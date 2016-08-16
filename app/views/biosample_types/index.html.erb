@@ -1,0 +1,27 @@
+<h1>Listing biosample_types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @biosample_types.each do |biosample_type| %>
+      <tr>
+        <td><%= biosample_type.name %></td>
+        <td><%= link_to 'Show', biosample_type %></td>
+        <td><%= link_to 'Edit', edit_biosample_type_path(biosample_type) %></td>
+        <td><%= link_to 'Destroy', biosample_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Biosample type', new_biosample_type_path %>

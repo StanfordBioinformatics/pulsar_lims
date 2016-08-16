@@ -1,0 +1,29 @@
+<%= form_for(@sequence_ontology_term) do |f| %>
+  <% if @sequence_ontology_term.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sequence_ontology_term.errors.count, "error") %> prohibited this sequence_ontology_term from being saved:</h2>
+
+      <ul>
+      <% @sequence_ontology_term.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :accession %><br>
+    <%= f.text_field :accession %>
+  </div>
+  <div class="field">
+    <%= f.label :definition %><br>
+    <%= f.text_field :definition %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

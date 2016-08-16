@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @sequence_ontology_term.name %>
+</p>
+
+<p>
+  <strong>Accession:</strong>
+  <%= @sequence_ontology_term.accession %>
+</p>
+
+<p>
+  <strong>Definition:</strong>
+  <%= @sequence_ontology_term.definition %>
+</p>
+
+<%= link_to 'Edit', edit_sequence_ontology_term_path(@sequence_ontology_term) %> |
+<%= link_to 'Back', sequence_ontology_terms_path %>

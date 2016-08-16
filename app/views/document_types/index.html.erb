@@ -1,0 +1,27 @@
+<h1>Listing document_types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @document_types.each do |document_type| %>
+      <tr>
+        <td><%= document_type.name %></td>
+        <td><%= link_to 'Show', document_type %></td>
+        <td><%= link_to 'Edit', edit_document_type_path(document_type) %></td>
+        <td><%= link_to 'Destroy', document_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Document type', new_document_type_path %>
