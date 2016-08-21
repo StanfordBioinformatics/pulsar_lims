@@ -1,0 +1,29 @@
+<h1>Listing uberons</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Accession</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @uberons.each do |uberon| %>
+      <tr>
+        <td><%= uberon.name %></td>
+        <td><%= uberon.accession %></td>
+        <td><%= link_to 'Show', uberon %></td>
+        <td><%= link_to 'Edit', edit_uberon_path(uberon) %></td>
+        <td><%= link_to 'Destroy', uberon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Uberon', new_uberon_path %>

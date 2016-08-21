@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816034416) do
+ActiveRecord::Schema.define(version: 20160821224017) do
 
   create_table "biosample_types", force: true do |t|
     t.string   "name"
@@ -25,10 +25,29 @@ ActiveRecord::Schema.define(version: 20160816034416) do
     t.datetime "updated_at"
   end
 
+  create_table "documents", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "content_type"
+    t.binary   "data"
+    t.integer  "document_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "documents", ["document_type_id"], name: "index_documents_on_document_type_id"
+
   create_table "sequence_ontology_terms", force: true do |t|
     t.string   "name"
     t.string   "accession"
     t.string   "definition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "uberons", force: true do |t|
+    t.string   "name"
+    t.string   "accession"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,4 +1,11 @@
 SnyderEncode::Application.routes.draw do
+  resources :uberons
+
+  resources :documents do
+		post :save, on: :collection
+		get  :document, on: :member
+	end
+
   resources :document_types
 
   resources :biosample_types

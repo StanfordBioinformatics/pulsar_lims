@@ -70,3 +70,17 @@ DocumentType.create!([
 	{name: "high resolution pathology slide image"},
 	{name: "other"}
 	])
+
+Uberon.delete_all
+Uberon.create!([
+	{name: "head", accession: "UBERON_0000033"},
+	{name: "limb", accession: "UBERON:0002101"},
+	{name: "saliva-secreting gland", accession: "UBERON:0001044"},
+	{name: "male accessory sex gland", accession: "UBERON:0010147"},
+	{name: "testis", accession: "UBERON:0000473"},
+	{name: "female gonad", accession: "UBERON:0000992"},
+	{name: "digestive system", accession: "UBERON:0001007"},
+	{name: "adult maxillary segment", accession: "FBbt:00003016"},
+	{name: "female reproductive system", accession: "UBERON:0000474"},
+	{name: "male reproductive system", accession: "UBERON:0000079"}
+	])

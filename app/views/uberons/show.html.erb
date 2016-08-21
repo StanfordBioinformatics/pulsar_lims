@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @uberon.name %>
+</p>
+
+<p>
+  <strong>Accession:</strong>
+  <%= @uberon.accession %>
+</p>
+
+<%= link_to 'Edit', edit_uberon_path(@uberon) %> |
+<%= link_to 'Back', uberons_path %>

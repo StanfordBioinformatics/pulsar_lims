@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @document.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @document.description %>
+</p>
+
+<p>
+  <strong>Content Type:</strong>
+  <%= @document.content_type%>
+</p>
+
+<p>
+  <strong>Data:</strong>
+	<%= link_to(@document.name,:action => "document", :id => @document.id) %>
+</p>
+
+<p>
+  <strong>Document type:</strong>
+ 	<%= @document.name %>
+</p>
+
+<%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Back', documents_path %>
