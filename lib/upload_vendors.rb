@@ -23,7 +23,6 @@ json_data.each do |x|
 	params[:description] = x["description"]
 	params[:title] = x["title"]
 	params[:name] = x["name"]
-	print params
 	Vendor.create!(params)
 end
 
