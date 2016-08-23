@@ -1,0 +1,53 @@
+<%= form_for(@biosample) do |f| %>
+  <% if @biosample.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@biosample.errors.count, "error") %> prohibited this biosample from being saved:</h2>
+
+      <ul>
+      <% @biosample.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :submitter_comments %><br>
+    <%= f.text_field :submitter_comments %>
+  </div>
+  <div class="field">
+    <%= f.label :lot_identifier %><br>
+    <%= f.text_field :lot_identifier %>
+  </div>
+  <div class="field">
+    <%= f.label :source_product_identifier %><br>
+    <%= f.text_field :source_product_identifier %>
+  </div>
+  <div class="field">
+    <%= f.label :term_name %><br>
+    <%= f.text_field :term_name %>
+  </div>
+  <div class="field">
+    <%= f.label :term_identifier %><br>
+    <%= f.text_field :term_identifier %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :passage_number %><br>
+    <%= f.number_field :passage_number %>
+  </div>
+  <div class="field">
+    <%= f.label :culture_harvest_date %><br>
+    <%= f.date_select :culture_harvest_date %>
+  </div>
+  <div class="field">
+    <%= f.label :encid %><br>
+    <%= f.text_field :encid %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

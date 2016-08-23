@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Encode:</strong>
+  <%= @human_donor.encode_id %>
+</p>
+
+<p>
+  <strong>Encode alias:</strong>
+  <%= @human_donor.encode_alias %>
+</p>
+
+<p>
+  <strong>String:</strong>
+  <%= @human_donor.string %>
+</p>
+
+<%= link_to 'Edit', edit_human_donor_path(@human_donor) %> |
+<%= link_to 'Back', human_donors_path %>

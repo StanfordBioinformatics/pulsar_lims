@@ -1,0 +1,43 @@
+<h1>Listing biosamples</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Submitter comments</th>
+      <th>Lot identifier</th>
+      <th>Source product identifier</th>
+      <th>Term name</th>
+      <th>Term identifier</th>
+      <th>Description</th>
+      <th>Passage number</th>
+      <th>Culture harvest date</th>
+      <th>Encid</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @biosamples.each do |biosample| %>
+      <tr>
+        <td><%= biosample.submitter_comments %></td>
+        <td><%= biosample.lot_identifier %></td>
+        <td><%= biosample.source_product_identifier %></td>
+        <td><%= biosample.term_name %></td>
+        <td><%= biosample.term_identifier %></td>
+        <td><%= biosample.description %></td>
+        <td><%= biosample.passage_number %></td>
+        <td><%= biosample.culture_harvest_date %></td>
+        <td><%= biosample.encid %></td>
+        <td><%= link_to 'Show', biosample %></td>
+        <td><%= link_to 'Edit', edit_biosample_path(biosample) %></td>
+        <td><%= link_to 'Destroy', biosample, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Biosample', new_biosample_path %>

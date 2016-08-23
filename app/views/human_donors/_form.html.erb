@@ -1,0 +1,29 @@
+<%= form_for(@human_donor) do |f| %>
+  <% if @human_donor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@human_donor.errors.count, "error") %> prohibited this human_donor from being saved:</h2>
+
+      <ul>
+      <% @human_donor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :encode_id %><br>
+    <%= f.text_field :encode_id %>
+  </div>
+  <div class="field">
+    <%= f.label :encode_alias %><br>
+    <%= f.text_field :encode_alias %>
+  </div>
+  <div class="field">
+    <%= f.label :string %><br>
+    <%= f.text_field :string %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<h1>Listing human_donors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Encode</th>
+      <th>Encode alias</th>
+      <th>String</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @human_donors.each do |human_donor| %>
+      <tr>
+        <td><%= human_donor.encode_id %></td>
+        <td><%= human_donor.encode_alias %></td>
+        <td><%= human_donor.string %></td>
+        <td><%= link_to 'Show', human_donor %></td>
+        <td><%= link_to 'Edit', edit_human_donor_path(human_donor) %></td>
+        <td><%= link_to 'Destroy', human_donor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Human donor', new_human_donor_path %>

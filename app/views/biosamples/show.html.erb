@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Submitter comments:</strong>
+  <%= @biosample.submitter_comments %>
+</p>
+
+<p>
+  <strong>Lot identifier:</strong>
+  <%= @biosample.lot_identifier %>
+</p>
+
+<p>
+  <strong>Source product identifier:</strong>
+  <%= @biosample.source_product_identifier %>
+</p>
+
+<p>
+  <strong>Term name:</strong>
+  <%= @biosample.term_name %>
+</p>
+
+<p>
+  <strong>Term identifier:</strong>
+  <%= @biosample.term_identifier %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @biosample.description %>
+</p>
+
+<p>
+  <strong>Passage number:</strong>
+  <%= @biosample.passage_number %>
+</p>
+
+<p>
+  <strong>Culture harvest date:</strong>
+  <%= @biosample.culture_harvest_date %>
+</p>
+
+<p>
+  <strong>Encid:</strong>
+  <%= @biosample.encid %>
+</p>
+
+<%= link_to 'Edit', edit_biosample_path(@biosample) %> |
+<%= link_to 'Back', biosamples_path %>
