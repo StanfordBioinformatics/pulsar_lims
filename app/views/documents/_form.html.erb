@@ -3,6 +3,7 @@
 						html: {multipart: true}) do |f| %>
 	Description:	<%= f.text_field(:description) %><br/>
 	Upload your document: <%= f.file_field("uploaded_document") %><br/>
+	Document: <%= f.select :biosample_id, Biosample.all, prompt: "select a biosample" %>
 
 	<%= submit_tag("Upload document") %>
 <% end %>

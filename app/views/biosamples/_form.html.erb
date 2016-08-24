@@ -11,7 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
+	<div>
+		Select Relevant Protocol Documents:</br>
+		<%= f.select :documents, options_for_select(Document.all.map{|x| [x.name,x.id]}),options = {},html_options = {multiple: true,size: 15} %>
+	</div>
+
+	<div>
     <%= f.label :submitter_comments %><br>
     <%= f.text_field :submitter_comments %>
   </div>

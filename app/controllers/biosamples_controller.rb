@@ -24,6 +24,7 @@ class BiosamplesController < ApplicationController
   # POST /biosamples
   # POST /biosamples.json
   def create
+		documents = biosample_params[:documents]
     @biosample = Biosample.new(biosample_params)
 
     respond_to do |format|
@@ -69,6 +70,6 @@ class BiosamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_params
-      params.require(:biosample).permit(:submitter_comments, :lot_identifier, :source_product_identifier, :term_name, :term_identifier, :description, :passage_number, :culture_harvest_date, :encid)
+      params.require(:biosample).permit(:submitter_comments, :lot_identifier, :source_product_identifier, :term_name, :term_identifier, :description, :passage_number, :culture_harvest_date, :encid,:documents)
     end
 end
