@@ -84,3 +84,12 @@ Uberon.create!([
 	{name: "female reproductive system", accession: "UBERON:0000474"},
 	{name: "male reproductive system", accession: "UBERON:0000079"}
 	])
+
+#Vendors
+#see script in lib called upload_vendors.rb.
+
+HumanDonor.delete_all
+HumanDonor.create!([
+	{encode_id: "ENCDO268AAA", encode_alias:"bernstein:donor of NHEK cells"},
+	{encode_id: "ENCDO000ABE", encode_alias:"encode:donor of HCT-116"}
+	])

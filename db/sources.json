@@ -1,0 +1,986 @@
+{
+context: "/terms/",
+views: [
+{
+href: "/report/?format=json",
+title: "View tabular report",
+icon: "table"
+}
+],
+id: "/sources/?format=json",
+clear_filters: "/search/?type=Source",
+sort: {
+date_created: {
+ignore_unmapped: true,
+order: "desc"
+},
+label: {
+ignore_unmapped: true,
+missing: "_last",
+order: "asc"
+}
+},
+description: "Listing of sources and vendors for ENCODE material",
+type: [
+"SourceCollection",
+"Collection"
+],
+filters: [
+{
+remove: "/sources/listing?format=json",
+term: "Source",
+field: "type"
+}
+],
+all: "/sources/?format=json&limit=all",
+title: "Sources",
+graph: [
+{
+name: "ncascr",
+id: "/sources/ncascr/",
+aliases: [ ],
+description: "National Centre for Adult Stem Cell Research (NCASCR), Griffith University",
+type: [
+"Source",
+"Item"
+],
+title: "NCASCR"
+},
+{
+name: "nichd",
+id: "/sources/nichd/",
+aliases: [ ],
+description: "National Institute of Child Health and Human Development (NICHD)",
+type: [
+"Source",
+"Item"
+],
+title: "NICHD"
+},
+{
+name: "genhong-cheng",
+id: "/sources/genhong-cheng/",
+aliases: [ ],
+description: "Genhong Cheng Lab at University of California, Los Angeles",
+type: [
+"Source",
+"Item"
+],
+title: "Genhong Cheng"
+},
+{
+name: "nctc",
+id: "/sources/nctc/",
+aliases: [ ],
+description: "North Carolina Tissue Consortium (NCTC)",
+type: [
+"Source",
+"Item"
+],
+title: "NCTC"
+},
+{
+name: "harvard-ipsc",
+id: "/sources/harvard-ipsc/",
+aliases: [ ],
+description: "iPS Cell Core Facility at Harvard University",
+type: [
+"Source",
+"Item"
+],
+title: "Harvard iPSC"
+},
+{
+name: "jefferey-marks",
+id: "/sources/jefferey-marks/",
+aliases: [ ],
+description: "Jefferey Marks at Duke University",
+type: [
+"Source",
+"Item"
+],
+title: "Jefferey Marks"
+},
+{
+name: "promocell",
+id: "/sources/promocell/",
+aliases: [ ],
+description: "PromoCell GmbH",
+type: [
+"Source",
+"Item"
+],
+title: "PromoCell"
+},
+{
+name: "joseph-costello",
+id: "/sources/joseph-costello/",
+aliases: [ ],
+description: "Joseph Costello at UCSF",
+type: [
+"Source",
+"Item"
+],
+title: "Joseph Costello"
+},
+{
+name: "jerrold-olefsky",
+id: "/sources/jerrold-olefsky/",
+aliases: [ ],
+description: "Jerrold M. Olefsky Lab at University of California, San Diego",
+type: [
+"Source",
+"Item"
+],
+title: "Jerrold Olefsky"
+},
+{
+name: "rd-systems",
+id: "/sources/rd-systems/",
+aliases: [ ],
+description: "R&D Systems",
+type: [
+"Source",
+"Item"
+],
+title: "RD Systems"
+},
+{
+name: "rajinder-kaul",
+id: "/sources/rajinder-kaul/",
+aliases: [ ],
+description: "Rajinder Kaul at University of Washington",
+type: [
+"Source",
+"Item"
+],
+title: "Rajinder Kaul"
+},
+{
+name: "yoichi-shinkai",
+id: "/sources/yoichi-shinkai/",
+aliases: [ ],
+description: "Yoichi Shinkai at RIKEN",
+type: [
+"Source",
+"Item"
+],
+title: "Yoichi Shinkai"
+},
+{
+name: "robert-paulson",
+id: "/sources/robert-paulson/",
+aliases: [ ],
+description: "Robert Paulson at Pennsylvania State University",
+type: [
+"Source",
+"Item"
+],
+title: "Robert Paulson"
+},
+{
+name: "kpbbb",
+id: "/sources/kpbbb/",
+aliases: [ ],
+description: "Kathleen Price Bryan Brain Bank (KPBBB)",
+type: [
+"Source",
+"Item"
+],
+title: "KPBBB"
+},
+{
+name: "robert-white",
+id: "/sources/robert-white/",
+aliases: [ ],
+description: "Robert White at Beatson Institute for Cancer Research",
+type: [
+"Source",
+"Item"
+],
+title: "Robert White"
+},
+{
+name: "stephen-bell",
+id: "/sources/stephen-bell/",
+aliases: [ ],
+description: "Stephen Bell at Massachusetts Institute of Technology",
+type: [
+"Source",
+"Item"
+],
+title: "Stephen Bell"
+},
+{
+name: "susan-fisher",
+id: "/sources/susan-fisher/",
+aliases: [ ],
+description: "Susan Fisher at UCSF",
+type: [
+"Source",
+"Item"
+],
+title: "Susan Fisher"
+},
+{
+name: "roberto-mantovani",
+id: "/sources/roberto-mantovani/",
+aliases: [ ],
+description: "Roberto Mantovani at Universita degli Studi di Milano",
+type: [
+"Source",
+"Item"
+],
+title: "Roberto Mantovani"
+},
+{
+name: "wako",
+id: "/sources/wako/",
+aliases: [ ],
+description: "Wako Chemicals",
+type: [
+"Source",
+"Item"
+],
+title: "Wako Chemicals"
+},
+{
+name: "stanford-cfc",
+id: "/sources/stanford-cfc/",
+aliases: [ ],
+description: "Cystic Fibrosis Center at Stanford University (CFC)",
+type: [
+"Source",
+"Item"
+],
+title: "Stanford CFC"
+},
+{
+name: "jeffrey-engelman",
+id: "/sources/jeffrey-engelman/",
+aliases: [ ],
+description: "Jeffrey Engelman at Massachusetts General Hospital",
+type: [
+"Source",
+"Item"
+],
+title: "Jeffrey Engelman"
+},
+{
+name: "melanie-ehrlich-and-koji-tsumagari",
+id: "/sources/melanie-ehrlich-and-koji-tsumagari/",
+aliases: [ ],
+description: "Melanie Ehrlich and Koji Tsumagari at Tulane University",
+type: [
+"Source",
+"Item"
+],
+title: "Melanie Ehrlich and Koji Tsumagari"
+},
+{
+name: "abgent",
+id: "/sources/abgent/",
+aliases: [ ],
+description: "Abgent",
+type: [
+"Source",
+"Item"
+],
+title: "Abgent"
+},
+{
+name: "michael-bender-and-rachel-byron",
+id: "/sources/michael-bender-and-rachel-byron/",
+aliases: [ ],
+description: "Michael Bender and Rachel Byron at Fred Hutchinson Cancer Research Center",
+type: [
+"Source",
+"Item"
+],
+title: "Michael Bender and Rachel Byron"
+},
+{
+name: "jean-antoine-lepesant",
+id: "/sources/jean-antoine-lepesant/",
+aliases: [ ],
+description: "Jean-Antoine Lepseant at Inistitute Jacques Monod",
+type: [
+"Source",
+"Item"
+],
+title: "Jean-Antoine Lepseant"
+}
+],
+notification: "Success",
+total: 271,
+columns: {
+id: {
+title: "ID"
+},
+title: {
+title: "Name"
+},
+description: {
+title: "Description"
+},
+name: {
+title: "name"
+},
+aliases: {
+title: "Lab aliases"
+}
+},
+facets: [
+{
+total: 271,
+terms: [
+{
+key: "Source",
+doc_count: 271
+},
+{
+key: "AccessKey",
+doc_count: 0
+},
+{
+key: "AnalysisStep",
+doc_count: 0
+},
+{
+key: "AnalysisStepRun",
+doc_count: 0
+},
+{
+key: "AnalysisStepVersion",
+doc_count: 0
+},
+{
+key: "Annotation",
+doc_count: 0
+},
+{
+key: "AntibodyApproval",
+doc_count: 0
+},
+{
+key: "AntibodyCharacterization",
+doc_count: 0
+},
+{
+key: "AntibodyLot",
+doc_count: 0
+},
+{
+key: "Award",
+doc_count: 0
+},
+{
+key: "Biosample",
+doc_count: 0
+},
+{
+key: "BiosampleCharacterization",
+doc_count: 0
+},
+{
+key: "BismarkQualityMetric",
+doc_count: 0
+},
+{
+key: "Characterization",
+doc_count: 0
+},
+{
+key: "ChipSeqFilterQualityMetric",
+doc_count: 0
+},
+{
+key: "Construct",
+doc_count: 0
+},
+{
+key: "CpgCorrelationQualityMetric",
+doc_count: 0
+},
+{
+key: "Dataset",
+doc_count: 0
+},
+{
+key: "Document",
+doc_count: 0
+},
+{
+key: "Donor",
+doc_count: 0
+},
+{
+key: "DonorCharacterization",
+doc_count: 0
+},
+{
+key: "Experiment",
+doc_count: 0
+},
+{
+key: "FastqcQualityMetric",
+doc_count: 0
+},
+{
+key: "File",
+doc_count: 0
+},
+{
+key: "FileSet",
+doc_count: 0
+},
+{
+key: "FlyDonor",
+doc_count: 0
+},
+{
+key: "GenericQualityMetric",
+doc_count: 0
+},
+{
+key: "GeneticModification",
+doc_count: 0
+},
+{
+key: "HumanDonor",
+doc_count: 0
+},
+{
+key: "IDRQualityMetric",
+doc_count: 0
+},
+{
+key: "IdrSummaryQualityMetric",
+doc_count: 0
+},
+{
+key: "Image",
+doc_count: 0
+},
+{
+key: "Lab",
+doc_count: 0
+},
+{
+key: "Library",
+doc_count: 0
+},
+{
+key: "MadQualityMetric",
+doc_count: 0
+},
+{
+key: "MatchedSet",
+doc_count: 0
+},
+{
+key: "ModificationTechnique",
+doc_count: 0
+},
+{
+key: "MouseDonor",
+doc_count: 0
+},
+{
+key: "Organism",
+doc_count: 0
+},
+{
+key: "OrganismDevelopmentSeries",
+doc_count: 0
+},
+{
+key: "Page",
+doc_count: 0
+},
+{
+key: "Pipeline",
+doc_count: 0
+},
+{
+key: "Platform",
+doc_count: 0
+},
+{
+key: "Project",
+doc_count: 0
+},
+{
+key: "Publication",
+doc_count: 0
+},
+{
+key: "PublicationData",
+doc_count: 0
+},
+{
+key: "QualityMetric",
+doc_count: 0
+},
+{
+key: "RNAi",
+doc_count: 0
+},
+{
+key: "Reference",
+doc_count: 0
+},
+{
+key: "ReferenceEpigenome",
+doc_count: 0
+},
+{
+key: "Replicate",
+doc_count: 0
+},
+{
+key: "ReplicationTimingSeries",
+doc_count: 0
+},
+{
+key: "SamtoolsFlagstatsQualityMetric",
+doc_count: 0
+},
+{
+key: "SamtoolsStatsQualityMetric",
+doc_count: 0
+},
+{
+key: "Series",
+doc_count: 0
+},
+{
+key: "Software",
+doc_count: 0
+},
+{
+key: "SoftwareVersion",
+doc_count: 0
+},
+{
+key: "StarQualityMetric",
+doc_count: 0
+},
+{
+key: "TALEN",
+doc_count: 0
+},
+{
+key: "Tale",
+doc_count: 0
+},
+{
+key: "Target",
+doc_count: 0
+},
+{
+key: "Treatment",
+doc_count: 0
+},
+{
+key: "TreatmentConcentrationSeries",
+doc_count: 0
+},
+{
+key: "TreatmentTimeSeries",
+doc_count: 0
+},
+{
+key: "UcscBrowserComposite",
+doc_count: 0
+},
+{
+key: "User",
+doc_count: 0
+},
+{
+key: "WormDonor",
+doc_count: 0
+}
+],
+title: "Data Type",
+field: "type"
+},
+{
+total: 271,
+terms: [
+{
+key: "inconsistent control",
+doc_count: 0
+},
+{
+key: "inconsistent library biosample",
+doc_count: 0
+},
+{
+key: "inconsistent ontology term",
+doc_count: 0
+},
+{
+key: "inconsistent replicate",
+doc_count: 0
+},
+{
+key: "inconsistent target",
+doc_count: 0
+},
+{
+key: "missing antibody",
+doc_count: 0
+},
+{
+key: "missing donor",
+doc_count: 0
+},
+{
+key: "missing paired_with",
+doc_count: 0
+},
+{
+key: "missing possible_controls",
+doc_count: 0
+},
+{
+key: "missing raw data in replicate",
+doc_count: 0
+},
+{
+key: "missing transfection_type",
+doc_count: 0
+},
+{
+key: "not tagged antibody",
+doc_count: 0
+},
+{
+key: "replicate with no library",
+doc_count: 0
+},
+{
+key: "technical replicates with not identical biosample",
+doc_count: 0
+}
+],
+title: "Audit category: ERROR",
+field: "audit.ERROR.category"
+},
+{
+total: 271,
+terms: [
+{
+key: "control insufficient read depth",
+doc_count: 0
+},
+{
+key: "inconsistent age",
+doc_count: 0
+},
+{
+key: "insufficient read depth",
+doc_count: 0
+},
+{
+key: "insufficient read length",
+doc_count: 0
+},
+{
+key: "insufficient replicate concordance",
+doc_count: 0
+},
+{
+key: "missing RNA fragment size",
+doc_count: 0
+},
+{
+key: "missing controlled_by",
+doc_count: 0
+},
+{
+key: "missing documents",
+doc_count: 0
+},
+{
+key: "missing input control",
+doc_count: 0
+},
+{
+key: "missing possible_controls",
+doc_count: 0
+},
+{
+key: "missing spikeins",
+doc_count: 0
+},
+{
+key: "need compliant primaries",
+doc_count: 0
+},
+{
+key: "need compliant secondary",
+doc_count: 0
+},
+{
+key: "no characterizations submitted",
+doc_count: 0
+},
+{
+key: "no primary characterizations",
+doc_count: 0
+},
+{
+key: "no secondary characterizations",
+doc_count: 0
+},
+{
+key: "not eligible antibody",
+doc_count: 0
+},
+{
+key: "poor library complexity",
+doc_count: 0
+},
+{
+key: "severe bottlenecking",
+doc_count: 0
+},
+{
+key: "unreplicated experiment",
+doc_count: 0
+}
+],
+title: "Audit category: NOT COMPLIANT",
+field: "audit.NOT_COMPLIANT.category"
+},
+{
+total: 271,
+terms: [
+{
+key: "antibody eligible via exemption",
+doc_count: 0
+},
+{
+key: "borderline replicate concordance",
+doc_count: 0
+},
+{
+key: "characterizations not reviewed",
+doc_count: 0
+},
+{
+key: "control low read depth",
+doc_count: 0
+},
+{
+key: "inconsistent control read length",
+doc_count: 0
+},
+{
+key: "inconsistent control run_type",
+doc_count: 0
+},
+{
+key: "inconsistent platforms",
+doc_count: 0
+},
+{
+key: "inconsistent target of control experiment",
+doc_count: 0
+},
+{
+key: "low read depth",
+doc_count: 0
+},
+{
+key: "low read length",
+doc_count: 0
+},
+{
+key: "low replicate concordance",
+doc_count: 0
+},
+{
+key: "mild to moderate bottlenecking",
+doc_count: 0
+},
+{
+key: "missing IHEC required assay",
+doc_count: 0
+},
+{
+key: "missing dbxrefs",
+doc_count: 0
+},
+{
+key: "missing flowcell_details",
+doc_count: 0
+},
+{
+key: "missing genotype",
+doc_count: 0
+},
+{
+key: "missing step_run",
+doc_count: 0
+},
+{
+key: "mixed read lengths",
+doc_count: 0
+},
+{
+key: "mixed run types",
+doc_count: 0
+},
+{
+key: "moderate library complexity",
+doc_count: 0
+},
+{
+key: "multiple biosample term names in reference epigenome",
+doc_count: 0
+},
+{
+key: "multiple biosample treatments in reference epigenome",
+doc_count: 0
+},
+{
+key: "multiple donors in reference epigenome",
+doc_count: 0
+},
+{
+key: "wrong step_run for IDR peaks",
+doc_count: 0
+},
+{
+key: "wrong step_run for peaks",
+doc_count: 0
+}
+],
+title: "Audit category: WARNING",
+field: "audit.WARNING.category"
+},
+{
+total: 271,
+terms: [
+{
+key: "NTR assay",
+doc_count: 0
+},
+{
+key: "NTR biosample",
+doc_count: 0
+},
+{
+key: "biological replicates with identical biosample",
+doc_count: 0
+},
+{
+key: "biosample term-type mismatch",
+doc_count: 0
+},
+{
+key: "experiment with biosample term-type mismatch",
+doc_count: 0
+},
+{
+key: "inconsistent assembly",
+doc_count: 0
+},
+{
+key: "inconsistent biosample_term_id",
+doc_count: 0
+},
+{
+key: "inconsistent derived_from",
+doc_count: 0
+},
+{
+key: "inconsistent internal tags",
+doc_count: 0
+},
+{
+key: "low read depth",
+doc_count: 0
+},
+{
+key: "mismatched file status",
+doc_count: 0
+},
+{
+key: "mismatched status",
+doc_count: 0
+},
+{
+key: "missing analysis step version",
+doc_count: 0
+},
+{
+key: "missing assembly",
+doc_count: 0
+},
+{
+key: "missing date_released",
+doc_count: 0
+},
+{
+key: "missing derived_from",
+doc_count: 0
+},
+{
+key: "missing file_size",
+doc_count: 0
+},
+{
+key: "missing paired_with in controlled_by",
+doc_count: 0
+},
+{
+key: "missing raw data in replicate",
+doc_count: 0
+},
+{
+key: "missing read depth",
+doc_count: 0
+},
+{
+key: "needs pipeline run",
+doc_count: 0
+},
+{
+key: "out of date analysis",
+doc_count: 0
+},
+{
+key: "sequencing runs labeled as technical replicates",
+doc_count: 0
+},
+{
+key: "undetermined replication_type",
+doc_count: 0
+},
+{
+key: "unexpected property",
+doc_count: 0
+},
+{
+key: "validation error",
+doc_count: 0
+},
+{
+key: "validation error: construct_type",
+doc_count: 0
+},
+{
+key: "validation error: documents",
+doc_count: 0
+}
+],
+title: "Audit category: DCC ACTION",
+field: "audit.INTERNAL_ACTION.category"
+}
+]
+}

@@ -11,12 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160821224017) do
+ActiveRecord::Schema.define(version: 20160828004941) do
 
   create_table "biosample_types", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "biosamples", force: true do |t|
+    t.string   "submitter_comments"
+    t.string   "lot_identifier"
+    t.string   "source_product_identifier"
+    t.string   "term_name"
+    t.string   "term_identifier"
+    t.string   "description"
+    t.integer  "passage_number"
+    t.date     "culture_harvest_date"
+    t.string   "encid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "biosamples_documents", id: false, force: true do |t|
+    t.integer "biosample_id"
+    t.integer "document_id"
   end
 
   create_table "document_types", force: true do |t|
@@ -37,6 +56,14 @@ ActiveRecord::Schema.define(version: 20160821224017) do
 
   add_index "documents", ["document_type_id"], name: "index_documents_on_document_type_id"
 
+  create_table "human_donors", force: true do |t|
+    t.string   "encode_id"
+    t.string   "encode_alias"
+    t.string   "string"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sequence_ontology_terms", force: true do |t|
     t.string   "name"
     t.string   "accession"
@@ -48,6 +75,14 @@ ActiveRecord::Schema.define(version: 20160821224017) do
   create_table "uberons", force: true do |t|
     t.string   "name"
     t.string   "accession"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vendors", force: true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

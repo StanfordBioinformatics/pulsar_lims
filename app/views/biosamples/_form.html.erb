@@ -12,9 +12,16 @@
   <% end %>
 
 	<div>
-		Select Relevant Protocol Documents:</br>
-		<%= f.select :documents, options_for_select(Document.all.map{|x| [x.name,x.id]}),options = {},html_options = {multiple: true,size: 15} %>
-	</div>
+		<strong>Associated Protocol Documents</strong></br>
+		<% @biosample.documents.to_a.each do |d| %>
+			<%= d.name %></br>
+		<% end %>
+	</div></br>
+
+	<div>
+		<strong>Add Protocol Document From List</strong></br>
+		<%= f.select :documents, options_for_select(Document.all.map{|x| [x.name,x.id]}),options = {:prompt => "Choose a Document"},html_options = {multiple: false,size: 1} %>
+	</div></br>
 
 	<div>
     <%= f.label :submitter_comments %><br>

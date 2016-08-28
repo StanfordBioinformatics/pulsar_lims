@@ -1,4 +1,10 @@
 SnyderEncode::Application.routes.draw do
+  resources :biosamples
+
+  resources :human_donors
+
+  resources :vendors
+
   resources :uberons
 
   resources :documents do

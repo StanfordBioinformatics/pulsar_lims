@@ -24,9 +24,10 @@ class BiosamplesController < ApplicationController
   # POST /biosamples
   # POST /biosamples.json
   def create
-		documents = biosample_params[:documents]
+		#documents could be a string containing a document ID, or an array of strings, where each string identifies a document id. 
     @biosample = Biosample.new(biosample_params)
-
+		add_document()	
+		
     respond_to do |format|
       if @biosample.save
         format.html { redirect_to @biosample, notice: 'Biosample was successfully created.' }
@@ -41,6 +42,7 @@ class BiosamplesController < ApplicationController
   # PATCH/PUT /biosamples/1
   # PATCH/PUT /biosamples/1.json
   def update
+		add_document()
     respond_to do |format|
       if @biosample.update(biosample_params)
         format.html { redirect_to @biosample, notice: 'Biosample was successfully updated.' }
@@ -70,6 +72,14 @@ class BiosamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_params
-      params.require(:biosample).permit(:submitter_comments, :lot_identifier, :source_product_identifier, :term_name, :term_identifier, :description, :passage_number, :culture_harvest_date, :encid,:documents)
+      params.require(:biosample).permit(:submitter_comments, :lot_identifier, :source_product_identifier, :term_name, :term_identifier, :description, :passage_number, :culture_harvest_date, :encid)
     end
+
+		def add_document
+			document = params[:biosample][:documents]
+			if not document.empty?
+				document = Document.find(document)
+				@biosample.documents << document
+			end
+		end
 end
