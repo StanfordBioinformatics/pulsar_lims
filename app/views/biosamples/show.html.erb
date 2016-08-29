@@ -1,72 +1,74 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-	<strong>Documents</strong>
-	<%= @biosample.documents %>
+	<strong>Documents</strong></br>
+	<% @biosample.documents.each do |d| %>
+		<%= d.name %></br>
+	<% end %>
 </p>
 
 <p>
-	<strong>Biosample Type:</strong>
+	<strong>Biosample Type:</strong></br>
 	<%= @biosample.biosample_type.name %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Description:</strong></br>
   <%= @biosample.description %>
 </p>
 
 <p> 
-	<strong>Vendor:</strong>
+	<strong>Vendor:</strong></br>
 	<%= @biosample.vendor.name %>
 </p>
 
 <p>
-  <strong>Source product identifier:</strong>
+  <strong>Source product identifier:</strong></br>
   <%= @biosample.source_product_identifier %>
 </p>
 
 <p>
-  <strong>Lot identifier:</strong>
+  <strong>Lot identifier:</strong></br>
   <%= @biosample.lot_identifier %>
 </p>
 
 <p>
-  <strong>Term name:</strong>
+  <strong>Biosample Term Name:</strong></br>
   <%= @biosample.term_name %>
 </p>
 
 <p>
-  <strong>Term identifier:</strong>
+  <strong>Biosample Term identifier:</strong></br>
   <%= @biosample.term_identifier %>
 </p>
 
 <p>
-	<strong>Human Donor:</strong>
+	<strong>Human Donor:</strong></br>
 	<%= @biosample.human_donor.encode_alias%>
 </p>
 
 <p>
-  <strong>Passage number:</strong>
+  <strong>Passage number:</strong></br>
   <%= @biosample.passage_number %>
 </p>
 
 <p>
-  <strong>Culture harvest date:</strong>
+  <strong>Culture harvest date:</strong></br>
   <%= @biosample.culture_harvest_date %>
 </p>
 
 <p>
-  <strong>Submitter comments:</strong>
+  <strong>Submitter comments:</strong></br>
   <%= @biosample.submitter_comments %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Description:</strong></br>
   <%= @biosample.description %>
 </p>
 
 <p>
-  <strong>Encid:</strong>
+  <strong>Encid:</strong></br>
   <%= @biosample.encid %>
 </p>
 

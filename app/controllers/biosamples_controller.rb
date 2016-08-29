@@ -79,7 +79,9 @@ class BiosamplesController < ApplicationController
 			document = params[:biosample][:documents]
 			if not document.empty?
 				document = Document.find(document)
-				@biosample.documents << document
+				if not @biosample.documents.include? document
+					@biosample.documents << document
+				end
 			end
 		end
 end

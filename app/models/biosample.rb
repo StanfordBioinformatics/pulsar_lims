@@ -5,5 +5,5 @@ class Biosample < ActiveRecord::Base
   belongs_to  :vendor
 
 	validates :term_identifier, format: {with: /\A(UBERON|EFO|CL|NTR|FBbt|WBbt):[0-9]{2,8}\Z/}
-	validates :term_name, :term_identifier, presence: true
+	validates :documents, :biosample_type_id, :vendor_id, :term_identifier, :human_donor_id, presence: true
 end

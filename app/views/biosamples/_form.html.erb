@@ -24,7 +24,11 @@
 		<% documents.sort! do |x,y| %>
 			<% x[0] <=> y[0] %>
 		<% end %>
-		<%= f.select :documents, options_for_select(documents),options = {:prompt => "Choose a Document"},html_options = {multiple: false,size: 1} %>
+		<% default_document_id = nil %>
+		<% if not @biosample.documents.nil? %>
+			<% default_document_id = @biosample.documents.last %>
+		<% end %>
+		<%= f.select :documents, choices=options_for_select(documents,default_document_id),html_options={:prompt => "Choose a Document",multiple: false,size:1} %>
 	</div></br>
 
 	<div class="field">
@@ -33,7 +37,11 @@
 		<% biosample_types.sort! do |x,y| %>
 			<% x[0] <=> y[0] %>
 		<% end %>
-		<%= f.select :biosample_type_id, options_for_select(biosample_types),options={:prompt => "Select the Biosample Type"},html_options={}%>
+		<% biosample_type_id = nil %>
+		<% if not @biosample.biosample_type.nil? %>
+			<% biosample_type_id = @biosample.biosample_type.id %>
+		<% end %>
+		<%= f.select :biosample_type_id, choices=options_for_select(biosample_types,selected=biosample_type_id),html_options={:prompt => "Select the Biosample Type"}%>
 	</div>
 
   <div class="field">
@@ -47,7 +55,11 @@
 		<% vendors.sort! do |x,y| %>
 			<% x[0] <=> y[0] %>
 		<% end %>
-		<%= f.select :vendor_id, options_for_select(vendors),options={:prompt => "Select the Vendor"},html_options={} %>
+		<% vendor_id = nil %>
+		<% if not @biosample.vendor.nil? %>
+			<% vendor_id = @biosample.vendor.id %>
+		<% end %>
+		<%= f.select :vendor_id, choices=options_for_select(vendors,selected=vendor_id),html_options={:prompt => "Select the Vendor"} %>
 	</div>
 
   <div class="field">
@@ -76,7 +88,11 @@
 		<% donors.sort! do |x,y| %>
 			<% x[0] <=> y[0] %>
 		<% end %>
-		<%= f.select :human_donor_id, options_for_select(donors),options = {:prompt => "Choose The Human Donor"},html_options={} %>
+		<% human_donor_id = nil %>
+		<% if not @biosample.human_donor.nil? %>
+			<% human_donor_id = @biosample.human_donor.id %>
+		<% end %>
+		<%= f.select :human_donor_id, choices=options_for_select(donors,selected=human_donor_id),html_options={:prompt => "Choose The Human Donor"} %>
 	</div>
 
   <div class="field">
