@@ -2,22 +2,32 @@
 
 <p>
 	<strong>Documents</strong>
-	<% @biosample.documents %>
+	<%= @biosample.documents %>
 </p>
 
 <p>
-  <strong>Submitter comments:</strong>
-  <%= @biosample.submitter_comments %>
+	<strong>Biosample Type:</strong>
+	<%= @biosample.biosample_type.name %>
 </p>
 
 <p>
-  <strong>Lot identifier:</strong>
-  <%= @biosample.lot_identifier %>
+  <strong>Description:</strong>
+  <%= @biosample.description %>
+</p>
+
+<p> 
+	<strong>Vendor:</strong>
+	<%= @biosample.vendor.name %>
 </p>
 
 <p>
   <strong>Source product identifier:</strong>
   <%= @biosample.source_product_identifier %>
+</p>
+
+<p>
+  <strong>Lot identifier:</strong>
+  <%= @biosample.lot_identifier %>
 </p>
 
 <p>
@@ -31,8 +41,8 @@
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @biosample.description %>
+	<strong>Human Donor:</strong>
+	<%= @biosample.human_donor.encode_alias%>
 </p>
 
 <p>
@@ -43,6 +53,16 @@
 <p>
   <strong>Culture harvest date:</strong>
   <%= @biosample.culture_harvest_date %>
+</p>
+
+<p>
+  <strong>Submitter comments:</strong>
+  <%= @biosample.submitter_comments %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @biosample.description %>
 </p>
 
 <p>

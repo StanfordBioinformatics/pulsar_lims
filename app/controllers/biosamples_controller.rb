@@ -72,7 +72,7 @@ class BiosamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_params
-      params.require(:biosample).permit(:submitter_comments, :lot_identifier, :source_product_identifier, :term_name, :term_identifier, :description, :passage_number, :culture_harvest_date, :encid)
+      params.require(:biosample).permit(:submitter_comments, :lot_identifier, :source_product_identifier, :term_name, :term_identifier, :description, :passage_number, :culture_harvest_date, :encid, :human_donor_id,:vendor_id,:biosample_type_id)
     end
 
 		def add_document

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160828004941) do
+ActiveRecord::Schema.define(version: 20160829043748) do
 
   create_table "biosample_types", force: true do |t|
     t.string   "name"
@@ -31,7 +31,14 @@ ActiveRecord::Schema.define(version: 20160828004941) do
     t.string   "encid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "human_donor_id"
+    t.integer  "vendor_id"
+    t.integer  "biosample_type_id"
   end
+
+  add_index "biosamples", ["biosample_type_id"], name: "index_biosamples_on_biosample_type_id"
+  add_index "biosamples", ["human_donor_id"], name: "index_biosamples_on_human_donor_id"
+  add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id"
 
   create_table "biosamples_documents", id: false, force: true do |t|
     t.integer "biosample_id"
@@ -52,8 +59,10 @@ ActiveRecord::Schema.define(version: 20160828004941) do
     t.integer  "document_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "biosample_id"
   end
 
+  add_index "documents", ["biosample_id"], name: "index_documents_on_biosample_id"
   add_index "documents", ["document_type_id"], name: "index_documents_on_document_type_id"
 
   create_table "human_donors", force: true do |t|

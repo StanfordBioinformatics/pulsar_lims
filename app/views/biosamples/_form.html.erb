@@ -20,43 +20,83 @@
 
 	<div>
 		<strong>Add Protocol Document From List</strong></br>
-		<%= f.select :documents, options_for_select(Document.all.map{|x| [x.name,x.id]}),options = {:prompt => "Choose a Document"},html_options = {multiple: false,size: 1} %>
+		<% documents = Document.all.map{ |x| [x.name,x.id] } %>
+		<% documents.sort! do |x,y| %>
+			<% x[0] <=> y[0] %>
+		<% end %>
+		<%= f.select :documents, options_for_select(documents),options = {:prompt => "Choose a Document"},html_options = {multiple: false,size: 1} %>
 	</div></br>
+
+	<div class="field">
+		<%= f.label :biosample_type_id %>
+		<% biosample_types = BiosampleType.all.map{ |x| [x.name,x.id] } %>
+		<% biosample_types.sort! do |x,y| %>
+			<% x[0] <=> y[0] %>
+		<% end %>
+		<%= f.select :biosample_type_id, options_for_select(biosample_types),options={:prompt => "Select the Biosample Type"},html_options={}%>
+	</div>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+
+	<div class="field">
+		<%= f.label :vendor_id %>
+		<% vendors = Vendor.all.map{ |x| [x.name,x.id] } %>
+		<% vendors.sort! do |x,y| %>
+			<% x[0] <=> y[0] %>
+		<% end %>
+		<%= f.select :vendor_id, options_for_select(vendors),options={:prompt => "Select the Vendor"},html_options={} %>
+	</div>
+
+  <div class="field">
+    <%= f.label :source_product_identifier %><br>
+    <%= f.text_field :source_product_identifier %>
+  </div>
+
+  <div class="field">
+    <%= f.label :lot_identifier %><br>
+    <%= f.text_field :lot_identifier %>
+  </div>
+
+  <div class="field">
+		Biosample Term Name:</br>
+    <%= f.text_field :term_name %>
+  </div>
+
+  <div class="field">
+		Biosample Term Identifier:</br>
+    <%= f.text_field :term_identifier %>
+  </div>
+
+	<div class="field">
+		<%= f.label :human_donor_id %>
+		<% donors = HumanDonor.all.map{ |x| [x.encode_alias,x.id]} %>
+		<% donors.sort! do |x,y| %>
+			<% x[0] <=> y[0] %>
+		<% end %>
+		<%= f.select :human_donor_id, options_for_select(donors),options = {:prompt => "Choose The Human Donor"},html_options={} %>
+	</div>
+
+  <div class="field">
+    <%= f.label :passage_number %><br>
+    <%= f.number_field :passage_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :culture_harvest_date %><br>
+    <%= f.date_select :culture_harvest_date %>
+  </div>
 
 	<div>
     <%= f.label :submitter_comments %><br>
     <%= f.text_field :submitter_comments %>
   </div>
+
+	</br></br>
   <div class="field">
-    <%= f.label :lot_identifier %><br>
-    <%= f.text_field :lot_identifier %>
-  </div>
-  <div class="field">
-    <%= f.label :source_product_identifier %><br>
-    <%= f.text_field :source_product_identifier %>
-  </div>
-  <div class="field">
-    <%= f.label :term_name %><br>
-    <%= f.text_field :term_name %>
-  </div>
-  <div class="field">
-    <%= f.label :term_identifier %><br>
-    <%= f.text_field :term_identifier %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :passage_number %><br>
-    <%= f.number_field :passage_number %>
-  </div>
-  <div class="field">
-    <%= f.label :culture_harvest_date %><br>
-    <%= f.date_select :culture_harvest_date %>
-  </div>
-  <div class="field">
-    <%= f.label :encid %><br>
+		ENCODE Identifier</br>
     <%= f.text_field :encid %>
   </div>
   <div class="actions">
