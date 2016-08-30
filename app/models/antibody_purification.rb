@@ -1,3 +1,3 @@
 class AntibodyPurification < ActiveRecord::Base
-	has_many :antibodies
+	has_and_belongs_to_many :antibodies
 end

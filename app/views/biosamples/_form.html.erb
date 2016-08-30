@@ -20,15 +20,11 @@
 
 	<div>
 		<strong>Add Protocol Document From List</strong></br>
-		<% documents = Document.all.map{ |x| [x.name,x.id] } %>
-		<% documents.sort! do |x,y| %>
-			<% x[0] <=> y[0] %>
-		<% end %>
 		<% default_document_id = nil %>
 		<% if not @biosample.documents.nil? %>
 			<% default_document_id = @biosample.documents.last %>
 		<% end %>
-		<%= f.select :documents, choices=options_for_select(documents,default_document_id),html_options={:prompt => "Choose a Document",multiple: false,size:1} %>
+		<%= f.select :documents, choices=options_for_select(sorted_document_name_id,default_document_id),html_options={:prompt => "Choose a Document",multiple: false,size:1} %>
 	</div></br>
 
 	<div class="field">
@@ -51,15 +47,11 @@
 
 	<div class="field">
 		<%= f.label :vendor_id %>
-		<% vendors = Vendor.all.map{ |x| [x.name,x.id] } %>
-		<% vendors.sort! do |x,y| %>
-			<% x[0] <=> y[0] %>
-		<% end %>
 		<% vendor_id = nil %>
 		<% if not @biosample.vendor.nil? %>
 			<% vendor_id = @biosample.vendor.id %>
 		<% end %>
-		<%= f.select :vendor_id, choices=options_for_select(vendors,selected=vendor_id),html_options={:prompt => "Select the Vendor"} %>
+		<%= f.select :vendor_id, choices=options_for_select(sorted_vendor_name_id,selected=vendor_id),html_options={:prompt => "Select the Vendor"} %>
 	</div>
 
   <div class="field">
