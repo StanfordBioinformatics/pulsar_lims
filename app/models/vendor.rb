@@ -1,3 +1,4 @@
 class Vendor < ActiveRecord::Base
-	has_one :biosample
+	has_many :biosample
+	has_many :antibodies
 end
