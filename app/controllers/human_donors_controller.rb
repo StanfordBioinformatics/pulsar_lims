@@ -69,6 +69,6 @@ class HumanDonorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def human_donor_params
-      params.require(:human_donor).permit(:encode_id, :encode_alias, :string)
+      params.require(:human_donor).permit(:encode_identifier, :encode_alias, :string)
     end
 end

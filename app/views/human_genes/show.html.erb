@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Encode identifier:</strong>
+  <%= @human_gene.encode_identifier %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @human_gene.name %>
+</p>
+
+<%= link_to 'Edit', edit_human_gene_path(@human_gene) %> |
+<%= link_to 'Back', human_genes_path %>

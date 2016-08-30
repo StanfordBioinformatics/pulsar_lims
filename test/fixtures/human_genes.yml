@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  encode_identifier: MyString
+  name: MyString
+
+two:
+  encode_identifier: MyString
+  name: MyString

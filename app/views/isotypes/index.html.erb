@@ -1,0 +1,27 @@
+<h1>Listing isotypes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @isotypes.each do |isotype| %>
+      <tr>
+        <td><%= isotype.name %></td>
+        <td><%= link_to 'Show', isotype %></td>
+        <td><%= link_to 'Edit', edit_isotype_path(isotype) %></td>
+        <td><%= link_to 'Destroy', isotype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Isotype', new_isotype_path %>

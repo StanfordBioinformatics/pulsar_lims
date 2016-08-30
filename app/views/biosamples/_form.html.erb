@@ -32,7 +32,7 @@
 	</div></br>
 
 	<div class="field">
-		<%= f.label :biosample_type_id %>
+		Biosample Type:</br>
 		<% biosample_types = BiosampleType.all.map{ |x| [x.name,x.id] } %>
 		<% biosample_types.sort! do |x,y| %>
 			<% x[0] <=> y[0] %>
@@ -63,12 +63,12 @@
 	</div>
 
   <div class="field">
-    <%= f.label :source_product_identifier %><br>
-    <%= f.text_field :source_product_identifier %>
+		Vendor Product Identifier:</br>
+    <%= f.text_field :vendor_product_identifier %>
   </div>
 
   <div class="field">
-    <%= f.label :lot_identifier %><br>
+		Lot Identifier:</br>
     <%= f.text_field :lot_identifier %>
   </div>
 
@@ -83,7 +83,7 @@
   </div>
 
 	<div class="field">
-		<%= f.label :human_donor_id %>
+		Human Donor:</br>
 		<% donors = HumanDonor.all.map{ |x| [x.encode_alias,x.id]} %>
 		<% donors.sort! do |x,y| %>
 			<% x[0] <=> y[0] %>
@@ -96,17 +96,17 @@
 	</div>
 
   <div class="field">
-    <%= f.label :passage_number %><br>
+		Passage Number:</br>
     <%= f.number_field :passage_number %>
   </div>
 
   <div class="field">
-    <%= f.label :culture_harvest_date %><br>
+		Culture Harvest Date:</br>
     <%= f.date_select :culture_harvest_date %>
   </div>
 
 	<div>
-    <%= f.label :submitter_comments %><br>
+		Submitter Comments:</br>
     <%= f.text_field :submitter_comments %>
   </div>
 

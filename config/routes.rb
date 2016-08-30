@@ -1,4 +1,12 @@
 SnyderEncode::Application.routes.draw do
+  resources :organisms
+
+  resources :antibody_purifications
+
+  resources :human_genes
+
+  resources :isotypes
+
   resources :biosamples
 
   resources :human_donors

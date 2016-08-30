@@ -85,11 +85,88 @@ Uberon.create!([
 	{name: "male reproductive system", accession: "UBERON:0000079"}
 	])
 
-#Vendors
+#Vendor
 #see script in lib called upload_vendors.rb.
 
 HumanDonor.delete_all
 HumanDonor.create!([
-	{encode_id: "ENCDO268AAA", encode_alias:"bernstein:donor of NHEK cells"},
-	{encode_id: "ENCDO000ABE", encode_alias:"encode:donor of HCT-116"}
+	{encode_identifier: "ENCDO268AAA", encode_alias:"bernstein:donor of NHEK cells"},
+	{encode_identifier: "ENCDO000ABE", encode_alias:"encode:donor of HCT-116"}
 	])
+
+Isotype.delete_all
+Isotype.create!([
+	{ name: "IgA1"},
+	{ name: "IgA2"},
+	{ name: "IgD"},
+	{ name: "IgG"},
+	{ name: "IgGκ"},
+	{ name: "IgG1"},
+	{ name: "IgG1κ"},
+	{ name: "IgG1λ"},
+	{ name: "IgG2"},
+	{ name: "IgG2κ"},
+	{ name: "IgG2λ"},
+	{ name: "IgG2a"},
+	{ name: "IgG2aκ"},
+	{ name: "IgG2aλ"},
+	{ name: "IgG2b"},
+	{ name: "IgG2bκ"},
+	{ name: "IgG2bλ"},
+	{ name: "IgG3"},
+	{ name: "IgG3κ"},
+	{ name: "IgG4"},
+	{ name: "IgA"},
+	{ name: "IgM"},
+	{ name: "IgMκ"},
+	{ name: "IgE"},
+	{ name: "serum"}
+])
+
+#HumanGenes
+#see script in lib called upload_human_genes.rb
+
+AntibodyPurification.delete_all
+AntibodyPurification.create!([
+	{name: "Protein A/G" },
+	{name: "affinity" },
+	{name: "Protein A"},
+	{name: "Protein G"},
+	{name: "crude"},
+	{name: "other"},
+	{name: "IEC"},
+	{name: "IMAC"},
+	{name: "tissue culture supernatant"},
+	{name: "antiserum"},
+	{name: "IgG fraction"}
+])
+
+Organism.delete_all
+Organism.create!([
+	{name: "avictoria"},
+	{name: "bacteriophage-phi-x174"},
+	{name: "bacteriophage-t7"},
+	{name: "cbrenneri"},
+	{name: "cbriggsae"},
+	{name: "celegans"},
+	{name: "chicken"},
+	{name: "cjaponica"},
+	{name: "cremanei"},
+	{name: "dananassae"},
+	{name: "dmelanogaster"},
+	{name: "dmojavensis"},
+	{name: "dpseudoobscura"},
+	{name: "dsimulans"},
+	{name: "dvirilis"},
+	{name: "dyakuba"},
+	{name: "goat" },
+	{name: "guineapig" },
+	{name: "human" },
+	{name: "influenza" },
+	{name: "mouse" },
+	{name: "rabbit"},
+	{name: "rat"   },
+	{name: "savidinii" },
+	{name: "sheep" },
+	{name: "synthetic" }
+])
