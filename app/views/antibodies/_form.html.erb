@@ -1,0 +1,61 @@
+<%= form_for(@antibody) do |f| %>
+  <% if @antibody.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@antibody.errors.count, "error") %> prohibited this antibody from being saved:</h2>
+
+      <ul>
+      <% @antibody.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :organism %><br>
+    <%= f.text_field :organism %>
+  </div>
+  <div class="field">
+    <%= f.label :antibody_purifications %><br>
+    <%= f.text_field :antibody_purifications %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor %><br>
+    <%= f.text_field :vendor %>
+  </div>
+  <div class="field">
+    <%= f.label :isotype %><br>
+    <%= f.text_field :isotype %>
+  </div>
+  <div class="field">
+    <%= f.label :human_gene %><br>
+    <%= f.text_field :human_gene %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor_product_identifier %><br>
+    <%= f.text_field :vendor_product_identifier %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor_product_url %><br>
+    <%= f.text_field :vendor_product_url %>
+  </div>
+  <div class="field">
+    <%= f.label :lot_identifier %><br>
+    <%= f.text_field :lot_identifier %>
+  </div>
+  <div class="field">
+    <%= f.label :clonality %><br>
+    <%= f.text_field :clonality %>
+  </div>
+  <div class="field">
+    <%= f.label :antigen_description %><br>
+    <%= f.text_field :antigen_description %>
+  </div>
+  <div class="field">
+    <%= f.label :antigen_sequence %><br>
+    <%= f.text_field :antigen_sequence %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

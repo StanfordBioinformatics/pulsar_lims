@@ -1,4 +1,6 @@
 SnyderEncode::Application.routes.draw do
+  resources :antibodies
+
   resources :organisms
 
   resources :antibody_purifications

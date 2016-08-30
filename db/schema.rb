@@ -11,7 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830050811) do
+ActiveRecord::Schema.define(version: 20160830051832) do
+
+  create_table "antibodies", force: true do |t|
+    t.integer  "organism_id"
+    t.integer  "antibody_purifications_id"
+    t.integer  "vendor_id"
+    t.integer  "isotype_id"
+    t.integer  "human_gene_id"
+    t.string   "vendor_product_identifier"
+    t.string   "vendor_product_url"
+    t.string   "lot_identifier"
+    t.string   "clonality"
+    t.string   "antigen_description"
+    t.string   "antigen_sequence"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "antibodies", ["antibody_purifications_id"], name: "index_antibodies_on_antibody_purifications_id"
+  add_index "antibodies", ["human_gene_id"], name: "index_antibodies_on_human_gene_id"
+  add_index "antibodies", ["isotype_id"], name: "index_antibodies_on_isotype_id"
+  add_index "antibodies", ["organism_id"], name: "index_antibodies_on_organism_id"
+  add_index "antibodies", ["vendor_id"], name: "index_antibodies_on_vendor_id"
 
   create_table "antibody_purifications", force: true do |t|
     t.string   "name"

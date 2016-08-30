@@ -1,0 +1,47 @@
+<h1>Listing antibodies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Organism</th>
+      <th>Antibody purifications</th>
+      <th>Vendor</th>
+      <th>Isotype</th>
+      <th>Human gene</th>
+      <th>Vendor product identifier</th>
+      <th>Vendor product url</th>
+      <th>Lot identifier</th>
+      <th>Clonality</th>
+      <th>Antigen description</th>
+      <th>Antigen sequence</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @antibodies.each do |antibody| %>
+      <tr>
+        <td><%= antibody.organism %></td>
+        <td><%= antibody.antibody_purifications %></td>
+        <td><%= antibody.vendor %></td>
+        <td><%= antibody.isotype %></td>
+        <td><%= antibody.human_gene %></td>
+        <td><%= antibody.vendor_product_identifier %></td>
+        <td><%= antibody.vendor_product_url %></td>
+        <td><%= antibody.lot_identifier %></td>
+        <td><%= antibody.clonality %></td>
+        <td><%= antibody.antigen_description %></td>
+        <td><%= antibody.antigen_sequence %></td>
+        <td><%= link_to 'Show', antibody %></td>
+        <td><%= link_to 'Edit', edit_antibody_path(antibody) %></td>
+        <td><%= link_to 'Destroy', antibody, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Antibody', new_antibody_path %>

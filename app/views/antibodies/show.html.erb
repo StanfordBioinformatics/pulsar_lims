@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Organism:</strong>
+  <%= @antibody.organism %>
+</p>
+
+<p>
+  <strong>Antibody purifications:</strong>
+  <%= @antibody.antibody_purifications %>
+</p>
+
+<p>
+  <strong>Vendor:</strong>
+  <%= @antibody.vendor %>
+</p>
+
+<p>
+  <strong>Isotype:</strong>
+  <%= @antibody.isotype %>
+</p>
+
+<p>
+  <strong>Human gene:</strong>
+  <%= @antibody.human_gene %>
+</p>
+
+<p>
+  <strong>Vendor product identifier:</strong>
+  <%= @antibody.vendor_product_identifier %>
+</p>
+
+<p>
+  <strong>Vendor product url:</strong>
+  <%= @antibody.vendor_product_url %>
+</p>
+
+<p>
+  <strong>Lot identifier:</strong>
+  <%= @antibody.lot_identifier %>
+</p>
+
+<p>
+  <strong>Clonality:</strong>
+  <%= @antibody.clonality %>
+</p>
+
+<p>
+  <strong>Antigen description:</strong>
+  <%= @antibody.antigen_description %>
+</p>
+
+<p>
+  <strong>Antigen sequence:</strong>
+  <%= @antibody.antigen_sequence %>
+</p>
+
+<%= link_to 'Edit', edit_antibody_path(@antibody) %> |
+<%= link_to 'Back', antibodies_path %>
