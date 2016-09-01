@@ -1,0 +1,49 @@
+<%= form_for(@library) do |f| %>
+  <% if @library.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@library.errors.count, "error") %> prohibited this library from being saved:</h2>
+
+      <ul>
+      <% @library.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+		Nucleic Acid Term Name:</br>
+    <%= f.select :sequence_ontology_term,choices=options_for_select(sorted_so_name_id),html_options={:prompt => "Select the Term Name"} %>
+  </div>
+  <div class="field">
+    <%= f.label :biosample %><br>
+    <%= f.select :biosample,choices=options_for_select(sorted_biosample_name_id),html_options={:prompt => "Select the Biosample"} %>
+  </div>
+  <div class="field">
+    <%= f.label :antibody %><br>
+    <%= f.text_field :antibody %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor %><br>
+    <%= f.text_field :vendor %>
+  </div>
+  <div class="field">
+    <%= f.label :lot_identifier %><br>
+    <%= f.text_field :lot_identifier %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor_product_identifier %><br>
+    <%= f.text_field :vendor_product_identifier %>
+  </div>
+  <div class="field">
+    <%= f.label :size_range %><br>
+    <%= f.text_field :size_range %>
+  </div>
+  <div class="field">
+    <%= f.label :strand_specificity %><br>
+    <%= f.check_box :strand_specificity %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

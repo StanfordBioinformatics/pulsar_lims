@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830082425) do
+ActiveRecord::Schema.define(version: 20160901230335) do
 
   create_table "antibodies", force: true do |t|
     t.integer  "organism_id"
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 20160830082425) do
     t.string   "submitter_comments"
     t.string   "lot_identifier"
     t.string   "vendor_product_identifier"
-    t.string   "term_name"
-    t.string   "term_identifier"
+    t.string   "ontology_term_name"
+    t.string   "ontology_term_accession"
     t.string   "description"
     t.integer  "passage_number"
     t.date     "culture_harvest_date"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160830082425) do
     t.integer  "human_donor_id"
     t.integer  "vendor_id"
     t.integer  "biosample_type_id"
+    t.string   "name"
   end
 
   add_index "biosamples", ["biosample_type_id"], name: "index_biosamples_on_biosample_type_id"
@@ -96,6 +97,11 @@ ActiveRecord::Schema.define(version: 20160830082425) do
   add_index "documents", ["biosample_id"], name: "index_documents_on_biosample_id"
   add_index "documents", ["document_type_id"], name: "index_documents_on_document_type_id"
 
+  create_table "documents_libraries", id: false, force: true do |t|
+    t.integer "document_id"
+    t.integer "library_id"
+  end
+
   create_table "human_donors", force: true do |t|
     t.string   "encode_identifier"
     t.string   "encode_alias"
@@ -116,6 +122,24 @@ ActiveRecord::Schema.define(version: 20160830082425) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "libraries", force: true do |t|
+    t.integer  "sequence_ontology_term_id"
+    t.integer  "biosample_id"
+    t.integer  "antibody_id"
+    t.integer  "vendor_id"
+    t.string   "lot_identifier"
+    t.string   "vendor_product_identifier"
+    t.string   "size_range"
+    t.boolean  "strand_specificity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "libraries", ["antibody_id"], name: "index_libraries_on_antibody_id"
+  add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id"
+  add_index "libraries", ["sequence_ontology_term_id"], name: "index_libraries_on_sequence_ontology_term_id"
+  add_index "libraries", ["vendor_id"], name: "index_libraries_on_vendor_id"
 
   create_table "organisms", force: true do |t|
     t.string   "name"

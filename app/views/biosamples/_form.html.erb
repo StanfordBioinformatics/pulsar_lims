@@ -12,7 +12,12 @@
   <% end %>
 
 	<div>
-		<strong>Associated Protocol Documents</strong></br>
+		<strong><%= f.label :name %></strong> (Max. 20 characters)</br>
+		<%= f.text_field :name %>
+	</div></br>
+
+	<div>
+		<strong>Associated Protocol Documents:</strong></br>
 		<% @biosample.documents.to_a.each do |d| %>
 			<%= d.name %></br>
 		<% end %>
@@ -65,13 +70,13 @@
   </div>
 
   <div class="field">
-		Biosample Term Name:</br>
-    <%= f.text_field :term_name %>
+		Ontology Term Name describing the biosample:</br>
+    <%= f.text_field :ontology_term_name%>
   </div>
 
   <div class="field">
-		Biosample Term Identifier:</br>
-    <%= f.text_field :term_identifier %>
+		Ontology Term Accession describing the biosample:</br>
+    <%= f.text_field :ontology_term_accession%>
   </div>
 
 	<div class="field">

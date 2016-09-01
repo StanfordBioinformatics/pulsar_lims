@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sequence ontology term:</strong>
+  <%= @library.sequence_ontology_term %>
+</p>
+
+<p>
+  <strong>Biosample:</strong>
+  <%= @library.biosample %>
+</p>
+
+<p>
+  <strong>Antibody:</strong>
+  <%= @library.antibody %>
+</p>
+
+<p>
+  <strong>Vendor:</strong>
+  <%= @library.vendor %>
+</p>
+
+<p>
+  <strong>Lot identifier:</strong>
+  <%= @library.lot_identifier %>
+</p>
+
+<p>
+  <strong>Vendor product identifier:</strong>
+  <%= @library.vendor_product_identifier %>
+</p>
+
+<p>
+  <strong>Size range:</strong>
+  <%= @library.size_range %>
+</p>
+
+<p>
+  <strong>Strand specificity:</strong>
+  <%= @library.strand_specificity %>
+</p>
+
+<%= link_to 'Edit', edit_library_path(@library) %> |
+<%= link_to 'Back', libraries_path %>

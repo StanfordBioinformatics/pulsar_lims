@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sequence_ontology_term_id: 
+  biosample_id: 
+  antibody_id: 
+  vendor_id: 
+  lot_identifier: MyString
+  vendor_product_identifier: MyString
+  size_range: MyString
+  strand_specificity: false
+
+two:
+  sequence_ontology_term_id: 
+  biosample_id: 
+  antibody_id: 
+  vendor_id: 
+  lot_identifier: MyString
+  vendor_product_identifier: MyString
+  size_range: MyString
+  strand_specificity: false

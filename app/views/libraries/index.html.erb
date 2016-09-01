@@ -1,0 +1,41 @@
+<h1>Listing libraries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sequence ontology term</th>
+      <th>Biosample</th>
+      <th>Antibody</th>
+      <th>Vendor</th>
+      <th>Lot identifier</th>
+      <th>Vendor product identifier</th>
+      <th>Size range</th>
+      <th>Strand specificity</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @libraries.each do |library| %>
+      <tr>
+        <td><%= library.sequence_ontology_term %></td>
+        <td><%= library.biosample %></td>
+        <td><%= library.antibody %></td>
+        <td><%= library.vendor %></td>
+        <td><%= library.lot_identifier %></td>
+        <td><%= library.vendor_product_identifier %></td>
+        <td><%= library.size_range %></td>
+        <td><%= library.strand_specificity %></td>
+        <td><%= link_to 'Show', library %></td>
+        <td><%= link_to 'Edit', edit_library_path(library) %></td>
+        <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Library', new_library_path %>

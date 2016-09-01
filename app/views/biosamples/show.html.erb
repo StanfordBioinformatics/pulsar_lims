@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+	<strong>Biosample Name</strong></br>
+	<%= @biosample.name %>
+</p>
+
+<p>
 	<strong>Documents</strong></br>
 	<% @biosample.documents.each do |d| %>
 		<%= d.name %></br>
@@ -33,13 +38,13 @@
 </p>
 
 <p>
-  <strong>Biosample Term Name:</strong></br>
-  <%= @biosample.term_name %>
+  <strong>Ontology Term Name describing the biosample:</strong></br>
+  <%= @biosample.ontology_term_name%>
 </p>
 
 <p>
-  <strong>Biosample Term identifier:</strong></br>
-  <%= @biosample.term_identifier %>
+  <strong>Ontology Term Accession describing the biosample:</strong></br>
+  <%= @biosample.ontology_term_accession%>
 </p>
 
 <p>

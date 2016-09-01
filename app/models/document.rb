@@ -1,5 +1,6 @@
 class Document < ActiveRecord::Base
 	has_and_belongs_to_many :biosamples
+	has_and_belongs_to_many :libraries
 	###
 	##Columns:
 	# name
