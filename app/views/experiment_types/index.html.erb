@@ -1,0 +1,27 @@
+<h1>Listing experiment_types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @experiment_types.each do |experiment_type| %>
+      <tr>
+        <td><%= experiment_type.name %></td>
+        <td><%= link_to 'Show', experiment_type %></td>
+        <td><%= link_to 'Edit', edit_experiment_type_path(experiment_type) %></td>
+        <td><%= link_to 'Destroy', experiment_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Experiment type', new_experiment_type_path %>

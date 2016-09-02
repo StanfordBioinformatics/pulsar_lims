@@ -170,3 +170,24 @@ Organism.create!([
 	{name: "sheep" },
 	{name: "synthetic" }
 ])
+
+SequencingPlatform.delete_all
+SequencingPlatform.create!([
+	{name: "Illumina MiSeq"},
+	{name: "Illumina HiSeq 2000"},
+	{name: "Illumina HiSeq 4000"}
+])
+
+ExperimentType.delete_all
+ExperimentType.create!([
+	{name: "ChIP-Seq"},
+	{name: "ATAC-Seq"}
+])
+
+ReferenceGenome.delete_all
+ReferenceGenome.create!([
+	{name: "UCSC hg19", url: "http://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/"},
+	{name: "NCBI GRCh37",url: "http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human"},
+	{name: "UCSC hg38", url: "http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/"},
+	{name: "NCBI GRCh38", url: "http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human"}
+])

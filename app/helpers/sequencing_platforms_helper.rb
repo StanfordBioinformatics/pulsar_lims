@@ -1,0 +1,2 @@
+module SequencingPlatformsHelper
+end

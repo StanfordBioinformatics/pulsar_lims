@@ -1,4 +1,10 @@
 SnyderEncode::Application.routes.draw do
+  resources :reference_genomes
+
+  resources :experiment_types
+
+  resources :sequencing_platforms
+
   resources :libraries
 
   resources :antibodies

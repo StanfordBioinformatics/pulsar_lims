@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @reference_genome.name %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @reference_genome.url %>
+</p>
+
+<%= link_to 'Edit', edit_reference_genome_path(@reference_genome) %> |
+<%= link_to 'Back', reference_genomes_path %>

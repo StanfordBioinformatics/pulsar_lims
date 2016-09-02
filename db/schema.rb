@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902011006) do
+ActiveRecord::Schema.define(version: 20160902072932) do
 
   create_table "antibodies", force: true do |t|
     t.integer  "organism_id"
@@ -103,6 +103,12 @@ ActiveRecord::Schema.define(version: 20160902011006) do
     t.integer "library_id"
   end
 
+  create_table "experiment_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "human_donors", force: true do |t|
     t.string   "encode_identifier"
     t.string   "encode_alias"
@@ -149,10 +155,23 @@ ActiveRecord::Schema.define(version: 20160902011006) do
     t.datetime "updated_at"
   end
 
+  create_table "reference_genomes", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sequence_ontology_terms", force: true do |t|
     t.string   "name"
     t.string   "accession"
     t.string   "definition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sequencing_platforms", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

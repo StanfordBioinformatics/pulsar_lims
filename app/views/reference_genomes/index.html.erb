@@ -1,0 +1,29 @@
+<h1>Listing reference_genomes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reference_genomes.each do |reference_genome| %>
+      <tr>
+        <td><%= reference_genome.name %></td>
+        <td><%= reference_genome.url %></td>
+        <td><%= link_to 'Show', reference_genome %></td>
+        <td><%= link_to 'Edit', edit_reference_genome_path(reference_genome) %></td>
+        <td><%= link_to 'Destroy', reference_genome, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reference genome', new_reference_genome_path %>
