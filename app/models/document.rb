@@ -10,7 +10,9 @@ class Document < ActiveRecord::Base
 	# document_type_id (fkey)
 	###
   belongs_to :document_type
-	validates :name, :description, :content_type, :data, presence: true
+
+	validates :name, length: { maximum: 20 }, presence: true, uniqueness: true
+	validates :description, :content_type, :data, presence: true
 
 	def uploaded_document=(document_field)
 		self.name = File.basename(document_field.original_filename)

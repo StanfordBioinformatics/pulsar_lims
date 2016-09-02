@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902072932) do
+ActiveRecord::Schema.define(version: 20160902223338) do
 
   create_table "antibodies", force: true do |t|
     t.integer  "organism_id"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160902072932) do
 
   add_index "antibodies", ["human_gene_id"], name: "index_antibodies_on_human_gene_id"
   add_index "antibodies", ["isotype_id"], name: "index_antibodies_on_isotype_id"
+  add_index "antibodies", ["name"], name: "index_antibodies_on_name", unique: true
   add_index "antibodies", ["organism_id"], name: "index_antibodies_on_organism_id"
   add_index "antibodies", ["vendor_id"], name: "index_antibodies_on_vendor_id"
 
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 20160902072932) do
 
   add_index "biosamples", ["biosample_type_id"], name: "index_biosamples_on_biosample_type_id"
   add_index "biosamples", ["human_donor_id"], name: "index_biosamples_on_human_donor_id"
+  add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true
   add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id"
 
   create_table "biosamples_documents", id: false, force: true do |t|
@@ -97,6 +99,7 @@ ActiveRecord::Schema.define(version: 20160902072932) do
 
   add_index "documents", ["biosample_id"], name: "index_documents_on_biosample_id"
   add_index "documents", ["document_type_id"], name: "index_documents_on_document_type_id"
+  add_index "documents", ["name"], name: "index_documents_on_name", unique: true
 
   create_table "documents_libraries", id: false, force: true do |t|
     t.integer "document_id"
@@ -146,6 +149,7 @@ ActiveRecord::Schema.define(version: 20160902072932) do
 
   add_index "libraries", ["antibody_id"], name: "index_libraries_on_antibody_id"
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id"
+  add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true
   add_index "libraries", ["sequence_ontology_term_id"], name: "index_libraries_on_sequence_ontology_term_id"
   add_index "libraries", ["vendor_id"], name: "index_libraries_on_vendor_id"
 
@@ -190,5 +194,7 @@ ActiveRecord::Schema.define(version: 20160902072932) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true
 
 end

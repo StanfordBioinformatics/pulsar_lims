@@ -6,8 +6,14 @@ class Antibody < ActiveRecord::Base
   belongs_to :isotype
   belongs_to :human_gene
 	has_many   :libraries
-	validates  :name, length: { maximum: 20 }
-	validates  :name, :organism_id, :antibody_purifications, :vendor_id, :isotype_id, :human_gene_id, presence: true
-	validates  :vendor_product_identifier, :lot_identifier, :clonality, presence: true
-	validates  :clonality, inclusion: CLONALITY_TYPES
+
+	validates  :name, length: { maximum: 20 }, presence: true, uniqueness: true
+	validates  :organism_id, presence: true
+	validates  :antibody_purifications, presence: true
+	validates  :vendor_id, presence: true
+	validates  :isotype_id, presence: true
+	validates  :human_gene_id, presence: true
+	validates  :vendor_product_identifier, presence: true
+	validates  :lot_identifier, presence: true
+	validates  :clonality, inclusion: CLONALITY_TYPES, presence: true
 end
