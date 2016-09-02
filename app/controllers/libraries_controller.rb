@@ -25,6 +25,7 @@ class LibrariesController < ApplicationController
   # POST /libraries.json
   def create
     @library = Library.new(library_params)
+		add_documents()
 
     respond_to do |format|
       if @library.save
@@ -71,4 +72,14 @@ class LibrariesController < ApplicationController
     def library_params
       params.require(:library).permit(:sequence_ontology_term_id, :biosample_id, :antibody_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specificity)
     end
+
+    def add_document
+      document = params[:library][:documents]
+      if not document.empty?
+        document = Document.find(document)
+        if not @library.documents.include? document
+          @library.documents << document
+        end 
+      end 
+    end 
 end

@@ -11,38 +11,83 @@
     </div>
   <% end %>
 
+  <div>
+    Library Name:</br>
+    <%= f.text_field :name %>(Max. 20 characters)
+  </div></br>
+
+  <div>
+    <strong>Associated Protocol Documents:</strong></br>
+    <% @library.documents.to_a.each do |d| %>
+      <%= d.name %></br>
+    <% end %>
+  </div></br>
+
+  <div>
+    <strong>Add Protocol Document From List</strong></br>
+    <% default_document_id = nil %>
+    <% if not @library.documents.nil? %>
+      <% default_document_id = @library.documents.last %>
+    <% end %>
+    <%= f.select :documents, choices=options_for_select(sorted_document_name_id,default_document_id),html_options={:prompt => "Choose a Document",multiple: false,size:1} %>
+  </div></br>
+
   <div class="field">
 		Nucleic Acid Term Name:</br>
-    <%= f.select :sequence_ontology_term,choices=options_for_select(sorted_so_name_id),html_options={:prompt => "Select the Term Name"} %>
+		<% sequence_ontology_term_id = nil %>
+		<% if not @library.sequence_ontology_term.nil? %>
+			<% sequence_ontology_term_id = @library.sequence_ontology_term.id %>
+		<% end %>
+    <%= f.select :sequence_ontology_term_id,choices=options_for_select(sorted_so_name_id,selected=sequence_ontology_term_id),html_options={:prompt => "Select the Term Name"} %>
   </div>
+
   <div class="field">
     <%= f.label :biosample %><br>
-    <%= f.select :biosample,choices=options_for_select(sorted_biosample_name_id),html_options={:prompt => "Select the Biosample"} %>
+		<% biosample_id = nil %>
+		<% if not @library.biosample.nil? %>
+			<% biosample_id = @library.biosample.id %>
+		<% end %>
+    <%= f.select :biosample_id,choices=options_for_select(sorted_biosample_name_id,selected=biosample_id),html_options={:prompt => "Select the Biosample"} %>
   </div>
+
   <div class="field">
     <%= f.label :antibody %><br>
-    <%= f.text_field :antibody %>
+		<% antibody_id = nil %>
+		<% if not @library.antibody.nil? %>
+			<% antibody_id = @library.antibody.id %>
+		<% end %>
+    <%= f.select :antibody_id,choices=options_for_select(sorted_antibody_name_id,selected=antibody_id),html_options={:prompt => "Select the Antibody"} %>
   </div>
+
   <div class="field">
-    <%= f.label :vendor %><br>
-    <%= f.text_field :vendor %>
+    <%= f.label :vendor_id %>
+    <% vendor_id = nil %>
+    <% if not @library.vendor.nil? %>
+      <% vendor_id = @library.vendor.id %>
+    <% end %>
+    <%= f.select :vendor_id, choices=options_for_select(sorted_vendor_name_id,selected=vendor_id),html_options={:prompt => "Select the Vendor"} %>
   </div>
+
   <div class="field">
     <%= f.label :lot_identifier %><br>
     <%= f.text_field :lot_identifier %>
   </div>
+
   <div class="field">
     <%= f.label :vendor_product_identifier %><br>
     <%= f.text_field :vendor_product_identifier %>
   </div>
+
   <div class="field">
     <%= f.label :size_range %><br>
     <%= f.text_field :size_range %>
   </div>
+
   <div class="field">
     <%= f.label :strand_specificity %><br>
     <%= f.check_box :strand_specificity %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

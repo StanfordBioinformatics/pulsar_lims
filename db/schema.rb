@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160901230335) do
+ActiveRecord::Schema.define(version: 20160902011006) do
 
   create_table "antibodies", force: true do |t|
     t.integer  "organism_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160901230335) do
     t.string   "antigen_sequence"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   add_index "antibodies", ["human_gene_id"], name: "index_antibodies_on_human_gene_id"
@@ -134,6 +135,7 @@ ActiveRecord::Schema.define(version: 20160901230335) do
     t.boolean  "strand_specificity"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   add_index "libraries", ["antibody_id"], name: "index_libraries_on_antibody_id"

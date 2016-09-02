@@ -9,6 +9,11 @@
     </div>
   <% end %>
 
+  <div>
+    <strong>Antibody Name:</strong> (Max. 20 characters)</br>
+    <%= f.text_field :name %>
+  </div></br>
+
   <div class="field">
     <%= f.label :organism_id %><br>
 		<% organism_id = nil %>
@@ -19,7 +24,7 @@
   </div>
 
 	<div class="field">
-		<strong>Associated Antibody Purifications</strong></br>
+		<strong>Associated Antibody Purifications:</strong></br>
 		<% @antibody.antibody_purifications.each do |pur| %>
 			<%= pur.name %></br>
 		<% end %></br>
@@ -27,7 +32,6 @@
 
   <div class="field">
 		<strong>Add Antibody Association From List</strong></br>
-    <%= f.label :antibody_purifications %></br>
 		<% default_antibody_purification_id = nil %>
 		<% if not @antibody.antibody_purifications.nil? %>
 			<% default_antibody_purification_id = @antibody.antibody_purifications.last %>

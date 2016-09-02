@@ -4,4 +4,5 @@ class Library < ActiveRecord::Base
   belongs_to :biosample
   belongs_to :antibody
   belongs_to :vendor
+	validates :name, length: { maximum: 20 }
 end

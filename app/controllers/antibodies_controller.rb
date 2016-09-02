@@ -72,3 +72,4 @@ class AntibodiesController < ApplicationController
       params.require(:antibody).permit(:organism_id, :vendor_id, :isotype_id, :human_gene_id, :vendor_product_identifier, :vendor_product_url, :lot_identifier, :clonality, :antigen_description, :antigen_sequence)
     end
 end
+
