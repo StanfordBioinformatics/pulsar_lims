@@ -7,7 +7,7 @@ class Antibody < ActiveRecord::Base
   belongs_to :human_gene
 	has_many   :libraries
 	validates  :name, length: { maximum: 20 }
-	validates  :organism_id, :antibody_purifications, :vendor_id, :isotype_id, :human_gene_id, presence: true
+	validates  :name, :organism_id, :antibody_purifications, :vendor_id, :isotype_id, :human_gene_id, presence: true
 	validates  :vendor_product_identifier, :lot_identifier, :clonality, presence: true
 	validates  :clonality, inclusion: CLONALITY_TYPES
 end

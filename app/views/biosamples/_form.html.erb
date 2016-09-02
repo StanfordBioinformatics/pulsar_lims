@@ -12,19 +12,19 @@
   <% end %>
 
 	<div>
-		<strong>Biosample Name:</strong> (Max. 20 characters)</br>
-		<%= f.text_field :name %>
+		Biosample Name:</br>
+		<%= f.text_field :name %> (Max. 20 characters)
 	</div></br>
 
 	<div>
-		<strong>Associated Protocol Documents:</strong></br>
+		Associated Protocol Documents:</br>
 		<% @biosample.documents.to_a.each do |d| %>
 			<%= d.name %></br>
 		<% end %>
 	</div></br>
 
 	<div>
-		<strong>Add Protocol Document From List</strong></br>
+		Add Protocol Document From List:</br>
 		<% default_document_id = nil %>
 		<% if not @biosample.documents.nil? %>
 			<% default_document_id = @biosample.documents.last %>
@@ -71,12 +71,12 @@
 
   <div class="field">
 		Ontology Term Name describing the biosample:</br>
-    <%= f.text_field :ontology_term_name%>
+    <%= f.text_field :ontology_term_name %>
   </div>
 
   <div class="field">
 		Ontology Term Accession describing the biosample:</br>
-    <%= f.text_field :ontology_term_accession%>
+    <%= f.text_field :ontology_term_accession%> (An UBERON, EFO, CL, NTR, FBbt, or WBbt identifer)
   </div>
 
 	<div class="field">

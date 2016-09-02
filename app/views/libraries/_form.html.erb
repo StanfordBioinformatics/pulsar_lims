@@ -17,14 +17,14 @@
   </div></br>
 
   <div>
-    <strong>Associated Protocol Documents:</strong></br>
+    Associated Protocol Documents:</br>
     <% @library.documents.to_a.each do |d| %>
       <%= d.name %></br>
     <% end %>
   </div></br>
 
   <div>
-    <strong>Add Protocol Document From List</strong></br>
+    Add Protocol Document From List:</br>
     <% default_document_id = nil %>
     <% if not @library.documents.nil? %>
       <% default_document_id = @library.documents.last %>
@@ -80,12 +80,11 @@
 
   <div class="field">
     <%= f.label :size_range %><br>
-    <%= f.text_field :size_range %>
+    <%= f.text_field :size_range %>(i.e. 450-650)
   </div>
 
   <div class="field">
-    <%= f.label :strand_specificity %><br>
-    <%= f.check_box :strand_specificity %>
+		Strand Specific: <%= f.check_box :strand_specificity %>
   </div>
 
   <div class="actions">
