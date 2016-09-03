@@ -17,10 +17,7 @@
 	</div></br>
 
 	<div>
-		Associated Protocol Documents:</br>
-		<% @biosample.documents.to_a.each do |d| %>
-			<%= d.name %></br>
-		<% end %>
+		<%= render(@biosample.documents) %>
 	</div></br>
 
 	<div>
