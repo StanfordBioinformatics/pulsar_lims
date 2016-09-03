@@ -17,11 +17,25 @@
 	</div></br>
 
 	<div>
-		<%= render(@biosample.documents) %>
+		Associated Protocol Documents:
+		<% if @biosample.new_record? %>
+			None
+		<% else %>
+			<%= render(@biosample.documents) %>
+		<% end %>
 	</div></br>
 
 	<div>
-		<%= render(partial: "documents/add_document", locals: {f: f,documents: @biosample.documents}) %>
+		<!-- Show select for Documents. Mutliple documents can be selected.
+				 If the form was rejected due to a validation error, then the
+				 user will have been presented with this form again to correct it, 
+				 and I set the default selectioned to what the user had originally, 
+				 if any. -->
+		<% selected = nil %>
+		<% if @biosample.documents and @biosample.new_record? %>
+			<% selected = @biosample.documents.map{|x| x.id} %>
+		<% end %>
+		<%= render(partial: "documents/add_document", locals: {f: f,selected: selected}) %>
 	</div></br>
 
 	<div class="field">

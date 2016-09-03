@@ -74,11 +74,13 @@ class LibrariesController < ApplicationController
     end
 
     def add_document
-      document = params[:library][:documents]
-      if not document.empty?
-        document = Document.find(document)
-        if not @library.documents.include? document
-          @library.documents << document
+      documents = params[:library][:documents]
+      documents.each do |d| 
+        if not d.empty?
+          doc = Library.find(d)
+          if not @library.documents.include? doc 
+            @library.documents << doc 
+          end 
         end 
       end 
     end 

@@ -76,11 +76,13 @@ class BiosamplesController < ApplicationController
     end
 
 		def add_document
-			document = params[:biosample][:documents]
-			if not document.empty?
-				document = Document.find(document)
-				if not @biosample.documents.include? document
-					@biosample.documents << document
+			documents = params[:biosample][:documents]
+			documents.each do |d|
+				if not d.empty?
+					doc = Document.find(d)
+					if not @biosample.documents.include? doc
+						@biosample.documents << doc
+					end
 				end
 			end
 		end

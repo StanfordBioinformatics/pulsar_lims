@@ -1,6 +1,9 @@
-Add Protocol Document From List:</br>
-<% default_document_id = nil %>
-<% if not documents.empty? %>
-  <% default_document_id = documents.last.id %>
-<% end %>
-<%= f.select :documents, choices=options_for_select(sorted_document_name_id,default_document_id),html_options={:prompt => "Choose a Document",multiple: false,size:1} %>
+<!-- Form parameters:
+	1) f - The form object to add this partial to. 
+	2) documents - an array of docuemnts already associated with the object in question, i.e. a Library or Biosample, 
+								 so that a default can be selected from it in the select tag. If empty, will be set to nil and the 
+                 prompt will be the default selection.
+-->
+		             
+Add Protocol Document(s) From List:</br>
+<%= f.select :documents, choices=options_for_select(sorted_document_name_id,selected=selected),options={},html_options={:prompt => "Select a Document",:multiple => true} %>

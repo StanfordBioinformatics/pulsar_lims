@@ -17,11 +17,25 @@
   </div></br>
 
   <div>
-    <%= render(@library.documents) %>
+    Associated Protocol Documents:
+    <% if @library.new_record? %>
+      None
+    <% else %>
+      <%= render(@library.documents) %>
+    <% end %>
   </div></br>
 
   <div>
-    <%= render(partial: "documents/add_document", locals: {f: f,documents: @library.documents}) %>
+    <!-- Show select for Documents. Mutliple documents can be selected.
+         If the form was rejected due to a validation error, then the
+         user will have been presented with this form again to correct it, 
+         and I set the default selectioned to what the user had originally, 
+         if any. -->
+    <% selected = nil %>
+    <% if @library.documents and @library.new_record? %>
+      <% selected = @library.documents.map{|x| x.id} %>
+    <% end %>
+    <%= render(partial: "documents/add_document", locals: {f: f,selected: selected}) %>
   </div></br>
 
   <div class="field">
