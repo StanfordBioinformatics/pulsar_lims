@@ -21,12 +21,7 @@
 	</div></br>
 
 	<div>
-		Add Protocol Document From List:</br>
-		<% default_document_id = nil %>
-		<% if not @biosample.documents.nil? %>
-			<% default_document_id = @biosample.documents.last %>
-		<% end %>
-		<%= f.select :documents, choices=options_for_select(sorted_document_name_id,default_document_id),html_options={:prompt => "Choose a Document",multiple: false,size:1} %>
+		<%= render(partial: "documents/add_document", locals: {f: f,documents: @biosample.documents}) %>
 	</div></br>
 
 	<div class="field">

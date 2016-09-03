@@ -1,0 +1,6 @@
+Add Protocol Document From List:</br>
+<% default_document_id = nil %>
+<% if not documents.empty? %>
+  <% default_document_id = documents.last.id %>
+<% end %>
+<%= f.select :documents, choices=options_for_select(sorted_document_name_id,default_document_id),html_options={:prompt => "Choose a Document",multiple: false,size:1} %>
