@@ -6,10 +6,10 @@
 </p>
 
 <p>
-	<strong>Documents:</strong></br>
-	<% @biosample.documents.each do |d| %>
-		<%= d.name %></br>
-	<% end %>
+	<table>
+		<tr><th style="text-align:left">Documents:</th></tr>
+		<%= render(@biosample.documents) %>
+	</table>
 </p>
 
 <p>

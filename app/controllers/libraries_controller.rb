@@ -73,7 +73,7 @@ class LibrariesController < ApplicationController
       params.require(:library).permit(:sequence_ontology_term_id, :biosample_id, :antibody_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specificity, :name)
     end
 
-    def add_document
+    def add_documents
       documents = params[:library][:documents]
       documents.each do |d| 
         if not d.empty?

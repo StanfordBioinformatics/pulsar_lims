@@ -1,5 +1,5 @@
 class BiosamplesController < ApplicationController
-  before_action :set_biosample, only: [:show, :edit, :update, :destroy]
+  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :delete_biosample_document]
 
   # GET /biosamples
   # GET /biosamples.json
@@ -26,7 +26,7 @@ class BiosamplesController < ApplicationController
   def create
 		#documents could be a string containing a document ID, or an array of strings, where each string identifies a document id. 
     @biosample = Biosample.new(biosample_params)
-		add_document()	
+		add_documents()	
 		
     respond_to do |format|
       if @biosample.save
@@ -42,6 +42,7 @@ class BiosamplesController < ApplicationController
   # PATCH/PUT /biosamples/1
   # PATCH/PUT /biosamples/1.json
   def update
+		remove_documents()
 		add_document()
     respond_to do |format|
       if @biosample.update(biosample_params)
@@ -64,6 +65,23 @@ class BiosamplesController < ApplicationController
     end
   end
 
+	def delete_biosample_document
+		document_id = params[:document_id]
+		#render :text => params
+		#return
+		document = Document.find(document_id)
+		@biosample.documents.destroy(document)
+		respond_to do |format|
+			if @biosample.save
+				format.html { redirect_to action: "show" }
+				format.json { head :no_content}
+			else
+				format.html { render action: "edit", notice: "There must be at least one associated document. Add the document of interest before deleting the last one." }
+				format.json {render json: @biosample.errors, status: :unprocessable_entity }
+			end
+		end
+	end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_biosample
@@ -74,8 +92,21 @@ class BiosamplesController < ApplicationController
     def biosample_params
       params.require(:biosample).permit(:submitter_comments, :lot_identifier, :vendor_product_identifier, :ontology_term_name, :ontology_term_accession, :description, :passage_number, :culture_harvest_date, :encid, :human_donor_id,:vendor_id,:biosample_type_id,:name)
     end
+	
+		def remove_documents
+			if not params.has_key?(:remove_documents)
+				return
+			end
+			documents = params[:remove_documents]
+			documents.each do |d|
+				doc = Document.find(d)
+				if @biosample.documents.include? doc
+					@biosample.documents.destroy(doc)
+				end
+			end
+		end
 
-		def add_document
+		def add_documents
 			documents = params[:biosample][:documents]
 			documents.each do |d|
 				if not d.empty?

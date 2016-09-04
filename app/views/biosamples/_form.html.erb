@@ -1,3 +1,4 @@
+<p id="notice"><%= notice %></p>
 <%= form_for(@biosample) do |f| %>
   <% if @biosample.errors.any? %>
     <div id="error_explanation">
@@ -20,8 +21,16 @@
 		Associated Protocol Documents:
 		<% if @biosample.new_record? %>
 			None
-		<% else %>
-			<%= render(@biosample.documents) %>
+		<% else %></br>
+			<table>
+				<% @biosample.documents.each do |d| %>
+					<tr>
+						<td><%= link_to(d.name, d) %></td>
+						<!-- <td><%# button_to "Remove",delete_biosample_document_biosample_path(bid: @biosample.id, document_id: d.id) %></td> -->
+						<td> Remove: <input type="checkbox" name="remove_documents[]" value=<%= d.id %> /></td>
+					</tr>
+				<% end %>
+			</table>
 		<% end %>
 	</div></br>
 
@@ -40,15 +49,11 @@
 
 	<div class="field">
 		Biosample Type:</br>
-		<% biosample_types = BiosampleType.all.map{ |x| [x.name,x.id] } %>
-		<% biosample_types.sort! do |x,y| %>
-			<% x[0] <=> y[0] %>
-		<% end %>
 		<% biosample_type_id = nil %>
 		<% if not @biosample.biosample_type.nil? %>
 			<% biosample_type_id = @biosample.biosample_type.id %>
 		<% end %>
-		<%= f.select :biosample_type_id, choices=options_for_select(biosample_types,selected=biosample_type_id),html_options={:prompt => "Select the Biosample Type"}%>
+		<%= f.select :biosample_type_id, choices=options_for_select(sorted_biosampletype_name_id,selected=biosample_type_id),html_options={:prompt => "Select the Biosample Type"} %>
 	</div>
 
   <div class="field">
