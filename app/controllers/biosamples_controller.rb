@@ -65,22 +65,6 @@ class BiosamplesController < ApplicationController
     end
   end
 
-	def delete_biosample_document
-		document_id = params[:document_id]
-		#render :text => params
-		#return
-		document = Document.find(document_id)
-		@biosample.documents.destroy(document)
-		respond_to do |format|
-			if @biosample.save
-				format.html { redirect_to action: "show" }
-				format.json { head :no_content}
-			else
-				format.html { render action: "edit", notice: "There must be at least one associated document. Add the document of interest before deleting the last one." }
-				format.json {render json: @biosample.errors, status: :unprocessable_entity }
-			end
-		end
-	end
 
   private
     # Use callbacks to share common setup or constraints between actions.

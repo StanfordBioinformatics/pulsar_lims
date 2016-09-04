@@ -17,9 +17,7 @@ SnyderEncode::Application.routes.draw do
 
   resources :isotypes
 
-  resources :biosamples do
-		post "delete_biosample_document", on: :member
-	end
+  resources :biosamples
 
   resources :human_donors
 
