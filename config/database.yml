@@ -6,8 +6,6 @@
 development:
   adapter: postgresql
   database: snyder_encode_development
-  pool: 5
-  timeout: 5000
   username: root
   password: secret
 
@@ -17,15 +15,11 @@ development:
 test:
   adapter: postgresql
   database: snyder_encode_test
-  pool: 5
-  timeout: 5000
   username: root
   password: secret
 
 production:
   adapter: postgresql
   database: snyder_encode_production
-  pool: 5
-  timeout: 5000
   username: root
   password: secret
