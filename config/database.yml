@@ -6,7 +6,7 @@
 development:
   adapter: postgresql
   database: snyder_encode_development
-  username: root
+  username: nathankw
   password: secret
 
 # Warning: The database defined as "test" will be erased and
@@ -15,11 +15,11 @@ development:
 test:
   adapter: postgresql
   database: snyder_encode_test
-  username: root
-  password: secret
+  username: nathankw
+  password: secret 
 
 production:
   adapter: postgresql
   database: snyder_encode_production
-  username: root
-  password: secret
+  username: nathankw
+  password: secret 
