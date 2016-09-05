@@ -3,15 +3,11 @@
 <table>
   <thead>
     <tr>
-      <th>Submitter comments</th>
-      <th>Lot identifier</th>
-      <th>Source product identifier</th>
-      <th>Term name</th>
-      <th>Term identifier</th>
+			<th>Name</th>
       <th>Description</th>
-      <th>Passage number</th>
-      <th>Culture harvest date</th>
-      <th>Encid</th>
+      <th>Vendor</th>
+      <th>Biosample Term Name</th>
+      <th>ENCID</th>
       <th></th>
       <th></th>
       <th></th>
@@ -21,14 +17,10 @@
   <tbody>
     <% @biosamples.each do |biosample| %>
       <tr>
-        <td><%= biosample.submitter_comments %></td>
-        <td><%= biosample.lot_identifier %></td>
-        <td><%= biosample.vendor_product_identifier %></td>
-        <td><%= biosample.ontology_term_name %></td>
-        <td><%= biosample.ontology_term_accession %></td>
+				<td><%= biosample.name %></td>
         <td><%= biosample.description %></td>
-        <td><%= biosample.passage_number %></td>
-        <td><%= biosample.culture_harvest_date %></td>
+        <td><%= biosample.vendor.name %></td>
+        <td><%= biosample.ontology_term_name %></td>
         <td><%= biosample.encid %></td>
         <td><%= link_to 'Show', biosample %></td>
         <td><%= link_to 'Edit', edit_biosample_path(biosample) %></td>

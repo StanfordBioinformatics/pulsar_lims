@@ -33,6 +33,13 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development, :test do
+	gem "rspec-rails", "~> 3.2.1"
+end
+
+group :test do
+	gem "capybara", "~> 2.4" #used for integration testing. 
+end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

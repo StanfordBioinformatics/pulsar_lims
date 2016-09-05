@@ -43,7 +43,7 @@ class BiosamplesController < ApplicationController
   # PATCH/PUT /biosamples/1.json
   def update
 		remove_documents()
-		add_document()
+		add_documents()
     respond_to do |format|
       if @biosample.update(biosample_params)
         format.html { redirect_to @biosample, notice: 'Biosample was successfully updated.' }
