@@ -1,9 +1,6 @@
-<%= form_for(:document,
-						url: {action: "save"},
-						html: {multipart: true}) do |f| %>
+<%= form_for(@document) do |f| %>
 	Description:	<%= f.text_field(:description) %><br/>
 	Upload your document: <%= f.file_field("uploaded_document") %><br/>
-	Document: <%= f.select :biosample_id, Biosample.all, prompt: "select a biosample" %>
 
-	<%= submit_tag("Upload document") %>
+	<%= f.submit("Upload document") %>
 <% end %>

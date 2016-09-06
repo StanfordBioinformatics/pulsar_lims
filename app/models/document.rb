@@ -15,8 +15,12 @@ class Document < ActiveRecord::Base
 	validates :description, :content_type, :data, presence: true
 
 	def uploaded_document=(document_field)
-		self.name = File.basename(document_field.original_filename)
+		self.name = format_filename(document_field.original_filename)
 		self.content_type = document_field.content_type.chomp
 		self.data = document_field.read
+	end
+
+	def format_filename(filename)
+		File.basename(filename).gsub(/[^\w._-]/,"")
 	end
 end

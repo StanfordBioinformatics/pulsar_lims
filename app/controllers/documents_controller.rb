@@ -15,7 +15,7 @@ class DocumentsController < ApplicationController
 
   # GET /documents/new
   def new
-    #@document = Document.new
+    @document = Document.new
   end
 
   # GET /documents/1/edit
@@ -24,28 +24,15 @@ class DocumentsController < ApplicationController
 
   # POST /documents
   # POST /documents.json
-#  def create
-#		@document_type = DocumentType.find(document_params[:document_type])
-#		@document = Document.new({
-#			:name => document_params[:name],
-#			:description => document_params[:description]
-#			:content_type => 
-#			:data => "jj", 
-#			:document_type_id => @document_type.id }) 
-#		
-#		respond_to do |format|
-#      if @document.save
-#        format.html { redirect_to @document, notice: 'Document was successfully created.' }
-#        format.json { render action: 'show', status: :created, location: @document }
-#      else
-#        format.html { render action: 'new' }
-#        format.json { render json: @document.errors, status: :unprocessable_entity }
-#      end
-#    end
-#  end
+  def create
+		@document = Document.new(document_params)
+		if @document.save
+			redirect_to(@document, notice: "Document was successfully created.")
+		else
+			render(action: :get)
+		end
+	end
 
-  # PATCH/PUT /documents/1
-  # PATCH/PUT /documents/1.json
   def update
     respond_to do |format|
       if @document.update(document_params)
@@ -68,15 +55,6 @@ class DocumentsController < ApplicationController
     end
   end
 
-	def save
-		@document = Document.new(document_params)
-		if @document.save
-			redirect_to(action: "show", id: @document.id)
-		else
-			render(action: :new)
-		end
-	end
-	
 	def document
 		#called by the 'show' view.
 		@document = Document.find(params[:id])
