@@ -7,7 +7,7 @@ Vendor.delete_all
 
 options = {}
 OptionParser.new do |opts|
-	opts.on("--infile [INFILE]",help="Full path to input file containing JSON to import into the vendors table.") do |infile|
+	opts.on("--infile [INFILE]",help="Full path to input file containing JSON to import into the ENCODE sources table. This can be obtained from the URL https://www.encodeproject.org/sources/?format=json&limit=all.") do |infile|
 		options[:infile] = infile
 	end
 end.parse!

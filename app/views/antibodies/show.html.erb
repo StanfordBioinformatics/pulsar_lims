@@ -5,27 +5,29 @@
 
 <p>
   <strong>Organism:</strong>
-  <%= @antibody.organism %>
+  <%= @antibody.organism.name %>
 </p>
 
 <p>
-  <strong>Antibody purifications:</strong>
-  <%= @antibody.antibody_purifications %>
+  <table>
+    <tr><th style="text-align:left">Antibody Purifications:</th></tr>
+    <%= render(@antibody.antibody_purifications) %>
+  </table>
 </p>
 
 <p>
   <strong>Vendor:</strong>
-  <%= @antibody.vendor %>
+  <%= @antibody.vendor.name %>
 </p>
 
 <p>
   <strong>Isotype:</strong>
-  <%= @antibody.isotype %>
+  <%= @antibody.isotype.name %>
 </p>
 
 <p>
   <strong>Human gene:</strong>
-  <%= @antibody.human_gene %>
+  <%= @antibody.human_gene.name %>
 </p>
 
 <p>

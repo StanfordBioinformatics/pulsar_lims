@@ -23,20 +23,32 @@
     <%= f.select :organism_id, choices=options_for_select(sorted_organism_name_id,organism_id),html_options={:prompt => "Select the Organism"} %>
   </div>
 
-	<div class="field">
-		Associated Antibody Purifications:</br>
-		<% @antibody.antibody_purifications.each do |pur| %>
-			<%= pur.name %></br>
-		<% end %></br>
-	</div>
-
   <div class="field">
-		Add Antibody Association From List:</br>
-		<% default_antibody_purification_id = nil %>
-		<% if not @antibody.antibody_purifications.nil? %>
-			<% default_antibody_purification_id = @antibody.antibody_purifications.last %>
+		<% if @antibody.new_record? %>
+			None
+		<% else %>
+			<table>
+				<% @antibody.antibody_purifications.each do |p| %>
+					<tr>
+						<td><%= link_to(p.name,p) %></td>
+						<td> Remove: <input type="checkbox" name="remove_antibody_purifications[]" value=<%= p.id %> /></td>
+					</tr>
+				<% end %>
+			</table>
 		<% end %>
-    <%= f.select :antibody_purifications, choices=options_for_select(sorted_antibody_purification_name_id,default_antibody_purification_id),html_options={:prompt => "Choose an Antibody Purification"}%>
+	</div></br>
+
+  <div>
+    <!-- Show select for AntibodyPurifications. Mutliple can be selected.
+         If the form was rejected due to a validation error, then the
+         user will have been presented with this form again to correct it, 
+         and I set the default selectioned to what the user had originally, 
+         if any. -->
+    <% selected = nil %>
+    <% if @antibody.antibody_purifications and @antibody.new_record? %>
+      <% selected = @antibody.antibody_purifications.map{|x| x.id} %>
+    <% end %>
+    <%= render(partial: "antibody_purifications/select_antibody_purifications", locals: {f: f,selected: selected}) %>
   </div></br>
 
   <div class="field">

@@ -25,6 +25,7 @@ class AntibodiesController < ApplicationController
   # POST /antibodies.json
   def create
     @antibody = Antibody.new(antibody_params)
+		add_antibody_purifications()
 
     respond_to do |format|
       if @antibody.save
@@ -40,6 +41,8 @@ class AntibodiesController < ApplicationController
   # PATCH/PUT /antibodies/1
   # PATCH/PUT /antibodies/1.json
   def update
+		remove_antibody_purifications()
+		add_antibody_purifications()
     respond_to do |format|
       if @antibody.update(antibody_params)
         format.html { redirect_to @antibody, notice: 'Antibody was successfully updated.' }
@@ -71,5 +74,29 @@ class AntibodiesController < ApplicationController
     def antibody_params
       params.require(:antibody).permit(:organism_id, :vendor_id, :isotype_id, :human_gene_id, :vendor_product_identifier, :vendor_product_url, :lot_identifier, :clonality, :antigen_description, :antigen_sequence, :name)
     end
-end
 
+    def add_antibody_purifications
+      purifications = params[:antibody][:antibody_purifications]
+      purifications.each do |p| 
+        if not p.empty?
+          pur = AntibodyPurification.find(p)
+          if not @antibody.antibody_purifications.include? pur
+            @antibody.antibody_purifications << pur
+          end 
+        end 
+      end 
+    end 
+
+    def remove_antibody_purifications
+      if not params.has_key?(:remove_antibody_purifications)
+        return
+      end 
+      purifications = params[:remove_antibody_purifications]
+      purifications.each do |p| 
+        pur = AntibodyPurification.find(p)
+        if @antibody.documents.include? pur
+          @antibody.documents.destroy(pur)
+        end 
+      end 
+    end 
+end

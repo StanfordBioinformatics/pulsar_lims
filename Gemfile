@@ -41,6 +41,7 @@ end
 
 group :test do
 	gem "capybara", "~> 2.4" #used for integration testing. 
+	gem "factory_girl_rails", "~> 4.5"
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

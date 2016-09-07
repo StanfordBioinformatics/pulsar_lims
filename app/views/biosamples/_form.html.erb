@@ -43,7 +43,7 @@
 		<% if @biosample.documents and @biosample.new_record? %>
 			<% selected = @biosample.documents.map{|x| x.id} %>
 		<% end %>
-		<%= render(partial: "documents/add_document", locals: {f: f,selected: selected}) %>
+		<%= render(partial: "documents/select_documents", locals: {f: f,selected: selected}) %>
 	</div></br>
 
 	<div class="field">

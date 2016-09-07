@@ -41,6 +41,8 @@ class LibrariesController < ApplicationController
   # PATCH/PUT /libraries/1
   # PATCH/PUT /libraries/1.json
   def update
+		remove_documents()
+		add_documents()
     respond_to do |format|
       if @library.update(library_params)
         format.html { redirect_to @library, notice: 'Library was successfully updated.' }
@@ -81,6 +83,19 @@ class LibrariesController < ApplicationController
           if not @library.documents.include? doc 
             @library.documents << doc 
           end 
+        end 
+      end 
+    end 
+
+    def remove_documents
+      if not params.has_key?(:remove_documents)
+        return
+      end 
+      documents = params[:remove_documents]
+      documents.each do |d| 
+        doc = Document.find(d)
+        if @library.documents.include? doc 
+          @library.documents.destroy(doc)
         end 
       end 
     end 

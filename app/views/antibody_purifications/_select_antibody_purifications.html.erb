@@ -1,0 +1,9 @@
+<!-- Form parameters:
+	1) f - The form object to add this partial to. 
+	2) documents - an array of docuemnts already associated with the object in question, i.e. a Library or Biosample, 
+								 so that a default can be selected from it in the select tag. If empty, will be set to nil and the 
+                 prompt will be the default selection.
+-->
+		             
+Add Antibody Purifications From List:</br>
+<%= f.select :antibody_purifications, choices=options_for_select(sorted_antibody_purification_name_id,selected=selected),options={},html_options={:prompt => "Choose Antibody Purifications",:multiple => true} %>
