@@ -24,6 +24,9 @@ class Antibody < ActiveRecord::Base
 		Function : Adds AntibodyPurification associations to the self.antibody_purifications attr. 
 		Args     : ab_pur_ids - Array of AntibodyPurification foreign key IDs.
 		"""
+		if ab_pur_ids.blank?
+			return
+		end
 		ab_pur_ids.each do |p| 
 			if not p.empty?
 				pur = AntibodyPurification.find(p)
@@ -39,7 +42,7 @@ class Antibody < ActiveRecord::Base
 		Function : Removes AntibodyPurification associations from the self.antibody_purifications attr. 
 		Args     : ab_pur_ids - Array of AntibodyPurification foreign key IDs.
 		"""
-		if not ab_pur_ids
+		if ab_pur_ids.blank?
 			return
 		end 
 		ab_pur_ids.each do |p| 

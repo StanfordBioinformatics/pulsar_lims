@@ -26,7 +26,7 @@ class BiosamplesController < ApplicationController
   def create
 		#documents could be a string containing a document ID, or an array of strings, where each string identifies a document id. 
     @biosample = Biosample.new(biosample_params)
-		add_documents()	
+		@biosample.add_documents(params[:biosample][:documents])
 		
     respond_to do |format|
       if @biosample.save
@@ -42,8 +42,8 @@ class BiosamplesController < ApplicationController
   # PATCH/PUT /biosamples/1
   # PATCH/PUT /biosamples/1.json
   def update
-		remove_documents()
-		add_documents()
+		@biosample.remove_documents(params[:remove_documents])
+		@biosample.add_documents(params[:biosample][:documents])
     respond_to do |format|
       if @biosample.update(biosample_params)
         format.html { redirect_to @biosample, notice: 'Biosample was successfully updated.' }
@@ -76,29 +76,4 @@ class BiosamplesController < ApplicationController
     def biosample_params
       params.require(:biosample).permit(:submitter_comments, :lot_identifier, :vendor_product_identifier, :ontology_term_name, :ontology_term_accession, :description, :passage_number, :culture_harvest_date, :encid, :human_donor_id,:vendor_id,:biosample_type_id,:name)
     end
-	
-		def remove_documents
-			if not params.has_key?(:remove_documents)
-				return
-			end
-			documents = params[:remove_documents]
-			documents.each do |d|
-				doc = Document.find(d)
-				if @biosample.documents.include? doc
-					@biosample.documents.destroy(doc)
-				end
-			end
-		end
-
-		def add_documents
-			documents = params[:biosample][:documents]
-			documents.each do |d|
-				if not d.empty?
-					doc = Document.find(d)
-					if not @biosample.documents.include? doc
-						@biosample.documents << doc
-					end
-				end
-			end
-		end
 end

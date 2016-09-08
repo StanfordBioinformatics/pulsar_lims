@@ -25,7 +25,7 @@ class LibrariesController < ApplicationController
   # POST /libraries.json
   def create
     @library = Library.new(library_params)
-		add_documents()
+		@library.add_documents(params[:library][:documents])
 
     respond_to do |format|
       if @library.save
@@ -41,8 +41,8 @@ class LibrariesController < ApplicationController
   # PATCH/PUT /libraries/1
   # PATCH/PUT /libraries/1.json
   def update
-		remove_documents()
-		add_documents()
+		@library.remove_documents(params[:remove_documents])
+		@library.add_documents(params[:library][:documents])
     respond_to do |format|
       if @library.update(library_params)
         format.html { redirect_to @library, notice: 'Library was successfully updated.' }
@@ -75,28 +75,4 @@ class LibrariesController < ApplicationController
       params.require(:library).permit(:sequence_ontology_term_id, :biosample_id, :antibody_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specificity, :name)
     end
 
-    def add_documents
-      documents = params[:library][:documents]
-      documents.each do |d| 
-        if not d.empty?
-          doc = Library.find(d)
-          if not @library.documents.include? doc 
-            @library.documents << doc 
-          end 
-        end 
-      end 
-    end 
-
-    def remove_documents
-      if not params.has_key?(:remove_documents)
-        return
-      end 
-      documents = params[:remove_documents]
-      documents.each do |d| 
-        doc = Document.find(d)
-        if @library.documents.include? doc 
-          @library.documents.destroy(doc)
-        end 
-      end 
-    end 
 end
