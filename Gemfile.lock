@@ -153,7 +153,7 @@ DEPENDENCIES
   json
   pg
   rails (= 4.0.0)
-  rspec-rails (~> 3.2.1)
+  rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
   turbolinks

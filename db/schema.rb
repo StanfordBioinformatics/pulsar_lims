@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160902223338) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "antibodies", force: true do |t|
     t.integer  "organism_id"
     t.integer  "vendor_id"
@@ -29,11 +32,11 @@ ActiveRecord::Schema.define(version: 20160902223338) do
     t.string   "name"
   end
 
-  add_index "antibodies", ["human_gene_id"], name: "index_antibodies_on_human_gene_id"
-  add_index "antibodies", ["isotype_id"], name: "index_antibodies_on_isotype_id"
-  add_index "antibodies", ["name"], name: "index_antibodies_on_name", unique: true
-  add_index "antibodies", ["organism_id"], name: "index_antibodies_on_organism_id"
-  add_index "antibodies", ["vendor_id"], name: "index_antibodies_on_vendor_id"
+  add_index "antibodies", ["human_gene_id"], name: "index_antibodies_on_human_gene_id", using: :btree
+  add_index "antibodies", ["isotype_id"], name: "index_antibodies_on_isotype_id", using: :btree
+  add_index "antibodies", ["name"], name: "index_antibodies_on_name", unique: true, using: :btree
+  add_index "antibodies", ["organism_id"], name: "index_antibodies_on_organism_id", using: :btree
+  add_index "antibodies", ["vendor_id"], name: "index_antibodies_on_vendor_id", using: :btree
 
   create_table "antibodies_antibody_purifications", id: false, force: true do |t|
     t.integer "antibody_id"
@@ -64,16 +67,14 @@ ActiveRecord::Schema.define(version: 20160902223338) do
     t.string   "encid"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "human_donor_id"
     t.integer  "vendor_id"
     t.integer  "biosample_type_id"
     t.string   "name"
   end
 
-  add_index "biosamples", ["biosample_type_id"], name: "index_biosamples_on_biosample_type_id"
-  add_index "biosamples", ["human_donor_id"], name: "index_biosamples_on_human_donor_id"
-  add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true
-  add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id"
+  add_index "biosamples", ["biosample_type_id"], name: "index_biosamples_on_biosample_type_id", using: :btree
+  add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
+  add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id", using: :btree
 
   create_table "biosamples_documents", id: false, force: true do |t|
     t.integer "biosample_id"
@@ -94,12 +95,10 @@ ActiveRecord::Schema.define(version: 20160902223338) do
     t.integer  "document_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "biosample_id"
   end
 
-  add_index "documents", ["biosample_id"], name: "index_documents_on_biosample_id"
-  add_index "documents", ["document_type_id"], name: "index_documents_on_document_type_id"
-  add_index "documents", ["name"], name: "index_documents_on_name", unique: true
+  add_index "documents", ["document_type_id"], name: "index_documents_on_document_type_id", using: :btree
+  add_index "documents", ["name"], name: "index_documents_on_name", unique: true, using: :btree
 
   create_table "documents_libraries", id: false, force: true do |t|
     t.integer "document_id"
@@ -147,11 +146,11 @@ ActiveRecord::Schema.define(version: 20160902223338) do
     t.string   "name"
   end
 
-  add_index "libraries", ["antibody_id"], name: "index_libraries_on_antibody_id"
-  add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id"
-  add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true
-  add_index "libraries", ["sequence_ontology_term_id"], name: "index_libraries_on_sequence_ontology_term_id"
-  add_index "libraries", ["vendor_id"], name: "index_libraries_on_vendor_id"
+  add_index "libraries", ["antibody_id"], name: "index_libraries_on_antibody_id", using: :btree
+  add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
+  add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true, using: :btree
+  add_index "libraries", ["sequence_ontology_term_id"], name: "index_libraries_on_sequence_ontology_term_id", using: :btree
+  add_index "libraries", ["vendor_id"], name: "index_libraries_on_vendor_id", using: :btree
 
   create_table "organisms", force: true do |t|
     t.string   "name"
@@ -195,6 +194,6 @@ ActiveRecord::Schema.define(version: 20160902223338) do
     t.datetime "updated_at"
   end
 
-  add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true
+  add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
 
 end
