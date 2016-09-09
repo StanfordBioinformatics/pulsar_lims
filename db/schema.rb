@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902223338) do
+ActiveRecord::Schema.define(version: 20160909025252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,9 +70,11 @@ ActiveRecord::Schema.define(version: 20160902223338) do
     t.integer  "vendor_id"
     t.integer  "biosample_type_id"
     t.string   "name"
+    t.integer  "human_donor_id"
   end
 
   add_index "biosamples", ["biosample_type_id"], name: "index_biosamples_on_biosample_type_id", using: :btree
+  add_index "biosamples", ["human_donor_id"], name: "index_biosamples_on_human_donor_id", using: :btree
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
   add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id", using: :btree
 

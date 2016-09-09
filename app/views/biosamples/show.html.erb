@@ -8,7 +8,7 @@
 <p>
 	<table>
 		<tr><th style="text-align:left">Documents:</th></tr>
-		<%= render(@biosample.documents) %>
+		<%= render partial: "documents/link_to_document", locals: {documents: @biosample.documents} %>
 	</table>
 </p>
 

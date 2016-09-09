@@ -1,4 +1,5 @@
 class LibrariesController < ApplicationController
+	include DocumentsConcern #gives me add_documents(), remove_documents()
   before_action :set_library, only: [:show, :edit, :update, :destroy]
 
   # GET /libraries
@@ -25,7 +26,7 @@ class LibrariesController < ApplicationController
   # POST /libraries.json
   def create
     @library = Library.new(library_params)
-		@library.add_documents(params[:library][:documents])
+		@library = add_documents(@library,params[:library][:documents])
 
     respond_to do |format|
       if @library.save
@@ -41,8 +42,8 @@ class LibrariesController < ApplicationController
   # PATCH/PUT /libraries/1
   # PATCH/PUT /libraries/1.json
   def update
-		@library.remove_documents(params[:remove_documents])
-		@library.add_documents(params[:library][:documents])
+		@library = remove_documents(@library,params[:remove_documents])
+		@library = add_documents(@library,params[:library][:documents])
     respond_to do |format|
       if @library.update(library_params)
         format.html { redirect_to @library, notice: 'Library was successfully updated.' }

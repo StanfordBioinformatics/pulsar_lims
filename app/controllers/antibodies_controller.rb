@@ -25,7 +25,7 @@ class AntibodiesController < ApplicationController
   # POST /antibodies.json
   def create
     @antibody = Antibody.new(antibody_params)
-		@antibody.add_antibody_purifications = params[:antibody][:antibody_purifications]
+		@antibody.add_antibody_purifications(params[:antibody][:antibody_purifications])
 		
     respond_to do |format|
       if @antibody.save

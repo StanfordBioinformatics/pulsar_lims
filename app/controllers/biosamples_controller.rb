@@ -1,4 +1,5 @@
 class BiosamplesController < ApplicationController
+	include DocumentsConcern #gives me add_documents(), remove_documents()
   before_action :set_biosample, only: [:show, :edit, :update, :destroy, :delete_biosample_document]
 
   # GET /biosamples
@@ -24,9 +25,8 @@ class BiosamplesController < ApplicationController
   # POST /biosamples
   # POST /biosamples.json
   def create
-		#documents could be a string containing a document ID, or an array of strings, where each string identifies a document id. 
     @biosample = Biosample.new(biosample_params)
-		@biosample.add_documents(params[:biosample][:documents])
+		@biosample = add_documents(@biosample,params[:biosample][:documents])
 		
     respond_to do |format|
       if @biosample.save
@@ -42,8 +42,8 @@ class BiosamplesController < ApplicationController
   # PATCH/PUT /biosamples/1
   # PATCH/PUT /biosamples/1.json
   def update
-		@biosample.remove_documents(params[:remove_documents])
-		@biosample.add_documents(params[:biosample][:documents])
+		@biosample = remove_documents(@biosample,params[:remove_documents])
+		@biosample = add_documents(@biosample,params[:biosample][:documents])
     respond_to do |format|
       if @biosample.update(biosample_params)
         format.html { redirect_to @biosample, notice: 'Biosample was successfully updated.' }

@@ -21,16 +21,8 @@
 		<% if @biosample.new_record? %>
 			None
 		<% else %></br>
-			<table>
-				<% @biosample.documents.each do |d| %>
-					<tr>
-						<td><%= link_to(d.name, d) %></td>
-						<!-- <td><%# button_to "Remove",delete_biosample_document_biosample_path(bid: @biosample.id, document_id: d.id) %></td> -->
-						<td> Remove: <input type="checkbox" name="remove_documents[]" value=<%= d.id %> /></td>
-					</tr>
-				<% end %>
-			</table>
-		<% end %>
+      <%= render(@biosample.documents) %>
+    <% end %>
 	</div></br>
 
 	<div>

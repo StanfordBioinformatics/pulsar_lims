@@ -1,12 +1,12 @@
 <p>
   <strong>Library Name</strong></br>
-  <%= @Library.name %>
+  <%= @library.name %>
 </p>
 
 <p>
 	<table>
 		<tr><th style="text-align:left">Documents:</th></tr>
-		<%= render(@library.documents) %>
+		<%= render partial: "documents/link_to_document", locals: {documents: @library.documents} %>
 	</table>
 </p>
 
