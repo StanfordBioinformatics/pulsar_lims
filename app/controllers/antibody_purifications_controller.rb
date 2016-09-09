@@ -65,6 +65,9 @@ class AntibodyPurificationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_antibody_purification
       @antibody_purification = AntibodyPurification.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "The antibody purification you were looking for could not be found."
+      redirect_to antibody_purifications_path
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

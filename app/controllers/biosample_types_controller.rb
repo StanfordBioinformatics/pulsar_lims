@@ -65,6 +65,9 @@ class BiosampleTypesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_biosample_type
       @biosample_type = BiosampleType.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "The biosample type you were looking for could not be found."
+      redirect_to biosample_types_path
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

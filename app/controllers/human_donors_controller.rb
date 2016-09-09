@@ -65,6 +65,9 @@ class HumanDonorsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_human_donor
       @human_donor = HumanDonor.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "The human donor you were looking for could not be found."
+      redirect_to human_donors_path
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

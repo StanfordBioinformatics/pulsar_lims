@@ -65,6 +65,9 @@ class SequenceOntologyTermsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_sequence_ontology_term
       @sequence_ontology_term = SequenceOntologyTerm.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "The sequence ontology term you were looking for could not be found."
+      redirect_to sequence_ontology_terms_path
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

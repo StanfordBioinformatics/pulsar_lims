@@ -65,6 +65,9 @@ class UberonsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_uberon
       @uberon = Uberon.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "The uberon term you were looking for could not be found."
+      redirect_to uberons_path
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
