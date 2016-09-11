@@ -27,9 +27,9 @@
     <% @libraries.each do |library| %>
       <tr>
         <td><%= library.sequence_ontology_term %></td>
-        <td><%= library.biosample %></td>
-        <td><%= library.antibody %></td>
-        <td><%= library.vendor %></td>
+        <td><%= library.biosample.name %></td>
+        <td><%= library.antibody.name %></td>
+        <td><%= library.vendor.name %></td>
         <td><%= library.lot_identifier %></td>
         <td><%= library.vendor_product_identifier %></td>
         <td><%= library.size_range %></td>

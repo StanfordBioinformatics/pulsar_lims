@@ -19,17 +19,17 @@
 
 @import "font-awesome";
 
+body {
+	padding-top: 40px;
+}
 
-.page-header {
+header {
+	@extend .page-header;
 	position: relative;
 	padding-bottom: 0px;
 	
 	&:first-child {
 		margin-top: 20px;
-	}
-
-	h1, h2, h3, h4, h5, h6 {
-		max-width: 55%;
 	}
 }
 
@@ -68,11 +68,22 @@ a.edit {
 	}
 }
 
-
 a.delete {
 	@extend .btn-danger;
 
 	&:before {
 		@extend .fa-trash;
 	}
+}
+
+.alert-notice {
+	@extend .alert-success;
+}
+
+.alert-danger {
+	@extend .alert-danger;
+}
+
+form {
+	max-width: 30%;
 }
