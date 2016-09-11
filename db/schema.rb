@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160911200639) do
+ActiveRecord::Schema.define(version: 20160911225011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,14 @@ ActiveRecord::Schema.define(version: 20160911200639) do
   add_index "libraries", ["sequence_ontology_term_id"], name: "index_libraries_on_sequence_ontology_term_id", using: :btree
   add_index "libraries", ["vendor_id"], name: "index_libraries_on_vendor_id", using: :btree
 
+  create_table "nucleic_acid_terms", force: true do |t|
+    t.string   "name"
+    t.string   "accession"
+    t.string   "definition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "organisms", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -162,14 +170,6 @@ ActiveRecord::Schema.define(version: 20160911200639) do
   create_table "reference_genomes", force: true do |t|
     t.string   "name"
     t.string   "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sequence_ontology_terms", force: true do |t|
-    t.string   "name"
-    t.string   "accession"
-    t.string   "definition"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(version: 20160911200639) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
   end
 
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree

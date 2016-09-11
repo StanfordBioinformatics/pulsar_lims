@@ -1,0 +1,273 @@
+Name	Title	Description	URL
+pacific-immunology	Pacific Immunology	Pacific Immunology	https://www.pacificimmunology.com/
+stephen-bell	Stephen Bell	Stephen Bell at Massachusetts Institute of Technology	https://biology.mit.edu/people/stephen_bell
+susan-fisher	Susan Fisher	Susan Fisher at UCSF	http://fisherlab.ucsf.edu/
+stephen-dalton	Stephen Dalton	Stephen Dalton at UGA	http://www.daltonlab.uga.edu/
+jefferey-marks	Jefferey Marks	Jefferey Marks at Duke University	http://surgery.duke.edu/faculty/details/0098991
+plasmid-repository	PlasmID Repository	PlasmID Repository at Harvard Medical School	https://plasmid.med.harvard.edu/PLASMID/Home.xhtml
+jerrold-olefsky	Jerrold Olefsky	Jerrold M. Olefsky Lab at University of California, San Diego	http://endocrinology.ucsd.edu/Faculty/olefsky.html
+wako	Wako Chemicals	Wako Chemicals	http://www.wakousa.com/
+michael-mannstadt	Michael Mannstadt	Michael Mannstadt at Massachusetts General Hospital	http://www.massgeneral.org/cancer/doctors/doctor.aspx?ID=17826
+stanford-cfc	Stanford CFC	Cystic Fibrosis Center at Stanford University (CFC)	http://cfcenter.stanford.edu/
+icrc	ICRC	Islet Cell Resource Center	http://icr.coh.org/
+usbio	USBio	United States Biological	https://www.usbio.net/
+sdix	SDIX, LLC	SDIX, LLC	http://www.sdix.com/
+callaini-giuliano	Callaini Guiliano	Callaini Guiliano at University of Siena	http://www.dbe.unisi.it/index.php?option=com_content&view=article&id=50&Itemid=75&lang=en
+santa-cruz-biotech	Santa Cruz Biotech	Santa Cruz Biotechnology	http://www.scbt.com
+sigma	Sigma	Sigma-Aldrich	http://www.sigmaaldrich.com
+gregory-crawford	Gregory Crawford	Gregory Crawford at Duke University	http://www.genome.duke.edu/labs/crawford/
+ran	RAN	Recombinant Antibody Network	http://recombinant-antibodies.org/
+calvin-cotton	Calvin Cotton	Calvin Cotton at Case Western Reserve University	http://cf.case.edu/Cotton.html
+thomas-gingeras	Thomas Gingeras	Thomas Gingeras at Cold Spring Harbor Laboratory	http://gingeraslab.cshl.edu/
+aruna-biomedical	ArunA Biomedical	ArunA Biomedical	http://www.arunabiomedical.com/
+james-thomson	James Thomson	James Thomson at Morgridge Institute, University of Wisconsin	http://discovery.wisc.edu/home/morgridge/about-morgridge/leadership/james-thomson/
+cathy-savage-dunn	Cathy Savage-Dunn	Cathy Savage-Dunn at City University of New York	http://biology.qc.cuny.edu/people/faculty/cathy-savage-dunn/
+epitomics	Epitomics	Epitomics	http://www.epitomics.com
+aviva	Aviva	Aviva Systems Biology	http://www.avivasysbio.com
+sescc	SESCC	Southeast Stem Cell Consortium	http://www.sestemcells.uga.edu/index.html
+aviva-and-kevin-white	Aviva Systems Biology and Kevin White	Aviva Systems Biology and Kevin White at University of Chicago	http://www.avivasysbio.com/
+bethyl-labs	Bethyl Labs	Bethyl Laboratories	http://www.bethyl.com
+michael-snyder	Michael Snyder	Michael Snyder at Stanford University	http://snyderlab.stanford.edu
+genetex	GeneTex	GeneTex	http://www.genetex.com
+eric-lai	Eric Lai	Eric Lai at Memorial Sloan Kettering Cancer Center	https://www.mskcc.org/research-areas/labs/eric-lai
+charles-graham	Charles Graham	Charles Graham at Queen's University	http://meds.queensu.ca/faculty/charles_graham
+steven-henikoff	Steven Henikoff	Steven Henikoff at Fred Hutchinson Cancer Research Center	http://research.fhcrc.org/henikoff/en.html
+william-kelly	William Kelly	William Kelly at Emory University	http://www.biology.emory.edu/research/Kelly/
+rush-university	Rush University	Rush University Medical Center	http://www.rush.edu/
+john-reinitz	John Reinitz	John Reinitz at University of Chicago	http://flyex.uchicago.edu/newlab/index.shtml
+medimabs	Medimabs	Medimabs	https://www.medimabs.com/
+axxora	Axxora	Axxora	http://www.axxora.com/
+dana-levasseur	Dana Levasseur	Dana Levasseur at University of Iowa	http://www.int-med.uiowa.edu/Divisions/Immunology/Directory/DanaLevasseur.html
+assay-biotech	Assay Biotech	Assay Biotechnology	http://www.assaybiotechnology.com/
+shin-lin	Shin Lin	Shin Lin at Stanford	http://med.stanford.edu/profiles/Shin_Lin/
+andrew-dingwall	Andrew Dingwall	Andrew Dingwall at Loyola University Chicago	http://www.stritch.luc.edu/oncology_institute/content/dingwall-lab
+keith-ligon	Keith Ligon	Keith Ligon at Harvard	http://www.dfhcc.harvard.edu/membership/profile/member/582/0/
+igor-zhimulev-and-harald-saumweber	Harald Saumweber	Igore Zhimulev at Russian Academy of Sciences and Harald Saumweber at Humboldt University Berlin	http://www2.hu-berlin.de/biologie/cytogen/
+rainer-renkawitz	Rainer Renkawitz	Rainer Renkawitz at University of Giessen	http://www.uni-giessen.de/cms/fbz/fb08/Inst/biochem/international-networks/gradu/partners/renkawitz
+evan-rosen	Evan Rosen	Evan Rosen at Beth Israel Deaconess Medical Center	http://www.bidmc.org/Research/Departments/Medicine/Divisions/Endocrinology/Laboratories/RosenLab/Members/EvanRosen.aspx
+joanna-wysocka	Joanna Wysocka	Joanna Wysocka at Stanford University	http://stemcellphd.stanford.edu/faculty/joanna-wysocka.html
+a-thomas-look	A. Thomas Look	A. Thomas Look at Dana-Farber Cancer Institute	http://researchers.dana-farber.org/directory/profile.asp?pict_id=0000129
+jan-larsson	Jan Larsson	Jan Larsson at Umeå University	http://www.molbiol.umu.se/english/research/researchers/jan-larsson/
+novartis-and-kevin-white	Novartis and Kevin White	Novartis and Kevin White at University of Chicago	http://www.us.novartis.com/
+abgent	Abgent	Abgent	http://www.abgent.com/
+kpbbb	KPBBB	Kathleen Price Bryan Brain Bank (KPBBB)	https://adrc.mc.duke.edu/index.php/research/brain-bank
+christina-leslie	Christina Leslie	Christina Leslie Laboratory at Memorial Sloan-Kettering Cancer Center 	https://www.mskcc.org/research-areas/labs/christina-leslie
+takemi-ohtsuki	Takemi Ohtsuki	Takemi Ohtsuki at Kawasaki Medical University	https://www.kawasaki-m.ac.jp/med/en/
+norbert-perrimon	Norbert Perrimon	Norbert Perrimon at Harvard University	http://genepath.med.harvard.edu/~perrimon/
+jeffrey-engelman	Jeffrey Engelman	Jeffrey Engelman at Massachusetts General Hospital	http://www.massgeneral.org/research/researchlab.aspx?id=1169
+gerd-blobel	Gerd Blobel	Gerd Blobel at University of Pennsylvania	http://www.med.upenn.edu/apps/faculty/index.php/p1105
+promocell	PromoCell	PromoCell GmbH	http://www.promocell.com
+jean-antoine-lepesant	Jean-Antoine Lepseant	Jean-Antoine Lepseant at Inistitute Jacques Monod	http://www.academie-sciences.fr/academie/membre/Lepesant_JA.htm
+biolegend	BioLegend	BioLegend	http://www.biolegend.com/
+zenbio	ZenBio	ZenBio	http://www.zen-bio.com
+todd-golub	Todd Golub	Todd Golub at Broad Institute CCLE	http://www.broadinstitute.org/ccle/home
+woodring-wright	Woodring Wright	Woodring Wright at University of Texas Southwestern	http://profiles.utsouthwestern.edu/profile/18156/woodring-wright.html
+karen-schulze-and-hugo-bellen	Karen Schulze and Hugo Bellen	Karen Schulze and Hugo Bellen at Baylor College of Medicine	http://flypush.imgen.bcm.tmc.edu/lab/index.html
+victor-corces	Victor Corces	Victor Corces at Emory University	http://www.biology.emory.edu/research/Corces/
+ken-cadigan	Ken Cadigan	Ken Cadigan at University of Michigan	http://labs.mcdb.lsa.umich.edu/labs/cadigan/
+carl-mann	Carl Mann	Carl Mann at Commissariat à l'énergie atomique et aux énergies alternatives	http://www-dsv.cea.fr/en/institutes/institute-of-biology-and-technology-saclay-ibitec-s/units/integrative-biology-and-molecular-genetics-sbigem/oxidative-stress-and-cancer-lsoc/genome-stability-c.-mann
+kirsten-hagstrom	Kirsten Hagstrom	Kirsten Hagstrom at University of Massachusetts	http://wheatoncollege.edu/faculty/profiles/kristen-hagstrom/
+james-engel	James Engel	James Engel at University of Michigan	http://www.med.umich.edu/cdb/people/engel.html
+crl	CRL	Charles River Laboratories	http://www.criver.com
+maria-roubelakis	Maria Roubelakis	Maria Roubelakis at Biomedical Research Foundation Academy of Athens (BRFAA)	http://www.bioacademy.gr/
+gordon-hager	Gordon Hager	Gordon Hager at the National Institutes of Health	http://ccr.cancer.gov/staff/staff.asp?profileid=5817
+brian-oliver	Brian Oliver	Brian Oliver at NIH	http://www.niddk.nih.gov/about-niddk/staff-directory/intramural/brian-oliver/pages/research-summary.aspx
+francesca-palladino	Francesca Palladino	Francesca Palladino at École normale supérieure de Lyon	http://www.ens-lyon.fr/LBMC/EpiDev/index.php/en/
+leidos	LEIDOS		https://www.leidos.com/
+pamela-geyer	Pamela Geyer	Pamela Geyer at University of Iowa	http://www.medicine.uiowa.edu/biochem/labs/geyer/
+cdi	CDI	CDI Laboratories	http://www.cdi-lab.com/index.html
+timothy-hughes	Timothy Hughes	Timothy Hughes at University of Toronto	http://hugheslab.med.utoronto.ca/
+albert-la-spada	Albert La Spada	Albert La Spada at UCSD	http://laspadalab.ucsd.edu/Pages/default.aspx
+giacomo-cavalli	Giacomo Cavalli	Giacomo Cavalli at Institute de Genetique Humaine	http://www.igh.cnrs.fr/equip/cavalli/link.pageAenglish.html
+kevin-struhl	Kevin Struhl	Kevin Struhl at Harvard University	https://struhl.med.harvard.edu/
+axiomx	AxioMx	AxioMx	http://www.axiomxinc.com/
+tom-williams-and-sean-carroll	Tom Williams and Sean Carroll	Tom Williams and Sean Carroll at University of Wisconson at Madison	http://carroll.molbio.wisc.edu/
+bioss	Bioss	Bioss Inc	http://biossusa.com/store/index.php
+laszlo-tora	Laszlo Tora	Laszlo Tora at Institut de Génétique et de Biologie Moléculaire et Cellulaire	http://www.igbmc.fr/Tora/
+david-gilbert	David Gilbert	David Gilbert at Florida State University	http://gilbertlab.bio.fsu.edu/
+licia-selleri	Licia Selleri	Licia Selleri at Weill Cornell Medical College	http://www.cornellcelldevbiology.org/selleri/
+diagenode	Diagenode	Diagenode	http://www.diagenode.com
+bdsc	Bloomington Drosophila Stock Center at Indiana University	Bloomington Drosophila Stock Center at Indiana University	http://flystocks.bio.indiana.edu/
+invitrogen	Invitrogen	Invitrogen	http://www.lifetechnologies.com/us/en/home/brands/invitrogen.html
+cell-signaling	Cell Signaling	Cell Signaling Technology	http://www.cellsignal.com
+pedro-caballero-campo	Pedro Caballero-Campo	Pedro Caballero-Campo at UCSF	http://directory.ucsf.edu/people_detail.jsp?FNO=Pedro.Caballero-Campo@ucsf.edu&retLink=1&school_code=all&last_name=&first_name=&offset=0
+thom-kaufman	Thom Kaufman	Thom Kaufman at Indiana University	http://www.bio.indiana.edu/faculty/directory/profile.php?person=kaufman
+chordoma	Chordoma	Chordoma Research Foundation	http://www.chordomafoundation.org/research/
+jan-brinchmann	Jan Brinchmann	Jan Brinchmann at Rikshospitalet University Hospital	http://www.med.uio.no/imb/english/people/aca/ebrinch/
+jennifer-brown	Jennifer Brown	Jennifer Brown at Harvard Medical School and Dana-Farber Cancer Institute	http://www.dfhcc.harvard.edu/membership/profile/member/669/0/
+brenton-graveley	Brenton Graveley	University of Connecticut Health Center	http://graveleylab.cam.uchc.edu/Graveley/
+national-bioresource-project	National Bioresource Project	This project is aimed to collect nematode bioresources available to researchers so that studies using the nematode are promoted.	http://shigen.nig.ac.jp/c.elegans/index.jsp
+paul-yaswen	Paul Yaswen	Paul Yaswen at University of California, Berkeley	http://stemcellcenter.berkeley.edu/PIs/yaswen.html
+unc-cf-center	UNC CF Center	UNC CF Center Tissue Procurement and Cell Culture Core	https://www.med.unc.edu/cfpulmcenter/core-facilities/tc
+james-kadonaga	James Kadonaga	James Kadonaga at University of California San Diego	http://biology.ucsd.edu/faculty/kadonaga.html
+rd-systems	RD Systems	R&D Systems	http://www.rndsystems.com
+david-randolph	David Randolph	David Randolph at University of Alabama	http://138.26.61.118/depts/MEB/SOMResearchFaculty/currentfacultydata.asp?ID=DRDRDR
+rajinder-kaul	Rajinder Kaul	Rajinder Kaul at University of Washington	http://depts.washington.edu/medgen/faculty/Rajinder_Kaul.shtml
+marek-bartkuhn	Marek Bartkuhn	Marek Bartkuhn at University of Giessen	http://www.uni-giessen.de/cms/fbz/fb08/trr81/staff/bartkuhn
+donna-arndt-jovin	Donna Arndt-Jovin	Donna Arndt-Jovin at Max Planck Institute for Biophysical Chemistry	http://www3.mpibpc.mpg.de/groups/jovin/index.php/ResearchGroups/CellBiologyDonnaArndt-Jovin/
+max-reuter	Max Reuter	Max Reuter at University College London	http://www.homepages.ucl.ac.uk/~ucbtmre/Labsite/Home.html
+michael-bender-and-rachel-byron	Michael Bender and Rachel Byron	Michael Bender and Rachel Byron at Fred Hutchinson Cancer Research Center	http://www.seattlechildrens.org/medical-staff/michael-a-bender/
+dgrc	Drosophila Genomics Resource Center	Drosophila Genomics Resource Center	https://dgrc.cgb.indiana.edu/
+dharmacon	Dharmacon	Dharmacon	http://dharmacon.gelifesciences.com/
+arshad-desai	Arshad Desai	Arshad Desai at University of California San Diego	http://cmm.ucsd.edu/odlabweb/sites/
+lurdes-queimado	Lurdes Queimado	Lurdes Queimado at University of Oklahoma	http://www.oumedicine.com/orl/academic-information/research/lurdes-queimado-m-d-ph-d-
+susan-strome	Susan Strome	Susan Strome at University of California Santa Cruz	http://bio.research.ucsc.edu/people/strome/Site1/Home.html
+arno-greenleaf	Arno Greenleaf	Arno Greenleaf at Duke University	http://www.biochem.duke.edu/modules/biochem_greenleaf_lab/index.php?id=1
+john-stamatoyannopoulos	John Stamatoyannopoulos	John Stamatoyannopoulos at University of Washington	http://www.gs.washington.edu/faculty/stamj.htm
+covance	Covance	Covance	https://store.crpinc.com
+josh-chenoweth	Josh Chenoweth	Josh Chenoweth at National Institute of Neurological Disorders and Stroke (NINDS)	http://www.ninds.nih.gov/
+russell-ryan	Russell Ryan	Russell Ryan at Massachusetts General Hospital	https://csb.mgh.harvard.edu/information/people_directories
+genetivision	GenetiVision	GenetiVision	http://www.genetivision.com/
+roche	Roche	Roche	http://www.roche.com
+jack-greenblatt	Jack Greenblatt	Jack Greenblatt at University of Toronto	http://sites.utoronto.ca/greenblattlab/index.htm
+alex-meissner	Alex Meissner	Alex Meissner at Harvard University	http://www.hsci.harvard.edu/people/alex-meissner-phd
+coriell	Coriell	Coriell Institute for Medical Research	http://www.coriell.org/
+darrell-bigner	Darrell Bigner	Darrell Bigner at Duke University	http://www.cancer.duke.edu/btc/modules/facultystaff1/index.php?id=85
+hiroshi-kimura	Hiroshi Kimura	Hiroshi Kimura at Osaka University	http://www.fbs.osaka-u.ac.jp/labs/hiraoka/index.html
+claude-desplan	Claude Desplan	Claude Desplan at New York University	http://www.nyu.edu/projects/desplan/
+abcam	Abcam	Abcam	http://www.abcam.com
+thomas-jenuwein	Thomas Jenuwein	Thomas Jenuwein at Max Planck Institute of Immunobiology and Epigenetics	http://www1.ie-freiburg.mpg.de/jenuwein
+david-bodine	David Bodine	David Bodine at National Human Genome Research Institute	http://www.genome.gov/10000336
+source-bioscience	Source BioScience LifeSciences	Source BioScience LifeSciences	http://www.lifesciences.sourcebioscience.com/
+alla-grishok	Alla Grishok	Alla Grishok at Columbia University	http://biochemistry.hs.columbia.edu/faculty/grishok.html
+cgc	CGC	The Caenorhabditis Genetics Center at the University of Minnesota	http://www.cbs.umn.edu/research/resources/cgc
+dmitry-fyodorov	Dmitry Fyodorov	Dmitry Fyodorov at Albert Einstein College of Medicine	http://www.einstein.yu.edu/faculty/9626/dmitry-fyodorov/
+gtex	GTEx	The GTEx Project	http://www.gtexportal.org/home/
+barbara-wold	Barbara Wold	Barbara Wold at California Institute of Technology	http://woldlab.caltech.edu/
+jun-liu	Jun Liu	Jun Liu at Cornell University	http://bmcb.cornell.edu/faculty/liu.html
+michael-bender	Michael Bender	Michael Bender at Fred Hutchinson Cancer Research Center	http://www.seattlechildrens.org/medical-staff/michael-a-bender/
+bd-biosciences	BD Biosciences	BD Biosciences	http://www.bdbiosciences.com
+shelly-heimfeld	Shelly Heimfeld	Shelly Heimfeld at Fred Hutchison Cancer Research Center	https://labs.fhcrc.org/heimfeld/index.html
+haplogen	Haplogen Genomics	Haplogen Genomics	http://www.haplogen.com/
+pgp	PGP	Personal Genome Project	http://www.personalgenomes.org/
+bacpac	BACPAC	BACPAC Resources Center at the Children's Hospital Oakland Research Institute	http://bacpac.chori.org/home.htm
+mark-minden	Mark Minden	Mark Minden at Ontario Cancer Institute	http://www.uhnresearch.ca/researchers/profile.php?lookup=4159
+trc	The RNAi Consortium	The RNAi Consortium	http://www.broadinstitute.org/rnai/public/
+thomas-reh	Thomas Reh	Thomas Reh at University of Washington Deptartment of Biological Structure	http://faculty.washington.edu/tomreh/
+mmrrc	MMRRC	Mutant Mouse Regional Resource Centers	http://www.mmrrc.org/catalog/cellLineSDS.php?mmrrc_id=15890
+gary-karpen	Gary Karpen	Gary Karpen at Lawrence Berkeley National Laboratory	http://www2.lbl.gov/lsd/People_&_Organization/Scientific_Staff_Directory/Karpen_Lab.html
+susan-celniker	Susan Celniker	Susan Celniker at Lawrence Berkeley National Laboratory	http://www2.lbl.gov/lsd/People_&_Organization/Scientific_Staff_Directory/Celniker_Lab.html
+christine-disteche	Christine Disteche	Christine Disteche at University of Washington	http://depts.washington.edu/chdd/iddrc/res_aff/disteche.html
+human-orfeome	Human ORFeome	The CCSB Human ORFeome Collection	http://horfdb.dfci.harvard.edu/index.php?page=home
+dssc	Drosophila Species Stock Center	Drosophila Species Stock Center at UCSD	https://stockcenter.ucsd.edu/info/welcome.php
+agilent	Agilent	Agilent	http://www.home.agilent.com
+zen-bioscience	Zen Bioscience	Zen Bioscience	http://www.zen-bioscience.com/new/
+miguel-ramalho-santos	Miguel Ramalho-Santos	Miguel Ramalho-Santos at University of California, San Francisco	http://santoslab.ucsf.edu/lab_site/Home.html
+genhong-cheng	Genhong Cheng	Genhong Cheng Lab at University of California, Los Angeles	http://www.mimg.ucla.edu/faculty/cheng/
+millipore	Millipore	EMD Millipore	http://www.emdmillipore.com
+anthony-hyman	Anthony Hyman	Anthony Hyman at Max Planck Institute of Molecular Cell Biology and Genetics	http://hymanlab.mpi-cbg.de/hyman_lab/
+paul-schedl-and-jason-blanton-and-greg-shanower	Paul Schedl, Jason Blanton and Greg Shanowe	Paul Schedl, Jason Blanton and Greg Shanower at Princeton University	http://www.molbio1.princeton.edu/labs/schedl/
+ian-glass	Ian Glass	Ian Glass at Congenital Defects Lab, University of Washington	http://depts.washington.edu/genediv/directory/iglass
+arthur-weiss	Arthur Weiss	Arthur Weiss at UCSF	http://sabre.ucsf.edu/executive/arthur_weiss.html
+paul-khavari	Paul Khavari	Paul Khavari's lab at Stanford University	http://khavarilab.stanford.edu/#the-khavari-lab
+robert-horvitz	Robert Horvitz	Robert Horvitz at Massachusetts Institute of Technology	http://web.mit.edu/horvitz/www/horvitzlab.html
+david-anderson	David Anderson	David Anderson at Protein Expression Center	http://www.cns.caltech.edu/people/faculty/anderson.html
+abnova	Abnova	Abnova	http://www.abnova.com
+ulrich-laemmli	Ulrich Laemmli	Ulrich Laemmli at University of Geneva	http://www.molbio.unige.ch/fra/research_groups/laemmli/lab
+active-motif	Active Motif	Active Motif	http://www.activemotif.com
+proteintech	Proteintech	Proteintech	http://www.ptglab.com
+repocell	ReproCELL	ReproCELL	https://www.reprocell.com
+vincenzo-pirrotta	Vincenzo Pirrotta	Vincenzo Pirrotta at Rutgers University	http://molbiosci.rutgers.edu/faculty/pirrotta.html
+alan-mackay-sim	Alan Mackay-Sim	Alan Mackay-Sim at Griffith University	http://www.griffith.edu.au/professional-page/professor-alan-mackay-sim
+dsmz	DSMZ	Leibniz Institute DSMZ	http://www.dsmz.de/
+david-herrmann	David Herrmann	David Herrmann at Rochester University	http://rarediseasesnetwork.epi.usf.edu/INC/centers/rochester.htm
+everest-biotech	Everest Biotech	Everest Biotech	http://everestbiotech.com/
+lonza	Lonza	Lonza Group Ltd.	http://www.lonza.com/
+tirtha-das-and-ross-cagan	Tirtha Das and Ross Cagan	Tirtha Das and Ross Cagan at Icahn School of Medicine at Mount Sinai	http://drb.mssm.edu/labs/cagan.html
+origene	Origene	OriGene Technologies	http://www.origene.com/
+asterand	Asterand	Asterand, Inc	http://www.asterand.com/Asterand/
+unknown	Unknown Source	Unknown Source	
+jennifer-condon-jeyasuria	Jennifer Condon-Jeyasuria	Jennifer Condon-Jeyasuria at The University of Pittsburgh	http://www.cbp.pitt.edu/faculty/condon-jeyasuria.html
+cellular-dynamics	Cellular Dynamics	Cellular Dynamics International	http://www.cellulardynamics.com/
+bing-ren	Bing Ren	Bing Ren at University of California, San Diego	http://bioinformatics-renlab.ucsd.edu/rentrac/
+hyung-don-ryoo	Hyung Don Ryoo	Hyung Don Ryoo at New York University	http://www.med.nyu.edu/biosketch/ryooh01
+carl-wu	Carl Wu	Carl Wu at HHMI Janelia Farm Research Campus	http://www.janelia.org/lab/wu-lab
+haruhiko-siomi	Haruhiko Siomi	Haruhiko Siomi at Kyoto University	http://www.siomilab.med.keio.ac.jp/
+nuria-paricio	Nuria Paricio	Nuria Paricio at University of Valencia	http://www.uv.es/~gmd/equipo/equipo_ingles.html
+thea-tlsty	Thea Tlsty	Thea Tlsty at UCSF	http://labmed.ucsf.edu/about/faculty/pathology-ttlsty.html
+kristin-ardlie	Kristin Ardlie	Kristin Ardlie, Broad Institute Genomics Platform	
+jianhong-wu-and-tao-shi-hsieh	Jianhong Wu and Tao Shi Hsieh	Jianhong Wu and Tao-shih Hsieh at Duke University	http://www.biochem.duke.edu/modules/biochem_hsieh_lab/index.php?id=5
+cayman	Cayman	Cayman Chemical	http://www.caymanchem.com
+ambion	Ambion	Ambion	http://www.lifetechnologies.com/us/en/home/brands/ambion.html
+francis-stewart	Francis Stewart	Francis Stewart at Dresden University of Technology	http://www.biotec.tu-dresden.de/research/stewart/group-page.html
+hugo-bellen	Hugo Bellen	Hugo Bellen at Baylor College of Medicine	http://flypush.imgen.bcm.tmc.edu/lab/index.html
+progeria-research	Progeria Research	Progeria Research Foundation	http://www.progeriaresearch.org
+kevin-white	Kevin White	Kevin White at University of Chicago	http://www.genes.uchicago.edu/white.html
+peter-cherbas	Peter Cherbas	Peter Cherbas at Indiana University	http://www.bio.indiana.edu/faculty/directory/profile.php?person=cherbas
+huabing-li-and-vincenzo-pirrotta	Huabing Li and Vincenzo Pirrotta	Huabing Li and Vincenzo Pirrotta at Rutgers University	http://molbiosci.rutgers.edu/faculty/pirrotta.html
+victor-lobanenkov	Victor Lobanenkov	Victor V. Lobanenkov at National Institute of Allergy and Infectious Diseases	http://irp.nih.gov/pi/victor-lobanenkov
+kenneth-irvine	Kenneth Irvine	Kenneth Irvine at Rutgers University	http://www.waksman.rutgers.edu/irvine/home
+lsbio	LSBio	LifeSpan BioSciences, Inc	https://www.lsbio.com/
+donald-sens	Donald Sens	Donald Sens at University of North Dakota	http://www.med.und.edu/pathology/faculty-staff/donald-sens.cfm
+erika-bach	Erika Bach	Erika Bach at New York University	http://bachlab.med.nyu.edu/
+joseph-costello	Joseph Costello	Joseph Costello at UCSF	http://neurosurgery.ucsf.edu/index.php/about_us_faculty_costello.html
+pat-navas	Pat Navas	Pat Navas	
+sarah-elgin	Sarah Elgin	Sarah Elgin at Washington University St Louis	http://www.biology.wustl.edu/faculty/elgin/
+ari-melnick	Ari Melnick	Ari Melnick at Cornell University	http://melnicklaboratory.med.cornell.edu/people/arimelnick.php
+robert-paulson	Robert Paulson	Robert Paulson at Pennsylvania State University	http://vbs.psu.edu/research/labs/paulson
+emery-bresnick	Emery Bresnick	Emery Bresnick at University of Wisconsin, Madison	http://stemcells.wisc.edu/node/101
+florence-maschat	Florence Maschat	Florence Maschat at Institute de Genomique Fonctionelle	http://www.igh.cnrs.fr/equip/WebFM/index.html
+robert-white	Robert White	Robert White at Beatson Institute for Cancer Research	http://www.beatson.gla.ac.uk/
+mbli	MBLI	MBL International	http://www.mblintl.com/
+anthony-schwacha	Anthony Schwacha	Anthony Schwacha at University of Pittsburgh	http://www.biology.pitt.edu/person/anthony-schwacha
+len-pennacchio	Len Pennacchio	Len Pennacchio at Joint Genome Institute	http://www.jgi.doe.gov/whoweare/pennacchio.html
+atcc	ATCC	American Type Culture Collection (ATCC)	http://www.atcc.org/
+scott-hawley	Scott Hawley	Scott Hawley at Stowers Institute	http://www.stowers.org/faculty/hawley-lab
+illumina	Illumina	Illumina	http://www.illumina.com/
+amy-murtha	Amy Murtha	Amy Murtha at Duke University	http://obgyn.duke.edu/faculty/details/0097193
+ravi-jhaveri	Ravi Jhaveri	Ravi Jhaveri at University of North Carolina	http://findadoc.unchealthcare.org/directory/profile.asp?dbase=main&setsize=10&last=Jhaveri&pict_id=1893383
+marella-debruijn	Marella deBruijn	Marella deBruijn at The Weatherall Institute of Molecular Medicine	http://www.imm.ox.ac.uk/wimm-research/molhaem/marella-de-bruijn
+novartis	Novartis	Novartis	http://www.us.novartis.com/
+sciencell	ScienCell	ScienCell Research Laboratories	http://www.sciencellonline.com/
+mattias-mannervik	Mattias Mannervik	Mattias Mannervik at Stockholm University	http://www.su.se/cmlink/2.6681/research/research-groups/mattias-mannervik
+thermo-fisher	Thermo Fisher	Thermo Fisher Scientific Inc.	http://www.thermofisher.com/global/en/home.asp
+paul-tesar	Paul Tesar	Paul Tesar at Case Western University	http://genetics.case.edu/page.php?page_id=5&LN=Tesar&FN=Paul
+peggy-farnham	Peggy Farnham	Peggy Farnham at University of Southern California	http://pibbs.usc.edu/faculty/profile/?fid=205
+yang-shi	Yang Shi	Yang Shi at Harvard University	http://cellbio.med.harvard.edu/faculty/shi
+yardena-samuels	Yardena Samuels	Yardena Samuels at National Human Genome Research Institute	http://irp.nih.gov/pi/yardena-samuels
+huntington-willard	Huntington Willard	Huntington Willard at Duke University	http://www.genome.duke.edu/directory/faculty/willard/
+stuart-schreiber	Stuart Schreiber	Stuart Schreiber at Broad Institute CTD2 Center	http://www.broadinstitute.org/scientific-community/science/programs/csoft/chemical-biology/project-cancer-dependencies-%E2%80%93-ctd2/canc
+carol-ware	Carol Ware	Carol Ware at University of Washington Department of Comparative Medicine	http://depts.washington.edu/compmed/directory/faculty/ware.htm
+steven-young	Steven Young	Steven Young at University of North Carolina	http://findadoc.unchealthcare.org/directory/profile.asp?dbase=main&setsize=5&pict_id=0002115
+mitchell-weiss	Mitchell Weiss	Mitchell Weiss at University of Pennsylvania	http://www.med.upenn.edu/apps/faculty/index.php/g20000320/p14904
+stephen-hauschka	Stephen Hauschka	Stephen Hauschka at University of Washington	http://depts.washington.edu/biowww/pages/faculty-Hauschka.shtml
+ecacc	ECACC	Health Protection Agency Culture Collections	http://www.hpacultures.org.uk
+steve-choi	Steve Choi	Steve Choi at Duke University	http://gastroenterology.medicine.duke.edu/faculty/details/0278358
+ndri	NDRI	National Disease Research Interchange (NDRI)	http://ndriresource.org/
+viacyte	ViaCyte	Vicatye, Inc.	http://viacyte.com/
+jackson-labs	The Jackson Laboratory		http://www.jax.org/index.html
+novus	Novus	Novus Biologicals	http://www.novusbio.com
+tcesc	TCESC	Transgenic Core and Embryonic Stem Cell at University of California, San Diego	http://cancer.ucsd.edu/research-training/shared-resources/transgenic-core/Pages/default.aspx
+wicell	WiCell	WiCell Research Institute	http://www.wicell.org/
+arthur-skoultchi	Arthur Skoultchi	Arthur Skoultchi at Albert Einstein College of Medicine	http://www.einstein.yu.edu/faculty/4683/arthur-skoultchi/
+bradley-bernstein	Bradley Bernstein	Bradley Bernstein at The Eli and Edythe L. Broad Institute of Harvard and MIT	https://csb.mgh.harvard.edu/bradley_bernstein
+julie-ahringer	Julie Ahringer	Julie Ahringer at University of Cambridge	http://www.gurdon.cam.ac.uk/~ahringerlab/
+rockland	Rockland	Rockland Immunochemicals	http://rockland-inc.com
+guangshuo-ou	Guangshuo Ou	Guangshuo Ou at Center for Life Sciences	http://www.cls.edu.cn/english/PrincipalInvestigator/pi/index2187.shtml
+eric-bouhassira	Eric Bouhassira	Eric Bouhassira at Albert Einstein College of Medicine	http://www.einstein.yu.edu/faculty/4981/eric-bouhassira/
+eurogentec	Eurogentec	Eurogentec	http://www.eurogentec.com/eu-home.html
+beverly-torok-storb	Beverly Torok-Storb	Beverly Torok-Storb at Fred Hutchison Cancer Research Center	http://cceh.fhcrc.org/
+nichd-btb	NICHD BTB	The Eunice Kennedy Shriver NICHD Brain and Tissue Bank for Developmental Disorders at the University of Maryland	http://medschool.umaryland.edu/btbank/
+shinya-yamanaka	Shinya Yamanaka	Shinya Yamanaka at University of California, San Francisco	http://gladstoneinstitutes.org/scientist/yamanaka
+roberto-mantovani	Roberto Mantovani	Roberto Mantovani at Universita degli Studi di Milano	http://www.unimi.it/chiedove/schedaPersonaXML.jsp?matricola=12736
+austin-smith	Austin Smith	Austin Smith at University of Cambridge	http://www.bioc.cam.ac.uk/uto/smitha
+melanie-ehrlich-and-koji-tsumagari	Melanie Ehrlich and Koji Tsumagari	Melanie Ehrlich and Koji Tsumagari at Tulane University	http://tulane.edu/som/hayward-genetics/faculty/melanie-ehrlich.cfm
+harvard-ipsc	Harvard iPSC	iPS Cell Core Facility at Harvard University	http://www.hsci.harvard.edu/research/ips-core-facility
+ncascr	NCASCR	National Centre for Adult Stem Cell Research (NCASCR), Griffith University	http://www.griffith.edu.au/science-aviation/national-centre-adult-stem-cell-research
+nichd	NICHD	National Institute of Child Health and Human Development (NICHD)	http://www.nichd.nih.gov/Pages/index.aspx
+taconic	Taconic	Taconic Farms, Inc	http://www.taconic.com
+nctc	NCTC	North Carolina Tissue Consortium (NCTC)	http://www.ecu.edu/cs-dhs/med/NcTissueConsortium.cfm
+yoichi-shinkai	Yoichi Shinkai	Yoichi Shinkai at RIKEN	http://www.asi.riken.jp/en/laboratories/chieflabs/cml/
+bdrl	BDRL	Birth Defect Research Laboratory	
+valerie-reinke	Valerie Reinke	Valerie Reinke at Yale University	http://medicine.yale.edu/lab/reinke/index.aspx
+lpbio	Lake Placid Biologicals	Lake Placid Biologicals	https://www.activemotif.com
+sherman-weissman	Sherman Weissman	Sherman Weissman at Yale University	http://bbs.yale.edu/people/sherman_weissman.profile
+richard-mann	Richard Mann	Richard Mann at Columbia University	http://themannlab.org
+stephen-crews	Stephen Crews	Stephen Crews at University of North Carolina Chapel Hill	http://www.unc.edu/~crews/SteveC.html
+ming-sound-tsao	Ming-Sound Tsao	Ming-Sound Tsao at Ontario Cancer Institute	http://www.uhnres.utoronto.ca/researchers/profile.php?lookup=6118
+abclonal	ABclonal	ABclonal Technology	http://www.abclonal.com/
+thomas-montine	Thomas Montine	Thomas Montine at University of Washington Deptartmen of Pathology	http://www.pathology.washington.edu/faculty/montine
+biochain	BioChain	BioChain Institute Inc	http://www.biochain.com
+bresagen	BresaGen	BresaGen, Inc	http://www.bresagen.com.au/
+stephen-smale	Stephen Smale	Stephen Smale at University of California, Los Angeles	http://people.healthsciences.ucla.edu/institution/personnel?personnel_id=45693
+richard-myers	Richard Myers	Richard Myers at the HudsonAlpha Institute for Biotechnology	

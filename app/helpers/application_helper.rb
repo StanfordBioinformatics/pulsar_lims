@@ -6,4 +6,8 @@ module ApplicationHelper
 			end
 		end
 	end
+
+	def encode_url(accession)
+		return ["https://www.encodeproject.org",accession].join("/")
+	end
 end

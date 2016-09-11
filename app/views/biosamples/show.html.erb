@@ -24,7 +24,7 @@
 
 <p> 
 	<strong>Vendor:</strong></br>
-	<%= @biosample.vendor.name %>
+	<%= link_to @biosample.vendor.name, @biosample.vendor.url %>
 </p>
 
 <p>
@@ -49,7 +49,7 @@
 
 <p>
 	<strong>Human Donor:</strong></br>
-	<%= @biosample.donor.encode_alias%>
+	<%= link_to @biosample.donor.encode_alias, encode_url(@biosample.donor.encode_identifier)%>
 </p>
 
 <p>

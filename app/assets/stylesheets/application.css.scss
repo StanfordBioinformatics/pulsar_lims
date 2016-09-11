@@ -4,10 +4,10 @@
 @import "bootstrap";
 
 @import "font-awesome";
-@import "responsive";
+@import "responsive.scss";
 
 body {
-	padding-top: 40px;
+	padding-top: 70px;
 }
 
 header {
@@ -67,5 +67,6 @@ a.delete {
 }
 
 form {
-	max-width: 30%;
+	max-width: 55%;
 }
+
