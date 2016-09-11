@@ -1,23 +1,10 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require_tree .
- */
-
 /* Import all of Bootstrap's Css Components */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
 @import "font-awesome";
+@import "responsive";
 
 body {
 	padding-top: 40px;
@@ -36,11 +23,6 @@ header {
 ul.actions {
 	@extend .list-unstyled;
 	@extend .list-inline;
-	position: absolute; 
-	bottom: -2px;
-	right: 2px;
-	max-width: 45%;
-	text-align: right;
 }
 
 a.new, a.edit, a.delete {
@@ -80,7 +62,7 @@ a.delete {
 	@extend .alert-success;
 }
 
-.alert-danger {
+.alert-alert {
 	@extend .alert-danger;
 }
 

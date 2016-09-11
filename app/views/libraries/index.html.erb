@@ -1,10 +1,10 @@
-<div class="page-header">
+<header>
 	<h1>Libraries</h1>
 	
 	<ul class="actions">
 		<li><%= link_to "New Library", new_library_path, class: "new" %></li>
 	</ul>	
-</div>
+</header>
 
 <table>
   <thead>
@@ -33,7 +33,7 @@
         <td><%= library.lot_identifier %></td>
         <td><%= library.vendor_product_identifier %></td>
         <td><%= library.size_range %></td>
-        <td><%= library.strand_specificity %></td>
+        <td><%= library.strand_specific %></td>
         <td><%= link_to 'Show', library %></td>
         <td><%= link_to 'Edit', edit_library_path(library) %></td>
         <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></td>

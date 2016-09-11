@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909025252) do
+ActiveRecord::Schema.define(version: 20160911081900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 20160909025252) do
     t.string   "lot_identifier"
     t.string   "vendor_product_identifier"
     t.string   "size_range"
-    t.boolean  "strand_specificity"
+    t.boolean  "strand_specific"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"

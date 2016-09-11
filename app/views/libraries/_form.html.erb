@@ -11,9 +11,7 @@
     </div>
   <% end %>
 
-  <div>
-    <%= f.input :name %>(Max. 20 characters)
-  </div></br>
+  <%= f.input :name %>(Max. 20 characters)
 
   <div>
     Associated Protocol Documents:
@@ -39,56 +37,44 @@
     <%= render(partial: "documents/select_documents", locals: {f: f,selected: selected}) %>
   </div></br>
 
-  <div class="field">
-		Nucleic Acid Term Name:</br>
-		<% sequence_ontology_term_id = nil %>
-		<% if not @library.sequence_ontology_term.nil? %>
-			<% sequence_ontology_term_id = @library.sequence_ontology_term.id %>
-		<% end %>
-    <%= f.select :sequence_ontology_term_id,choices=options_for_select(sorted_so_name_id,selected=sequence_ontology_term_id),html_options={:prompt => "Select the Term Name"} %>
-  </div>
 
-  <div class="field">
-		<% biosample_id = nil %>
-		<% if not @library.biosample.nil? %>
-			<% biosample_id = @library.biosample.id %>
-		<% end %>
-    <%= f.select :biosample_id,choices=options_for_select(sorted_biosample_name_id,selected=biosample_id),html_options={:prompt => "Select the Biosample"} %>
-  </div>
+	<% sequence_ontology_term_id = nil %>
+	<% if not @library.sequence_ontology_term.nil? %>
+		<% sequence_ontology_term_id = @library.sequence_ontology_term.id %>
+	<% end %>
+  <%= f.input :sequence_ontology_term_id, label: "Nucleic Acid Term Name", collection: sorted_so_name_id(), selected: sequence_ontology_term_id ,prompt: "Select the Term Name" %>
 
-  <div class="field">
-		<% antibody_id = nil %>
-		<% if not @library.antibody.nil? %>
-			<% antibody_id = @library.antibody.id %>
-		<% end %>
-    <%= f.select :antibody_id,choices=options_for_select(sorted_antibody_name_id,selected=antibody_id),html_options={:prompt => "Select the Antibody"} %>
-  </div>
 
-  <div class="field">
-    <% vendor_id = nil %>
-    <% if not @library.vendor.nil? %>
-      <% vendor_id = @library.vendor.id %>
-    <% end %>
-    <%= f.select :vendor_id, choices=options_for_select(sorted_vendor_name_id,selected=vendor_id),html_options={:prompt => "Select the Vendor"} %>
-  </div>
+	<% biosample_id = nil %>
+	<% if not @library.biosample.nil? %>
+		<% biosample_id = @library.biosample.id %>
+	<% end %>
+  <%= f.input :biosample_id, collection: sorted_biosample_name_id(), selected: biosample_id, prompt: "Select the Biosample" %>
 
-  <div class="field">
-    <%= f.input :lot_identifier %>
-  </div>
 
-  <div class="field">
-    <%= f.input :vendor_product_identifier %>
-  </div>
+	<% antibody_id = nil %>
+	<% if not @library.antibody.nil? %>
+		<% antibody_id = @library.antibody.id %>
+	<% end %>
+  <%= f.input :antibody_id, collection: sorted_antibody_name_id(), selected: antibody_id, prompt: "Select the Antibody" %>
 
-  <div class="field">
-    <%= f.input :size_range %>(i.e. 450-650)
-  </div>
 
-  <div class="field">
-		Strand Specific: <%= f.check_box :strand_specificity %>
-  </div>
+  <% vendor_id = nil %>
+  <% if not @library.vendor.nil? %>
+		<% vendor_id = @library.vendor.id %>
+  <% end %>
+  <%= f.input :vendor_id, collection: sorted_vendor_name_id(), selected: vendor_id, prompt: "Select the Vendor" %>
+
+
+  <%= f.input :lot_identifier %>
+
+  <%= f.input :vendor_product_identifier %>
+
+  <%= f.input :size_range, as: :string %>
+
+	<%= f.input :strand_specific %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary"%>
-  </div>
+  </div></br></br>
 <% end %>

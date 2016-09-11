@@ -23,22 +23,22 @@
 
 <p>
   <strong>Sequence ontology term:</strong>
-  <%= @library.sequence_ontology_term %>
+  <%= @library.sequence_ontology_term.name %>
 </p>
 
 <p>
   <strong>Biosample:</strong>
-  <%= @library.biosample %>
+  <%= @library.biosample.name %>
 </p>
 
 <p>
   <strong>Antibody:</strong>
-  <%= @library.antibody %>
+  <%= @library.antibody.name %>
 </p>
 
 <p>
   <strong>Vendor:</strong>
-  <%= @library.vendor %>
+  <%= @library.vendor.name %>
 </p>
 
 <p>
@@ -57,8 +57,8 @@
 </p>
 
 <p>
-  <strong>Strand specificity:</strong>
-  <%= @library.strand_specificity %>
+  <strong>Strand specific:</strong>
+  <%= @library.strand_specific %>
 </p>
 
 <%= link_to 'Back', libraries_path %>
