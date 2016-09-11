@@ -1,0 +1,78 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+/* Import all of Bootstrap's Css Components */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import "font-awesome";
+
+
+.page-header {
+	position: relative;
+	padding-bottom: 0px;
+	
+	&:first-child {
+		margin-top: 20px;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		max-width: 55%;
+	}
+}
+
+ul.actions {
+	@extend .list-unstyled;
+	@extend .list-inline;
+	position: absolute; 
+	bottom: -2px;
+	right: 2px;
+	max-width: 45%;
+	text-align: right;
+}
+
+a.new, a.edit, a.delete {
+	@extend .btn;
+	
+	&:before {
+		font-family: "FontAwesome";
+		padding-right: 0.5em;
+	}
+}
+
+a.new {
+	@extend .btn-success;
+
+	&:before {
+		@extend .fa-plus;
+	}
+}
+
+a.edit {
+	@extend .btn-primary;
+
+	&:before {
+		@extend .fa-pencil;
+	}
+}
+
+
+a.delete {
+	@extend .btn-danger;
+
+	&:before {
+		@extend .fa-trash;
+	}
+}

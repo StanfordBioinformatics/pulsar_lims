@@ -1,3 +1,14 @@
+<div class="page-header" >
+	<h1><%= @library.name %>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Library", edit_library_path(@library), class: "edit" %></li>
+    <li><%= link_to "Delete Library", library_path(@library), method: :delete,
+										 data: { confirm: "Are you sure you would like to delete this library?"},
+										 class: "delete" %></li>
+	</ul>
+</div>
+
 <p>
   <strong>Library Name</strong></br>
   <%= @library.name %>
@@ -50,5 +61,4 @@
   <%= @library.strand_specificity %>
 </p>
 
-<%= link_to 'Edit', edit_library_path(@library) %> |
 <%= link_to 'Back', libraries_path %>
