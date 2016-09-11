@@ -34,7 +34,7 @@ SnyderEncode::Application.routes.draw do
 
   resources :biosample_types
 
-  resources :sequence_ontology_terms
+  resources :nucleic_acid_terms
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
