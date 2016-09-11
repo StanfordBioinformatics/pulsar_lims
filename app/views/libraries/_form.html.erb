@@ -24,7 +24,6 @@
     <% end %>
   </div></br>
 
-  <div>
     <!-- Show select for Documents. Mutliple documents can be selected.
          If the form was rejected due to a validation error, then the
          user will have been presented with this form again to correct it, 
@@ -35,7 +34,6 @@
       <% selected = @library.documents.map{|x| x.id} %>
     <% end %>
     <%= render(partial: "documents/select_documents", locals: {f: f,selected: selected}) %>
-  </div></br>
 
 
 	<% sequence_ontology_term_id = nil %>

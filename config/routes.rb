@@ -19,7 +19,7 @@ SnyderEncode::Application.routes.draw do
 
   resources :biosamples
 
-  resources :human_donors
+  resources :donors
 
   resources :vendors
 

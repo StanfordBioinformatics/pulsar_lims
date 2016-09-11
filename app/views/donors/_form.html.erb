@@ -1,10 +1,10 @@
-<%= form_for(@human_donor) do |f| %>
-  <% if @human_donor.errors.any? %>
+<%= form_for(@donor) do |f| %>
+  <% if @donor.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@human_donor.errors.count, "error") %> prohibited this human_donor from being saved:</h2>
+      <h2><%= pluralize(@donor.errors.count, "error") %> prohibited this human_donor from being saved:</h2>
 
       <ul>
-      <% @human_donor.errors.full_messages.each do |msg| %>
+      <% @donor.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

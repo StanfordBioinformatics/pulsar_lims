@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160911081900) do
+ActiveRecord::Schema.define(version: 20160911200639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,11 +70,11 @@ ActiveRecord::Schema.define(version: 20160911081900) do
     t.integer  "vendor_id"
     t.integer  "biosample_type_id"
     t.string   "name"
-    t.integer  "human_donor_id"
+    t.integer  "donor_id"
   end
 
   add_index "biosamples", ["biosample_type_id"], name: "index_biosamples_on_biosample_type_id", using: :btree
-  add_index "biosamples", ["human_donor_id"], name: "index_biosamples_on_human_donor_id", using: :btree
+  add_index "biosamples", ["donor_id"], name: "index_biosamples_on_donor_id", using: :btree
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
   add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id", using: :btree
 
@@ -107,16 +107,15 @@ ActiveRecord::Schema.define(version: 20160911081900) do
     t.integer "library_id"
   end
 
-  create_table "experiment_types", force: true do |t|
-    t.string   "name"
+  create_table "donors", force: true do |t|
+    t.string   "encode_identifier"
+    t.string   "encode_alias"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "human_donors", force: true do |t|
-    t.string   "encode_identifier"
-    t.string   "encode_alias"
-    t.string   "string"
+  create_table "experiment_types", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

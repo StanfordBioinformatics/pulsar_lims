@@ -1,0 +1,17 @@
+<p>
+  <strong>Encode:</strong>
+  <%= @donor.encode_id %>
+</p>
+
+<p>
+  <strong>Encode alias:</strong>
+  <%= @donor.encode_alias %>
+</p>
+
+<p>
+  <strong>String:</strong>
+  <%= @donor.string %>
+</p>
+
+<%= link_to 'Edit', edit_donor_path(@donor) %> |
+<%= link_to 'Back', donors_path %>

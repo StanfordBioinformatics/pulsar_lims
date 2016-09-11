@@ -1,4 +1,4 @@
-<%= form_for(@biosample) do |f| %>
+<%= simple_form_for(@biosample) do |f| %>
   <% if @biosample.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@biosample.errors.count, "error") %> prohibited this biosample from being saved:</h2>
@@ -11,110 +11,71 @@
     </div>
   <% end %>
 
-	<div>
-		Biosample Name:</br>
-		<%= f.text_field :name %> (Max. 20 characters)
-	</div></br>
+	<%= f.input :name %> (Max. 20 characters)
 
 	<div>
-		Associated Protocol Documents:
+		<strong>Associated Protocol Documents:</strong>
 		<% if @biosample.new_record? %>
 			None
 		<% else %></br>
-      <%= render(@biosample.documents) %>
+			<table>
+	      <%= render(@biosample.documents) %>
+			</table>
     <% end %>
 	</div></br>
 
-	<div>
-		<!-- Show select for Documents. Mutliple documents can be selected.
+
+	<!-- Show select for Documents. Mutliple documents can be selected.
 				 If the form was rejected due to a validation error, then the
 				 user will have been presented with this form again to correct it, 
 				 and I set the default selectioned to what the user had originally, 
 				 if any. -->
-		<% selected = nil %>
-		<% if @biosample.documents and @biosample.new_record? %>
-			<% selected = @biosample.documents.map{|x| x.id} %>
-		<% end %>
-		<%= render(partial: "documents/select_documents", locals: {f: f,selected: selected}) %>
-	</div></br>
+	<% selected = nil %>
+	<% if @biosample.documents and @biosample.new_record? %>
+		<% selected = @biosample.documents.map{|x| x.id} %>
+	<% end %>
+	<%= render(partial: "documents/select_documents", locals: {f: f,selected: selected}) %>
 
-	<div class="field">
-		Biosample Type:</br>
-		<% biosample_type_id = nil %>
-		<% if not @biosample.biosample_type.nil? %>
-			<% biosample_type_id = @biosample.biosample_type.id %>
-		<% end %>
-		<%= f.select :biosample_type_id, choices=options_for_select(sorted_biosampletype_name_id,selected=biosample_type_id),html_options={:prompt => "Select the Biosample Type"} %>
-	</div>
+	<% biosample_type_id = nil %>
+	<% if not @biosample.biosample_type.nil? %>
+		<% biosample_type_id = @biosample.biosample_type.id %>
+	<% end %>
+	<%= f.input :biosample_type_id, collection: sorted_biosampletype_name_id(), selected: biosample_type_id, prompt: "Select the Biosample Type" %>
 
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
 
-	<div class="field">
-		<%= f.label :vendor_id %>
-		<% vendor_id = nil %>
-		<% if not @biosample.vendor.nil? %>
-			<% vendor_id = @biosample.vendor.id %>
-		<% end %>
-		<%= f.select :vendor_id, choices=options_for_select(sorted_vendor_name_id,selected=vendor_id),html_options={:prompt => "Select the Vendor"} %>
-	</div>
+  <%= f.input :description %>
 
-  <div class="field">
-		Vendor Product Identifier:</br>
-    <%= f.text_field :vendor_product_identifier %>
-  </div>
+	<% vendor_id = nil %>
+	<% if not @biosample.vendor.nil? %>
+		<% vendor_id = @biosample.vendor.id %>
+	<% end %>
+	<%= f.input :vendor_id, collection: sorted_vendor_name_id(), selected: vendor_id, prompt: "Select the Vendor" %>
 
-  <div class="field">
-		Lot Identifier:</br>
-    <%= f.text_field :lot_identifier %>
-  </div>
 
-  <div class="field">
-		Ontology Term Name describing the biosample:</br>
-    <%= f.text_field :ontology_term_name %>
-  </div>
+	<%= f.input:vendor_product_identifier %>
 
-  <div class="field">
-		Ontology Term Accession describing the biosample:</br>
-    <%= f.text_field :ontology_term_accession%> (An UBERON, EFO, CL, NTR, FBbt, or WBbt identifer)
-  </div>
+	<%= f.input :lot_identifier %>
 
-	<div class="field">
-		Human Donor:</br>
-		<% donors = HumanDonor.all.map{ |x| [x.encode_alias,x.id]} %>
-		<% donors.sort! do |x,y| %>
-			<% x[0] <=> y[0] %>
-		<% end %>
-		<% human_donor_id = nil %>
-		<% if not @biosample.human_donor.nil? %>
-			<% human_donor_id = @biosample.human_donor.id %>
-		<% end %>
-		<%= f.select :human_donor_id, choices=options_for_select(donors,selected=human_donor_id),html_options={:prompt => "Choose The Human Donor"} %>
-	</div>
+	<%= f.input :ontology_term_name, label: "Ontology term name describing the biosample" %>
 
-  <div class="field">
-		Passage Number:</br>
-    <%= f.number_field :passage_number %>
-  </div>
+	<%= f.input :ontology_term_accession, label: "Ontology term accession describing the biosample" %> (An UBERON, EFO, CL, NTR, FBbt, or WBbt identifer)
 
-  <div class="field">
-		Culture Harvest Date:</br>
-    <%= f.date_select :culture_harvest_date %>
-  </div>
+	<% donor_id = nil %>
+	<% if not @biosample.donor.nil? %>
+		<% donor_id = @biosample.donor.id %>
+	<% end %>
+	<%= f.input :donor_id, collection: sorted_donor_name_id,selected: donor_id, prompt: "Choose The Human Donor" %>
 
-	<div>
-		Submitter Comments:</br>
-    <%= f.text_field :submitter_comments %>
-  </div>
+	<%= f.input :passage_number %>
 
-	</br></br>
-  <div class="field">
-		ENCODE Identifier</br>
-    <%= f.text_field :encid %>
-  </div>
+	<%= f.input :culture_harvest_date %>
+
+	<%= f.input :submitter_comments %>
+
+	<%= f.input :encid %>
+
   <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.button :submit, class: "btn-primary"%>
+  </div></br></br>
+
 <% end %>
