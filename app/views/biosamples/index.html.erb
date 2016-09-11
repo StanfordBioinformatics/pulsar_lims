@@ -1,4 +1,11 @@
-<h1>Listing biosamples</h1>
+<header>
+	<h1>Biosamples</h1>
+
+  <ul class="actions">
+    <li><%= link_to "New Biosample", new_biosample_path, class: "new" %></li>
+  </ul> 
+</header>	
+	
 
 <table>
   <thead>
@@ -31,5 +38,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Biosample', new_biosample_path %>

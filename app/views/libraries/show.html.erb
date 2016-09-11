@@ -1,3 +1,4 @@
+<% title(@library.name, "Libraries") %>
 <header>
 	<h1><%= @library.name %></h1>
 
@@ -23,22 +24,22 @@
 
 <p>
   <strong>Sequence ontology term:</strong>
-  <%= @library.sequence_ontology_term.name %>
+  <%= link_to @library.nucleic_acid_term.name, @library.nucleic_acid_term %>
 </p>
 
 <p>
   <strong>Biosample:</strong>
-  <%= @library.biosample.name %>
+  <%= link_to @library.biosample.name, @library.biosample %>
 </p>
 
 <p>
   <strong>Antibody:</strong>
-  <%= @library.antibody.name %>
+  <%= link_to @library.antibody.name, @library.antibody %>
 </p>
 
 <p>
   <strong>Vendor:</strong>
-  <%= @library.vendor.name %>
+  <%= link_to @library.vendor.name, @library.vendor %>
 </p>
 
 <p>

@@ -1,4 +1,4 @@
-<%= form_for(@nucleic_acid_term) do |f| %>
+<%= simple_form_for(@nucleic_acid_term) do |f| %>
   <% if @nucleic_acid_term.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@nucleic_acid_term.errors.count, "error") %> prohibited this nucleic_acid_term from being saved:</h2>
@@ -11,19 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :accession %><br>
-    <%= f.text_field :accession %>
-  </div>
-  <div class="field">
-    <%= f.label :definition %><br>
-    <%= f.text_field :definition %>
-  </div>
+	<%= f.input :name %>
+    
+	<%= f.input :accession %>
+    
+	<%= f.input :definition %>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.button :submit, class: "btn-primary" %>
   </div>
 <% end %>

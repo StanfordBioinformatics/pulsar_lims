@@ -36,11 +36,11 @@
   <%= render(partial: "documents/select_documents", locals: {f: f,selected: selected}) %>
 
 
-	<% sequence_ontology_term_id = nil %>
-	<% if not @library.sequence_ontology_term.nil? %>
-		<% sequence_ontology_term_id = @library.sequence_ontology_term.id %>
+	<% nucleic_acid_term_id = nil %>
+	<% if not @library.nucleic_acid_term.nil? %>
+		<% nucleic_acid_term_id = @library.nucleic_acid_term.id %>
 	<% end %>
-  <%= f.input :sequence_ontology_term_id, label: "Nucleic Acid Term Name", collection: sorted_nucleic_acid_term_name_id(), selected: sequence_ontology_term_id ,prompt: "Select the Term Name" %>
+  <%= f.input :nucleic_acid_term_id, label: "Nucleic Acid Term Name", collection: sorted_nucleic_acid_term_name_id(), selected: nucleic_acid_term_id ,prompt: "Select the Term Name" %>
 
 
 	<% biosample_id = nil %>

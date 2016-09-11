@@ -1,17 +1,29 @@
+<% title(@nucleic_acid_term.name,"NucleicAcidTerms") %>
+<header>
+	<h1><%= @nucleic_acid_term.name %></h1>
+	
+  <ul class="actions">
+    <li><%= link_to "Edit Term", edit_nucleic_acid_term_path(@nucleic_acid_term), class: "edit" %></li>
+<li><%= link_to "Delete Term", nucleic_acid_term_path(@nucleic_acid_term), method: :delete,
+                 data: { confirm: "Are you sure you would like to delete this nucleic acid term?"},
+                 class: "delete" %></li>
+  </ul>
+</header> 
+
 <p>
   <strong>Name:</strong>
-  <%= @sequence_ontology_term.name %>
+  <%= @nucleic_acid_term.name %>
 </p>
 
 <p>
   <strong>Accession:</strong>
-  <%= @sequence_ontology_term.accession %>
+  <%= @nucleic_acid_term.accession %>
 </p>
 
 <p>
   <strong>Definition:</strong>
-  <%= @sequence_ontology_term.definition %>
+  <%= @nucleic_acid_term.definition %>
 </p>
 
-<%= link_to 'Edit', edit_sequence_ontology_term_path(@sequence_ontology_term) %> |
-<%= link_to 'Back', sequence_ontology_terms_path %>
+<%= link_to 'Edit', edit_nucleic_acid_term_path(@nucleic_acid_term) %> |
+<%= link_to 'Back', nucleic_acid_terms_path %>

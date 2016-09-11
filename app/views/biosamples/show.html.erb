@@ -1,4 +1,14 @@
 <% title(@biosample.name,"Biosamples") %> 
+<header>
+	<h1><%= @biosample.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Biosample", edit_biosample_path(@biosample), class: "edit" %></li>
+    <li><%= link_to "Delete Biosample", biosample_path(@biosample), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this biosample?"},
+                     class: "delete" %></li>
+  </ul>
+</header>	
 
 <p>
 	<strong>Biosample Name</strong></br>
@@ -77,5 +87,4 @@
   <%= @biosample.encid %>
 </p>
 
-<%= link_to 'Edit', edit_biosample_path(@biosample) %> |
 <%= link_to 'Back', biosamples_path %>

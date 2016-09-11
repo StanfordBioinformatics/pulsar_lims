@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160911225011) do
+ActiveRecord::Schema.define(version: 20160911231229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 20160911225011) do
   end
 
   create_table "libraries", force: true do |t|
-    t.integer  "sequence_ontology_term_id"
+    t.integer  "nucleic_acid_term_id"
     t.integer  "biosample_id"
     t.integer  "antibody_id"
     t.integer  "vendor_id"
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 20160911225011) do
   add_index "libraries", ["antibody_id"], name: "index_libraries_on_antibody_id", using: :btree
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
   add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true, using: :btree
-  add_index "libraries", ["sequence_ontology_term_id"], name: "index_libraries_on_sequence_ontology_term_id", using: :btree
+  add_index "libraries", ["nucleic_acid_term_id"], name: "index_libraries_on_nucleic_acid_term_id", using: :btree
   add_index "libraries", ["vendor_id"], name: "index_libraries_on_vendor_id", using: :btree
 
   create_table "nucleic_acid_terms", force: true do |t|
