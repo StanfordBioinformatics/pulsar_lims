@@ -1,7 +1,17 @@
+<header>
+	<h1><%= @biosample_type.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Biosample Type", edit_biosample_type_path(@biosample_type), class: "edit" %></li>
+    <li><%= link_to "Delete Biosample Type", biosample_type_path(@biosample_type), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this biosample type ?"},
+                     class: "delete" %></li>
+  </ul>
+</header>
+
 <p>
   <strong>Name:</strong>
   <%= @biosample_type.name %>
 </p>
 
-<%= link_to 'Edit', edit_biosample_type_path(@biosample_type) %> |
 <%= link_to 'Back', biosample_types_path %>
