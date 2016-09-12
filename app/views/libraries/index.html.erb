@@ -9,7 +9,7 @@
 <table>
   <thead>
     <tr>
-      <th>Sequence ontology term</th>
+      <th>Nucleic Acid Term</th>
       <th>Biosample</th>
       <th>Antibody</th>
       <th>Vendor</th>
@@ -26,7 +26,7 @@
   <tbody>
     <% @libraries.each do |library| %>
       <tr>
-        <td><%= library.nucleic_acid_term %></td>
+        <td><%= library.nucleic_acid_term.name %></td>
         <td><%= library.biosample.name %></td>
         <td><%= library.antibody.name %></td>
         <td><%= library.vendor.name %></td>
