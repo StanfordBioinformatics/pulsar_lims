@@ -1,4 +1,4 @@
-<%= form_for(@antibody_purification) do |f| %>
+<%= simple_form_for(@antibody_purification) do |f| %>
   <% if @antibody_purification.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@antibody_purification.errors.count, "error") %> prohibited this antibody_purification from being saved:</h2>
@@ -11,11 +11,9 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
+  <%= f.input :name %>
+
   <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
 <% end %>

@@ -1,4 +1,4 @@
-<%= form_for(@antibody) do |f| %> <% if @antibody.errors.any? %> <div id="error_explanation">
+<%= simple_form_for(@antibody) do |f| %> <% if @antibody.errors.any? %> <div id="error_explanation">
       <h2><%= pluralize(@antibody.errors.count, "error") %> prohibited this antibody from being saved:</h2>
 
       <ul>
@@ -9,101 +9,70 @@
     </div>
   <% end %>
 
-  <div>
-    Antibody Name:</br>
-    <%= f.text_field :name %> (Max. 20 characters)
-  </div></br>
+  <%= f.input :name %> (Max. 20 characters)
 
-  <div class="field">
-    <%= f.label :organism_id %><br>
-		<% organism_id = nil %>
-		<% if not @antibody.organism.nil? %>
-			<% organism_id = @antibody.organism.id %>
-		<% end %>
-    <%= f.select :organism_id, choices=options_for_select(sorted_organism_name_id,organism_id),html_options={:prompt => "Select the Organism"} %>
-  </div>
+	<% organism_id = nil %>
+	<% if not @antibody.organism.nil? %>
+		<% organism_id = @antibody.organism.id %>
+	<% end %>
+  <%= f.input :organism_id, collection: sorted_organism_name_id(), selected: organism_id, prompt: "Select the Organism" %>
 
-  <div class="field">
-		<% if @antibody.new_record? %>
-			None
-		<% else %>
-			<table>
-				<% @antibody.antibody_purifications.each do |p| %>
-					<tr>
-						<td><%= link_to(p.name,p) %></td>
-						<td> Remove: <input type="checkbox" name="remove_antibody_purifications[]" value=<%= p.id %> /></td>
-					</tr>
-				<% end %>
-			</table>
-		<% end %>
-	</div></br>
+	<% if @antibody.new_record? %>
+		None
+	<% else %>
+		<table>
+			<% @antibody.antibody_purifications.each do |p| %>
+				<tr>
+					<td><%= link_to(p.name,p) %></td>
+					<td> Remove: <input type="checkbox" name="remove_antibody_purifications[]" value=<%= p.id %> /></td>
+				</tr>
+			<% end %>
+		</table>
+	<% end %>
 
-  <div>
-    <!-- Show select for AntibodyPurifications. Mutliple can be selected.
-         If the form was rejected due to a validation error, then the
-         user will have been presented with this form again to correct it, 
-         and I set the default selectioned to what the user had originally, 
-         if any. -->
-    <% selected = nil %>
-    <% if @antibody.antibody_purifications and @antibody.new_record? %>
-      <% selected = @antibody.antibody_purifications.map{|x| x.id} %>
-    <% end %>
-    <%= render(partial: "antibody_purifications/select_antibody_purifications", locals: {f: f,selected: selected}) %>
-  </div></br>
+  <!-- Show select for AntibodyPurifications. Mutliple can be selected.
+       If the form was rejected due to a validation error, then the
+       user will have been presented with this form again to correct it, 
+       and I set the default selectioned to what the user had originally, 
+       if any. -->
+  <% selected = nil %>
+  <% if @antibody.antibody_purifications and @antibody.new_record? %>
+    <% selected = @antibody.antibody_purifications.map{|x| x.id} %>
+  <% end %>
+  <%= render(partial: "antibody_purifications/select_antibody_purifications", locals: {f: f,selected: selected}) %>
 
-  <div class="field">
-    <%= f.label :vendor_id %></br>
-    <% vendor_id = nil %>
-    <% if not @antibody.vendor.nil? %>
-      <% vendor_id = @antibody.vendor.id %>
-    <% end %>
-    <%= f.select :vendor_id, choices=options_for_select(sorted_vendor_name_id,selected=vendor_id),html_options={:prompt => "Select the Vendor"} %>
-  </div>
 
-  <div class="field">
-    <%= f.label :isotype_id %><br>
-		<% isotype_id = nil %>
-		<% if not @antibody.isotype.nil? %>
-			<% isotype_id = @antibody.isotype.id %>
-		<% end %>
-    <%= f.select :isotype_id, choices=options_for_select(sorted_isotype_name_id,isotype_id),html_options={:prompt => "Select the Isotype"} %>
-  </div>
+  <% vendor_id = nil %>
+  <% if not @antibody.vendor.nil? %>
+    <% vendor_id = @antibody.vendor.id %>
+  <% end %>
+  <%= f.input :vendor_id, collection: sorted_vendor_name_id(), selected: vendor_id, prompt: "Select the Vendor" %>
 
-  <div class="field">
-    <%= f.label :human_gene_id %><br>
-		<% gene_id = nil %>
-		<% if not @antibody.human_gene.nil? %>
-			<% gene_id = @antibody.human_gene.id %>
-		<% end %>
-    <%= f.select :human_gene_id, choices=options_for_select(sorted_gene_name_id,gene_id),html_options={:prompt => "Select the Human Gene"} %>
-	</div>
+	<% isotype_id = nil %>
+	<% if not @antibody.isotype.nil? %>
+		<% isotype_id = @antibody.isotype.id %>
+	<% end %>
+  <%= f.input :isotype_id, collection: sorted_isotype_name_id(), selected: isotype_id, prompt: "Select the Isotype" %>
 
-  <div class="field">
-    <%= f.label :vendor_product_identifier %></br>
-    <%= f.text_field :vendor_product_identifier %>
-  </div></br>
+	<% gene_id = nil %>
+	<% if not @antibody.human_gene.nil? %>
+		<% gene_id = @antibody.human_gene.id %>
+	<% end %>
+  <%= f.input :human_gene_id, collection: sorted_gene_name_id(), selected: gene_id, prompt: "Select the Human Gene" %>
 
-  <div class="field">
-    <%= f.label :vendor_product_url %><br>
-    <%= f.text_field :vendor_product_url %>
-  </div>
-  <div class="field">
-    <%= f.label :lot_identifier %><br>
-    <%= f.text_field :lot_identifier %>
-  </div>
-  <div class="field">
-    <%= f.label :clonality %><br>
-    <%= f.select :clonality, choices=Antibody::CLONALITY_TYPES,html_options={:prompt => "Select the Clonality"} %>
-  </div>
-  <div class="field">
-    <%= f.label :antigen_description %><br>
-    <%= f.text_field :antigen_description %>
-  </div>
-  <div class="field">
-    <%= f.label :antigen_sequence %><br>
-    <%= f.text_field :antigen_sequence %>
-  </div>
+  <%= f.input :vendor_product_identifier %>
+
+  <%= f.input :vendor_product_url %>
+    
+  <%= f.input :lot_identifier %>
+
+  <%= f.input :clonality, collection: Antibody::CLONALITY_TYPES, prompt:  "Select the Clonality" %>
+
+  <%= f.input :antigen_description %>
+
+  <%= f.input :antigen_sequence %>
+
   <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br></br>
 <% end %>

@@ -1,4 +1,10 @@
-<h1>Listing antibody_purifications</h1>
+<header>
+	<h1>Listing antibody_purifications</h1>
+
+  <ul class="actions">
+    <li><%= link_to "New Antibody Purification", new_antibody_purification_path, class: "new" %></li>
+  </ul> 
+</header>
 
 <table>
   <thead>
@@ -23,5 +29,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Antibody purification', new_antibody_purification_path %>

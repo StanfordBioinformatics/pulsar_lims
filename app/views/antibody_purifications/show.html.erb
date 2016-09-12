@@ -1,7 +1,18 @@
+<%= title(@antibody_purification.name, "AntibodyPurifications") %>
+<header>
+  <h1><%= @antibody_purification.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Antibody Purification", edit_antibody_purification_path(@antibody_purification), class: "edit" %></li>
+    <li><%= link_to "Delete Antibody Purification", library_path(@antibody_purification), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this antibody purification?"},
+                     class: "delete" %></li>
+  </ul>
+</header>
+
 <p>
   <strong>Name:</strong>
   <%= @antibody_purification.name %>
 </p>
 
-<%= link_to 'Edit', edit_antibody_purification_path(@antibody_purification) %> |
 <%= link_to 'Back', antibody_purifications_path %>

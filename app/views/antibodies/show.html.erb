@@ -1,3 +1,15 @@
+<% title(@antibody.name, "Antibodies") %>
+<header>
+  <h1><%= @antibody.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Antibody", edit_antibody_path(@antibody), class: "edit" %></li>
+    <li><%= link_to "Delete Antibody", antibody_path(@antibody), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this antibody?"},
+                     class: "delete" %></li>
+  </ul>
+</header>
+
 <p>
   <strong>AntibodyName</strong></br>
   <%= @antibody.name %>
@@ -22,12 +34,12 @@
 
 <p>
   <strong>Isotype:</strong>
-  <%= @antibody.isotype.name %>
+  <%= link_to @antibody.isotype.name, @antibody.isotype %>
 </p>
 
 <p>
   <strong>Human gene:</strong>
-  <%= @antibody.human_gene.name %>
+  <%= link_to @antibody.human_gene.name, @antibody.human_gene %>
 </p>
 
 <p>
@@ -37,7 +49,7 @@
 
 <p>
   <strong>Vendor product url:</strong>
-  <%= @antibody.vendor_product_url %>
+  <%= link_to @antibody.vendor_product_url %>
 </p>
 
 <p>
@@ -60,5 +72,4 @@
   <%= @antibody.antigen_sequence %>
 </p>
 
-<%= link_to 'Edit', edit_antibody_path(@antibody) %> |
 <%= link_to 'Back', antibodies_path %>

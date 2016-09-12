@@ -1,4 +1,10 @@
-<h1>Listing antibodies</h1>
+<header>
+	<h1>Antibodies</h1>
+
+  <ul class="actions">
+    <li><%= link_to "New Antibody", new_antibody_path, class: "new" %></li>
+  </ul> 
+</header>
 
 <table>
   <thead>
@@ -23,14 +29,14 @@
   <tbody>
     <% @antibodies.each do |antibody| %>
       <tr>
-				<td><%= link_to(antibody.name,antibody) %></td>
-        <td><%= antibody.organism.name %></td>
-        <td><%= antibody.human_gene.name %></td>
+				<td><%= link_to antibody.name, antibody %></td>
+        <td><%= link_to antibody.organism.name, antibody.organism %></td>
+        <td><%= link_to antibody.human_gene.name, antibody.human_gene %></td>
         <td><%= antibody.clonality %></td>
-        <td><%= antibody.isotype.name %></td>
-        <td><%= antibody.vendor.name %></td>
+        <td><%= link_to antibody.isotype.name, antibody.isotype %></td>
+        <td><%= link_to antibody.vendor.name, antibody.vendor %></td>
         <td><%= antibody.vendor_product_identifier %></td>
-        <td><%= antibody.vendor_product_url %></td>
+        <td><%= link_to antibody.vendor_product_url %></td>
         <td><%= antibody.lot_identifier %></td>
         <td><%= antibody.antigen_description %></td>
         <td><%= antibody.antigen_sequence %></td>
@@ -43,5 +49,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Antibody', new_antibody_path %>
