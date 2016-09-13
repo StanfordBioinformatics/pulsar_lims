@@ -1,17 +1,24 @@
+<% title(@donor.encode_alias, "Donors") %>
+<header>
+  <h1><%= @donor.encode_alias %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Donor", edit_donor_path(@donor), class: "edit" %></li>
+    <li><%= link_to "Delete Donor", donor_path(@donor), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this donor?"},
+                     class: "delete" %></li>
+  </ul>
+</header>
+
 <p>
   <strong>Encode:</strong>
-  <%= @donor.encode_id %>
+  <%= link_to @donor.encode_identifier %>
 </p>
 
 <p>
   <strong>Encode alias:</strong>
-  <%= @donor.encode_alias %>
+  <%= link_to @donor.encode_alias %>
 </p>
 
-<p>
-  <strong>String:</strong>
-  <%= @donor.string %>
-</p>
 
-<%= link_to 'Edit', edit_donor_path(@donor) %> |
 <%= link_to 'Back', donors_path %>

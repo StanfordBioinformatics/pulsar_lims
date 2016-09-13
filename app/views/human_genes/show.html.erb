@@ -1,3 +1,14 @@
+<header>
+  <h1><%= @human_gene.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Human Gene", edit_human_gene_path(@human_gene), class: "edit" %></li>
+    <li><%= link_to "Delete Human Gene", human_gene_path(@human_gene), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this human gene?"},
+                     class: "delete" %></li>
+  </ul>
+</header>
+
 <p>
   <strong>Encode identifier:</strong>
   <%= @human_gene.encode_identifier %>
@@ -8,5 +19,4 @@
   <%= @human_gene.name %>
 </p>
 
-<%= link_to 'Edit', edit_human_gene_path(@human_gene) %> |
 <%= link_to 'Back', human_genes_path %>

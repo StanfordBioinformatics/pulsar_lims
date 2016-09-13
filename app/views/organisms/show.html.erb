@@ -1,7 +1,17 @@
+<header>
+  <h1><%= @organism.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Organism", edit_organism_path(@organism), class: "edit" %></li>
+    <li><%= link_to "Delete Organism", organism_path(@organism), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this organism?"},
+                     class: "delete" %></li>
+  </ul>
+</header>
+
 <p>
   <strong>Name:</strong>
   <%= @organism.name %>
 </p>
 
-<%= link_to 'Edit', edit_organism_path(@organism) %> |
 <%= link_to 'Back', organisms_path %>

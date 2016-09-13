@@ -1,7 +1,17 @@
+<header>
+  <h1><%= @sequencing_platform.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Library", edit_sequencing_platform_path(@sequencing_platform), class: "edit" %></li>
+    <li><%= link_to "Delete Library", sequencing_platform_path(@sequencing_platform), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this sequencing platform?"},
+                     class: "delete" %></li>
+  </ul>
+</header>
+
 <p>
   <strong>Name:</strong>
   <%= @sequencing_platform.name %>
 </p>
 
-<%= link_to 'Edit', edit_sequencing_platform_path(@sequencing_platform) %> |
 <%= link_to 'Back', sequencing_platforms_path %>

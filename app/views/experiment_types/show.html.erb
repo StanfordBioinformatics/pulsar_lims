@@ -1,7 +1,17 @@
+<header>
+  <h1><%= @experiment_type.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Experiment Type", edit_experiment_type_path(@experiment_type), class: "edit" %></li>
+    <li><%= link_to "Delete Experiment Type", experiment_type_path(@experiment_type), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this experiment type?"},
+                     class: "delete" %></li>
+  </ul>
+</header>
+
 <p>
   <strong>Name:</strong>
   <%= @experiment_type.name %>
 </p>
 
-<%= link_to 'Edit', edit_experiment_type_path(@experiment_type) %> |
 <%= link_to 'Back', experiment_types_path %>

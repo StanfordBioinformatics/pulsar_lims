@@ -1,4 +1,4 @@
-<%= form_for(@donor) do |f| %>
+<%= simple_form_for(@donor) do |f| %>
   <% if @donor.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@donor.errors.count, "error") %> prohibited this human_donor from being saved:</h2>
@@ -11,19 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :encode_identifier %><br>
-    <%= f.text_field :encode_identifier %>
-  </div>
-  <div class="field">
-    <%= f.label :encode_alias %><br>
-    <%= f.text_field :encode_alias %>
-  </div>
-  <div class="field">
-    <%= f.label :string %><br>
-    <%= f.text_field :string %>
-  </div>
+	<%= f.input :encode_identifier %>
+
+  <%= f.input :encode_alias %>
+
   <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.button :subit, class: "btn-primary" %>
+  </div></br>
 <% end %>

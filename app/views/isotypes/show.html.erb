@@ -1,7 +1,17 @@
+<header>
+  <h1><%= @isotype.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Isotype", edit_isotype_path(@isotype), class: "edit" %></li>
+    <li><%= link_to "Delete Isotype", isotype_path(@isotype), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this isotype?"},
+                     class: "delete" %></li>
+  </ul>
+</header>
+
 <p>
   <strong>Name:</strong>
   <%= @isotype.name %>
 </p>
 
-<%= link_to 'Edit', edit_isotype_path(@isotype) %> |
 <%= link_to 'Back', isotypes_path %>

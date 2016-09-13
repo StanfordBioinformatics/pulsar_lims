@@ -1,4 +1,4 @@
-<%= form_for(@human_gene) do |f| %>
+<%= simple_form_for(@human_gene) do |f| %>
   <% if @human_gene.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@human_gene.errors.count, "error") %> prohibited this human_gene from being saved:</h2>
@@ -11,15 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :encode_identifier %><br>
-    <%= f.text_field :encode_identifier %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
+  <%= f.input :encode_identifier %>
+
+  <%= f.input :name %>
+
   <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
 <% end %>

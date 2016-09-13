@@ -1,4 +1,4 @@
 json.array!(@donors) do |donor|
-  json.extract! donor, :id, :encode_id, :encode_alias, :string
+  json.extract! donor, :id, :encode_identifier, :encode_alias
   json.url donor_url(donor, format: :json)
 end

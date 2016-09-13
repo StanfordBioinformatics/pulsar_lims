@@ -1,3 +1,14 @@
+<header>
+  <h1><%= @vendor.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Vendor", edit_vendor_path(@vendor), class: "edit" %></li>
+    <li><%= link_to "Delete Vendor", vendor_path(@vendor), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this vendor?"},
+                     class: "delete" %></li>
+  </ul>
+</header>
+
 <p>
   <strong>Name:</strong>
   <%= link_to @vendor.name,@vendor.url %>
@@ -13,5 +24,4 @@
   <%= @vendor.description %>
 </p>
 
-<%= link_to 'Edit', edit_vendor_path(@vendor) %> |
 <%= link_to 'Back', vendors_path %>

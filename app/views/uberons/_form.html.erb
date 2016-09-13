@@ -1,4 +1,4 @@
-<%= form_for(@uberon) do |f| %>
+<%= simple_form_for(@uberon) do |f| %>
   <% if @uberon.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@uberon.errors.count, "error") %> prohibited this uberon from being saved:</h2>
@@ -11,15 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :accession %><br>
-    <%= f.text_field :accession %>
-  </div>
+  <%= f.input :name %>
+
+  <%= f.input :accession %>
+
   <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
 <% end %>

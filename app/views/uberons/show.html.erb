@@ -1,3 +1,13 @@
+<header>
+  <h1><%= @uberon.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Uberon", edit_uberon_path(@uberon), class: "edit" %></li>
+    <li><%= link_to "Delete Uberon", uberon_path(@uberon), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this uberon?"},
+                     class: "delete" %></li>
+  </ul>
+</header>
 <p>
   <strong>Name:</strong>
   <%= @uberon.name %>
@@ -8,5 +18,4 @@
   <%= @uberon.accession %>
 </p>
 
-<%= link_to 'Edit', edit_uberon_path(@uberon) %> |
 <%= link_to 'Back', uberons_path %>

@@ -1,3 +1,13 @@
+<header>
+  <h1><%= @reference_genome.name %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Library", edit_reference_genome_path(@reference_genome), class: "edit" %></li>
+    <li><%= link_to "Delete Library", reference_genome_path(@reference_genome), method: :delete,
+                     data: { confirm: "Are you sure you would like to delete this reference genome?"},
+                     class: "delete" %></li>
+  </ul>
+</header>
 <p>
   <strong>Name:</strong>
   <%= @reference_genome.name %>
@@ -8,5 +18,4 @@
   <%= @reference_genome.url %>
 </p>
 
-<%= link_to 'Edit', edit_reference_genome_path(@reference_genome) %> |
 <%= link_to 'Back', reference_genomes_path %>
