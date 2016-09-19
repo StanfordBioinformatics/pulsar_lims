@@ -1,4 +1,5 @@
 SnyderEncode::Application.routes.draw do
+  devise_for :users
   resources :reference_genomes
 
   resources :experiment_types
@@ -9,9 +10,9 @@ SnyderEncode::Application.routes.draw do
 
   resources :antibodies
 
-  resources :organisms
+	resources :antibody_purifications
 
-  resources :antibody_purifications
+  resources :organisms
 
   resources :human_genes
 

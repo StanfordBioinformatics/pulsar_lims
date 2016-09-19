@@ -17,17 +17,15 @@ class Antibody < ActiveRecord::Base
 	validates  :lot_identifier, presence: true
 	validates  :clonality, inclusion: CLONALITY_TYPES, presence: true
 
-
-
-	def add_antibody_purifications(ab_pur_ids)
+	def add_antibody_purifications(purifications)
 		"""
 		Function : Adds AntibodyPurification associations to the self.antibody_purifications attr. 
-		Args     : ab_pur_ids - Array of AntibodyPurification foreign key IDs.
+		Args     : purification - Array of AntibodyPurification foreign key IDs.
 		"""
-		if ab_pur_ids.blank?
+		if purifications.nil?
 			return
 		end
-		ab_pur_ids.each do |p| 
+		purifications.each do |p| 
 			if not p.empty?
 				pur = AntibodyPurification.find(p)
 				if not antibody_purifications.include? pur 
@@ -37,15 +35,15 @@ class Antibody < ActiveRecord::Base
 		end 
 	end 
 
-	def remove_antibody_purifications(ab_pur_ids)
+	def remove_antibody_purifications(purifications)
 		"""
 		Function : Removes AntibodyPurification associations from the self.antibody_purifications attr. 
-		Args     : ab_pur_ids - Array of AntibodyPurification foreign key IDs.
+		Args     : purifications - Array of AntibodyPurification foreign key IDs.
 		"""
-		if ab_pur_ids.blank?
+		if purifications.nil?
 			return
-		end 
-		ab_pur_ids.each do |p| 
+		end
+		purifications.each do |p| 
 			pur = AntibodyPurification.find(p)
 			if antibody_purifications.include? pur 
 				antibody_purifications.destroy(pur)
