@@ -1,15 +1,5 @@
 <%= simple_form_for(@nucleic_acid_term) do |f| %>
-  <% if @nucleic_acid_term.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@nucleic_acid_term.errors.count, "error") %> prohibited this nucleic_acid_term from being saved:</h2>
-
-      <ul>
-      <% @nucleic_acid_term.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<%= f.error_notification %>
 
 	<%= f.input :name %>
     

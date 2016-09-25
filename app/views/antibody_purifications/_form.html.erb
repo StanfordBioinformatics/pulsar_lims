@@ -1,15 +1,5 @@
 <%= simple_form_for(@antibody_purification) do |f| %>
-  <% if @antibody_purification.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@antibody_purification.errors.count, "error") %> prohibited this antibody_purification from being saved:</h2>
-
-      <ul>
-      <% @antibody_purification.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<%= f.error_notification %>
 
   <%= f.input :name %>
 

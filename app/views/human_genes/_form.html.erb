@@ -1,15 +1,5 @@
 <%= simple_form_for(@human_gene) do |f| %>
-  <% if @human_gene.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@human_gene.errors.count, "error") %> prohibited this human_gene from being saved:</h2>
-
-      <ul>
-      <% @human_gene.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<%= f.error_notification %>
 
   <%= f.input :encode_identifier %>
 

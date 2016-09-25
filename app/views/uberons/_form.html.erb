@@ -1,15 +1,5 @@
 <%= simple_form_for(@uberon) do |f| %>
-  <% if @uberon.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@uberon.errors.count, "error") %> prohibited this uberon from being saved:</h2>
-
-      <ul>
-      <% @uberon.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<%= f.error_notification %>
 
   <%= f.input :name %>
 

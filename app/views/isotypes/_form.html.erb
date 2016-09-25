@@ -1,15 +1,5 @@
 <%= simple_form_for(@isotype) do |f| %>
-  <% if @isotype.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@isotype.errors.count, "error") %> prohibited this isotype from being saved:</h2>
-
-      <ul>
-      <% @isotype.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<%= f.error_notification %>
 
   <%= f.input :name %>
 

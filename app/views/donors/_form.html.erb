@@ -1,15 +1,5 @@
 <%= simple_form_for(@donor) do |f| %>
-  <% if @donor.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@donor.errors.count, "error") %> prohibited this human_donor from being saved:</h2>
-
-      <ul>
-      <% @donor.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<%= f.error_notification %>
 
 	<%= f.input :encode_identifier %>
 

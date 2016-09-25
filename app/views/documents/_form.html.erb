@@ -1,4 +1,5 @@
 <%= simple_form_for(@document) do |f| %>
+	<%= f.error_notification %>
 
 	<%= f.input :description %>
 	Upload your document: <%= f.file_field("uploaded_document") %><br/>
