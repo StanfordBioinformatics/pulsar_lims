@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919050724) do
+ActiveRecord::Schema.define(version: 20160925211601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,12 +145,14 @@ ActiveRecord::Schema.define(version: 20160919050724) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name",                      limit: 255
+    t.integer  "user_id"
   end
 
   add_index "libraries", ["antibody_id"], name: "index_libraries_on_antibody_id", using: :btree
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
   add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true, using: :btree
   add_index "libraries", ["nucleic_acid_term_id"], name: "index_libraries_on_nucleic_acid_term_id", using: :btree
+  add_index "libraries", ["user_id"], name: "index_libraries_on_user_id", using: :btree
   add_index "libraries", ["vendor_id"], name: "index_libraries_on_vendor_id", using: :btree
 
   create_table "nucleic_acid_terms", force: :cascade do |t|
@@ -227,5 +229,6 @@ ActiveRecord::Schema.define(version: 20160919050724) do
   add_foreign_key "libraries", "antibodies"
   add_foreign_key "libraries", "biosamples"
   add_foreign_key "libraries", "nucleic_acid_terms"
+  add_foreign_key "libraries", "users"
   add_foreign_key "libraries", "vendors"
 end

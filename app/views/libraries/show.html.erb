@@ -10,56 +10,56 @@
 	</ul>
 </header>
 
-<p>
-  <strong>Library Name</strong></br>
-  <%= @library.name %>
-</p>
-
-<p>
-	<table>
-		<tr><th style="text-align:left">Documents:</th></tr>
+<table id="attributes">
+	<tr>
+		<th>Author:</th>
+		<td><%= @library.user.email %></td>
+	</tr>
+	<tr>
+		<th>Created:</th>
+		<td><%= time_ago_in_words(@library.created_at) %> ago </td>
+	</tr>
+	<tr>
+	  <th>Library Name:</th>
+		<td><%= @library.name %></td>
+	</tr>
+	<tr>
+		<th>Documents:</th>
 		<%= render partial: "documents/link_to_document", locals: {documents: @library.documents} %>
-	</table>
-</p>
+	</tr>
+  <tr>
+		<th>Sequence Ontology Term:</th>
+	  <td><%= link_to @library.nucleic_acid_term.name, @library.nucleic_acid_term %></td>
+	</tr>
+	<tr>
+		<th>Biosample:</th>
+		<td><%= link_to @library.biosample.name, @library.biosample %></td>
+	</tr>
+	<tr>
+	  <th>Antibody:</th>
+	  <td><%= link_to @library.antibody.name, @library.antibody %></td>
+	</tr>
+  <tr>
+		<th>Vendor:</th>
+		<td><%= link_to @library.vendor.name, @library.vendor %></td>
+	</tr>
+  <tr>
+		<th>Lot Identifier:</th>
+	  <td><%= @library.lot_identifier %></td>
+	</tr>
+	<tr>
+	  <th>Vendor Product Identifier:</th>
+	  <td><%= @library.vendor_product_identifier %></td>
+	</tr>
+	<tr>
+  	<th>Size range:</th>
+	  <td><%= @library.size_range %></td>
+	</tr>
 
-<p>
-  <strong>Sequence ontology term:</strong>
-  <%= link_to @library.nucleic_acid_term.name, @library.nucleic_acid_term %>
-</p>
-
-<p>
-  <strong>Biosample:</strong>
-  <%= link_to @library.biosample.name, @library.biosample %>
-</p>
-
-<p>
-  <strong>Antibody:</strong>
-  <%= link_to @library.antibody.name, @library.antibody %>
-</p>
-
-<p>
-  <strong>Vendor:</strong>
-  <%= link_to @library.vendor.name, @library.vendor %>
-</p>
-
-<p>
-  <strong>Lot identifier:</strong>
-  <%= @library.lot_identifier %>
-</p>
-
-<p>
-  <strong>Vendor product identifier:</strong>
-  <%= @library.vendor_product_identifier %>
-</p>
-
-<p>
-  <strong>Size range:</strong>
-  <%= @library.size_range %>
-</p>
-
-<p>
-  <strong>Strand specific:</strong>
-  <%= @library.strand_specific %>
-</p>
+	<tr>
+  	<th>Strand Specific:</th>
+	  <td><%= @library.strand_specific %></td>
+	</tr>
+</table>
 
 <%= link_to 'Back', libraries_path %>

@@ -4,6 +4,7 @@ class Library < ActiveRecord::Base
   belongs_to :biosample
   belongs_to :antibody
   belongs_to :vendor
+	belongs_to :user
 
 	validates :name, length: { maximum: 20 }, presence: true, uniqueness: true
 	validates  :size_range, format: {with: /\A\d+-\d+\Z/}, presence: true
