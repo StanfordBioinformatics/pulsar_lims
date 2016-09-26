@@ -1,15 +1,24 @@
 require "rails_helper"
 
 RSpec.feature "Users can create biosamples" do
-	let!(:vendor) { FactoryGirl.create(:vendor) }
+	let!(:vendor) { FactoryGirl.create(:vendor, name: "vendor a") }
 	let!(:donor)  { FactoryGirl.create(:donor) }
 	let!(:biosample_type) { FactoryGirl.create(:biosample_type) }
+	let!(:document) { FactoryGirl.create(:document,name: "new doc") }
+
 	before do
-		visit libraries_path
-		click_link "New Library"
-		fill_in "Name", with "example name"
-		
-		
+		visit biosamples_path
+		click_link "New Biosample"
+	end
+
 	scenario "with valid attributes" do
+		fill_in "Name", with: "example name"
+		fill_in "biosample_ontology_term_accession", with: "EFO:0000962"
+		select "new doc", from: "biosample[documents][]"
+		select "vendor a", from: "biosample_vendor_id"
+		select donor.encode_alias, from: "biosample_donor_id"
+		select biosample_type.name, from: "biosample_biosample_type_id"
+		click_button "Create Biosample"
+		expect(page).to have_content "Biosample was successfully created."
 	end
 end

@@ -28,7 +28,7 @@ class DonorsController < ApplicationController
 
     respond_to do |format|
       if @donor.save
-        format.html { redirect_to @donor, notice: 'Human donor was successfully created.' }
+        format.html { redirect_to @donor, notice: 'Donor was successfully created.' }
         format.json { render action: 'show', status: :created, location: @donor }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class DonorsController < ApplicationController
   def update
     respond_to do |format|
       if @donor.update(donor_params)
-        format.html { redirect_to @donor, notice: 'Human donor was successfully updated.' }
+        format.html { redirect_to @donor, notice: 'Donor was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

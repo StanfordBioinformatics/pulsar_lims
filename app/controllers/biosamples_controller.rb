@@ -49,7 +49,7 @@ class BiosamplesController < ApplicationController
         format.html { redirect_to @biosample, notice: 'Biosample was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+				format.html { render "edit" }
         format.json { render json: @biosample.errors, status: :unprocessable_entity }
       end
     end

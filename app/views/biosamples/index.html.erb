@@ -24,7 +24,7 @@
   <tbody>
     <% @biosamples.each do |biosample| %>
       <tr>
-				<td><%= biosample.name %></td>
+				<td><%= link_to biosample.name, biosample %></td>
         <td><%= biosample.description %></td>
         <td><%= biosample.vendor.name %></td>
         <td><%= biosample.ontology_term_name %></td>

@@ -9,5 +9,6 @@ RSpec.feature "Users can create donors" do
 	scenario "with valid attributes" do
 		fill_in "donor_encode_identifier", with: "ENCDO000AAC"
 		click_button "Create Donor"
+		expect(page).to have_content "Donor was successfully created."
 	end
 end
