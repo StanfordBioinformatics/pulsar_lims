@@ -3,16 +3,16 @@
 
   <%= f.input :name %>(Max. 20 characters)
 
-  <div>
-    <strong>Associated Protocol Documents:</strong>
+	<table>
+    <tr>
+			<th>Associated Protocol Documents:</th>
+		</tr>
     <% if @library.new_record? %>
-      None
+      <tr>None</tr>
     <% else %>
-			<table>
-				<%= render(@library.documents) %>
-			</table>
+			<%= render(@library.documents) %>
     <% end %>
-  </div></br>
+  </table></br>
 
   <!-- Show select for Documents. Mutliple documents can be selected.
        If the form was rejected due to a validation error, then the
@@ -24,7 +24,6 @@
 		<% selected = @library.documents.map{|x| x.id} %>
   <% end %>
   <%= render(partial: "documents/select_documents", locals: {f: f,selected: selected}) %>
-
 
 	<% nucleic_acid_term_id = nil %>
 	<% if not @library.nucleic_acid_term.nil? %>

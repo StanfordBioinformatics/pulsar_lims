@@ -3,17 +3,16 @@
 
 	<%= f.input :name %> (Max. 20 characters)
 
-	<div>
-		<strong>Associated Protocol Documents:</strong>
+	<table>
+		<tr>
+			<th>Associated Protocol Documents:</th>
+		</tr>
 		<% if @biosample.new_record? %>
-			None
-		<% else %></br>
-			<table>
-	      <%= render(@biosample.documents) %>
-			</table>
-    <% end %>
-	</div></br>
-
+			<tr>None</tr>
+		<% else %>
+      <%= render(@biosample.documents) %>
+   	<% end %>
+	</table></br>
 
 	<!-- Show select for Documents. Mutliple documents can be selected.
 				 If the form was rejected due to a validation error, then the

@@ -21,4 +21,14 @@ RSpec.feature "Users can create biosamples" do
 		click_button "Create Biosample"
 		expect(page).to have_content "Biosample was successfully created."
 	end
+
+	scenario "with invalid attributes" do
+		click_button "Create Biosample"
+		expect(page).to have_content "Name is too short"
+		expect(page).to have_content "Documents can't be blank"
+		expect(page).to have_content "Biosample type can't be blank"
+		expect(page).to have_content "Vendor can't be blank"
+		expect(page).to have_content "Ontology term accession is invalid"
+		expect(page).to have_content "Donor can't be blank"
+	end
 end
