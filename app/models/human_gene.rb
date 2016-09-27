@@ -1,4 +1,5 @@
 class HumanGene < ActiveRecord::Base
 	has_many :antibodies
-	validates :encode_identifier, uniqueness: true
+	validates :encode_identifier, uniqueness: true, presence: true
+	validates :name, presence: true
 end

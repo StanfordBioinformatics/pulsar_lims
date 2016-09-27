@@ -1,5 +1,6 @@
 class NucleicAcidTerm < ActiveRecord::Base
 	has_many :libraries
-	validates :name, :accession, :definition, presence: true
-	validates :accession, :name, uniqueness: true
+	validates :name, presence: true, uniqueness: true
+	validates :accession, presence: true, uniqueness: true
+	validates :definition, presence: true
 end

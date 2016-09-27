@@ -1,7 +1,7 @@
 
 FactoryGirl.define do
 	factory :vendor do
-		name "Example vendor"
+		sequence(:name) { |n| "vendor#{n}" }
 		title "examplevendor"
 	end
 end

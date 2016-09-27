@@ -136,7 +136,6 @@ ActiveRecord::Schema.define(version: 20160925211601) do
   create_table "libraries", force: :cascade do |t|
     t.integer  "nucleic_acid_term_id"
     t.integer  "biosample_id"
-    t.integer  "antibody_id"
     t.integer  "vendor_id"
     t.string   "lot_identifier",            limit: 255
     t.string   "vendor_product_identifier", limit: 255
@@ -146,9 +145,9 @@ ActiveRecord::Schema.define(version: 20160925211601) do
     t.datetime "updated_at"
     t.string   "name",                      limit: 255
     t.integer  "user_id"
+    t.integer  "antibody_id"
   end
 
-  add_index "libraries", ["antibody_id"], name: "index_libraries_on_antibody_id", using: :btree
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
   add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true, using: :btree
   add_index "libraries", ["nucleic_acid_term_id"], name: "index_libraries_on_nucleic_acid_term_id", using: :btree
@@ -213,7 +212,7 @@ ActiveRecord::Schema.define(version: 20160925211601) do
     t.string   "description", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "url"
+    t.string   "url",         limit: 255
   end
 
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
@@ -226,7 +225,6 @@ ActiveRecord::Schema.define(version: 20160925211601) do
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "documents", "document_types"
-  add_foreign_key "libraries", "antibodies"
   add_foreign_key "libraries", "biosamples"
   add_foreign_key "libraries", "nucleic_acid_terms"
   add_foreign_key "libraries", "users"
