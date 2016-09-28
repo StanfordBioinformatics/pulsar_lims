@@ -1,6 +1,7 @@
 
 FactoryGirl.define do
 	factory :biosample do
+		user
 		documents { [FactoryGirl.create(:document),FactoryGirl.create(:document)] }
 		donor
 		vendor

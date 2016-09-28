@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925211601) do
+ActiveRecord::Schema.define(version: 20160928055854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,11 +71,13 @@ ActiveRecord::Schema.define(version: 20160925211601) do
     t.integer  "biosample_type_id"
     t.string   "name",                      limit: 255
     t.integer  "donor_id"
+    t.integer  "user_id"
   end
 
   add_index "biosamples", ["biosample_type_id"], name: "index_biosamples_on_biosample_type_id", using: :btree
   add_index "biosamples", ["donor_id"], name: "index_biosamples_on_donor_id", using: :btree
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
+  add_index "biosamples", ["user_id"], name: "index_biosamples_on_user_id", using: :btree
   add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id", using: :btree
 
   create_table "biosamples_documents", id: false, force: :cascade do |t|
@@ -136,6 +138,7 @@ ActiveRecord::Schema.define(version: 20160925211601) do
   create_table "libraries", force: :cascade do |t|
     t.integer  "nucleic_acid_term_id"
     t.integer  "biosample_id"
+    t.integer  "antibody_id"
     t.integer  "vendor_id"
     t.string   "lot_identifier",            limit: 255
     t.string   "vendor_product_identifier", limit: 255
@@ -145,9 +148,9 @@ ActiveRecord::Schema.define(version: 20160925211601) do
     t.datetime "updated_at"
     t.string   "name",                      limit: 255
     t.integer  "user_id"
-    t.integer  "antibody_id"
   end
 
+  add_index "libraries", ["antibody_id"], name: "index_libraries_on_antibody_id", using: :btree
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
   add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true, using: :btree
   add_index "libraries", ["nucleic_acid_term_id"], name: "index_libraries_on_nucleic_acid_term_id", using: :btree
@@ -212,7 +215,7 @@ ActiveRecord::Schema.define(version: 20160925211601) do
     t.string   "description", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "url",         limit: 255
+    t.string   "url"
   end
 
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
@@ -223,8 +226,10 @@ ActiveRecord::Schema.define(version: 20160925211601) do
   add_foreign_key "antibodies", "vendors"
   add_foreign_key "biosamples", "biosample_types"
   add_foreign_key "biosamples", "donors"
+  add_foreign_key "biosamples", "users"
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "documents", "document_types"
+  add_foreign_key "libraries", "antibodies"
   add_foreign_key "libraries", "biosamples"
   add_foreign_key "libraries", "nucleic_acid_terms"
   add_foreign_key "libraries", "users"

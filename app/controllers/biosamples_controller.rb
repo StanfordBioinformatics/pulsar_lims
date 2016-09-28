@@ -26,6 +26,7 @@ class BiosamplesController < ApplicationController
   # POST /biosamples.json
   def create
     @biosample = Biosample.new(biosample_params)
+		@biosample.user = current_user
 		@biosample = add_documents(@biosample,params[:biosample][:documents])
 		
     respond_to do |format|
@@ -60,7 +61,7 @@ class BiosamplesController < ApplicationController
   def destroy
     @biosample.destroy
     respond_to do |format|
-      format.html { redirect_to biosamples_url }
+      format.html { redirect_to biosamples_url, notice: "Biosample has been deleted." }
       format.json { head :no_content }
     end
   end

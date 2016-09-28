@@ -1,12 +1,14 @@
 require "rails_helper"
 
 RSpec.feature "Users can create biosamples" do
+	let!(:user)   { FactoryGirl.create(:user) }
 	let!(:vendor) { FactoryGirl.create(:vendor, name: "vendor a") }
 	let!(:donor)  { FactoryGirl.create(:donor) }
 	let!(:biosample_type) { FactoryGirl.create(:biosample_type) }
 	let!(:document) { FactoryGirl.create(:document,name: "new doc") }
 
 	before do
+		login_as(user)
 		visit biosamples_path
 		click_link "New Biosample"
 	end
@@ -20,6 +22,7 @@ RSpec.feature "Users can create biosamples" do
 		select biosample_type.name, from: "biosample_biosample_type_id"
 		click_button "Create Biosample"
 		expect(page).to have_content "Biosample was successfully created."
+		expect(page).to have_content "Created By: #{user.email}"
 	end
 
 	scenario "with invalid attributes" do

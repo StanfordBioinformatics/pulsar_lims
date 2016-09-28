@@ -10,81 +10,74 @@
   </ul>
 </header>	
 
-<p>
-	<strong>Biosample Name</strong></br>
-	<%= @biosample.name %>
-</p>
-
-<p>
-	<table>
-		<tr><th style="text-align:left">Documents:</th></tr>
+<table id="attributes">
+  <tr>
+    <th>Created By:</th>
+    <td><%= @biosample.user.email %></td>
+  </tr>
+  <tr>
+    <th>Date Created:</th>
+    <td><%= time_ago_in_words(@biosample.created_at) %> ago </td>
+  </tr>
+  <tr>
+		<th>Biosample Name</th>
+		<td><%= @biosample.name %></td>
+	</tr>
+	<tr>
+		<th>Documents:</th>
 		<%= render partial: "documents/link_to_document", locals: {documents: @biosample.documents} %>
-	</table>
-</p>
-
-<p>
-	<strong>Biosample Type:</strong></br>
-	<%= @biosample.biosample_type.name %>
-</p>
-
-<p>
-  <strong>Description:</strong></br>
-  <%= @biosample.description %>
-</p>
-
-<p> 
-	<strong>Vendor:</strong></br>
-	<%= link_to @biosample.vendor.name, @biosample.vendor.url %>
-</p>
-
-<p>
-  <strong>Vendor product identifier:</strong></br>
-  <%= @biosample.vendor_product_identifier %>
-</p>
-
-<p>
-  <strong>Lot identifier:</strong></br>
-  <%= @biosample.lot_identifier %>
-</p>
-
-<p>
-  <strong>Ontology Term Name describing the biosample:</strong></br>
-  <%= @biosample.ontology_term_name%>
-</p>
-
-<p>
-  <strong>Ontology Term Accession describing the biosample:</strong></br>
-  <%= @biosample.ontology_term_accession%>
-</p>
-
-<p>
-	<strong>Human Donor:</strong></br>
-	<%= link_to @biosample.donor.encode_alias, encode_url(@biosample.donor.encode_identifier)%>
-</p>
-
-<p>
-  <strong>Passage number:</strong></br>
-  <%= @biosample.passage_number %>
-</p>
-
-<p>
-  <strong>Culture harvest date:</strong></br>
-  <%= @biosample.culture_harvest_date %>
-</p>
-
-<p>
-  <strong>Submitter comments:</strong></br>
-  <%= @biosample.submitter_comments %>
-</p>
-
-<p>
-  <strong>Description:</strong></br>
-  <%= @biosample.description %>
-</p>
-
-<p>
-  <strong>Encid:</strong></br>
-  <%= @biosample.encid %>
-</p>
-
+	</tr>
+	<tr>
+		<th>Biosample Type:</th>
+		<td><%= @biosample.biosample_type.name %></td>
+	</tr>
+  <tr>
+		<th>Description:</th>
+  	<td><%= @biosample.description %></td>
+	</tr>
+	<tr>
+		<th>Vendor:</th>
+		<td><%= link_to @biosample.vendor.name, @biosample.vendor.url %></td>
+	</tr>
+	<tr>
+  	<th>Vendor product identifier:</th>
+  	<td><%= @biosample.vendor_product_identifier %></td>
+	</tr>
+	<tr>
+	  <th>Lot identifier:</th>
+  	<td><%= @biosample.lot_identifier %></td>
+	</tr>
+	<tr>
+  	<th>Ontology Term Name describing the biosample:</th>
+  	<td><%= @biosample.ontology_term_name%></td>
+	</tr>
+	<tr>
+	  <th>Ontology Term Accession describing the biosample:</th>
+	  <td><%= @biosample.ontology_term_accession%></td>
+	</tr>
+	<tr>
+		<th>Human Donor:</th>
+		<td><%= link_to @biosample.donor.encode_alias, encode_url(@biosample.donor.encode_identifier)%></td>
+	</tr>
+	<tr>
+	  <th>Passage number:</th>
+	  <td><%= @biosample.passage_number %></td>
+	</tr>
+	<tr>
+	  <th>Culture harvest date:</th>
+	  <td><%= @biosample.culture_harvest_date %></td>
+	</tr>
+	<tr>
+	  <th>Submitter comments:</th>
+	  <td><%= @biosample.submitter_comments %></td>
+	</tr>
+	<tr>
+	  <th>Description:</th>
+	  <td><%= @biosample.description %></td>
+	</tr>
+	<tr>
+	  <th>Encid:</th>
+	  <td><%= @biosample.encid %></td>
+	</tr>
+</table>
 <%= link_to 'Back', biosamples_path %>

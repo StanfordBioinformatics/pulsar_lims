@@ -2,6 +2,7 @@
 FactoryGirl.define do
 	factory :library do
 		user
+		documents { [FactoryGirl.create(:document),FactoryGirl.create(:document)] }
 		biosample
 		antibody
 		vendor

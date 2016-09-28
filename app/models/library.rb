@@ -7,7 +7,7 @@ class Library < ActiveRecord::Base
 	belongs_to :user
 
 	validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
-	validates  :size_range, format: {with: /\A\d+-\d+\Z/}
+	validates  :size_range, format: {with: /\A\d+-\d+\Z/}, presence: true
 	validates :nucleic_acid_term_id, :biosample_id, :vendor_id,  presence: true
 	validates :documents, presence: true
 	validates :vendor_id, presence: true

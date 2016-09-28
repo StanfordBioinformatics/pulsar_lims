@@ -9,6 +9,7 @@
 <table>
   <thead>
     <tr>
+			<th>Name</th>
       <th>Nucleic Acid Term</th>
       <th>Biosample</th>
       <th>Antibody</th>
@@ -26,8 +27,9 @@
   <tbody>
     <% @libraries.each do |library| %>
       <tr>
+				<td><%= link_to library.name, library %></td>
         <td><%= library.nucleic_acid_term.name %></td>
-        <td><%= library.biosample.name %></td>
+        <td><%= link_to library.biosample.name, library.biosample %></td>
         <td><%= library.antibody.name %></td>
         <td><%= library.vendor.name %></td>
         <td><%= library.lot_identifier %></td>

@@ -61,7 +61,7 @@ class LibrariesController < ApplicationController
   def destroy
     @library.destroy
     respond_to do |format|
-      format.html { redirect_to libraries_url }
+      format.html { redirect_to libraries_url, notice: "Library has been deleted." }
       format.json { head :no_content }
     end
   end
