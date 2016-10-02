@@ -1,5 +1,11 @@
 SnyderEncode::Application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+		sessions: "users/sessions",
+		registrations: "users/registrations"
+	}
+
+	resources :welcome, only: [:index]
+
   resources :reference_genomes
 
   resources :experiment_types
@@ -41,7 +47,7 @@ SnyderEncode::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'libraries#index'
+   root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

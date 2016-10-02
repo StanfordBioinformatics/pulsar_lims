@@ -10,4 +10,9 @@ module ApplicationHelper
 	def encode_url(accession)
 		return ["https://www.encodeproject.org",accession].join("/")
 	end
+
+	def if_signed_in(&block)
+		block.call if current_user
+	end
 end
+	
