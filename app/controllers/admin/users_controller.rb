@@ -1,7 +1,13 @@
 class Admin::UsersController < Admin::ApplicationController
+	before_action :set_user, only: [:show, :edit, :update, :destroy]
+
   def index
-		@users = User.order(:email)
+		@admins = User.where(:admin => true)
+		@users = User.where(:admin => false).order(:email)
   end
+
+	def show
+	end
 
 	def new
 		@user = User.new
@@ -19,4 +25,24 @@ class Admin::UsersController < Admin::ApplicationController
       end 
     end 
   end 
+
+	def edit
+	end
+
+	def destroy
+		@user.destroy
+		respond_to do |format|
+			format.html { redirect_to admin_users_url, notice: "User has been deleted." }
+			format.json { head :no_content }
+		end
+	end
+
+	private
+		def user_params
+			params.require(:user).permit(:email, :password, :admin)
+		end
+
+		def set_user
+			@user = User.find(params[:id])
+		end
 end

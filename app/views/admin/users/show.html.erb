@@ -1,0 +1,12 @@
+<header>
+	<h1><%= @user %></h1>
+
+	<ul class="actions">
+		<li>
+			<%= link_to "Edit User", [:edit, :admin, @user], class: "edit" %>
+			<li><%= link_to "Delete User", admin_user_path(@user), method: :delete,
+				data: { confirm: "Are you sure you would like to delete this user?"},
+				class: "delete" %></li>
+		</li>
+	</ul>
+</header>
