@@ -6,6 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.delete_all
+User.create!(email: "admin@enc.com", password: "password", admin: true)
+User.create!(email: "viewer@enc.com",password: "password")
+
 SequenceOntologyTerm.delete_all
 SequenceOntologyTerm.create!(name: "DNA",
 	accession: "SO:0000352",

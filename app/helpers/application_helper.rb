@@ -14,5 +14,9 @@ module ApplicationHelper
 	def if_signed_in(&block)
 		block.call if current_user
 	end
+
+	def admins_only(&block)
+		block.call if current_user.try(:admin?)
+	end
 end
 	

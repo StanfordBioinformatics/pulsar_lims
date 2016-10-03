@@ -1,8 +1,12 @@
 SnyderEncode::Application.routes.draw do
-  devise_for :users, controllers: {
-		sessions: "users/sessions",
-		registrations: "users/registrations"
-	}
+
+  namespace :admin do
+  	root "application#index"
+
+		resources :users
+  end
+
+  devise_for :users
 
 	resources :welcome, only: [:index]
 
