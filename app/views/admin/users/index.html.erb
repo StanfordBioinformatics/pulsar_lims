@@ -12,8 +12,8 @@
 <div id="admins">	
 	<h4>Admin Users</h4>
 	<ul>
-		<% @admins.each do |admin| %>
-			<li><%= link_to admin, [:admin, admin] %></li>
+		<% @admins.each do |user| %>
+			<li><%= link_to user, [:admin, user] %></li>
 		<% end %>
 	</ul>
 </div>
@@ -24,6 +24,16 @@
 	<h4>Regular Users</h4>
 	<ul>
 		<% @users.each do |user| %>
+			<li><%= link_to user, [:admin, user] %></li>
+		<% end %>
+	</ul>
+</div>
+
+
+<div id="archived">	
+	<h4>Archived Users</h4>
+	<ul>
+		<% @archived.each do |user| %>
 			<li><%= link_to user, [:admin, user] %></li>
 		<% end %>
 	</ul>

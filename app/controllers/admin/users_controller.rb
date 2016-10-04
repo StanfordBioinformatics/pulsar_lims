@@ -1,9 +1,10 @@
 class Admin::UsersController < Admin::ApplicationController
-	before_action :set_user, only: [:show, :edit, :update, :destroy]
+	before_action :set_user, only: [:show, :edit, :update, :destroy, :archive]
 
   def index
-		@admins = User.where(:admin => true)
-		@users = User.where(:admin => false).order(:email)
+		@admins = User.admin_users
+		@users = User.regular_users
+		@archived = User.archived_users
   end
 
 	def show
@@ -29,10 +30,43 @@ class Admin::UsersController < Admin::ApplicationController
 	def edit
 	end
 
+	def update
+		if params[:user][:password].blank?
+			params[:user].delete(:password)
+		end
+		
+		respond_to do |format|
+			if @user.update(user_params)
+				format.html { redirect_to admin_users_path, notice: "User was successfully updated."}
+				format.json { head :no_content }
+			else
+				format.html { render :edit }
+				format.json { render json: @user.errors, status: :unprocessable_entity }
+			end
+		end
+	end
+				
 	def destroy
 		@user.destroy
 		respond_to do |format|
 			format.html { redirect_to admin_users_url, notice: "User has been deleted." }
+			format.json { head :no_content }
+		end
+	end
+
+	def archive
+		if @user == current_user
+			respond_to do |format|
+				flash.now[:alert] =  "You cannot archive yourself."
+				format.html { render "show" }
+			end
+			return
+		end
+
+		@user.archive
+		
+		respond_to do |format|
+			format.html { redirect_to admin_users_path, notice: "User has been archived." }
 			format.json { head :no_content }
 		end
 	end
