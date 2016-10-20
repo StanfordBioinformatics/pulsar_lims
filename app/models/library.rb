@@ -8,9 +8,9 @@ class Library < ActiveRecord::Base
 
 	validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
 	validates  :size_range, format: {with: /\A\d+-\d+\Z/}, presence: true
-	validates :nucleic_acid_term_id, :biosample_id, :vendor_id,  presence: true
+	validates :nucleic_acid_term_id, presence: true
 	validates :documents, presence: true
-	validates :vendor_id, presence: true
+	#validates :vendor_id, presence: true
 	validates :biosample_id, presence: true
 	#The fkey antibody_id doesn't need to be required since some libraries, such as ATAC-SEq, don't have an antibody.
 

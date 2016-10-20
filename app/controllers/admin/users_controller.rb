@@ -49,7 +49,7 @@ class Admin::UsersController < Admin::ApplicationController
 	def destroy
 		@user.destroy
 		respond_to do |format|
-			format.html { redirect_to admin_users_url, notice: "User has been deleted." }
+			format.html { redirect_to admin_users_url, notice: "User was successfully deleted." }
 			format.json { head :no_content }
 		end
 	end
@@ -66,7 +66,7 @@ class Admin::UsersController < Admin::ApplicationController
 		@user.archive
 		
 		respond_to do |format|
-			format.html { redirect_to admin_users_path, notice: "User has been archived." }
+			format.html { redirect_to admin_users_path, notice: "User was successfully archived." }
 			format.json { head :no_content }
 		end
 	end

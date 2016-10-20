@@ -92,10 +92,11 @@ Uberon.create!([
 #Vendor
 #see script in lib called upload_vendors.rb.
 
-HumanDonor.delete_all
-HumanDonor.create!([
+Donor.delete_all
+Donor.create!([
 	{encode_identifier: "ENCDO268AAA", encode_alias:"bernstein:donor of NHEK cells"},
-	{encode_identifier: "ENCDO000ABE", encode_alias:"encode:donor of HCT-116"}
+	{encode_identifier: "ENCDO000ABE", encode_alias:"encode:donor of HCT-116"},
+	{encode_identifier: "ENCDO000ABF", encode_alias: "encode:donor of HEK293"}
 	])
 
 Isotype.delete_all
@@ -195,3 +196,15 @@ ReferenceGenome.create!([
 	{name: "UCSC hg38", url: "http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/"},
 	{name: "NCBI GRCh38", url: "http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human"}
 ])
+
+
+Biosample.delete_all
+Biosample.create!([
+	{name: "first biosample", user_id: User.where(email: "admin@enc.com")[0].id, biosample_type_id: 2, donor_id: 3, ontology_term_accession: "EFO:0001184", ontology_term_name: "HEK293T", lot_identifier: "11074-4D9", vendor_id: 560, vendor_product_identifier: "WH0008531M2", documents: [Document.find(1)]}
+])
+
+Library.delete_all
+Library.create!([
+	{name: "first library", vendor_id: 560, user_id: User.where(email: "admin@enc.com")[0].id,nucleic_acid_term_id: 1, biosample_id: Biosample.where(name: "first biosample")[0].id, size_range: "450-650", antibody_id: Antibody.first.id, documents: [Document.find(2)]}
+])
+	
