@@ -12,11 +12,11 @@ class ApplicationPolicy
 
   def show?
     #scope.where(:id => record.id).exists?
-		true
+		user.role >= USER::VIEWER_ROLE
   end
 
   def create?
-		user.try(:admin?)
+		user.role >= USER::MANAGER_ROLE
   end
 
   def new?
@@ -24,15 +24,15 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+		create?
   end
 
   def edit?
-    update?
+		update?
   end
 
   def destroy?
-    false
+		create?
   end
 
 #  def scope

@@ -45,4 +45,29 @@ class User < ActiveRecord::Base
 			raise Exception, "Unknown role for user #{email}."
 		end
 	end
+
+	def admin?
+		if role == ADMIN_ROLE
+			return true
+		else
+			return false
+		end
+	end
+
+	def manager?
+		if role == MANAGER_ROLE
+			return true
+		else
+			return false
+		end
+	end
+
+	def viewer?
+		if role == VIEWER_ROLE
+			return true
+		else
+			return false
+		end
+	end
+
 end
