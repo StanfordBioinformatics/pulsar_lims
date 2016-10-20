@@ -15,15 +15,16 @@
 </header>
 
 <table id="attributes">
+  <tr>
+    <th>Created By:</th>
+    <td><%= link_to @user.email, $user %></td>
+  </tr>
+  <tr>
     <th>Date Created:</th>
     <td><%= time_ago_in_words(@user.created_at) %> ago </td>
   </tr>
   <tr>
-    <th>Email</th>
+    <th>User Email</th>
     <td><%= @user.email %></td>
   </tr>
-	<tr>
-		<th>Role</th>
-		<td><%= @user.role_name %></td>
-	</tr>
 </table>

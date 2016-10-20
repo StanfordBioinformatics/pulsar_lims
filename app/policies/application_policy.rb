@@ -16,7 +16,7 @@ class ApplicationPolicy
   end
 
   def create?
-		user.role >=
+		user.try(:admin?)
   end
 
   def new?

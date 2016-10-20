@@ -10,7 +10,10 @@ class User < ActiveRecord::Base
 	scope :admin_users, lambda { where(admin: true,archived_at: nil) }
 	scope :regular_users, lambda {where(admin: false, archived_at: nil) }
 
-	ROLES = { :VIEWER_ROLE => 1, :MANAGER_ROLE => 5, :ADMIN_ROLE => 10 }
+	VIEWER_ROLE = 1
+	MANAGER_ROLE = 5
+	ADMIN_ROLE = 10
+	ROLES = { :VIEWER_ROLE => VIEWER_ROLE, :MANAGER_ROLE => MANAGER_ROLE, :ADMIN_ROLE => ADMIN_ROLE }
 	
 	
 	
@@ -31,4 +34,15 @@ class User < ActiveRecord::Base
 		archived_at.nil? ? super : :archived
 	end
 
+	def role_name
+		if role == VIEWER_ROLE
+			return "viewer"
+		elsif role == MANAGER_ROLE
+			return "manager"
+		elsif role == ADMIN_ROLE
+			return "admin"
+		else
+			raise Exception, "Unknown role for user #{email}."
+		end
+	end
 end
