@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
 	scope :admin_users, lambda { where(admin: true,archived_at: nil) }
 	scope :regular_users, lambda {where(admin: false, archived_at: nil) }
 
+	ROLES = { :VIEWER_ROLE => 1, :MANAGER_ROLE => 5, :ADMIN_ROLE => 10 }
+	
+	
+	
+
 	def archive
 		self.update(archived_at: Time.now)
 	end
