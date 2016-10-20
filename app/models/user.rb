@@ -6,17 +6,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-	scope :archived_users, lambda { where.not(archived_at: nil) }
-	scope :admin_users, lambda { where(admin: true,archived_at: nil) }
-	scope :regular_users, lambda {where(admin: false, archived_at: nil) }
-
 	VIEWER_ROLE = 1
 	MANAGER_ROLE = 5
 	ADMIN_ROLE = 10
 	ROLES = { :VIEWER_ROLE => VIEWER_ROLE, :MANAGER_ROLE => MANAGER_ROLE, :ADMIN_ROLE => ADMIN_ROLE }
-	
-	
-	
+
+	scope :archived_users, lambda { where.not(archived_at: nil) }
+	scope :admin_users, lambda { where(role: ADMIN_ROLE, archived_at: nil) }
+	scope :regular_users, lambda { where.not(role: ADMIN_ROLE ).where(archived_at: nil) }
+
 
 	def archive
 		self.update(archived_at: Time.now)
