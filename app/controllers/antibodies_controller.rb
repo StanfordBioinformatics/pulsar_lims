@@ -4,7 +4,7 @@ class AntibodiesController < ApplicationController
   # GET /antibodies
   # GET /antibodies.json
   def index
-    @antibodies = Antibody.all
+    @antibodies = policy_scope(Antibody)
   end
 
   # GET /antibodies/1

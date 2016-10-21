@@ -13,4 +13,8 @@ class Biosample < ActiveRecord::Base
 	validates :vendor_id, presence: true
 	validates :donor_id, presence: true
 
+	def self.policy_class
+		ApplicationPolicy
+	end 
+
 end

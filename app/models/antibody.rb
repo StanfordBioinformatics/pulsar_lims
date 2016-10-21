@@ -16,6 +16,10 @@ class Antibody < ActiveRecord::Base
 	validates  :lot_identifier, presence: true
 	validates  :clonality, inclusion: CLONALITY_TYPES, presence: true
 
+	def self.policy_class
+		ApplicationPolicy
+	end
+
 	def add_antibody_purifications(purifications)
 		"""
 		Function : Adds AntibodyPurification associations to the self.antibody_purifications attr. 

@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
 	scope :regular_users, lambda { where.not(role: ADMIN_ROLE ).where(archived_at: nil) }
 
 
+	def self.policy_class
+		ApplicationPolicy
+	end 
+
 	def archive
 		self.update(archived_at: Time.now)
 	end

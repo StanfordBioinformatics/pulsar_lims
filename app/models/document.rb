@@ -16,6 +16,10 @@ class Document < ActiveRecord::Base
 	validates :content_type, presence: true
 	validates :data, presence: true
 
+	def self.policy_class
+		ApplicationPolicy
+	end 
+
 	def uploaded_document=(document_field)
 		self.name = format_filename(document_field.original_filename)
 		self.content_type = document_field.content_type.chomp

@@ -7,7 +7,7 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+   	user.role >= USER::VIEWER_ROLE 
   end
 
   def show?
@@ -35,21 +35,25 @@ class ApplicationPolicy
 		create?
   end
 
-#  def scope
-#    Pundit.policy_scope!(user, record.class)
-#  end
-#
-#  class Scope
-#    attr_reader :user, :scope
-#
-#    def initialize(user, scope)
-#      @user = user
-#      @scope = scope
-#    end
-#
-#    def resolve
-#      scope
-#    end
-#  end
+  def scope
+    Pundit.policy_scope!(user, record.class)
+  end
+
+  class Scope
+    attr_reader :user, :scope
+
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    def resolve
+			if user.nil?
+				return scope.none
+			else
+				return scope.all
+			end
+    end
+  end
 end
 

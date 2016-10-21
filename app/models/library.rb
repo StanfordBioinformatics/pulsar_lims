@@ -14,4 +14,8 @@ class Library < ActiveRecord::Base
 	validates :biosample_id, presence: true
 	#The fkey antibody_id doesn't need to be required since some libraries, such as ATAC-SEq, don't have an antibody.
 
+	def self.policy_class
+		ApplicationPolicy
+	end 
+
 end
