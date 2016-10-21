@@ -10,21 +10,25 @@ class AntibodiesController < ApplicationController
   # GET /antibodies/1
   # GET /antibodies/1.json
   def show
+		authorize @antibody
   end
 
   # GET /antibodies/new
   def new
     @antibody = Antibody.new
+		authorize @antibody
   end
 
   # GET /antibodies/1/edit
   def edit
+		authorize @antibody
   end
 
   # POST /antibodies
   # POST /antibodies.json
   def create
     @antibody = Antibody.new(antibody_params)
+		authorize @antibody
 		@antibody.add_antibody_purifications(params[:antibody][:antibody_purifications])
 		
     respond_to do |format|
@@ -41,6 +45,7 @@ class AntibodiesController < ApplicationController
   # PATCH/PUT /antibodies/1
   # PATCH/PUT /antibodies/1.json
   def update
+		authorize @antibody
 		@antibody.remove_antibody_purifications(params[:remove_antibody_purifications])
 		@antibody.add_antibody_purifications(params[:antibody][:antibody_purifications])
     respond_to do |format|
@@ -57,6 +62,7 @@ class AntibodiesController < ApplicationController
   # DELETE /antibodies/1
   # DELETE /antibodies/1.json
   def destroy
+		authorize @antibody
     @antibody.destroy
     respond_to do |format|
       format.html { redirect_to antibodies_url }

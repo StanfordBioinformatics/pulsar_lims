@@ -7,16 +7,16 @@ class ApplicationPolicy
   end
 
   def index?
-   	user.role >= USER::VIEWER_ROLE 
+   	user.role >= User::VIEWER_ROLE 
   end
 
   def show?
     #scope.where(:id => record.id).exists?
-		user.role >= USER::VIEWER_ROLE
+		user.role >= User::VIEWER_ROLE
   end
 
   def create?
-		user.role >= USER::MANAGER_ROLE
+		user.role >= User::MANAGER_ROLE
   end
 
   def new?
