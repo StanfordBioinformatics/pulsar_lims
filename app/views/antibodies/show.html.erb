@@ -3,14 +3,8 @@
   <h1><%= @antibody.name %></h1>
 
   <ul class="actions">
-		<% if policy(@antibody).update? %>
-	    <li><%= link_to "Edit Antibody", edit_antibody_path(@antibody), class: "edit" %></li>
-		<% end %>
-		<% if policy(@antibody).destroy? %>
-	    <li><%= link_to "Delete Antibody", antibody_path(@antibody), method: :delete,
-                     data: { confirm: "Are you sure you would like to delete this antibody?"},
-                     class: "delete" %></li>
-		<% end %>
+		<%= render partial: "application_partials/auth_edit_record", locals: {record: @antibody} %>
+		<%= render partial: "application_partials/auth_destroy_record", locals: {record: @antibody} %>
   </ul>
 </header>
 

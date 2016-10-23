@@ -1,0 +1,5 @@
+<% res = "" %>
+<% record_class = record.class.name %>
+<% if policy(record).destroy? %>
+	<li><%= link_to "Delete #{record_class}", [record], method: :delete, data: { confirm: "Are you sure you would like to delete this #{record_class.downcase}?"},class: "delete" %></li>
+<% end %>
