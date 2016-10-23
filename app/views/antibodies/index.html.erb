@@ -2,7 +2,7 @@
 	<h1>Antibodies</h1>
 
   <ul class="actions">
-    <li><%= link_to "New Antibody", new_antibody_path, class: "new" %></li>
+    <%= render partial: "application_partials/auth_new_record", locals: {policy_class: Antibody} %>
   </ul> 
 </header>
 

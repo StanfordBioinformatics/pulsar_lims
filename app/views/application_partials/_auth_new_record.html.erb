@@ -1,0 +1,3 @@
+<% if policy(policy_class).new? %>
+	<li><%= link_to "New #{policy_class}", [:new,policy_class.to_s.downcase],  class: "new" %></li>
+<% end %>
