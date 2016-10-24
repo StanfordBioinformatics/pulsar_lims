@@ -3,10 +3,8 @@
 	<h1><%= @nucleic_acid_term.name %></h1>
 	
   <ul class="actions">
-    <li><%= link_to "Edit Term", edit_nucleic_acid_term_path(@nucleic_acid_term), class: "edit" %></li>
-<li><%= link_to "Delete Term", nucleic_acid_term_path(@nucleic_acid_term), method: :delete,
-                 data: { confirm: "Are you sure you would like to delete this nucleic acid term?"},
-                 class: "delete" %></li>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @nucleic_acid_term} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @nucleic_acid_term} %>
   </ul>
 </header> 
 
@@ -25,5 +23,4 @@
   <%= @nucleic_acid_term.definition %>
 </p>
 
-<%= link_to 'Edit', edit_nucleic_acid_term_path(@nucleic_acid_term) %> |
 <%= link_to 'Back', nucleic_acid_terms_path %>

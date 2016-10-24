@@ -3,10 +3,8 @@
   <h1><%= @document.name %></h1>
 
   <ul class="actions">
-    <li><%= link_to "Edit Document", edit_document_path(@document), class: "edit" %></li>
-    <li><%= link_to "Delete Document", document_path(@document), method: :delete,
-                     data: { confirm: "Are you sure you would like to delete this Document?"},
-                     class: "delete" %></li>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @document} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @document} %>
   </ul>
 </header>
 

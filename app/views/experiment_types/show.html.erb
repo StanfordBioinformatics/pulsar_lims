@@ -2,10 +2,8 @@
   <h1><%= @experiment_type.name %></h1>
 
   <ul class="actions">
-    <li><%= link_to "Edit Experiment Type", edit_experiment_type_path(@experiment_type), class: "edit" %></li>
-    <li><%= link_to "Delete Experiment Type", experiment_type_path(@experiment_type), method: :delete,
-                     data: { confirm: "Are you sure you would like to delete this experiment type?"},
-                     class: "delete" %></li>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @experiment_types} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @experiment_types} %>
   </ul>
 </header>
 

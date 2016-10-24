@@ -3,10 +3,8 @@
   <h1><%= @donor.encode_alias %></h1>
 
   <ul class="actions">
-    <li><%= link_to "Edit Donor", edit_donor_path(@donor), class: "edit" %></li>
-    <li><%= link_to "Delete Donor", donor_path(@donor), method: :delete,
-                     data: { confirm: "Are you sure you would like to delete this donor?"},
-                     class: "delete" %></li>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @donor} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @donor} %>
   </ul>
 </header>
 

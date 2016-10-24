@@ -2,10 +2,8 @@
   <h1><%= @organism.name %></h1>
 
   <ul class="actions">
-    <li><%= link_to "Edit Organism", edit_organism_path(@organism), class: "edit" %></li>
-    <li><%= link_to "Delete Organism", organism_path(@organism), method: :delete,
-                     data: { confirm: "Are you sure you would like to delete this organism?"},
-                     class: "delete" %></li>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @organism} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @organism} %>
   </ul>
 </header>
 

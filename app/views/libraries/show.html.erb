@@ -3,10 +3,8 @@
 	<h1><%= @library.name %></h1>
 
   <ul class="actions">
-    <li><%= link_to "Edit Library", edit_library_path(@library), class: "edit" %></li>
-    <li><%= link_to "Delete Library", library_path(@library), method: :delete,
-										 data: { confirm: "Are you sure you would like to delete this library?"},
-										 class: "delete" %></li>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @library} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @library} %>
 	</ul>
 </header>
 

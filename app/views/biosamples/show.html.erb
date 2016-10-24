@@ -3,10 +3,8 @@
 	<h1><%= @biosample.name %></h1>
 
   <ul class="actions">
-    <li><%= link_to "Edit Biosample", edit_biosample_path(@biosample), class: "edit" %></li>
-    <li><%= link_to "Delete Biosample", biosample_path(@biosample), method: :delete,
-                     data: { confirm: "Are you sure you would like to delete this biosample?"},
-                     class: "delete" %></li>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @biosample} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @biosample} %>
   </ul>
 </header>	
 

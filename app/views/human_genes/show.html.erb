@@ -2,10 +2,8 @@
   <h1><%= @human_gene.name %></h1>
 
   <ul class="actions">
-    <li><%= link_to "Edit Human Gene", edit_human_gene_path(@human_gene), class: "edit" %></li>
-    <li><%= link_to "Delete Human Gene", human_gene_path(@human_gene), method: :delete,
-                     data: { confirm: "Are you sure you would like to delete this human gene?"},
-                     class: "delete" %></li>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @human_gene} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @human_gene} %>
   </ul>
 </header>
 
