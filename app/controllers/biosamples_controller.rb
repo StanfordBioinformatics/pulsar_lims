@@ -1,8 +1,6 @@
 class BiosamplesController < ApplicationController
 	include DocumentsConcern #gives me add_documents(), remove_documents()
   before_action :set_biosample, only: [:show, :edit, :update, :destroy, :delete_biosample_document]
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
 
   # GET /biosamples
   # GET /biosamples.json

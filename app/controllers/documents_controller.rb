@@ -1,7 +1,5 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
 
   # GET /documents
   # GET /documents.json

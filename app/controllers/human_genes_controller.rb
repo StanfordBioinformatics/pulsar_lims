@@ -1,7 +1,5 @@
 class HumanGenesController < ApplicationController
   before_action :set_human_gene, only: [:show, :edit, :update, :destroy]
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
 
   # GET /human_genes
   # GET /human_genes.json

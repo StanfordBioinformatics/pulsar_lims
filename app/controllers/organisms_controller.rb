@@ -1,7 +1,5 @@
 class OrganismsController < ApplicationController
   before_action :set_organism, only: [:show, :edit, :update, :destroy]
-  after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
 
   # GET /organisms
   # GET /organisms.json
