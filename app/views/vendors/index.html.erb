@@ -1,8 +1,8 @@
 <header>
-	<h1>Listing Vendors</h1>
+	<h1>Vendors</h1>
 
   <ul class="actions">
-    <li><%= link_to "New Vendor", new_vendor_path, class: "new" %></li>
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: Vendor} %>
   </ul> 
 </header>
 

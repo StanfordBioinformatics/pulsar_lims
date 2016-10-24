@@ -1,7 +1,15 @@
+<header>
+	<h1><%= @document_type.name %></h1>
+	
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @document_type} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @document_type} %>
+  </ul>
+</header>
+
 <p>
-  <strong>Name:</strong>
+  <strong>Name:</strong></br>
   <%= @document_type.name %>
 </p>
 
-<%= link_to 'Edit', edit_document_type_path(@document_type) %> |
 <%= link_to 'Back', document_types_path %>

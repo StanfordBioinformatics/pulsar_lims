@@ -1,8 +1,8 @@
 <header>
-	<h1>Listing antibody_purifications</h1>
+	<h1>Antibody Purifications</h1>
 
   <ul class="actions">
-    <li><%= link_to "New Antibody Purification", new_antibody_purification_path, class: "new" %></li>
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: AntibodyPurification} %>
   </ul> 
 </header>
 

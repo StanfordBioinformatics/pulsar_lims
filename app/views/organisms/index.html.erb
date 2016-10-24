@@ -1,8 +1,8 @@
 <header>
-	<h1>Listing organisms</h1>
+	<h1>Organisms</h1>
 
   <ul class="actions">
-    <li><%= link_to "New Organism", new_organism_path, class: "new" %></li>
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: Organism} %>
   </ul> 
 </header>
 

@@ -1,4 +1,10 @@
-<h1>Listing documents</h1>
+<header>
+	<h1>Documents</h1>
+
+	<ul class="actions">
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: Document} %>
+	</ul>
+</header>
 
 <table>
   <thead>

@@ -2,7 +2,7 @@
 	<h1>Nucleic Acid Terms</h1>
 
 	<ul class="actions">
-		<li><%= link_to "New Term", new_nucleic_acid_term_path, class: "new" %></li>
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: NucleicAcidTerm} %>
 	</ul> 
 </header>
 

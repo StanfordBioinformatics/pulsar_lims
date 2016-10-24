@@ -1,8 +1,8 @@
 <header>
-	<h1>Listing Isotypes</h1>
+	<h1>Isotypes</h1>
 
   <ul class="actions">
-    <li><%= link_to "New Isotype", new_isotype_path, class: "new" %></li>
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: Isotype} %>
   </ul> 
 </header>
 

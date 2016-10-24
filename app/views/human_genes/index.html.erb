@@ -1,8 +1,8 @@
 <header>
-	<h1>Listing Human Genes</h1>
+	<h1>Human Genes</h1>
 
   <ul class="actions">
-    <li><%= link_to "New Human Gene ", new_human_gene_path, class: "new" %></li>
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: Antibody} %>
   </ul> 
 </header>
 

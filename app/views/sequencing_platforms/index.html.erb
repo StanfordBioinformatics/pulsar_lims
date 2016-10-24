@@ -1,8 +1,8 @@
 <header>
-	<h1>Listing Sequencing Platforms</h1>
+	<h1>Sequencing Platforms</h1>
 
   <ul class="actions">
-    <li><%= link_to "New Sequencing Platform", new_sequencing_platform_path, class: "new" %></li>
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: SequencingPlatform} %>
   </ul> 
 </header>
 

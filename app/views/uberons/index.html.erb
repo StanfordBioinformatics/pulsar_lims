@@ -1,8 +1,8 @@
 <header>
-	<h1>Listing Uberons</h1>
+	<h1>Uberons</h1>
   
   <ul class="actions">
-    <li><%= link_to "New Uberon", new_uberon_path, class: "new" %></li>
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: Uberon} %>
   </ul> 
 </header>
 

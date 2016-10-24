@@ -1,4 +1,4 @@
-<% res = "" %>
+<% record_class_hr = record.model_name.human.titleize %>
 <% if policy(record).update? %>
-	<li><%= link_to "Edit #{record.class.name}", [:edit,record], class: "edit" %></li>
+	<li><%= link_to "Edit #{record_class_hr}", [:edit,record.model_name.to_s.underscore], class: "edit" %></li>
 <% end %>

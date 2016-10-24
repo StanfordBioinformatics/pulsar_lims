@@ -1,8 +1,8 @@
 <header>
-	<h1>Listing Reference Genomes</h1>
+	<h1>Reference Genomes</h1>
   
   <ul class="actions">
-    <li><%= link_to "New Reference Genome", new_reference_genome_path, class: "new" %></li>
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: ReferenceGenome} %>
   </ul> 
 </header>
   

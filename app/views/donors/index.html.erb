@@ -1,8 +1,8 @@
 <header>
-	<h1>Listing donors</h1>
+	<h1>Donors</h1>
 	
   <ul class="actions">
-    <li><%= link_to "New Donor", new_donor_path, class: "new" %></li>
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: Donor} %>
   </ul> 
 </header>
 

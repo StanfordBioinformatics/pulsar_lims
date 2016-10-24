@@ -2,7 +2,7 @@
 	<h1>Biosamples</h1>
 
   <ul class="actions">
-    <li><%= link_to "New Biosample", new_biosample_path, class: "new" %></li>
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: Biosample} %>
   </ul> 
 </header>	
 	

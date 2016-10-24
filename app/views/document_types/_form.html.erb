@@ -1,11 +1,9 @@
-<%= form_for(@document_type) do |f| %>
+<%= simple_form_for(@document_type) do |f| %>
 	<%= f.error_notification %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
+  <%= f.input :name %>
+
   <div class="actions">
-    <%= f.submit %>
-  </div>
+		<%= f.button :submit, class: "btn-primary" %>
+  </div></br>
 <% end %>

@@ -1,8 +1,8 @@
 <header>
-	<h1>Listing Experiment Types</h1>
+	<h1>Experiment Types</h1>
 
   <ul class="actions">
-    <li><%= link_to "New Experiment Type", new_experiment_type_path, class: "new" %></li>
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: ExperimentType} %>
   </ul> 
 </header>
 
