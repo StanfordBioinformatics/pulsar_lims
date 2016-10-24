@@ -1,5 +1,7 @@
 class AntibodiesController < ApplicationController
   before_action :set_antibody, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   # GET /antibodies
   # GET /antibodies.json

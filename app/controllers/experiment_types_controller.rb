@@ -1,5 +1,7 @@
 class ExperimentTypesController < ApplicationController
   before_action :set_experiment_type, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   # GET /experiment_types
   # GET /experiment_types.json

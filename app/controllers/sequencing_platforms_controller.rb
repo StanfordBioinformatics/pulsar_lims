@@ -1,5 +1,7 @@
 class SequencingPlatformsController < ApplicationController
   before_action :set_sequencing_platform, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   # GET /sequencing_platforms
   # GET /sequencing_platforms.json

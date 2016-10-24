@@ -1,5 +1,7 @@
 class DonorsController < ApplicationController
   before_action :set_donor, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   # GET /donors
   # GET /donors.json

@@ -1,5 +1,7 @@
 class NucleicAcidTermsController < ApplicationController
   before_action :set_nucleic_acid_term, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   # GET /nucleic_acid_terms
   # GET /nucleic_acid_terms.json

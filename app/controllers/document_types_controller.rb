@@ -1,5 +1,7 @@
 class DocumentTypesController < ApplicationController
   before_action :set_document_type, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   # GET /document_types
   # GET /document_types.json

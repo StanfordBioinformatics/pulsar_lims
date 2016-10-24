@@ -1,6 +1,8 @@
 class LibrariesController < ApplicationController
 	include DocumentsConcern #gives me add_documents(), remove_documents()
   before_action :set_library, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   # GET /libraries
   # GET /libraries.json
