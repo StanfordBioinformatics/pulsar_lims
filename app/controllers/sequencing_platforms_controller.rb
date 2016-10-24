@@ -4,26 +4,30 @@ class SequencingPlatformsController < ApplicationController
   # GET /sequencing_platforms
   # GET /sequencing_platforms.json
   def index
-    @sequencing_platforms = SequencingPlatform.all
+    @sequencing_platforms = policy_scope(SequencingPlatform)
   end
 
   # GET /sequencing_platforms/1
   # GET /sequencing_platforms/1.json
   def show
+		authorize @sequencing_platform
   end
 
   # GET /sequencing_platforms/new
   def new
+		authorize SequencingPlatform
     @sequencing_platform = SequencingPlatform.new
   end
 
   # GET /sequencing_platforms/1/edit
   def edit
+		authorize @sequencing_platform
   end
 
   # POST /sequencing_platforms
   # POST /sequencing_platforms.json
   def create
+		authorize SequencingPlatform
     @sequencing_platform = SequencingPlatform.new(sequencing_platform_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class SequencingPlatformsController < ApplicationController
   # PATCH/PUT /sequencing_platforms/1
   # PATCH/PUT /sequencing_platforms/1.json
   def update
+		authorize @sequencing_platform
     respond_to do |format|
       if @sequencing_platform.update(sequencing_platform_params)
         format.html { redirect_to @sequencing_platform, notice: 'Sequencing platform was successfully updated.' }
@@ -54,6 +59,7 @@ class SequencingPlatformsController < ApplicationController
   # DELETE /sequencing_platforms/1
   # DELETE /sequencing_platforms/1.json
   def destroy
+		authorize @sequencing_platform
     @sequencing_platform.destroy
     respond_to do |format|
       format.html { redirect_to sequencing_platforms_url }

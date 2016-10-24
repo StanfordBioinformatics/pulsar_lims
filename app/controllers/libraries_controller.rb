@@ -5,26 +5,30 @@ class LibrariesController < ApplicationController
   # GET /libraries
   # GET /libraries.json
   def index
-    @libraries = Library.all
+    @libraries = policy_scope(Library)
   end
 
   # GET /libraries/1
   # GET /libraries/1.json
   def show
+		authorize @library
   end
 
   # GET /libraries/new
   def new
+		authorize Library
     @library = Library.new
   end
 
   # GET /libraries/1/edit
   def edit
+		authorize @library	
   end
 
   # POST /libraries
   # POST /libraries.json
   def create
+		authorize Library
     @library = Library.new(library_params)
 		@library.user = current_user
 		@library = add_documents(@library,params[:library][:documents])
@@ -43,6 +47,7 @@ class LibrariesController < ApplicationController
   # PATCH/PUT /libraries/1
   # PATCH/PUT /libraries/1.json
   def update
+		authorize @library
 		@library = remove_documents(@library,params[:remove_documents])
 		@library = add_documents(@library,params[:library][:documents])
     respond_to do |format|
@@ -59,6 +64,7 @@ class LibrariesController < ApplicationController
   # DELETE /libraries/1
   # DELETE /libraries/1.json
   def destroy
+		authorize @library
     @library.destroy
     respond_to do |format|
       format.html { redirect_to libraries_url, notice: "Library has been deleted." }

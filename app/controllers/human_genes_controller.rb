@@ -4,26 +4,30 @@ class HumanGenesController < ApplicationController
   # GET /human_genes
   # GET /human_genes.json
   def index
-    @human_genes = HumanGene.all
+    @human_genes = policy_scope(HumanGene)
   end
 
   # GET /human_genes/1
   # GET /human_genes/1.json
   def show
+		authorize @human_gene
   end
 
   # GET /human_genes/new
   def new
+		authorize HumanGene
     @human_gene = HumanGene.new
   end
 
   # GET /human_genes/1/edit
   def edit
+		authorize @human_gene
   end
 
   # POST /human_genes
   # POST /human_genes.json
   def create
+		authorize HumanGene
     @human_gene = HumanGene.new(human_gene_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class HumanGenesController < ApplicationController
   # PATCH/PUT /human_genes/1
   # PATCH/PUT /human_genes/1.json
   def update
+		authorize @human_gene
     respond_to do |format|
       if @human_gene.update(human_gene_params)
         format.html { redirect_to @human_gene, notice: 'Human gene was successfully updated.' }
@@ -54,6 +59,7 @@ class HumanGenesController < ApplicationController
   # DELETE /human_genes/1
   # DELETE /human_genes/1.json
   def destroy
+		authorize @human_gene
     @human_gene.destroy
     respond_to do |format|
       format.html { redirect_to human_genes_url }

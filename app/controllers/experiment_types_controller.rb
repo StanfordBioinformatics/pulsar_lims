@@ -4,26 +4,30 @@ class ExperimentTypesController < ApplicationController
   # GET /experiment_types
   # GET /experiment_types.json
   def index
-    @experiment_types = ExperimentType.all
+    @experiment_types = policy_scope(ExperimentType)
   end
 
   # GET /experiment_types/1
   # GET /experiment_types/1.json
   def show
+		authorize @experiment_type
   end
 
   # GET /experiment_types/new
   def new
+		authorize ExperimentType
     @experiment_type = ExperimentType.new
   end
 
   # GET /experiment_types/1/edit
   def edit
+		authorize @experiment_type
   end
 
   # POST /experiment_types
   # POST /experiment_types.json
   def create
+		authorize ExperimentType
     @experiment_type = ExperimentType.new(experiment_type_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class ExperimentTypesController < ApplicationController
   # PATCH/PUT /experiment_types/1
   # PATCH/PUT /experiment_types/1.json
   def update
+		authorize @experiment_type
     respond_to do |format|
       if @experiment_type.update(experiment_type_params)
         format.html { redirect_to @experiment_type, notice: 'Experiment type was successfully updated.' }
@@ -54,6 +59,7 @@ class ExperimentTypesController < ApplicationController
   # DELETE /experiment_types/1
   # DELETE /experiment_types/1.json
   def destroy
+		authorize @experiment_type
     @experiment_type.destroy
     respond_to do |format|
       format.html { redirect_to experiment_types_url }

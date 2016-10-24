@@ -4,26 +4,30 @@ class VendorsController < ApplicationController
   # GET /vendors
   # GET /vendors.json
   def index
-    @vendors = Vendor.all
+    @vendors = policy_scope(Vendor)
   end
 
   # GET /vendors/1
   # GET /vendors/1.json
   def show
+		authorize @vendor
   end
 
   # GET /vendors/new
   def new
+		authorize Vendor
     @vendor = Vendor.new
   end
 
   # GET /vendors/1/edit
   def edit
+		authorize @vendor
   end
 
   # POST /vendors
   # POST /vendors.json
   def create
+		authorize Vendor
     @vendor = Vendor.new(vendor_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class VendorsController < ApplicationController
   # PATCH/PUT /vendors/1
   # PATCH/PUT /vendors/1.json
   def update
+		authorize @vendor
     respond_to do |format|
       if @vendor.update(vendor_params)
         format.html { redirect_to @vendor, notice: 'Vendor was successfully updated.' }
@@ -54,6 +59,7 @@ class VendorsController < ApplicationController
   # DELETE /vendors/1
   # DELETE /vendors/1.json
   def destroy
+		authorize @vendor
     @vendor.destroy
     respond_to do |format|
       format.html { redirect_to vendors_url }

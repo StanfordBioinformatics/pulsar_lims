@@ -4,26 +4,30 @@ class UberonsController < ApplicationController
   # GET /uberons
   # GET /uberons.json
   def index
-    @uberons = Uberon.all
+    @uberons = policy_scope(Uberon)
   end
 
   # GET /uberons/1
   # GET /uberons/1.json
   def show
+		authorize @uberon
   end
 
   # GET /uberons/new
   def new
+		authorize Uberon
     @uberon = Uberon.new
   end
 
   # GET /uberons/1/edit
   def edit
+		authorize @uberon
   end
 
   # POST /uberons
   # POST /uberons.json
   def create
+		authorize Uberon
     @uberon = Uberon.new(uberon_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class UberonsController < ApplicationController
   # PATCH/PUT /uberons/1
   # PATCH/PUT /uberons/1.json
   def update
+		authorize @uberon
     respond_to do |format|
       if @uberon.update(uberon_params)
         format.html { redirect_to @uberon, notice: 'Uberon was successfully updated.' }
@@ -54,6 +59,7 @@ class UberonsController < ApplicationController
   # DELETE /uberons/1
   # DELETE /uberons/1.json
   def destroy
+		authorize @uberon
     @uberon.destroy
     respond_to do |format|
       format.html { redirect_to uberons_url }

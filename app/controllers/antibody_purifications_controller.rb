@@ -4,26 +4,30 @@ class AntibodyPurificationsController < ApplicationController
   # GET /antibody_purifications
   # GET /antibody_purifications.json
   def index
-    @antibody_purifications = AntibodyPurification.all
+    @antibody_purifications = policy_scope(AntibodyPurification)
   end
 
   # GET /antibody_purifications/1
   # GET /antibody_purifications/1.json
   def show
+		authorize @antibody_purification
   end
 
   # GET /antibody_purifications/new
   def new
+		authorize AntibodyPurifiction
     @antibody_purification = AntibodyPurification.new
   end
 
   # GET /antibody_purifications/1/edit
   def edit
+		authorize @antibody_purification
   end
 
   # POST /antibody_purifications
   # POST /antibody_purifications.json
   def create
+		authorize AntibodyPurification
     @antibody_purification = AntibodyPurification.new(antibody_purification_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class AntibodyPurificationsController < ApplicationController
   # PATCH/PUT /antibody_purifications/1
   # PATCH/PUT /antibody_purifications/1.json
   def update
+		authorize @antibody_purification
     respond_to do |format|
       if @antibody_purification.update(antibody_purification_params)
         format.html { redirect_to @antibody_purification, notice: 'Antibody purification was successfully updated.' }
@@ -54,6 +59,7 @@ class AntibodyPurificationsController < ApplicationController
   # DELETE /antibody_purifications/1
   # DELETE /antibody_purifications/1.json
   def destroy
+		authorize @antibody_purification
     @antibody_purification.destroy
     respond_to do |format|
       format.html { redirect_to antibody_purifications_url }

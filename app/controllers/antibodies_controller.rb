@@ -15,8 +15,8 @@ class AntibodiesController < ApplicationController
 
   # GET /antibodies/new
   def new
+		authorize Antibody
     @antibody = Antibody.new
-		authorize @antibody
   end
 
   # GET /antibodies/1/edit
@@ -27,8 +27,8 @@ class AntibodiesController < ApplicationController
   # POST /antibodies
   # POST /antibodies.json
   def create
+		authorize Antibody
     @antibody = Antibody.new(antibody_params)
-		authorize @antibody
 		@antibody.add_antibody_purifications(params[:antibody][:antibody_purifications])
 		
     respond_to do |format|

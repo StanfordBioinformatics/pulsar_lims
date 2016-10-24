@@ -4,26 +4,30 @@ class DocumentTypesController < ApplicationController
   # GET /document_types
   # GET /document_types.json
   def index
-    @document_types = DocumentType.all
+    @document_types = policy_scope(DocumentType)
   end
 
   # GET /document_types/1
   # GET /document_types/1.json
   def show
+		authorize @document_type
   end
 
   # GET /document_types/new
   def new
+		authorize DocumentType
     @document_type = DocumentType.new
   end
 
   # GET /document_types/1/edit
   def edit
+		authorize @document_type
   end
 
   # POST /document_types
   # POST /document_types.json
   def create
+		authorize DocumentType
     @document_type = DocumentType.new(document_type_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class DocumentTypesController < ApplicationController
   # PATCH/PUT /document_types/1
   # PATCH/PUT /document_types/1.json
   def update
+		authorize @document_type
     respond_to do |format|
       if @document_type.update(document_type_params)
         format.html { redirect_to @document_type, notice: 'Document type was successfully updated.' }
@@ -54,6 +59,7 @@ class DocumentTypesController < ApplicationController
   # DELETE /document_types/1
   # DELETE /document_types/1.json
   def destroy
+		authorize @document_type
     @document_type.destroy
     respond_to do |format|
       format.html { redirect_to document_types_url }

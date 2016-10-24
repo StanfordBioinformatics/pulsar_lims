@@ -4,26 +4,30 @@ class BiosampleTypesController < ApplicationController
   # GET /biosample_types
   # GET /biosample_types.json
   def index
-    @biosample_types = BiosampleType.all
+    @biosample_types = policy_scope(BiosampleType)
   end
 
   # GET /biosample_types/1
   # GET /biosample_types/1.json
   def show
+		authorize @biosample_type
   end
 
   # GET /biosample_types/new
   def new
+		authorize BiosampleType
     @biosample_type = BiosampleType.new
   end
 
   # GET /biosample_types/1/edit
   def edit
+		authorize @biosample_type
   end
 
   # POST /biosample_types
   # POST /biosample_types.json
   def create
+		authorize BiosampleType
     @biosample_type = BiosampleType.new(biosample_type_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class BiosampleTypesController < ApplicationController
   # PATCH/PUT /biosample_types/1
   # PATCH/PUT /biosample_types/1.json
   def update
+		authorize @biosample_type
     respond_to do |format|
       if @biosample_type.update(biosample_type_params)
         format.html { redirect_to @biosample_type, notice: 'Biosample type was successfully updated.' }
@@ -54,6 +59,7 @@ class BiosampleTypesController < ApplicationController
   # DELETE /biosample_types/1
   # DELETE /biosample_types/1.json
   def destroy
+		authorize @biosample_type
     @biosample_type.destroy
     respond_to do |format|
       format.html { redirect_to biosample_types_url }

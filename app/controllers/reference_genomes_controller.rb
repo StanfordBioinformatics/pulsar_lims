@@ -4,26 +4,30 @@ class ReferenceGenomesController < ApplicationController
   # GET /reference_genomes
   # GET /reference_genomes.json
   def index
-    @reference_genomes = ReferenceGenome.all
+    @reference_genomes = policy_scope(ReferenceGenome)
   end
 
   # GET /reference_genomes/1
   # GET /reference_genomes/1.json
   def show
+		authorize @reference_genome
   end
 
   # GET /reference_genomes/new
   def new
+		authorize ReferenceGenome
     @reference_genome = ReferenceGenome.new
   end
 
   # GET /reference_genomes/1/edit
   def edit
+		authorize @reference_genome
   end
 
   # POST /reference_genomes
   # POST /reference_genomes.json
   def create
+		authorize ReferenceGenome
     @reference_genome = ReferenceGenome.new(reference_genome_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class ReferenceGenomesController < ApplicationController
   # PATCH/PUT /reference_genomes/1
   # PATCH/PUT /reference_genomes/1.json
   def update
+		authorize @reference_genome
     respond_to do |format|
       if @reference_genome.update(reference_genome_params)
         format.html { redirect_to @reference_genome, notice: 'Reference genome was successfully updated.' }
@@ -54,6 +59,7 @@ class ReferenceGenomesController < ApplicationController
   # DELETE /reference_genomes/1
   # DELETE /reference_genomes/1.json
   def destroy
+		authorize @reference_genome
     @reference_genome.destroy
     respond_to do |format|
       format.html { redirect_to reference_genomes_url }

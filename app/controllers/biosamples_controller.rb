@@ -5,26 +5,30 @@ class BiosamplesController < ApplicationController
   # GET /biosamples
   # GET /biosamples.json
   def index
-    @biosamples = Biosample.all
+    @biosamples = policy_scope(Biosample)
   end
 
   # GET /biosamples/1
   # GET /biosamples/1.json
   def show
+		authorize @biosample
   end
 
   # GET /biosamples/new
   def new
+		authorize Biosample
     @biosample = Biosample.new
   end
 
   # GET /biosamples/1/edit
   def edit
+		authorize @biosample
   end
 
   # POST /biosamples
   # POST /biosamples.json
   def create
+		authorize Biosample
     @biosample = Biosample.new(biosample_params)
 		@biosample.user = current_user
 		@biosample = add_documents(@biosample,params[:biosample][:documents])
@@ -43,6 +47,7 @@ class BiosamplesController < ApplicationController
   # PATCH/PUT /biosamples/1
   # PATCH/PUT /biosamples/1.json
   def update
+		authorize @biosample
 		@biosample = remove_documents(@biosample,params[:remove_documents])
 		@biosample = add_documents(@biosample,params[:biosample][:documents])
     respond_to do |format|
@@ -59,6 +64,7 @@ class BiosamplesController < ApplicationController
   # DELETE /biosamples/1
   # DELETE /biosamples/1.json
   def destroy
+		authorize @biosample
     @biosample.destroy
     respond_to do |format|
       format.html { redirect_to biosamples_url, notice: "Biosample has been deleted." }

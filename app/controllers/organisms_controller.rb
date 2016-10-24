@@ -4,26 +4,30 @@ class OrganismsController < ApplicationController
   # GET /organisms
   # GET /organisms.json
   def index
-    @organisms = Organism.all
+    @organisms = policy_scope(Organism)
   end
 
   # GET /organisms/1
   # GET /organisms/1.json
   def show
+		authorize @organism
   end
 
   # GET /organisms/new
   def new
+		authorize Organism
     @organism = Organism.new
   end
 
   # GET /organisms/1/edit
   def edit
+		authorize @organism
   end
 
   # POST /organisms
   # POST /organisms.json
   def create
+		authorize Organism
     @organism = Organism.new(organism_params)
 
     respond_to do |format|
@@ -40,6 +44,7 @@ class OrganismsController < ApplicationController
   # PATCH/PUT /organisms/1
   # PATCH/PUT /organisms/1.json
   def update
+		authorize @organism
     respond_to do |format|
       if @organism.update(organism_params)
         format.html { redirect_to @organism, notice: 'Organism was successfully updated.' }
@@ -54,6 +59,7 @@ class OrganismsController < ApplicationController
   # DELETE /organisms/1
   # DELETE /organisms/1.json
   def destroy
+		authorize @organism
     @organism.destroy
     respond_to do |format|
       format.html { redirect_to organisms_url }
