@@ -2,12 +2,15 @@ class ApplicationPolicy
   attr_reader :user, :record
 
   def initialize(user, record)
+		if user.nil?
+			raise Pundit::NotAuthorizedError
+		end
     @user = user
     @record = record
   end
 
   def index?
-   	user.role >= User::VIEWER_ROLE 
+	  user.role >= User::VIEWER_ROLE 
   end
 
   def show?
@@ -43,15 +46,18 @@ class ApplicationPolicy
     attr_reader :user, :scope
 
     def initialize(user, scope)
+			if user.nil?
+				raise Pundit::NotAuthorizedError
+			end
       @user = user
       @scope = scope
     end
 
     def resolve
-			if user.nil?
-				return scope.none
-			else
+			if user.role >= User::VIEWER_ROLE
 				return scope.all
+			else
+				return scope.none
 			end
     end
   end
