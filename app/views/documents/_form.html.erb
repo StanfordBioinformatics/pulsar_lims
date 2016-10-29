@@ -2,7 +2,7 @@
 	<%= f.error_notification %>
 
 	<%= f.input :description %>
-	Upload your document: <%= f.file_field("uploaded_document") %><br/>
+	<%= f.input :uploaded_document, as: :file, label: "File" %><br/>
 
 	<div class="actions">
 		<%= f.button :submit, class: "btn-primary" %>

@@ -25,21 +25,11 @@
 	<% end %>
 	<%= render(partial: "documents/select_documents", locals: {f: f,selected: selected}) %>
 
-	<% biosample_type_id = nil %>
-	<% if not @biosample.biosample_type.nil? %>
-		<% biosample_type_id = @biosample.biosample_type.id %>
-	<% end %>
-	<%= f.input :biosample_type_id, collection: sorted_biosampletype_name_id(), selected: biosample_type_id, prompt: "Select the Biosample Type" %>
-
+	<%= f.input :biosample_type_id, collection: sorted_biosampletype_name_id(), prompt: "Select the Biosample Type" %>
 
   <%= f.input :description %>
 
-	<% vendor_id = nil %>
-	<% if not @biosample.vendor.nil? %>
-		<% vendor_id = @biosample.vendor.id %>
-	<% end %>
-	<%= f.input :vendor_id, collection: sorted_vendor_name_id(), selected: vendor_id, prompt: "Select the Vendor" %>
-
+	<%= f.input :vendor_id, collection: sorted_vendor_name_id(), prompt: "Select the Vendor" %>
 
 	<%= f.input:vendor_product_identifier %>
 
@@ -49,11 +39,7 @@
 
 	<%= f.input :ontology_term_accession, label: "Ontology term accession describing the biosample" %> (An UBERON, EFO, CL, NTR, FBbt, or WBbt identifer)
 
-	<% donor_id = nil %>
-	<% if not @biosample.donor.nil? %>
-		<% donor_id = @biosample.donor.id %>
-	<% end %>
-	<%= f.input :donor_id, collection: sorted_donor_name_id,selected: donor_id, prompt: "Choose The Human Donor" %>
+	<%= f.input :donor_id, collection: sorted_donor_name_id, prompt: "Choose The Human Donor" %>
 
 	<%= f.input :passage_number %>
 

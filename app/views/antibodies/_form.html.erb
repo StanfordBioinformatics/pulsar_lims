@@ -3,11 +3,7 @@
 
   <%= f.input :name %> (Max. 20 characters)
 
-	<% organism_id = nil %>
-	<% if not @antibody.organism.nil? %>
-		<% organism_id = @antibody.organism.id %>
-	<% end %>
-  <%= f.input :organism_id, collection: sorted_organism_name_id(), selected: organism_id, prompt: "Select the Organism" %>
+  <%= f.input :organism_id, collection: sorted_organism_name_id(), prompt: "Select the Organism" %>
 
 	<% if @antibody.new_record? %>
 		None
@@ -33,24 +29,11 @@
   <% end %>
   <%= render(partial: "antibody_purifications/select_antibody_purifications", locals: {f: f,selected: selected}) %>
 
+  <%= f.input :vendor_id, collection: sorted_vendor_name_id(), prompt: "Select the Vendor" %>
 
-  <% vendor_id = nil %>
-  <% if not @antibody.vendor.nil? %>
-    <% vendor_id = @antibody.vendor.id %>
-  <% end %>
-  <%= f.input :vendor_id, collection: sorted_vendor_name_id(), selected: vendor_id, prompt: "Select the Vendor" %>
+  <%= f.input :isotype_id, collection: sorted_isotype_name_id(), prompt: "Select the Isotype" %>
 
-	<% isotype_id = nil %>
-	<% if not @antibody.isotype.nil? %>
-		<% isotype_id = @antibody.isotype.id %>
-	<% end %>
-  <%= f.input :isotype_id, collection: sorted_isotype_name_id(), selected: isotype_id, prompt: "Select the Isotype" %>
-
-	<% gene_id = nil %>
-	<% if not @antibody.human_gene.nil? %>
-		<% gene_id = @antibody.human_gene.id %>
-	<% end %>
-  <%= f.input :human_gene_id, collection: sorted_gene_name_id(), selected: gene_id, prompt: "Select the Human Gene" %>
+  <%= f.input :human_gene_id, collection: sorted_gene_name_id(), prompt: "Select the Human Gene" %>
 
   <%= f.input :vendor_product_identifier %>
 

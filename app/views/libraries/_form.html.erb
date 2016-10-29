@@ -25,33 +25,13 @@
   <% end %>
   <%= render(partial: "documents/select_documents", locals: {f: f,selected: selected}) %>
 
-	<% nucleic_acid_term_id = nil %>
-	<% if not @library.nucleic_acid_term.nil? %>
-		<% nucleic_acid_term_id = @library.nucleic_acid_term.id %>
-	<% end %>
-  <%= f.input :nucleic_acid_term_id, label: "Nucleic Acid Term Name", collection: sorted_nucleic_acid_term_name_id(), selected: nucleic_acid_term_id ,prompt: "Select the Term Name" %>
+  <%= f.input :nucleic_acid_term_id, label: "Nucleic Acid Term Name", collection: sorted_nucleic_acid_term_name_id(), prompt: "Select the Term Name" %>
 
+  <%= f.input :biosample_id, collection: sorted_biosample_name_id(), prompt: "Select the Biosample" %>
 
-	<% biosample_id = nil %>
-	<% if not @library.biosample.nil? %>
-		<% biosample_id = @library.biosample.id %>
-	<% end %>
-  <%= f.input :biosample_id, collection: sorted_biosample_name_id(), selected: biosample_id, prompt: "Select the Biosample" %>
+  <%= f.input :antibody_id, collection: sorted_antibody_name_id(), prompt: "Select the Antibody" %>
 
-
-	<% antibody_id = nil %>
-	<% if not @library.antibody.nil? %>
-		<% antibody_id = @library.antibody.id %>
-	<% end %>
-  <%= f.input :antibody_id, collection: sorted_antibody_name_id(), selected: antibody_id, prompt: "Select the Antibody" %>
-
-
-  <% vendor_id = nil %>
-  <% if not @library.vendor.nil? %>
-		<% vendor_id = @library.vendor.id %>
-  <% end %>
-  <%= f.input :vendor_id, collection: sorted_vendor_name_id(), selected: vendor_id, prompt: "Select the Vendor" %>
-
+  <%= f.input :vendor_id, collection: sorted_vendor_name_id(), prompt: "Select the Vendor" %>
 
   <%= f.input :lot_identifier %>
 
