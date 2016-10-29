@@ -3,16 +3,18 @@
 
 	<%= f.input :name %> (Max. 20 characters)
 
-	<table>
-		<tr>
-			<th>Associated Protocol Documents:</th>
-		</tr>
-		<% if @biosample.new_record? %>
-			<tr>None</tr>
-		<% else %>
-      <%= render(@biosample.documents) %>
-   	<% end %>
-	</table></br>
+  <table>
+    <tr>
+      <th>Associated Protocol Documents:</th>
+    </tr>
+    <%= f.simple_fields_for :documents do |ff| %>
+      <% doc = @biosample.documents[ff.index] %>
+      <tr>
+        <td><%= doc.name %></td>
+        <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
+      </tr></br>
+     <% end %>  
+  </table>
 
 	<!-- Show select for Documents. Mutliple documents can be selected.
 				 If the form was rejected due to a validation error, then the

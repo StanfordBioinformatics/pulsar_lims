@@ -22,21 +22,4 @@ module DocumentsConcern
     end 
 		return model_obj
   end 
-  
-  def remove_documents(model_obj,documents)
-    """ 
-    Function : Removes associations to Documents that are stored in self.documents.
-    Args     : document_ids - array of Document IDs.
-    """
-    if documents.blank?
-      return model_obj
-    end 
-    documents.each do |d| 
-      doc = Document.find(d)
-      if model_obj.documents.include? doc 
-        model_obj.documents.destroy(doc)
-      end 
-    end 
-		return model_obj
-  end 
 end

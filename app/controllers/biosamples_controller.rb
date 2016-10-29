@@ -48,7 +48,6 @@ class BiosamplesController < ApplicationController
   # PATCH/PUT /biosamples/1.json
   def update
 		authorize @biosample
-		@biosample = remove_documents(@biosample,params[:remove_documents])
 		@biosample = add_documents(@biosample,params[:biosample][:documents])
     respond_to do |format|
       if @biosample.update(biosample_params)
@@ -84,6 +83,6 @@ class BiosamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_params
-      params.require(:biosample).permit(:submitter_comments, :lot_identifier, :vendor_product_identifier, :ontology_term_name, :ontology_term_accession, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name)
+      params.require(:biosample).permit(:submitter_comments, :lot_identifier, :vendor_product_identifier, :ontology_term_name, :ontology_term_accession, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, documents_attributes: [:id,:_destroy])
     end
 end
