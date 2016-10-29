@@ -63,6 +63,7 @@ class DocumentsController < ApplicationController
 	def document
 		#called by the 'show' view.
 		@document = Document.find(params[:id])
+		authorize @document, :show?
 		send_data(data=@document.data,options={
 							filename: @document.name,
 							type: @document.content_type,
