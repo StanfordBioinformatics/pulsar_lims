@@ -1,18 +1,21 @@
 <%= simple_form_for(@library) do |f| %>
 	<%= f.error_notification %>
 
-  <%= f.input :name %>(Max. 20 characters)
+  <%= f.input :name %>(Max. 20 characters)</br>
 
 	<table>
     <tr>
-			<th>Associated Protocol Documents:</th>
-		</tr>
-    <% if @library.new_record? %>
-      <tr>None</tr>
-    <% else %>
-			<%= render(@library.documents) %>
-    <% end %>
-  </table></br>
+      <th>Associated Protocol Documents:</th>
+    </tr>
+	  <%= f.simple_fields_for :documents do |ff| %>
+      <% doc = @library.documents[ff.index] %>
+      <tr>
+  			<td><%= doc.name %></td>
+        <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
+			</tr></br>
+ 		 <% end %>	
+	</table>
+
 
   <!-- Show select for Documents. Mutliple documents can be selected.
        If the form was rejected due to a validation error, then the
