@@ -16,6 +16,8 @@ class Antibody < ActiveRecord::Base
 	validates  :lot_identifier, presence: true
 	validates  :clonality, inclusion: CLONALITY_TYPES, presence: true
 
+	accepts_nested_attributes_for :antibody_purifications, allow_destroy: true
+
 	def self.policy_class
 		ApplicationPolicy
 	end

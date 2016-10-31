@@ -12,6 +12,8 @@ SnyderEncode::Application.routes.draw do
 
   devise_for :users
 
+	resources :attachments, only: [:show,:new]
+
 	resources :welcome, only: [:index]
 
   resources :reference_genomes

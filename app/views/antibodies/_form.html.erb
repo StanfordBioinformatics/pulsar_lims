@@ -5,18 +5,18 @@
 
   <%= f.input :organism_id, collection: sorted_organism_name_id(), prompt: "Select the Organism" %>
 
-	<% if @antibody.new_record? %>
-		None
-	<% else %>
-		<table>
-			<% @antibody.antibody_purifications.each do |p| %>
-				<tr>
-					<td><%= link_to(p.name,p) %></td>
-					<td> Remove: <input type="checkbox" name="remove_antibody_purifications[]" value=<%= p.id %> /></td>
-				</tr>
-			<% end %>
-		</table>
-	<% end %>
+	<table>
+		<tr>
+			<th>Associated Antibody Purifications</th>
+		</tr>
+		<%= f.simple_fields_for(:antibody_purifications) do |ff| %>
+			<% antibody_purification = @antibody.antibody_purifications[ff.index] %>
+			<tr>
+				<td><%= antibody_purification.name %></td>
+				<td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
+			</tr></br>
+		<% end %>
+	</table>
 
   <!-- Show select for AntibodyPurifications. Mutliple can be selected.
        If the form was rejected due to a validation error, then the
