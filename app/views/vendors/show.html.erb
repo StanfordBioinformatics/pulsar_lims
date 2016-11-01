@@ -7,6 +7,8 @@
   </ul>
 </header>
 
+<%= render partial: "application_partials/record_meta", locals: { record: @vendor} %>
+
 <p>
   <strong>Name:</strong>
   <%= link_to @vendor.name,@vendor.url %>

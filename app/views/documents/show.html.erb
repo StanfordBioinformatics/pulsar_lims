@@ -8,6 +8,8 @@
   </ul>
 </header>
 
+<%= render partial: "application_partials/record_meta", locals: { record: @document } %>
+
 <p>
   <strong>Name:</strong>
   <%= @document.name %>

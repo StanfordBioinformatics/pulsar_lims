@@ -7,6 +7,8 @@
   </ul>
 </header>
 
+<%= render partial: "application_partials/record_meta", locals: { record: @isotype } %>
+
 <p>
   <strong>Name:</strong>
   <%= @isotype.name %>

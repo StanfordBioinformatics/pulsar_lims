@@ -8,6 +8,8 @@
   </ul>
 </header>
 
+<%= render partial: "application_partials/record_meta", locals: { record: @donor } %>
+
 <p>
   <strong>Encode:</strong>
   <%= link_to @donor.encode_identifier %>

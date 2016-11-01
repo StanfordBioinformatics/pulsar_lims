@@ -8,6 +8,8 @@
   </ul>
 </header>
 
+<%= render partial: "application_partials/record_meta", locals: { record: @antibody_purification } %>
+
 <p>
   <strong>Name:</strong>
   <%= @antibody_purification.name %>

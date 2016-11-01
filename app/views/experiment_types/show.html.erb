@@ -7,6 +7,8 @@
   </ul>
 </header>
 
+<%= render partial: "application_partials/record_meta", locals: { record: @experiment_type } %>
+
 <p>
   <strong>Name:</strong>
   <%= @experiment_type.name %>

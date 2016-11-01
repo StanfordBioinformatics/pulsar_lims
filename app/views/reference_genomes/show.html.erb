@@ -6,6 +6,9 @@
     <%= render partial: "application_partials/auth_destroy_record", locals: {record: @reference_genome} %>
   </ul>
 </header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @reference_genome } %>
+
 <p>
   <strong>Name:</strong>
   <%= @reference_genome.name %>

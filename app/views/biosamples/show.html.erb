@@ -8,15 +8,9 @@
   </ul>
 </header>	
 
+<%= render partial: "application_partials/record_meta", locals: { record: @biosample } %>
+
 <table id="attributes">
-  <tr>
-    <th>Created By:</th>
-    <td><%= @biosample.user.email %></td>
-  </tr>
-  <tr>
-    <th>Date Created:</th>
-    <td><%= time_ago_in_words(@biosample.created_at) %> ago </td>
-  </tr>
   <tr>
 		<th>Biosample Name</th>
 		<td><%= @biosample.name %></td>
