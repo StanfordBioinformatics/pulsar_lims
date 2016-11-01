@@ -8,15 +8,9 @@
 	</ul>
 </header>
 
+<%= render partial: "application_partials/record_meta", locals: { record: @library } %>
+
 <table id="attributes">
-	<tr>
-		<th>Created By:</th>
-		<td><%= @library.user.email %></td>
-	</tr>
-	<tr>
-		<th>Date Created:</th>
-		<td><%= time_ago_in_words(@library.created_at) %> ago </td>
-	</tr>
 	<tr>
 	  <th>Library Name:</th>
 		<td><%= @library.name %></td>

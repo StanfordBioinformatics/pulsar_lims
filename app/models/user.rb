@@ -1,6 +1,22 @@
 class User < ActiveRecord::Base
-	has_many :libraries, dependent: :nullify
+	has_many :antibodies, dependent: :nullify
+	has_many :antibody_purifications, dependent: :nullify
+	has_many :attachments, dependent: :nullify
 	has_many :biosamples, dependent: :nullify
+	has_many :biosample_types, dependent: :nullify
+	has_many :documents, dependent: :nullify
+	has_many :document_types, dependent: :nullify
+	has_many :donors, dependent: :nullify
+	has_many :experiment_types, dependent: :nullify
+	has_many :libraries, dependent: :nullify
+	has_many :human_genes, dependent: :nullify
+	has_many :isotypes, dependent: :nullify
+	has_many :nucleic_acid_terms, dependent: :nullify
+	has_many :organisms, dependent: :nullify
+	has_many :reference_genomes, dependent: :nullify
+	has_many :sequencing_platforms, dependent: :nullify
+	has_many :uberons, dependent: :nullify
+	has_many :vendors, dependent: :nullify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

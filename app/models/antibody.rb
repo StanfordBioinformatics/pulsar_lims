@@ -1,6 +1,7 @@
 class Antibody < ActiveRecord::Base
 	CLONALITY_TYPES = ["monoclonal", "polyclonal"]
   has_and_belongs_to_many :antibody_purifications
+	belongs_to :user
   belongs_to :vendor
 	belongs_to :organism
   belongs_to :isotype

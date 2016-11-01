@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161030051852) do
+ActiveRecord::Schema.define(version: 20161101195446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,12 +30,14 @@ ActiveRecord::Schema.define(version: 20161030051852) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name",                      limit: 255
+    t.integer  "user_id"
   end
 
   add_index "antibodies", ["human_gene_id"], name: "index_antibodies_on_human_gene_id", using: :btree
   add_index "antibodies", ["isotype_id"], name: "index_antibodies_on_isotype_id", using: :btree
   add_index "antibodies", ["name"], name: "index_antibodies_on_name", unique: true, using: :btree
   add_index "antibodies", ["organism_id"], name: "index_antibodies_on_organism_id", using: :btree
+  add_index "antibodies", ["user_id"], name: "index_antibodies_on_user_id", using: :btree
   add_index "antibodies", ["vendor_id"], name: "index_antibodies_on_vendor_id", using: :btree
 
   create_table "antibodies_antibody_purifications", id: false, force: :cascade do |t|
@@ -47,19 +49,28 @@ ActiveRecord::Schema.define(version: 20161030051852) do
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "antibody_purifications", ["user_id"], name: "index_antibody_purifications_on_user_id", using: :btree
 
   create_table "attachments", force: :cascade do |t|
     t.string   "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
+
+  add_index "attachments", ["user_id"], name: "index_attachments_on_user_id", using: :btree
 
   create_table "biosample_types", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "biosample_types", ["user_id"], name: "index_biosample_types_on_user_id", using: :btree
 
   create_table "biosamples", force: :cascade do |t|
     t.string   "submitter_comments",        limit: 255
@@ -105,10 +116,12 @@ ActiveRecord::Schema.define(version: 20161030051852) do
     t.integer  "document_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "documents", ["document_type_id"], name: "index_documents_on_document_type_id", using: :btree
   add_index "documents", ["name"], name: "index_documents_on_name", unique: true, using: :btree
+  add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
   create_table "documents_libraries", id: false, force: :cascade do |t|
     t.integer "document_id"
@@ -120,26 +133,38 @@ ActiveRecord::Schema.define(version: 20161030051852) do
     t.string   "encode_alias",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "donors", ["user_id"], name: "index_donors_on_user_id", using: :btree
 
   create_table "experiment_types", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "experiment_types", ["user_id"], name: "index_experiment_types_on_user_id", using: :btree
 
   create_table "human_genes", force: :cascade do |t|
     t.string   "encode_identifier", limit: 255
     t.string   "name",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "human_genes", ["user_id"], name: "index_human_genes_on_user_id", using: :btree
 
   create_table "isotypes", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "isotypes", ["user_id"], name: "index_isotypes_on_user_id", using: :btree
 
   create_table "libraries", force: :cascade do |t|
     t.integer  "nucleic_acid_term_id"
@@ -154,6 +179,7 @@ ActiveRecord::Schema.define(version: 20161030051852) do
     t.string   "name",                      limit: 255
     t.integer  "user_id"
     t.integer  "antibody_id"
+    t.string   "barcode"
   end
 
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
@@ -168,33 +194,48 @@ ActiveRecord::Schema.define(version: 20161030051852) do
     t.string   "definition", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "nucleic_acid_terms", ["user_id"], name: "index_nucleic_acid_terms_on_user_id", using: :btree
 
   create_table "organisms", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "organisms", ["user_id"], name: "index_organisms_on_user_id", using: :btree
 
   create_table "reference_genomes", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "url",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "reference_genomes", ["user_id"], name: "index_reference_genomes_on_user_id", using: :btree
 
   create_table "sequencing_platforms", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "sequencing_platforms", ["user_id"], name: "index_sequencing_platforms_on_user_id", using: :btree
 
   create_table "uberons", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "accession",  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "uberons", ["user_id"], name: "index_uberons_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -223,21 +264,38 @@ ActiveRecord::Schema.define(version: 20161030051852) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url",         limit: 255
+    t.integer  "user_id"
   end
 
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
+  add_index "vendors", ["user_id"], name: "index_vendors_on_user_id", using: :btree
 
   add_foreign_key "antibodies", "human_genes"
   add_foreign_key "antibodies", "isotypes"
   add_foreign_key "antibodies", "organisms"
+  add_foreign_key "antibodies", "users"
   add_foreign_key "antibodies", "vendors"
+  add_foreign_key "antibody_purifications", "users"
+  add_foreign_key "attachments", "users"
+  add_foreign_key "biosample_types", "users"
   add_foreign_key "biosamples", "biosample_types"
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "documents", "document_types"
+  add_foreign_key "documents", "users"
+  add_foreign_key "donors", "users"
+  add_foreign_key "experiment_types", "users"
+  add_foreign_key "human_genes", "users"
+  add_foreign_key "isotypes", "users"
   add_foreign_key "libraries", "biosamples"
   add_foreign_key "libraries", "nucleic_acid_terms"
   add_foreign_key "libraries", "users"
   add_foreign_key "libraries", "vendors"
+  add_foreign_key "nucleic_acid_terms", "users"
+  add_foreign_key "organisms", "users"
+  add_foreign_key "reference_genomes", "users"
+  add_foreign_key "sequencing_platforms", "users"
+  add_foreign_key "uberons", "users"
+  add_foreign_key "vendors", "users"
 end

@@ -22,6 +22,26 @@ header {
 	}
 }
 
+#meta_attributes {
+	border: 1px solid grey;
+	border-bottom: 1px solid grey;
+	@extend .table;
+	width: 65%;
+
+	th {
+		width: 35%;
+	}
+
+	tr:first-child {
+		td, th {
+			border-top: 0px;
+		}
+	}
+
+	td, th {
+		line-height: 24px !important;
+	}
+}
 
 #attributes {
 	@extend .table;

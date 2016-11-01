@@ -1,10 +1,9 @@
 class Library < ActiveRecord::Base
 	has_and_belongs_to_many :documents
+	belongs_to :user
   belongs_to :nucleic_acid_term
   belongs_to :biosample
   belongs_to :vendor
-	belongs_to :antibody
-	belongs_to :user
 
 	validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
 	validates  :size_range, format: {with: /\A\d+-\d+\Z/}, presence: true

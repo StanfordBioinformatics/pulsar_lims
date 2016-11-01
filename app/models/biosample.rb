@@ -1,6 +1,6 @@
 class Biosample < ActiveRecord::Base
-	belongs_to :user
 	has_and_belongs_to_many :documents
+	belongs_to :user
 	belongs_to  :biosample_type
 	belongs_to  :donor
   belongs_to  :vendor
