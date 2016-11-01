@@ -1,0 +1,10 @@
+<table id="meta_attributes">
+	<tr>
+		<th>Created By:</th>
+		<td><%= record.user.email %></td>
+	</tr>
+	<tr>
+		<th>Date Created:</th>
+		<td><%= time_ago_in_words(record.created_at) %> ago </td>
+	</tr>
+</table>
