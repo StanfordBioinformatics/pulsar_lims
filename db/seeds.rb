@@ -205,6 +205,6 @@ Biosample.create!([
 
 Library.delete_all
 Library.create!([
-	{name: "first library", vendor_id: 560, user_id: User.where(email: "admin@enc.com")[0].id,nucleic_acid_term_id: 1, biosample_id: Biosample.where(name: "first biosample")[0].id, size_range: "450-650", antibody_id: Antibody.first.id, documents: [Document.find(2)]}
+	{name: "first library", vendor_id: 560, user_id: User.where(email: "admin@enc.com")[0].id,nucleic_acid_term_id: 1, biosample_id: Biosample.where(name: "first biosample")[0].id, size_range: "450-650", documents: [Document.find(2)]}
 ])
 	

@@ -1,4 +1,4 @@
-class HumanGene < ActiveRecord::Base
+class HumanTarget < ActiveRecord::Base
 	has_many :antibodies
 	belongs_to :user
 	validates :encode_identifier, uniqueness: true, presence: true

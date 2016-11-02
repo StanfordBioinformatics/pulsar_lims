@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101195446) do
+ActiveRecord::Schema.define(version: 20161102183327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 20161101195446) do
 
   add_index "experiment_types", ["user_id"], name: "index_experiment_types_on_user_id", using: :btree
 
-  create_table "human_genes", force: :cascade do |t|
+  create_table "human_targets", force: :cascade do |t|
     t.string   "encode_identifier", limit: 255
     t.string   "name",              limit: 255
     t.datetime "created_at"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 20161101195446) do
     t.integer  "user_id"
   end
 
-  add_index "human_genes", ["user_id"], name: "index_human_genes_on_user_id", using: :btree
+  add_index "human_targets", ["user_id"], name: "index_human_targets_on_user_id", using: :btree
 
   create_table "isotypes", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -270,7 +270,7 @@ ActiveRecord::Schema.define(version: 20161101195446) do
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
   add_index "vendors", ["user_id"], name: "index_vendors_on_user_id", using: :btree
 
-  add_foreign_key "antibodies", "human_genes"
+  add_foreign_key "antibodies", "human_targets", column: "human_gene_id"
   add_foreign_key "antibodies", "isotypes"
   add_foreign_key "antibodies", "organisms"
   add_foreign_key "antibodies", "users"
@@ -286,7 +286,7 @@ ActiveRecord::Schema.define(version: 20161101195446) do
   add_foreign_key "documents", "users"
   add_foreign_key "donors", "users"
   add_foreign_key "experiment_types", "users"
-  add_foreign_key "human_genes", "users"
+  add_foreign_key "human_targets", "users"
   add_foreign_key "isotypes", "users"
   add_foreign_key "libraries", "biosamples"
   add_foreign_key "libraries", "nucleic_acid_terms"

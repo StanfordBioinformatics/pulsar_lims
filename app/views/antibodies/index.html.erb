@@ -11,7 +11,7 @@
     <tr>
 			<th>Name</th>
       <th>Organism</th>
-      <th>Gene</th>
+      <th>Target</th>
       <th>Clonality</th>
       <th>Isotype</th>
       <th>Vendor</th>
@@ -31,7 +31,7 @@
       <tr>
 				<td><%= link_to antibody.name, antibody %></td>
         <td><%= link_to antibody.organism.name, antibody.organism %></td>
-        <td><%= link_to antibody.human_gene.name, antibody.human_gene %></td>
+        <td><%= link_to antibody.human_target.name, antibody.human_target %></td>
         <td><%= antibody.clonality %></td>
         <td><%= link_to antibody.isotype.name, antibody.isotype %></td>
         <td><%= link_to antibody.vendor.name, antibody.vendor %></td>
