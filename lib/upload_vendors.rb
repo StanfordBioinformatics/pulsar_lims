@@ -15,6 +15,8 @@ end.parse!
 fh = File.open(options[:infile],'r')
 fh.readline() #header
 
+admin = User.find_by(email: "admin@enc.com")
+
 fh.each_line do |line|
 	params = {}
 	line = line.split("\t")
@@ -22,6 +24,7 @@ fh.each_line do |line|
 	params[:title] = line[1]
 	params[:description] = line[2]
 	params[:url] = line[3]
+	params[:user_id] = admin.id
 	Vendor.create!(params)
 end
 #json_data = JSON.parse(fh)
