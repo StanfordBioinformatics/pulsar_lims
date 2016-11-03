@@ -28,9 +28,10 @@ class LibrariesController < ApplicationController
   # POST /libraries
   # POST /libraries.json
   def create
-		authorize Library
     @library = Library.new(library_params)
+		authorize @library
 		@library.user = current_user
+
 		@library = add_documents(@library,params[:library][:documents])
 
     respond_to do |format|

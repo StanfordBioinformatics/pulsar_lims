@@ -27,8 +27,9 @@ class ReferenceGenomesController < ApplicationController
   # POST /reference_genomes
   # POST /reference_genomes.json
   def create
-		authorize ReferenceGenome
     @reference_genome = ReferenceGenome.new(reference_genome_params)
+		authorize @reference_genome
+		@reference_genome.user = current_user
 
     respond_to do |format|
       if @reference_genome.save

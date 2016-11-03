@@ -27,8 +27,9 @@ class VendorsController < ApplicationController
   # POST /vendors
   # POST /vendors.json
   def create
-		authorize Vendor
     @vendor = Vendor.new(vendor_params)
+		authorize @vendor
+		@vendor.user = current_user
 
     respond_to do |format|
       if @vendor.save

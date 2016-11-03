@@ -27,8 +27,9 @@ class OrganismsController < ApplicationController
   # POST /organisms
   # POST /organisms.json
   def create
-		authorize Organism
     @organism = Organism.new(organism_params)
+		authorize @organism
+		@organism.user = current_user
 
     respond_to do |format|
       if @organism.save

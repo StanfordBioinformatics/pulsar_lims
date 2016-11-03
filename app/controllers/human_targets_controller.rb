@@ -27,8 +27,9 @@ class HumanTargetsController < ApplicationController
   # POST /human_targets
   # POST /human_targets.json
   def create
-		authorize HumanTarget
     @human_target = HumanTarget.new(human_target_params)
+		authorize @human_target
+		@human_target.user = current_user
 
     respond_to do |format|
       if @human_target.save

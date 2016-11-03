@@ -27,8 +27,9 @@ class DocumentTypesController < ApplicationController
   # POST /document_types
   # POST /document_types.json
   def create
-		authorize DocumentType
     @document_type = DocumentType.new(document_type_params)
+		authorize @document_type
+		@document_type.user = current_user
 
     respond_to do |format|
       if @document_type.save

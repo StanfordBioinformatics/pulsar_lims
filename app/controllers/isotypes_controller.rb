@@ -27,8 +27,9 @@ class IsotypesController < ApplicationController
   # POST /isotypes
   # POST /isotypes.json
   def create
-		authorize Isotype
     @isotype = Isotype.new(isotype_params)
+		authorize @isotype
+		@isotype.user = current_user
 
     respond_to do |format|
       if @isotype.save

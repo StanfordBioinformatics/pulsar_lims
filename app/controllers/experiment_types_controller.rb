@@ -27,8 +27,9 @@ class ExperimentTypesController < ApplicationController
   # POST /experiment_types
   # POST /experiment_types.json
   def create
-		authorize ExperimentType
     @experiment_type = ExperimentType.new(experiment_type_params)
+		authorize @experiment_type
+		@experiment_type.user = current_user
 
     respond_to do |format|
       if @experiment_type.save

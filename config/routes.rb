@@ -1,5 +1,7 @@
 SnyderEncode::Application.routes.draw do
 
+  resources :sequencing_centers
+
   namespace :admin do
   	root "application#index"
 

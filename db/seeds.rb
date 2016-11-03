@@ -6,9 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.delete_all
-User.create!(email: "admin@enc.com", password: "password", admin: true)
-User.create!(email: "viewer@enc.com",password: "password")
+#User.delete_all
+#User.create!(email: "admin@enc.com", password: "password", admin: true)
+#User.create!(email: "viewer@enc.com",password: "password")
+
+admin_user_id = User.find_by(email: "admin@enc.com").id
 
 SequenceOntologyTerm.delete_all
 SequenceOntologyTerm.create!(name: "DNA",
@@ -133,17 +135,17 @@ Isotype.create!([
 
 AntibodyPurification.delete_all
 AntibodyPurification.create!([
-	{name: "Protein A/G" },
-	{name: "affinity" },
-	{name: "Protein A"},
-	{name: "Protein G"},
-	{name: "crude"},
-	{name: "other"},
-	{name: "IEC"},
-	{name: "IMAC"},
-	{name: "tissue culture supernatant"},
-	{name: "antiserum"},
-	{name: "IgG fraction"}
+	{name: "Protein A/G", user_id: admin_user_id},
+	{name: "affinity" , user_id: admin_user_id },
+	{name: "Protein A", user_id: admin_user_id },
+	{name: "Protein G", user_id: admin_user_id },
+	{name: "crude", user_id: admin_user_id },
+	{name: "other", user_id: admin_user_id },
+	{name: "IEC", user_id: admin_user_id },
+	{name: "IMAC", user_id: admin_user_id },
+	{name: "tissue culture supernatant", user_id: admin_user_id },
+	{name: "antiserum", user_id: admin_user_id },
+	{name: "IgG fraction", user_id: admin_user_id }
 ])
 
 Organism.delete_all
@@ -200,11 +202,11 @@ ReferenceGenome.create!([
 
 Biosample.delete_all
 Biosample.create!([
-	{name: "first biosample", user_id: User.where(email: "admin@enc.com")[0].id, biosample_type_id: 2, donor_id: 3, ontology_term_accession: "EFO:0001184", ontology_term_name: "HEK293T", lot_identifier: "11074-4D9", vendor_id: 560, vendor_product_identifier: "WH0008531M2", documents: [Document.find(1)]}
+	{name: "first biosample", user_id: admin_user_id, biosample_type_id: 2, donor_id: 3, ontology_term_accession: "EFO:0001184", ontology_term_name: "HEK293T", lot_identifier: "11074-4D9", vendor_id: 560, vendor_product_identifier: "WH0008531M2", documents: [Document.find(1)]}
 ])
 
 Library.delete_all
 Library.create!([
-	{name: "first library", vendor_id: 560, user_id: User.where(email: "admin@enc.com")[0].id,nucleic_acid_term_id: 1, biosample_id: Biosample.where(name: "first biosample")[0].id, size_range: "450-650", documents: [Document.find(2)]}
+	{name: "first library", vendor_id: 560, user_id: admin_user_id,nucleic_acid_term_id: 1, biosample_id: Biosample.where(name: "first biosample")[0].id, size_range: "450-650", documents: [Document.find(2)]}
 ])
 	

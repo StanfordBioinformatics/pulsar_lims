@@ -27,8 +27,9 @@ class DonorsController < ApplicationController
   # POST /donors
   # POST /donors.json
   def create
-		authorize Donor
     @donor = Donor.new(donor_params)
+		authorize @donor
+		@donor.user = current_user
 
     respond_to do |format|
       if @donor.save

@@ -27,8 +27,9 @@ class NucleicAcidTermsController < ApplicationController
   # POST /nucleic_acid_terms
   # POST /nucleic_acid_terms.json
   def create
-		authorize NucleicAcidTerm
     @nucleic_acid_term = NucleicAcidTerm.new(nucleic_acid_term_params)
+		authorize @nucleic_acid_term
+		@nucleic_acid_term.user = current_user
 
     respond_to do |format|
       if @nucleic_acid_term.save

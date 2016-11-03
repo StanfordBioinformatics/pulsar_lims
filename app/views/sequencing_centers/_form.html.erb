@@ -1,0 +1,11 @@
+<%= simple_form_for(@sequencing_center) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :name %> (Max. 20 characters)
+
+  <%= f.input :address %>
+
+  <div class="actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+<% end %>

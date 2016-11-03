@@ -27,8 +27,9 @@ class BiosampleTypesController < ApplicationController
   # POST /biosample_types
   # POST /biosample_types.json
   def create
-		authorize BiosampleType
     @biosample_type = BiosampleType.new(biosample_type_params)
+		authorize @biosample_type
+		@biosample_type.user = current_user
 
     respond_to do |format|
       if @biosample_type.save

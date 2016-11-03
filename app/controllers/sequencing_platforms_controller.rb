@@ -27,8 +27,9 @@ class SequencingPlatformsController < ApplicationController
   # POST /sequencing_platforms
   # POST /sequencing_platforms.json
   def create
-		authorize SequencingPlatform
     @sequencing_platform = SequencingPlatform.new(sequencing_platform_params)
+		authorize @sequencing_platform
+		@sequencing_platform.user = current_user
 
     respond_to do |format|
       if @sequencing_platform.save

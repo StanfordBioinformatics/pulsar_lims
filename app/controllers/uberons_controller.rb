@@ -27,8 +27,9 @@ class UberonsController < ApplicationController
   # POST /uberons
   # POST /uberons.json
   def create
-		authorize Uberon
     @uberon = Uberon.new(uberon_params)
+		authorize @uberon
+		@uberon.user = current_user
 
     respond_to do |format|
       if @uberon.save

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102183327) do
+ActiveRecord::Schema.define(version: 20161103070124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20161102183327) do
     t.integer  "organism_id"
     t.integer  "vendor_id"
     t.integer  "isotype_id"
-    t.integer  "human_gene_id"
     t.string   "vendor_product_identifier", limit: 255
     t.string   "vendor_product_url",        limit: 255
     t.string   "lot_identifier",            limit: 255
@@ -31,9 +30,10 @@ ActiveRecord::Schema.define(version: 20161102183327) do
     t.datetime "updated_at"
     t.string   "name",                      limit: 255
     t.integer  "user_id"
+    t.integer  "human_target_id"
   end
 
-  add_index "antibodies", ["human_gene_id"], name: "index_antibodies_on_human_gene_id", using: :btree
+  add_index "antibodies", ["human_target_id"], name: "index_antibodies_on_human_target_id", using: :btree
   add_index "antibodies", ["isotype_id"], name: "index_antibodies_on_isotype_id", using: :btree
   add_index "antibodies", ["name"], name: "index_antibodies_on_name", unique: true, using: :btree
   add_index "antibodies", ["organism_id"], name: "index_antibodies_on_organism_id", using: :btree
@@ -218,6 +218,13 @@ ActiveRecord::Schema.define(version: 20161102183327) do
 
   add_index "reference_genomes", ["user_id"], name: "index_reference_genomes_on_user_id", using: :btree
 
+  create_table "sequencing_centers", force: :cascade do |t|
+    t.string   "name"
+    t.text     "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sequencing_platforms", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
@@ -270,7 +277,7 @@ ActiveRecord::Schema.define(version: 20161102183327) do
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
   add_index "vendors", ["user_id"], name: "index_vendors_on_user_id", using: :btree
 
-  add_foreign_key "antibodies", "human_targets", column: "human_gene_id"
+  add_foreign_key "antibodies", "human_targets"
   add_foreign_key "antibodies", "isotypes"
   add_foreign_key "antibodies", "organisms"
   add_foreign_key "antibodies", "users"
