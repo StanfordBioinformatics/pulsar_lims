@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103070124) do
+ActiveRecord::Schema.define(version: 20161104060834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,7 +223,10 @@ ActiveRecord::Schema.define(version: 20161103070124) do
     t.text     "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
+
+  add_index "sequencing_centers", ["user_id"], name: "index_sequencing_centers_on_user_id", using: :btree
 
   create_table "sequencing_platforms", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -302,6 +305,7 @@ ActiveRecord::Schema.define(version: 20161103070124) do
   add_foreign_key "nucleic_acid_terms", "users"
   add_foreign_key "organisms", "users"
   add_foreign_key "reference_genomes", "users"
+  add_foreign_key "sequencing_centers", "users"
   add_foreign_key "sequencing_platforms", "users"
   add_foreign_key "uberons", "users"
   add_foreign_key "vendors", "users"

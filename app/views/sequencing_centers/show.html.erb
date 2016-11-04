@@ -1,4 +1,13 @@
-<p id="notice"><%= notice %></p>
+<header>
+	<h1><%= @sequencing_center.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_center} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_center} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @sequencing_center} %>
 
 <p>
   <strong>Name:</strong>
@@ -10,5 +19,4 @@
   <%= @sequencing_center.address %>
 </p>
 
-<%= link_to 'Edit', edit_sequencing_center_path(@sequencing_center) %> |
 <%= link_to 'Back', sequencing_centers_path %>

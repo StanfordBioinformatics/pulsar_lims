@@ -1,6 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Sequencing Centers</h1>
+<header>
+	<h1>Sequencing Centers</h1>
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {policy_class: SequencingCenter} %>
+  </ul> 
+</header>
 
 <table>
   <thead>
@@ -26,4 +29,3 @@
 
 <br>
 
-<%= link_to 'New Sequencing center', new_sequencing_center_path %>

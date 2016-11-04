@@ -1,5 +1,6 @@
 class SequencingCenter < ActiveRecord::Base
-	validates :name, uniqueness: true, presence: true, length: { minimum: 2, maximum: 20 }
+	belongs_to :user
+	validates :name, uniqueness: true, presence: true, length: { minimum: 2, maximum: 30 }
 	validates :address, uniqueness: true, presence: true
 	
 	def self.policy_class
