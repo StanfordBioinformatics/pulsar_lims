@@ -22,8 +22,8 @@
       <tr>
         <td><%= sequencing_request.name %></td>
         <td><%= sequencing_request.comment %></td>
-        <td><%= sequencing_request.sequencing_platform %></td>
-        <td><%= sequencing_request.sequencing_center %></td>
+        <td><%= sequencing_request.sequencing_platform.name %></td>
+        <td><%= sequencing_request.sequencing_center.name %></td>
         <td><%= sequencing_request.shipped %></td>
         <td><%= link_to 'Show', sequencing_request %></td>
         <td><%= link_to 'Edit', edit_sequencing_request_path(sequencing_request) %></td>
