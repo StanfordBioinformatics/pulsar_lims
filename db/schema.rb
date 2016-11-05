@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104060834) do
+ActiveRecord::Schema.define(version: 20161105011407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -188,6 +188,14 @@ ActiveRecord::Schema.define(version: 20161104060834) do
   add_index "libraries", ["user_id"], name: "index_libraries_on_user_id", using: :btree
   add_index "libraries", ["vendor_id"], name: "index_libraries_on_vendor_id", using: :btree
 
+  create_table "libraries_sequencing_requests", id: false, force: :cascade do |t|
+    t.integer "library_id",            null: false
+    t.integer "sequencing_request_id", null: false
+  end
+
+  add_index "libraries_sequencing_requests", ["library_id"], name: "index_libraries_sequencing_requests_on_library_id", using: :btree
+  add_index "libraries_sequencing_requests", ["sequencing_request_id"], name: "index_libraries_sequencing_requests_on_sequencing_request_id", using: :btree
+
   create_table "nucleic_acid_terms", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "accession",  limit: 255
@@ -236,6 +244,21 @@ ActiveRecord::Schema.define(version: 20161104060834) do
   end
 
   add_index "sequencing_platforms", ["user_id"], name: "index_sequencing_platforms_on_user_id", using: :btree
+
+  create_table "sequencing_requests", force: :cascade do |t|
+    t.string   "name"
+    t.text     "comment"
+    t.integer  "sequencing_platform_id"
+    t.integer  "sequencing_center_id"
+    t.boolean  "shipped"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "user_id"
+  end
+
+  add_index "sequencing_requests", ["sequencing_center_id"], name: "index_sequencing_requests_on_sequencing_center_id", using: :btree
+  add_index "sequencing_requests", ["sequencing_platform_id"], name: "index_sequencing_requests_on_sequencing_platform_id", using: :btree
+  add_index "sequencing_requests", ["user_id"], name: "index_sequencing_requests_on_user_id", using: :btree
 
   create_table "uberons", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -307,6 +330,9 @@ ActiveRecord::Schema.define(version: 20161104060834) do
   add_foreign_key "reference_genomes", "users"
   add_foreign_key "sequencing_centers", "users"
   add_foreign_key "sequencing_platforms", "users"
+  add_foreign_key "sequencing_requests", "sequencing_centers"
+  add_foreign_key "sequencing_requests", "sequencing_platforms"
+  add_foreign_key "sequencing_requests", "users"
   add_foreign_key "uberons", "users"
   add_foreign_key "vendors", "users"
 end

@@ -1,0 +1,38 @@
+<header>
+  <h1>Sequencing Requests</h1>
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {policy_class: SequencingRequest} %>
+  </ul> 	
+</header>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Comment</th>
+      <th>Sequencing platform</th>
+      <th>Sequencing center</th>
+      <th>Shipped</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sequencing_requests.each do |sequencing_request| %>
+      <tr>
+        <td><%= sequencing_request.name %></td>
+        <td><%= sequencing_request.comment %></td>
+        <td><%= sequencing_request.sequencing_platform %></td>
+        <td><%= sequencing_request.sequencing_center %></td>
+        <td><%= sequencing_request.shipped %></td>
+        <td><%= link_to 'Show', sequencing_request %></td>
+        <td><%= link_to 'Edit', edit_sequencing_request_path(sequencing_request) %></td>
+        <td><%= link_to 'Destroy', sequencing_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sequencing request', new_sequencing_request_path %>

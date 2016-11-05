@@ -1,0 +1,2 @@
+module SequencingRequestsHelper
+end

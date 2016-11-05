@@ -1,0 +1,13 @@
+<%= simple_form_for(@sequencing_request) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :name %>
+  <%= f.input :comment %>
+  <%= f.input :sequencing_platform_id, collection: sorted_sequencing_platform_name_id(), prompt: "Select the Sequencing Platform" %>
+  <%= f.input :sequencing_center_id, collection: sorted_sequencing_center_name_id(), prompt: "Select the Sequencing Center" %>
+  <%= f.input :shipped %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
+<% end %>

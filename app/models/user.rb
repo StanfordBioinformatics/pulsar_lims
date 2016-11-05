@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 	has_many :reference_genomes, dependent: :nullify
 	has_many :sequencing_centers, dependent: :nullify
 	has_many :sequencing_platforms, dependent: :nullify
+	has_many :sequencing_requests, dependent: :nullify
 	has_many :uberons, dependent: :nullify
 	has_many :vendors, dependent: :nullify
   # Include default devise modules. Others available are:
