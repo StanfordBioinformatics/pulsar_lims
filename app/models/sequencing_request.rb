@@ -8,6 +8,8 @@ class SequencingRequest < ActiveRecord::Base
 	validates :sequencing_center, presence: true
 	validates :sequencing_platform, presence: true
 
+	accepts_nested_attributes_for :libraries, allow_destroy: true
+
 	def self.policy_class
 		ApplicationPolicy
 	end

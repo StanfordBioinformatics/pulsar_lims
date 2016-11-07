@@ -17,9 +17,9 @@ class Library < ActiveRecord::Base
 	#The fkey antibody_id doesn't need to be required since some libraries, such as ATAC-SEq, don't have an antibody.
 
 	accepts_nested_attributes_for :documents, allow_destroy: true
+	accepts_nested_attributes_for :sequencing_requests, allow_destroy: true
 
 	def self.policy_class
 		ApplicationPolicy
 	end 
-
 end

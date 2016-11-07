@@ -32,11 +32,7 @@
        user will have been presented with this form again to correct it, 
        and I set the default selectioned to what the user had originally, 
        if any. -->
-  <% selected = nil %>
-  <% if @antibody.antibody_purifications and @antibody.new_record? %>
-    <% selected = @antibody.antibody_purifications.map{|x| x.id} %>
-  <% end %>
-  <%= render(partial: "antibody_purifications/select_antibody_purifications", locals: {f: f,selected: selected}) %>
+  <%= render(partial: "antibody_purifications/select_antibody_purifications", locals: {f: f}) %>
 
   <%= f.input :vendor_id, collection: sorted_vendor_name_id(), prompt: "Select the Vendor" %>
 

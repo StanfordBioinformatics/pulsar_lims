@@ -47,7 +47,7 @@ class AntibodiesController < ApplicationController
   # PATCH/PUT /antibodies/1.json
   def update
 		authorize @antibody
-		@antibody.remove_antibody_purifications(params[:remove_antibody_purifications])
+		#@antibody.remove_antibody_purifications(params[:remove_antibody_purifications])
 		@antibody.add_antibody_purifications(params[:antibody][:antibody_purifications])
     respond_to do |format|
       if @antibody.update(antibody_params)

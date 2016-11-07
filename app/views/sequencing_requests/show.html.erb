@@ -19,13 +19,22 @@
 </p>
 
 <p>
+	<strong>Libraries</strong>
+  <% if @sequencing_request.libraries.present? %>
+	  <% @sequencing_request.libraries.each do |lib| %>
+	  	<%= link_to lib.name, lib%>
+  	<% end %>	
+	<% end %>
+</p>
+
+<p>
   <strong>Sequencing platform:</strong>
-  <%= @sequencing_request.sequencing_platform.name %>
+  <%= link_to @sequencing_request.sequencing_platform.name, @sequencing_request.sequencing_platform %>
 </p>
 
 <p>
   <strong>Sequencing center:</strong>
-  <%= @sequencing_request.sequencing_center.name %>
+  <%= link_to @sequencing_request.sequencing_center.name, @sequencing_request.sequencing_center %>
 </p>
 
 <p>

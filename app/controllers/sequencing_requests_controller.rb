@@ -1,8 +1,16 @@
 class SequencingRequestsController < ApplicationController
+	include LibrariesConcern #gives me add_libraries()
   before_action :set_sequencing_request, only: [:show, :edit, :update, :destroy]
+	skip_after_action :verify_authorized, only: [:select_library]
 
   # GET /sequencing_requests
   # GET /sequencing_requests.json
+
+	def select_library
+		@sequencing_request = SequencingRequest.new
+		render layout: false
+	end
+		
   def index
     @sequencing_requests = policy_scope(SequencingRequest)
   end
@@ -30,6 +38,7 @@ class SequencingRequestsController < ApplicationController
     @sequencing_request = SequencingRequest.new(sequencing_request_params)
 		authorize @sequencing_request
 		@sequencing_request.user = current_user
+		@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:libraries])
 
     respond_to do |format|
       if @sequencing_request.save
@@ -46,6 +55,9 @@ class SequencingRequestsController < ApplicationController
   # PATCH/PUT /sequencing_requests/1.json
   def update
 		authorize @sequencing_request
+		@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:libraries])
+		#render text: params
+		#return
     respond_to do |format|
       if @sequencing_request.update(sequencing_request_params)
         format.html { redirect_to @sequencing_request, notice: 'Sequencing request was successfully updated.' }
@@ -76,6 +88,6 @@ class SequencingRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_request_params
-      params.require(:sequencing_request).permit(:name, :comment, :sequencing_platform_id, :sequencing_center_id, :shipped)
+      params.require(:sequencing_request).permit(:name,:comment, :sequencing_platform_id, :sequencing_center_id, :shipped, libraries_attributes: [:id,:_destroy])
     end
 end

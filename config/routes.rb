@@ -1,7 +1,5 @@
 SnyderEncode::Application.routes.draw do
 
-  resources :sequencing_requests
-
   resources :sequencing_centers
 
   namespace :admin do
@@ -13,6 +11,10 @@ SnyderEncode::Application.routes.draw do
 			end
 		end
   end
+
+	resources :sequencing_requests do
+		get :select_library, on: :collection
+	end
 
   devise_for :users
 

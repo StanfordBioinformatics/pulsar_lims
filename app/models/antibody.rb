@@ -26,7 +26,7 @@ class Antibody < ActiveRecord::Base
 	def add_antibody_purifications(purifications)
 		"""
 		Function : Adds AntibodyPurification associations to the self.antibody_purifications attr. 
-		Args     : purification - Array of AntibodyPurification foreign key IDs.
+		Args     : purification - Array of AntibodyPurification primary key IDs.
 		"""
 		if purifications.nil?
 			return
@@ -41,20 +41,20 @@ class Antibody < ActiveRecord::Base
 		end 
 	end 
 
-	def remove_antibody_purifications(purifications)
-		"""
-		Function : Removes AntibodyPurification associations from the self.antibody_purifications attr. 
-		Args     : purifications - Array of AntibodyPurification foreign key IDs.
-		"""
-		if purifications.nil?
-			return
-		end
-		purifications.each do |p| 
-			pur = AntibodyPurification.find(p)
-			if antibody_purifications.include? pur 
-				antibody_purifications.destroy(pur)
-			end 
-		end 
-	end 
+#	def remove_antibody_purifications(purifications)
+#		"""
+#		Function : Removes AntibodyPurification associations from the self.antibody_purifications attr. 
+#		Args     : purifications - Array of AntibodyPurification foreign key IDs.
+#		"""
+#		if purifications.nil?
+#			return
+#		end
+#		purifications.each do |p| 
+#			pur = AntibodyPurification.find(p)
+#			if antibody_purifications.include? pur 
+#				antibody_purifications.destroy(pur)
+#			end 
+#		end 
+#	end 
 
 end

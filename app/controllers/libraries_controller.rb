@@ -1,9 +1,7 @@
 class LibrariesController < ApplicationController
-	include DocumentsConcern #gives me add_documents(), remove_documents()
+	include DocumentsConcern #gives me add_documents()
   before_action :set_library, only: [:show, :edit, :update, :destroy]
 
-  # GET /libraries
-  # GET /libraries.json
   def index
     @libraries = policy_scope(Library)
   end
@@ -84,7 +82,7 @@ class LibrariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_params
-      params.require(:library).permit(:nucleic_acid_term_id, :biosample_id, :antibody_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, documents_attributes: [:id,:_destroy], sequencing_request_attributes: [:id,:_destroy])
+      params.require(:library).permit(:nucleic_acid_term_id, :biosample_id, :antibody_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, documents_attributes: [:id,:_destroy], sequencing_requests_attributes: [:id,:_destroy])
     end
 
 end

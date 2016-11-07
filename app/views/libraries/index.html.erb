@@ -30,8 +30,19 @@
 				<td><%= link_to library.name, library %></td>
         <td><%= library.nucleic_acid_term.name %></td>
         <td><%= link_to library.biosample.name, library.biosample %></td>
-        <td><%= library.antibody.name %></td>
-        <td><%= library.vendor.name %></td>
+
+        <% if library.antibody.present? %>
+          <td><%= library.antibody.name %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+
+        <% if library.vendor.present? %>
+          <td><%= library.vendor.name %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+  
         <td><%= library.lot_identifier %></td>
         <td><%= library.vendor_product_identifier %></td>
         <td><%= library.size_range %></td>

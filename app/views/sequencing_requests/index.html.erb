@@ -20,13 +20,11 @@
   <tbody>
     <% @sequencing_requests.each do |sequencing_request| %>
       <tr>
-        <td><%= sequencing_request.name %></td>
+        <td><%= link_to sequencing_request.name, sequencing_request %></td>
         <td><%= sequencing_request.comment %></td>
-        <td><%= sequencing_request.sequencing_platform.name %></td>
-        <td><%= sequencing_request.sequencing_center.name %></td>
+        <td><%= link_to sequencing_request.sequencing_platform.name, sequencing_request.sequencing_platform %></td>
+        <td><%= link_to sequencing_request.sequencing_center.name, sequencing_request.sequencing_center %></td>
         <td><%= sequencing_request.shipped %></td>
-        <td><%= link_to 'Show', sequencing_request %></td>
-        <td><%= link_to 'Edit', edit_sequencing_request_path(sequencing_request) %></td>
         <td><%= link_to 'Destroy', sequencing_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
