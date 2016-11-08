@@ -21,9 +21,8 @@
   <tbody>
     <% @donors.each do |donor| %>
       <tr>
-        <td><%= donor.encode_identifier %></td>
+        <td><%= link_to donor.encode_identifier, donor %></td>
         <td><%= donor.encode_alias %></td>
-        <td><%= link_to 'Show', donor %></td>
         <td><%= link_to 'Edit', edit_donor_path(donor) %></td>
         <td><%= link_to 'Destroy', donor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

@@ -96,9 +96,9 @@ Uberon.create!([
 
 Donor.delete_all
 Donor.create!([
-	{encode_identifier: "ENCDO268AAA", encode_alias:"bernstein:donor of NHEK cells"},
-	{encode_identifier: "ENCDO000ABE", encode_alias:"encode:donor of HCT-116"},
-	{encode_identifier: "ENCDO000ABF", encode_alias: "encode:donor of HEK293"}
+	{user_id: admin_user_id, encode_identifier: "ENCDO268AAA", encode_alias:"bernstein:donor of NHEK cells"},
+	{user_id: admin_user_id, encode_identifier: "ENCDO000ABE", encode_alias:"encode:donor of HCT-116"},
+	{user_id: admin_user_id, encode_identifier: "ENCDO000ABF", encode_alias: "encode:donor of HEK293"}
 	])
 
 Isotype.delete_all

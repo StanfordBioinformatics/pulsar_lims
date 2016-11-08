@@ -19,7 +19,7 @@
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
-        <%= link_to "SnyderEncode", root_path, class: "navbar-brand" %>
+        <%= link_to "<span id=\"app-title\">SnyderEncode<span>".html_safe, root_path, class: "navbar-brand" %>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
@@ -63,6 +63,7 @@
     </div>
   </nav>
   <nav id="left-nav" class="w3-sidenav w3-card-2">
+		<h4>Object Store</h4>
     <ul><%= link_to "Antibodies",antibodies_path %></ul>
     <ul><%= link_to "Antibody Purifications",antibody_purifications_path %></ul>
     <ul><%= link_to "Biosamples",biosamples_path %></ul>
