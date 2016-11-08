@@ -6,11 +6,34 @@
 @import "font-awesome";
 @import "responsive.scss";
 
+@import "w3.css";
+
 @import "admin/application";
+
+
+#left-nav {
+	ul {
+		background-color: #f8f8f8;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		padding-top: -2em;
+	}
+	background-color: #f8f8f8;
+	padding-left: 0;
+	width: 15%;
+	margin-top: -1.5em;
+}
+
+.data-container {
+	margin-left: 18%;
+}
 
 body {
 	padding-top: 70px;
+	padding-right: 2em;
 }
+
 
 header {
 	@extend .page-header;

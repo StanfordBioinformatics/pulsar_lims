@@ -1,76 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width", initial-scale=1">
+  <meta name="viewport" content="width=device-width", initial-scale=1">
   <title>
-		<% if content_for?(:title) %>
-			<%= yield(:title) %>
-		<% else %>
-			SnyderEncode 
-	<% end %>
-	</title>
+    <% if content_for?(:title) %>
+      <%= yield(:title) %>
+    <% else %>
+      SnyderEncode 
+  <% end %>
+  </title>
 
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<%= link_to "SnyderEncode", root_path, class: "navbar-brand" %>
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-		
-			<div class="collapse navbar-collapse" id="collapse">
-				<ul class="nav navbar-nav">
-					<li class="<%= "active" if current_page?("/") %>">
-						<%= link_to "Home", root_path %>
-					</li>
-					<% admins_only do %>
-						<li>
-							<%= link_to "Admin", admin_root_path %>
-						</li>
-					<% end %>
-					<% unless user_signed_in? %>
-						<li class="<%= "active" if current_page?("/users/sign_up") %>">
-							<%= link_to "Create Account", new_user_registration_path %>
-						</li>
-						<li class="<%= "active" if current_page?("/users/sign_in") %>">
-							<%= link_to "Sign in", new_user_session_path %>
-						</li>
-					<% end %>
-				</ul>
-				
-				<% if user_signed_in? %>
-					<div class="navbar-right">
-						<p class="navbar-text">
-							Signed in as <%= current_user.email %>
-						</p>
-						<ul class="nav navbar-nav">
-							<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-							</li>
-						</ul>
-					</div>
-				<% end %>
-			</div>
-		</div>
-	</nav>
-					
-			
 
-	<div class="container">
-		<% flash.each do |key, message| %>
-			<div class="alert alert-<%= key %>">
-				<%= message %>
-			</div>
-		<% end %>
-		<%= yield %>
-	</div>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to "SnyderEncode", root_path, class: "navbar-brand" %>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+    
+      <div class="collapse navbar-collapse" id="collapse">
+        <ul class="nav navbar-nav">
+          <li class="<%= "active" if current_page?("/") %>">
+            <%= link_to "Home", root_path %>
+          </li>
+          <% admins_only do %>
+            <li>
+              <%= link_to "Admin", admin_root_path %>
+            </li>
+          <% end %>
+          <% unless user_signed_in? %>
+            <li class="<%= "active" if current_page?("/users/sign_up") %>">
+              <%= link_to "Create Account", new_user_registration_path %>
+            </li>
+            <li class="<%= "active" if current_page?("/users/sign_in") %>">
+              <%= link_to "Sign in", new_user_session_path %>
+            </li>
+          <% end %>
+        </ul>
+        
+        <% if user_signed_in? %>
+          <div class="navbar-right">
+            <p class="navbar-text">
+              Signed in as <%= current_user.email %>
+            </p>
+            <ul class="nav navbar-nav">
+              <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+  <nav id="left-nav" class="w3-sidenav w3-card-2">
+    <ul><%= link_to "Antibodies",antibodies_path %></ul>
+    <ul><%= link_to "Antibody Purifications",antibody_purifications_path %></ul>
+    <ul><%= link_to "Biosamples",biosamples_path %></ul>
+    <ul><%= link_to "Biosample Types",biosample_types_path %></ul>
+    <ul><%= link_to "Documents",documents_path %></ul>
+    <ul><%= link_to "Document Types",document_types_path %></ul>
+    <ul><%= link_to "Donors",donors_path %></ul>
+    <ul><%= link_to "Experiment Types",experiment_types_path %></ul>
+    <ul><%= link_to "Human Targets",human_targets_path %></ul>
+    <ul><%= link_to "Isotypes",isotypes_path %></ul>
+    <ul><%= link_to "Libraries",libraries_path %></ul>
+    <ul><%= link_to "Nucleic Acid Terms",nucleic_acid_terms_path %></ul>
+    <ul><%= link_to "Organisms",organisms_path %></ul>
+    <ul><%= link_to "Reference Genomes",reference_genomes_path %></ul>
+    <ul><%= link_to "Sequencing Centers",sequencing_centers_path %></ul>
+    <ul><%= link_to "Sequencing Platforms",sequencing_platforms_path %></ul>
+    <ul><%= link_to "Sequencing Requests",sequencing_requests_path %></ul>
+    <ul><%= link_to "Uberons",uberons_path %></ul>
+    <ul><%= link_to "Vendors",vendors_path %></ul>
+  </nav>
+          
+  <div class="data-container">
+    <% flash.each do |key, message| %>
+      <div class="alert alert-<%= key %>">
+        <%= message %>
+      </div>
+    <% end %>
+    <%= yield %>
+  </div>
 </body>
 </html>
