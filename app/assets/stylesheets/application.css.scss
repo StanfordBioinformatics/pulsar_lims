@@ -10,6 +10,11 @@
 
 @import "admin/application";
 
+
+select:focus, input:focus {
+	background-color: #FFFFCC; 
+}
+
 #app-title {
 	font-size: 1.3em;
 }
