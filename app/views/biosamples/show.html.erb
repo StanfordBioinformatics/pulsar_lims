@@ -71,5 +71,16 @@
 	  <th>Encid:</th>
 	  <td><%= @biosample.encid %></td>
 	</tr>
+	<tr>
+    <th>Associated Libraries:</th>
+    <% if @biosample.libraries.present? %>
+      <% @biosample.libraries.each do |lib| %>
+        <td><%= link_to lib.name, lib %></td></br>
+      <% end %>  
+    <% else %>
+      <td>None</td>
+    <% end %>
+	</tr>
+</p>
 </table>
 <%= link_to 'Back', biosamples_path %>

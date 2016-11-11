@@ -9,7 +9,7 @@ class Antibody < ActiveRecord::Base
 	has_many   :libraries
 
 	validates  :name, length: { maximum: 20 }, presence: true, uniqueness: true
-	validates  :antibody_purifications, presence: true
+	#validates  :antibody_purifications, presence: true
 	validates  :vendor_id, presence: true
 	validates  :isotype_id, presence: true
 	validates  :human_target_id, presence: true

@@ -1,5 +1,6 @@
 /* Import all of Bootstrap's Css Components */
 
+@import "reset.css";
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -37,15 +38,21 @@ select:focus, input:focus {
 		padding: 0;
 		margin: 0;
 	}
+	
+	ul:last-child {
+		padding-bottom: 5em;
+	}
+
 	background-color: #f8f8f8;
 	padding-left: 1em;
 	padding-top: 2em;
-	width: 10%;
+	width: 10em;
 	margin-top: -1.5em;
+	padding-bottom: 2em;
 }
 
 .data-container {
-	margin-left: 12%;
+	margin-left: 12em;
 }
 
 body {
@@ -75,6 +82,7 @@ header h1 {
 	border: 1px solid grey;
 	border-bottom: 1px solid grey;
 	@extend .table;
+	@extend .table-condensed;
 	width: 65%;
 
 	th {

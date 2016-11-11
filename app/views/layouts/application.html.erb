@@ -34,16 +34,16 @@
             <%= link_to "Home", root_path %>
           </li>
           <% admins_only do %>
-            <li>
+            <li class="<%= "active" if current_page?("/admin") %>">
               <%= link_to "Admin", admin_root_path %>
             </li>
           <% end %>
           <% unless user_signed_in? %>
             <li class="<%= "active" if current_page?("/users/sign_up") %>">
-              <%= link_to "Create Account", new_user_registration_path %>
+              <%= link_to fa_icon("user-plus") + " Create Account", new_user_registration_path %>
             </li>
             <li class="<%= "active" if current_page?("/users/sign_in") %>">
-              <%= link_to "Sign in", new_user_session_path %>
+              <%= link_to fa_icon("sign-in") + " Sign in", new_user_session_path %>
             </li>
           <% end %>
         </ul>
@@ -51,10 +51,10 @@
         <% if user_signed_in? %>
           <div class="navbar-right">
             <p class="navbar-text">
-              Signed in as <%= current_user.email %>
+              <%= fa_icon("user")%><span> Signed in as <%= current_user.email %></span>
             </p>
             <ul class="nav navbar-nav">
-              <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+              <li><%= link_to fa_icon("sign-out") + " Sign out", destroy_user_session_path, method: :delete %>
               </li>
             </ul>
           </div>
@@ -63,7 +63,7 @@
     </div>
   </nav>
   <nav id="left-nav" class="w3-sidenav w3-card-2">
-		<h4>Object Store</h4>
+		<h5>Object Store</h5>
     <ul><%= link_to "Antibodies",antibodies_path %></ul>
     <ul><%= link_to "Antibody Purifications",antibody_purifications_path %></ul>
     <ul><%= link_to "Biosamples",biosamples_path %></ul>

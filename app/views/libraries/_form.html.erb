@@ -1,33 +1,31 @@
 <%= simple_form_for(@library) do |f| %>
-	<%= f.error_notification %>
+  <%= f.error_notification %>
 
   <%= f.input :name %>(Max. 20 characters)</br>
 
   <table>
   <tr><th>Associated Protocol Documents:</th></tr>
-	<% if @library.documents.present? %>
-    <%= f.simple_fields_for :documents do |ff| %>
-	  	<% doc = @library.documents[ff.index] %>
-	  	<tr>
- 	  	<td><%= doc.name %></td>
- 	  	<td><%= ff.input_field :_destroy, as: :boolean, label: "Remove" %></td>
-	  	</tr>
- 	   <% end %>	
-	<% end %>
-	</table></br>
+  <%= f.simple_fields_for :documents do |ff| %>
+   <% doc = @library.documents[ff.index] %>
+   <tr>
+    <td><%= doc.name %></td>
+    <td><%= ff.input_field :_destroy, as: :boolean, label: "Remove" %></td>
+   </tr>
+   <% end %>  
+  </table></br>
 
-	<table>
+  <table>
   <tr><th>Associated Sequencing Requests:</th></tr>
-	<% if @library.sequencing_requests.present? %>
+  <% if @library.sequencing_requests.present? %>
     <%= f.simple_fields_for :sequencing_requests do |ff| %>
-	  	<% seqreq = @library.sequencing_requests[ff.index] %>
-	  	<tr>
- 	  	<td><%= seqreq.name %></td>
- 	  	<td><%= ff.input_field :_destroy, as: :boolean, label: "Remove" %></td>
-	  	</tr>
- 	   <% end %>	
-	<% end %>
-	</table></br>
+      <% seqreq = @library.sequencing_requests[ff.index] %>
+      <tr>
+       <td><%= seqreq.name %></td>
+       <td><%= ff.input_field :_destroy, as: :boolean, label: "Remove" %></td>
+      </tr>
+      <% end %>  
+  <% end %>
+  </table></br>
 
   <!-- Show select for Documents. Mutliple documents can be selected.
        If the form was rejected due to a validation error, then the
@@ -50,7 +48,7 @@
 
   <%= f.input :size_range, as: :string %>
 
-	<%= f.input :strand_specific %>
+  <%= f.input :strand_specific %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary "%>
