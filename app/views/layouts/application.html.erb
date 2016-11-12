@@ -31,11 +31,11 @@
       <div class="collapse navbar-collapse" id="collapse">
         <ul class="nav navbar-nav">
           <li class="<%= "active" if current_page?("/") %>">
-            <%= link_to "Home", root_path %>
+            <%= link_to fa_icon("home") + " Home", root_path %>
           </li>
           <% admins_only do %>
             <li class="<%= "active" if current_page?("/admin") %>">
-              <%= link_to "Admin", admin_root_path %>
+              <%= link_to fa_icon("coffee") + " Admin", admin_root_path %>
             </li>
           <% end %>
           <% unless user_signed_in? %>
