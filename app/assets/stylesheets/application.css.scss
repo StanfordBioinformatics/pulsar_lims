@@ -21,24 +21,25 @@ select:focus, input:focus {
 
 .navbar-fixed-top {
 	background-color: #8C1515;
-	.container .navbar-header span, .container .collapse li a, .navbar-right span {
-		color: white;
+	.container-fluid .navbar-header span, .container-fluid .collapse li a, .navbar-right span {
+		color: #fbfbf9;
 	}
 	i {
-		color: white;
+		color: #fbfbf9;
 	}
 }
 
 .sidebar {
+	padding-left: 0;
+	margin-left: 0;
 	.navbar-fixed-side {
 		padding-bottom: $navbar-height;
 	}
-	margin-right: 2em;
-	float: left;
 }
 
 .data-container {
 	padding-right: 1em;
+	padding-bottom: $navbar-height;
 }
 
 body {
@@ -65,7 +66,6 @@ header h1 {
 
 #meta_attributes {
 	border: 1px solid grey;
-	border-bottom: 1px solid grey;
 	@extend .table;
 	@extend .table-condensed;
 	width: 65%;
@@ -87,7 +87,9 @@ header h1 {
 
 #attributes {
 	@extend .table;
+	@extend .table-hover;
 	@extend .table-condensed;
+	@extend .table-responsive;
 	width: 65%;
 
 	th {

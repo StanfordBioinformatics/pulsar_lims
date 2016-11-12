@@ -16,7 +16,7 @@
 </head>
 <body>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+    <div class="container-fluid">
       <div class="navbar-header">
         <%= link_to "<span id=\"app-title\">SnyderEncode<span>".html_safe, root_path, class: "navbar-brand" %>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
@@ -62,48 +62,52 @@
     </div>
   </nav>
 
-	<div class="sidebar container-fluid">
-		<div class="row">
-				<nav class="navbar navbar-default navbar-fixed-side">
-		<h5>Object Store</h5>
-    <ul><%= link_to "Antibodies",antibodies_path %></ul>
-    <ul><%= link_to "Antibody Purifications",antibody_purifications_path %></ul>
-    <ul><%= link_to "Biosamples",biosamples_path %></ul>
-    <ul><%= link_to "Biosample Types",biosample_types_path %></ul>
-    <ul><%= link_to "Documents",documents_path %></ul>
-    <ul><%= link_to "Document Types",document_types_path %></ul>
-    <ul><%= link_to "Donors",donors_path %></ul>
-    <ul><%= link_to "Experiment Types",experiment_types_path %></ul>
-    <ul><%= link_to "Human Targets",human_targets_path %></ul>
-    <ul><%= link_to "Isotypes",isotypes_path %></ul>
-    <ul><%= link_to "Libraries",libraries_path %></ul>
-    <ul><%= link_to "Nucleic Acid Terms",nucleic_acid_terms_path %></ul>
-    <ul><%= link_to "Organisms",organisms_path %></ul>
-    <ul><%= link_to "Reference Genomes",reference_genomes_path %></ul>
-    <ul><%= link_to "Sequencing Centers",sequencing_centers_path %></ul>
-    <ul><%= link_to "Sequencing Platforms",sequencing_platforms_path %></ul>
-    <ul><%= link_to "Sequencing Requests",sequencing_requests_path %></ul>
-    <ul><%= link_to "Uberons",uberons_path %></ul>
-    <ul><%= link_to "Vendors",vendors_path %></ul>
-  </nav>
-	</div>
-	</div>
-  <div class="data-container">
-    <% flash.each do |key, message| %>
-      <div class="alert alert-<%= key %>">
-        <%= message %>
+  <div class="container-fluid">
+    <div class="row">
+			<div class="sidebar col-xs-2">
+        <nav class="navbar navbar-default navbar-fixed-side">
+          <div class="navbar-header">
+            <span class="navbar-brand">Object Store</span>
+          </div>
+          <div class="nav navbar-nav navbar-left">
+						<%= link_to "Antibodies",antibodies_path, class: "list-group-item" %>
+            <%= link_to "Antibody Purifications",antibody_purifications_path, class: "list-group-item" %>
+            <%= link_to "Biosamples",biosamples_path, class: "list-group-item" %>
+            <%= link_to "Biosample Types",biosample_types_path, class: "list-group-item" %>
+            <%= link_to "Documents",documents_path, class: "list-group-item" %>
+            <%= link_to "Document Types",document_types_path, class: "list-group-item" %>
+            <%= link_to "Donors",donors_path, class: "list-group-item" %>
+            <%= link_to "Experiment Types",experiment_types_path, class: "list-group-item" %>
+            <%= link_to "Human Targets",human_targets_path, class: "list-group-item" %>
+            <%= link_to "Isotypes",isotypes_path, class: "list-group-item" %>
+            <%= link_to "Libraries",libraries_path, class: "list-group-item" %>
+            <%= link_to "Nucleic Acid Terms",nucleic_acid_terms_path, class: "list-group-item" %>
+            <%= link_to "Organisms",organisms_path, class: "list-group-item" %>
+            <%= link_to "Reference Genomes",reference_genomes_path, class: "list-group-item" %>
+            <%= link_to "Sequencing Centers",sequencing_centers_path, class: "list-group-item" %>
+            <%= link_to "Sequencing Platforms",sequencing_platforms_path, class: "list-group-item" %>
+            <%= link_to "Sequencing Requests",sequencing_requests_path, class: "list-group-item" %>
+            <%= link_to "Uberons",uberons_path, class: "list-group-item" %>
+            <%= link_to "Vendors",vendors_path, class: "list-group-item" %>
+          </div>
+        </nav>
       </div>
-    <% end %>
-    <%= yield %>
-    <nav id="footer" class="navbar navbar-default navbar-fixed-bottom">
-      <div class="container-fluid">
-        <div class="navbar-right">
-          <p class="navbar-text">
-            <%= fa_icon("copyright") %><span>2016 The Board of Trustees of the Leland Stanford Junior University<span>
-          </p>
-        </div>
+      <div class="data-container col-xs-10">
+        <% flash.each do |key, message| %>
+          <div class="alert alert-<%= key %>">
+          <%= message %>
+          </div>
+        <% end %>
+        <%= yield %>
       </div>
-    </nav>
+    </div>
   </div>
+  <nav id="footer" class="navbar navbar-default navbar-fixed-bottom">
+    <div class="navbar-right">
+      <p class="navbar-text">
+      <%= fa_icon("copyright") %><span>2016 The Board of Trustees of the Leland Stanford Junior University</span>
+      </p>
+    </div>
+  </nav>
 </body>
 </html>
