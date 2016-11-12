@@ -14,7 +14,6 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-
 <body>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
@@ -62,7 +61,10 @@
       </div>
     </div>
   </nav>
-  <nav id="left-nav" class="w3-sidenav w3-card-2">
+
+	<div class="sidebar container-fluid">
+		<div class="row">
+				<nav class="navbar navbar-default navbar-fixed-side">
 		<h5>Object Store</h5>
     <ul><%= link_to "Antibodies",antibodies_path %></ul>
     <ul><%= link_to "Antibody Purifications",antibody_purifications_path %></ul>
@@ -84,7 +86,8 @@
     <ul><%= link_to "Uberons",uberons_path %></ul>
     <ul><%= link_to "Vendors",vendors_path %></ul>
   </nav>
-          
+	</div>
+	</div>
   <div class="data-container">
     <% flash.each do |key, message| %>
       <div class="alert alert-<%= key %>">
@@ -92,6 +95,15 @@
       </div>
     <% end %>
     <%= yield %>
+    <nav id="footer" class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container-fluid">
+        <div class="navbar-right">
+          <p class="navbar-text">
+            <%= fa_icon("copyright") %><span>2016 The Board of Trustees of the Leland Stanford Junior University<span>
+          </p>
+        </div>
+      </div>
+    </nav>
   </div>
 </body>
 </html>

@@ -7,8 +7,6 @@
 @import "font-awesome";
 @import "responsive.scss";
 
-@import "w3.css";
-
 @import "admin/application";
 
 
@@ -20,44 +18,31 @@ select:focus, input:focus {
 	font-size: 1.3em;
 }
 
-#left-nav {
-	h4 {
-		display: inline-block;
-		margin: 0;
-		margin-bottom: 0.5em;
-		padding: 0;
-		border-bottom: 1px solid green;
-	}
-	ul {
-		background-color: #f8f8f8;
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-	}
-	ul a {
-		padding: 0;
-		margin: 0;
-	}
-	
-	ul:last-child {
-		padding-bottom: 5em;
-	}
 
-	background-color: #f8f8f8;
-	padding-left: 1em;
-	padding-top: 2em;
-	width: 10em;
-	margin-top: -1.5em;
-	padding-bottom: 2em;
+.navbar-fixed-top {
+	background-color: #8C1515;
+	.container .navbar-header span, .container .collapse li a, .navbar-right span {
+		color: white;
+	}
+	i {
+		color: white;
+	}
+}
+
+.sidebar {
+	.navbar-fixed-side {
+		padding-bottom: $navbar-height;
+	}
+	margin-right: 2em;
+	float: left;
 }
 
 .data-container {
-	margin-left: 12em;
+	padding-right: 1em;
 }
 
 body {
-	padding-top: 70px;
-	padding-right: 3em;
+	padding-top: $navbar-height;
 }
 
 
