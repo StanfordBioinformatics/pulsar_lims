@@ -29,6 +29,12 @@ select:focus, input:focus {
 	}
 }
 
+#footer {
+	padding-right: 1em;
+	margin-bottom: 0;
+	font-size: 0.8em;
+}
+
 #sidebar {
 	max-width: 12%;
 	padding-left: 0;
@@ -45,7 +51,6 @@ select:focus, input:focus {
 
 .data-container {
 	padding-right: 1em;
-	padding-bottom: $navbar-height;
 }
 
 body {
