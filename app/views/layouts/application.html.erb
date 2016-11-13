@@ -70,25 +70,25 @@
             <span class="navbar-brand">Object Store</span>
           </div>
           <div class="nav navbar-nav navbar-left">
-						<%= link_to "Antibodies",antibodies_path, class: "list-group-item" %>
-            <%= link_to "Antibody Purifications",antibody_purifications_path, class: "list-group-item" %>
-            <%= link_to "Biosamples",biosamples_path, class: "list-group-item" %>
-            <%= link_to "Biosample Types",biosample_types_path, class: "list-group-item" %>
-            <%= link_to "Documents",documents_path, class: "list-group-item" %>
-            <%= link_to "Document Types",document_types_path, class: "list-group-item" %>
-            <%= link_to "Donors",donors_path, class: "list-group-item" %>
-            <%= link_to "Experiment Types",experiment_types_path, class: "list-group-item" %>
-            <%= link_to "Human Targets",human_targets_path, class: "list-group-item" %>
-            <%= link_to "Isotypes",isotypes_path, class: "list-group-item" %>
-            <%= link_to "Libraries",libraries_path, class: "list-group-item" %>
-            <%= link_to "Nucleic Acid Terms",nucleic_acid_terms_path, class: "list-group-item" %>
-            <%= link_to "Organisms",organisms_path, class: "list-group-item" %>
-            <%= link_to "Reference Genomes",reference_genomes_path, class: "list-group-item" %>
-            <%= link_to "Sequencing Centers",sequencing_centers_path, class: "list-group-item" %>
-            <%= link_to "Sequencing Platforms",sequencing_platforms_path, class: "list-group-item" %>
-            <%= link_to "Sequencing Requests",sequencing_requests_path, class: "list-group-item" %>
-            <%= link_to "Uberons",uberons_path, class: "list-group-item" %>
-            <%= link_to "Vendors",vendors_path, class: "list-group-item" %>
+						<%= link_to "Antibodies",antibodies_path, class: current_page?("/antibodies") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Antibody Purifications",antibody_purifications_path, class: current_page?("/antibody_purifications") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Biosamples",biosamples_path, class: current_page?("/biosamples") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Biosample Types",biosample_types_path, class: current_page?("/biosample_types") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Documents",documents_path, class: current_page?("/documents") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Document Types",document_types_path, class: current_page?("/document_types") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Donors",donors_path, class: current_page?("/donors") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Experiment Types",experiment_types_path, class: current_page?("/experiment_types") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Human Targets",human_targets_path, class: current_page?("/human_targets") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Isotypes",isotypes_path, class: current_page?("/isotypes") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Libraries",libraries_path, class: current_page?("/libraries") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Nucleic Acid Terms",nucleic_acid_terms_path, class: current_page?("/nucleic_acid_terms") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Organisms",organisms_path, class: current_page?("/organisms") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Reference Genomes",reference_genomes_path, class: current_page?("/reference_genomes") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Sequencing Centers",sequencing_centers_path, class: current_page?("/sequencing_centers") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Sequencing Platforms",sequencing_platforms_path, class: current_page?("/sequencing_platforms") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Sequencing Requests",sequencing_requests_path, class: current_page?("/sequencing_requests") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Uberons",uberons_path, class: current_page?("/uberons") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Vendors",vendors_path, class: current_page?("/vendors") ? "list-group-item active" : "list-group-item" %>
           </div>
         </nav>
       </div>
