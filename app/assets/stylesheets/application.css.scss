@@ -29,11 +29,17 @@ select:focus, input:focus {
 	}
 }
 
-.sidebar {
+#sidebar {
+	max-width: 12%;
 	padding-left: 0;
 	margin-left: 0;
 	.navbar-fixed-side {
 		padding-bottom: $navbar-height;
+	}
+	a {
+		margin-left: 3%;
+		margin-right: 3%;
+		font-size: 0.8em;
 	}
 }
 
