@@ -40,12 +40,14 @@ select:focus, input:focus {
 	padding-left: 0;
 	margin-left: 0;
 	.navbar-fixed-side {
-		padding-bottom: $navbar-height;
 	}
 	a {
 		margin-left: 3%;
 		margin-right: 3%;
 		font-size: 0.8em;
+	}
+	a:last-child {
+		margin-bottom: 3%;
 	}
 }
 
