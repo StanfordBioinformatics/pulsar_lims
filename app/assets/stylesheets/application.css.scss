@@ -17,6 +17,10 @@ select:focus, input:focus {
   font-size: 1.3em;
 }
 
+.encode-logo {
+	height: $navbar-height;
+	background-color: white;
+}
 
 .navbar-fixed-top {
   background-color: #8C1515;
@@ -34,12 +38,23 @@ select:focus, input:focus {
 
 html {
   height: 100%;
+
   body {
     height: 100%;
-      #sidebar {
+
+		#main {
+			height: 100%;
+
+			.row {
         height: 100%;
-        .navbar-fixed-side {
-         height: 100%;
+
+        #sidebar {
+          height: 100%;
+
+          .navbar-fixed-side {
+            height: 100%;
+				  }
+        }
       }
     }
   }
@@ -64,7 +79,7 @@ body {
 }
 
 #sidebar {
-  max-width: 10%;
+  max-width: 12%;
   padding: 0;
   margin: 0;
   .navbar-fixed-side {
