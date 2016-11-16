@@ -9,167 +9,198 @@
 
 @import "admin/application";
 
-
 select:focus, input:focus {
-	background-color: #FFFFCC; 
+  background-color: #FFFFCC; 
 }
 
 #app-title {
-	font-size: 1.3em;
+  font-size: 1.3em;
 }
 
 
 .navbar-fixed-top {
-	background-color: #8C1515;
-	.container-fluid .navbar-header span, .container-fluid .collapse li a, .navbar-right span {
-		color: #fbfbf9;
-	}
-	i {
-		color: #fbfbf9;
-	}
+  background-color: #8C1515;
+  .container-fluid .navbar-header span, .container-fluid .collapse li a, .navbar-right span {
+    color: #fbfbf9;
+  }
+  i {
+    color: #fbfbf9;
+  }
+}
+
+#tofloat {
+  float: left;
+}
+
+html {
+  height: 100%;
+  body {
+    height: 100%;
+    #main-wraper, #main {
+      height: 100%;
+      .row {
+        height: 100%;
+        #sidebar {
+          height: 100%;
+          .navbar-fixed-side {
+           height: 100%;
+          }
+        }  
+      }
+    }
+  }
+}
+
+body { 
+  padding-top: $navbar-height;
 }
 
 #footer {
-	padding-right: 1em;
-	margin-bottom: 0;
-	font-size: 0.8em;
+  width: 100%;
+  max-width: 100%;
+  clear: both;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+
+  .navbar-right {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 #sidebar {
-	max-width: 12%;
-	padding-left: 0;
-	margin-left: 0;
-	.navbar-fixed-side {
-	}
-	a {
-		margin-left: 3%;
-		margin-right: 3%;
-		font-size: 0.8em;
-	}
-	a:last-child {
-		margin-bottom: 3%;
-	}
+  max-width: 10%;
+  padding: 0;
+  margin: 0;
+  .navbar-fixed-side {
+    padding: 0;
+    margin: 0;
+  }
+
+  ul {
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: 0;
+    padding-bottom: 0; a { font-size: 0.8em;
+    }
+  }
 }
 
 .data-container {
-	padding-right: 1em;
+  padding-right: 1em;
 }
-
-body {
-	padding-top: $navbar-height;
-}
-
 
 header {
-	@extend .page-header;
-	position: relative;
-	padding-bottom: 0px;
-	
-	&:first-child {
-		margin-top: 20px;
-	}
+  @extend .page-header;
+  position: relative;
+  padding-bottom: 0px;
+  
+  &:first-child {
+    margin-top: 20px;
+  }
 }
 
 /*
 header h1 {
-	border: 2px solid red;
-	width: 10%;
+  border: 2px solid red;
+  width: 10%;
 }
 */
 
 #meta_attributes {
-	border: 1px solid grey;
-	@extend .table;
-	@extend .table-condensed;
-	width: 65%;
+  border: 1px solid grey;
+  @extend .table;
+  @extend .table-condensed;
+  width: 65%;
 
-	th {
-		width: 35%;
-	}
+  th {
+    width: 35%;
+  }
 
-	tr:first-child {
-		td, th {
-			border-top: 0px;
-		}
-	}
+  tr:first-child {
+    td, th {
+      border-top: 0px;
+    }
+  }
 
-	td, th {
-		line-height: 24px !important;
-	}
+  td, th {
+    line-height: 24px !important;
+  }
 }
 
 #attributes {
-	@extend .table;
-	@extend .table-hover;
-	@extend .table-condensed;
-	@extend .table-responsive;
-	width: 65%;
+  @extend .table;
+  @extend .table-hover;
+  @extend .table-condensed;
+  @extend .table-responsive;
+  width: 65%;
 
-	th {
-		width: 35%;
-	}
+  th {
+    width: 35%;
+  }
 
-	tr:first-child {
-		td, th {
-			border-top: 0px;
-		}
-	}
+  tr:first-child {
+    td, th {
+      border-top: 0px;
+    }
+  }
 
-	td, th {
-		line-height: 24px !important;
-	}
+  td, th {
+    line-height: 24px !important;
+  }
 }
 
 ul.actions {
-	max-width: 75%;
-	min-width: 50%;
-	@extend .list-unstyled;
-	@extend .list-inline;
+  max-width: 75%;
+  min-width: 50%;
+  @extend .list-unstyled;
+  @extend .list-inline;
 }
 
 a.new, a.edit, a.delete {
-	@extend .btn;
-	
-	&:before {
-		font-family: "FontAwesome";
-		padding-right: 0.5em;
-	}
+  @extend .btn;
+  
+  &:before {
+    font-family: "FontAwesome";
+    padding-right: 0.5em;
+  }
 }
 
 a.new {
-	@extend .btn-success;
+  @extend .btn-success;
 
-	&:before {
-		@extend .fa-plus;
-	}
+  &:before {
+    @extend .fa-plus;
+  }
 }
 
 a.edit {
-	@extend .btn-primary;
+  @extend .btn-primary;
 
-	&:before {
-		@extend .fa-pencil;
-	}
+  &:before {
+    @extend .fa-pencil;
+  }
 }
 
 a.delete {
-	@extend .btn-danger;
+  @extend .btn-danger;
 
-	&:before {
-		@extend .fa-trash;
-	}
+  &:before {
+    @extend .fa-trash;
+  }
 }
 
 .alert-notice {
-	@extend .alert-success;
+  @extend .alert-success;
 }
 
 .alert-alert {
-	@extend .alert-danger;
+  @extend .alert-danger;
 }
 
 form {
-	max-width: 55%;
+  max-width: 55%;
 }
 
 #error_explanation {
