@@ -36,16 +36,10 @@ html {
   height: 100%;
   body {
     height: 100%;
-    #main-wraper, #main {
-      height: 100%;
-      .row {
+      #sidebar {
         height: 100%;
-        #sidebar {
-          height: 100%;
-          .navbar-fixed-side {
-           height: 100%;
-          }
-        }  
+        .navbar-fixed-side {
+         height: 100%;
       }
     }
   }
