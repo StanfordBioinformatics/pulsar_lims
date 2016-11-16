@@ -92,7 +92,7 @@
           </ul>
         </nav>
       </div>
-      <div class="data-container col-xs-10">
+      <div id="main-body" class="data-container col-xs-10">
         <% flash.each do |key, message| %>
           <div class="alert alert-<%= key %>">
           <%= message %>
@@ -105,7 +105,7 @@
   <nav id="footer" class="navbar navbar-default navbar-bottom">
     <div class="navbar-right">
       <p class="navbar-text">
-      <%= fa_icon("copyright") %><span>2016 The Board of Trustees of the Leland Stanford Junior University</span>
+      <%= fa_icon("copyright") %><span> 2016 The Board of Trustees of the Leland Stanford Junior University</span>
       </p>
     </div>
   </nav>
