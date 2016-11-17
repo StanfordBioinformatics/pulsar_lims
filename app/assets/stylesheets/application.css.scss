@@ -18,11 +18,17 @@ select:focus, input:focus {
 }
 
 #topleft-nav {
-	.active a {
-		background-color: #337ab7;
-	}
+ .active a {
+		background-color: #8C1515;
+	} 
 	a:hover {
-		background-color: #337ab7;
+		background-color: rgba(0,0,0,0.2);
+	}
+}
+
+#sign-out-btn {
+	a:hover {
+		background-color: rgba(0,0,0,0.2);
 	}
 }
 

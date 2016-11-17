@@ -55,7 +55,7 @@
               <%= fa_icon("user")%><span> Signed in as <%= current_user.email %></span>
             </p>
             <ul class="nav navbar-nav">
-              <li><%= link_to fa_icon("sign-out") + " Sign out", destroy_user_session_path, method: :delete %>
+              <li id="sign-out-btn"><%= link_to fa_icon("sign-out") + " Sign out", destroy_user_session_path, method: :delete %>
               </li>
             </ul>
           </div>
