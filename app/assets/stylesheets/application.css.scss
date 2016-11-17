@@ -17,7 +17,16 @@ select:focus, input:focus {
   font-size: 1.3em;
 }
 
+#topleft-nav {
+  display: inline-block;
+	.active a {
+		background-color: #337ab7;
+	}
+}
+
 .encode-logo {
+	float: left;
+	margin-right: 1em;
 	height: $navbar-height;
 	background-color: white;
 }

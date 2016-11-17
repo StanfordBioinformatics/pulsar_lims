@@ -27,8 +27,10 @@
         </button>
       </div>
     
+  		<%= image_tag "ENCODE_logo.png", class: "encode-logo" %>
+
       <div class="collapse navbar-collapse" id="collapse">
-        <ul class="nav navbar-nav">
+        <ul id="topleft-nav" class="nav navbar-nav">
           <li class="<%= "active" if current_page?("/") %>">
             <%= link_to fa_icon("home") + " Home", root_path %>
           </li>
