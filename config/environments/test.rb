@@ -5,6 +5,9 @@ SnyderEncode::Application.configure do
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
+	
+	config.action_controller.action_on_unpermitted_parameters = :raise
+
   config.cache_classes = true
 
   # Do not eager load code on boot. This avoids loading your whole application
