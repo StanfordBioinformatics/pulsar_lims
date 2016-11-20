@@ -34,13 +34,13 @@
        if any. -->
   <%= render(partial: "documents/select_documents", locals: {f: f}) %>
 
-  <%= f.input :nucleic_acid_term_id, label: "Nucleic Acid Term Name", collection: sorted_nucleic_acid_term_name_id(), prompt: "Select the Term Name" %>
+  <%= f.association :nucleic_acid_term, label: "Nucleic Acid Term Name", collection: NucleicAcidTerm.order(:name), label_method: :name, prompt: "Select the Term Name" %>
 
-  <%= f.input :biosample_id, collection: sorted_biosample_name_id(), prompt: "Select the Biosample" %>
+  <%= f.association :biosample, collection: Biosample.order(:name), label_method: :name, prompt: "Select the Biosample" %>
 
-  <%= f.input :antibody_id, collection: sorted_antibody_name_id(), prompt: "Select the Antibody" %>
+  <%= f.association :antibody, collection: Antibody.order(:name), label_method: :name, prompt: "Select the Antibody" %>
 
-  <%= f.input :vendor_id, collection: sorted_vendor_name_id(), prompt: "Select the Vendor" %>
+  <%= f.association :vendor, collection: Vendor.order(:name), label_method: :name,  prompt: "Select the Vendor" %>
 
   <%= f.input :lot_identifier %>
 

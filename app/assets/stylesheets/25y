@@ -18,19 +18,17 @@ select:focus, input:focus {
 }
 
 #topleft-nav {
- .active a {
-		background-color: #8C1515;
-	} 
+	.active a {
+		background-color: #337ab7;
+	}
 	a:hover {
 		background-color: rgba(0,0,0,0.2);
 	}
 }
 
-#sign-out-btn {
+.sign-out-btn {
 	a:hover {
-		background-color: rgba(0,0,0,0.2);
-	}
-}
+		
 
 .encode-logo {
 	float: left;
@@ -48,6 +46,10 @@ select:focus, input:focus {
   i {
     color: #fbfbf9;
   }
+}
+
+#tofloat {
+  float: left;
 }
 
 html {

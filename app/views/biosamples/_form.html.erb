@@ -25,11 +25,11 @@
 	<% end %>
 	<%= render(partial: "documents/select_documents", locals: {f: f,selected: selected}) %>
 
-	<%= f.input :biosample_type_id, collection: sorted_biosampletype_name_id(), prompt: "Select the Biosample Type" %>
+	<%= f.association :biosample_type, collection: BiosampleType.order(:name), prompt: "Select the Biosample Type" %>
 
   <%= f.input :description %>
 
-	<%= f.input :vendor_id, collection: sorted_vendor_name_id(), prompt: "Select the Vendor" %>
+	<%= f.association :vendor, collection: Vendor.order(:name), prompt: "Select the Vendor" %>
 
 	<%= f.input:vendor_product_identifier %>
 
@@ -39,7 +39,7 @@
 
 	<%= f.input :ontology_term_accession, label: "Ontology term accession describing the biosample" %> (An UBERON, EFO, CL, NTR, FBbt, or WBbt identifer)
 
-	<%= f.input :donor_id, collection: sorted_donor_name_id, prompt: "Choose The Human Donor" %>
+	<%= f.association :donor, collection: Donor.order(:encode_alias), label_method: :encode_alias, prompt: "Choose The Human Donor" %>
 
 	<%= f.input :passage_number %>
 

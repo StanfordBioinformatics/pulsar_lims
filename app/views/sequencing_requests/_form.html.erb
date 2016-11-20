@@ -33,8 +33,8 @@
     <%= link_to "Add Library", select_library_sequencing_requests_path, remote: true, id: "add_library" %>
   </p>
 
-  <%= f.input :sequencing_platform_id, collection: sorted_sequencing_platform_name_id(), prompt: "Select the Sequencing Platform" %>
-  <%= f.input :sequencing_center_id, collection: sorted_sequencing_center_name_id(), prompt: "Select the Sequencing Center" %>
+  <%= f.association :sequencing_platform, collection: SequencingPlatform.order(:name), label_method: :name, prompt: "Select the Sequencing Platform" %>
+  <%= f.association :sequencing_center, collection: SequencingCenter.order(:name), label_method: :name, prompt: "Select the Sequencing Center" %>
   <%= f.input :shipped %>
 
   <div class="form-actions">

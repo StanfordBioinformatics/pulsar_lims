@@ -14,7 +14,7 @@
 
   <%= f.input :name %> (Max. 20 characters)
 
-  <%= f.input :organism_id, collection: sorted_organism_name_id(), prompt: "Select the Organism" %>
+  <%= f.association :organism, collection: Organism.order(:name), label_method: :name, prompt: "Select the Organism" %>
 
 	<table>
 	<tr><th>Associated Antibody Purifications</th></tr>
@@ -34,11 +34,11 @@
        if any. -->
   <%= render(partial: "antibody_purifications/select_antibody_purifications", locals: {f: f}) %>
 
-  <%= f.input :vendor_id, collection: sorted_vendor_name_id(), prompt: "Select the Vendor" %>
+  <%= f.association :vendor, collection: Vendor.order(:name), label_method: :name, prompt: "Select the Vendor" %>
 
-  <%= f.input :isotype_id, collection: sorted_isotype_name_id(), prompt: "Select the Isotype" %>
+  <%= f.association :isotype, collection: Isotype.order(:name), label_method: :name, prompt: "Select the Isotype" %>
 
-  <%= f.input :human_target_id, collection: sorted_target_name_id(), prompt: "Select the Human Target" %>
+  <%= f.association :human_target, collection: HumanTarget.order(:name), label_method: :name, prompt: "Select the Human Target" %>
 
   <%= f.input :vendor_product_identifier %>
 
