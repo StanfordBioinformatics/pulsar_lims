@@ -1,3 +1,7 @@
-<% sequencing_requests.each do |sr| %>
- 	<td><%= link_to sr.name, sequencing_request_path(sr) %></td>
+<% if sequencing_requests.present? %>
+	<% sequencing_requests.each do |sr| %>
+ 		<%= link_to sr.name, sequencing_request_path(sr) %></br>
+	<% end %>
+<% else %>
+	None
 <% end %>

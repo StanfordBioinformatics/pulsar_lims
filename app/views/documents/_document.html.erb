@@ -1,4 +1,2 @@
-<tr>
-	<td><%= link_to(document.name, document) %></td>
-	<td> Remove: <input type="checkbox" id="<%= document.name %>" name="remove_documents[]" value=<%= document.id %> /></td>
-</tr>
+<%= link_to(document.name, document) %>
+Remove: <input type="checkbox" id="<%= document.name %>" name="remove_documents[]" value="<%= document.id %>"></br>
