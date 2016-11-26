@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem "active_model_serializers", "~> 0.9.3" 
+
 gem "devise", "~> 3.4.1"
 gem "pundit", "~> 0.3.0"
 
