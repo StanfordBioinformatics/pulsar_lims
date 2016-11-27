@@ -56,20 +56,9 @@ html {
   body {
     height: 100%;
 
-		#main {
+		#mains {
 			height: 100%;
 
-			.row {
-        height: 100%;
-
-        #sidebar {
-          height: 100%;
-
-          .navbar-fixed-side {
-            height: 100%;
-				  }
-        }
-      }
     }
   }
 }
@@ -81,7 +70,6 @@ body {
 #footer {
   width: 100%;
   max-width: 100%;
-  clear: both;
   padding: 0;
   margin: 0;
   font-size: 0.8em;
@@ -92,6 +80,9 @@ body {
   }
 }
 
+#main {
+	height: 100%;
+}
 #sidebar {
   max-width: 12%;
   padding: 0;
@@ -102,10 +93,15 @@ body {
   }
 
   ul {
+		&:last-child {
+			padding-bottom: 1.0em;
+		}
     margin-left: 1em;
     margin-right: 1em;
     margin-bottom: 0;
-    padding-bottom: 0; a { font-size: 0.8em;
+    padding-bottom: 0; 
+    a { 
+      font-size: 0.8em;
     }
   }
 }
