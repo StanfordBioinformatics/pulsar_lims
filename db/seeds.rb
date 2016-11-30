@@ -98,7 +98,8 @@ Donor.delete_all
 Donor.create!([
 	{user_id: admin_user_id, encode_identifier: "ENCDO268AAA", encode_alias:"bernstein:donor of NHEK cells"},
 	{user_id: admin_user_id, encode_identifier: "ENCDO000ABE", encode_alias:"encode:donor of HCT-116"},
-	{user_id: admin_user_id, encode_identifier: "ENCDO000ABF", encode_alias: "encode:donor of HEK293"}
+	{user_id: admin_user_id, encode_identifier: "ENCDO000ABF", encode_alias: "encode:donor of HEK293"},
+	{user_id: admin_user_id, encode_identifier: "ENCDO000AAK", encode_alias: "encode:donor of GM12878"
 	])
 
 Isotype.delete_all
@@ -199,16 +200,29 @@ ReferenceGenome.create!([
 	{name: "NCBI GRCh38", url: "http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human"}
 ])
 
+HumanTarget.delete_all
+HumanTarget.create!([
+{name: "RELB-human", user_id: admin_user_id, encode_identifier: "4c8ef6d7-d7e9-4af5-9b8b-4e44450b5c3c"}
+])
+
+Antibody.delete_all
+Antibody.create!([
+{name: "ENCAB140SNC", user_id: admin_user_id, organism_id: Organism.find_by(name: "human").id, vendor_product_identifier: "A302-183A", vendor_id: Vendor.find_by(name: "bethyl-labs").id, clonality: "polyclonal", human_target_id: HumanTarget.find_by(name: "RELB-human").id, antibody_purifications: [AntibodyPurification.find_by(name: "affinity")], lot_identifier: 1}
+])
 
 Biosample.delete_all
 Biosample.create!([
-	{name: "ENCBS826GBM",encid: "ENCBS826GBM", user_id: admin_user_id, description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.first_by(encode_alias: "encode:donor of HEK293").id, ontology_term_accession: "EFO:0001182", ontology_term_name: "HEK293", lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(name: "timothy-hughes").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+	{name: "ENCBS826GBM", user_id: admin_user_id, encid: "ENCBS826GBM", escription: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(encode_alias: "encode:donor of HEK293").id, ontology_term_accession: "EFO:0001182", ontology_term_name: "HEK293", lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(name: "timothy-hughes").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
-	{name: "ENCBS758JEW",encid: "ENCBS758JEW", user_id: admin_user_id, description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.first_by(encode_alias: "encode:donor of HEK293").id, ontology_term_accession: "EFO:0001182", ontology_term_name: "HEK293", lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(name: "timothy-hughes").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]}
+{name: "ENCBS758JEW", user_id: admin_user_id, encid: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(encode_alias: "encode:donor of HEK293").id, ontology_term_accession: "EFO:0001182", ontology_term_name: "HEK293", lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(name: "timothy-hughes").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+
+{name: "ENCBS389LEA", user_id: admin_user_id, encid: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(encode_alias: "encode:donor of GM12878").id, ontology_term_accession: "EFO:0002784", ontology_term_name: "GM12878", vendor_id: Vendor.find_by(name: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
+
+{name: "ENCBS488GLI", user_id: admin_user_id, encid: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(encode_alias: "encode:donor of GM12878").id, ontology_term_accession: "EFO:0002784", ontology_term_name: "GM12878", vendor_id: Vendor.find_by(name: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],culture_harvest_date: "2014-06-05"}
 ])
 
 Library.delete_all
 Library.create!([
-	{name: "first library", vendor_id: 560, user_id: admin_user_id,nucleic_acid_term_id: 1, biosample_id: Biosample.where(name: "first biosample")[0].id, size_range: "450-650", documents: [Document.find(2)]}
+	{name: "ENCLB709JYF", user_id: admin_user_id, nucleic_acid_term_id: NucleicAcidTerm.find_by(name: "DNA").id, biosample_id: Biosample.find_by(name: "ENCBS488GLI").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by(name: "ENCAB140SNC").id}
 ])
 	
