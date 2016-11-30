@@ -11,7 +11,6 @@ class Antibody < ActiveRecord::Base
 	validates  :name, length: { maximum: 20 }, presence: true, uniqueness: true
 	#validates  :antibody_purifications, presence: true
 	validates  :vendor_id, presence: true
-	validates  :isotype_id, presence: true
 	validates  :human_target_id, presence: true
 	validates  :vendor_product_identifier, presence: true
 	validates  :lot_identifier, presence: true

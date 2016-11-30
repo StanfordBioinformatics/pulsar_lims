@@ -34,7 +34,9 @@
 
 <p>
   <strong>Isotype:</strong>
-  <%= link_to @antibody.isotype.name, @antibody.isotype %>
+	<% if @antibody.isotype.present? %>
+	  <%= link_to @antibody.isotype.name, @antibody.isotype %>
+	<% end %>
 </p>
 
 <p>
