@@ -23,7 +23,7 @@
       <% lib = @sequencing_request.libraries[ff.index] %>
       <tr>
       <td><%= lib.name %></td>
-      <td><%= ff.input_field :_destroy, as: :boolean, label: "Remove" %></td>
+      <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
       </tr>
      <% end %>  
   <% end %>
