@@ -5,6 +5,6 @@
                  prompt will be the default selection.
 -->
 		             
-<%= f.input :documents, label: "Add Protocol Documents From List:", collection: sorted_document_name_id(), prompt: "Select a Document", input_html: {multiple: true} %>
+<%= f.input :documents, label: "Add Protocol Documents From List:", selected: selected, collection: sorted_document_name_id(), prompt: "Select a Document", input_html: {multiple: true} %>
 
 <!--  f.select :documents, choices=options_for_select(sorted_document_name_id,selected=selected),options={},html_options={:prompt => "Select     a Document",:multiple => true}  -->

@@ -202,7 +202,9 @@ ReferenceGenome.create!([
 
 Biosample.delete_all
 Biosample.create!([
-	{name: "first biosample", user_id: admin_user_id, biosample_type_id: 2, donor_id: 3, ontology_term_accession: "EFO:0001184", ontology_term_name: "HEK293T", lot_identifier: "11074-4D9", vendor_id: 560, vendor_product_identifier: "WH0008531M2", documents: [Document.find(1)]}
+	{name: "ENCBS826GBM",encid: "ENCBS826GBM", user_id: admin_user_id, description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.first_by(encode_alias: "encode:donor of HEK293").id, ontology_term_accession: "EFO:0001182", ontology_term_name: "HEK293", lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(name: "timothy-hughes").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+
+	{name: "ENCBS758JEW",encid: "ENCBS758JEW", user_id: admin_user_id, description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.first_by(encode_alias: "encode:donor of HEK293").id, ontology_term_accession: "EFO:0001182", ontology_term_name: "HEK293", lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(name: "timothy-hughes").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]}
 ])
 
 Library.delete_all
