@@ -207,7 +207,8 @@ HumanTarget.create!([
 
 Antibody.delete_all
 Antibody.create!([
-{name: "ENCAB140SNC", user_id: admin_user_id, organism_id: Organism.find_by(name: "human").id, vendor_product_identifier: "A302-183A", vendor_id: Vendor.find_by(name: "bethyl-labs").id, clonality: "polyclonal", human_target_id: HumanTarget.find_by(name: "RELB-human").id, antibody_purifications: [AntibodyPurification.find_by(name: "affinity")], lot_identifier: 1}
+{name: "ENCAB140SNC", user_id: admin_user_id, organism_id: Organism.find_by(name: "human").id, vendor_product_identifier: "A302-183A", vendor_id: Vendor.find_by(name: "bethyl-labs").id, clonality: "polyclonal", human_target_id: HumanTarget.find_by(encode_identifier: "RELB-human").id, antibody_purifications: [AntibodyPurification.find_by(name: "affinity")], lot_identifier: 1},
+{name: "ENCAB830JLB", user_id: admin_user_id, organism_id: Organism.find_by(name: "human").id, vendor_product_identifier: "07-729", vendor_id: Vendor.find_by(name: "millipore").id, clonality: "polyclonal", human_target_id: HumanTarget.find_by(encode_identifier: "CTCF-human").id, antibody_purifications: [], lot_identifier: 2599305}
 ])
 
 Biosample.delete_all
@@ -223,6 +224,8 @@ Biosample.create!([
 
 Library.delete_all
 Library.create!([
-	{name: "ENCLB709JYF", user_id: admin_user_id, nucleic_acid_term_id: NucleicAcidTerm.find_by(name: "DNA").id, biosample_id: Biosample.find_by(name: "ENCBS488GLI").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by(name: "ENCAB140SNC").id}
+	{name: "ENCLB709JYF", user_id: admin_user_id, nucleic_acid_term_id: NucleicAcidTerm.find_by(name: "DNA").id, biosample_id: Biosample.find_by(name: "ENCBS488GLI").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by(name: "ENCAB140SNC").id},
+
+	{name: "ENCLB874QGN", user_id: admin_user_id, nucleic_acid_term_id: NucleicAcidTerm.find_by(name: "DNA").id, biosample_id: Biosample.find_by(name: "ENCBS389LEA").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by(name: "ENCAB140SNC").id}
 ])
 	

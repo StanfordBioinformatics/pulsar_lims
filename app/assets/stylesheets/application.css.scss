@@ -153,11 +153,6 @@ header h1 {
   @extend .table-hover;
   @extend .table-condensed;
   @extend .table-responsive;
-  width: 65%;
-
-  th {
-    width: 35%;
-  }
 
   tr:first-child {
     td, th {
