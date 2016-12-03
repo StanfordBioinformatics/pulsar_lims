@@ -18,6 +18,14 @@ select:focus, input:focus {
 }
 
 #topleft-nav {
+	li.encode-logo a {
+		margin: 0;
+		padding: 0;
+		img {
+			background-color: white;
+			height: $navbar-height;
+		}
+	}
  .active a {
 		background-color: #8C1515;
 	} 
@@ -30,14 +38,6 @@ select:focus, input:focus {
 	a:hover {
 		background-color: rgba(0,0,0,0.2);
 	}
-}
-
-.encode-logo {
-	float: left;
-	margin-left: 0.5em;
-	margin-right: 0.5em;
-	height: $navbar-height;
-	background-color: white;
 }
 
 .navbar-fixed-top {
@@ -55,11 +55,6 @@ html {
 
   body {
     height: 100%;
-
-		#mains {
-			height: 100%;
-
-    }
   }
 }
 
@@ -82,10 +77,10 @@ body {
 
 #main {
 	height: 100%;
+	padding-top: $navbar-height;
 }
+
 #sidebar {
-  max-width: 12%;
-  padding: 0;
   margin: 0;
   .navbar-fixed-side {
     padding: 0;
@@ -93,6 +88,7 @@ body {
   }
 
   ul {
+		margin-top: 0.5em;
 		&:last-child {
 			padding-bottom: 1.0em;
 		}
