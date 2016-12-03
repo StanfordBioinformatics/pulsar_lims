@@ -27,10 +27,12 @@
         </button>
       </div>
     
-  		<%= link_to image_tag("ENCODE_logo.png", class: "encode-logo"),"https://www.encodeproject.org/" %>
 
       <div class="collapse navbar-collapse" id="collapse">
         <ul id="topleft-nav" class="nav navbar-nav">
+  		    <li class="encode-logo">
+						<%= link_to image_tag("ENCODE_logo.png"),"https://www.encodeproject.org/" %>
+					</li>
           <li class="<%= "active" if current_page?("/") %>">
             <%= link_to fa_icon("home") + " Home", root_path %>
           </li>
@@ -50,7 +52,7 @@
         </ul>
         
         <% if user_signed_in? %>
-          <div class="navbar-right">
+          <div style="position:absolute;right:2em;" class="navbar-right">
             <p class="navbar-text">
               <%= fa_icon("user")%><span> Signed in as <%= current_user.email %></span>
             </p>
@@ -66,12 +68,12 @@
 
   <div id="main" class="container-fluid">
     <div class="row">
-      <div id="sidebar" class="col-xs-2">
+      <div id="sidebar" class="col-xs-4 col-sm-3 col-md-2">
         <nav class="navbar navbar-default navbar-side">
           <div class="navbar-header">
             <span class="navbar-brand"><h5>Object Store<h5></span>
           </div>
-          <ul class="nav navbar-nav">
+          <ul style="clear:left;" class="nav navbar-nav">
 						<%= link_to "Antibodies",antibodies_path, class: controller_name() == "antibodies" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Antibody Purifications",antibody_purifications_path, class: controller_name() == "antibody_purifications" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Biosamples",biosamples_path, class: controller_name() == "biosamples" ? "list-group-item active" : "list-group-item" %>
@@ -94,7 +96,7 @@
           </ul>
         </nav>
       </div>
-      <div id="main-body" class="data-container col-xs-10">
+      <div id="main-body" class="data-container col-xs-8 col-sm-9 col-md-10">
         <% flash.each do |key, message| %>
           <div class="alert alert-<%= key %>">
           <%= message %>
