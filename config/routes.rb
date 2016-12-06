@@ -36,7 +36,7 @@ SnyderEncode::Application.routes.draw do
 
   resources :organisms
 
-  resources :human_targets
+  resources :targets
 
   resources :isotypes
 
