@@ -19,12 +19,12 @@ admin = User.find_by(email: "admin@enc.com")
 
 fh.each_line do |line|
 	params = {}
+	params[:user_id] = admin.id
 	line = line.split("\t")
-	params[:name] = line[0]
-	params[:title] = line[1]
+	params[:encode_identifier] = line["@id"].split("/").last
+	params[:name] = line[1] #the 'title' attribute in the JSON
 	params[:description] = line[2]
 	params[:url] = line[3]
-	params[:user_id] = admin.id
 	Vendor.create!(params)
 end
 #json_data = JSON.parse(fh)

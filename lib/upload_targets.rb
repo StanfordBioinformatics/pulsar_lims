@@ -30,7 +30,7 @@ json_data.each do |x|
 	end
 	params = {}
 	params[:user_id] = admin.id
-	params[:encode_identifier] = x["@id"].split("/")
+	params[:encode_identifier] = x["@id"].split("/").last
 	params[:name] = x["label"]
 	#Using the label since it's unique and all entries have it. The 
 	
