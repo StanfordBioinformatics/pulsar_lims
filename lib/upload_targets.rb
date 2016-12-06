@@ -2,6 +2,7 @@
 
 #require "json" #not needed since I added this to the Gemfile and RAILS already requires all gems when using rails runner.
 require "optparse"
+require "json"
 
 SPECIES="Homo sapiens"
 
@@ -34,7 +35,7 @@ json_data.each do |x|
 	params[:name] = x["label"]
 	#Using the label since it's unique and all entries have it. The 
 	
-	HumanGene.create!(params)
+	Target.create!(params)
 end
 puts count
 

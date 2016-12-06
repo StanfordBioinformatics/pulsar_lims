@@ -12,19 +12,19 @@ OptionParser.new do |opts|
 	end
 end.parse!
 
-fh = File.open(options[:infile],'r')
-fh.readline() #header
-
 admin = User.find_by(email: "admin@enc.com")
 
-fh.each_line do |line|
+fh = File.read(options[:infile])
+
+json_data = JSON.parse(fh)
+
+json_data.each do |x|
 	params = {}
 	params[:user_id] = admin.id
-	line = line.split("\t")
-	params[:encode_identifier] = line["@id"].split("/").last
-	params[:name] = line[1] #the 'title' attribute in the JSON
-	params[:description] = line[2]
-	params[:url] = line[3]
+	params[:encode_identifier] = x["@id"].split("/").last
+	params[:name] = x["title"] 
+	params[:description] = x["description"]
+	params[:url] = x["url"]
 	Vendor.create!(params)
 end
 #json_data = JSON.parse(fh)
@@ -40,6 +40,3 @@ end
 #	params[:url] = x["url"]
 #	Vendor.create!(params)
 #end
-
-
-
