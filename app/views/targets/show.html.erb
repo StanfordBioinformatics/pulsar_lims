@@ -1,0 +1,22 @@
+<header>
+  <h1><%= @target.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @target} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @target} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @target } %>
+
+<p>
+  <strong>Encode identifier:</strong>
+  <%= @target.encode_identifier %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @target.name %>
+</p>
+
+<%= link_to 'Back', targets_path %>

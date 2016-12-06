@@ -1,9 +1,7 @@
-#!/usr/bin/env /Users/nathankw/RailsApps/snyder_encode/bin/rails runner
 
 #require "json" #not needed since I added this to the Gemfile and RAILS already requires all gems when using rails runner.
 require "optparse"
-
-HumanGene.delete_all
+require "json"
 
 options = {}
 OptionParser.new do |opts|
@@ -12,7 +10,6 @@ OptionParser.new do |opts|
 	end
 end.parse!
 
-admin = User.find_by(email: "admin@enc.com")
 
 fh = File.read(options[:infile])
 json_data = JSON.parse(fh)
@@ -20,19 +17,31 @@ json_data = JSON.parse(fh)
 #	json_data = json_data["@graph"]
 #end
 
+labels = []
 count = 0
 json_data.each do |x|
 	organism = x["organism"]["scientific_name"]
 	if organism != "Homo sapiens"
 		next
 	end
+	names = []
 	params = {}
-	params[:user_id] = admin.id
-	params[:encode_identifier] = x["@id"].split("/")
-	params[:name] = x["label"]
-	#Using the label since it's unique and all entries have it. The 
+	#dcc_id = x["@id"].split("/").last
+	#params[:encode_identifier] = dcc_id
+	#gene_name = x["gene_name"]
+	#if gene_name.nil?
+	#	count += 1
+	#	next	
+	#end
+	puts x["label"]
+	#params[:name] = gene_name
+#	name = x["gene_name"]
+#	if not names.include? name
+#		names << name
+#	else
+#		print(name)
+#		break
+#	end
 	
-	HumanGene.create!(params)
 end
-puts count
 

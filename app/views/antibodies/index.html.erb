@@ -31,7 +31,7 @@
       <tr>
 				<td><%= link_to antibody.name, antibody %></td>
         <td><%= link_to antibody.organism.name, antibody.organism %></td>
-        <td><%= link_to antibody.human_target.name, antibody.human_target %></td>
+        <td><%= link_to antibody.target.name, antibody.target %></td>
         <td><%= antibody.clonality %></td>
 				<% if antibody.isotype.present? %>
 	        <td><%= link_to antibody.isotype.name, antibody.isotype %></td>

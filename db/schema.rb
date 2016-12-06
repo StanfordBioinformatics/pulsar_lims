@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105011407) do
+ActiveRecord::Schema.define(version: 20161206014037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,16 +147,6 @@ ActiveRecord::Schema.define(version: 20161105011407) do
 
   add_index "experiment_types", ["user_id"], name: "index_experiment_types_on_user_id", using: :btree
 
-  create_table "human_targets", force: :cascade do |t|
-    t.string   "encode_identifier", limit: 255
-    t.string   "name",              limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-  end
-
-  add_index "human_targets", ["user_id"], name: "index_human_targets_on_user_id", using: :btree
-
   create_table "isotypes", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
@@ -260,6 +250,16 @@ ActiveRecord::Schema.define(version: 20161105011407) do
   add_index "sequencing_requests", ["sequencing_platform_id"], name: "index_sequencing_requests_on_sequencing_platform_id", using: :btree
   add_index "sequencing_requests", ["user_id"], name: "index_sequencing_requests_on_user_id", using: :btree
 
+  create_table "targets", force: :cascade do |t|
+    t.string   "encode_identifier", limit: 255
+    t.string   "name",              limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "targets", ["user_id"], name: "index_targets_on_user_id", using: :btree
+
   create_table "uberons", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "accession",  limit: 255
@@ -303,9 +303,9 @@ ActiveRecord::Schema.define(version: 20161105011407) do
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
   add_index "vendors", ["user_id"], name: "index_vendors_on_user_id", using: :btree
 
-  add_foreign_key "antibodies", "human_targets"
   add_foreign_key "antibodies", "isotypes"
   add_foreign_key "antibodies", "organisms"
+  add_foreign_key "antibodies", "targets", column: "human_target_id"
   add_foreign_key "antibodies", "users"
   add_foreign_key "antibodies", "vendors"
   add_foreign_key "antibody_purifications", "users"
@@ -319,7 +319,6 @@ ActiveRecord::Schema.define(version: 20161105011407) do
   add_foreign_key "documents", "users"
   add_foreign_key "donors", "users"
   add_foreign_key "experiment_types", "users"
-  add_foreign_key "human_targets", "users"
   add_foreign_key "isotypes", "users"
   add_foreign_key "libraries", "biosamples"
   add_foreign_key "libraries", "nucleic_acid_terms"
@@ -333,6 +332,7 @@ ActiveRecord::Schema.define(version: 20161105011407) do
   add_foreign_key "sequencing_requests", "sequencing_centers"
   add_foreign_key "sequencing_requests", "sequencing_platforms"
   add_foreign_key "sequencing_requests", "users"
+  add_foreign_key "targets", "users"
   add_foreign_key "uberons", "users"
   add_foreign_key "vendors", "users"
 end

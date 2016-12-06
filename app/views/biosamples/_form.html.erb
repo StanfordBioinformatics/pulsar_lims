@@ -39,7 +39,7 @@
 
 	<%= f.input :ontology_term_accession, label: "Ontology term accession describing the biosample" %> (An UBERON, EFO, CL, NTR, FBbt, or WBbt identifer)
 
-	<%= f.association :donor, collection: Donor.order(:encode_alias), label_method: :encode_alias, prompt: "Choose The Human Donor" %>
+	<%= f.association :donor, collection: Donor.order(:encode_alias), label_method: :encode_alias, prompt: "Choose The Donor" %>
 
 	<%= f.input :passage_number %>
 

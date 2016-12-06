@@ -38,7 +38,7 @@
 
   <%= f.association :isotype, collection: Isotype.order(:name), label_method: :name, prompt: "Select the Isotype" %>
 
-  <%= f.association :human_target, collection: HumanTarget.order(:name), label_method: :name, prompt: "Select the Human Target" %>
+  <%= f.association :target, collection: Target.order(:name), label_method: :name, prompt: "Select the Target" %>
 
   <%= f.input :vendor_product_identifier %>
 

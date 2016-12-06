@@ -1,1 +1,1 @@
-json.extract! @antibody, :id, :organism_id, :vendor_id, :isotype_id, :human_targets_id, :vendor_product_identifier, :vendor_product_url, :lot_identifier, :clonality, :antigen_description, :antigen_sequence, :created_at, :updated_at
+json.extract! @antibody, :id, :organism_id, :vendor_id, :isotype_id, :targets_id, :vendor_product_identifier, :vendor_product_url, :lot_identifier, :clonality, :antigen_description, :antigen_sequence, :created_at, :updated_at

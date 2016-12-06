@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 	has_many :donors, dependent: :nullify
 	has_many :experiment_types, dependent: :nullify
 	has_many :libraries, dependent: :nullify
-	has_many :human_targets, dependent: :nullify
+	has_many :targets, dependent: :nullify
 	has_many :isotypes, dependent: :nullify
 	has_many :nucleic_acid_terms, dependent: :nullify
 	has_many :organisms, dependent: :nullify

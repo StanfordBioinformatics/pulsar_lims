@@ -1,0 +1,35 @@
+<header>
+	<h1>Targets</h1>
+
+  <ul class="actions">
+		<%= render partial: "application_partials/auth_new_record", locals: {policy_class: Antibody} %>
+  </ul> 
+</header>
+
+<table id="attributes">
+  <thead>
+    <tr>
+      <th>Encode identifier</th>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @targets.each do |target| %>
+      <tr>
+        <td><%= target.encode_identifier %></td>
+        <td><%= target.name %></td>
+        <td><%= link_to 'Show', target %></td>
+        <td><%= link_to 'Edit', edit_target_path(target) %></td>
+        <td><%= link_to 'Destroy', target, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Target', new_target_path %>
