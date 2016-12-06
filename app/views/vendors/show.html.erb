@@ -10,13 +10,13 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @vendor} %>
 
 <p>
-  <strong>Name:</strong>
-  <%= link_to @vendor.name,@vendor.url %>
+	<strong>ENCID:</strong>
+	<%= @vendor.encode_identifier %>
 </p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @vendor.title %>
+  <strong>Name:</strong>
+  <%= link_to @vendor.name,@vendor.url %>
 </p>
 
 <p>
