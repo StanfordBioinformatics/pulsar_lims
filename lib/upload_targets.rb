@@ -3,6 +3,8 @@
 #require "json" #not needed since I added this to the Gemfile and RAILS already requires all gems when using rails runner.
 require "optparse"
 
+SPECIES="Homo sapiens"
+
 HumanGene.delete_all
 
 options = {}
@@ -23,7 +25,7 @@ json_data = JSON.parse(fh)
 count = 0
 json_data.each do |x|
 	organism = x["organism"]["scientific_name"]
-	if organism != "Homo sapiens"
+	if organism != SPECIES
 		next
 	end
 	params = {}
