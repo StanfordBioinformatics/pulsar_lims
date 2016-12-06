@@ -5,7 +5,7 @@ require "optparse"
 
 SPECIES="Homo sapiens"
 
-HumanGene.delete_all
+Target.delete_all
 
 options = {}
 OptionParser.new do |opts|
