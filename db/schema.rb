@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206014037) do
+ActiveRecord::Schema.define(version: 20161206024626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -258,6 +258,8 @@ ActiveRecord::Schema.define(version: 20161206014037) do
     t.integer  "user_id"
   end
 
+  add_index "targets", ["encode_identifier"], name: "index_targets_on_encode_identifier", unique: true, using: :btree
+  add_index "targets", ["name"], name: "index_targets_on_name", unique: true, using: :btree
   add_index "targets", ["user_id"], name: "index_targets_on_user_id", using: :btree
 
   create_table "uberons", force: :cascade do |t|
