@@ -32,12 +32,8 @@
        user will have been presented with this form again to correct it, 
        and I set the default selectioned to what the user had originally, 
        if any. -->
-  <% selected = nil %>
-  <% if @library.documents and @library.new_record? %>
-    <% selected = @library.documents.map{|x| x.id} %>
-  <% end %>
-  <%= render(partial: "documents/select_documents", locals: {f: f,selected: selected}) %>
 
+	<%= f.association :documents, collection: sorted_document_name_id(), prompt: "Select a Document" %>
   <%= f.association :nucleic_acid_term, label: "Nucleic Acid Term Name", collection: NucleicAcidTerm.order(:name), label_method: :name, prompt: "Select the Term Name" %>
 
   <%= f.association :biosample, collection: Biosample.order(:name), label_method: :name, prompt: "Select the Biosample" %>

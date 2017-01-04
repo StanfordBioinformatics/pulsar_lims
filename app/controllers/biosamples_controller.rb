@@ -31,7 +31,7 @@ class BiosamplesController < ApplicationController
     @biosample = Biosample.new(biosample_params)
 		authorize @biosample
 		@biosample.user = current_user
-		@biosample = add_documents(@biosample,params[:biosample][:documents])
+		@biosample = add_documents(@biosample,params[:biosample][:document_ids])
 		
     respond_to do |format|
       if @biosample.save

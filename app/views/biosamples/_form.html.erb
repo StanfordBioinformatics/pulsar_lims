@@ -19,11 +19,8 @@
 				 user will have been presented with this form again to correct it, 
 				 and I set the default selectioned to what the user had originally, 
 				 if any. -->
-	<% selected = nil %>
-	<% if @biosample.documents and @biosample.new_record? %>
-		<% selected = @biosample.documents.map{|x| x.id} %>
-	<% end %>
-	<%= render(partial: "documents/select_documents", locals: {f: f,selected: selected}) %>
+
+	<%= f.association :documents, collection: sorted_document_name_id(), prompt: "Select a Document" %>
 
 	<%= f.association :biosample_type, collection: BiosampleType.order(:name), prompt: "Select the Biosample Type" %>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206025827) do
+ActiveRecord::Schema.define(version: 20170103230716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 20161206025827) do
     t.datetime "updated_at"
     t.string   "name",                      limit: 255
     t.integer  "user_id"
-    t.integer  "human_target_id"
+    t.integer  "target_id"
   end
 
-  add_index "antibodies", ["human_target_id"], name: "index_antibodies_on_human_target_id", using: :btree
   add_index "antibodies", ["isotype_id"], name: "index_antibodies_on_isotype_id", using: :btree
   add_index "antibodies", ["name"], name: "index_antibodies_on_name", unique: true, using: :btree
   add_index "antibodies", ["organism_id"], name: "index_antibodies_on_organism_id", using: :btree
+  add_index "antibodies", ["target_id"], name: "index_antibodies_on_target_id", using: :btree
   add_index "antibodies", ["user_id"], name: "index_antibodies_on_user_id", using: :btree
   add_index "antibodies", ["vendor_id"], name: "index_antibodies_on_vendor_id", using: :btree
 
@@ -308,7 +308,7 @@ ActiveRecord::Schema.define(version: 20161206025827) do
 
   add_foreign_key "antibodies", "isotypes"
   add_foreign_key "antibodies", "organisms"
-  add_foreign_key "antibodies", "targets", column: "human_target_id"
+  add_foreign_key "antibodies", "targets"
   add_foreign_key "antibodies", "users"
   add_foreign_key "antibodies", "vendors"
   add_foreign_key "antibody_purifications", "users"

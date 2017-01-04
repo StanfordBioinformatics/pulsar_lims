@@ -28,9 +28,12 @@ class LibrariesController < ApplicationController
   def create
     @library = Library.new(library_params)
 		authorize @library
+
+		#render json: params
+		#return
 		@library.user = current_user
 
-		@library = add_documents(@library,params[:library][:documents])
+		@library = add_documents(@library,params[:library][:document_ids])
 
     respond_to do |format|
       if @library.save
