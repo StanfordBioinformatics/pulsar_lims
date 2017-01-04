@@ -37,8 +37,10 @@ class SequencingRequestsController < ApplicationController
   def create
     @sequencing_request = SequencingRequest.new(sequencing_request_params)
 		authorize @sequencing_request
+	#	render json: params
+	#	return
 		@sequencing_request.user = current_user
-		@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:libraries])
+		@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:library_ids])
 
     respond_to do |format|
       if @sequencing_request.save
@@ -55,7 +57,7 @@ class SequencingRequestsController < ApplicationController
   # PATCH/PUT /sequencing_requests/1.json
   def update
 		authorize @sequencing_request
-		@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:libraries])
+		@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:library_ids])
 		#render text: params
 		#return
     respond_to do |format|
