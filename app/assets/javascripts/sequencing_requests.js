@@ -1,25 +1,30 @@
+//Set up handler for when the user wants to remove a library selection
+$(document).on("click","#libraries .remove_library", function(event) {
+	$parentSelector = $(this).closest(".sequencing_request_libraries");
+	$parentSelector.fadeOut("slow",function() {
+		$parentSelector.remove();
+	})
+});
+
+//Listen for a successful AJAX response
 $(document).ajaxSuccess(function(event,jqXHR,ajaxProps) {
+		//If the add library button was clicked, append the response to the #libraries element
+    // and 1) adjust the default label text, 2) Add a remove link, and 3) have the new library selector fade in.
 		if (event.currentTarget.activeElement.id === "add_library") {
-//			newContent = jqXHR.responseText;
-//			console.log(newContent);
+			//newContent = jqXHR.responseText;
+			//console.log(newContent);
 			$libraries = $("#libraries");
 			$libraries.append(jqXHR.responseText);
 			$newContent = $libraries.find(".sequencing_request_libraries").last();
-			$newContentLabel = $newContent.children("label").first()
-			$newContentLabel.text("Library")
+			$newContentLabel = $newContent.children("label").first() 
+			$newContentLabel.text("Library") //default label set by simple form is Libraries.
 			$newContentLabel.append('<span>  <a class="remove_library fa fa-remove"></a></span>');
-			$libraries.on("click",".remove_library", function(event) {
-				$parentSelector = $(this).closest(".sequencing_request_libraries");
-				$parentSelector.fadeOut("slow",function() {
-					$parentSelector.remove();
-				})
-			});
 			$newContent.hide().fadeIn("slow");
 		}
 	}
 )
 
-/* coffescript equivalent
+/* coffescript 
   $ ->  
   $("#add_library").on "ajax:success", (event,data) ->  
     $("#libraries").append data
