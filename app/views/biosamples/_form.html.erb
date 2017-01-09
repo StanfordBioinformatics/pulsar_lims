@@ -1,17 +1,17 @@
 <%= simple_form_for(@biosample) do |f| %>
 	<%= f.error_notification %>
 
-	<%= f.input :name %> (Max. 20 characters)
+	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique biosample name"} %> (Max. 20 characters)
 
-  <table>
-  <tr><th>Associated Protocol Documents:</th></tr>
-  <%= f.simple_fields_for :documents do |ff| %>
-    <% doc = @biosample.documents[ff.index] %>
-    <tr>
-      <td><%= doc.name %></td>
-      <td><%= ff.input_field :_destroy, as: :boolean, label: "Remove" %></td>
-    </tr></br>
-   <% end %>  
+	<table>
+		<tr><th>Associated Protocol Documents:</th></tr>
+		<%= f.simple_fields_for :documents do |ff| %>
+			<% doc = @biosample.documents[ff.index] %>
+			<tr>
+ 		   	<td><%= doc.name %></td>
+ 	 	  	<td><%= ff.input_field :_destroy, as: :boolean, label: "Remove" %></td>
+   	</tr>
+   	<% end %>  
   </table></br>
 
 	<!-- Show select for Documents. Mutliple documents can be selected.
@@ -20,31 +20,42 @@
 				 and I set the default selectioned to what the user had originally, 
 				 if any. -->
 
-	<%= f.association :documents, collection: sorted_document_name_id(), prompt: "Select a Document" %>
+	<%= f.association :documents, collection: sorted_document_name_id(), prompt: "Select documents",
+			label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not data file)."} %>
 
-	<%= f.association :biosample_type, collection: BiosampleType.order(:name), prompt: "Select the Biosample Type" %>
+	<%= f.association :biosample_type, collection: BiosampleType.order(:name), prompt: "Select the Biosample Type",
+			label_html: {"data-toggle" => "tooltip", "title" => "The categorization of the biosample."} %>
 
-  <%= f.input :description %>
+  <%= f.input :description, label_html: {"data-toggle" => "tooltip", "title" => "A plain text description of the biosample. Do not include experiment details, constructs or treatments."} %>
 
-	<%= f.association :vendor, collection: Vendor.order(:name), prompt: "Select the Vendor" %>
+	<%= f.association :vendor, collection: Vendor.order(:name), prompt: "Select the Vendor",
+			label_html: {"data-toggle" => "tooltip", "title" => "The originating lab or vendor."} %>
 
-	<%= f.input:vendor_product_identifier %>
+	<%= f.input:vendor_product_identifier, 
+			label_html: {"data-toggle" => "tooltip", "title" => "The product identifier provided by the originating lab or vendor."} %>
 
-	<%= f.input :lot_identifier %>
+	<%= f.input :lot_identifier,
+			label_html: {"data-toggle" => "tooltip", "title" => "The lot identifier provided by the originating lab or vendor."} %>
 
-	<%= f.input :ontology_term_name, label: "Ontology term name describing the biosample" %>
+	<%= f.input :ontology_term_name, label: "Ontology term name describing the biosample",
+			label_html: {"data-toggle" => "tooltip", "title" => "Ontology term describing biosample."} %>
 
-	<%= f.input :ontology_term_accession, label: "Ontology term accession describing the biosample" %> (An UBERON, EFO, CL, NTR, FBbt, or WBbt identifer)
+	<%= f.input :ontology_term_accession, label: "Ontology term accession describing the biosample",
+			label_html: {"data-toggle" => "tooltip", "title" => "Ontology identifier describing biosample - An UBERON, EFO, CL, NTR, FBbt, or WBbt identifer"} %>
 
-	<%= f.association :donor, collection: Donor.order(:encode_alias), label_method: :encode_alias, prompt: "Choose The Donor" %>
+	<%= f.association :donor, collection: Donor.order(:encode_alias), label_method: :encode_alias, prompt: "Choose The Donor",
+			label_html: {"data-toggle" => "tooltip", "title" => "The donor of the biosample"} %>
 
-	<%= f.input :passage_number %>
+	<%= f.input :passage_number,
+			label_html: {"data-toggle" => "tooltip", "title" => "In calculating passage number, include passages from the source."} %>
 
-	<%= f.input :culture_harvest_date %>
+	<%= f.input :culture_harvest_date,
+			label_html: {"data-toggle" => "tooltip", "title" => "For cultured samples, the date the biosample was taken."} %>
 
-	<%= f.input :submitter_comments %>
+	<%= f.input :submitter_comments,
+			label_html: {"data-toggle" => "tooltip", "title" => "Additional information specified by the submitter to be displayed as a comment on the portal."} %>
 
-	<%= f.input :encid %>
+	<%= f.input :encid, label_html: {"data-toggle" => "tooltip", "title" => "The corresponding ID for this biosample on the ENCODE Portal"} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary"%>
