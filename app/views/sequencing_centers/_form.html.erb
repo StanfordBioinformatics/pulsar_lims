@@ -1,9 +1,9 @@
 <%= simple_form_for(@sequencing_center) do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :name %> (Max. 20 characters)
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing center name"} %> (Max. 20 characters)
 
-  <%= f.input :address %>
+  <%= f.input :address, label_html: {"data-toggle" => "tooltip", "title" => "Address of the sequencing center"} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary" %>

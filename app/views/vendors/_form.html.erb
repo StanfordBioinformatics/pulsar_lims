@@ -1,11 +1,12 @@
 <%= simple_form_for(@vendor) do |f| %>
 	<%= f.error_notification %>
 
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique vendor name"} %>
+
 	<%= f.input :encode_identifier %>
 
-  <%= f.input :name %>
 
-  <%= f.input :description %>
+  <%= f.input :description, label_html: {"data-toggle" => "tooltip", "title" => "Vendor description"} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary" %>

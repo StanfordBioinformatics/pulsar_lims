@@ -1,9 +1,10 @@
 <%= simple_form_for(@target) do |f| %>
 	<%= f.error_notification %>
 
+  <%= f.input :name, label_html: {"data-toggle" => "Unique target (i.e. gene) name"} %>
+
   <%= f.input :encode_identifier %>
 
-  <%= f.input :name %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary" %>

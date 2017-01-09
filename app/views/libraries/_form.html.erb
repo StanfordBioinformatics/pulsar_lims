@@ -1,7 +1,7 @@
 <%= simple_form_for(@library) do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :name, label_html: {"data-toggle" => "tooltip","title" => "Library name"} %>(Max. 20 characters)</br>
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip","title" => "Unique library name"} %>(Max. 20 characters)</br>
 
   <table>
   <tr><th>Associated Protocol Documents:</th></tr>
@@ -21,7 +21,7 @@
       <% seqreq = @library.sequencing_requests[ff.index] %>
       <tr>
        <td><%= seqreq.name %></td>
-       <td><%= ff.input_field :_destroy, as: :boolean, label: "Remove" %></td>
+       <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
       </tr>
       <% end %>  
   <% end %>
@@ -33,7 +33,7 @@
        and I set the default selectioned to what the user had originally, 
        if any. -->
 
-	<%= f.association :documents, collection: sorted_document_name_id(), prompt: "Select a Document", 
+	<%= f.association :documents, collection: sorted_document_name_id(), prompt: "Select documents", 
 			label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not data file)."} %>
   <%= f.association :nucleic_acid_term, label: "Nucleic Acid Term Name", collection: NucleicAcidTerm.order(:name), 
 			label_method: :name, prompt: "Select the Term Name",

@@ -1,8 +1,8 @@
 <%= simple_form_for(@reference_genome) do |f| %>
 	<%= f.error_notification %>
 
-  <%= f.input :name %>
-  <%= f.input :url %>
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique reference genome name"} %>
+  <%= f.input :url, label_html: {"data-toggle" => "tooltip", "title" => "External link providing details on the reference genome build."} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary"%>
