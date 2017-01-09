@@ -1,7 +1,7 @@
 <%= simple_form_for(@library) do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :name %>(Max. 20 characters)</br>
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip","title" => "Library name"} %>(Max. 20 characters)</br>
 
   <table>
   <tr><th>Associated Protocol Documents:</th></tr>
@@ -33,22 +33,32 @@
        and I set the default selectioned to what the user had originally, 
        if any. -->
 
-	<%= f.association :documents, collection: sorted_document_name_id(), prompt: "Select a Document" %>
-  <%= f.association :nucleic_acid_term, label: "Nucleic Acid Term Name", collection: NucleicAcidTerm.order(:name), label_method: :name, prompt: "Select the Term Name" %>
+	<%= f.association :documents, collection: sorted_document_name_id(), prompt: "Select a Document", 
+			label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not data file)."} %>
+  <%= f.association :nucleic_acid_term, label: "Nucleic Acid Term Name", collection: NucleicAcidTerm.order(:name), 
+			label_method: :name, prompt: "Select the Term Name",
+			label_html: {"data-toggle" => "tooltip","title" => "SO (Sequence Ontology) term best matching the molecule isolated to generate the library (e.g. 'RNA' for a total RNA library, even if that library is subsequently reverse transcribed for DNA sequencing.)"} %>
 
-  <%= f.association :biosample, collection: Biosample.order(:name), label_method: :name, prompt: "Select the Biosample" %>
+  <%= f.association :biosample, collection: Biosample.order(:name), label_method: :name, prompt: "Select the Biosample",
+			label_html: {"data-toggle" => "tooltip","title" => "The biosample that nucleic acid was isolated from to generate the library."} %>
 
-  <%= f.association :antibody, collection: Antibody.order(:name), label_method: :name, prompt: "Select the Antibody" %>
+  <%= f.association :antibody, collection: Antibody.order(:name), label_method: :name, prompt: "Select the Antibody",
+			label_html: {"data-toggle" => "tooltip", "title" => "For Immunoprecipitation assays, the antibody used."} %>
 
-  <%= f.association :vendor, collection: Vendor.order(:name), label_method: :name,  prompt: "Select the Vendor" %>
+  <%= f.association :vendor, collection: Vendor.order(:name), label_method: :name,  prompt: "Select the Vendor",
+			label_html: {"data-toggle" => "tooltip", "title" => "The vendor, for nucleic acids or proteins purchased directly from a vendor (e.g. total RNA)."} %>
 
-  <%= f.input :lot_identifier %>
+  <%= f.input :lot_identifier, 
+			label_html: {"data-toggle" => "tooltip", "title" => "The lot identifier provided by the vendor, for nucleic acids or proteins purchased directly from a vendor (e.g. total RNA)."} %>
 
-  <%= f.input :vendor_product_identifier %>
+  <%= f.input :vendor_product_identifier,
+			label_html: {"data-toggle" => "tooltip", "title" => "The product identifier provided by the vendor, for nucleic acids or proteins purchased directly from a vendor (e.g. total RNA)."} %>
 
-  <%= f.input :size_range, as: :string %>
+  <%= f.input :size_range, as: :string,
+			label_html: {"data-toggle" => "tooltip", "title" => "The measured size range of the purified nucleic acid, in bp."} %>
 
-  <%= f.input :strand_specific %>
+  <%= f.input :strand_specific,
+			label_html: {"data-toggle" => "tooltip", "title" => "Whether the preparation of the library using a strand-specific protocol."} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary "%>
