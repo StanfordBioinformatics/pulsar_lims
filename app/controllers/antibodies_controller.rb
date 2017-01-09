@@ -1,4 +1,5 @@
 class AntibodiesController < ApplicationController
+	include AntibodyPurificationsConcern #provides add_antibody_purifications()
   before_action :set_antibody, only: [:show, :edit, :update, :destroy]
 
   # GET /antibodies
@@ -30,7 +31,8 @@ class AntibodiesController < ApplicationController
     @antibody = Antibody.new(antibody_params)
 		authorize @antibody
 		@antibody.user = current_user
-		@antibody.add_antibody_purifications(params[:antibody][:antibody_purifications])
+		@antibody = add_antibody_purifications(@antibody,params[:antibody][:antibody_purification_ids])
+		#@antibody.add_antibody_purifications(params[:antibody][:antibody_purifications])
 		
     respond_to do |format|
       if @antibody.save
@@ -47,8 +49,9 @@ class AntibodiesController < ApplicationController
   # PATCH/PUT /antibodies/1.json
   def update
 		authorize @antibody
+		@antibody = add_antibody_purifications(@antibody,params[:antibody][:antibody_purification_ids])
 		#@antibody.remove_antibody_purifications(params[:remove_antibody_purifications])
-		@antibody.add_antibody_purifications(params[:antibody][:antibody_purifications])
+		#@antibody.add_antibody_purifications(params[:antibody][:antibody_purifications])
     respond_to do |format|
       if @antibody.update(antibody_params)
         format.html { redirect_to @antibody, notice: 'Antibody was successfully updated.' }
