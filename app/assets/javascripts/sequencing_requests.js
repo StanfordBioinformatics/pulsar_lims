@@ -6,6 +6,7 @@ $(document).on("click","#libraries .remove_library", function(event) {
 	})
 });
 
+
 //Listen for a successful AJAX response
 $(document).ajaxSuccess(function(event,jqXHR,ajaxProps) {
 		//If the add library button was clicked, append the response to the #libraries element
@@ -16,10 +17,11 @@ $(document).ajaxSuccess(function(event,jqXHR,ajaxProps) {
 			$libraries = $("#libraries");
 			$libraries.append(jqXHR.responseText);
 			$newContent = $libraries.find(".sequencing_request_libraries").last();
-			$newContentLabel = $newContent.children("label").first() 
+			$newContentLabel = $newContent.children("label").first();
 			$newContentLabel.text("Library") //default label set by simple form is Libraries.
 			$newContentLabel.append('<span>  <a class="remove_library fa fa-remove"></a></span>');
-			$newContent.hide().fadeIn("slow");
+			//$newContent.hide().fadeIn("slow");
+			$newContent.hide().slideDown();
 		}
 	}
 )
