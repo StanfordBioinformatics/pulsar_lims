@@ -3,7 +3,7 @@
 
   <% if @sequencing_request.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@sequencing_request.errors.count, "error") %> prohibited this antibody from being saved:</h2>
+      <h2><%= pluralize(@sequencing_request.errors.count, "error") %> prohibited this sequencing request from being saved:</h2>
 
       <ul>
       <% @sequencing_request.errors.full_messages.each do |msg| %>
@@ -14,7 +14,7 @@
   <% end %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing request name"} %>
-  <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Notes about the sequencning request"} %>
+  <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Notes about the sequencing request"} %>
 
   <table id="libraries">
   <tr><th>Associated Libraries:</th></tr>

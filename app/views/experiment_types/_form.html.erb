@@ -1,7 +1,7 @@
 <%= simple_form_for(@experiment_type) do |f| %>
 	<%= f.error_notification %>
 
-  <%= f.input :name %>
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique experiment type name"} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary" %>

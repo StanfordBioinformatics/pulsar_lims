@@ -1,0 +1,37 @@
+<header>
+  <h1><%= @sequencing_result.name %></h1>  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_result} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_result} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @sequencing_result} %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @sequencing_result.name %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @sequencing_result.comment %>
+</p>
+
+
+<p>
+  <strong>Sequencing request:</strong>
+  <%= link_to @sequencing_result.sequencing_request.name, @sequencing_result.sequencing_request %>
+</p>
+
+<p>
+  <strong>Run name:</strong>
+  <%= @sequencing_result.run_name %>
+</p>
+
+<p>
+  <strong>Lane:</strong>
+  <%= @sequencing_result.lane %>
+</p>
+
+<%= link_to 'Back', sequencing_results_path %>

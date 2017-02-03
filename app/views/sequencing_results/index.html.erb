@@ -1,0 +1,38 @@
+<header>
+  <h1>Sequencing Results</h1>
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {policy_class: SequencingResult} %>
+  </ul>   
+</header>
+
+<table id="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Comment</th>
+      <th>User</th>
+      <th>Sequencing request</th>
+      <th>Run name</th>
+      <th>Lane</th>
+      <th>Comment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sequencing_results.each do |sequencing_result| %>
+      <tr>
+				<td><%= link_to sequencing_result.name, sequencing_result %></td>
+        <td><%= sequencing_result.comment %></td>
+        <td><%= link_to sequencing_result.sequencing_request.name, sequencing_result.sequencing_request %></td>
+        <td><%= sequencing_result.run_name %></td>
+        <td><%= sequencing_result.lane %></td>
+        <td><%= link_to 'Destroy', sequencing_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sequencing result', new_sequencing_result_path %>

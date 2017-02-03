@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170103230716) do
+ActiveRecord::Schema.define(version: 20170203005141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -250,6 +250,22 @@ ActiveRecord::Schema.define(version: 20170103230716) do
   add_index "sequencing_requests", ["sequencing_platform_id"], name: "index_sequencing_requests_on_sequencing_platform_id", using: :btree
   add_index "sequencing_requests", ["user_id"], name: "index_sequencing_requests_on_user_id", using: :btree
 
+  create_table "sequencing_results", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "sequencing_request_id"
+    t.integer  "report_id"
+    t.string   "run_name"
+    t.integer  "lane"
+    t.text     "comment"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "name"
+  end
+
+  add_index "sequencing_results", ["report_id"], name: "index_sequencing_results_on_report_id", using: :btree
+  add_index "sequencing_results", ["sequencing_request_id"], name: "index_sequencing_results_on_sequencing_request_id", using: :btree
+  add_index "sequencing_results", ["user_id"], name: "index_sequencing_results_on_user_id", using: :btree
+
   create_table "targets", force: :cascade do |t|
     t.string   "encode_identifier", limit: 255
     t.string   "name",              limit: 255
@@ -335,6 +351,9 @@ ActiveRecord::Schema.define(version: 20170103230716) do
   add_foreign_key "sequencing_requests", "sequencing_centers"
   add_foreign_key "sequencing_requests", "sequencing_platforms"
   add_foreign_key "sequencing_requests", "users"
+  add_foreign_key "sequencing_results", "documents", column: "report_id"
+  add_foreign_key "sequencing_results", "sequencing_requests"
+  add_foreign_key "sequencing_results", "users"
   add_foreign_key "targets", "users"
   add_foreign_key "uberons", "users"
   add_foreign_key "vendors", "users"
