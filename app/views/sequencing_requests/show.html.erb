@@ -8,38 +8,53 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @sequencing_request} %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @sequencing_request.name %>
-</p>
+<table id="attributes">
+  <tr>
+    <th>Sequencing Request Name:</th>
+    <td><%= @sequencing_request.name %></td>
+  </tr>
 
-<p>
-  <strong>Comment:</strong>
-  <%= @sequencing_request.comment %>
-</p>
+  <tr>
+  	<th>Comment:</th>
+  	<td><%= @sequencing_request.comment %></td>
+	</tr>
+	
+	<tr>
+		<th>Libraries:</th>
+		<% if @sequencing_request.libraries.present? %>
+			<td>
+        <%= render partial: "libraries/link_to_library", locals: {libraries: @sequencing_request.libraries} %>
+      </td>
+    <% else %>
+      <td>None</td>
+    <% end %>
+  </tr>
 
-<p>
-	<strong>Libraries</strong>
-  <% if @sequencing_request.libraries.present? %>
-	  <% @sequencing_request.libraries.each do |lib| %>
-	  	<%= link_to lib.name, lib%>
-  	<% end %>	
-	<% end %>
-</p>
+	<tr>
+  	<th>Sequencing platform:</th>
+  	<td><%= link_to @sequencing_request.sequencing_platform.name, @sequencing_request.sequencing_platform %></td>
+	</tr>
+  
+	<tr>
+		<th>Sequencing center:</th>
+  	<td><%= link_to @sequencing_request.sequencing_center.name, @sequencing_request.sequencing_center %></td></td>
+	</tr>
+  
+	<tr>
+		<th>Shipped:</th>
+  	<td><%= @sequencing_request.shipped %></td>
+	</tr>
 
-<p>
-  <strong>Sequencing platform:</strong>
-  <%= link_to @sequencing_request.sequencing_platform.name, @sequencing_request.sequencing_platform %>
-</p>
-
-<p>
-  <strong>Sequencing center:</strong>
-  <%= link_to @sequencing_request.sequencing_center.name, @sequencing_request.sequencing_center %>
-</p>
-
-<p>
-  <strong>Shipped:</strong>
-  <%= @sequencing_request.shipped %>
-</p>
+	<tr>
+		<th>Sequencing Result:</th>
+		<% if @sequencing_request.sequencing_result.present? %>
+			<td>
+				<%= link_to @sequencing_request.sequencing_result.name, [@sequencing_request,@sequencing_request.sequencing_result] %>
+			</td>
+		<% else %>
+			<td>None</td>
+		<% end %>
+	</tr>
+</table>
 
 <%= link_to 'Back', sequencing_requests_path %>

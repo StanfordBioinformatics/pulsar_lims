@@ -1,8 +1,12 @@
 <header>
   <h1><%= @sequencing_result.name %></h1>  
   <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_result} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_result} %>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_result, nested: @sequencing_request} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_result, nested: @sequencing_request} %>
+		<!-- Note that I use the SequencingRequest policy class above. The authorization will be the same level
+        for both classes. I avoided using the SequencingResult class directly here since it's a nested resource
+				and the partial doesn't know how to calculate the full path to the policy class in this case.
+		-->
   </ul>
 </header>
 
@@ -33,5 +37,3 @@
   <strong>Lane:</strong>
   <%= @sequencing_result.lane %>
 </p>
-
-<%= link_to 'Back', sequencing_results_path %>

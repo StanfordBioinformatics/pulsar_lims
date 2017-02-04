@@ -1,5 +1,6 @@
 class SequencingResultsController < ApplicationController
   before_action :set_sequencing_result, only: [:show, :edit, :update, :destroy]
+	before_action :set_sequencing_request
 
   # GET /sequencing_results
   # GET /sequencing_results.json
@@ -20,7 +21,7 @@ class SequencingResultsController < ApplicationController
 
   # GET /sequencing_results/new
   def new
-    @sequencing_result = SequencingResult.new
+    @sequencing_result = @sequencing_request.build_sequencing_result
 		authorize @sequencing_result
   end
 
@@ -78,8 +79,12 @@ class SequencingResultsController < ApplicationController
       @sequencing_result = SequencingResult.find(params[:id])
     end
 
+		def set_sequencing_request
+			@sequencing_request = SequencingRequest.find(params[:sequencing_request_id])
+		end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_result_params
-      params.require(:sequencing_result).permit(:sequencing_request_id, :run_name, :lane, :comment)
+      params.require(:sequencing_result).permit(:name, :sequencing_request_id, :run_name, :lane, :comment)
     end
 end
