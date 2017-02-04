@@ -1,4 +1,12 @@
+<% if local_assigns[:nested].nil? %>
+  <% nested = "" %>
+<% end %>
+
 <% record_class_hr = record.model_name.human.titleize %>
 <% if policy(record).update? %>
-	<li><%= link_to "Edit #{record_class_hr}", [:edit,record.model_name.to_s.underscore], class: "edit" %></li>
+	<% if nested.present? %>
+		<li><%= link_to "Edit #{record_class_hr}", [:edit,nested,record], class: "edit" %></li>
+	<% else %>
+		<li><%= link_to "Edit #{record_class_hr}", [:edit,record], class: "edit" %></li>
+	<% end %>
 <% end %>

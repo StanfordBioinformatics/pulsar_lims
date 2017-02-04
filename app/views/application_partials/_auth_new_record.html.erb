@@ -1,3 +1,12 @@
-<% if policy(policy_class).new? %>
-	<li><%= link_to "New #{policy_class.model_name.human.titleize}", [:new,policy_class.model_name.to_s.underscore],  class: "new" %></li>
+<% if local_assigns[:nested].nil? %>
+	<% nested = "" %>
+<% end %>
+
+<% record_class_hr = record.model_name.human.titleize %>
+<% if policy(record).new? %>
+	<% if nested.present? %>
+		<li><%= link_to "New #{record_class_hr}", [:new,nested,record],  class: "new" %></li>
+	<% else %>
+		<li><%= link_to "New #{record_class_hr}", [:new,record],  class: "new" %></li>
+	<% end %>
 <% end %>
