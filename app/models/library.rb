@@ -8,6 +8,8 @@ class Library < ActiveRecord::Base
 	belongs_to :biosample
 	belongs_to :vendor
 
+	has_many   :library_sequencing_results, dependent: :destroy
+
 	validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
 	validates  :size_range, format: {with: /\A\d+-\d+\Z/}, presence: true
 	validates :nucleic_acid_term_id, presence: true

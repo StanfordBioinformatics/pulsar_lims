@@ -3,7 +3,7 @@ class SequencingRequest < ActiveRecord::Base
 	belongs_to :user
   belongs_to :sequencing_platform
   belongs_to :sequencing_center
-	has_one    :sequencing_result
+	has_one    :sequencing_result, dependent: :destroy
 
 	validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
 	validates :sequencing_center, presence: true

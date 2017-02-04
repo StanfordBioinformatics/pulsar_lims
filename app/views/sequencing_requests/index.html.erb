@@ -25,6 +25,7 @@
         <td><%= sequencing_request.comment %></td>
         <td><%= link_to sequencing_request.sequencing_platform.name, sequencing_request.sequencing_platform %></td>
         <td><%= link_to sequencing_request.sequencing_center.name, sequencing_request.sequencing_center %></td>
+        <td><%= sequencing_request.paired_end%></td>
         <td><%= sequencing_request.shipped %></td>
         <td><%= link_to 'Destroy', sequencing_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= sequencing_request.sequencing_result %></td>

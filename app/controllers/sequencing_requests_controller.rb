@@ -90,6 +90,6 @@ class SequencingRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_request_params
-      params.require(:sequencing_request).permit(:name,:comment, :sequencing_platform_id, :sequencing_center_id, :shipped, libraries_attributes: [:id,:_destroy])
+      params.require(:sequencing_request).permit(:name,:paired_end,:comment, :sequencing_platform_id, :sequencing_center_id, :shipped, libraries_attributes: [:id,:_destroy])
     end
 end

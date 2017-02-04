@@ -39,6 +39,11 @@
 		<th>Sequencing center:</th>
   	<td><%= link_to @sequencing_request.sequencing_center.name, @sequencing_request.sequencing_center %></td></td>
 	</tr>
+
+	<tr>
+		<th>Paired-end:</th>
+		<td><%= @sequencing_request.paired_end %></td>
+	</tr>
   
 	<tr>
 		<th>Shipped:</th>
@@ -56,5 +61,8 @@
 		<% end %>
 	</tr>
 </table>
+
+<%= link_to "Add Sequencing Result", new_sequencing_request_sequencing_result_path(@sequencing_request) %>
+</br></br>
 
 <%= link_to 'Back', sequencing_requests_path %>

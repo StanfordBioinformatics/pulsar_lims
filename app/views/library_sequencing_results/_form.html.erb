@@ -1,0 +1,18 @@
+<%= simple_form_for(@library_sequencing_result) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.association :sequencing_result %>
+    <%= f.association :library %>
+    <%= f.input :comment %>
+    <%= f.input :read1_uri %>
+    <%= f.input :read2_uri %>
+    <%= f.input :read1_count %>
+    <%= f.input :read2_count %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

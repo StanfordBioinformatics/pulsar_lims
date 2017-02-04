@@ -1,4 +1,4 @@
-<%= simple_form_for(@sequencing_result) do |f| %>
+<%= simple_form_for([@sequencing_request,@sequencing_result]) do |f| %>
   <%= f.error_notification %>
 
   <% if @sequencing_result.errors.any? %>
@@ -17,7 +17,6 @@
   <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Notes about the sequencing result"} %>
 
   <div class="form-inputs">
-    <%= f.association :sequencing_request, collection: SequencingRequest.order(:name), label_method: :name, prompt: "Select the Sequencing Request" %>
     <%= f.input :run_name %>
     <%= f.input :lane %>
   </div>

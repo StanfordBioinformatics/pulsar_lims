@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @library_sequencing_result.name %>
+</p>
+
+<p>
+  <strong>Sequencing result:</strong>
+  <%= @library_sequencing_result.sequencing_result %>
+</p>
+
+<p>
+  <strong>Library:</strong>
+  <%= @library_sequencing_result.library %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @library_sequencing_result.comment %>
+</p>
+
+<p>
+  <strong>Read1 uri:</strong>
+  <%= @library_sequencing_result.read1_uri %>
+</p>
+
+<p>
+  <strong>Read2 uri:</strong>
+  <%= @library_sequencing_result.read2_uri %>
+</p>
+
+<p>
+  <strong>Read1 count:</strong>
+  <%= @library_sequencing_result.read1_count %>
+</p>
+
+<p>
+  <strong>Read2 count:</strong>
+  <%= @library_sequencing_result.read2_count %>
+</p>
+
+<%= link_to 'Edit', edit_library_sequencing_result_path(@library_sequencing_result) %> |
+<%= link_to 'Back', library_sequencing_results_path %>

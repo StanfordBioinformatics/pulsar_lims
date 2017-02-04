@@ -1,9 +1,16 @@
 class SequencingResultsController < ApplicationController
   before_action :set_sequencing_result, only: [:show, :edit, :update, :destroy]
 	before_action :set_sequencing_request
+	skip_after_action :verify_authorized, only: [:add_library_sequencing_result]
 
   # GET /sequencing_results
   # GET /sequencing_results.json
+
+	def add_library_sequencing_result
+		@sequencing_result = @sequencing_request.build_sequencing_result
+		render layout: false
+	end
+
   def index
     @sequencing_results = policy_scope(SequencingResult)
 
@@ -33,13 +40,13 @@ class SequencingResultsController < ApplicationController
   # POST /sequencing_results
   # POST /sequencing_results.json
   def create
-    @sequencing_result = SequencingResult.new(sequencing_result_params)
+    @sequencing_result = @sequencing_request.build_sequencing_result(sequencing_result_params)
 		authorize @sequencing_result
 		@sequencing_result.user = current_user
 
     respond_to do |format|
       if @sequencing_result.save
-        format.html { redirect_to @sequencing_result, notice: 'Sequencing result was successfully created.' }
+        format.html { redirect_to [@sequencing_request,@sequencing_result], notice: 'Sequencing result was successfully created.' }
         format.json { render json: @sequencing_result, status: :created }
       else
         format.html { render action: 'new' }
@@ -54,7 +61,7 @@ class SequencingResultsController < ApplicationController
 		authorize @sequencing_result
     respond_to do |format|
       if @sequencing_result.update(sequencing_result_params)
-        format.html { redirect_to @sequencing_result, notice: 'Sequencing result was successfully updated.' }
+        format.html { redirect_to [@sequencing_request,@sequencing_result], notice: 'Sequencing result was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -66,9 +73,10 @@ class SequencingResultsController < ApplicationController
   # DELETE /sequencing_results/1
   # DELETE /sequencing_results/1.json
   def destroy
+		authorize @sequencing_result
     @sequencing_result.destroy
     respond_to do |format|
-      format.html { redirect_to sequencing_results_url }
+      format.html { redirect_to sequencing_request_sequencing_results_url }
       format.json { head :no_content }
     end
   end
