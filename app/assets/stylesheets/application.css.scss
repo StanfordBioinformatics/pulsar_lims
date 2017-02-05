@@ -177,6 +177,12 @@ a.new, a.edit, a.delete {
   }
 }
 
+.reg-btn {
+	@extend .btn;
+	@extend .btn-default;
+	background-color: #DCDCDC;
+}
+
 a.new {
   @extend .btn-success;
 
