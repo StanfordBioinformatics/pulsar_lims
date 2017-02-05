@@ -39,7 +39,20 @@
 	</tr>
 </table>
 
-<table id="library_results">
+<h4>Library Sequencing Results</h4>
+<table id="library_results" >
+	<tr>
+		<th>Name</th>
+		<th>Library</th>
+		<th>Read1 Count</th>
+		<th>Read1 URI</th>
+		<th>Read2 Count </th>
+		<th>Read2 URI</th>
+		<th>Comment</th>
+		<th>Submit</th>
+	</tr>
 </table>
+</br>
 
-<%= link_to 'Back', sequencing_request_sequencing_results_path %>
+<%= link_to "New Library Result", library_result_sequencing_request_sequencing_result_path, class: "reg-btn", remote: true, id: "add_library_result" %>
+</br></br>

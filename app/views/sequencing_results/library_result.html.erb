@@ -1,0 +1,15 @@
+	<%= simple_form_for([@sequencing_request,@sequencing_result,@library_sequencing_result]) do |f| %>
+    <%= f.input_field :name, label: false %>
+    <%= f.association :library, label: false %>
+    <%= f.input_field :read1_count, label: false %>
+    <%= f.input_field :read1_uri, label: false  %>
+    <%= f.input_field :read2_count, label: false %>
+    <%= f.input_field :read2_uri, label: false %>
+    <%= f.input_field :comment, label: false %>
+		
+			<div class="form-actions">
+				<%= f.button :submit, "Add", class: "btn-primary" %>
+			</div>
+		
+
+<% end %>

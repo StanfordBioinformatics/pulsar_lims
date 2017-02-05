@@ -62,7 +62,10 @@
 	</tr>
 </table>
 
-<%= link_to "Add Sequencing Result", new_sequencing_request_sequencing_result_path(@sequencing_request) %>
-</br></br>
+<% unless @sequencing_request.sequencing_result.present? %>
+	<%= link_to "Add Sequencing Result", new_sequencing_request_sequencing_result_path(@sequencing_request), class: "reg-btn" %>
+	</br>
+<% end %>
+</br>
 
 <%= link_to 'Back', sequencing_requests_path %>

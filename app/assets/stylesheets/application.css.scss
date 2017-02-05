@@ -8,6 +8,7 @@
 @import "responsive.scss";
 
 @import "admin/application";
+@import "sequencing_results";
 
 select:focus, input:focus {
   background-color: #FFFFCC; 

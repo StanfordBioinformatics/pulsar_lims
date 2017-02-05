@@ -2,29 +2,20 @@ class LibrarySequencingResultsController < ApplicationController
   before_action :set_library_sequencing_result, only: [:show, :edit, :update, :destroy]
 	before_action :set_sequencing_result
 
-  # GET /library_sequencing_results
-  # GET /library_sequencing_results.json
   def index
-    @library_sequencing_results = LibrarySequencingResult.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @library_sequencing_results }
-    end
+    @library_sequencing_results = policy_scope(LibrarySequencingResult)
   end
 
   # GET /library_sequencing_results/1
   # GET /library_sequencing_results/1.json
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @library_sequencing_result }
-    end
+		authorize @library_sequencing_result
   end
 
   # GET /library_sequencing_results/new
   def new
-    @library_sequencing_result = @sequencing_result.build
+		authorize LibrarySequencingResult
+    @library_sequencing_result = @sequencing_result.library_sequencing_result.build
   end
 
   # GET /library_sequencing_results/1/edit
@@ -35,8 +26,11 @@ class LibrarySequencingResultsController < ApplicationController
   # POST /library_sequencing_results
   # POST /library_sequencing_results.json
   def create
-    @library_sequencing_result = LibrarySequencingResult.new(library_sequencing_result_params)
-		authorize @library_sequencing_result
+		authorize LibrarySequencingResult
+		render json: params
+		return
+    @library_sequencing_result = @sequencing_result.library_sequencing_result.build(library_sequencing_result_params)
+		@library_sequencing_result.user = current_user
 
     respond_to do |format|
       if @library_sequencing_result.save
@@ -52,7 +46,7 @@ class LibrarySequencingResultsController < ApplicationController
   # PATCH/PUT /library_sequencing_results/1
   # PATCH/PUT /library_sequencing_results/1.json
   def update
-		authorize @library_sequencing_result@
+		authorize @library_sequencing_result
     respond_to do |format|
       if @library_sequencing_result.update(library_sequencing_result_params)
         format.html { redirect_to @library_sequencing_result, notice: 'Library sequencing result was successfully updated.' }
@@ -67,6 +61,7 @@ class LibrarySequencingResultsController < ApplicationController
   # DELETE /library_sequencing_results/1
   # DELETE /library_sequencing_results/1.json
   def destroy
+		authorize @library_sequencing_result
     @library_sequencing_result.destroy
     respond_to do |format|
       format.html { redirect_to library_sequencing_results_url }
