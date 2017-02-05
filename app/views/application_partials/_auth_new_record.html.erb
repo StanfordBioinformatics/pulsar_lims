@@ -5,7 +5,7 @@
 <% record_class_hr = record.model_name.human.titleize %>
 <% if policy(record).new? %>
 	<% if nested.present? %>
-		<li><%= link_to "New #{record_class_hr}", [:new,nested,record],  class: "new" %></li>
+		<li><%= link_to "New #{record_class_hr}", [:new,nested,record].flatten,  class: "new" %></li>
 	<% else %>
 		<li><%= link_to "New #{record_class_hr}", [:new,record],  class: "new" %></li>
 	<% end %>

@@ -5,7 +5,7 @@
 <% record_class_hr = record.model_name.human.titleize %>
 <% if policy(record).destroy? %>
 	<% if nested.present? %>
-		<li><%= link_to "Delete #{record_class_hr}", [nested,record], method: :delete, data: { confirm: "Are you sure you would like to delete this #{record_class_hr}?"},class: "delete" %></li>
+		<li><%= link_to "Delete #{record_class_hr}", [nested,record].flatten, method: :delete, data: { confirm: "Are you sure you would like to delete this #{record_class_hr}?"},class: "delete" %></li>
 	<% else %>
 			<li><%= link_to "Delete #{record_class_hr}", [record], method: :delete, data: { confirm: "Are you sure you would like to delete this #{record_class_hr}?"},class: "delete" %></li>
 	<% end %>

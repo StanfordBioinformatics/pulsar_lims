@@ -1,44 +1,55 @@
-<p id="notice"><%= notice %></p>
+<% title(@library_sequencing_result.name, "Libraries") %>
+<header>
+  <h1><%= @library_sequencing_result.name %></h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @library_sequencing_result.name %>
-</p>
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @library_sequencing_result, nested: [@sequencing_request,@sequencing_result]} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @library_sequencing_result, nested: [@sequencing_request,@sequencing_result]} %>
+  </ul>
+</header>
 
-<p>
-  <strong>Sequencing result:</strong>
-  <%= @library_sequencing_result.sequencing_result %>
-</p>
+<%= render partial: "application_partials/record_meta", locals: { record: @library_sequencing_result } %>
 
-<p>
-  <strong>Library:</strong>
-  <%= @library_sequencing_result.library %>
-</p>
+<table id="attributes">
+	<tr>
+	  <th>Name:</th>
+  	<td><%= @library_sequencing_result.name %></td>
+	</tr>
 
-<p>
-  <strong>Comment:</strong>
-  <%= @library_sequencing_result.comment %>
-</p>
+	<tr>
+	  <th>Sequencing result:</th>
+  	<td><%= link_to @library_sequencing_result.sequencing_result.name, [@sequencing_request,@sequencing_result] %></td>
+	</tr>
 
-<p>
-  <strong>Read1 uri:</strong>
-  <%= @library_sequencing_result.read1_uri %>
-</p>
+	<tr>
+	  <th>Library:</th>
+  	<td><%= link_to @library_sequencing_result.library.name, @library_sequencing_result.library %></td>
+	</tr>
 
-<p>
-  <strong>Read2 uri:</strong>
-  <%= @library_sequencing_result.read2_uri %>
-</p>
+	<tr>
+  	<th>Comment:</th>
+  	</td><%= @library_sequencing_result.comment %></td>
+	</tr>
 
-<p>
-  <strong>Read1 count:</strong>
-  <%= @library_sequencing_result.read1_count %>
-</p>
+	<tr>
+  	<th>Read1 uri:</th>
+  	<td><%= @library_sequencing_result.read1_uri %></td>
+	</tr>
 
-<p>
-  <strong>Read2 count:</strong>
-  <%= @library_sequencing_result.read2_count %>
-</p>
+	<tr>
+  	<th>Read2 uri:</th>
+  	<td><%= @library_sequencing_result.read2_uri %></td>
+	</tr>
 
-<%= link_to 'Edit', edit_library_sequencing_result_path(@library_sequencing_result) %> |
+	<tr>
+  	<th>Read1 count:</th>
+  	<td><%= @library_sequencing_result.read1_count %></td>
+	</tr>
+
+	<tr>
+  	<th>Read2 count:</th>
+  	<td><%= @library_sequencing_result.read2_count %></td>
+	</tr>
+</table>
+
 <%= link_to 'Back', sequencing_request_sequencing_result_library_sequencing_results_path %>

@@ -1,8 +1,16 @@
-<p id="notice"><%= notice %></p>
+<header>
+	<h1>Library Sequencing Results</h1>
 
-<h1>Listing Library Sequencing Results</h1>
+<!--
+	#Dont include lines below since we don't want users to be able to creat a library_sequencing_result
+  # from it's own page, rather, only through a sequencing_result object.
+	<ul class="actions">
+	<\%= render partial: "application_partials/auth_new_record", locals: {record: Library.first} %>
+	</ul> 
+-->
+</header>
 
-<table>
+<table id="attributes">
   <thead>
     <tr>
       <th>Name</th>
@@ -21,8 +29,8 @@
     <% @library_sequencing_results.each do |res| %>
       <tr>
         <td><%= res.name %></td>
-        <td><%= res.sequencing_result %></td>
-        <td><%= res.library %></td>
+        <td><%= link_to @sequencing_result.name, [@sequencing_request,@sequencing_result] %></td>
+        <td><%= link_to res.library.name, res.library %></td>
         <td><%= res.comment %></td>
         <td><%= res.read1_uri %></td>
         <td><%= res.read2_uri %></td>
@@ -37,5 +45,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Library sequencing result', new_library_sequencing_result_path %>
