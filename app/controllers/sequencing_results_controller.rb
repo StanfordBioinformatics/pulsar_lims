@@ -77,7 +77,7 @@ class SequencingResultsController < ApplicationController
 		authorize @sequencing_result
     @sequencing_result.destroy
     respond_to do |format|
-      format.html { redirect_to sequencing_request_sequencing_results_url }
+      format.html { redirect_to @sequencing_request}
       format.json { head :no_content }
     end
   end

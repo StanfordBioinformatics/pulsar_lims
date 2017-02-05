@@ -1,4 +1,4 @@
-<%= simple_form_for(@library_sequencing_result) do |f| %>
+<%= simple_form_for([@sequencing_request,@sequencing_result,@library_sequencing_result]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -13,6 +13,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: "btn-primary" %>
   </div>
+	</br>	
 <% end %>
