@@ -1,4 +1,5 @@
 class LibrarySequencingResult < ActiveRecord::Base
+	belongs_to :user
   belongs_to :sequencing_result
   belongs_to :library
 

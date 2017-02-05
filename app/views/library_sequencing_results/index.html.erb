@@ -18,19 +18,19 @@
   </thead>
 
   <tbody>
-    <% @library_sequencing_results.each do |library_sequencing_result| %>
+    <% @library_sequencing_results.each do |res| %>
       <tr>
-        <td><%= library_sequencing_result.name %></td>
-        <td><%= library_sequencing_result.sequencing_result %></td>
-        <td><%= library_sequencing_result.library %></td>
-        <td><%= library_sequencing_result.comment %></td>
-        <td><%= library_sequencing_result.read1_uri %></td>
-        <td><%= library_sequencing_result.read2_uri %></td>
-        <td><%= library_sequencing_result.read1_count %></td>
-        <td><%= library_sequencing_result.read2_count %></td>
-        <td><%= link_to 'Show', library_sequencing_result %></td>
-        <td><%= link_to 'Edit', edit_library_sequencing_result_path(library_sequencing_result) %></td>
-        <td><%= link_to 'Destroy', library_sequencing_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= res.name %></td>
+        <td><%= res.sequencing_result %></td>
+        <td><%= res.library %></td>
+        <td><%= res.comment %></td>
+        <td><%= res.read1_uri %></td>
+        <td><%= res.read2_uri %></td>
+        <td><%= res.read1_count %></td>
+        <td><%= res.read2_count %></td>
+        <td><%= link_to 'Show', [@sequencing_request,@sequencing_result,res] %></td>
+        <td><%= link_to 'Edit', [:edit,@sequencing_request,@sequencing_result,res] %></td>
+        <td><%= link_to 'Destroy', [@sequencing_request,@sequencing_result,res], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

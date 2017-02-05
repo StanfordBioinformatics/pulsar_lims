@@ -1,5 +1,6 @@
 class LibrarySequencingResultsController < ApplicationController
   before_action :set_library_sequencing_result, only: [:show, :edit, :update, :destroy]
+	before_action :set_sequencing_request
 	before_action :set_sequencing_result
 
   def index
@@ -15,7 +16,7 @@ class LibrarySequencingResultsController < ApplicationController
   # GET /library_sequencing_results/new
   def new
 		authorize LibrarySequencingResult
-    @library_sequencing_result = @sequencing_result.library_sequencing_result.build
+    @library_sequencing_result = @sequencing_result.library_sequencing_results.build
   end
 
   # GET /library_sequencing_results/1/edit
@@ -27,14 +28,14 @@ class LibrarySequencingResultsController < ApplicationController
   # POST /library_sequencing_results.json
   def create
 		authorize LibrarySequencingResult
-		render json: params
-		return
-    @library_sequencing_result = @sequencing_result.library_sequencing_result.build(library_sequencing_result_params)
+#		render json: params
+#		return
+    @library_sequencing_result = @sequencing_result.library_sequencing_results.build(library_sequencing_result_params)
 		@library_sequencing_result.user = current_user
 
     respond_to do |format|
       if @library_sequencing_result.save
-        format.html { redirect_to @library_sequencing_result, notice: 'Library sequencing result was successfully created.' }
+        format.html { redirect_to [@sequencing_request,@sequencing_result,@library_sequencing_result], notice: 'Library sequencing result was successfully created.' }
         format.json { render json: @library_sequencing_result, status: :created }
       else
         format.html { render action: 'new' }
@@ -75,12 +76,16 @@ class LibrarySequencingResultsController < ApplicationController
       @library_sequencing_result = LibrarySequencingResult.find(params[:id])
     end
 
+		def set_sequencing_request
+			@sequencing_request = SequencingRequest.find(params[:sequencing_request_id])
+		end
+
 		def set_sequencing_result
 			@sequencing_result = SequencingResult.find(params[:sequencing_result_id])
 		end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_sequencing_result_params
-      params.require(:library_sequencing_result).permit(:name, :sequencing_result_id, :library_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count)
+      params.require(:library_sequencing_result).permit(:name, :library_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count)
     end
 end
