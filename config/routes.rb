@@ -1,6 +1,6 @@
 SnyderEncode::Application.routes.draw do
 
-  resources :sequencing_results
+  resources :library_sequencing_results
 
   resources :sequencing_centers
 
@@ -16,6 +16,10 @@ SnyderEncode::Application.routes.draw do
 
 	resources :sequencing_requests do
 		get :select_library, on: :collection
+  	resources :sequencing_results do
+			get :new_library_result, on: :member
+			resources :library_sequencing_results
+		end
 	end
 
   devise_for :users
