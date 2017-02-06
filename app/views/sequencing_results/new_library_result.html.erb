@@ -1,0 +1,17 @@
+</br></br>
+	<%= simple_form_for([@sequencing_request,@sequencing_result,@library_sequencing_result]) do |f| %>
+		<fieldset id="lib_seq_res_table">
+			<legend>New Library Sequencing Result</legend>
+	    <%= f.input :name %>
+	    <%= f.association :library %>
+	    <%= f.input :read1_count %>
+	    <%= f.input :read1_uri  %>
+	    <%= f.input :read2_count %>
+	    <%= f.input :read2_uri %>
+	    <%= f.input :comment %>
+			
+			<div class="form-actions">
+				<%= f.button :submit, "Add", class: "btn-primary" %>
+			</div>
+		</fieldset>
+<% end %>

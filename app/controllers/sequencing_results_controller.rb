@@ -1,14 +1,15 @@
 class SequencingResultsController < ApplicationController
-  before_action :set_sequencing_result, only: [:show, :edit, :update, :destroy, :library_result]
+  before_action :set_sequencing_result, only: [:show, :edit, :update, :destroy, :new_library_result]
 	before_action :set_sequencing_request
-	skip_after_action :verify_authorized, only: [:library_result]
+	skip_after_action :verify_authorized, only: [:new_library_result]
 
   # GET /sequencing_results
   # GET /sequencing_results.json
 
-	def library_result
+	def new_library_result
 		@library_sequencing_result = @sequencing_result.library_sequencing_results.build	
-		render layout: false
+		#render layout: false
+		render partial: "library_sequencing_results/form"
 		return
 	end
 

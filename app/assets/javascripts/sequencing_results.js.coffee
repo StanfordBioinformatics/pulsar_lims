@@ -3,5 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->  
-  $("#add_library_result").on "ajax:success", (event,data) ->  
+  $("#new_library_result").on "ajax:success", (event,data) ->  
     $("#library_results").after data

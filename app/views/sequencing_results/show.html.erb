@@ -51,8 +51,11 @@
 		<th>Comment</th>
 		<th>Submit</th>
 	</tr>
+	<% if @sequencing_result.library_sequencing_results.present? %>
+		<%= render partial: "row_library_result", locals: {library_sequencing_results: @sequencing_result.library_sequencing_results} %>
+	<% end %>
 </table>
 </br>
 
-<%= link_to "New Library Result", library_result_sequencing_request_sequencing_result_path, class: "reg-btn", remote: true, id: "add_library_result" %>
+<%= link_to "New Library Result", [:new_library_result,@sequencing_request,@sequencing_result], class: "reg-btn", remote: true, id: "new_library_result" %>
 </br></br>

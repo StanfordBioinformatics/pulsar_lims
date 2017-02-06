@@ -1,0 +1,14 @@
+<% library_sequencing_results.each do |res| %>
+<!-- A row in the table #library_results in the show view. The column names are defined and ordered in
+     ./new_library_result.html.erb.
+-->
+	<tr>
+		<td><%= res.name %></td>
+		<td><%= link_to res.library.name, res.library %></td>
+		<td><%= res.read1_count %></td>
+		<td><%= res.read1_uri %></td>
+		<td><%= res.read2_count %></td>
+		<td><%= res.read2_uri %></td>
+		<td><%= res.comment %></td>
+	</tr>
+<% end %>
