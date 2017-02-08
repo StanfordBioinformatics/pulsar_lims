@@ -3,12 +3,15 @@
      ./new_library_result.html.erb.
 -->
 	<tr>
-		<td><%= res.name %></td>
+		<td><%= link_to res.name, [@sequencing_request,@sequencing_result,res] %></td>
 		<td><%= link_to res.library.name, res.library %></td>
+		<td><%= res.library.barcode %></td>
+		<td><%= res.comment %></td>
 		<td><%= res.read1_count %></td>
 		<td><%= res.read1_uri %></td>
 		<td><%= res.read2_count %></td>
 		<td><%= res.read2_uri %></td>
-		<td><%= res.comment %></td>
+		<td><%= link_to fa_icon("remove"), [@sequencing_request,@sequencing_result,res], method: :delete %></td>
+		<td><%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_result,res] %></td>
 	</tr>
 <% end %>

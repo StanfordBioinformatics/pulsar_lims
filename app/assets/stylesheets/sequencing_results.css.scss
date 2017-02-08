@@ -3,13 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #library_results {
-	tr, th, td, form, option, input, select, textarea {
-		padding: 0px;
-		margin: 0px;
-	}
+	@extend: .table;
 
 	background-color: #F8F8F8;
-	border-color: "grey";
+	border: 2px solid blue;
+
+	tr {
+		border-top: 1px solid black;
+	}
 
 	th {
 		text-align: center;

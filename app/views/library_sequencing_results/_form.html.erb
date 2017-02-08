@@ -1,16 +1,17 @@
 <%= simple_form_for([@sequencing_request,@sequencing_result,@library_sequencing_result]) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.association :sequencing_result %>
-    <%= f.association :library %>
-    <%= f.input :comment %>
-    <%= f.input :read1_uri %>
-    <%= f.input :read2_uri %>
-    <%= f.input :read1_count %>
-    <%= f.input :read2_count %>
-  </div>
+  <table class="form-inputs">
+		<tr>
+			<td><%= f.input :name %></td>
+      <td><%= f.association :library %></td>
+      <td><%= f.input :comment %></td>
+      <td><%= f.input :read1_count %></td>
+      <td><%= f.input :read1_uri %></td>
+      <td><%= f.input :read2_count %></td>
+      <td><%= f.input :read2_uri %></td>
+		</tr>
+  </table>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

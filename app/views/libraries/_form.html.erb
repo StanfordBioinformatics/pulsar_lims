@@ -48,6 +48,9 @@
   <%= f.association :vendor, collection: Vendor.order(:name), label_method: :name,  prompt: "Select the Vendor",
 			label_html: {"data-toggle" => "tooltip", "title" => "The vendor, for nucleic acids or proteins purchased directly from a vendor (e.g. total RNA)."} %>
 
+	<%= f.input :barcode,
+			label_html: {"data-toggle" => "tooltip", "title" => "If the library was prepared with a barcode, enter here. If duel-indexed, separate with a '-', i.e. AGTTCA-GTGAAT."} %>
+
   <%= f.input :lot_identifier, 
 			label_html: {"data-toggle" => "tooltip", "title" => "The lot identifier provided by the vendor, for nucleic acids or proteins purchased directly from a vendor (e.g. total RNA)."} %>
 

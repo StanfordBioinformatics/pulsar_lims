@@ -8,7 +8,7 @@
 @import "responsive.scss";
 
 @import "admin/application";
-@import "sequencing_results";
+//@import "sequencing_results";
 
 select:focus, input:focus {
   background-color: #FFFFCC; 
@@ -145,7 +145,7 @@ header h1 {
   }
 }
 
-#attributes {
+#attributes,.table-data {
   @extend .table;
   @extend .table-hover;
   @extend .table-condensed;
@@ -160,6 +160,18 @@ header h1 {
   td, th {
     line-height: 24px !important;
   }
+}
+
+
+
+#library_results {
+	@extend #attributes;
+	thead {
+		font-weight: bold;
+		color: white;
+		background-color: #3a4749;
+		opacity: 0.7;
+	}
 }
 
 ul.actions {

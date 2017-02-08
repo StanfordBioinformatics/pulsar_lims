@@ -35,7 +35,7 @@ class LibrarySequencingResultsController < ApplicationController
 
     respond_to do |format|
       if @library_sequencing_result.save
-        format.html { redirect_to [@sequencing_request,@sequencing_result,@library_sequencing_result], notice: 'Library sequencing result was successfully created.' }
+        format.html { redirect_to [@sequencing_request,@sequencing_result], notice: 'Library sequencing result was successfully created.' }
         format.json { render json: @library_sequencing_result, status: :created }
       else
         format.html { render action: 'new' }
@@ -50,7 +50,7 @@ class LibrarySequencingResultsController < ApplicationController
 		authorize @library_sequencing_result
     respond_to do |format|
       if @library_sequencing_result.update(library_sequencing_result_params)
-        format.html { redirect_to [@sequencing_request,@sequencing_result,@library_sequencing_result], notice: 'Library sequencing result was successfully updated.' }
+        format.html { redirect_to [@sequencing_request,@sequencing_result], notice: 'Library sequencing result was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
