@@ -6,7 +6,7 @@
 $ ->  
 
   $("#new_library_result").click( -> 
-  	$(this).hide())
+  	$(@).hide())
 
   $("#new_library_result").on "ajax:success", (event,data) ->  
     $("#library_results").after data

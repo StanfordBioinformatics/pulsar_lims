@@ -10,9 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
 
@@ -20,9 +18,8 @@
     <% @document_types.each do |document_type| %>
       <tr>
         <td><%= document_type.name %></td>
-        <td><%= link_to 'Show', document_type %></td>
-        <td><%= link_to 'Edit', edit_document_type_path(document_type) %></td>
-        <td><%= link_to 'Destroy', document_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("pencil"), edit_document_type_path(document_type) %></td>
+        <td><%= link_to fa_icon("trash"), document_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

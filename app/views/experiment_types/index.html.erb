@@ -10,9 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
 
@@ -20,9 +18,8 @@
     <% @experiment_types.each do |experiment_type| %>
       <tr>
         <td><%= experiment_type.name %></td>
-        <td><%= link_to 'Show', experiment_type %></td>
-        <td><%= link_to 'Edit', edit_experiment_type_path(experiment_type) %></td>
-        <td><%= link_to 'Destroy', experiment_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("pencil"), edit_experiment_type_path(experiment_type) %></td>
+        <td><%= link_to fa_icon("trash"), experiment_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

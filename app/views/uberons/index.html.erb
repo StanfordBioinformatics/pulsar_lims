@@ -11,9 +11,7 @@
     <tr>
       <th>Name</th>
       <th>Accession</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
 
@@ -22,9 +20,8 @@
       <tr>
         <td><%= uberon.name %></td>
         <td><%= uberon.accession %></td>
-        <td><%= link_to 'Show', uberon %></td>
-        <td><%= link_to 'Edit', edit_uberon_path(uberon) %></td>
-        <td><%= link_to 'Destroy', uberon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("pencil"), edit_uberon_path(uberon) %></td>
+        <td><%= link_to fa_icon("trash"), uberon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

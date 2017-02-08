@@ -10,9 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
 
@@ -20,9 +18,8 @@
     <% @sequencing_platforms.each do |sequencing_platform| %>
       <tr>
         <td><%= sequencing_platform.name %></td>
-        <td><%= link_to 'Show', sequencing_platform %></td>
-        <td><%= link_to 'Edit', edit_sequencing_platform_path(sequencing_platform) %></td>
-        <td><%= link_to 'Destroy', sequencing_platform, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("pencil"), edit_sequencing_platform_path(sequencing_platform) %></td>
+        <td><%= link_to fa_icon("trash"), sequencing_platform, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -12,9 +12,7 @@
       <th>Name</th>
       <th>Accession</th>
       <th>Definition</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
 
@@ -24,9 +22,8 @@
         <td><%= nucleic_acid_term.name %></td>
         <td><%= nucleic_acid_term.accession %></td>
         <td><%= nucleic_acid_term.definition %></td>
-        <td><%= link_to 'Show', nucleic_acid_term %></td>
-        <td><%= link_to 'Edit', edit_nucleic_acid_term_path(nucleic_acid_term) %></td>
-        <td><%= link_to 'Destroy', nucleic_acid_term, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("pencil"), edit_nucleic_acid_term_path(nucleic_acid_term) %></td>
+        <td><%= link_to fa_icon("trash"), nucleic_acid_term, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

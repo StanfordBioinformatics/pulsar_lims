@@ -11,10 +11,7 @@
     <tr>
       <th>Encode</th>
       <th>Encode alias</th>
-      <th>String</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
 
@@ -23,8 +20,8 @@
       <tr>
         <td><%= link_to donor.encode_identifier, donor %></td>
         <td><%= donor.encode_alias %></td>
-        <td><%= link_to 'Edit', edit_donor_path(donor) %></td>
-        <td><%= link_to 'Destroy', donor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("pencil"), edit_donor_path(donor) %></td>
+        <td><%= link_to fa_icon("trash"), donor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

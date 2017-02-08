@@ -16,11 +16,10 @@
       <th>Vendor</th>
       <th>Lot identifier</th>
       <th>Vendor product identifier</th>
+      <th>Barcode</th>
       <th>Size range</th>
       <th>Strand specificity</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
 
@@ -45,11 +44,11 @@
   
         <td><%= library.lot_identifier %></td>
         <td><%= library.vendor_product_identifier %></td>
+        <td><%= library.barcode %></td>
         <td><%= library.size_range %></td>
         <td><%= library.strand_specific %></td>
-        <td><%= link_to 'Show', library %></td>
-        <td><%= link_to 'Edit', edit_library_path(library) %></td>
-        <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("pencil"), edit_library_path(library) %></td>
+        <td><%= link_to fa_icon("trash"),library, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

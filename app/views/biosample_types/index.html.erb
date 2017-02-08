@@ -10,9 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
 
@@ -20,9 +18,8 @@
     <% @biosample_types.each do |biosample_type| %>
       <tr>
         <td><%= biosample_type.name %></td>
-        <td><%= link_to 'Show', biosample_type %></td>
-        <td><%= link_to 'Edit', edit_biosample_type_path(biosample_type) %></td>
-        <td><%= link_to 'Destroy', biosample_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("pencil"), edit_biosample_type_path(biosample_type) %></td>
+        <td><%= link_to fa_icon("trash"), biosample_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

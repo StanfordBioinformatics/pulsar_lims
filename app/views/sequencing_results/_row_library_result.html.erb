@@ -11,7 +11,7 @@
 		<td><%= res.read1_uri %></td>
 		<td><%= res.read2_count %></td>
 		<td><%= res.read2_uri %></td>
-		<td><%= link_to fa_icon("remove"), [@sequencing_request,@sequencing_result,res], method: :delete %></td>
 		<td><%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_result,res] %></td>
+		<td><%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_result,res], method: :delete %></td>
 	</tr>
 <% end %>

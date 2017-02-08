@@ -9,7 +9,9 @@ class SequencingResultsController < ApplicationController
 	def new_library_result
 		@library_sequencing_result = @sequencing_result.library_sequencing_results.build	
 		#render layout: false
-		render partial: "library_sequencing_results/form"
+		#render partial: "library_sequencing_results/form"
+
+		render layout: "fieldset_library_sequencing_result", partial: "library_sequencing_results/form"
 		return
 	end
 

@@ -15,9 +15,7 @@
       <th>Vendor</th>
       <th>Biosample Term Name</th>
       <th>ENCID</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
 
@@ -29,9 +27,8 @@
         <td><%= biosample.vendor.name %></td>
         <td><%= biosample.ontology_term_name %></td>
         <td><%= biosample.encid %></td>
-        <td><%= link_to 'Show', biosample %></td>
-        <td><%= link_to 'Edit', edit_biosample_path(biosample) %></td>
-        <td><%= link_to 'Destroy', biosample, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("pencil"), edit_biosample_path(biosample) %></td>
+        <td><%= link_to fa_icon("trash"), biosample, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
