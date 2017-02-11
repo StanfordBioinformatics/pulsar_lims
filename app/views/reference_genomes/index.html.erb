@@ -2,15 +2,10 @@
 	<h1>Reference Genomes</h1>
   
   <ul class="actions">
-		<%= render partial: "application_partials/auth_new_record", locals: {record: ReferenceGenome.first} %>
+		<%= render partial: "application_partials/auth_new_record", locals: {model_class: ReferenceGenome} %>
   </ul> 
 </header>
   
-  <ul class="actions">
-    <li><%= link_to "New Library", new_library_path, class: "new" %></li>
-  </ul> 
-</header>
-
 <table id="attributes">
   <thead>
     <tr>
@@ -23,7 +18,7 @@
   <tbody>
     <% @reference_genomes.each do |reference_genome| %>
       <tr>
-        <td><%= reference_genome.name %></td>
+        <td><%= link_to reference_genome.name, reference_genome %></td>
         <td><%= reference_genome.url %></td>
         <td><%= link_to fa_icon("pencil"), edit_reference_genome_path(reference_genome) %></td>
         <td><%= link_to fa_icon("trash"), reference_genome, method: :delete, data: { confirm: 'Are you sure?' } %></td>

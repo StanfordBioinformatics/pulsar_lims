@@ -2,11 +2,12 @@
 	<% nested = "" %>
 <% end %>
 
-<% record_class_hr = record.model_name.human.titleize %>
-<% if policy(record).new? %>
+<% model_class_hr = model_class.model_name.human.titleize %>
+<% model_route_path = model_class.model_name.singular_route_key %>
+<% if policy(model_class).new? %>
 	<% if nested.present? %>
-		<li><%= link_to "New #{record_class_hr}", [:new,nested,record].flatten,  class: "new" %></li>
+		<li><%= link_to "New #{model_class_hr}", [:new,nested,model_route_path].flatten,  class: "new" %></li>
 	<% else %>
-		<li><%= link_to "New #{record_class_hr}", [:new,record],  class: "new" %></li>
+		<li><%= link_to "New #{model_class_hr}", [:new,model_route_path],  class: "new" %></li>
 	<% end %>
 <% end %>

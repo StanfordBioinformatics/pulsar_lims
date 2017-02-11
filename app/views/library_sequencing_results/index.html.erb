@@ -5,7 +5,7 @@
 	#Dont include lines below since we don't want users to be able to creat a library_sequencing_result
   # from it's own page, rather, only through a sequencing_result object.
 	<ul class="actions">
-	<\%= render partial: "application_partials/auth_new_record", locals: {record: Library.first} %>
+	<\%= render partial: "application_partials/auth_new_record", locals: {model_class: Library} %>
 	</ul> 
 -->
 </header>
