@@ -4,7 +4,7 @@
   <table class="form-inputs">
 		<tr>
 			<td><%= f.input :name %></td>
-      <td><%= f.association :library, collection: Library.order(:name) %></td>
+      <td><%= f.association :library, collection: @sequencing_request.libraries.order(:name) %></td>
       <td><%= f.input :comment %></td>
       <td><%= f.input :read1_count %></td>
       <td><%= f.input :read1_uri %></td>
