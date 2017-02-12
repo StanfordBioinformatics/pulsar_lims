@@ -1,6 +1,8 @@
-<div style="padding: 8px;border: 2px solid grey;">
-	<frameset>
-		<legend>New Library Sequencing Result</legend>
+<div id="new_library_result_form" style="padding: 8px;border: 2px solid grey;">
+	<fieldset>
+		<%= content_tag :legend do %>
+			New Library Sequencing Result <%= link_to fa_icon("remove"), "bob", id: "rm_new_library_result_form" %>
+		<% end %>
 	<%= yield %>
-	</frameset>
+	</fieldset>
 </div>

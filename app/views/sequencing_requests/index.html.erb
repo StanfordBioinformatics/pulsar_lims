@@ -12,6 +12,7 @@
       <th>Comment</th>
       <th>Sequencing platform</th>
       <th>Sequencing center</th>
+			<th>Paired-end</th>
       <th>Shipped</th>
 			<th>Sequencing Result</th>
       <th colspan="2">Actions</th>
@@ -27,9 +28,13 @@
         <td><%= link_to sequencing_request.sequencing_center.name, sequencing_request.sequencing_center %></td>
         <td><%= sequencing_request.paired_end%></td>
         <td><%= sequencing_request.shipped %></td>
+				<% if sequencing_request.sequencing_result.present? %>
+	        <td><%= link_to sequencing_request.sequencing_result.name, [sequencing_request,sequencing_request.sequencing_result] %></td>
+				<% else %>
+					<td>None</td>
+				<% end %>
         <td><%= link_to fa_icon("pencil"), edit_sequencing_request_path(sequencing_request) %></td>
         <td><%= link_to fa_icon("trash"), sequencing_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= sequencing_request.sequencing_result %></td>
       </tr>
     <% end %>
   </tbody>

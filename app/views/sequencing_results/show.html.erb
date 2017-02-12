@@ -41,24 +41,24 @@
 
 <h4>Library Sequencing Results</h4>
 <table id="library_results" class="table-bordered table-data" >
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Library</th>
-			<th>Barcode</th>
-			<th>Comment</th>
-			<th>Read1 Count</th>
-			<th>Read1 URI</th>
-			<th>Read2 Count </th>
-			<th>Read2 URI</th>
-			<th colspan="2">Actions</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% if @sequencing_result.library_sequencing_results.present? %>
-			<%= render partial: "row_library_result", locals: {library_sequencing_results: @sequencing_result.library_sequencing_results} %>
-		<% end %>
-	</tbody>
+	<% if @sequencing_result.library_sequencing_results.present? %>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Library</th>
+				<th>Barcode</th>
+				<th>Comment</th>
+				<th>Read1 Count</th>
+				<th>Read1 URI</th>
+				<th>Read2 Count </th>
+				<th>Read2 URI</th>
+				<th colspan="2">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+				<%= render partial: "row_library_result", locals: {library_sequencing_results: @sequencing_result.library_sequencing_results} %>
+		</tbody>
+	<% end %>
 </table>
 
 <%= link_to "New Library Result", [:new_library_result,@sequencing_request,@sequencing_result], class: "reg-btn", remote: true, id: "new_library_result" %>
