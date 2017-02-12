@@ -11,7 +11,7 @@ class Library < ActiveRecord::Base
 	has_many   :library_sequencing_results, dependent: :destroy
 
 	validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
-	validates :barcode, format: { with: /\A[acgtnACGTN]+-?[acgtnACGTN]+\z/ }, allow_nil: true
+	validates :barcode, format: { with: /\A[acgtnACGTN]+-?[acgtnACGTN]+\z/ }, allow_blank: true
 	validates  :size_range, format: {with: /\A\d+-\d+\Z/}, presence: true
 	validates :nucleic_acid_term_id, presence: true
 	validates :documents, presence: true
