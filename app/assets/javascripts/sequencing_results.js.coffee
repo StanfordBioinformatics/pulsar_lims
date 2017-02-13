@@ -11,7 +11,7 @@ $ ->
   $("#new_library_result").on "ajax:success", (event,data) ->  
     $("#library_results").after(data)
     #this appends a form with id new_library_result_form.
-    $("#new_library_result_form").hide().fadeIn()
+    $("#new_library_result_form").hide().fadeIn("fast")
     $("#rm_new_library_result_form").click (event) -> 
       event.preventDefault()
       $("#new_library_result_form").slideUp("fast")

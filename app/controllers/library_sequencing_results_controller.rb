@@ -28,13 +28,16 @@ class LibrarySequencingResultsController < ApplicationController
   # POST /library_sequencing_results.json
   def create
 		authorize LibrarySequencingResult
-#		render json: params
-#		return
     @library_sequencing_result = @sequencing_result.library_sequencing_results.build(library_sequencing_result_params)
+		lib = @library_sequencing_result.library
+		#render text: lib.id
+		#return
 		@library_sequencing_result.user = current_user
 
     respond_to do |format|
-      if @library_sequencing_result.save
+			if @sequencing_request.libraries.include? lib
+				format.html {redirect_to [@sequencing_request,@sequencing_result], alert: "A Library Sequencing Result was already created for library #{lib.name}."}
+      elsif @library_sequencing_result.save
         format.html { redirect_to [@sequencing_request,@sequencing_result], notice: 'Library sequencing result was successfully created.' }
         format.json { render json: @library_sequencing_result, status: :created }
       else

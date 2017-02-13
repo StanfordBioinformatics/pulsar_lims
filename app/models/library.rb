@@ -1,14 +1,12 @@
 class Library < ActiveRecord::Base
 	has_and_belongs_to_many :documents
 	has_and_belongs_to_many :sequencing_requests
-	has_many   :libraries
+	has_many   :library_sequencing_results, dependent: :destroy
 	belongs_to :antibody
 	belongs_to :user
 	belongs_to :nucleic_acid_term
 	belongs_to :biosample
 	belongs_to :vendor
-
-	has_many   :library_sequencing_results, dependent: :destroy
 
 	validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
 	validates :barcode, format: { with: /\A[acgtnACGTN]+-?[acgtnACGTN]+\z/ }, allow_blank: true
