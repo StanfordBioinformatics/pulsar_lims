@@ -13,7 +13,7 @@ module LibrarySequencingResultsHelper
 	def get_libraries_on_sequencing_result(sequencing_result)
 		libs = []
 		sequencing_result.library_sequencing_results.each do |x|
-			libs << x.library
+			libs << x.library if x.persisted?
 		end
 		return libs
 	end		

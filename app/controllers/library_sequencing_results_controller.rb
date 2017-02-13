@@ -1,4 +1,5 @@
 class LibrarySequencingResultsController < ApplicationController
+	include LibrarySequencingResultsHelper
   before_action :set_library_sequencing_result, only: [:show, :edit, :update, :destroy]
 	before_action :set_sequencing_request
 	before_action :set_sequencing_result
@@ -35,7 +36,7 @@ class LibrarySequencingResultsController < ApplicationController
 		@library_sequencing_result.user = current_user
 
     respond_to do |format|
-			if @sequencing_request.libraries.include? lib
+			if get_libraries_on_sequencing_result(@sequencing_result).include? lib
 				format.html {redirect_to [@sequencing_request,@sequencing_result], alert: "A Library Sequencing Result was already created for library #{lib.name}."}
       elsif @library_sequencing_result.save
         format.html { redirect_to [@sequencing_request,@sequencing_result], notice: 'Library sequencing result was successfully created.' }

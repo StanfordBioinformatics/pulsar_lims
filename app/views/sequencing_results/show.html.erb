@@ -62,6 +62,7 @@
 </table>
 
 <% if libs_on_sreq_without_seqresult(@sequencing_request).blank? %>
+	<!-- Create hidden element for jQuery to look for. If jQuery finds it, then it will disable the link below with id="new_library_result" -->
 	<span id="hide_new_library_result" hidden></span>
 <% end %>
 <%= link_to "New Library Result", [:new_library_result,@sequencing_request,@sequencing_result], class: "reg-btn", remote: true, id: "new_library_result" %>
