@@ -10,6 +10,7 @@ $ ->
   $("#new_library_result").click (event) -> 
     if ($("#new_library_result").attr("disabled") == "disabled")
       event.preventDefault()
+    $(@).hide()
 
 
   $("#new_library_result").on "ajax:success", (event,data) ->  
