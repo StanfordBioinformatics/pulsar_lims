@@ -4,9 +4,13 @@
 
 
 $ ->  
+  if $("#hide_new_library_result").length == 1 
+    $("#new_library_result").attr("disabled", "disabled")
 
-  $("#new_library_result").click( -> 
-    $(@).hide())
+  $("#new_library_result").click (event) -> 
+    if ($("#new_library_result").attr("disabled") == "disabled")
+      event.preventDefault()
+
 
   $("#new_library_result").on "ajax:success", (event,data) ->  
     $("#library_results").after(data)
