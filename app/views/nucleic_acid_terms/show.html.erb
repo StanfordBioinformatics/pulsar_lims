@@ -10,19 +10,21 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @nucleic_acid_term } %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @nucleic_acid_term.name %>
-</p>
+<table class="attributes">
+	<tr>
+		<th><strong>Name:</strong></th>
+		<td><%= @nucleic_acid_term.name %></td>
+	</tr>
 
-<p>
-  <strong>Accession:</strong>
-  <%= @nucleic_acid_term.accession %>
-</p>
+	<tr>
+		<th><strong>Accession:</strong></th>
+		<td><%= @nucleic_acid_term.accession %></td>
+	</tr>
 
-<p>
-  <strong>Definition:</strong>
-  <%= @nucleic_acid_term.definition %>
-</p>
+	<tr>
+		<th><strong>Definition:</strong></th>
+		<td><%= @nucleic_acid_term.definition %></td>
+	</tr>
+</table>
 
 <%= link_to 'Back', nucleic_acid_terms_path %>

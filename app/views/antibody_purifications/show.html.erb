@@ -10,9 +10,11 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @antibody_purification } %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @antibody_purification.name %>
-</p>
+<table class="attributes">
+	<tr>
+		<th><strong>Name:</strong></th>
+		<td><%= @antibody_purification.name %></td>
+	</tr>
+</table>
 
 <%= link_to 'Back', antibody_purifications_path %>

@@ -12,69 +12,69 @@
 
 <table class="attributes">
   <tr>
-		<th>Biosample Name</th>
+		<th><strong>Biosample Name</strong></th>
 		<td><%= @biosample.name %></td>
 	</tr>
 	<tr>
-		<th>Documents:</th>
+		<th><strong>Documents:</strong></th>
 		<td>
 			<%= render partial: "documents/link_to_document", locals: {documents: @biosample.documents} %>
 		</td>
 	</tr>
 	<tr>
-		<th>Biosample Type:</th>
+		<th><strong>Biosample Type:</strong></th>
 		<td><%= @biosample.biosample_type.name %></td>
 	</tr>
   <tr>
-		<th>Description:</th>
+		<th><strong>Description:</strong></th>
   	<td><%= @biosample.description %></td>
 	</tr>
 	<tr>
-		<th>Vendor:</th>
+		<th><strong>Vendor:</strong></th>
 		<td><%= link_to @biosample.vendor.name, @biosample.vendor.url %></td>
 	</tr>
 	<tr>
-  	<th>Vendor product identifier:</th>
+  	<th><strong>Vendor product identifier:</strong></th>
   	<td><%= @biosample.vendor_product_identifier %></td>
 	</tr>
 	<tr>
-	  <th>Lot identifier:</th>
+	  <th><strong>Lot identifier:</strong></th>
   	<td><%= @biosample.lot_identifier %></td>
 	</tr>
 	<tr>
-  	<th>Ontology Term Name describing the biosample:</th>
+  	<th><strong>Ontology Term Name describing the biosample:</strong></th>
   	<td><%= @biosample.ontology_term_name%></td>
 	</tr>
 	<tr>
-	  <th>Ontology Term Accession describing the biosample:</th>
+	  <th><strong>Ontology Term Accession describing the biosample:</strong></th>
 	  <td><%= @biosample.ontology_term_accession%></td>
 	</tr>
 	<tr>
-		<th>Human Donor:</th>
+		<th><strong>Human Donor:</strong></th>
 		<td><%= link_to @biosample.donor.encode_alias, encode_url(@biosample.donor.encode_identifier)%></td>
 	</tr>
 	<tr>
-	  <th>Passage number:</th>
+	  <th><strong>Passage number:</strong></th>
 	  <td><%= @biosample.passage_number %></td>
 	</tr>
 	<tr>
-	  <th>Culture harvest date:</th>
+	  <th><strong>Culture harvest date:</strong></th>
 	  <td><%= @biosample.culture_harvest_date %></td>
 	</tr>
 	<tr>
-	  <th>Submitter comments:</th>
+	  <th><strong>Submitter comments:</strong></th>
 	  <td><%= @biosample.submitter_comments %></td>
 	</tr>
 	<tr>
-	  <th>Description:</th>
+	  <th><strong>Description:</strong></th>
 	  <td><%= @biosample.description %></td>
 	</tr>
 	<tr>
-	  <th>Encid:</th>
+	  <th><strong>Encid:</strong></th>
 	  <td><%= @biosample.encid %></td>
 	</tr>
 	<tr>
-    <th>Associated Libraries:</th>
+    <th><strong>Associated Libraries:</strong></th>
     <% if @biosample.libraries.present? %>
 			<td>
 				<%= render partial: "libraries/link_to_library", locals: {libraries: @biosample.libraries} %>

@@ -2,16 +2,18 @@
   <h1><%= @isotype.name %></h1>
 
   <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @isotyp} %>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @isotype} %>
     <%= render partial: "application_partials/auth_destroy_record", locals: {record: @isotype} %>
   </ul>
 </header>
 
 <%= render partial: "application_partials/record_meta", locals: { record: @isotype } %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @isotype.name %>
-</p>
+<table class="attributes">
+	<tr>
+		<th><strong>Name:</strong></th>
+		<td><%= @isotype.name %></td>
+	</tr>
+</table>
 
 <%= link_to 'Back', isotypes_path %>

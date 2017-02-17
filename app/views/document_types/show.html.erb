@@ -9,9 +9,11 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @document_type } %>
 
-<p>
-  <strong>Name:</strong></br>
-  <%= @document_type.name %>
-</p>
+<table class="attributes">
+	<tr>
+  	<th><strong>Name:</strong></th>
+  	<td><%= @document_type.name %></td>
+	</tr>
+</table>
 
 <%= link_to 'Back', document_types_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217001718) do
+ActiveRecord::Schema.define(version: 20170217062642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,7 +120,10 @@ ActiveRecord::Schema.define(version: 20170217001718) do
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "document_types", ["user_id"], name: "index_document_types_on_user_id", using: :btree
 
   create_table "documents", force: :cascade do |t|
     t.string   "name",             limit: 255
@@ -372,6 +375,7 @@ ActiveRecord::Schema.define(version: 20170217001718) do
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "crispr_genetic_modifications", "users"
   add_foreign_key "crispr_genetic_modifications", "vendors"
+  add_foreign_key "document_types", "users"
   add_foreign_key "documents", "document_types"
   add_foreign_key "documents", "users"
   add_foreign_key "donors", "users"

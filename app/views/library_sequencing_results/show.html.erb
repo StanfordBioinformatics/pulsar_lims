@@ -11,47 +11,43 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @library_sequencing_result } %>
 
 <table class="attributes">
-	<thead>
 		<tr>
-		  <th>Name:</th>
+		  <th><strong>Name:</strong></th>
 	  	<td><%= @library_sequencing_result.name %></td>
 		</tr>
-	</thead>
 
-	<tbody>
 		<tr>
-		  <th>Sequencing result:</th>
+		  <th><strong>Sequencing result:</strong></th>
 	  	<td><%= link_to @library_sequencing_result.sequencing_result.name, [@sequencing_request,@sequencing_result] %></td>
 		</tr>
 	
 		<tr>
-		  <th>Library:</th>
+		  <th><strong>Library:</strong></th>
 	  	<td><%= link_to @library_sequencing_result.library.name, @library_sequencing_result.library %></td>
 		</tr>
 	
 		<tr>
-	  	<th>Comment:</th>
+	  	<th><strong>Comment:</strong></th>
 	  	<td><%= @library_sequencing_result.comment %></td>
 		</tr>
 	
 		<tr>
-	  	<th>Read1 uri:</th>
+	  	<th><strong>Read1 uri:</strong></th>
 	  	<td><%= @library_sequencing_result.read1_uri %></td>
 		</tr>
 	
 		<tr>
-	  	<th>Read2 uri:</th>
+	  	<th><strong>Read2 uri:</strong></th>
 	  	<td><%= @library_sequencing_result.read2_uri %></td>
 		</tr>
 	
 		<tr>
-	  	<th>Read1 count:</th>
+	  	<th><strong>Read1 count:</strong></th>
 	  	<td><%= @library_sequencing_result.read1_count %></td>
 		</tr>
 	
 		<tr>
-	  	<th>Read2 count:</th>
+	  	<th><strong>Read2 count:</strong></th>
 	  	<td><%= @library_sequencing_result.read2_count %></td>
 		</tr>
-	</tbody>
 </table>

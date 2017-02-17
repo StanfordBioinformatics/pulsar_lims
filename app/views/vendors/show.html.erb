@@ -9,19 +9,21 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @vendor} %>
 
-<p>
-	<strong>ENCID:</strong>
-	<%= @vendor.encode_identifier %>
-</p>
+<table class="attributes">
+	<tr>
+		<th><strong>ENCID:</strong></th>
+		<td><%= @vendor.encode_identifier %></td>
+	</tr>
 
-<p>
-  <strong>Name:</strong>
-  <%= link_to @vendor.name,@vendor.url %>
-</p>
+	<tr>
+		<th><strong>Name:</strong></th>
+		<td><%= link_to @vendor.name,@vendor.url %></td>
+	</tr>
 
-<p>
-  <strong>Description:</strong>
-  <%= @vendor.description %>
-</p>
+	<tr>
+		<th><strong>Description:</strong></th>
+		<td><%= @vendor.description %></td>
+	</tr>
+</table>
 
 <%= link_to 'Back', vendors_path %>

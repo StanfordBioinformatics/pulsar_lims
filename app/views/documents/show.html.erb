@@ -10,29 +10,32 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @document } %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @document.name %>
-</p>
+<table class="attributes">
+	<tr>
+	  <th><strong>Name:</strong></th>
+	  <td><%= @document.name %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Description:</strong></th>
+	  <td><%= @document.description %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Content Type:</strong></th>
+	  <td><%= @document.content_type%></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Data:</strong></th>
+		<td><%= link_to(@document.name,:action => "document", :id => @document.id) %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Document type:</strong></th>
+	 	<td><%= link_to @document.document_type.name, @document.document_type %></td>
+	</tr>
 
-<p>
-  <strong>Description:</strong>
-  <%= @document.description %>
-</p>
-
-<p>
-  <strong>Content Type:</strong>
-  <%= @document.content_type%>
-</p>
-
-<p>
-  <strong>Data:</strong>
-	<%= link_to(@document.name,:action => "document", :id => @document.id) %>
-</p>
-
-<p>
-  <strong>Document type:</strong>
- 	<%= @document.name %>
-</p>
+</table>
 
 <%= link_to 'Back', documents_path %>

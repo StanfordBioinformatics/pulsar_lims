@@ -9,14 +9,16 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @sequencing_center} %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @sequencing_center.name %>
-</p>
+<table class="attribute">
+	<tr>
+		<th><strong>Name:</strong></th>
+		<td><%= @sequencing_center.name %></td>
+	</tr>
 
-<p>
-  <strong>Address:</strong>
-  <%= @sequencing_center.address %>
-</p>
+	<tr>
+		<th><strong>Address:</strong></th>
+		<td><%= @sequencing_center.address %></td>
+	</tr>
+</table>
 
 <%= link_to 'Back', sequencing_centers_path %>

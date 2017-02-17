@@ -1,34 +1,36 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %>	</tr>
 
-<p>
-  <strong>Name:</strong>
-  <%= @crispr_genetic_modification.name %>
-</p>
+<table class="attributes">
+	<tr>
+	  <th><strong>Name:</strong></th>
+  	<td><%= @crispr_genetic_modification.name %></td>
+	</tr>
 
-<p>
-  <strong>User:</strong>
-  <%= @crispr_genetic_modification.user %>
-</p>
+	<tr>
+	  <th><strong>User:</strong></th>
+	 	<td><%= @crispr_genetic_modification.user %></td>
+	</tr>
 
-<p>
-  <strong>Vendor:</strong>
-  <%= @crispr_genetic_modification.vendor %>
-</p>
+	<tr>
+		<th><strong>Vendor:</strong></th>
+  	<td><%= @crispr_genetic_modification.vendor %></td>
+	</tr>
 
-<p>
-  <strong>Vendor product identifier:</strong>
-  <%= @crispr_genetic_modification.vendor_product_identifier %>
-</p>
+	<tr>
+  	<th><strong>Vendor product identifier:</strong></th>
+  	<td><%= @crispr_genetic_modification.vendor_product_identifier %></td>
+	</tr>
 
-<p>
-  <strong>Guide rna sequences:</strong>
-  <%= @crispr_genetic_modification.guide_rna_sequences %>
-</p>
+	<tr>
+  	<th><strong>Guide rna sequences:</strong></th>
+  	<td><%= @crispr_genetic_modification.guide_rna_sequences %></td>
+	</tr>
 
-<p>
-  <strong>Insert sequence:</strong>
-  <%= @crispr_genetic_modification.insert_sequence %>
-</p>
+	<tr>
+  	<th><strong>Insert sequence:</strong></th>
+  	<td><%= @crispr_genetic_modification.insert_sequence %></td>
+	</tr>
+</table>
 
 <%= link_to 'Edit', edit_crispr_genetic_modification_path(@crispr_genetic_modification) %> |
 <%= link_to 'Back', crispr_genetic_modifications_path %>

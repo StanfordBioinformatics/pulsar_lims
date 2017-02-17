@@ -9,14 +9,16 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @reference_genome } %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @reference_genome.name %>
-</p>
+<table class="attributes">
+	<tr>
+		<th><strong>Name:</strong></th>
+		<td><%= @reference_genome.name %></td>
+	</tr>
 
-<p>
-  <strong>Url:</strong>
-  <%= @reference_genome.url %>
-</p>
+	<tr>
+		<th><strong>Url:</strong></th>
+		<td><%= @reference_genome.url %></td>
+	</tr>
+</table>
 
 <%= link_to 'Back', reference_genomes_path %>

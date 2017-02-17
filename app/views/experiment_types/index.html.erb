@@ -17,14 +17,10 @@
   <tbody>
     <% @experiment_types.each do |experiment_type| %>
       <tr>
-        <td><%= experiment_type.name %></td>
+        <td><%= link_to experiment_type.name, experiment_type %></td>
         <td><%= link_to fa_icon("pencil"), edit_experiment_type_path(experiment_type) %></td>
         <td><%= link_to fa_icon("trash"), experiment_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Experiment type', new_experiment_type_path %>

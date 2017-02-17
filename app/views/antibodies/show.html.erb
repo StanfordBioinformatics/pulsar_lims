@@ -12,17 +12,17 @@
 
 <table class="attributes">
 	<tr>
-		<th>Name</th>
+		<th><strong>Name</strong></th>
 		<td><%= @antibody.name %></td>
 	</tr>
 		
 	<tr>
-		<th>Organism</th>
+		<th><strong>Organism</strong></th>
 		<td><%= @antibody.organism.name %></td>
 	</tr>
 
 	<tr>
-		<th>Antibody Purifications</th>
+		<th><strong>Antibody Purifications</strong></th>
 		<td>
 			<table>
 				<%= render(@antibody.antibody_purifications) %>
@@ -31,12 +31,12 @@
 	</tr>
 
 	<tr>
-		<th>Vendor</th>
+		<th><strong>Vendor</strong></th>
 		<td><%= @antibody.vendor.name %></td>
 	</tr>
 
 	<tr>
-		<th>Isotpye</th>
+		<th><strong>Isotpye</strong></th>
 		<td>
 			<% if @antibody.isotype.present? %>
 			  <%= link_to @antibody.isotype.name, @antibody.isotype %>
@@ -45,37 +45,37 @@
 	</tr>
 
 	<tr>
-		<th>Target</th>
+		<th><strong>Target</strong></th>
 		<td><%= link_to @antibody.target.name, @antibody.target %></td>
 	</tr>
 
 	<tr>
-		<th>Vendor Product Identifier</th>
+		<th><strong>Vendor Product Identifier</strong></th>
 		<td><%= @antibody.vendor_product_identifier %></td>
 	</tr>
 
 	<tr>
-		<th>Vendor Product URL</th>
+		<th><strong>Vendor Product URL</strong></th>
 		<td><%= link_to @antibody.vendor_product_url %></td>
 	</tr>
 
 	<tr>
-		<th>Lot Identifier</th>
+		<th><strong>Lot Identifier</strong></th>
 		<td><%= @antibody.lot_identifier %></td>
 	</tr>
 
 	<tr>
-		<th>Clonality</th>
+		<th><strong>Clonality</strong></th>
 		<td><%= @antibody.clonality %></td>
 	</tr>
 
 	<tr>
-		<th>Antigen Description</th>
+		<th><strong>Antigen Description</strong></th>
 		<td><%= @antibody.antigen_description %></td>
 	</tr>
 
 	<tr>
-		<th>Antigen Sequence</th>
+		<th><strong>Antigen Sequence</strong></th>
 		<td><%= @antibody.antigen_sequence %></td>
 	</tr>
 

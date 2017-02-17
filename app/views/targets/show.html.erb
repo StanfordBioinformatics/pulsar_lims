@@ -9,14 +9,16 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @target } %>
 
-<p>
-  <strong>Encode identifier:</strong>
-  <%= @target.encode_identifier %>
-</p>
+<table class="attributes">
+	<tr>
+		<th><strong>Encode identifier:</strong></th>
+		<td><%= @target.encode_identifier %></td>
+	</tr>
 
-<p>
-  <strong>Name:</strong>
-  <%= @target.name %>
-</p>
+	<tr>
+		<th><strong>Name:</strong></th>
+		<td><%= @target.name %></td>
+	</tr>
+</table>
 
 <%= link_to 'Back', targets_path %>

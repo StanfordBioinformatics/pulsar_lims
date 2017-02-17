@@ -19,14 +19,10 @@
     <% @targets.each do |target| %>
       <tr>
         <td><%= target.encode_identifier %></td>
-        <td><%= target.name %></td>
+        <td><%= link_to target.name, target %></td>
         <td><%= link_to fa_icon("pencil"), edit_target_path(target) %></td>
         <td><%= link_to fa_icon("trash"), target, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Target', new_target_path %>

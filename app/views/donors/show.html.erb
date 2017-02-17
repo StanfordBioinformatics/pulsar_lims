@@ -10,15 +10,17 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @donor } %>
 
-<p>
-  <strong>Encode:</strong>
-  <%= link_to @donor.encode_identifier %>
-</p>
+<table class="attributes">
+	<tr>
+		<th><strong>Encode:</strong></th>
+		<td><%= link_to @donor.encode_identifier %></td>
+	</tr>
 
-<p>
-  <strong>Encode alias:</strong>
-  <%= link_to @donor.encode_alias %>
-</p>
+	<tr>
+		<th><strong>Encode alias:</strong></th>
+		<td><%= link_to @donor.encode_alias %></td>
+	</tr>
+</table>
 
 
 <%= link_to 'Back', donors_path %>

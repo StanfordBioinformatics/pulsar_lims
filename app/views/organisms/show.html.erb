@@ -9,9 +9,11 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @organism } %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @organism.name %>
-</p>
+<table class="attributes">
+	<tr>
+		<th><strong>Name:</strong></th>
+		<td><%= @organism.name %></td>
+	</tr>
+</table>
 
 <%= link_to 'Back', organisms_path %>

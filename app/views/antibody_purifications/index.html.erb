@@ -17,12 +17,10 @@
   <tbody>
     <% @antibody_purifications.each do |antibody_purification| %>
       <tr>
-        <td><%= antibody_purification.name %></td>
+        <td><%= link_to antibody_purification.name, antibody_purification %></td>
         <td><%= link_to fa_icon("pencil"), edit_antibody_purification_path(antibody_purification) %></td>
         <td><%= link_to fa_icon("trash"), antibody_purification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>

@@ -9,14 +9,16 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @uberon } %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @uberon.name %>
-</p>
+<table class="attributes">
+	<tr>
+		<th><strong>Name:</strong></th>
+		<td><%= @uberon.name %></td>
+	</tr>
 
-<p>
-  <strong>Accession:</strong>
-  <%= @uberon.accession %>
-</p>
+	<tr>
+		<th><strong>Accession:</strong></th>
+		<td><%= @uberon.accession %></td>
+	</tr>
+</table>
 
 <%= link_to 'Back', uberons_path %>
