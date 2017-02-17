@@ -1,0 +1,16 @@
+<%= simple_form_for(@crispr_genetic_modification) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.association :user %>
+    <%= f.association :vendor %>
+    <%= f.input :vendor_product_identifier %>
+    <%= f.input :guide_rna_sequences %>
+    <%= f.input :insert_sequence %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -145,7 +145,7 @@ header h1 {
   }
 }
 
-#attributes,.table-data {
+.attributes,.table-data {
   @extend .table;
   @extend .table-hover;
   @extend .table-condensed;
@@ -163,9 +163,8 @@ header h1 {
 }
 
 
-
 #library_results {
-	@extend #attributes;
+	@extend .attributes;
 	thead {
 		font-weight: bold;
 		color: white;

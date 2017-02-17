@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @crispr_genetic_modification.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @crispr_genetic_modification.user %>
+</p>
+
+<p>
+  <strong>Vendor:</strong>
+  <%= @crispr_genetic_modification.vendor %>
+</p>
+
+<p>
+  <strong>Vendor product identifier:</strong>
+  <%= @crispr_genetic_modification.vendor_product_identifier %>
+</p>
+
+<p>
+  <strong>Guide rna sequences:</strong>
+  <%= @crispr_genetic_modification.guide_rna_sequences %>
+</p>
+
+<p>
+  <strong>Insert sequence:</strong>
+  <%= @crispr_genetic_modification.insert_sequence %>
+</p>
+
+<%= link_to 'Edit', edit_crispr_genetic_modification_path(@crispr_genetic_modification) %> |
+<%= link_to 'Back', crispr_genetic_modifications_path %>

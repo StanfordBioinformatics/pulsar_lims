@@ -10,44 +10,48 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @library_sequencing_result } %>
 
-<table id="attributes">
-	<tr>
-	  <th>Name:</th>
-  	<td><%= @library_sequencing_result.name %></td>
-	</tr>
+<table class="attributes">
+	<thead>
+		<tr>
+		  <th>Name:</th>
+	  	<td><%= @library_sequencing_result.name %></td>
+		</tr>
+	</thead>
 
-	<tr>
-	  <th>Sequencing result:</th>
-  	<td><%= link_to @library_sequencing_result.sequencing_result.name, [@sequencing_request,@sequencing_result] %></td>
-	</tr>
-
-	<tr>
-	  <th>Library:</th>
-  	<td><%= link_to @library_sequencing_result.library.name, @library_sequencing_result.library %></td>
-	</tr>
-
-	<tr>
-  	<th>Comment:</th>
-  	<td><%= @library_sequencing_result.comment %></td>
-	</tr>
-
-	<tr>
-  	<th>Read1 uri:</th>
-  	<td><%= @library_sequencing_result.read1_uri %></td>
-	</tr>
-
-	<tr>
-  	<th>Read2 uri:</th>
-  	<td><%= @library_sequencing_result.read2_uri %></td>
-	</tr>
-
-	<tr>
-  	<th>Read1 count:</th>
-  	<td><%= @library_sequencing_result.read1_count %></td>
-	</tr>
-
-	<tr>
-  	<th>Read2 count:</th>
-  	<td><%= @library_sequencing_result.read2_count %></td>
-	</tr>
+	<tbody>
+		<tr>
+		  <th>Sequencing result:</th>
+	  	<td><%= link_to @library_sequencing_result.sequencing_result.name, [@sequencing_request,@sequencing_result] %></td>
+		</tr>
+	
+		<tr>
+		  <th>Library:</th>
+	  	<td><%= link_to @library_sequencing_result.library.name, @library_sequencing_result.library %></td>
+		</tr>
+	
+		<tr>
+	  	<th>Comment:</th>
+	  	<td><%= @library_sequencing_result.comment %></td>
+		</tr>
+	
+		<tr>
+	  	<th>Read1 uri:</th>
+	  	<td><%= @library_sequencing_result.read1_uri %></td>
+		</tr>
+	
+		<tr>
+	  	<th>Read2 uri:</th>
+	  	<td><%= @library_sequencing_result.read2_uri %></td>
+		</tr>
+	
+		<tr>
+	  	<th>Read1 count:</th>
+	  	<td><%= @library_sequencing_result.read1_count %></td>
+		</tr>
+	
+		<tr>
+	  	<th>Read2 count:</th>
+	  	<td><%= @library_sequencing_result.read2_count %></td>
+		</tr>
+	</tbody>
 </table>

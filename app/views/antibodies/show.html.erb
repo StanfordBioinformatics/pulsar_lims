@@ -10,68 +10,75 @@
 
 <%= render partial: "application_partials/record_meta", locals: { record: @antibody} %>
 
-<p>
-  <strong>AntibodyName</strong></br>
-  <%= @antibody.name %>
-</p>
+<table class="attributes">
+	<tr>
+		<th>Name</th>
+		<td><%= @antibody.name %></td>
+	</tr>
+		
+	<tr>
+		<th>Organism</th>
+		<td><%= @antibody.organism.name %></td>
+	</tr>
 
-<p>
-  <strong>Organism:</strong>
-  <%= @antibody.organism.name %>
-</p>
+	<tr>
+		<th>Antibody Purifications</th>
+		<td>
+			<table>
+				<%= render(@antibody.antibody_purifications) %>
+		  </table>
+		</td>
+	</tr>
 
-<p>
-  <table>
-    <tr><th style="text-align:left">Antibody Purifications:</th></tr>
-    <%= render(@antibody.antibody_purifications) %>
-  </table>
-</p>
+	<tr>
+		<th>Vendor</th>
+		<td><%= @antibody.vendor.name %></td>
+	</tr>
 
-<p>
-  <strong>Vendor:</strong>
-  <%= @antibody.vendor.name %>
-</p>
+	<tr>
+		<th>Isotpye</th>
+		<td>
+			<% if @antibody.isotype.present? %>
+			  <%= link_to @antibody.isotype.name, @antibody.isotype %>
+			<% end %>
+		</td>
+	</tr>
 
-<p>
-  <strong>Isotype:</strong>
-	<% if @antibody.isotype.present? %>
-	  <%= link_to @antibody.isotype.name, @antibody.isotype %>
-	<% end %>
-</p>
+	<tr>
+		<th>Target</th>
+		<td><%= link_to @antibody.target.name, @antibody.target %></td>
+	</tr>
 
-<p>
-  <strong>Target:</strong>
-  <%= link_to @antibody.target.name, @antibody.target %>
-</p>
+	<tr>
+		<th>Vendor Product Identifier</th>
+		<td><%= @antibody.vendor_product_identifier %></td>
+	</tr>
 
-<p>
-  <strong>Vendor product identifier:</strong>
-  <%= @antibody.vendor_product_identifier %>
-</p>
+	<tr>
+		<th>Vendor Product URL</th>
+		<td><%= link_to @antibody.vendor_product_url %></td>
+	</tr>
 
-<p>
-  <strong>Vendor product url:</strong>
-  <%= link_to @antibody.vendor_product_url %>
-</p>
+	<tr>
+		<th>Lot Identifier</th>
+		<td><%= @antibody.lot_identifier %></td>
+	</tr>
 
-<p>
-  <strong>Lot identifier:</strong>
-  <%= @antibody.lot_identifier %>
-</p>
+	<tr>
+		<th>Clonality</th>
+		<td><%= @antibody.clonality %></td>
+	</tr>
 
-<p>
-  <strong>Clonality:</strong>
-  <%= @antibody.clonality %>
-</p>
+	<tr>
+		<th>Antigen Description</th>
+		<td><%= @antibody.antigen_description %></td>
+	</tr>
 
-<p>
-  <strong>Antigen description:</strong>
-  <%= @antibody.antigen_description %>
-</p>
+	<tr>
+		<th>Antigen Sequence</th>
+		<td><%= @antibody.antigen_sequence %></td>
+	</tr>
 
-<p>
-  <strong>Antigen sequence:</strong>
-  <%= @antibody.antigen_sequence %>
-</p>
+</table>
 
 <%= link_to 'Back', antibodies_path %>

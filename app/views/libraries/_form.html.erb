@@ -4,18 +4,18 @@
   <%= f.input :name, label_html: {"data-toggle" => "tooltip","title" => "Unique library name"} %>(Max. 20 characters)</br>
 
   <table>
-  <tr><th>Associated Protocol Documents:</th></tr>
+  <tr><th>Protocol Documents:</th></tr>
   <%= f.simple_fields_for :documents do |ff| %>
    <% doc = @library.documents[ff.index] %>
    <tr>
     <td><%= doc.name %></td>
-    <td><%= ff.input_field :_destroy, as: :boolean, label: "Remove" %></td>
+    <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
    </tr>
    <% end %>  
   </table></br>
 
   <table>
-  <tr><th>Associated Sequencing Requests:</th></tr>
+  <tr><th>Sequencing Requests:</th></tr>
   <% if @library.sequencing_requests.present? %>
     <%= f.simple_fields_for :sequencing_requests do |ff| %>
       <% seqreq = @library.sequencing_requests[ff.index] %>

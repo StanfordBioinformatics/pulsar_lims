@@ -21,7 +21,7 @@ $(document).ajaxSuccess(function(event,jqXHR,ajaxProps) {
 			$newContentLabel.text("Library") //default label set by simple form is Libraries.
 			$newContentLabel.append('<span>  <a class="remove_library fa fa-remove"></a></span>');
 			//$newContent.hide().fadeIn("slow");
-			$newContent.hide().slideDown();
+			$newContent.hide().slideDown("fast");
 		}
 	}
 )

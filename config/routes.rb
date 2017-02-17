@@ -1,5 +1,7 @@
 SnyderEncode::Application.routes.draw do
 
+  resources :crispr_genetic_modifications
+
   resources :library_sequencing_results
 
   resources :sequencing_centers
