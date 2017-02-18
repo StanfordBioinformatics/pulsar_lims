@@ -1,7 +1,7 @@
 class Uberon < ActiveRecord::Base
-	validates :name, :accession, presence: true
-	validates :accession, uniqueness: true
 	belongs_to :user
+	validates :accession, presence: true, uniqueness: true
+	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
 
 	def self.policy_class
 		ApplicationPolicy

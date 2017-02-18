@@ -12,6 +12,15 @@
 
 admin_user_id = User.find_by(email: "admin@enc.com").id
 
+NucleicAcidTerm.delete_all
+NucleicAcidTerm.create!([
+	{user_id: admin_user_id, name: "DNA", accession: "SO:0000352", definition: "An attribute describing a sequence consisting of nucleobases bound to a repeating unit made of a 2-deoxy-D-ribose ring connected to a phosphate backbone."},
+	{user_id: admin_user_id, name: "RNA", accession: "SO:0000356", definition: "An attribute describing a sequence consisting of nucleobases bound to a repeating unit made of a D-ribose ring connected to a phosphate backbone."},
+	{user_id: admin_user_id, name: "polyadenylated mRNA", accession: "SO:0000871", definition: "An mRNA that is polyadenylated."},
+	{user_id: admin_user_id, name: "miRNA", accession: "SO:0000276", definition: "micro RNA"},
+	{user_id: admin_user_id, name: "protein", accession: "SO:0000104", definition: "sequence of amino acids linked by peptide bonds which may lack appreciable tertiary structure and may not be liable to irreversible denaturation."}
+])
+
 SequenceOntologyTerm.delete_all
 SequenceOntologyTerm.create!(name: "DNA",
 	accession: "SO:0000352",
@@ -96,10 +105,10 @@ Uberon.create!([
 
 Donor.delete_all
 Donor.create!([
-	{user_id: admin_user_id, encode_identifier: "ENCDO268AAA", encode_alias:"bernstein:donor of NHEK cells"},
-	{user_id: admin_user_id, encode_identifier: "ENCDO000ABE", encode_alias:"encode:donor of HCT-116"},
-	{user_id: admin_user_id, encode_identifier: "ENCDO000ABF", encode_alias: "encode:donor of HEK293"},
-	{user_id: admin_user_id, encode_identifier: "ENCDO000AAK", encode_alias: "encode:donor of GM12878"
+	{user_id: admin_user_id, encode_identifier: "ENCDO268AAA", name:"bernstein:donor of NHEK cells"},
+	{user_id: admin_user_id, encode_identifier: "ENCDO000ABE", name:"encode:donor of HCT-116"},
+	{user_id: admin_user_id, encode_identifier: "ENCDO000ABF", name: "encode:donor of HEK293"},
+	{user_id: admin_user_id, encode_identifier: "ENCDO000AAK", name: "encode:donor of GM12878"
 	])
 
 Isotype.delete_all
@@ -207,25 +216,25 @@ Target.create!([
 
 Antibody.delete_all
 Antibody.create!([
-{user_id: admin_user_id, name: "ENCAB140SNC", organism_id: Organism.find_by(name: "human").id, vendor_product_identifier: "A302-183A", vendor_id: Vendor.find_by(name: "bethyl-labs").id, clonality: "polyclonal", human_target_id: Target.find_by(encode_identifier: "RELB-human").id, antibody_purifications: [AntibodyPurification.find_by(name: "affinity")], lot_identifier: 1},
-{user_id: admin_user_id, name: "ENCAB830JLB", organism_id: Organism.find_by(name: "human").id, vendor_product_identifier: "07-729", vendor_id: Vendor.find_by(name: "millipore").id, clonality: "polyclonal", human_target_id: Target.find_by(encode_identifier: "CTCF-human").id, antibody_purifications: [], lot_identifier: 2599305}
+{user_id: admin_user_id, name: "ENCAB140SNC", organism_id: Organism.find_by(name: "human").id, vendor_product_identifier: "A302-183A", vendor_id: Vendor.find_by(encode_identifier: "bethyl-labs").id, clonality: "polyclonal", target_id: Target.find_by(encode_identifier: "RELB-human").id, antibody_purifications: [AntibodyPurification.find_by(name: "affinity")], lot_identifier: 1},
+{user_id: admin_user_id, name: "ENCAB830JLB", organism_id: Organism.find_by(name: "human").id, vendor_product_identifier: "07-729", vendor_id: Vendor.find_by(encode_identifier: "millipore").id, clonality: "polyclonal", target_id: Target.find_by(encode_identifier: "CTCF-human").id, antibody_purifications: [], lot_identifier: 2599305}
 ])
 
 Biosample.delete_all
 Biosample.create!([
-	{user_id: admin_user_id, name: "ENCBS826GBM", encid: "ENCBS826GBM", escription: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(encode_alias: "encode:donor of HEK293").id, ontology_term_accession: "EFO:0001182", ontology_term_name: "HEK293", lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(name: "timothy-hughes").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+	{user_id: admin_user_id, name: "ENCBS826GBM", encid: "ENCBS826GBM", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of HEK293").id, ontology_term_accession: "EFO:0001182", ontology_term_name: "HEK293", lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(encode_identifier: "dgrc").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
-{user_id: admin_user_id, name: "ENCBS758JEW", encid: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(encode_alias: "encode:donor of HEK293").id, ontology_term_accession: "EFO:0001182", ontology_term_name: "HEK293", lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(name: "timothy-hughes").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+{user_id: admin_user_id, name: "ENCBS758JEW", encid: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of HEK293").id, ontology_term_accession: "EFO:0001182", ontology_term_name: "HEK293", lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(encode_identifier: "dgrc").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
-{user_id: admin_user_id, name: "ENCBS389LEA", encid: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(encode_alias: "encode:donor of GM12878").id, ontology_term_accession: "EFO:0002784", ontology_term_name: "GM12878", vendor_id: Vendor.find_by(name: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
+{user_id: admin_user_id, name: "ENCBS389LEA", encid: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of GM12878").id, ontology_term_accession: "EFO:0002784", ontology_term_name: "GM12878", vendor_id: Vendor.find_by(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
 
-{user_id: admin_user_id, name: "ENCBS488GLI", encid: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(encode_alias: "encode:donor of GM12878").id, ontology_term_accession: "EFO:0002784", ontology_term_name: "GM12878", vendor_id: Vendor.find_by(name: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],culture_harvest_date: "2014-06-05"}
+{user_id: admin_user_id, name: "ENCBS488GLI", encid: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of GM12878").id, ontology_term_accession: "EFO:0002784", ontology_term_name: "GM12878", vendor_id: Vendor.find_by(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],culture_harvest_date: "2014-06-05"}
 ])
 
 Library.delete_all
 Library.create!([
-	{user_id: admin_user_id, name: "ENCLB709JYF", nucleic_acid_term_id: NucleicAcidTerm.find_by(name: "DNA").id, biosample_id: Biosample.find_by(name: "ENCBS488GLI").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by(name: "ENCAB140SNC").id},
+	{user_id: admin_user_id, name: "ENCLB709JYF", barcode: "ATCCGTA", nucleic_acid_term_id: NucleicAcidTerm.find_by(name: "DNA").id, biosample_id: Biosample.find_by(name: "ENCBS488GLI").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by(name: "ENCAB140SNC").id},
 
-	{user_id: admin_user_id, name: "ENCLB874QGN", nucleic_acid_term_id: NucleicAcidTerm.find_by(name: "DNA").id, biosample_id: Biosample.find_by(name: "ENCBS389LEA").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by(name: "ENCAB140SNC").id}
+	{user_id: admin_user_id, name: "ENCLB874QGN", barcode: "GATGGAC", nucleic_acid_term_id: NucleicAcidTerm.find_by(name: "DNA").id, biosample_id: Biosample.find_by(name: "ENCBS389LEA").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by(name: "ENCAB140SNC").id}
 ])
 	

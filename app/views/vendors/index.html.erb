@@ -12,6 +12,7 @@
       <th>Name</th>
       <th>ENCID</th>
       <th>Description</th>
+			<th>URL</th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
@@ -19,9 +20,10 @@
   <tbody>
     <% @vendors.each do |vendor| %>
       <tr>
+				<td><%= link_to vendor.name, vendor%></td>
 				<td><%= vendor.encode_identifier %></td>
-        <td><%= link_to vendor.name, vendor.url %></td>
         <td><%= vendor.description %></td>
+        <td><%= link_to vendor.url, vendor.url %></td>
         <td><%= link_to fa_icon("pencil"), edit_vendor_path(vendor) %></td>
         <td><%= link_to fa_icon("trash"), vendor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

@@ -16,13 +16,17 @@
 	</tr>
 
 	<tr>
-		<th><strong>Name:</strong></th>
-		<td><%= link_to @vendor.name,@vendor.url %></td>
+		<th><strong>Description:</strong></th>
+		<td><%= @vendor.description %></td>
 	</tr>
 
 	<tr>
-		<th><strong>Description:</strong></th>
-		<td><%= @vendor.description %></td>
+		<th><strong>URL:</strong></th>
+		<% if not @vendor.url.blank? %>
+			<td><%= link_to @vendor.url, @vendor.url %></td>
+		<% else %>
+			<td></td>
+		<% end %>
 	</tr>
 </table>
 

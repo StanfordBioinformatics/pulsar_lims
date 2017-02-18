@@ -1,6 +1,6 @@
-<% title(@donor.encode_alias, "Donors") %>
+<% title(@donor.name, "Donors") %>
 <header>
-  <h1><%= @donor.encode_alias %></h1>
+  <h1><%= @donor.name %></h1>
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_edit_record", locals: {record: @donor} %>
@@ -18,7 +18,7 @@
 
 	<tr>
 		<th><strong>Encode alias:</strong></th>
-		<td><%= link_to @donor.encode_alias %></td>
+		<td><%= link_to @donor.name %></td>
 	</tr>
 </table>
 

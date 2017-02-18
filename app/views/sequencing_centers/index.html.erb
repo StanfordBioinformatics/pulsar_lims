@@ -17,7 +17,7 @@
   <tbody>
     <% @sequencing_centers.each do |sequencing_center| %>
       <tr>
-        <td><%= sequencing_center.name %></td>
+        <td><%= link_to sequencing_center.name, sequencing_center %></td>
         <td><%= sequencing_center.address %></td>
         <td><%= link_to fa_icon("pencil"), edit_sequencing_center_path(sequencing_center) %></td>
         <td><%= link_to fa_icon("trash"), sequencing_center, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -18,7 +18,7 @@
   <tbody>
     <% @uberons.each do |uberon| %>
       <tr>
-        <td><%= uberon.name %></td>
+        <td><%= link_to uberon.name, uberon %></td>
         <td><%= uberon.accession %></td>
         <td><%= link_to fa_icon("pencil"), edit_uberon_path(uberon) %></td>
         <td><%= link_to fa_icon("trash"), uberon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
