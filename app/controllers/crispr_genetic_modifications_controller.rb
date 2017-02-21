@@ -7,20 +7,12 @@ class CrisprGeneticModificationsController < ApplicationController
   # GET /crispr_genetic_modifications.json
   def index
     @crispr_genetic_modifications = policy_scope(CrisprGeneticModification)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @crispr_genetic_modifications }
-    end
   end
 
   # GET /crispr_genetic_modifications/1
   # GET /crispr_genetic_modifications/1.json
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @crispr_genetic_modification }
-    end
+		authorize @crispr_genetic_modification
   end
 
   # GET /crispr_genetic_modifications/new
@@ -31,7 +23,7 @@ class CrisprGeneticModificationsController < ApplicationController
 
   # GET /crispr_genetic_modifications/1/edit
   def edit
-		authorize @crispr_genetic_modifications
+		authorize @crispr_genetic_modification
   end
 
   # POST /crispr_genetic_modifications
@@ -39,7 +31,7 @@ class CrisprGeneticModificationsController < ApplicationController
   def create
 		authorize CrisprGeneticModification
     @crispr_genetic_modification = CrisprGeneticModification.new(crispr_genetic_modification_params)
-		@crispr_genetic_modification = current_user
+		@crispr_genetic_modification.user = current_user
 		@crispr_genetic_modification = add_documents(@crispr_genetic_modification,params[:crispr_genetic_modification][:document_ids])
 
     respond_to do |format|

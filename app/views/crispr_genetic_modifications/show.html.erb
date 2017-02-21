@@ -1,4 +1,13 @@
-<p id="notice"><%= notice %>	</tr>
+<header>
+  <h1><%= @crispr_genetic_modification.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @crispr_genetic_modification} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @crispr_genetic_modification} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @crispr_genetic_modification} %>
 
 <table class="attributes">
 	<tr>
@@ -7,13 +16,8 @@
 	</tr>
 
 	<tr>
-	  <th><strong>User:</strong></th>
-	 	<td><%= @crispr_genetic_modification.user %></td>
-	</tr>
-
-	<tr>
 		<th><strong>Vendor:</strong></th>
-  	<td><%= @crispr_genetic_modification.vendor %></td>
+  	<td><%= link_to @crispr_genetic_modification.vendor.name, @crispr_genetic_modification.vendor %></td>
 	</tr>
 
 	<tr>
@@ -32,5 +36,4 @@
 	</tr>
 </table>
 
-<%= link_to 'Edit', edit_crispr_genetic_modification_path(@crispr_genetic_modification) %> |
 <%= link_to 'Back', crispr_genetic_modifications_path %>

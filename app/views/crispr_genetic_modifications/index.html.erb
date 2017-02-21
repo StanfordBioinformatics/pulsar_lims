@@ -1,32 +1,33 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Crispr Genetic Modifications</h1>
+<header>
+  <h1>CRISPR Genetic Modifications</h1>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: CrisprGeneticModification} %>
+  </ul> 
+</header>
 
 <table class="attributes">
   <thead>
     <tr>
       <th>Name</th>
-      <th>User</th>
       <th>Vendor</th>
       <th>Vendor product identifier</th>
       <th>Guide rna sequences</th>
       <th>Insert sequence</th>
-      <th colspan="3"></th>
+			<th colspan="2">Actions</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @crispr_genetic_modifications.each do |crispr_genetic_modification| %>
+    <% @crispr_genetic_modifications.each do |cgm| %>
       <tr>
-        <td><%= crispr_genetic_modification.name %></td>
-        <td><%= crispr_genetic_modification.user %></td>
-        <td><%= crispr_genetic_modification.vendor %></td>
-        <td><%= crispr_genetic_modification.vendor_product_identifier %></td>
-        <td><%= crispr_genetic_modification.guide_rna_sequences %></td>
-        <td><%= crispr_genetic_modification.insert_sequence %></td>
-        <td><%= link_to 'Show', crispr_genetic_modification %></td>
-        <td><%= link_to 'Edit', edit_crispr_genetic_modification_path(crispr_genetic_modification) %></td>
-        <td><%= link_to 'Destroy', crispr_genetic_modification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to cgm.name, cgm %></td>
+        <td><%= link_to cgm.vendor.name, cgm.vendor %></td>
+        <td><%= cgm.vendor_product_identifier %></td>
+        <td><%= cgm.guide_rna_sequences %></td>
+        <td><%= cgm.insert_sequence %></td>
+        <td><%= link_to fa_icon("pencil"), edit_crispr_genetic_modification_path(cgm) %></td>
+        <td><%= link_to fa_icon("trash"), cgm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
