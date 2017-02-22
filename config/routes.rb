@@ -54,8 +54,6 @@ SnyderEncode::Application.routes.draw do
 
   resources :vendors
 
-  resources :uberons
-
   resources :documents do
 		post :save, on: :collection
 		get  :document, on: :member

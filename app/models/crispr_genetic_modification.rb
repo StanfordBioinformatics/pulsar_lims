@@ -1,4 +1,5 @@
 class CrisprGeneticModification < ActiveRecord::Base
+	#encode model: crispr.json
 	has_and_belongs_to_many :documents
   belongs_to :user
   belongs_to :vendor
