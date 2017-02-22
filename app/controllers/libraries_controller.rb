@@ -26,8 +26,8 @@ class LibrariesController < ApplicationController
   # POST /libraries
   # POST /libraries.json
   def create
+		authorize Library
     @library = Library.new(library_params)
-		authorize @library
 
 		#render json: params
 		#return

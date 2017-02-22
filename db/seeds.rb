@@ -12,6 +12,25 @@
 
 admin_user_id = User.find_by(email: "admin@enc.com").id
 
+BiosampleOntology.delete_all
+BiosampleOntology.create!([
+	{user_id: admin_user_id, name: "CL", url: "http://www.obofoundry.org/ontology/cl.html"},
+	{user_id: admin_user_id, name: "Uberon", url: "http://uberon.github.io/"},
+	{user_id: admin_user_id, name: "EFO", url: "http://www.ebi.ac.uk/efo/"}
+])
+
+BiosampleTermName.delete_all
+BiosampleTermName.create!([
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "CL").id, name: "hepatic stellate cell", accession: "CL:0000632", description: "A cell that is found in the perisinusoidal space of the liver that is capable of multiple roles including storage of retinol, presentation of antigen to T cells (including CD1d-restricted NKT cells), and upon activation, production of extracellular matrix components that can contribute to liver fibrosis."},
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "CL").id, name: "mesenchymal stem cell of the bone marrow", accession: "CL:0002540", description: "A mesenchymal stem cell
+  that is part of the bone marrow. [database_cross_reference: GOC:tfm]"},
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "Uberon").id, name: "liver", accession: "UBERON:0002107", description: "Liver"},
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "Uberon").id, name: "heart left ventricle", accession: "UBERON:0002084", description: "A cardiac ventricle that is in the left side of the heart. [database_cross_reference: http://orcid.org/0000-0002-6601-2165]"},
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "K562", accession: "EFO_0002067", description: "Human chronic myeloid leukemia in blast crisis established from the pleural effusion of a 53-year-old woman with chronic myeloid leukemia (CML) in blast crisis in 1970; cells can be used as highly sensitive targets in in-vitro natural killer assays; cells produce hemoglobin; cells carry the Philadelphia chromosome with a b3-a2 fusion gene."},
+	{user_id: admin_user_id,biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "induced pluripotent stem cell", accession: "EFO_0004905", description: "Induced pluripotent stem cells (iPS cells or iPSCs) are a type of pluripotent stem cell artificially derived from a non-pluripotent cell. Various methods exist to revert cells to pluripotency such as reprogramming mediated through a mature metaphase II oocyte as in somatic cell nuclear transfer."},
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "H1-hESC", accession: "EFO_0003042", description: "H1 human embryonic stem cell line, usually called H1-hESC and on occasion just H1"}
+])
+
 NucleicAcidTerm.delete_all
 NucleicAcidTerm.create!([
 	{user_id: admin_user_id, name: "DNA", accession: "SO:0000352", definition: "An attribute describing a sequence consisting of nucleobases bound to a repeating unit made of a 2-deoxy-D-ribose ring connected to a phosphate backbone."},

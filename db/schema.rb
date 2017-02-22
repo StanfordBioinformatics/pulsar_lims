@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218004347) do
+ActiveRecord::Schema.define(version: 20170222050125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,32 @@ ActiveRecord::Schema.define(version: 20170218004347) do
   end
 
   add_index "attachments", ["user_id"], name: "index_attachments_on_user_id", using: :btree
+
+  create_table "biosample_ontologies", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "biosample_ontologies", ["name"], name: "index_biosample_ontologies_on_name", unique: true, using: :btree
+  add_index "biosample_ontologies", ["url"], name: "index_biosample_ontologies_on_url", unique: true, using: :btree
+  add_index "biosample_ontologies", ["user_id"], name: "index_biosample_ontologies_on_user_id", using: :btree
+
+  create_table "biosample_term_names", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "accession"
+    t.integer  "biosample_ontology_id"
+    t.text     "description"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "biosample_term_names", ["biosample_ontology_id"], name: "index_biosample_term_names_on_biosample_ontology_id", using: :btree
+  add_index "biosample_term_names", ["name"], name: "index_biosample_term_names_on_name", unique: true, using: :btree
+  add_index "biosample_term_names", ["user_id"], name: "index_biosample_term_names_on_user_id", using: :btree
 
   create_table "biosample_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -368,6 +394,9 @@ ActiveRecord::Schema.define(version: 20170218004347) do
   add_foreign_key "antibodies", "vendors"
   add_foreign_key "antibody_purifications", "users"
   add_foreign_key "attachments", "users"
+  add_foreign_key "biosample_ontologies", "users"
+  add_foreign_key "biosample_term_names", "biosample_ontologies"
+  add_foreign_key "biosample_term_names", "users"
   add_foreign_key "biosample_types", "users"
   add_foreign_key "biosamples", "biosample_types"
   add_foreign_key "biosamples", "donors"

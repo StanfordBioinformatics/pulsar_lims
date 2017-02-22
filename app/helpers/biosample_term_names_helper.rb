@@ -1,0 +1,2 @@
+module BiosampleTermNamesHelper
+end

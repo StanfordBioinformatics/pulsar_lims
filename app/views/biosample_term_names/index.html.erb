@@ -1,0 +1,32 @@
+<header>
+  <h1>Biosample Term Names</h1>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: BiosampleTermName} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Accession</th>
+      <th>Biosample ontology</th>
+      <th>Description</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @biosample_term_names.each do |btn| %>
+      <tr>
+        <td><%= link_to btn.name, btn %></td>
+        <td><%= btn.accession %></td>
+        <td><%= btn.biosample_ontology.name %></td>
+        <td><%= btn.description %></td>
+        <td><%= link_to fa_icon("pencil"), edit_biosample_term_name_path(btn) %></td>
+        <td><%= link_to fa_icon("trash"), btn, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

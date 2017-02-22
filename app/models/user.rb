@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 	has_many :antibody_purifications, dependent: :nullify
 	has_many :attachments, dependent: :nullify
 	has_many :biosamples, dependent: :nullify
+	has_many :biosample_term_names, dependent: :nullify
 	has_many :biosample_types, dependent: :nullify
 	has_many :crispr_genetic_modifications, dependent: :nullify
 	has_many :documents, dependent: :nullify

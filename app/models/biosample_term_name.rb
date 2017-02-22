@@ -1,0 +1,37 @@
+class BiosampleTermName < ActiveRecord::Base
+	#The ENCODE DCC uses three ontologies for Biosamples:
+	#
+	# 1) Cell Ontology (CL),
+	# 2) Experimental Factor Ontology (EFO), and
+	# 3) Uberon
+	#
+	# See https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4360730/ for a description of how ENCODE uses
+	# these ontologies. In summary, ENCODE categorizes biosamples into seven types, each of which
+	# uses accessions from one of the CL, EFO, or Uberon ontologies, depending on the biosample type.
+	# This categorization and assigment of ontologies is as follow:
+	# 
+	#   BIOSAMPLE_TYPE (ONTOLOGY)
+	#	1) tissue (Uberon),
+	# 2) whole organism (Uberon),
+	# 3) primary cell (CL),
+	# 4) stem cell (CL),
+	# 5) immortalized cell line (EFO),
+	# 6) in vitro differentiated cell (CL or EFO),
+	# 7) induced pluripotent stem cell (EFO)
+	#
+	#Note that the ENCODE DCC requires that all ontology accessions start with the ontology prefix separated by
+	# a ':" followed by the identifier. This is the case for Uberon and CL accessions, but EFO accessions are
+	# instead separated by a '_". This table stores the accessions as they are naturally stored in the corresponding
+	# ontologies. Thus for EFO accessions, the API will need to replace the '_' with a ':' prior to submission to DCC.
+  belongs_to :user
+  belongs_to :biosample_ontology
+
+	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
+	validates :accession, presence: true
+	validates :description, presence: true
+	validates :biosample_ontology_id, presence: true
+
+	def self.policy_class
+		ApplicationPolicy
+	end
+end
