@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222050125) do
+ActiveRecord::Schema.define(version: 20170222065942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,8 +102,6 @@ ActiveRecord::Schema.define(version: 20170222050125) do
     t.string   "submitter_comments",        limit: 255
     t.string   "lot_identifier",            limit: 255
     t.string   "vendor_product_identifier", limit: 255
-    t.string   "ontology_term_name",        limit: 255
-    t.string   "ontology_term_accession",   limit: 255
     t.string   "description",               limit: 255
     t.integer  "passage_number"
     t.date     "culture_harvest_date"
@@ -115,8 +113,10 @@ ActiveRecord::Schema.define(version: 20170222050125) do
     t.string   "name",                      limit: 255
     t.integer  "donor_id"
     t.integer  "user_id"
+    t.integer  "biosample_term_name_id"
   end
 
+  add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
   add_index "biosamples", ["biosample_type_id"], name: "index_biosamples_on_biosample_type_id", using: :btree
   add_index "biosamples", ["donor_id"], name: "index_biosamples_on_donor_id", using: :btree
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
@@ -398,6 +398,7 @@ ActiveRecord::Schema.define(version: 20170222050125) do
   add_foreign_key "biosample_term_names", "biosample_ontologies"
   add_foreign_key "biosample_term_names", "users"
   add_foreign_key "biosample_types", "users"
+  add_foreign_key "biosamples", "biosample_term_names"
   add_foreign_key "biosamples", "biosample_types"
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"

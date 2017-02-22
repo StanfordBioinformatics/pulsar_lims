@@ -21,6 +21,7 @@ BiosampleOntology.create!([
 
 BiosampleTermName.delete_all
 BiosampleTermName.create!([
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "GM12878", accession: "EFO_0002784", description: "None provided"},
 	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "CL").id, name: "hepatic stellate cell", accession: "CL:0000632", description: "A cell that is found in the perisinusoidal space of the liver that is capable of multiple roles including storage of retinol, presentation of antigen to T cells (including CD1d-restricted NKT cells), and upon activation, production of extracellular matrix components that can contribute to liver fibrosis."},
 	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "CL").id, name: "mesenchymal stem cell of the bone marrow", accession: "CL:0002540", description: "A mesenchymal stem cell
   that is part of the bone marrow. [database_cross_reference: GOC:tfm]"},
@@ -28,6 +29,7 @@ BiosampleTermName.create!([
 	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "Uberon").id, name: "heart left ventricle", accession: "UBERON:0002084", description: "A cardiac ventricle that is in the left side of the heart. [database_cross_reference: http://orcid.org/0000-0002-6601-2165]"},
 	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "K562", accession: "EFO_0002067", description: "Human chronic myeloid leukemia in blast crisis established from the pleural effusion of a 53-year-old woman with chronic myeloid leukemia (CML) in blast crisis in 1970; cells can be used as highly sensitive targets in in-vitro natural killer assays; cells produce hemoglobin; cells carry the Philadelphia chromosome with a b3-a2 fusion gene."},
 	{user_id: admin_user_id,biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "induced pluripotent stem cell", accession: "EFO_0004905", description: "Induced pluripotent stem cells (iPS cells or iPSCs) are a type of pluripotent stem cell artificially derived from a non-pluripotent cell. Various methods exist to revert cells to pluripotency such as reprogramming mediated through a mature metaphase II oocyte as in somatic cell nuclear transfer."},
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "HEK293", accession: "EFO_0001182", description: "human embryonic kidney cell"},
 	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "H1-hESC", accession: "EFO_0003042", description: "H1 human embryonic stem cell line, usually called H1-hESC and on occasion just H1"}
 ])
 
@@ -241,13 +243,13 @@ Antibody.create!([
 
 Biosample.delete_all
 Biosample.create!([
-	{user_id: admin_user_id, name: "ENCBS826GBM", encid: "ENCBS826GBM", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of HEK293").id, ontology_term_accession: "EFO:0001182", ontology_term_name: "HEK293", lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(encode_identifier: "dgrc").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+	{user_id: admin_user_id, biosample_term_name_id: BiosampleTermName.find_by(name: "HEK293").id, name: "ENCBS826GBM", encid: "ENCBS826GBM", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(encode_identifier: "dgrc").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
-{user_id: admin_user_id, name: "ENCBS758JEW", encid: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of HEK293").id, ontology_term_accession: "EFO:0001182", ontology_term_name: "HEK293", lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(encode_identifier: "dgrc").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+{user_id: admin_user_id, biosample_term_name_id: BiosampleTermName.find_by(name: "HEK293").id, name: "ENCBS758JEW", encid: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(encode_identifier: "dgrc").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
-{user_id: admin_user_id, name: "ENCBS389LEA", encid: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of GM12878").id, ontology_term_accession: "EFO:0002784", ontology_term_name: "GM12878", vendor_id: Vendor.find_by(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
+{user_id: admin_user_id, biosample_term_name_id: BiosampleTermName.find_by(name: "GM12878").id, name: "ENCBS389LEA", encid: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
 
-{user_id: admin_user_id, name: "ENCBS488GLI", encid: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of GM12878").id, ontology_term_accession: "EFO:0002784", ontology_term_name: "GM12878", vendor_id: Vendor.find_by(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],culture_harvest_date: "2014-06-05"}
+{user_id: admin_user_id, biosample_term_name_id: BiosampleTermName.find_by(name: "GM12878").id, name: "ENCBS488GLI", encid: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],culture_harvest_date: "2014-06-05"}
 ])
 
 Library.delete_all

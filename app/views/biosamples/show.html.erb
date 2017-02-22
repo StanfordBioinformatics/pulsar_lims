@@ -42,12 +42,8 @@
   	<td><%= @biosample.lot_identifier %></td>
 	</tr>
 	<tr>
-  	<th><strong>Ontology Term Name describing the biosample:</strong></th>
-  	<td><%= @biosample.ontology_term_name%></td>
-	</tr>
-	<tr>
-	  <th><strong>Ontology Term Accession describing the biosample:</strong></th>
-	  <td><%= @biosample.ontology_term_accession%></td>
+  	<th><strong>Term Name describing the biosample:</strong></th>
+  	<td><%= link_to @biosample.biosample_term_name.name, @biosample.biosample_term_name %></td>
 	</tr>
 	<tr>
 		<th><strong>Human Donor:</strong></th>

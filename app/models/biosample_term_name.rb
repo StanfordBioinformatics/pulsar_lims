@@ -25,6 +25,7 @@ class BiosampleTermName < ActiveRecord::Base
 	# ontologies. Thus for EFO accessions, the API will need to replace the '_' with a ':' prior to submission to DCC.
   belongs_to :user
   belongs_to :biosample_ontology
+	has_many   :biosamples
 
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
 	validates :accession, format: { with: /\A(CL:|UBERON:|EFO_)[0-9]{2,8}\z/, message: "must begin with CL, UBERON, or EFO, followed by two to eight numbers." }

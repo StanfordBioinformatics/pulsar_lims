@@ -25,7 +25,7 @@
 				<td><%= link_to biosample.name, biosample %></td>
         <td><%= biosample.description %></td>
         <td><%= biosample.vendor.name %></td>
-        <td><%= biosample.ontology_term_name %></td>
+        <td><%= link_to biosample.biosample_term_name.name, biosample.biosample_term_name %></td>
         <td><%= biosample.encid %></td>
         <td><%= link_to fa_icon("pencil"), edit_biosample_path(biosample) %></td>
         <td><%= link_to fa_icon("trash"), biosample, method: :delete, data: { confirm: 'Are you sure?' } %></td>

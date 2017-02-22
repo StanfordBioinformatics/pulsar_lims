@@ -37,11 +37,8 @@
 	<%= f.input :lot_identifier,
 			label_html: {"data-toggle" => "tooltip", "title" => "The lot identifier provided by the originating lab or vendor."} %>
 
-	<%= f.input :ontology_term_name, label: "Ontology term name describing the biosample",
+	<%= f.association :biosample_term_name, 
 			label_html: {"data-toggle" => "tooltip", "title" => "Ontology term describing biosample."} %>
-
-	<%= f.input :ontology_term_accession, label: "Ontology term accession describing the biosample",
-			label_html: {"data-toggle" => "tooltip", "title" => "Ontology identifier describing biosample - An UBERON, EFO, CL, NTR, FBbt, or WBbt identifer"} %>
 
 	<%= f.association :donor, collection: Donor.order(:name), label_method: :name, prompt: "Choose The Donor",
 			label_html: {"data-toggle" => "tooltip", "title" => "The donor of the biosample"} %>
