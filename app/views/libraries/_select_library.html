@@ -1,1 +1,6 @@
-<%= f.association :libraries, collection: Library.order(:name), prompt: "Choose Library", input_html: {multiple: false} %>
+<% if exclude_library_ids.present? %>
+	<%= f.association :libraries, collection: Library.where.not(id: [exclude_library_ids]), prompt: "hi Library", input_html: {multiple: false} %>
+<% else %>
+	<%= f.association :libraries, collection: Library.order(:name), prompt: "hi Library", input_html: {multiple: false} %>
+<% end %>
+	

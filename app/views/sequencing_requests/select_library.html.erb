@@ -1,3 +1,7 @@
 <%= simple_fields_for @sequencing_request do |f| %>
-	<%= render partial: "libraries/select_library", locals: {f: f} %>
+	<% if @exclude_library_ids.present? %>
+		<%= render partial: "libraries/select_library", locals: {f: f, exclude_library_ids: @exclude_library_ids} %>
+	<% else %>
+		<%= render partial: "libraries/select_library", locals: {f: f} %>
+	<% end %>
 <% end %>

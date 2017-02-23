@@ -8,6 +8,17 @@ class SequencingRequestsController < ApplicationController
 
 	def select_library
 		@sequencing_request = SequencingRequest.new
+		exclude_libs = params[:exclude_libraries]
+		if exclude_libs.present?
+			if exclude_libs.is_a?(String)
+				exclude_libs = Array(exclude_libs)
+			end
+			@exclude_library_ids = []
+			exclude_libs.each do |x|
+				@exclude_library_ids << x.to_i
+			end
+		end
+				
 		render layout: false
 	end
 		

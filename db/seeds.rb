@@ -10,7 +10,7 @@
 #User.create!(email: "admin@enc.com", password: "password", admin: true)
 #User.create!(email: "viewer@enc.com",password: "password")
 
-admin_user_id = User.find_by(email: "admin@enc.com").id
+admin_user_id = User.find_by!(email: "admin@enc.com").id
 
 BiosampleOntology.delete_all
 BiosampleOntology.create!([
@@ -21,16 +21,16 @@ BiosampleOntology.create!([
 
 BiosampleTermName.delete_all
 BiosampleTermName.create!([
-	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "GM12878", accession: "EFO_0002784", description: "None provided"},
-	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "CL").id, name: "hepatic stellate cell", accession: "CL:0000632", description: "A cell that is found in the perisinusoidal space of the liver that is capable of multiple roles including storage of retinol, presentation of antigen to T cells (including CD1d-restricted NKT cells), and upon activation, production of extracellular matrix components that can contribute to liver fibrosis."},
-	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "CL").id, name: "mesenchymal stem cell of the bone marrow", accession: "CL:0002540", description: "A mesenchymal stem cell
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "GM12878", accession: "EFO_0002784", description: "None provided"},
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by!(name: "CL").id, name: "hepatic stellate cell", accession: "CL:0000632", description: "A cell that is found in the perisinusoidal space of the liver that is capable of multiple roles including storage of retinol, presentation of antigen to T cells (including CD1d-restricted NKT cells), and upon activation, production of extracellular matrix components that can contribute to liver fibrosis."},
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by!(name: "CL").id, name: "mesenchymal stem cell of the bone marrow", accession: "CL:0002540", description: "A mesenchymal stem cell
   that is part of the bone marrow. [database_cross_reference: GOC:tfm]"},
-	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "Uberon").id, name: "liver", accession: "UBERON:0002107", description: "Liver"},
-	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "Uberon").id, name: "heart left ventricle", accession: "UBERON:0002084", description: "A cardiac ventricle that is in the left side of the heart. [database_cross_reference: http://orcid.org/0000-0002-6601-2165]"},
-	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "K562", accession: "EFO_0002067", description: "Human chronic myeloid leukemia in blast crisis established from the pleural effusion of a 53-year-old woman with chronic myeloid leukemia (CML) in blast crisis in 1970; cells can be used as highly sensitive targets in in-vitro natural killer assays; cells produce hemoglobin; cells carry the Philadelphia chromosome with a b3-a2 fusion gene."},
-	{user_id: admin_user_id,biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "induced pluripotent stem cell", accession: "EFO_0004905", description: "Induced pluripotent stem cells (iPS cells or iPSCs) are a type of pluripotent stem cell artificially derived from a non-pluripotent cell. Various methods exist to revert cells to pluripotency such as reprogramming mediated through a mature metaphase II oocyte as in somatic cell nuclear transfer."},
-	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "HEK293", accession: "EFO_0001182", description: "human embryonic kidney cell"},
-	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by(name: "EFO").id, name: "H1-hESC", accession: "EFO_0003042", description: "H1 human embryonic stem cell line, usually called H1-hESC and on occasion just H1"}
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by!(name: "Uberon").id, name: "liver", accession: "UBERON:0002107", description: "Liver"},
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by!(name: "Uberon").id, name: "heart left ventricle", accession: "UBERON:0002084", description: "A cardiac ventricle that is in the left side of the heart. [database_cross_reference: http://orcid.org/0000-0002-6601-2165]"},
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "K562", accession: "EFO_0002067", description: "Human chronic myeloid leukemia in blast crisis established from the pleural effusion of a 53-year-old woman with chronic myeloid leukemia (CML) in blast crisis in 1970; cells can be used as highly sensitive targets in in-vitro natural killer assays; cells produce hemoglobin; cells carry the Philadelphia chromosome with a b3-a2 fusion gene."},
+	{user_id: admin_user_id,biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "induced pluripotent stem cell", accession: "EFO_0004905", description: "Induced pluripotent stem cells (iPS cells or iPSCs) are a type of pluripotent stem cell artificially derived from a non-pluripotent cell. Various methods exist to revert cells to pluripotency such as reprogramming mediated through a mature metaphase II oocyte as in somatic cell nuclear transfer."},
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "HEK293", accession: "EFO_0001182", description: "human embryonic kidney cell"},
+	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "H1-hESC", accession: "EFO_0003042", description: "H1 human embryonic stem cell line, usually called H1-hESC and on occasion just H1"}
 ])
 
 NucleicAcidTerm.delete_all
@@ -237,25 +237,25 @@ Target.create!([
 
 Antibody.delete_all
 Antibody.create!([
-{user_id: admin_user_id, name: "ENCAB140SNC", organism_id: Organism.find_by(name: "human").id, vendor_product_identifier: "A302-183A", vendor_id: Vendor.find_by(encode_identifier: "bethyl-labs").id, clonality: "polyclonal", target_id: Target.find_by(encode_identifier: "RELB-human").id, antibody_purifications: [AntibodyPurification.find_by(name: "affinity")], lot_identifier: 1},
-{user_id: admin_user_id, name: "ENCAB830JLB", organism_id: Organism.find_by(name: "human").id, vendor_product_identifier: "07-729", vendor_id: Vendor.find_by(encode_identifier: "millipore").id, clonality: "polyclonal", target_id: Target.find_by(encode_identifier: "CTCF-human").id, antibody_purifications: [], lot_identifier: 2599305}
+{user_id: admin_user_id, name: "ENCAB140SNC", organism_id: Organism.find_by!(name: "human").id, vendor_product_identifier: "A302-183A", vendor_id: Vendor.find_by!(encode_identifier: "bethyl-labs").id, clonality: "polyclonal", target_id: Target.find_by!(encode_identifier: "RELB-human").id, antibody_purifications: [AntibodyPurification.find_by!(name: "affinity")], lot_identifier: 1},
+{user_id: admin_user_id, name: "ENCAB830JLB", organism_id: Organism.find_by!(name: "human").id, vendor_product_identifier: "07-729", vendor_id: Vendor.find_by!(encode_identifier: "millipore").id, clonality: "polyclonal", target_id: Target.find_by!(encode_identifier: "CTCF-human").id, antibody_purifications: [], lot_identifier: 2599305}
 ])
 
 Biosample.delete_all
 Biosample.create!([
-	{user_id: admin_user_id, biosample_term_name_id: BiosampleTermName.find_by(name: "HEK293").id, name: "ENCBS826GBM", encid: "ENCBS826GBM", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(encode_identifier: "dgrc").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+	{user_id: admin_user_id, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS826GBM", encid: "ENCBS826GBM", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(encode_identifier: "dgrc").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
-{user_id: admin_user_id, biosample_term_name_id: BiosampleTermName.find_by(name: "HEK293").id, name: "ENCBS758JEW", encid: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by(encode_identifier: "dgrc").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+{user_id: admin_user_id, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS758JEW", encid: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(encode_identifier: "dgrc").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
-{user_id: admin_user_id, biosample_term_name_id: BiosampleTermName.find_by(name: "GM12878").id, name: "ENCBS389LEA", encid: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
+{user_id: admin_user_id, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS389LEA", encid: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
 
-{user_id: admin_user_id, biosample_term_name_id: BiosampleTermName.find_by(name: "GM12878").id, name: "ENCBS488GLI", encid: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by(name: "immortalized cell line").id, donor_id: Donor.find_by(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],culture_harvest_date: "2014-06-05"}
+{user_id: admin_user_id, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS488GLI", encid: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],culture_harvest_date: "2014-06-05"}
 ])
 
 Library.delete_all
 Library.create!([
-	{user_id: admin_user_id, name: "ENCLB709JYF", barcode: "ATCCGTA", nucleic_acid_term_id: NucleicAcidTerm.find_by(name: "DNA").id, biosample_id: Biosample.find_by(name: "ENCBS488GLI").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by(name: "ENCAB140SNC").id},
+	{user_id: admin_user_id, name: "lib1", barcode: "ATCCGTA", nucleic_acid_term_id: NucleicAcidTerm.find_by!(name: "DNA").id, biosample_id: Biosample.find_by!(name: "ENCBS488GLI").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by!(name: "ENCAB140SNC").id},
 
-	{user_id: admin_user_id, name: "ENCLB874QGN", barcode: "GATGGAC", nucleic_acid_term_id: NucleicAcidTerm.find_by(name: "DNA").id, biosample_id: Biosample.find_by(name: "ENCBS389LEA").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by(name: "ENCAB140SNC").id}
+	{user_id: admin_user_id, name: "lib2", barcode: "GATGGAC", nucleic_acid_term_id: NucleicAcidTerm.find_by!(name: "DNA").id, biosample_id: Biosample.find_by!(name: "ENCBS389LEA").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by!(name: "ENCAB140SNC").id}
 ])
 	

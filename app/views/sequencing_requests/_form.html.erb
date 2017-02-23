@@ -30,8 +30,8 @@
     </table>
 
   <p>
-    <%= link_to "Add Library", select_library_sequencing_requests_path, remote: true, id: "add_library",
-				label_html: {"data-toggle" => "tooltip", "title" => "A library on the sequencing request"} %>
+		<% exclude_libraries = @sequencing_request.libraries.each { |x| x.id } %>
+    <%= link_to "Add Library", select_library_sequencing_requests_path(:exclude_libraries => exclude_libraries), remote: true, id: "add_library" %>
   </p>
 
   <%= f.association :sequencing_platform, collection: SequencingPlatform.order(:name), label_method: :name, prompt: "Select the Sequencing Platform" %>
