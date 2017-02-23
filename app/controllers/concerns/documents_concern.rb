@@ -11,6 +11,8 @@ module DocumentsConcern
     """
     if documents.blank?
       return model_obj
+		elsif documents.is_a?(String)
+			documents = Array(documents)
     end 
     documents.each do |d| 
       if not d.empty?

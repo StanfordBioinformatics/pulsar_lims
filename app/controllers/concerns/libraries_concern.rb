@@ -11,6 +11,8 @@ module LibrariesConcern
     """
     if library_ids.blank?
       return model_obj
+		elsif library_ids.is_a?(String)
+			library_ids = Array(library_ids)
     end 
     library_ids.each do |l| 
       if not l.empty?
