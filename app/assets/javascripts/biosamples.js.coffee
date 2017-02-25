@@ -3,6 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+  if not ($("#biosample_biosample_type_id").val())
+    $("#biosample_biosample_term_name_id").attr("disabled","disabled")
+
   $("#biosample_biosample_type_id").change (event) -> 
     $.get "/biosamples/select_biosample_term_name", $("#biosample_biosample_type_id").serialize(), (responseText,status,jqXHR) ->
       $("#biosample_biosample_term_name_id").closest("div").replaceWith responseText
