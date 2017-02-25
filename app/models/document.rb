@@ -17,6 +17,8 @@ class Document < ActiveRecord::Base
 	validates :content_type, presence: true
 	validates :data, presence: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end 

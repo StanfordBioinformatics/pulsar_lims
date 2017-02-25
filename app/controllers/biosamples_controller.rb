@@ -60,8 +60,8 @@ class BiosamplesController < ApplicationController
   # POST /biosamples
   # POST /biosamples.json
   def create
+		authorize Biosample
     @biosample = Biosample.new(biosample_params)
-		authorize @biosample
 		@biosample.user = current_user
 		@biosample = add_documents(@biosample,params[:biosample][:document_ids])
 		

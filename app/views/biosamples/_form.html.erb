@@ -3,16 +3,18 @@
 
 	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique biosample name"} %> (Max. 20 characters)
 
-	<table>
-		<tr><th>Associated Protocol Documents:</th></tr>
-		<%= f.simple_fields_for :documents do |ff| %>
-			<% doc = @biosample.documents[ff.index] %>
-			<tr>
- 		   	<td><%= doc.name %></td>
- 	 	  	<td><%= ff.input_field :_destroy, as: :boolean, label: "Remove" %></td>
-   	</tr>
-   	<% end %>  
-  </table></br>
+	<% if @biosample.documents.persisted.any? %>
+		<table>
+			<tr><th>Associated Protocol Documents:</th></tr>
+			<%= f.simple_fields_for :documents do |ff| %>
+				<% doc = @biosample.documents[ff.index] %>
+				<tr>
+	 		   	<td><%= doc.name %></td>
+	 	 	  	<td><%= ff.input_field :_destroy, as: :boolean, label: "Remove" %></td>
+	   	</tr>
+	   	<% end %>  
+	  </table></br>
+	<% end %>
 
 	<!-- Show select for Documents. Mutliple documents can be selected.
 				 If the form was rejected due to a validation error, then the
@@ -27,7 +29,7 @@
 			label_html: {"data-toggle" => "tooltip", "title" => "The categorization of the biosample."} %>
 
 	<%= f.association :biosample_term_name,
-			label_html: {"data-toggle" => "tooltip", "title" => "Ontology term describing biosample."} %>
+			label_html: {"data-toggle" => "tooltip", "title" => "Ontology term describing biosample. Selection list is dependent upon value of the Biosample Type."} %>
 
   <%= f.input :description, label_html: {"data-toggle" => "tooltip", "title" => "A plain text description of the biosample. Do not include experiment details, constructs or treatments."} %>
 
