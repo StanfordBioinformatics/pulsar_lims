@@ -25,6 +25,10 @@
 		<th><strong>Biosample Type:</strong></th>
 		<td><%= @biosample.biosample_type.name %></td>
 	</tr>
+	<tr>
+  	<th><strong>Term Name describing the biosample:</strong></th>
+  	<td><%= link_to @biosample.biosample_term_name.name, @biosample.biosample_term_name %></td>
+	</tr>
   <tr>
 		<th><strong>Description:</strong></th>
   	<td><%= @biosample.description %></td>
@@ -40,10 +44,6 @@
 	<tr>
 	  <th><strong>Lot identifier:</strong></th>
   	<td><%= @biosample.lot_identifier %></td>
-	</tr>
-	<tr>
-  	<th><strong>Term Name describing the biosample:</strong></th>
-  	<td><%= link_to @biosample.biosample_term_name.name, @biosample.biosample_term_name %></td>
 	</tr>
 	<tr>
 		<th><strong>Human Donor:</strong></th>

@@ -13,6 +13,7 @@
 			<th>Name</th>
       <th>Description</th>
       <th>Vendor</th>
+			<th>Biosample Type</th>
       <th>Biosample Term Name</th>
       <th>ENCID</th>
       <th colspan="2">Actions</th>
@@ -25,6 +26,7 @@
 				<td><%= link_to biosample.name, biosample %></td>
         <td><%= biosample.description %></td>
         <td><%= biosample.vendor.name %></td>
+				<td><%= biosample.biosample_type.name %></td>
         <td><%= link_to biosample.biosample_term_name.name, biosample.biosample_term_name %></td>
         <td><%= biosample.encid %></td>
         <td><%= link_to fa_icon("pencil"), edit_biosample_path(biosample) %></td>

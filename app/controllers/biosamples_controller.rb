@@ -1,9 +1,41 @@
 class BiosamplesController < ApplicationController
 	include DocumentsConcern #gives me add_documents(), remove_documents()
   before_action :set_biosample, only: [:show, :edit, :update, :destroy, :delete_biosample_document]
+	skip_after_action :verify_authorized, only: [:select_biosample_term_name]
 
   # GET /biosamples
   # GET /biosamples.json
+
+
+  def select_biosample_term_name
+    @biosample = Biosample.new
+    biosample_type = BiosampleType.find(params[:biosample][:biosample_type_id])
+		puts "###"
+		puts params
+		puts "###"
+		biosample_type_name = biosample_type.name
+
+		tissue = BiosampleType.find_by!(name: "tissue") #Uberon
+		whole_organism = BiosampleType.find_by!(name: "whole organisms") #Uberon
+		primary_cell = BiosampleType.find_by!(name: "primary cell") #CL
+		stem_cell = BiosampleType.find_by!(name: "stem cell") #CL
+		immortalized_cell_line = BiosampleType.find_by!(name: "immortalized cell line") #EFO
+		induced_pluripotent_stem_cell = BiosampleType.find_by!(name: "induced pluripotent stem cell line") #EFO
+		in_vitro_differentiated_cell = BiosampleType.find_by!(name: "in vitro differentiated cells") #CL or EFO
+
+		@biosample_term_name_selection = BiosampleTermName.all
+		if [tissue.name,whole_organism.name].include?(biosample_type_name)
+			@biosample_term_name_selection = BiosampleTermName.uberon
+		elsif [primary_cell.name, stem_cell.name].include?(biosample_type_name)
+			@biosample_term_name_selection = BiosampleTermName.cl
+		elsif [immortalized_cell_line.name,induced_pluripotent_stem_cell.name].include?(biosample_type_name)
+			@biosample_term_name_selection = BiosampleTermName.efo
+		elsif biosample_type_name == in_vitro_differentiated_cell.name
+			@biosample_term_name_selection = BiosampleTermName.cl.merge(BiosampleTermName.efo)
+		end
+    render layout: false
+  end
+
   def index
     @biosamples = policy_scope(Biosample)
   end

@@ -32,6 +32,11 @@ class BiosampleTermName < ActiveRecord::Base
 	validates :description, presence: true
 	validates :biosample_ontology_id, presence: true
 
+	scope :cl, lambda { where(biosample_ontology_id: BiosampleOntology.find_by(name: "CL")) }
+	scope :uberon, lambda { where(biosample_ontology_id: BiosampleOntology.find_by(name: "Uberon")) }
+	scope :efo, lambda { where(biosample_ontology_id: BiosampleOntology.find_by(name: "EFO")) }
+
+
 	def self.policy_class
 		ApplicationPolicy
 	end

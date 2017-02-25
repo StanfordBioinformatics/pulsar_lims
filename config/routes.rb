@@ -50,7 +50,9 @@ SnyderEncode::Application.routes.draw do
 
   resources :isotypes
 
-  resources :biosamples
+  resources :biosamples do
+		get :select_biosample_term_name, on: :collection
+	end
 
   resources :donors
 

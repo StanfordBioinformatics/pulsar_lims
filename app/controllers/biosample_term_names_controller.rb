@@ -3,6 +3,7 @@ class BiosampleTermNamesController < ApplicationController
 
   # GET /biosample_term_names
   # GET /biosample_term_names.json
+
   def index
     @biosample_term_names = policy_scope(BiosampleTermName)
   end

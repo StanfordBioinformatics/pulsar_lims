@@ -20,4 +20,8 @@ class Biosample < ActiveRecord::Base
 		ApplicationPolicy
 	end 
 
+	def self.possible_biosample_terms(biosample_type)
+		BiosampleTermName.all
+	end
+
 end

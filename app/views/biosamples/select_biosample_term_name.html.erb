@@ -1,0 +1,3 @@
+<%= simple_fields_for @biosample do |f| %>
+	<%= render partial: "biosample_term_names/select_biosample_term_name", locals: {f: f, selection: @biosample_term_name_selection} %>
+<% end %>
