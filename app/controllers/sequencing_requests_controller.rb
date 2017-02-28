@@ -48,8 +48,6 @@ class SequencingRequestsController < ApplicationController
   def create
     @sequencing_request = SequencingRequest.new(sequencing_request_params)
 		authorize @sequencing_request
-	#	render json: params
-	#	return
 		@sequencing_request.user = current_user
 		@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:library_ids])
 

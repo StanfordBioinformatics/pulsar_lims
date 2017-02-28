@@ -28,9 +28,14 @@
      <% end %>  
   <% end %>
     </table>
+	<div class="added_libraries"></div>
+	<!-- .added_libraries will serve as the container for new library selections. -->
 
   <p>
-		<% exclude_libraries = @sequencing_request.libraries.each { |x| x.id } %>
+		<% exclude_libraries = [] %>
+		<% if @sequencing_request.libraries.persisted.any? %>
+			<% exclude_libraries = @sequencing_request.libraries.persisted.each { |x| x.id } %>
+		<% end %>
     <%= link_to "Add Library", select_library_sequencing_requests_path(:exclude_libraries => exclude_libraries), remote: true, id: "add_library" %>
   </p>
 

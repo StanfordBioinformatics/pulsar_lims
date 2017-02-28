@@ -42,7 +42,7 @@ class LibrarySequencingResultsController < ApplicationController
         format.html { redirect_to [@sequencing_request,@sequencing_result], notice: 'Library sequencing result was successfully created.' }
         format.json { render json: @library_sequencing_result, status: :created }
       else
-        format.html { render action: 'new' }
+        format.html { render action: :new }
         format.json { render json: @library_sequencing_result.errors, status: :unprocessable_entity }
       end
     end

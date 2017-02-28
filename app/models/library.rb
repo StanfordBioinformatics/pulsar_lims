@@ -20,6 +20,8 @@ class Library < ActiveRecord::Base
 	accepts_nested_attributes_for :documents, allow_destroy: true
 	accepts_nested_attributes_for :sequencing_requests, allow_destroy: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end 
