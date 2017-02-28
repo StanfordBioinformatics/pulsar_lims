@@ -1,28 +1,29 @@
 source 'https://rubygems.org'
 
-gem "active_model_serializers", "~> 0.9.3" 
+gem 'active_model_serializers', '~> 0.9.3' 
 
-gem "devise", "~> 3.4.1"
-gem "pundit", "~> 0.3.0"
+gem 'devise', '~> 3.4.1'
+gem 'pundit', '~> 0.3.0'
 
-gem "carrierwave", "~> 0.10.0"
+gem 'carrierwave', '~> 0.10.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'json'
-gem 'rails', '4.2.0'
+gem 'rails', '~> 4.2.1'
 
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 #Use PostgreSQL
-gem "pg"
+gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails'
 
 #Use Bootstrap (nathankw added)
-gem "bootstrap-sass", "~> 3.3"
-gem "font-awesome-rails", "~> 4.3"
-gem "simple_form", "~> 3.1.0"
+gem 'sprockets-rails', '~> 2.1.4'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'font-awesome-rails', '~> 4.3'
+gem 'simple_form', '~> 3.1.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -50,12 +51,12 @@ group :doc do
 end
 
 group :development, :test do
-	gem "rspec-rails"
+	gem 'rspec-rails'
 end
 
 group :test do
-	gem "capybara", "~> 2.4" #used for integration testing. 
-	gem "factory_girl_rails", "~> 4.5"
+	gem 'capybara', '~> 2.4' #used for integration testing. 
+	gem 'factory_girl_rails', '~> 4.5'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

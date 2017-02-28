@@ -27,14 +27,14 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
+		authorize Document
 		@document = Document.new(document_params)
-		authorize @document
 		@document.user = current_user
 
 		if @document.save
 			redirect_to(@document, notice: "Document was successfully created.")
 		else
-			render(action: :get)
+			render "new"
 		end
 	end
 

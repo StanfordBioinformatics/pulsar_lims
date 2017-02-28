@@ -12,10 +12,11 @@ class Document < ActiveRecord::Base
 	###
   belongs_to :document_type
 
-	validates :name, length: { maximum: 20 }, presence: true, uniqueness: true
+	validates :name, length: { maximum: 40 }, presence: true, uniqueness: true
 	validates :description, presence: true
 	validates :content_type, presence: true
 	validates :data, presence: true
+	validates :is_protocol, presence: true
 
 	scope :persisted, lambda { where.not(id: nil) }
 
@@ -27,6 +28,7 @@ class Document < ActiveRecord::Base
 		self.name = format_filename(document_field.original_filename)
 		self.content_type = document_field.content_type.chomp
 		self.data = document_field.read
+		#Rails.logger.debug(self.data.to_s)
 	end
 
 	def format_filename(filename)
