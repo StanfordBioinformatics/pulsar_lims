@@ -10,6 +10,15 @@
 @import "admin/application";
 //@import "sequencing_results";
 
+table th.actions {
+	text-align: center;
+	col-span: 2;
+}
+
+.form-group {
+	max-width: 50%;
+}
+
 select:focus, input:focus {
   background-color: #FFFFCC; 
 }

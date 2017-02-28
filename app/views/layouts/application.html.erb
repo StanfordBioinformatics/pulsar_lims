@@ -97,7 +97,7 @@
           </ul>
         </nav>
       </div>
-      <div id="main-body" class="data-container col-xs-8 col-sm-9 col-md-10">
+      <div style="float: left" id="main-body" class="data-container col-xs-8 col-sm-8 col-md-8">
         <% flash.each do |key, message| %>
           <div class="alert alert-<%= key %>">
           <%= message %>
@@ -105,6 +105,7 @@
         <% end %>
         <%= yield %>
       </div>
+			<div id="right_sidebar" class="data-container col-xs-0 col-sm-1 col-md-2"></div>
     </div>
 		</br style="clear:both">
   </div>

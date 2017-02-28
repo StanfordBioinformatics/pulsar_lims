@@ -1,7 +1,7 @@
 <%= simple_form_for [:admin, user] do |f| %>
 	<%= f.input :email %>
 	<%= f.input :password %>
-	<%= f.input :role, collection: User::ROLES, prompt:  "Select the user role" %>
+	<%= f.input :role, collection: User::ROLES, prompt:  "Select the user role", input_html: {size: 5} %>
 
 	<%= f.button :submit, class: "btn btn-primary" %>
 <% end %>
