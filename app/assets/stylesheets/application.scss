@@ -127,13 +127,6 @@ header {
   }
 }
 
-/*
-header h1 {
-  border: 2px solid red;
-  width: 10%;
-}
-*/
-
 #meta_attributes {
   border: 1px solid grey;
   @extend .table;
@@ -184,15 +177,16 @@ header h1 {
 }
 
 ul.actions {
-  max-width: 75%;
-  min-width: 50%;
   @extend .list-unstyled;
   @extend .list-inline;
+/* sometimes the buttons may stack up if zoomed in too much, so add some bottom margin: */
+	& a {
+		 margin-bottom: 8px;
+	}
 }
 
 a.new, a.edit, a.delete {
   @extend .btn;
-  
   &:before {
     font-family: "FontAwesome";
     padding-right: 0.5em;
