@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Is Protocol?</th>
       <th>Description</th>
       <th>Content type</th>
       <th>File Link</th>
@@ -22,6 +23,7 @@
     <% @documents.each do |document| %>
       <tr>
         <td><%= link_to document.name, document %></td>
+				<td><%= document.is_protocol %></td>
         <td><%= document.description %></td>
         <td><%= document.content_type %></td>
         <td><%= link_to(document.name,:action => "document", :id => document.id) %></td>

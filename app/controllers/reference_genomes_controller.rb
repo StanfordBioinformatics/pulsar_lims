@@ -4,7 +4,7 @@ class ReferenceGenomesController < ApplicationController
   # GET /reference_genomes
   # GET /reference_genomes.json
   def index
-    @reference_genomes = policy_scope(ReferenceGenome)
+    @reference_genomes = policy_scope(ReferenceGenome).order("lower(name)")
   end
 
   # GET /reference_genomes/1

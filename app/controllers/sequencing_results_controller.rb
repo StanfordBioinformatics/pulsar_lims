@@ -16,12 +16,7 @@ class SequencingResultsController < ApplicationController
 	end
 
   def index
-    @sequencing_results = policy_scope(SequencingResult)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @sequencing_results }
-    end
+    @sequencing_results = policy_scope(SequencingResult).order("lower(name)")
   end
 
   # GET /sequencing_results/1

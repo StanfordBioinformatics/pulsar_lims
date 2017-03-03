@@ -4,7 +4,7 @@ class VendorsController < ApplicationController
   # GET /vendors
   # GET /vendors.json
   def index
-    @vendors = policy_scope(Vendor)
+    @vendors = policy_scope(Vendor).order("lower(name)")
   end
 
   # GET /vendors/1

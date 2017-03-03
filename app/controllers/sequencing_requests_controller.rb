@@ -23,7 +23,7 @@ class SequencingRequestsController < ApplicationController
 	end
 		
   def index
-    @sequencing_requests = policy_scope(SequencingRequest)
+    @sequencing_requests = policy_scope(SequencingRequest).order("lower(name)")
   end
 
   # GET /sequencing_requests/1

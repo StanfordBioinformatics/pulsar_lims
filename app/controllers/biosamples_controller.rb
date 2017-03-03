@@ -37,7 +37,7 @@ class BiosamplesController < ApplicationController
   end
 
   def index
-    @biosamples = policy_scope(Biosample)
+    @biosamples = policy_scope(Biosample).order("lower(name)")
   end
 
   # GET /biosamples/1

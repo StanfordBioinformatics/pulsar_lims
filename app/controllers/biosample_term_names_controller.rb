@@ -5,7 +5,7 @@ class BiosampleTermNamesController < ApplicationController
   # GET /biosample_term_names.json
 
   def index
-    @biosample_term_names = policy_scope(BiosampleTermName)
+    @biosample_term_names = policy_scope(BiosampleTermName).order("lower(name)")
   end
 
   # GET /biosample_term_names/1

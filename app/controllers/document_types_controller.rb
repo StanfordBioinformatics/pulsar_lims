@@ -4,7 +4,7 @@ class DocumentTypesController < ApplicationController
   # GET /document_types
   # GET /document_types.json
   def index
-    @document_types = policy_scope(DocumentType)
+    @document_types = policy_scope(DocumentType).order("lower(name)")
   end
 
   # GET /document_types/1

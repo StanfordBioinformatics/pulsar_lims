@@ -1,16 +1,7 @@
 <%= simple_form_for(@document) do |f| %>
 	<%= f.error_notification %>
-  <% if @document.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
 
-      <ul>
-      <% @document.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<%= f.input :is_protocol, label: "Is Protocol?", as: :radio_buttons, item_label_class: "radio-inline", item_wrapper_tag: false, label_html: {"data-toggle" => "tooltip", "title" => "Select if this is a protocol document."} %>
 
 	<%= f.input :description,
 			label_html: {"data-toggle" => "tooltip", "title" => "A plain text description of the document."} %>

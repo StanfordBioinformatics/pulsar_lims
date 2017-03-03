@@ -1,4 +1,5 @@
 class Document < ActiveRecord::Base
+	#The is_protocol bool column has a default of false.
 	has_and_belongs_to_many :biosamples
 	has_and_belongs_to_many :libraries
 	belongs_to :user
@@ -16,9 +17,10 @@ class Document < ActiveRecord::Base
 	validates :description, presence: true
 	validates :content_type, presence: true
 	validates :data, presence: true
-	validates :is_protocol, presence: true
+	validates :is_protocol, inclusion: { in: [true, false] }
 
 	scope :persisted, lambda { where.not(id: nil) }
+	scope :protocols, lambda { where(is_protocol: true) }
 
 	def self.policy_class
 		ApplicationPolicy

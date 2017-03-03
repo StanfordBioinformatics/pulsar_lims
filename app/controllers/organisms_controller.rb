@@ -4,7 +4,7 @@ class OrganismsController < ApplicationController
   # GET /organisms
   # GET /organisms.json
   def index
-    @organisms = policy_scope(Organism)
+    @organisms = policy_scope(Organism).order("lower(name)")
   end
 
   # GET /organisms/1

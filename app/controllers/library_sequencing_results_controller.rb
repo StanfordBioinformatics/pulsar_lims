@@ -5,7 +5,7 @@ class LibrarySequencingResultsController < ApplicationController
 	before_action :set_sequencing_result
 
   def index
-    @library_sequencing_results = policy_scope(LibrarySequencingResult)
+    @library_sequencing_results = policy_scope(LibrarySequencingResult).order("lower(name)")
   end
 
   # GET /library_sequencing_results/1
@@ -90,6 +90,6 @@ class LibrarySequencingResultsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_sequencing_result_params
-      params.require(:library_sequencing_result).permit(:name, :library_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count)
+      params.require(:library_sequencing_result).permit(:is_control, :name, :library_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count)
     end
 end

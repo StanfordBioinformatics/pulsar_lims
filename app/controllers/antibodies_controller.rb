@@ -5,7 +5,7 @@ class AntibodiesController < ApplicationController
   # GET /antibodies
   # GET /antibodies.json
   def index
-    @antibodies = policy_scope(Antibody)
+    @antibodies = policy_scope(Antibody).order("lower(name)")
   end
 
   # GET /antibodies/1

@@ -1,4 +1,5 @@
 class Library < ActiveRecord::Base
+	#The is_control bool column has a default of false.
 	has_and_belongs_to_many :documents
 	has_and_belongs_to_many :sequencing_requests
 	has_many   :library_sequencing_results, dependent: :destroy
@@ -16,6 +17,7 @@ class Library < ActiveRecord::Base
 	#validates :vendor_id, presence: true
 	validates :biosample_id, presence: true
 	#The fkey antibody_id doesn't need to be required since some libraries, such as ATAC-SEq, don't have an antibody.
+	validates :is_control, presence: true
 
 	accepts_nested_attributes_for :documents, allow_destroy: true
 	accepts_nested_attributes_for :sequencing_requests, allow_destroy: true

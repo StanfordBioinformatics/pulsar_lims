@@ -4,7 +4,7 @@ class SequencingCentersController < ApplicationController
   # GET /sequencing_centers
   # GET /sequencing_centers.json
   def index
-    @sequencing_centers = policy_scope(SequencingCenter)
+    @sequencing_centers = policy_scope(SequencingCenter).order("lower(name)")
   end
 
   # GET /sequencing_centers/1

@@ -4,7 +4,7 @@ class ExperimentTypesController < ApplicationController
   # GET /experiment_types
   # GET /experiment_types.json
   def index
-    @experiment_types = policy_scope(ExperimentType)
+    @experiment_types = policy_scope(ExperimentType).order("lower(name)")
   end
 
   # GET /experiment_types/1

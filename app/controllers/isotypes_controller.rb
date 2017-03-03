@@ -4,7 +4,7 @@ class IsotypesController < ApplicationController
   # GET /isotypes
   # GET /isotypes.json
   def index
-    @isotypes = policy_scope(Isotype)
+    @isotypes = policy_scope(Isotype).order("lower(name)")
   end
 
   # GET /isotypes/1

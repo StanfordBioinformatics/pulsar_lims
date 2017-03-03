@@ -4,7 +4,7 @@ class DonorsController < ApplicationController
   # GET /donors
   # GET /donors.json
   def index
-    @donors = policy_scope(Donor)
+    @donors = policy_scope(Donor).order("lower(name)")
   end
 
   # GET /donors/1

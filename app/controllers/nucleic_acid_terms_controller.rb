@@ -4,7 +4,7 @@ class NucleicAcidTermsController < ApplicationController
   # GET /nucleic_acid_terms
   # GET /nucleic_acid_terms.json
   def index
-    @nucleic_acid_terms = policy_scope(NucleicAcidTerm)
+    @nucleic_acid_terms = policy_scope(NucleicAcidTerm).order("lower(name)")
   end
 
   # GET /nucleic_acid_terms/1

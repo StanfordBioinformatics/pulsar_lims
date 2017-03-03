@@ -4,7 +4,7 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    @documents = policy_scope(Document)
+    @documents = policy_scope(Document).order("lower(name)")
   end
 
   # GET /documents/1
@@ -85,6 +85,6 @@ class DocumentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
 #      params.require(:document).permit(:name, :description, :content_type, :data, :document_type)
-      params.require(:document).permit(:document_type_id,:description,:uploaded_document,:document_id)
+      params.require(:document).permit(:is_protocol, :document_type_id,:description,:uploaded_document,:document_id)
     end
 end

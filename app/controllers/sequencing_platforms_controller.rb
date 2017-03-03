@@ -4,7 +4,7 @@ class SequencingPlatformsController < ApplicationController
   # GET /sequencing_platforms
   # GET /sequencing_platforms.json
   def index
-    @sequencing_platforms = policy_scope(SequencingPlatform)
+    @sequencing_platforms = policy_scope(SequencingPlatform).order("lower(name)")
   end
 
   # GET /sequencing_platforms/1

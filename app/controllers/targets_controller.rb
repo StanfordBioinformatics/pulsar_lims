@@ -4,7 +4,7 @@ class TargetsController < ApplicationController
   # GET /targets
   # GET /targets.json
   def index
-    @targets = policy_scope(Target)
+    @targets = policy_scope(Target).order("lower(name)")
   end
 
   # GET /targets/1

@@ -6,7 +6,7 @@ class CrisprGeneticModificationsController < ApplicationController
   # GET /crispr_genetic_modifications
   # GET /crispr_genetic_modifications.json
   def index
-    @crispr_genetic_modifications = policy_scope(CrisprGeneticModification)
+    @crispr_genetic_modifications = policy_scope(CrisprGeneticModification).order("lower(name)")
   end
 
   # GET /crispr_genetic_modifications/1

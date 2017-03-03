@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227050829) do
+ActiveRecord::Schema.define(version: 20170303014644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(version: 20170227050829) do
     t.integer  "user_id"
     t.integer  "antibody_id"
     t.string   "barcode"
+    t.boolean  "is_control",                            default: false
   end
 
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
