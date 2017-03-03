@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303014644) do
+ActiveRecord::Schema.define(version: 20170303054951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,17 +204,18 @@ ActiveRecord::Schema.define(version: 20170303014644) do
     t.integer  "nucleic_acid_term_id"
     t.integer  "biosample_id"
     t.integer  "vendor_id"
-    t.string   "lot_identifier",            limit: 255
-    t.string   "vendor_product_identifier", limit: 255
-    t.string   "size_range",                limit: 255
+    t.string   "lot_identifier",                       limit: 255
+    t.string   "vendor_product_identifier",            limit: 255
+    t.string   "size_range",                           limit: 255
     t.boolean  "strand_specific"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",                      limit: 255
+    t.string   "name",                                 limit: 255
     t.integer  "user_id"
     t.integer  "antibody_id"
     t.string   "barcode"
-    t.boolean  "is_control",                            default: false
+    t.integer  "nucleic_acid_starting_quantity"
+    t.string   "nucleic_acid_starting_quantity_units"
   end
 
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree

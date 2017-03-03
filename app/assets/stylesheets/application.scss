@@ -8,7 +8,9 @@
 @import "responsive.scss";
 
 @import "admin/application";
+@import "libraries";
 //@import "sequencing_results";
+
 
 label.radio_buttons {
 	margin-right: 15px;
@@ -19,6 +21,7 @@ table th.actions {
 	col-span: 2;
 }
 
+/* the .form-group is the class rails/simple-form gives to inputs. */
 .form-group {
 	max-width: 50%;
 }
@@ -236,7 +239,7 @@ a.delete {
 }
 
 form {
-  max-width: 55%;
+  max-width: 85%;
 }
 
 #error_explanation {

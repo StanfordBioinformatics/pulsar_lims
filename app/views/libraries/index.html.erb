@@ -10,7 +10,6 @@
   <thead>
     <tr>
 			<th>Name</th>
-			<th>Is Control?</th>
       <th>Nucleic Acid Term</th>
       <th>Biosample</th>
       <th>Antibody</th>
@@ -28,7 +27,6 @@
     <% @libraries.each do |library| %>
       <tr>
 				<td><%= link_to library.name, library %></td>
-				<td><%= library.is_control %></td>
         <td><%= library.nucleic_acid_term.name %></td>
         <td><%= link_to library.biosample.name, library.biosample %></td>
 

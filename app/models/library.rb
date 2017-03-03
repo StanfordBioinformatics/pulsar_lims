@@ -1,4 +1,6 @@
 class Library < ActiveRecord::Base
+	NUCLEIC_ACID_STARTING_QUANTITY_UNITS = ["cells","cell-equivalent","µg","ng","pg","mg"]
+
 	#The is_control bool column has a default of false.
 	has_and_belongs_to_many :documents
 	has_and_belongs_to_many :sequencing_requests
@@ -17,6 +19,7 @@ class Library < ActiveRecord::Base
 	#validates :vendor_id, presence: true
 	validates :biosample_id, presence: true
 	#The fkey antibody_id doesn't need to be required since some libraries, such as ATAC-SEq, don't have an antibody.
+	validates :nucleic_acid_starting_quantity_units, inclusion: NUCLEIC_ACID_STARTING_QUANTITY_UNITS, allow_nil: true
 	validates :is_control, presence: true
 
 	accepts_nested_attributes_for :documents, allow_destroy: true
