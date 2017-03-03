@@ -74,7 +74,7 @@
 	<label for="library_nucleic_acid_starting_quantity" data-toggle="tooltip" title="The starting amount of nucleic acid before selection and purification.">Nucleic acid starting quantity</label>
 	<%= f.input_field :nucleic_acid_starting_quantity %>
 	<label for="library_nucleic_acid_starting_quantity_units" data-toggle="tooltip" title="The units used for starting amount of nucleic acid."><span>Units </span></label>
-	<%= f.input_field :nucleic_acid_starting_quantity_units, collection: Library::NUCLEIC_ACID_STARTING_QUANTITY_UNITS %>
+	<%= f.input_field :nucleic_acid_starting_quantity_units, collection: Library::NUCLEIC_ACID_STARTING_QUANTITY_UNITS  %>
 	</br></br>
 
   <%= f.input :size_range, as: :string,

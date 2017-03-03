@@ -17,6 +17,8 @@
       <th>Lot identifier</th>
       <th>Vendor product identifier</th>
       <th>Barcode</th>
+			<th>Nucleic Acid Starting Quantity</th>
+			<th>Nucleic Acid Starting Quantity Units</th>
       <th>Size range</th>
       <th>Strand specificity</th>
       <th class="actions">Actions</th>
@@ -45,6 +47,8 @@
         <td><%= library.lot_identifier %></td>
         <td><%= library.vendor_product_identifier %></td>
         <td><%= library.barcode %></td>
+				<td><%= library.nucleic_acid_starting_quantity %></td>
+				<td><%= library.nucleic_acid_starting_quantity_units %></td>
         <td><%= library.size_range %></td>
         <td><%= library.strand_specific %></td>
         <td><%= link_to fa_icon("pencil"), edit_library_path(library) %></td>

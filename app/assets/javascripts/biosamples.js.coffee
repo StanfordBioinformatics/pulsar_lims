@@ -13,7 +13,7 @@ $ ->
   else
     load_biosampel_term_name_selection()
 		#set when page loads to, because if the _form.html.erb refreshed with a validation error, the 
-		# biosample_type_id may already have been set, but not change event will fire.
+		# biosample_type_id may already have been set, but no change event will fire.
 
   $("#biosample_biosample_type_id").change (event) -> 
     load_biosampel_term_name_selection()

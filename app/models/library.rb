@@ -19,8 +19,8 @@ class Library < ActiveRecord::Base
 	#validates :vendor_id, presence: true
 	validates :biosample_id, presence: true
 	#The fkey antibody_id doesn't need to be required since some libraries, such as ATAC-SEq, don't have an antibody.
-	validates :nucleic_acid_starting_quantity_units, inclusion: NUCLEIC_ACID_STARTING_QUANTITY_UNITS, allow_nil: true
-	validates :is_control, presence: true
+	validates :nucleic_acid_starting_quantity_units, inclusion: NUCLEIC_ACID_STARTING_QUANTITY_UNITS, allow_blank: true #note that nil for string will be stored in the database as "".
+	validates :nucleic_acid_starting_quantity_units, presence: true, if: "nucleic_acid_starting_quantity.present?"
 
 	accepts_nested_attributes_for :documents, allow_destroy: true
 	accepts_nested_attributes_for :sequencing_requests, allow_destroy: true
