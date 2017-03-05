@@ -1,0 +1,10 @@
+<%= simple_form_for(@library_fragmentation_method) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip","title" => "Unique library name"} %>
+  <%= f.input :description, label_html: {"data-toggle" => "tooltip", "title" => "The description of fragmentation method." } %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
+<% end %>

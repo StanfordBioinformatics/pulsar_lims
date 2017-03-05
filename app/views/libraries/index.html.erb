@@ -10,15 +10,16 @@
   <thead>
     <tr>
 			<th>Name</th>
-      <th>Nucleic Acid Term</th>
+      <th>Nucleic acid term</th>
       <th>Biosample</th>
       <th>Antibody</th>
       <th>Vendor</th>
       <th>Lot identifier</th>
       <th>Vendor product identifier</th>
       <th>Barcode</th>
-			<th>Nucleic Acid Starting Quantity</th>
-			<th>Nucleic Acid Starting Quantity Units</th>
+      <th>Library fragmentation method</th>
+			<th>Nucleic acid starting quantity</th>
+			<th>Nucleic acid starting quantity units</th>
       <th>Size range</th>
       <th>Strand specificity</th>
       <th class="actions">Actions</th>
@@ -47,6 +48,11 @@
         <td><%= library.lot_identifier %></td>
         <td><%= library.vendor_product_identifier %></td>
         <td><%= library.barcode %></td>
+				<% if library.library_fragmentation_method.present? %>
+	        <td><%= link_to library.library_fragmentation_method.name, library.library_fragmentation_method.name %></td>
+				<% else %>
+					<td></td>
+				<% end %>
 				<td><%= library.nucleic_acid_starting_quantity %></td>
 				<td><%= library.nucleic_acid_starting_quantity_units %></td>
         <td><%= library.size_range %></td>

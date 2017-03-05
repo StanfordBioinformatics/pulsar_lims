@@ -13,7 +13,7 @@
     </div>
   <% end %>
 
-  <%= f.input :name, label_html: {"data-toggle" => "tooltip","title" => "Unique library name"} %>(Max. 20 characters)</br>
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library name"} %>(Max. 20 characters)</br>
 
 	<% if @library.documents.persisted.any? %>
 	  <table>
@@ -65,13 +65,16 @@
 	<%= f.input :barcode,
 			label_html: {"data-toggle" => "tooltip", "title" => "If the library was prepared with a barcode, enter here. If duel-indexed, separate with a '-', i.e. AGTTCA-GTGAAT."} %>
 
+	<%= f.association :library_fragmentation_method,
+			label_html: {"data-toggle" => "tooltip", "title" => "A short description or reference of the nucleic acid fragmentation protocol used in library preparation, if applicable."} %>
+
   <%= f.input :lot_identifier, 
 			label_html: {"data-toggle" => "tooltip", "title" => "The lot identifier provided by the vendor, for nucleic acids or proteins purchased directly from a vendor (e.g. total RNA)."} %>
 
   <%= f.input :vendor_product_identifier,
 			label_html: {"data-toggle" => "tooltip", "title" => "The product identifier provided by the vendor, for nucleic acids or proteins purchased directly from a vendor (e.g. total RNA)."} %>
 
-	<label for="library_nucleic_acid_starting_quantity" data-toggle="tooltip" title="The starting amount of nucleic acid before selection and purification.">Nucleic acid starting quantity</label>
+	<label for="library_nucleic_acid_starting_quantity" data-toggle="tooltip" title="The starting amount of nucleic acid before selection and purification."><span>Nucleic acid starting quantity </span></label>
 	<%= f.input_field :nucleic_acid_starting_quantity %>
 	<label for="library_nucleic_acid_starting_quantity_units" data-toggle="tooltip" title="The units used for starting amount of nucleic acid."><span>Units </span></label>
 	<%= f.input_field :nucleic_acid_starting_quantity_units, collection: Library::NUCLEIC_ACID_STARTING_QUANTITY_UNITS  %>

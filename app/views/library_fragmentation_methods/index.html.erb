@@ -1,0 +1,28 @@
+<header>
+  <h1>Library Fragmentation Methods</h1>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: LibraryFragmentationMethod} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th class="actions">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @library_fragmentation_methods.each do |lfm| %>
+      <tr>
+        <td><%= link_to lfm.name, lfm %></td>
+        <td><%= lfm.description %></td>
+        <td><%= link_to fa_icon("pencil"), edit_library_fragmentation_method_path(lfm) %></td>
+        <td><%= link_to fa_icon("trash"), lfm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

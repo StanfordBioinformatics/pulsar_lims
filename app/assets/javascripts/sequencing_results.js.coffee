@@ -4,6 +4,7 @@
 
 
 $ ->  
+
   if $("#hide_new_library_result").length == 1 
     $("#new_library_result").attr("disabled", "disabled")
 

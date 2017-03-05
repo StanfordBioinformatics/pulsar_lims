@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-$(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
+$(function() {
+		$('[data-toggle="tooltip"]').attr("data-delay",300)
+    $('[data-toggle="tooltip"]').tooltip()
 });

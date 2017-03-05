@@ -6,9 +6,10 @@ class Library < ActiveRecord::Base
 	has_and_belongs_to_many :sequencing_requests
 	has_many   :library_sequencing_results, dependent: :destroy
 	belongs_to :antibody
-	belongs_to :user
-	belongs_to :nucleic_acid_term
 	belongs_to :biosample
+	belongs_to :library_fragmentation_method
+	belongs_to :nucleic_acid_term
+	belongs_to :user
 	belongs_to :vendor
 
 	validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true

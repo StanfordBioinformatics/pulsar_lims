@@ -67,6 +67,15 @@
 		<td><%= @library.barcode %></td>
 	</tr>
 
+	<tr>
+		<th><strong>Library Fragmentation Method:</strong></th>
+		<% if @library.library_fragmentation_method.present? %>
+			<td><%= link_to @library.library_fragmentation_method.name, @library.library_fragmentation_method %></td>
+		<% else %>
+			<td></td>
+		<% end %>
+	</tr>
+
   <tr>
   	<th><strong>Lot Identifier:</strong></th>
     <td><%= @library.lot_identifier %></td>

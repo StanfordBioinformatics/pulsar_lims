@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303054951) do
+ActiveRecord::Schema.define(version: 20170303223503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -216,9 +216,11 @@ ActiveRecord::Schema.define(version: 20170303054951) do
     t.string   "barcode"
     t.integer  "nucleic_acid_starting_quantity"
     t.string   "nucleic_acid_starting_quantity_units"
+    t.integer  "library_fragmentation_method_id"
   end
 
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
+  add_index "libraries", ["library_fragmentation_method_id"], name: "index_libraries_on_library_fragmentation_method_id", using: :btree
   add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true, using: :btree
   add_index "libraries", ["nucleic_acid_term_id"], name: "index_libraries_on_nucleic_acid_term_id", using: :btree
   add_index "libraries", ["user_id"], name: "index_libraries_on_user_id", using: :btree
@@ -231,6 +233,16 @@ ActiveRecord::Schema.define(version: 20170303054951) do
 
   add_index "libraries_sequencing_requests", ["library_id"], name: "index_libraries_sequencing_requests_on_library_id", using: :btree
   add_index "libraries_sequencing_requests", ["sequencing_request_id"], name: "index_libraries_sequencing_requests_on_sequencing_request_id", using: :btree
+
+  create_table "library_fragmentation_methods", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "library_fragmentation_methods", ["user_id"], name: "index_library_fragmentation_methods_on_user_id", using: :btree
 
   create_table "library_sequencing_results", force: :cascade do |t|
     t.string   "name"
@@ -415,9 +427,11 @@ ActiveRecord::Schema.define(version: 20170303054951) do
   add_foreign_key "experiment_types", "users"
   add_foreign_key "isotypes", "users"
   add_foreign_key "libraries", "biosamples"
+  add_foreign_key "libraries", "library_fragmentation_methods"
   add_foreign_key "libraries", "nucleic_acid_terms"
   add_foreign_key "libraries", "users"
   add_foreign_key "libraries", "vendors"
+  add_foreign_key "library_fragmentation_methods", "users"
   add_foreign_key "library_sequencing_results", "libraries"
   add_foreign_key "library_sequencing_results", "sequencing_results"
   add_foreign_key "library_sequencing_results", "users"

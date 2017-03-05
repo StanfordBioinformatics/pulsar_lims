@@ -10,15 +10,16 @@ class User < ActiveRecord::Base
 	has_many :document_types, dependent: :nullify
 	has_many :donors, dependent: :nullify
 	has_many :experiment_types, dependent: :nullify
-	has_many :libraries, dependent: :nullify
-	has_many :targets, dependent: :nullify
 	has_many :isotypes, dependent: :nullify
+	has_many :libraries, dependent: :nullify
+	has_many :library_fragmentation_methods, dependent: :nullify
 	has_many :nucleic_acid_terms, dependent: :nullify
 	has_many :organisms, dependent: :nullify
 	has_many :reference_genomes, dependent: :nullify
 	has_many :sequencing_centers, dependent: :nullify
 	has_many :sequencing_platforms, dependent: :nullify
 	has_many :sequencing_requests, dependent: :nullify
+	has_many :targets, dependent: :nullify
 	has_many :uberons, dependent: :nullify
 	has_many :vendors, dependent: :nullify
   # Include default devise modules. Others available are:

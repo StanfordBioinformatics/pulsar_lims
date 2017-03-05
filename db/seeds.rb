@@ -32,6 +32,33 @@ BiosampleTermName.create!([
 	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "H1-hESC", accession: "EFO_0003042", description: "H1 human embryonic stem cell line, usually called H1-hESC and on occasion just H1"}
 ])
 
+
+LibraryFragmentationMethod.delete_all
+LibraryFragmentationMethod.create!([
+	{user_id: admin_user_id, name: "chemical (generic)", description: ""},
+	{user_id: admin_user_id, name: "chemical (DNaseI)",  description: ""},
+	{user_id: admin_user_id, name: "chemical (RNase III)", description: ""},
+	{user_id: admin_user_id, name: "chemical (HindIII/DpnII restriction)", description: ""},
+	{user_id: admin_user_id, name: "chemical (Tn5 transposase)", description: ""},
+	{user_id: admin_user_id, name: "chemical (micrococcal nuclease)", description: ""},
+	{user_id: admin_user_id, name: "chemical (Illumina TruSeq)", description: ""},
+	{user_id: admin_user_id, name: "chemical (Nextera tagmentation)", description: ""},
+	{user_id: admin_user_id, name: "shearing (generic)", description: ""},
+	{user_id: admin_user_id, name: "shearing (Covaris generic)", description: ""},
+	{user_id: admin_user_id, name: "shearing (Covaris S2)", description: ""},
+	{user_id: admin_user_id, name: "sonication (generic)", description: ""},
+	{user_id: admin_user_id, name: "sonication (Bioruptor generic)", description: ""},
+	{user_id: admin_user_id, name: "sonication (Bioruptor Pico)", description: ""},
+	{user_id: admin_user_id, name: "sonication (Bioruptor Plus)", description: ""},
+	{user_id: admin_user_id, name: "sonication (Bioruptor Twin)", description: ""},
+	{user_id: admin_user_id, name: "sonication (generic microtip)", description: ""},
+	{user_id: admin_user_id, name: "sonication (Branson Sonifier 250)", description: ""},
+	{user_id: admin_user_id, name: "sonication (Branson Sonifier 450)", description: ""},
+	{user_id: admin_user_id, name: "shearing (Covaris LE Series)", description: ""},
+	{user_id: admin_user_id, name: "see document", description: ""},
+	{user_id: admin_user_id, name: "none", description: ""}
+])
+
 NucleicAcidTerm.delete_all
 NucleicAcidTerm.create!([
 	{user_id: admin_user_id, name: "DNA", accession: "SO:0000352", definition: "An attribute describing a sequence consisting of nucleobases bound to a repeating unit made of a 2-deoxy-D-ribose ring connected to a phosphate backbone."},

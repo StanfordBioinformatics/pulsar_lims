@@ -1,0 +1,24 @@
+<header>
+  <h1><%= @library_fragmentation_method.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @library_fragmentation_method} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @library_fragmentation_method} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @library_fragmentation_method } %>
+
+<table class="attributes">
+	<tr>
+  	<th><strong>Name:</strong></th>
+  	<td><%= @library_fragmentation_method.name %></td>
+	</tr>
+
+	<tr>
+  	<th><strong>Description:</strong></th>
+  	<td><%= @library_fragmentation_method.description %></td>
+	</tr>
+</table>
+
+<%= link_to 'Back', library_fragmentation_methods_path %>
