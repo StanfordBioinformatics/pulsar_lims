@@ -13,7 +13,7 @@ class Document < ActiveRecord::Base
 	###
   belongs_to :document_type
 
-	validates :name, length: { maximum: 40 }, presence: true, uniqueness: true
+	validates :name, length: { maximum: 100 }, presence: true, uniqueness: true
 	validates :description, presence: true
 	validates :content_type, presence: true
 	validates :data, presence: true

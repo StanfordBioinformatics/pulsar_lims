@@ -1,6 +1,6 @@
-<% library_sequencing_results.each do |res| %>
-<!-- A row in the table #library_results in the show view. The column names are defined and ordered in
-     ./new_library_result.html.erb.
+<% barcode_sequencing_results.each do |res| %>
+<!-- A row in the table #barcode_results in the show view. The column names are defined and ordered in
+     ./new_barcode_result.html.erb.
 -->
 	<tr>
 		<td><%= link_to res.name, [@sequencing_request,@sequencing_result,res] %></td>

@@ -1,17 +1,17 @@
 class SequencingResultsController < ApplicationController
-  before_action :set_sequencing_result, only: [:show, :edit, :update, :destroy, :new_library_result]
+  before_action :set_sequencing_result, only: [:show, :edit, :update, :destroy, :new_barcode_result]
 	before_action :set_sequencing_request
-	skip_after_action :verify_authorized, only: [:new_library_result]
+	skip_after_action :verify_authorized, only: [:new_barcode_result]
 
   # GET /sequencing_results
   # GET /sequencing_results.json
 
-	def new_library_result
-		@library_sequencing_result = @sequencing_result.library_sequencing_results.build	
+	def new_barcode_result
+		@barcode_sequencing_result = @sequencing_result.barcode_sequencing_results.build	
 		#render layout: false
-		#render partial: "library_sequencing_results/form"
+		#render partial: "barcode_sequencing_results/form"
 
-		render layout: "fieldset_library_sequencing_result", partial: "library_sequencing_results/form"
+		render layout: "fieldset_barcode_sequencing_result", partial: "barcode_sequencing_results/form"
 		return
 	end
 

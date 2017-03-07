@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "library_sequencing_results/index", type: :view do
+RSpec.describe "barcode_sequencing_results/index", type: :view do
   before(:each) do
-    assign(:library_sequencing_results, [
-      LibrarySequencingResult.create!(
+    assign(:barcode_sequencing_results, [
+      BarcodeSequencingResult.create!(
         :name => "Name",
         :sequencing_result => nil,
         :library => nil,
@@ -13,7 +13,7 @@ RSpec.describe "library_sequencing_results/index", type: :view do
         :read1_count => 2,
         :read2_count => 3
       ),
-      LibrarySequencingResult.create!(
+      BarcodeSequencingResult.create!(
         :name => "Name",
         :sequencing_result => nil,
         :library => nil,
@@ -26,7 +26,7 @@ RSpec.describe "library_sequencing_results/index", type: :view do
     ])
   end
 
-  it "renders a list of library_sequencing_results" do
+  it "renders a list of barcode_sequencing_results" do
     render
     assert_select "tr>td", :text => "Name".to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2

@@ -40,8 +40,8 @@
 </table>
 
 <h4>Library Sequencing Results</h4>
-<table id="library_results" class="table-bordered table-data" >
-	<% if @sequencing_result.library_sequencing_results.present? %>
+<table id="barcode_results" class="table-bordered table-data" >
+	<% if @sequencing_result.barcode_sequencing_results.present? %>
 		<thead>
 			<tr>
 				<th>Name</th>
@@ -56,14 +56,14 @@
 			</tr>
 		</thead>
 		<tbody>
-				<%= render partial: "row_library_result", locals: {library_sequencing_results: @sequencing_result.library_sequencing_results} %>
+				<%= render partial: "row_barcode_result", locals: {barcode_sequencing_results: @sequencing_result.barcode_sequencing_results} %>
 		</tbody>
 	<% end %>
 </table>
 
 <% if libs_on_sreq_without_seqresult(@sequencing_request).blank? %>
-	<!-- Create hidden element for jQuery to look for. If jQuery finds it, then it will disable the link below with id="new_library_result" -->
-	<span id="hide_new_library_result" hidden></span>
+	<!-- Create hidden element for jQuery to look for. If jQuery finds it, then it will disable the link below with id="new_barcode_result" -->
+	<span id="hide_new_barcode_result" hidden></span>
 <% end %>
-<%= link_to "New Library Result", [:new_library_result,@sequencing_request,@sequencing_result], class: "reg-btn", remote: true, id: "new_library_result" %>
+<%= link_to "New Barcode Result", [:new_barcode_result,@sequencing_request,@sequencing_result], class: "reg-btn", remote: true, id: "new_barcode_result" %>
 </br></br>

@@ -1,11 +1,11 @@
 <header>
-	<h1>Library Sequencing Results</h1>
+	<h1>Barcode Sequencing Results</h1>
 
 <!--
-	#Dont include lines below since we don't want users to be able to creat a library_sequencing_result
+	#Dont include lines below since we don't want users to be able to create a barcode_sequencing_result
   # from it's own page, rather, only through a sequencing_result object.
 	<ul class="actions">
-	<\%= render partial: "application_partials/auth_new_record", locals: {model_class: Library} %>
+	<\%= render partial: "application_partials/auth_new_record", locals: {model_class: BarcodeSequencingResult} %>
 	</ul> 
 -->
 </header>
@@ -26,7 +26,7 @@
   </thead>
 
   <tbody>
-    <% @library_sequencing_results.each do |res| %>
+    <% @barcode_sequencing_results.each do |res| %>
       <tr>
         <td><%= res.name %></td>
         <td><%= link_to @sequencing_result.name, [@sequencing_request,@sequencing_result] %></td>

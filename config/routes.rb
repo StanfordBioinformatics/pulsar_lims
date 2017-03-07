@@ -5,8 +5,6 @@ SnyderEncode::Application.routes.draw do
 
   resources :crispr_genetic_modifications
 
-  resources :library_sequencing_results
-
   resources :sequencing_centers
 
   namespace :admin do
@@ -22,8 +20,8 @@ SnyderEncode::Application.routes.draw do
 	resources :sequencing_requests do
 		get :select_library, on: :collection
   	resources :sequencing_results do
-			get :new_library_result, on: :member
-			resources :library_sequencing_results
+			get :new_barcode_result, on: :member
+			resources :barcode_sequencing_results
 		end
 	end
 

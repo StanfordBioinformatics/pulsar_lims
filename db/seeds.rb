@@ -32,6 +32,13 @@ BiosampleTermName.create!([
 	{user_id: admin_user_id, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "H1-hESC", accession: "EFO_0003042", description: "H1 human embryonic stem cell line, usually called H1-hESC and on occasion just H1"}
 ])
 
+truseq_dna_pcr_free = Rails.root.join("lib","seeds","truseq-dna-pcr-free-library-prep-guide-15036187-d.pdf")
+Document.create!([
+	{user_id: admin_user_id, name: File.basename(truseq_dna_pcr_free), content_type: "application/pdf", 
+		data: File.open(truseq_dna_pcr_free,"rb").read(), is_protocol: false, 
+		description: "Illumina reference guide.",
+		document_type_id: DocumentType.find_by(name: "general protocol").id}
+])
 
 LibraryFragmentationMethod.delete_all
 LibraryFragmentationMethod.create!([

@@ -4,7 +4,7 @@ class Library < ActiveRecord::Base
 	#The is_control bool column has a default of false.
 	has_and_belongs_to_many :documents
 	has_and_belongs_to_many :sequencing_requests
-	has_many   :library_sequencing_results, dependent: :destroy
+	has_many   :barcode_sequencing_results, dependent: :destroy
 	belongs_to :antibody
 	belongs_to :biosample
 	belongs_to :library_fragmentation_method

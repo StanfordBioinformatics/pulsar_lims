@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303223503) do
+ActiveRecord::Schema.define(version: 20170306222440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,25 @@ ActiveRecord::Schema.define(version: 20170303223503) do
   end
 
   add_index "attachments", ["user_id"], name: "index_attachments_on_user_id", using: :btree
+
+  create_table "barcode_sequencing_results", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "sequencing_result_id"
+    t.integer  "library_id"
+    t.text     "comment"
+    t.string   "read1_uri"
+    t.string   "read2_uri"
+    t.integer  "read1_count"
+    t.integer  "read2_count"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "user_id"
+  end
+
+  add_index "barcode_sequencing_results", ["library_id"], name: "index_barcode_sequencing_results_on_library_id", using: :btree
+  add_index "barcode_sequencing_results", ["name"], name: "index_barcode_sequencing_results_on_name", unique: true, using: :btree
+  add_index "barcode_sequencing_results", ["sequencing_result_id"], name: "index_barcode_sequencing_results_on_sequencing_result_id", using: :btree
+  add_index "barcode_sequencing_results", ["user_id"], name: "index_barcode_sequencing_results_on_user_id", using: :btree
 
   create_table "biosample_ontologies", force: :cascade do |t|
     t.integer  "user_id"
@@ -244,25 +263,6 @@ ActiveRecord::Schema.define(version: 20170303223503) do
 
   add_index "library_fragmentation_methods", ["user_id"], name: "index_library_fragmentation_methods_on_user_id", using: :btree
 
-  create_table "library_sequencing_results", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "sequencing_result_id"
-    t.integer  "library_id"
-    t.text     "comment"
-    t.string   "read1_uri"
-    t.string   "read2_uri"
-    t.integer  "read1_count"
-    t.integer  "read2_count"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.integer  "user_id"
-  end
-
-  add_index "library_sequencing_results", ["library_id"], name: "index_library_sequencing_results_on_library_id", using: :btree
-  add_index "library_sequencing_results", ["name"], name: "index_library_sequencing_results_on_name", unique: true, using: :btree
-  add_index "library_sequencing_results", ["sequencing_result_id"], name: "index_library_sequencing_results_on_sequencing_result_id", using: :btree
-  add_index "library_sequencing_results", ["user_id"], name: "index_library_sequencing_results_on_user_id", using: :btree
-
   create_table "nucleic_acid_terms", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "accession",  limit: 255
@@ -409,6 +409,9 @@ ActiveRecord::Schema.define(version: 20170303223503) do
   add_foreign_key "antibodies", "vendors"
   add_foreign_key "antibody_purifications", "users"
   add_foreign_key "attachments", "users"
+  add_foreign_key "barcode_sequencing_results", "libraries"
+  add_foreign_key "barcode_sequencing_results", "sequencing_results"
+  add_foreign_key "barcode_sequencing_results", "users"
   add_foreign_key "biosample_ontologies", "users"
   add_foreign_key "biosample_term_names", "biosample_ontologies"
   add_foreign_key "biosample_term_names", "users"
@@ -432,9 +435,6 @@ ActiveRecord::Schema.define(version: 20170303223503) do
   add_foreign_key "libraries", "users"
   add_foreign_key "libraries", "vendors"
   add_foreign_key "library_fragmentation_methods", "users"
-  add_foreign_key "library_sequencing_results", "libraries"
-  add_foreign_key "library_sequencing_results", "sequencing_results"
-  add_foreign_key "library_sequencing_results", "users"
   add_foreign_key "nucleic_acid_terms", "users"
   add_foreign_key "organisms", "users"
   add_foreign_key "reference_genomes", "users"

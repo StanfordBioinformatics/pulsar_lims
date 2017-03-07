@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#library_results {
+#barcode_results {
 	@extend: .table;
 
 	background-color: #F8F8F8;
@@ -21,6 +21,6 @@
 	}
 }
 
-#lib_seq_res_table { 
+#barcode_seq_res_table { 
 		border: 2px solid #FFC2DF;
 }

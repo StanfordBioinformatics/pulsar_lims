@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "library_sequencing_results/show", type: :view do
+RSpec.describe "barcode_sequencing_results/show", type: :view do
   before(:each) do
-    @library_sequencing_result = assign(:library_sequencing_result, LibrarySequencingResult.create!(
+    @barcode_sequencing_result = assign(:barcode_sequencing_result, BarcodeSequencingResult.create!(
       :name => "Name",
       :sequencing_result => nil,
       :library => nil,
