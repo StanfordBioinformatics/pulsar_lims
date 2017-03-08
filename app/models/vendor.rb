@@ -2,6 +2,7 @@ class Vendor < ActiveRecord::Base
 	has_many :biosample
 	has_many :antibodies
 	has_many :libraries
+	has_many :sequencing_library_prep_kits
 	belongs_to :user
 	
 	validates :name, presence: true, uniqueness: true

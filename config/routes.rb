@@ -1,5 +1,6 @@
 SnyderEncode::Application.routes.draw do
 
+  resources :sequencing_library_prep_kits
   resources :library_fragmentation_methods
   resources :biosample_term_names
 

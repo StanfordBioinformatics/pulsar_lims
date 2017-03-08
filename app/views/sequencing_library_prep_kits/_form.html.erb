@@ -1,0 +1,28 @@
+<%= simple_form_for(@sequencing_library_prep_kit) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library prep kit name"} %>
+  <%= f.association :vendor,
+		label_html: {"data-toggle" => "tooltip", "title" => "Select the vendor of the library prep kit."} %>
+  <%= f.input :description %>
+
+  <% if @sequencing_library_prep_kit.documents.persisted.any? %>
+    <table>
+      <tr><th>Documents:</th></tr>
+      <%= f.simple_fields_for :documents do |ff| %>
+       <% doc = @sequencing_library_prep_kit.documents[ff.index] %>
+       <tr>
+        <td><%= doc.name %></td>
+        <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
+       </tr>
+       <% end %>  
+    </table></br>
+  <% end %>
+
+  <%= f.association :documents, collection: sorted_document_name_id(), prompt: "Select documents", 
+      label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not data file)."} %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
+<% end %>

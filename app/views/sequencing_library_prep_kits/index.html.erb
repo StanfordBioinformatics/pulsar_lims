@@ -1,0 +1,31 @@
+<header>
+  <h1>Sequencing Library Prep Kit</h1>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: SequencingLibraryPrepKit} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Vendor</th>
+      <th>Description</th>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sequencing_library_prep_kits.each do | prep_kit | %>
+      <tr>
+        <td><%= link_to prep_kit.name, prep_kit %></td>
+        <td><%= link_to prep_kit.vendor.name, prep_kit.vendor %></td>
+        <td><%= prep_kit.description %></td>
+        <td><%= link_to fa_icon("pencil"), edit_sequencing_library_prep_kit_path(prep_kit) %></td>
+        <td><%= link_to fa_icon("trash"), prep_kit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

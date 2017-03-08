@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170306222440) do
+ActiveRecord::Schema.define(version: 20170308070122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,6 +191,11 @@ ActiveRecord::Schema.define(version: 20170306222440) do
     t.integer "library_id"
   end
 
+  create_table "documents_sequencing_library_prep_kits", id: false, force: :cascade do |t|
+    t.integer "document_id",                    null: false
+    t.integer "sequencing_library_prep_kit_id", null: false
+  end
+
   create_table "donors", force: :cascade do |t|
     t.string   "encode_identifier", limit: 255
     t.string   "name",              limit: 255
@@ -302,6 +307,19 @@ ActiveRecord::Schema.define(version: 20170306222440) do
   end
 
   add_index "sequencing_centers", ["user_id"], name: "index_sequencing_centers_on_user_id", using: :btree
+
+  create_table "sequencing_library_prep_kits", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "vendor_id"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "sequencing_library_prep_kits", ["user_id"], name: "index_sequencing_library_prep_kits_on_user_id", using: :btree
+  add_index "sequencing_library_prep_kits", ["vendor_id", "name"], name: "index_sequencing_library_prep_kits_on_vendor_id_and_name", unique: true, using: :btree
+  add_index "sequencing_library_prep_kits", ["vendor_id"], name: "index_sequencing_library_prep_kits_on_vendor_id", using: :btree
 
   create_table "sequencing_platforms", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -439,6 +457,8 @@ ActiveRecord::Schema.define(version: 20170306222440) do
   add_foreign_key "organisms", "users"
   add_foreign_key "reference_genomes", "users"
   add_foreign_key "sequencing_centers", "users"
+  add_foreign_key "sequencing_library_prep_kits", "users"
+  add_foreign_key "sequencing_library_prep_kits", "vendors"
   add_foreign_key "sequencing_platforms", "users"
   add_foreign_key "sequencing_requests", "sequencing_centers"
   add_foreign_key "sequencing_requests", "sequencing_platforms"

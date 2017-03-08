@@ -1,0 +1,36 @@
+<header>
+  <h1><%= @sequencing_library_prep_kit.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_library_prep_kit} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_library_prep_kit} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @sequencing_library_prep_kit } %>
+
+<table class="attributes">
+  <tr>
+		<th><strong>Name:</strong></th>
+  	<td><%= @sequencing_library_prep_kit.name %></td>
+	</tr>
+
+  <tr>
+    <th><strong>Documents:</strong></th>
+    <td>
+      <%= render partial: "documents/link_to_document", locals: {documents: @sequencing_library_prep_kit.documents} %>
+    </td>
+  </tr>
+
+  <tr>
+		<th><strong>Vendor:</strong></th>
+  	<td><%= link_to @sequencing_library_prep_kit.vendor.name, @sequencing_library_prep_kit.vendor %></td>
+	</tr>
+
+	<tr>
+  	<th><strong>Description:</strong></th>
+  	<td><%= @sequencing_library_prep_kit.description %></td>
+	</tr>
+</table>
+
+<%= link_to 'Back', sequencing_library_prep_kits_path %>
