@@ -1,0 +1,32 @@
+<% title(@barcode.name, "Libraries") %>
+<header>
+  <h1><%= @barcode.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @barcode} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @barcode} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @barcode } %>
+
+
+<table class="attributes">
+
+	<tr>
+	  <th><strong>Name:</strong></th>
+	  <td><%= @barcode.name %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Sequence:</strong></th>
+	  <td><%= @barcode.sequence %></td>
+	</tr>
+
+	<tr>
+	  <th><strong>Sequencing library prep kit:</strong></th>
+		<td><%= link_to @barcode.sequencing_library_prep_kit.name, @barcode.sequencing_library_prep_kit %></td>
+	</tr>
+</table>
+
+<%= link_to 'Back', barcodes_path %>

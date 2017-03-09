@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308070122) do
+ActiveRecord::Schema.define(version: 20170309014743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,18 @@ ActiveRecord::Schema.define(version: 20170308070122) do
   add_index "barcode_sequencing_results", ["name"], name: "index_barcode_sequencing_results_on_name", unique: true, using: :btree
   add_index "barcode_sequencing_results", ["sequencing_result_id"], name: "index_barcode_sequencing_results_on_sequencing_result_id", using: :btree
   add_index "barcode_sequencing_results", ["user_id"], name: "index_barcode_sequencing_results_on_user_id", using: :btree
+
+  create_table "barcodes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "sequencing_library_prep_kit_id"
+    t.string   "name"
+    t.string   "sequence"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "barcodes", ["sequencing_library_prep_kit_id"], name: "index_barcodes_on_sequencing_library_prep_kit_id", using: :btree
+  add_index "barcodes", ["user_id"], name: "index_barcodes_on_user_id", using: :btree
 
   create_table "biosample_ontologies", force: :cascade do |t|
     t.integer  "user_id"
@@ -430,6 +442,8 @@ ActiveRecord::Schema.define(version: 20170308070122) do
   add_foreign_key "barcode_sequencing_results", "libraries"
   add_foreign_key "barcode_sequencing_results", "sequencing_results"
   add_foreign_key "barcode_sequencing_results", "users"
+  add_foreign_key "barcodes", "sequencing_library_prep_kits"
+  add_foreign_key "barcodes", "users"
   add_foreign_key "biosample_ontologies", "users"
   add_foreign_key "biosample_term_names", "biosample_ontologies"
   add_foreign_key "biosample_term_names", "users"
