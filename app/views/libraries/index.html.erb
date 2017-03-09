@@ -47,7 +47,7 @@
   
         <td><%= library.lot_identifier %></td>
         <td><%= library.vendor_product_identifier %></td>
-        <td><%= library.barcode %></td>
+        <td><%= library.barcodes %></td>
 				<% if library.library_fragmentation_method.present? %>
 	        <td><%= link_to library.library_fragmentation_method.name, library.library_fragmentation_method.name %></td>
 				<% else %>

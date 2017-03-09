@@ -13,6 +13,23 @@
     </div>
   <% end %>
 
+
+	<% if @library.barcodes.persisted.any? %>
+	  <table>
+		  <tr><th>Barcodes:</th></tr>
+		  <%= f.simple_fields_for :barcodes do |ff| %>
+		   <% bc = @library.barcodes[ff.index] %>
+		   <tr>
+		    <td><%= bc.name %></td>
+		    <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
+		   </tr>
+		   <% end %>  
+	  </table></br>
+	<% end %>
+
+
+	<%= f.association :barcodes %>
+
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library name"} %>(Max. 20 characters)</br>
 
 	<% if @library.documents.persisted.any? %>
@@ -61,9 +78,6 @@
 
   <%= f.association :vendor, collection: Vendor.order(:name), label_method: :name,  prompt: "Select the Vendor",
 			label_html: {"data-toggle" => "tooltip", "title" => "The vendor, for nucleic acids or proteins purchased directly from a vendor (e.g. total RNA)."} %>
-
-	<%= f.input :barcode,
-			label_html: {"data-toggle" => "tooltip", "title" => "If the library was prepared with a barcode, enter here. If duel-indexed, separate with a '-', i.e. AGTTCA-GTGAAT."} %>
 
 	<%= f.association :library_fragmentation_method,
 			label_html: {"data-toggle" => "tooltip", "title" => "A short description or reference of the nucleic acid fragmentation protocol used in library preparation, if applicable."} %>

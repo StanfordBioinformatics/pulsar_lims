@@ -30,7 +30,7 @@
 				<%= render partial: "sequencing_requests/link_to_sequencing_request", locals: {sequencing_requests: @library.sequencing_requests} %>
 			</td>
 		<% else %>
-			<td>None</td>
+			<td></td>
 		<% end %>
   </tr>
 
@@ -64,7 +64,11 @@
 
 	<tr>
 		<th><strong>Barcode:</strong></th>
-		<td><%= @library.barcode %></td>
+		<% if @library.barcodes.present? %>
+			<td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: @library.barcodes} %></td>
+		<% else %>
+			<td></td>
+		<% end %>
 	</tr>
 
 	<tr>

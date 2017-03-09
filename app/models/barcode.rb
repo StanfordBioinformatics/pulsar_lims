@@ -10,6 +10,8 @@ class Barcode < ActiveRecord::Base
 	validates :sequence, format: { with: /\A[acgtnACGTN]+\z/, message: "can only contain characters in the set ACTGN" }
 	validates :sequencing_library_prep_kit, presence: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end

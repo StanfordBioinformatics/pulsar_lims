@@ -1,5 +1,6 @@
 class LibrariesController < ApplicationController
 	include DocumentsConcern #gives me add_documents()
+	include BarcodesConcern  #gives me add_barcodes()
   before_action :set_library, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -29,11 +30,10 @@ class LibrariesController < ApplicationController
 		authorize Library
     @library = Library.new(library_params)
 
-		#render json: params
-		#return
 		@library.user = current_user
 
 		@library = add_documents(@library,params[:library][:document_ids])
+		@library = add_barcodes(@library,params[:library][:barcode_ids])
 
     respond_to do |format|
       if @library.save
@@ -52,6 +52,7 @@ class LibrariesController < ApplicationController
 		authorize @library
 		#@library = remove_documents(@library,params[:remove_documents])
 		@library = add_documents(@library,params[:library][:documents])
+		@library = add_barcodes(@library,params[:library][:barcode_ids])
     respond_to do |format|
       if @library.update(library_params)
         format.html { redirect_to @library, notice: 'Library was successfully updated.' }
@@ -85,7 +86,7 @@ class LibrariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_params
-      params.require(:library).permit(:library_fragmentation_method_id, :nucleic_acid_starting_quantity, :nucleic_acid_starting_quantity_units, :is_control, :nucleic_acid_term_id, :biosample_id, :antibody_id, :vendor_id, :barcode, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, documents_attributes: [:id,:_destroy], sequencing_requests_attributes: [:id,:_destroy])
+      params.require(:library).permit(:barcodes, :library_fragmentation_method_id, :nucleic_acid_starting_quantity, :nucleic_acid_starting_quantity_units, :is_control, :nucleic_acid_term_id, :biosample_id, :antibody_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, documents_attributes: [:id,:_destroy], sequencing_requests_attributes: [:id,:_destroy], barcodes_attributes: [:id,:_destroy])
     end
 
 end
