@@ -28,7 +28,8 @@
 	<% end %>
 
 
-	<%= f.association :barcodes %>
+	<%= f.association :barcodes, prompt: "Select barcodes",
+			label_html: {"data-toggle" => "tooltip", "title" => "If the library is barcoded, select the barcode used. If the library is pooled having multiple barcodes, select all barcodes used in the pooling."} %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library name"} %>(Max. 20 characters)</br>
 

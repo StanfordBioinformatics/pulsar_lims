@@ -4,6 +4,7 @@ class Barcode < ActiveRecord::Base
   belongs_to :user
   belongs_to :sequencing_library_prep_kit
 
+	validates :index_number, inclusion: { in: [1,2],  message: "must be one of [1,2]"}
 	validates_uniqueness_of :name, scope: :sequencing_library_prep_kit_id
 	validates :name, presence: true
 	validates_uniqueness_of :sequence, scope: :sequencing_library_prep_kit_id

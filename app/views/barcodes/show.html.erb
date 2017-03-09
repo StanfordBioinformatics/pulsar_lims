@@ -24,6 +24,11 @@
 	</tr>
 
 	<tr>
+	  <th><strong>Index Number:</strong></th>
+	  <td><%= @barcode.index_number %></td>
+	</tr>
+
+	<tr>
 	  <th><strong>Sequencing library prep kit:</strong></th>
 		<td><%= link_to @barcode.sequencing_library_prep_kit.name, @barcode.sequencing_library_prep_kit %></td>
 	</tr>

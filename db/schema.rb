@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309041224) do
+ActiveRecord::Schema.define(version: 20170309192146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20170309041224) do
     t.string   "sequence"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "index_number"
   end
 
   add_index "barcodes", ["sequencing_library_prep_kit_id"], name: "index_barcodes_on_sequencing_library_prep_kit_id", using: :btree

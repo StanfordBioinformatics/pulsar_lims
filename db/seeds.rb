@@ -52,9 +52,56 @@ SequencingLibraryPrepKit.create!([
 	{user_id: admin, name: "TruSeq LT Kits", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes TruSeq DNA PCR-Free LT, TruSeq Nano DNA LT, TruSeq DNA v1/v2/LT (obsolete), TruSeq RNA v1/v2/LT, TruSeq Stranded mRNA LT, TruSeq Stranded Total RNA LT, TruSeq RNA Access, and TruSeq ChIP"}
 ])
 
+truseq_ht_kits_id = SequencingLibraryPrepKit.find_by!(name: "TruSeq HT Kits").id
+truseq_lt_kits_id = SequencingLibraryPrepKit.find_by!(name: "TruSeq LT Kits").id
 Barcode.delete_all
 Barcode.create!([
-	{user_id: admin, name: "AD001", sequence: "ATCACG", TruSeq DNA PCR-Free LT Library Prep Kit	
+{user_id: admin, name: "D701", sequence: "ATTACTCG", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D702", sequence: "TCCGGAGA", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D703", sequence: "CGCTCATT", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D704", sequence: "GAGATTCC", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D705", sequence: "ATTCAGAA", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D706", sequence: "GAATTCGT", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D707", sequence: "CTGAAGCT", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D708", sequence: "TAATGCGC", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D709", sequence: "CGGCTATG", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D710", sequence: "TCCGCGAA", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D711", sequence: "TCTCGCGC", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D712", sequence: "AGCGATAG", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D501", sequence: "TATAGCCT", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D502", sequence: "ATAGAGGC", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D503", sequence: "CCTATCCT", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D504", sequence: "GGCTCTGA", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D505", sequence: "AGGCGAAG", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D506", sequence: "TAATCTTA", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D507", sequence: "CAGGACGT", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D508", sequence: "GTACTGAC", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+
+{user_id: admin, name: "AD001", sequence: "ATCACG", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD002", sequence: "CGATGT", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD003", sequence: "TTAGGC", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD004", sequence: "TGACCA", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD005", sequence: "ACAGTG", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD006", sequence: "GCCAAT", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD007", sequence: "CAGATC", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD008", sequence: "ACTTGA", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD009", sequence: "GATCAG", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD010", sequence: "TAGCTT", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD011", sequence: "GGCTAC", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD012", sequence: "CTTGTA", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD013", sequence: "AGTCAA", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD014", sequence: "AGTTCC", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD015", sequence: "ATGTCA", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD016", sequence: "CCGTCC", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD018", sequence: "GTCCGC", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD019", sequence: "GTGAAA", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD020", sequence: "GTGGCC", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD021", sequence: "GTTTCG", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD022", sequence: "CGTACG", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD023", sequence: "GAGTGG", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD025", sequence: "ACTGAT", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+{user_id: admin, name: "AD027", sequence: "ATTCCT", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+])
 
 LibraryFragmentationMethod.delete_all
 LibraryFragmentationMethod.create!([
