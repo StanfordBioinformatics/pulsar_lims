@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309014743) do
+ActiveRecord::Schema.define(version: 20170309041224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,14 @@ ActiveRecord::Schema.define(version: 20170309014743) do
 
   add_index "barcodes", ["sequencing_library_prep_kit_id"], name: "index_barcodes_on_sequencing_library_prep_kit_id", using: :btree
   add_index "barcodes", ["user_id"], name: "index_barcodes_on_user_id", using: :btree
+
+  create_table "barcodes_libraries", id: false, force: :cascade do |t|
+    t.integer "barcode_id", null: false
+    t.integer "library_id", null: false
+  end
+
+  add_index "barcodes_libraries", ["barcode_id"], name: "index_barcodes_libraries_on_barcode_id", using: :btree
+  add_index "barcodes_libraries", ["library_id"], name: "index_barcodes_libraries_on_library_id", using: :btree
 
   create_table "biosample_ontologies", force: :cascade do |t|
     t.integer  "user_id"
@@ -249,7 +257,6 @@ ActiveRecord::Schema.define(version: 20170309014743) do
     t.string   "name",                                 limit: 255
     t.integer  "user_id"
     t.integer  "antibody_id"
-    t.string   "barcode"
     t.integer  "nucleic_acid_starting_quantity"
     t.string   "nucleic_acid_starting_quantity_units"
     t.integer  "library_fragmentation_method_id"
