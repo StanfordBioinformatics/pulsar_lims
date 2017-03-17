@@ -1,0 +1,30 @@
+<header>
+  <h1>Construct Tag</h1>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: ConstructTag} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @construct_tags.each do |construct_tag| %>
+      <tr>
+        <td><%= construct_tag.name %></td>
+        <td><%= construct_tag.description %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_construct_tag_path(construct_tag) %>
+        	<%= link_to fa_icon("trash"), construct_tag, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

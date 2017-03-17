@@ -1,0 +1,32 @@
+<header>
+  <h1>Cloning Vectors</h1>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: CloningVector} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Url</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cloning_vectors.each do |cloning_vector| %>
+      <tr>
+        <td><%= cloning_vector.name %></td>
+        <td><%= cloning_vector.description %></td>
+        <td><%= cloning_vector.url %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_cloning_vector_path(cloning_vector) %>
+        	<%= link_to fa_icon("trash"), cloning_vector, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

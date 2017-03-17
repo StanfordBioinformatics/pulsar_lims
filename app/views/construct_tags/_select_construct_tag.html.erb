@@ -1,0 +1,5 @@
+<% if defined?(exclude_construct_tags) %>
+	<%= f.association :construct_tags, collection: ConstructTag.where.not(id: [exclude_construct_tags]), prompt: "Select a Construct Tag", input_html: {multiple: true} %>
+<% else %>
+	<%= f.association :construct_tags, collection: ConstructTag.order(:name), prompt: "Select a Construct Tag", input_html: {multiple: true} %>
+<% end %>

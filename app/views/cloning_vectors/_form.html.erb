@@ -1,10 +1,9 @@
-<%= simple_form_for(@barcode) do |f| %>
+<%= simple_form_for(@cloning_vector) do |f| %>
   <%= f.error_notification %>
 
   <%= f.input :name, {"data-toggle" => "tooltip", "title" => "Unique name"} %>
-  <%= f.input :sequence %>
-	<%= f.input :index_number %>
-  <%= f.association :sequencing_library_prep_kit %>
+  <%= f.input :description %>
+  <%= f.input :url %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

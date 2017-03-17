@@ -1,0 +1,34 @@
+<header>
+  <h1><%= @cloning_vector.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @cloning_vector} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @cloning_vector} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @cloning_vector } %>
+
+<table class="attributes">
+<tr>
+  <th><strong>User:</strong></th>
+  <td><%= @cloning_vector.user %></td>
+</tr>
+
+<tr>
+  <th><strong>Name:</strong></th>
+  <td><%= @cloning_vector.name %></td>
+</tr>
+
+<tr>
+  <th><strong>Description:</strong></th>
+  <td><%= @cloning_vector.description %></td>
+</tr>
+
+<tr>
+  <th><strong>Url:</strong></th>
+  <td><%= @cloning_vector.url %></td>
+</tr>
+</table>
+
+<%= link_to 'Back', cloning_vectors_path %>

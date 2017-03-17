@@ -1,0 +1,40 @@
+<header>
+  <h1>Donor constructs</h1>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: DonorConstruct} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Cloning vector</th>
+      <th>Vender</th>
+      <th>Vender product identifier</th>
+      <th>Target</th>
+      <th>Description</th>
+      <th>Insert sequence</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @donor_constructs.each do |donor_construct| %>
+      <tr>
+        <td><%= donor_construct.name %></td>
+        <td><%= donor_construct.cloning_vector %></td>
+        <td><%= donor_construct.vendor %></td>
+        <td><%= donor_construct.vendor_product_identifier %></td>
+        <td><%= donor_construct.target %></td>
+        <td><%= donor_construct.description %></td>
+        <td><%= donor_construct.insert_sequence %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_donor_construct_path(donor_construct) %>
+        	<%= link_to fa_icon("trash"), donor_construct, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

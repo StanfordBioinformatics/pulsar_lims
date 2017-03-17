@@ -1,0 +1,2 @@
+module ConstructTagsHelper
+end

@@ -1,0 +1,64 @@
+<header>
+  <h1><%= @donor_construct.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @donor_construct} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @donor_construct} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @donor_construct } %>
+
+<table class="attributes">
+	<tr>
+	  <th><strong>Name:</strong></th>
+	  <td><%= @donor_construct.name %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Cloning vector:</strong></th>
+	  <td><%= link_to @donor_construct.cloning_vector.name, @donor_construct.cloning_vector %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Vender:</strong></th>
+	  <td><%= link_to @donor_construct.vendor.name, @donor_construct.vendor %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Vender product identifier:</strong></th>
+	  <td><%= @donor_construct.vendor_product_identifier %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Target:</strong></th>
+	  <td><%= link_to @donor_construct.target.name, @donor_construct.target %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Description:</strong></th>
+	  <td><%= @donor_construct.description %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Insert sequence:</strong></th>
+	  <td><%= @donor_construct.insert_sequence %></td>
+	</tr>
+
+	<tr>
+		<th><strong>Construct Tags:</strong></th>
+			<% if @donor_construct.construct_tags.present? %>
+				<td><ul>
+				<%= @donor_construct.construct_tags.each do |t| %>
+					<li><%= link_to t.name, t %></li>
+				<% end %>
+				</ul></td>
+			<% else %>
+				<td>None</td>
+			<% end %>
+		</td>
+	</tr>
+	
+</table>
+
+<%= link_to 'Back', donor_constructs_path %>

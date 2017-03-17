@@ -7,10 +7,13 @@ class User < ActiveRecord::Base
 	has_many :biosample_term_names, dependent: :nullify
 	has_many :biosample_types, dependent: :nullify
 	has_many :chromosomes, dependent: :nullify
+	has_many :cloning_vectors, dependent: :nullify
+	has_many :construct_tags, dependent: :nullify
 	has_many :crispr_genetic_modifications, dependent: :nullify
 	has_many :documents, dependent: :nullify
 	has_many :document_types, dependent: :nullify
 	has_many :donors, dependent: :nullify
+	has_many :donor_constructs, dependent: :nullify
 	has_many :experiment_types, dependent: :nullify
 	has_many :isotypes, dependent: :nullify
 	has_many :libraries, dependent: :nullify

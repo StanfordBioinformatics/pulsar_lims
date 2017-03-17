@@ -1,0 +1,24 @@
+<header>
+  <h1><%= @construct_tag.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @construct_tag} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @construct_tag} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @construct_tag } %>
+
+<table class="attributes">
+	<tr>
+		<th><strong>Name:</strong></th>
+		<td><%= @construct_tag.name %></td>
+	</tr>
+
+	<tr>
+		<th><strong>Description:</strong></th>
+		<td><%= @construct_tag.description %></td>
+	</tr>
+</table>
+
+<%= link_to 'Back', construct_tags_path %>

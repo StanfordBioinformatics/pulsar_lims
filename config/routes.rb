@@ -1,5 +1,11 @@
 SnyderEncode::Application.routes.draw do
 
+  resources :donor_constructs do
+		get :select_construct_tag, on: :collection
+	end
+
+  resources :construct_tags
+  resources :cloning_vectors
   resources :genome_locations
   resources :barcodes
   resources :sequencing_library_prep_kits

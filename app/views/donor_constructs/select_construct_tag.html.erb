@@ -1,0 +1,7 @@
+<%= simple_fields_for @donor_construct do |f| %>
+	<% if @exclude_construct_tags.present? %>
+		<%= render partial: "construct_tags/select_construct_tag", locals: {f: f, exclude_construct_tags: @exclude_construct_tags} %>
+	<% else %>
+		<%= render partial: "construct_tags/select_construct_tag", locals: {f: f} %>
+	<% end %>
+<% end %>

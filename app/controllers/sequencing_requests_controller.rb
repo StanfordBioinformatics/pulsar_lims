@@ -3,9 +3,6 @@ class SequencingRequestsController < ApplicationController
   before_action :set_sequencing_request, only: [:show, :edit, :update, :destroy]
 	skip_after_action :verify_authorized, only: [:select_library]
 
-  # GET /sequencing_requests
-  # GET /sequencing_requests.json
-
 	def select_library
 		@sequencing_request = SequencingRequest.new
 		exclude_libs = params[:exclude_libraries]
@@ -26,25 +23,19 @@ class SequencingRequestsController < ApplicationController
     @sequencing_requests = policy_scope(SequencingRequest).order("lower(name)")
   end
 
-  # GET /sequencing_requests/1
-  # GET /sequencing_requests/1.json
   def show
 		authorize @sequencing_request
   end
 
-  # GET /sequencing_requests/new
   def new
     @sequencing_request = SequencingRequest.new
 		authorize @sequencing_request
   end
 
-  # GET /sequencing_requests/1/edit
   def edit
 		authorize @sequencing_request
   end
 
-  # POST /sequencing_requests
-  # POST /sequencing_requests.json
   def create
     @sequencing_request = SequencingRequest.new(sequencing_request_params)
 		authorize @sequencing_request
@@ -62,8 +53,6 @@ class SequencingRequestsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /sequencing_requests/1
-  # PATCH/PUT /sequencing_requests/1.json
   def update
 		authorize @sequencing_request
 		@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:library_ids])
@@ -80,8 +69,6 @@ class SequencingRequestsController < ApplicationController
     end
   end
 
-  # DELETE /sequencing_requests/1
-  # DELETE /sequencing_requests/1.json
   def destroy
 		authorize @sequencing_request
     @sequencing_request.destroy
