@@ -95,6 +95,7 @@
             <%= link_to "Sequencing Requests",sequencing_requests_path, class: controller_name() == "sequencing_requests" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Targets",targets_path, class: controller_name() == "targets" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Vendors",vendors_path, class: current_page?("/vendors") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Chromosomes",vendors_path, class: current_page?("/vendors") ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Library Fragmentation Methods",library_fragmentation_methods_path, class: controller_name() == "library_fragmentation_methods" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Sequencing Library Prep Kits",sequencing_library_prep_kits_path, class: controller_name() == "sequencing_library_prep_kits" ? "list-group-item active" : "list-group-item" %>
           </ul>

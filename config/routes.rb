@@ -33,7 +33,9 @@ SnyderEncode::Application.routes.draw do
 
 	resources :welcome, only: [:index]
 
-  resources :reference_genomes
+  resources :reference_genomes do
+	  resources :chromosomes
+	end
 
   resources :experiment_types
 

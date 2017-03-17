@@ -21,7 +21,7 @@
       <th>Read2 uri</th>
       <th>Read1 count</th>
       <th>Read2 count</th>
-      <th class="actions">Actions</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -36,8 +36,10 @@
         <td><%= res.read2_uri %></td>
         <td><%= res.read1_count %></td>
         <td><%= res.read2_count %></td>
-        <td><%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_result,res] %></td>
-        <td><%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_result,res], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_result,res] %>
+        	<%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_result,res], method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

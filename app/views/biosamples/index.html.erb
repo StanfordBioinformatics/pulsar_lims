@@ -16,7 +16,7 @@
 			<th>Biosample Type</th>
       <th>Biosample Term Name</th>
       <th>ENCID</th>
-      <th class="actions">Actions</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -29,8 +29,10 @@
 				<td><%= biosample.biosample_type.name %></td>
         <td><%= link_to biosample.biosample_term_name.name, biosample.biosample_term_name %></td>
         <td><%= biosample.encid %></td>
-        <td><%= link_to fa_icon("pencil"), edit_biosample_path(biosample) %></td>
-        <td><%= link_to fa_icon("trash"), biosample, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_biosample_path(biosample) %>
+        	<%= link_to fa_icon("trash"), biosample, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

@@ -20,7 +20,7 @@
       <th>Lot Identifier</th>
       <th>Antigen Description</th>
       <th>Antigen Sequence</th>
-      <th class="actions">Actions</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -42,8 +42,10 @@
         <td><%= antibody.lot_identifier %></td>
         <td><%= antibody.antigen_description %></td>
         <td><%= antibody.antigen_sequence %></td>
-        <td><%= link_to fa_icon("pencil"), edit_antibody_path(antibody) %></td>
-        <td><%= link_to fa_icon("trash"), antibody, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_antibody_path(antibody) %>
+        	<%= link_to fa_icon("trash"), antibody, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

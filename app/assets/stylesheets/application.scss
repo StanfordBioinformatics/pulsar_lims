@@ -8,17 +8,17 @@
 @import "responsive.scss";
 
 @import "admin/application";
+@import "chromosomes";
 @import "libraries";
 //@import "sequencing_results";
 
 
-label.radio_buttons {
-	margin-right: 15px;
+table.attributes i.fa-pencil {
+	margin-right: 1em;
 }
 
-table th.actions {
-	text-align: center;
-	col-span: 2;
+label.radio_buttons {
+	margin-right: 15px;
 }
 
 /* the .form-group is the class rails/simple-form gives to inputs. */

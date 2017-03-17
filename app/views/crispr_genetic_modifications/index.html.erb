@@ -14,7 +14,7 @@
       <th>Vendor product identifier</th>
       <th>Guide rna sequences</th>
       <th>Insert sequence</th>
-			<th class="actions">Actions</th>
+			<th>Actions</th>
     </tr>
   </thead>
 
@@ -26,8 +26,10 @@
         <td><%= cgm.vendor_product_identifier %></td>
         <td><%= cgm.guide_rna_sequences %></td>
         <td><%= cgm.insert_sequence %></td>
-        <td><%= link_to fa_icon("pencil"), edit_crispr_genetic_modification_path(cgm) %></td>
-        <td><%= link_to fa_icon("trash"), cgm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_crispr_genetic_modification_path(cgm) %>
+        	<%= link_to fa_icon("trash"), cgm, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

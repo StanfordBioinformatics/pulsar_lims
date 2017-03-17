@@ -11,7 +11,7 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th class="actions">Actions</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -20,8 +20,10 @@
       <tr>
         <td><%= link_to lfm.name, lfm %></td>
         <td><%= lfm.description %></td>
-        <td><%= link_to fa_icon("pencil"), edit_library_fragmentation_method_path(lfm) %></td>
-        <td><%= link_to fa_icon("trash"), lfm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_library_fragmentation_method_path(lfm) %>
+        	<%= link_to fa_icon("trash"), lfm, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

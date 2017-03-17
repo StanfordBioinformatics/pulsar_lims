@@ -15,7 +15,7 @@
       <th>Run name</th>
       <th>Lane</th>
       <th>Comment</th>
-      <th class="actions"></th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -27,8 +27,10 @@
         <td><%= link_to sequencing_result.sequencing_request.name, sequencing_result.sequencing_request %></td>
         <td><%= sequencing_result.run_name %></td>
         <td><%= sequencing_result.lane %></td>
-				<td><%= link_to fa_icon("pencil"), edit_sequencing_result_path(library) %></td>
-        <td><%= link_to 'Destroy', sequencing_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				<td>
+					<%= link_to fa_icon("pencil"), edit_sequencing_result_path(library) %>
+        	<%= link_to 'Destroy', sequencing_result, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

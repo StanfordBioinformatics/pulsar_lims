@@ -11,7 +11,7 @@
     <tr>
       <th>Name</th>
       <th>Url</th>
-      <th class="actions">Actions</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -20,8 +20,10 @@
       <tr>
         <td><%= link_to reference_genome.name, reference_genome %></td>
         <td><%= reference_genome.url %></td>
-        <td><%= link_to fa_icon("pencil"), edit_reference_genome_path(reference_genome) %></td>
-        <td><%= link_to fa_icon("trash"), reference_genome, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_reference_genome_path(reference_genome) %>
+        	<%= link_to fa_icon("trash"), reference_genome, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

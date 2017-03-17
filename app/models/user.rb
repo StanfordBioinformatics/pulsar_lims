@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 	has_many :biosamples, dependent: :nullify
 	has_many :biosample_term_names, dependent: :nullify
 	has_many :biosample_types, dependent: :nullify
+	has_many :chromosomes, dependent: :nullify
 	has_many :crispr_genetic_modifications, dependent: :nullify
 	has_many :documents, dependent: :nullify
 	has_many :document_types, dependent: :nullify

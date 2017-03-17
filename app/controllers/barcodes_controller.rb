@@ -65,6 +65,6 @@ class BarcodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def barcode_params
-      params.require(:barcode).permit(:user_id, :index_number, :sequencing_library_prep_kit_id, :name, :sequence)
+      params.require(:barcode).permit(:index_number, :sequencing_library_prep_kit_id, :name, :sequence)
     end
 end

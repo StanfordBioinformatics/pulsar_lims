@@ -17,6 +17,11 @@
 	</tr>
 
 	<tr>
+	  <th><strong>Sequencing Library Prep Kit:</strong></th>
+		<td><%= link_to @library.sequencing_library_prep_kit.name, @library.sequencing_library_prep_kit %></td>
+	</tr>
+
+	<tr>
 		<th><strong>Documents:</strong></th>
 		<td>
       <%= render partial: "documents/link_to_document", locals: {documents: @library.documents} %>

@@ -10,7 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th class="actions">Actions</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -18,8 +18,10 @@
     <% @organisms.each do |organism| %>
       <tr>
         <td><%= link_to organism.name, organism %></td>
-        <td><%= link_to fa_icon("pencil"), edit_organism_path(organism) %></td>
-        <td><%= link_to fa_icon("trash"), organism, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_organism_path(organism) %>
+        	<%= link_to fa_icon("trash"), organism, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

@@ -13,7 +13,7 @@
       <th>ENCID</th>
       <th>Description</th>
 			<th>URL</th>
-      <th class="actions">Actions</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -24,8 +24,10 @@
 				<td><%= vendor.encode_identifier %></td>
         <td><%= vendor.description %></td>
         <td><%= link_to vendor.url, vendor.url %></td>
-        <td><%= link_to fa_icon("pencil"), edit_vendor_path(vendor) %></td>
-        <td><%= link_to fa_icon("trash"), vendor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_vendor_path(vendor) %>j
+        	<%= link_to fa_icon("trash"), vendor, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

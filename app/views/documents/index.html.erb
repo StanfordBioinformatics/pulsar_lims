@@ -14,7 +14,7 @@
       <th>Content type</th>
       <th>File Link</th>
       <th>Document type</th>
-      <th class="actions">Actions</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -26,8 +26,10 @@
         <td><%= document.content_type %></td>
         <td><%= link_to(document.name,:action => "document", :id => document.id) %></td>
         <td><%= link_to document.document_type.name, document.document_type %></td>
-        <td><%= link_to fa_icon("pencil"), edit_document_path(document) %></td>
-        <td><%= link_to fa_icon("trash"), document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_document_path(document) %>
+        	<%= link_to fa_icon("trash"), document, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

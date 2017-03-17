@@ -10,7 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th class="actions">Actions</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -18,8 +18,10 @@
     <% @antibody_purifications.each do |antibody_purification| %>
       <tr>
         <td><%= link_to antibody_purification.name, antibody_purification %></td>
-        <td><%= link_to fa_icon("pencil"), edit_antibody_purification_path(antibody_purification) %></td>
-        <td><%= link_to fa_icon("trash"), antibody_purification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_antibody_purification_path(antibody_purification) %>
+        	<%= link_to fa_icon("trash"), antibody_purification, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

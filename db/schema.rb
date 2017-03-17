@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309192146) do
+ActiveRecord::Schema.define(version: 20170316223449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,6 +168,18 @@ ActiveRecord::Schema.define(version: 20170309192146) do
     t.integer "document_id"
   end
 
+  create_table "chromosomes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "reference_genome_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "chromosomes", ["name"], name: "index_chromosomes_on_name", unique: true, using: :btree
+  add_index "chromosomes", ["reference_genome_id"], name: "index_chromosomes_on_reference_genome_id", using: :btree
+  add_index "chromosomes", ["user_id"], name: "index_chromosomes_on_user_id", using: :btree
+
   create_table "crispr_genetic_modifications", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -261,12 +273,14 @@ ActiveRecord::Schema.define(version: 20170309192146) do
     t.integer  "nucleic_acid_starting_quantity"
     t.string   "nucleic_acid_starting_quantity_units"
     t.integer  "library_fragmentation_method_id"
+    t.integer  "sequencing_library_prep_kit_id"
   end
 
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
   add_index "libraries", ["library_fragmentation_method_id"], name: "index_libraries_on_library_fragmentation_method_id", using: :btree
   add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true, using: :btree
   add_index "libraries", ["nucleic_acid_term_id"], name: "index_libraries_on_nucleic_acid_term_id", using: :btree
+  add_index "libraries", ["sequencing_library_prep_kit_id"], name: "index_libraries_on_sequencing_library_prep_kit_id", using: :btree
   add_index "libraries", ["user_id"], name: "index_libraries_on_user_id", using: :btree
   add_index "libraries", ["vendor_id"], name: "index_libraries_on_vendor_id", using: :btree
 
@@ -461,6 +475,8 @@ ActiveRecord::Schema.define(version: 20170309192146) do
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"
   add_foreign_key "biosamples", "vendors"
+  add_foreign_key "chromosomes", "reference_genomes"
+  add_foreign_key "chromosomes", "users"
   add_foreign_key "crispr_genetic_modifications", "users"
   add_foreign_key "crispr_genetic_modifications", "vendors"
   add_foreign_key "document_types", "users"
@@ -472,6 +488,7 @@ ActiveRecord::Schema.define(version: 20170309192146) do
   add_foreign_key "libraries", "biosamples"
   add_foreign_key "libraries", "library_fragmentation_methods"
   add_foreign_key "libraries", "nucleic_acid_terms"
+  add_foreign_key "libraries", "sequencing_library_prep_kits"
   add_foreign_key "libraries", "users"
   add_foreign_key "libraries", "vendors"
   add_foreign_key "library_fragmentation_methods", "users"

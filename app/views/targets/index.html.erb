@@ -11,7 +11,7 @@
     <tr>
       <th>Encode identifier</th>
       <th>Name</th>
-      <th class="actions">Actions</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -20,8 +20,10 @@
       <tr>
         <td><%= target.encode_identifier %></td>
         <td><%= link_to target.name, target %></td>
-        <td><%= link_to fa_icon("pencil"), edit_target_path(target) %></td>
-        <td><%= link_to fa_icon("trash"), target, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_target_path(target) %>
+        	<%= link_to fa_icon("trash"), target, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

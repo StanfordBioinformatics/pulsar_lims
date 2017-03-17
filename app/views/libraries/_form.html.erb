@@ -13,6 +13,9 @@
     </div>
   <% end %>
 
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library name"} %>(Max. 20 characters)</br>
+
+  <%= f.association :sequencing_library_prep_kit, label_html: {"data-toggle" => "tooltip", "title" => "The library prep kit used for creating the library."} %>
 
 	<% if @library.barcodes.persisted.any? %>
 	  <table>
@@ -31,7 +34,6 @@
 	<%= f.association :barcodes, prompt: "Select barcodes",
 			label_html: {"data-toggle" => "tooltip", "title" => "If the library is barcoded, select the barcode used. If the library is pooled having multiple barcodes, select all barcodes used in the pooling."} %>
 
-  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library name"} %>(Max. 20 characters)</br>
 
 	<% if @library.documents.persisted.any? %>
 	  <table>

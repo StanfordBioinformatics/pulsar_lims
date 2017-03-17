@@ -10,6 +10,7 @@ class Library < ActiveRecord::Base
 	belongs_to :biosample
 	belongs_to :library_fragmentation_method
 	belongs_to :nucleic_acid_term
+	belongs_to :sequencing_library_prep_kit
 	belongs_to :user
 	belongs_to :vendor
 
@@ -25,6 +26,7 @@ class Library < ActiveRecord::Base
 	validates :nucleic_acid_starting_quantity_units, presence: {message: "must be specified when the quantity is specified."}, if: "nucleic_acid_starting_quantity.present?"
 	#validates :nucleic_acid_starting_quantity, presence: true, if: "nucleic_acid_starting_quantity_units.present?", message: "Nucleic acid starting quantity must be set if the units for it are set"
 	validates :nucleic_acid_starting_quantity, presence: {message: "must be specified when the units are set."}, if: "nucleic_acid_starting_quantity_units.present?"
+	validates :sequencing_library_prep_kit_id, presence: true
 
 	accepts_nested_attributes_for :documents, allow_destroy: true
 	accepts_nested_attributes_for :sequencing_requests, allow_destroy: true
