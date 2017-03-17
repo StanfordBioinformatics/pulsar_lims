@@ -1,5 +1,5 @@
 <header>
-  <h1><%= @chromosome.name %></h1>
+  <h1><%= @chromosome.name %>on <%= @reference_genome.name %></h1>
   
   <ul class="actions">
     <%= render partial: "application_partials/auth_edit_record", locals: {record: @chromosome, nested: @reference_genome} %>

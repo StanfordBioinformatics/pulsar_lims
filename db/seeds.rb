@@ -326,6 +326,36 @@ ReferenceGenome.create!([
 	{user_id: admin, name: "NCBI GRCh38", url: "http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human"}
 ])
 
+Chromosome.delete_all
+hg38 = ReferenceGenome.find_by(name: "UCSC hg38").id
+Chromosome.create!([
+	{user_id: admin, reference_genome_id: hg38, name: "chr1" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr2" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr3" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr4" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr5" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr6" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr7" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr8" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr9" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr10" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr11" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr12" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr13" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr14" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr15" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr16" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr17" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr18" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr19" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr20" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr21" },
+	{user_id: admin, reference_genome_id: hg38, name: "chr22" },
+	{user_id: admin, reference_genome_id: hg38, name: "chrM" },
+	{user_id: admin, reference_genome_id: hg38, name: "chrX" },
+	{user_id: admin, reference_genome_id: hg38, name: "chrY" }
+])
+
 Target.delete_all
 Target.create!([
 {user_id: admin, name: "RELB-human", encode_identifier: "4c8ef6d7-d7e9-4af5-9b8b-4e44450b5c3c"}

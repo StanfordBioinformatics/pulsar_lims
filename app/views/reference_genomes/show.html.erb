@@ -17,29 +17,29 @@
 
 	<tr>
 		<th><strong>Url:</strong></th>
-		<td><%= @reference_genome.url %></td>
+		<td><%= link_to @reference_genome.url, @reference_genome.url %></td>
 	</tr>
 
 </table>
 
 <div class="chromosomes bg-info">
-<h4>Chromosomes</h4>
-<table class="attributes">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th class="actions">Actions</th>
-		</tr>
-	</thead>
-	<% @reference_genome.chromosomes.each do |c| %>
-		<tr>
-			<td><%= link_to c.name, [@reference_genome,c] %></td>
-			<td>
-				<%= link_to fa_icon("pencil"), [:edit,@reference_genome,c] %>
-				<%= link_to fa_icon("trash"), [@reference_genome,c], method: :delete, data: { confirm: 'Are you sure?' } %>
-			</td>
-		</tr>
-	<% end %>
+	<h4> Chromosomes</h4>
+	<table class="attributes">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th class="actions">Actions</th>
+			</tr>
+		</thead>
+		<% @reference_genome.chromosomes.each do |c| %>
+			<tr>
+				<td><%= link_to c.name, [@reference_genome,c] %></td>
+				<td>
+					<%= link_to fa_icon("pencil"), [:edit,@reference_genome,c] %>
+					<%= link_to fa_icon("trash"), [@reference_genome,c], method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+			</tr>
+		<% end %>
 </table>
 </div></br>
 
