@@ -6,7 +6,6 @@ SnyderEncode::Application.routes.draw do
   resources :library_fragmentation_methods
   resources :biosample_term_names
 
-  resources :crispr_genetic_modifications
 
   resources :sequencing_centers
 
