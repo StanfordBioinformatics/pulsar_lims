@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @genome_location.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @genome_location.user %>
+</p>
+
+<p>
+  <strong>Chromosome:</strong>
+  <%= @genome_location.chromosome %>
+</p>
+
+<p>
+  <strong>Start:</strong>
+  <%= @genome_location.start %>
+</p>
+
+<p>
+  <strong>End:</strong>
+  <%= @genome_location.end %>
+</p>
+
+<%= link_to 'Edit', edit_genome_location_path(@genome_location) %> |
+<%= link_to 'Back', genome_locations_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316223449) do
+ActiveRecord::Schema.define(version: 20170317025721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,6 +247,20 @@ ActiveRecord::Schema.define(version: 20170316223449) do
   end
 
   add_index "experiment_types", ["user_id"], name: "index_experiment_types_on_user_id", using: :btree
+
+  create_table "genome_locations", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "chromosome_id"
+    t.integer  "start"
+    t.integer  "end"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "genome_locations", ["chromosome_id"], name: "index_genome_locations_on_chromosome_id", using: :btree
+  add_index "genome_locations", ["name"], name: "index_genome_locations_on_name", unique: true, using: :btree
+  add_index "genome_locations", ["user_id"], name: "index_genome_locations_on_user_id", using: :btree
 
   create_table "isotypes", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -484,6 +498,8 @@ ActiveRecord::Schema.define(version: 20170316223449) do
   add_foreign_key "documents", "users"
   add_foreign_key "donors", "users"
   add_foreign_key "experiment_types", "users"
+  add_foreign_key "genome_locations", "chromosomes"
+  add_foreign_key "genome_locations", "users"
   add_foreign_key "isotypes", "users"
   add_foreign_key "libraries", "biosamples"
   add_foreign_key "libraries", "library_fragmentation_methods"

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Genome Locations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>User</th>
+      <th>Chromosome</th>
+      <th>Start</th>
+      <th>End</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @genome_locations.each do |genome_location| %>
+      <tr>
+        <td><%= genome_location.name %></td>
+        <td><%= genome_location.user %></td>
+        <td><%= genome_location.chromosome %></td>
+        <td><%= genome_location.start %></td>
+        <td><%= genome_location.end %></td>
+        <td><%= link_to 'Show', genome_location %></td>
+        <td><%= link_to 'Edit', edit_genome_location_path(genome_location) %></td>
+        <td><%= link_to 'Destroy', genome_location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Genome location', new_genome_location_path %>
