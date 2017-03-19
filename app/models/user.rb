@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 	has_many :chromosomes, dependent: :nullify
 	has_many :cloning_vectors, dependent: :nullify
 	has_many :construct_tags, dependent: :nullify
+	has_many :crisprs, dependent: :nullify
 	has_many :crispr_constructs, dependent: :nullify
 	has_many :documents, dependent: :nullify
 	has_many :document_types, dependent: :nullify

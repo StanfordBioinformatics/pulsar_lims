@@ -1,16 +1,19 @@
-<p id="notice"><%= notice %></p>
+<header>
+  <h1>Crisprs</h1>
 
-<h1>Listing Crisprs</h1>
-
-<table>
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: Crispr} %>
+  </ul> 
+</header> 
+  
+<table class="attributes">
   <thead>
     <tr>
       <th>Name</th>
-      <th>User</th>
       <th>Crispr construct</th>
       <th>Donor construct</th>
       <th>Biosample</th>
-      <th colspan="3"></th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -18,18 +21,14 @@
     <% @crisprs.each do |crispr| %>
       <tr>
         <td><%= crispr.name %></td>
-        <td><%= crispr.user %></td>
-        <td><%= crispr.crispr_construct %></td>
-        <td><%= crispr.donor_construct %></td>
-        <td><%= crispr.biosample %></td>
-        <td><%= link_to 'Show', crispr %></td>
-        <td><%= link_to 'Edit', edit_crispr_path(crispr) %></td>
-        <td><%= link_to 'Destroy', crispr, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to crispr.crispr_construct.name, crispr.crispr_construct %></td>
+        <td><%= link_to crispr.donor_construct.name, crispr.donor_construct %></td>
+        <td><%= link_to crispr.biosample.name, crispr.biosample %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_crispr_path(crispr) %>
+	        <%= link_to fa_icon("trash"), crispr, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Crispr', new_crispr_path %>

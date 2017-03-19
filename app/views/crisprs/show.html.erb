@@ -1,29 +1,34 @@
-<p id="notice"><%= notice %></p>
+<header>
+  <h1><%= @crispr.name %></h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @crispr.name %>
-</p>
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @crispr} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @crispr} %>
+  </ul>
+</header> 
 
-<p>
-  <strong>User:</strong>
-  <%= @crispr.user %>
-</p>
+<%= render partial: "application_partials/record_meta", locals: { record: @crispr } %>
 
-<p>
-  <strong>Crispr construct:</strong>
-  <%= @crispr.crispr_construct %>
-</p>
+<table class="attributes">
+	<tr>
+	  <th><strong>Name:</strong></th>
+	  <td><%= @crispr.name %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Crispr construct:</strong></th>
+	  <td><%= link_to @crispr.crispr_construct.name, @crispr.crispr_construct %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Donor construct:</strong></th>
+	  <td><%= link_to @crispr.donor_construct.name, @crispr.donor_construct %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Biosample:</strong></th>
+	  <td><%= link_to @crispr.biosample.name, @crispr.biosample %></td>
+	</tr>
 
-<p>
-  <strong>Donor construct:</strong>
-  <%= @crispr.donor_construct %>
-</p>
-
-<p>
-  <strong>Biosample:</strong>
-  <%= @crispr.biosample %>
-</p>
-
-<%= link_to 'Edit', edit_crispr_path(@crispr) %> |
+</table>
 <%= link_to 'Back', crisprs_path %>

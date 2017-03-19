@@ -1,15 +1,12 @@
 <%= simple_form_for(@crispr) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.association :user %>
-    <%= f.association :crispr_construct %>
-    <%= f.association :donor_construct %>
-    <%= f.association :biosample %>
-  </div>
+  <%= f.input :name %>
+  <%= f.association :crispr_construct %>
+  <%= f.association :donor_construct %>
+  <%= f.association :biosample %>
 
   <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+    <%= f.button :submit, class: "btn-primary"  %>
+  </div></br>
 <% end %>

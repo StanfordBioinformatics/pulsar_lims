@@ -1,39 +1,28 @@
 class CrisprsController < ApplicationController
   before_action :set_crispr, only: [:show, :edit, :update, :destroy]
 
-  # GET /crisprs
-  # GET /crisprs.json
   def index
-    @crisprs = Crispr.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @crisprs }
-    end
+    @crisprs = policy_scope(Crispr).order("lower(name)")
   end
 
-  # GET /crisprs/1
-  # GET /crisprs/1.json
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @crispr }
-    end
+		authorize @crispr
   end
 
-  # GET /crisprs/new
   def new
+		authorize Crispr
     @crispr = Crispr.new
   end
 
-  # GET /crisprs/1/edit
   def edit
+		authorize @crispr
   end
 
-  # POST /crisprs
-  # POST /crisprs.json
   def create
+		authorize Crispr
     @crispr = Crispr.new(crispr_params)
+
+		@crispr.user = current_user
 
     respond_to do |format|
       if @crispr.save
@@ -46,9 +35,8 @@ class CrisprsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /crisprs/1
-  # PATCH/PUT /crisprs/1.json
   def update
+		authorize @crispr
     respond_to do |format|
       if @crispr.update(crispr_params)
         format.html { redirect_to @crispr, notice: 'Crispr was successfully updated.' }
@@ -60,9 +48,8 @@ class CrisprsController < ApplicationController
     end
   end
 
-  # DELETE /crisprs/1
-  # DELETE /crisprs/1.json
   def destroy
+		authorize @crispr
     @crispr.destroy
     respond_to do |format|
       format.html { redirect_to crisprs_url }
@@ -78,6 +65,6 @@ class CrisprsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def crispr_params
-      params.require(:crispr).permit(:name, :user_id, :crispr_construct_id, :donor_construct_id, :biosample_id)
+      params.require(:crispr).permit(:genomic_integration_site_id, :name, :crispr_construct_id, :donor_construct_id, :biosample_id)
     end
 end

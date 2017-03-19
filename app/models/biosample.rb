@@ -1,5 +1,6 @@
 class Biosample < ActiveRecord::Base
 	has_and_belongs_to_many :documents
+	has_one :crispr
 	belongs_to  :user
 	belongs_to  :biosample_term_name
 	belongs_to  :biosample_type

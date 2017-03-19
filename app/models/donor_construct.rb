@@ -1,5 +1,6 @@
 class DonorConstruct < ActiveRecord::Base
 	has_many :construct_tags
+	has_many :crisprs
   belongs_to :user
   belongs_to :cloning_vector
   belongs_to :vendor

@@ -1,4 +1,5 @@
 class CrisprConstruct < ActiveRecord::Base
+	has_many :crisprs
   belongs_to :user
   belongs_to :target
   belongs_to :cloning_vector
