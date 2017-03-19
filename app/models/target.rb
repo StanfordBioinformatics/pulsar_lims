@@ -1,5 +1,6 @@
 class Target < ActiveRecord::Base
 	has_many :antibodies
+	has_many :crispr_constructs
 	has_many :donor_constructs
 	belongs_to :user
 	validates :encode_identifier, uniqueness: true, presence: true

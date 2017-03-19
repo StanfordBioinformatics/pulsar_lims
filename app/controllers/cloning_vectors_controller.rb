@@ -65,6 +65,6 @@ class CloningVectorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cloning_vector_params
-      params.require(:cloning_vector).permit(:name, :description, :url)
+      params.require(:cloning_vector).permit(:vendor_id, :vendor_product_identifier, :name, :description, :product_url)
     end
 end

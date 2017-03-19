@@ -1,0 +1,40 @@
+<header>
+  <h1>Crispr Constructs</h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: CrisprConstruct} %>
+  </ul> 
+</header> 
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Target</th>
+      <th>Guide sequence</th>
+      <th>Cloning vector</th>
+      <th>Description</th>
+      <th>Vendor</th>
+      <th>Vendor product identifier</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @crispr_constructs.each do |crispr_construct| %>
+      <tr>
+        <td><%= crispr_construct.name %></td>
+        <td><%= link_to crispr_construct.target.name, crispr_construct.target %></td>
+        <td><%= crispr_construct.guide_sequence %></td>
+        <td><%= link_to crispr_construct.cloning_vector.name, crispr_construct.cloning_vector %></td>
+        <td><%= crispr_construct.description %></td>
+        <td><%= link_to crispr_construct.vendor.name, crispr_construct.vendor %></td>
+        <td><%= crispr_construct.vendor_product_identifier %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_crispr_construct_path(crispr_construct) %>
+        	<%= link_to fa_icon("trash"), crispr_construct, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

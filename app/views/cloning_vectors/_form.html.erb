@@ -3,7 +3,8 @@
 
   <%= f.input :name, {"data-toggle" => "tooltip", "title" => "Unique name"} %>
   <%= f.input :description %>
-  <%= f.input :url %>
+  <%= f.association :vendor, label_html: {"data-toggle" => "tooltip", "title" => "The originating lab or vendor."} %>
+  <%= f.input :product_url, label_html: {"data-toggle" => "tooltip", "title" => "Link to the vendor product."} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

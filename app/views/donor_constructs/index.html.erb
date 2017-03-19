@@ -24,10 +24,10 @@
     <% @donor_constructs.each do |donor_construct| %>
       <tr>
         <td><%= donor_construct.name %></td>
-        <td><%= donor_construct.cloning_vector %></td>
-        <td><%= donor_construct.vendor %></td>
+        <td><%= link_to donor_construct.cloning_vector.name, donor_construct.cloning_vector %></td>
+        <td><%= link_to donor_construct.vendor.name, donor_construct.vendor %></td>
         <td><%= donor_construct.vendor_product_identifier %></td>
-        <td><%= donor_construct.target %></td>
+        <td><%= link_to donor_construct.target.name, donor_construct.target %></td>
         <td><%= donor_construct.description %></td>
         <td><%= donor_construct.insert_sequence %></td>
         <td>

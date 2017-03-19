@@ -11,7 +11,8 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th>Url</th>
+      <th>Vendor</th>
+      <th>Product url</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -21,7 +22,8 @@
       <tr>
         <td><%= cloning_vector.name %></td>
         <td><%= cloning_vector.description %></td>
-        <td><%= cloning_vector.url %></td>
+        <td><%= link_to cloning_vector.vendor.name, cloning_vector.vendor %></td>
+        <td><%= cloning_vector.product_url %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_cloning_vector_path(cloning_vector) %>
         	<%= link_to fa_icon("trash"), cloning_vector, method: :delete, data: { confirm: 'Are you sure?' } %>

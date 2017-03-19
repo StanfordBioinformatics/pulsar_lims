@@ -1,0 +1,15 @@
+<%= simple_form_for(@crispr_construct) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :name %>
+  <%= f.association :target %>
+  <%= f.input :guide_sequence %>
+  <%= f.association :cloning_vector %>
+  <%= f.input :description %>
+  <%= f.association :vendor %>
+  <%= f.input :vendor_product_identifier %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
+<% end %>

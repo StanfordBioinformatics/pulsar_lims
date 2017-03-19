@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170317084547) do
+ActiveRecord::Schema.define(version: 20170319003300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,13 +184,17 @@ ActiveRecord::Schema.define(version: 20170317084547) do
     t.integer  "user_id"
     t.string   "name"
     t.text     "description"
-    t.string   "url"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "product_url"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "vendor_id"
+    t.string   "vendor_product_identifier"
   end
 
   add_index "cloning_vectors", ["name"], name: "index_cloning_vectors_on_name", unique: true, using: :btree
+  add_index "cloning_vectors", ["product_url"], name: "index_cloning_vectors_on_product_url", unique: true, using: :btree
   add_index "cloning_vectors", ["user_id"], name: "index_cloning_vectors_on_user_id", using: :btree
+  add_index "cloning_vectors", ["vendor_id"], name: "index_cloning_vectors_on_vendor_id", using: :btree
 
   create_table "construct_tags", force: :cascade do |t|
     t.integer  "user_id"
@@ -205,6 +209,25 @@ ActiveRecord::Schema.define(version: 20170317084547) do
   add_index "construct_tags", ["name"], name: "index_construct_tags_on_name", unique: true, using: :btree
   add_index "construct_tags", ["user_id"], name: "index_construct_tags_on_user_id", using: :btree
 
+  create_table "crispr_constructs", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "target_id"
+    t.text     "guide_sequence"
+    t.integer  "cloning_vector_id"
+    t.text     "description"
+    t.integer  "vendor_id"
+    t.string   "vendor_product_identifier"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "crispr_constructs", ["cloning_vector_id"], name: "index_crispr_constructs_on_cloning_vector_id", using: :btree
+  add_index "crispr_constructs", ["name"], name: "index_crispr_constructs_on_name", unique: true, using: :btree
+  add_index "crispr_constructs", ["target_id"], name: "index_crispr_constructs_on_target_id", using: :btree
+  add_index "crispr_constructs", ["user_id"], name: "index_crispr_constructs_on_user_id", using: :btree
+  add_index "crispr_constructs", ["vendor_id"], name: "index_crispr_constructs_on_vendor_id", using: :btree
+
   create_table "crispr_genetic_modifications", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -218,6 +241,23 @@ ActiveRecord::Schema.define(version: 20170317084547) do
 
   add_index "crispr_genetic_modifications", ["user_id"], name: "index_crispr_genetic_modifications_on_user_id", using: :btree
   add_index "crispr_genetic_modifications", ["vendor_id"], name: "index_crispr_genetic_modifications_on_vendor_id", using: :btree
+
+  create_table "crisprs", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "crispr_construct_id"
+    t.integer  "donor_construct_id"
+    t.integer  "biosample_id"
+    t.text     "description"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "crisprs", ["biosample_id"], name: "index_crisprs_on_biosample_id", using: :btree
+  add_index "crisprs", ["crispr_construct_id"], name: "index_crisprs_on_crispr_construct_id", using: :btree
+  add_index "crisprs", ["donor_construct_id"], name: "index_crisprs_on_donor_construct_id", using: :btree
+  add_index "crisprs", ["name"], name: "index_crisprs_on_name", unique: true, using: :btree
+  add_index "crisprs", ["user_id"], name: "index_crisprs_on_user_id", using: :btree
 
   create_table "document_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -536,10 +576,19 @@ ActiveRecord::Schema.define(version: 20170317084547) do
   add_foreign_key "chromosomes", "reference_genomes"
   add_foreign_key "chromosomes", "users"
   add_foreign_key "cloning_vectors", "users"
+  add_foreign_key "cloning_vectors", "vendors"
   add_foreign_key "construct_tags", "donor_constructs"
   add_foreign_key "construct_tags", "users"
+  add_foreign_key "crispr_constructs", "cloning_vectors"
+  add_foreign_key "crispr_constructs", "targets"
+  add_foreign_key "crispr_constructs", "users"
+  add_foreign_key "crispr_constructs", "vendors"
   add_foreign_key "crispr_genetic_modifications", "users"
   add_foreign_key "crispr_genetic_modifications", "vendors"
+  add_foreign_key "crisprs", "biosamples"
+  add_foreign_key "crisprs", "crispr_constructs"
+  add_foreign_key "crisprs", "donor_constructs"
+  add_foreign_key "crisprs", "users"
   add_foreign_key "document_types", "users"
   add_foreign_key "documents", "document_types"
   add_foreign_key "documents", "users"

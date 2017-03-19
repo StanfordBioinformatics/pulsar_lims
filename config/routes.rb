@@ -1,5 +1,7 @@
 SnyderEncode::Application.routes.draw do
 
+  resources :crisprs
+  resources :crispr_constructs
   resources :donor_constructs do
 		get :select_construct_tag, on: :collection
 	end

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @crispr.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @crispr.user %>
+</p>
+
+<p>
+  <strong>Crispr construct:</strong>
+  <%= @crispr.crispr_construct %>
+</p>
+
+<p>
+  <strong>Donor construct:</strong>
+  <%= @crispr.donor_construct %>
+</p>
+
+<p>
+  <strong>Biosample:</strong>
+  <%= @crispr.biosample %>
+</p>
+
+<%= link_to 'Edit', edit_crispr_path(@crispr) %> |
+<%= link_to 'Back', crisprs_path %>

@@ -21,13 +21,23 @@
 </tr>
 
 <tr>
+  <th><strong>Vendor:</strong></th>
+  <td><%= link_to @cloning_vector.vendor.name, @cloning_vector.vendor %></td>
+</tr>
+
+<tr>
+  <th><strong>Vendor product identifier:</strong></th>
+  <td><%= @cloning_vector.vendor_product_identifier %></td>
+</tr>
+
+<tr>
   <th><strong>Description:</strong></th>
   <td><%= @cloning_vector.description %></td>
 </tr>
 
 <tr>
-  <th><strong>Url:</strong></th>
-  <td><%= @cloning_vector.url %></td>
+  <th><strong>Product url:</strong></th>
+  <td><%= @cloning_vector.product_url %></td>
 </tr>
 </table>
 
