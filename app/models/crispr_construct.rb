@@ -1,4 +1,5 @@
 class CrisprConstruct < ActiveRecord::Base
+	has_many :construct_tags
 	has_many :crisprs
   belongs_to :user
   belongs_to :target
@@ -9,6 +10,8 @@ class CrisprConstruct < ActiveRecord::Base
 	validates :name, uniqueness: true
 	validates :target, presence: true	
 	validates :vendor, presence: true
+
+	accepts_nested_attributes_for :construct_tags, allow_destroy: true
 
 	def self.policy_class
 		ApplicationPolicy

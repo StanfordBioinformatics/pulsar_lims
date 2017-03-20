@@ -9,10 +9,9 @@ class DonorConstructsController < ApplicationController
       if exclude_construct_tags.is_a?(String)
         exclude_construct_tags = Array(exclude_construct_tags)
       end 
-      @exclude_construct_tag_ids = []
-      exclude_construct_tags.each do |x| 
-        @exclude_construct_tags << x.to_i
-      end 
+			@construct_tags = ConstructTag.where.not(id: [exclude_construct_tags])	
+		else
+			@construct_tags = ConstructTag.all
     end 
     
     render layout: false

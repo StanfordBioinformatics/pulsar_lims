@@ -31,11 +31,6 @@
 	</tr>
 	
 	<tr>
-	  <th><strong>Description:</strong></th>
-	  <td><%= @crispr_construct.description %></td>
-	</tr>
-	
-	<tr>
 	  <th><strong>Vendor:</strong></th>
 	  <td><%= link_to @crispr_construct.vendor.name, @crispr_construct.vendor %></td>
 	</tr>
@@ -43,6 +38,11 @@
 	<tr>
 	  <th><strong>Vendor product identifier:</strong></th>
 	  <td><%= @crispr_construct.vendor_product_identifier %>
+	</tr>
+
+	<tr>
+	  <th><strong>Description:</strong></th>
+	  <td><%= @crispr_construct.description %></td>
 	</tr>
 </table>
 

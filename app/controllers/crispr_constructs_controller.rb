@@ -1,5 +1,21 @@
 class CrisprConstructsController < ApplicationController
   before_action :set_crispr_construct, only: [:show, :edit, :update, :destroy]
+  skip_after_action :verify_authorized, only: [:select_construct_tag]
+
+  def select_construct_tag
+    @crispr_construct = CrisprConstruct.new
+    exclude_construct_tags = params[:exclude_construct_tags]
+    if exclude_construct_tags.present?
+      if exclude_construct_tags.is_a?(String)
+        exclude_construct_tags = Array(exclude_construct_tags)
+      end 
+      @construct_tags = ConstructTag.where.not(id: [exclude_construct_tags])  
+		else
+			@construct_tags = ConstructTag.all
+    end 
+        
+    render layout: false
+  end 
 
   def index
     @crispr_constructs = policy_scope(CrisprConstruct).order("lower(name)")
@@ -65,6 +81,6 @@ class CrisprConstructsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def crispr_construct_params
-      params.require(:crispr_construct).permit(:name, :target_id, :guide_sequence, :cloning_vector_id, :description, :vendor_id, :vendor_product_identifier)
+      params.require(:crispr_construct).permit(:name, :target_id, :guide_sequence, :cloning_vector_id, :description, :vendor_id, :vendor_product_identifier, construct_tags_attributes: [:id,:_destroy])
     end
 end

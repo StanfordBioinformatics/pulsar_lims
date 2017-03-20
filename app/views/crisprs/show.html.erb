@@ -39,22 +39,26 @@
 
 </br>
 <h4>Genomic Integration Location</h4>
-<table class="attributes">
-	<tr>
-		<th><strong>Reference Genome:</strong></th>
-		<td><%= @crispr.genomic_integration_site.chromosome.reference_genome.name %></td>
-	</tr>
-	<tr>
-		<th><strong>Chromosome:</strong></th>
-		<td><%= @crispr.genomic_integration_site.chromosome.name %></td>
-	</tr>
-	<tr>
-		<th><strong>Start:</strong></th>
-		<td><%= @crispr.genomic_integration_site.start %></td>
-	</tr>
-	<tr>
-		<th><strong>End:</strong></th>
-		<td><%= @crispr.genomic_integration_site.end %></td>
-	</tr>
-</table>
+<% if not @crispr.genomic_integration_site.present? %>
+	<span>Not provided</span></br></br>
+<% else %>
+	<table class="attributes">
+		<tr>
+			<th><strong>Reference Genome:</strong></th>
+			<td><%= @crispr.genomic_integration_site.chromosome.reference_genome.name %></td>
+		</tr>
+		<tr>
+			<th><strong>Chromosome:</strong></th>
+			<td><%= @crispr.genomic_integration_site.chromosome.name %></td>
+		</tr>
+		<tr>
+			<th><strong>Start:</strong></th>
+			<td><%= @crispr.genomic_integration_site.start %></td>
+		</tr>
+		<tr>
+			<th><strong>End:</strong></th>
+			<td><%= @crispr.genomic_integration_site.end %></td>
+		</tr>
+	</table>
+<% end %>
 <%= link_to 'Back', crisprs_path %>
