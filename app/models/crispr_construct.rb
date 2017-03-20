@@ -1,5 +1,5 @@
 class CrisprConstruct < ActiveRecord::Base
-	has_many :construct_tags
+	has_and_belongs_to_many :construct_tags
 	has_many :crisprs
   belongs_to :user
   belongs_to :target

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320045156) do
+ActiveRecord::Schema.define(version: 20170320204817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -200,14 +200,28 @@ ActiveRecord::Schema.define(version: 20170320045156) do
     t.integer  "user_id"
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "donor_construct_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "construct_tags", ["donor_construct_id"], name: "index_construct_tags_on_donor_construct_id", using: :btree
   add_index "construct_tags", ["name"], name: "index_construct_tags_on_name", unique: true, using: :btree
   add_index "construct_tags", ["user_id"], name: "index_construct_tags_on_user_id", using: :btree
+
+  create_table "construct_tags_crispr_tags", id: false, force: :cascade do |t|
+    t.integer "construct_tag_id", null: false
+    t.integer "crispr_tag_id",    null: false
+  end
+
+  add_index "construct_tags_crispr_tags", ["construct_tag_id"], name: "index_construct_tags_crispr_tags_on_construct_tag_id", using: :btree
+  add_index "construct_tags_crispr_tags", ["crispr_tag_id"], name: "index_construct_tags_crispr_tags_on_crispr_tag_id", using: :btree
+
+  create_table "construct_tags_donor_constructs", id: false, force: :cascade do |t|
+    t.integer "construct_tag_id",   null: false
+    t.integer "donor_construct_id", null: false
+  end
+
+  add_index "construct_tags_donor_constructs", ["construct_tag_id"], name: "index_construct_tags_donor_constructs_on_construct_tag_id", using: :btree
+  add_index "construct_tags_donor_constructs", ["donor_construct_id"], name: "index_construct_tags_donor_constructs_on_donor_construct_id", using: :btree
 
   create_table "crispr_constructs", force: :cascade do |t|
     t.string   "name"
@@ -577,7 +591,6 @@ ActiveRecord::Schema.define(version: 20170320045156) do
   add_foreign_key "chromosomes", "users"
   add_foreign_key "cloning_vectors", "users"
   add_foreign_key "cloning_vectors", "vendors"
-  add_foreign_key "construct_tags", "donor_constructs"
   add_foreign_key "construct_tags", "users"
   add_foreign_key "crispr_constructs", "cloning_vectors"
   add_foreign_key "crispr_constructs", "targets"

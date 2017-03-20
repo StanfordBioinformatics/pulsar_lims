@@ -9,18 +9,19 @@
   <%= f.input :description %>
   <%= f.input :insert_sequence %>
 
-  <table id="construct_tags">
-   <% if @donor_construct.construct_tags.present? %>
-	  <tr><th>Construct tags:</th></tr>
-    <%= f.simple_fields_for(:construct_tags) do |ff| %>
-      <% tag = @donor_construct.construct_tags[ff.index] %>
-      <tr>
-      <td><%= tag.name %></td>
-      <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
-      </tr>
-     <% end %>  
+	<% if @donor_construct.construct_tags.persisted.any? %>
+    <table id="construct_tags">
+      <tr><th>Construct tags:</th></tr>
+      <%= f.simple_fields_for :construct_tags do |ff| %>
+        <% tag = @donor_construct.construct_tags[ff.index] %>
+        <tr>
+          <td><%= tag.name %></td>
+          <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
+        </tr>
+      <% end %>  
+		</table></br>
   <% end %>
-    </table>
+
   <div id="added_construct_tags"></div>
   <!-- .added_construct_tags will serve as the container for new construct_tag selections added by jQuery. -->
 

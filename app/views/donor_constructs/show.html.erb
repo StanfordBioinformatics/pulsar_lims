@@ -42,14 +42,15 @@
 
 	<tr>
 		<th><strong>Construct Tags:</strong></th>
+		<td>
 			<% if @donor_construct.construct_tags.present? %>
-				<td><ul>
-				<%= @donor_construct.construct_tags.each do |t| %>
-					<li><%= link_to t.name, t %></li>
-				<% end %>
-				</ul></td>
+				<ul>
+					<% @donor_construct.construct_tags.each do |t| %>
+						<li><%= link_to t.name, t %></li>
+					<% end %>
+				</ul>
 			<% else %>
-				<td>None</td>
+				None
 			<% end %>
 		</td>
 	</tr>
