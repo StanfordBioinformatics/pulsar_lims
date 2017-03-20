@@ -1,11 +1,31 @@
 <%= simple_form_for(@crispr) do |f| %>
   <%= f.error_notification %>
+  <% if @crispr.errors.any? %>
+    <div><%= @crispr.errors.messages %></div>
+    <div id="error_explanation">
+      <h2><%= pluralize(@crispr.errors.count, "error") %> prohibited this crispr from being saved:</h2>
 
-  <%= f.input :name %>
-  <%= f.association :crispr_construct %>
-  <%= f.association :donor_construct %>
-  <%= f.association :biosample %>
+      <ul>
+      <% @crispr.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique name"} %>
+  <%= f.association :crispr_construct, label_html: {"data-toggle" => "tooltip", "title" => "The Crispr Construct that contains the guide sequence."} %>
+  <%= f.association :donor_construct, label_html: {"data-toggle" => "tooltip", "title" => "The Donor Construct that contains the donor sequence to integrate at the genomic site of the genetic modification."} %>
+  <%= f.association :biosample, label_html: {"data-toggle" => "tooltip", "title" => "The biosample on which the CRISPR was performed."} %>
+
+	<%= label_tag(:reference_genome_id, "Reference Genome ", {"data-toggle" => "tooltip", "title" => "Select reference genome you will use to describe the location of the genetic modification."}) %>
+	<%= select_tag(:reference_genome_id, options_for_select( ReferenceGenome.order("lower(name)").map {|x| [x.name, x.id]}),
+			prompt: "Select reference")  %>
+	</br>
+
+	<div class="container genomic_integration_site"></div>
+
+	</br>
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary"  %>
   </div></br>

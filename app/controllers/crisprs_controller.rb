@@ -1,5 +1,13 @@
 class CrisprsController < ApplicationController
   before_action :set_crispr, only: [:show, :edit, :update, :destroy]
+  skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome]
+
+  def select_chromosome_on_reference_genome
+    @crispr = Crispr.new
+		@crispr.build_genomic_integration_site
+    @chromosomes = Chromosome.where(reference_genome_id: params["reference_genome_id"])
+    render layout: false
+  end
 
   def index
     @crisprs = policy_scope(Crispr).order("lower(name)")
@@ -12,6 +20,7 @@ class CrisprsController < ApplicationController
   def new
 		authorize Crispr
     @crispr = Crispr.new
+		@crispr.build_genomic_integration_site
   end
 
   def edit
@@ -20,6 +29,8 @@ class CrisprsController < ApplicationController
 
   def create
 		authorize Crispr
+		#render json: params
+		#return 
     @crispr = Crispr.new(crispr_params)
 
 		@crispr.user = current_user
@@ -65,6 +76,6 @@ class CrisprsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def crispr_params
-      params.require(:crispr).permit(:genomic_integration_site_id, :name, :crispr_construct_id, :donor_construct_id, :biosample_id)
+      params.require(:crispr).permit(:name, :crispr_construct_id, :donor_construct_id, :biosample_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end] )
     end
 end

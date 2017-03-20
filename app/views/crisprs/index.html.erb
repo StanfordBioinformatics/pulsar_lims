@@ -20,7 +20,7 @@
   <tbody>
     <% @crisprs.each do |crispr| %>
       <tr>
-        <td><%= crispr.name %></td>
+        <td><%= link_to crispr.name, crispr %></td>
         <td><%= link_to crispr.crispr_construct.name, crispr.crispr_construct %></td>
         <td><%= link_to crispr.donor_construct.name, crispr.donor_construct %></td>
         <td><%= link_to crispr.biosample.name, crispr.biosample %></td>

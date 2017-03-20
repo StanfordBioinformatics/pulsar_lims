@@ -1,3 +1,10 @@
 // Place all the styles related to the ReferenceGenomes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+div.chromosomes {
+  max-width: 15em;
+  padding-top: 0.5em;
+  padding-left: 1em;
+}

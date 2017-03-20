@@ -1,6 +1,8 @@
 SnyderEncode::Application.routes.draw do
 
-  resources :crisprs
+  resources :crisprs do
+		get :select_chromosome_on_reference_genome, on: :collection
+	end
   resources :crispr_constructs
   resources :donor_constructs do
 		get :select_construct_tag, on: :collection

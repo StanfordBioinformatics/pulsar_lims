@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170319020008) do
+ActiveRecord::Schema.define(version: 20170320045156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -335,7 +335,6 @@ ActiveRecord::Schema.define(version: 20170319020008) do
   add_index "experiment_types", ["user_id"], name: "index_experiment_types_on_user_id", using: :btree
 
   create_table "genome_locations", force: :cascade do |t|
-    t.string   "name"
     t.integer  "user_id"
     t.integer  "chromosome_id"
     t.integer  "start"
@@ -345,7 +344,6 @@ ActiveRecord::Schema.define(version: 20170319020008) do
   end
 
   add_index "genome_locations", ["chromosome_id"], name: "index_genome_locations_on_chromosome_id", using: :btree
-  add_index "genome_locations", ["name"], name: "index_genome_locations_on_name", unique: true, using: :btree
   add_index "genome_locations", ["user_id"], name: "index_genome_locations_on_user_id", using: :btree
 
   create_table "isotypes", force: :cascade do |t|

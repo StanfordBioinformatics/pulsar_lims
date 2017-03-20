@@ -1,0 +1,9 @@
+<%= simple_fields_for @crispr do |f| %>
+	<%= f.simple_fields_for :genomic_integration_site, @crispr.genomic_integration_site do |ff| %>
+		<%= ff.association :chromosome, collection: @chromosomes.map {|x| [x.name, x.id]},
+				label_html: {"data-toggle" => "tooltip","title" => "Select the chromosome on the reference genome that is altered."}, 
+				prompt: "Select chromosome" %>
+		<%= ff.input :start %>
+		<%= ff.input :end %>
+	<% end %>
+<% end %>

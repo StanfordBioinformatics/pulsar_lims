@@ -5,7 +5,6 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
       <th>User</th>
       <th>Chromosome</th>
       <th>Start</th>
@@ -17,7 +16,6 @@
   <tbody>
     <% @genome_locations.each do |genome_location| %>
       <tr>
-        <td><%= genome_location.name %></td>
         <td><%= genome_location.user %></td>
         <td><%= genome_location.chromosome %></td>
         <td><%= genome_location.start %></td>
