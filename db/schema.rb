@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320204817) do
+ActiveRecord::Schema.define(version: 20170320224359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,13 +207,13 @@ ActiveRecord::Schema.define(version: 20170320204817) do
   add_index "construct_tags", ["name"], name: "index_construct_tags_on_name", unique: true, using: :btree
   add_index "construct_tags", ["user_id"], name: "index_construct_tags_on_user_id", using: :btree
 
-  create_table "construct_tags_crispr_tags", id: false, force: :cascade do |t|
-    t.integer "construct_tag_id", null: false
-    t.integer "crispr_tag_id",    null: false
+  create_table "construct_tags_crispr_constructs", id: false, force: :cascade do |t|
+    t.integer "construct_tag_id"
+    t.integer "crispr_construct_id"
   end
 
-  add_index "construct_tags_crispr_tags", ["construct_tag_id"], name: "index_construct_tags_crispr_tags_on_construct_tag_id", using: :btree
-  add_index "construct_tags_crispr_tags", ["crispr_tag_id"], name: "index_construct_tags_crispr_tags_on_crispr_tag_id", using: :btree
+  add_index "construct_tags_crispr_constructs", ["construct_tag_id", "crispr_construct_id"], name: "tag_construct", using: :btree
+  add_index "construct_tags_crispr_constructs", ["crispr_construct_id", "construct_tag_id"], name: "construct_tag", using: :btree
 
   create_table "construct_tags_donor_constructs", id: false, force: :cascade do |t|
     t.integer "construct_tag_id",   null: false

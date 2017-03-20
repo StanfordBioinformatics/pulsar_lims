@@ -1,4 +1,5 @@
 class CrisprConstruct < ActiveRecord::Base
+	attr_accessor :construct_tag_ids
 	has_and_belongs_to_many :construct_tags
 	has_many :crisprs
   belongs_to :user
@@ -16,4 +17,16 @@ class CrisprConstruct < ActiveRecord::Base
 	def self.policy_class
 		ApplicationPolicy
 	end
+
+  def construct_tag_ids=(ids)
+    ids.each do |i| 
+      if i.present?
+        construct = ConstructTag.find(i) 
+        if self.construct_tags.present? and self.construct_tags.include?(construct)
+          next
+        end 
+        self.construct_tags << construct
+      end 
+    end 
+  end 
 end

@@ -40,6 +40,21 @@
 	  <td><%= @crispr_construct.vendor_product_identifier %>
 	</tr>
 
+  <tr>
+    <th><strong>Construct Tags:</strong></th>
+    <td>
+      <% if @crispr_construct.construct_tags.present? %>
+        <ul>
+          <% @crispr_construct.construct_tags.each do |t| %>
+            <li><%= link_to t.name, t %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        None
+      <% end %>
+    </td>
+  </tr>
+
 	<tr>
 	  <th><strong>Description:</strong></th>
 	  <td><%= @crispr_construct.description %></td>
