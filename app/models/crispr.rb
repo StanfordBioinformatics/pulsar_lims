@@ -12,6 +12,16 @@ class Crispr < ActiveRecord::Base
 
 	accepts_nested_attributes_for :genomic_integration_site, allow_destroy: true
 
+	before_save :verify_target
+
+	protected
+		def verify_target
+			if self.crispr_construct.target.id != self.donor_construct.target.id
+				self.errors.add(:target_id,"must be the same between the Crispr Construct and the Donor Construct.")
+				return false
+			end
+		end
+
 	def self.policy_class
 		ApplicationPolicy
 	end

@@ -1,7 +1,6 @@
 <%= simple_form_for(@crispr) do |f| %>
   <%= f.error_notification %>
   <% if @crispr.errors.any? %>
-    <div><%= @crispr.errors.messages %></div>
     <div id="error_explanation">
       <h2><%= pluralize(@crispr.errors.count, "error") %> prohibited this crispr from being saved:</h2>
 

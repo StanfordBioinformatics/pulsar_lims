@@ -1,7 +1,6 @@
 <%= simple_form_for(@library) do |f| %>
   <%= f.error_notification %>
   <% if @library.errors.any? %>
-		<div><%= @library.errors.messages %></div>
     <div id="error_explanation">
       <h2><%= pluralize(@library.errors.count, "error") %> prohibited this library from being saved:</h2>
 

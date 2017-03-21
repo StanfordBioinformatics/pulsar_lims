@@ -13,6 +13,7 @@
       <th>Crispr construct</th>
       <th>Donor construct</th>
       <th>Biosample</th>
+			<th>Target</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -24,6 +25,7 @@
         <td><%= link_to crispr.crispr_construct.name, crispr.crispr_construct %></td>
         <td><%= link_to crispr.donor_construct.name, crispr.donor_construct %></td>
         <td><%= link_to crispr.biosample.name, crispr.biosample %></td>
+				<td><%= link_to crispr.crispr_construct.target.name, crispr.crispr_construct.target %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_crispr_path(crispr) %>
 	        <%= link_to fa_icon("trash"), crispr, method: :delete, data: { confirm: 'Are you sure?' } %>
