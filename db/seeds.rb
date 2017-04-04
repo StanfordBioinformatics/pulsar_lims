@@ -32,6 +32,20 @@ BiosampleTermName.create!([
 	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "H1-hESC", accession: "EFO_0003042", description: "H1 human embryonic stem cell line, usually called H1-hESC and on occasion just H1"}
 ])
 
+ConstructTag.delete_all
+ConstructTag.create!([
+	{user_id: admin, name: "eGFP"},
+	{user_id: admin, name: "V5"},
+	{user_id: admin, name: "HA"},
+	{user_id: admin, name: "ER"},
+	{user_id: admin, name: "3xFLAG"},
+	{user_id: admin, name: "DsRed"},
+	{user_id: admin, name: "TRE"},
+	{user_id: admin, name: "T2A"},
+	{user_id: admin, name: "YFP"},
+	{user_id: admin, name: "FLAG"},
+])
+
 illumina_truseq_dna_pcr_free = Rails.root.join("lib","seeds","truseq-dna-pcr-free-library-prep-guide-15036187-d.pdf")
 illumina_adapter_letter = Rails.root.join("lib","seeds","illumina-adapter-sequences_1000000002694-01.pdf")
 Document.create!([

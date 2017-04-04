@@ -1,4 +1,4 @@
-#!/usr/bin/env /Users/nathankw/RailsApps/snyder_encode/bin/rails runner
+#!/usr/bin/env /Users/nathankw/RailsApps/pulsar/bin/rails runner
 
 #require "json" #not needed since I added this to the Gemfile and RAILS already requires all gems when using rails runner.
 require "optparse"

@@ -1,4 +1,6 @@
 class Library < ActiveRecord::Base
+	attr_accessor :barcode_ids
+
 	NUCLEIC_ACID_STARTING_QUANTITY_UNITS = ["cells","cell-equivalent","µg","ng","pg","mg"]
 
 	#The is_control bool column has a default of false.
@@ -14,7 +16,7 @@ class Library < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :vendor
 
-	validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
+	validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true, presence: true
 #	validates :barcode, format: { with: /\A[acgtnACGTN]+-?[acgtnACGTN]+\z/ }, allow_blank: true
 	validates  :size_range, format: {with: /\A\d+-\d+\Z/}, presence: true
 	validates :nucleic_acid_term_id, presence: true
@@ -37,5 +39,17 @@ class Library < ActiveRecord::Base
 	def self.policy_class
 		ApplicationPolicy
 	end 
+
+  def barcode_ids=(ids)
+    ids.each do |i| 
+      if i.present?
+        barcode = Barcode.find(i) 
+        if self.barcodes.present? and self.barcodes.include?(barcode)
+          next
+        end 
+        self.barcodes << barcode
+      end 
+    end 
+  end 
 
 end

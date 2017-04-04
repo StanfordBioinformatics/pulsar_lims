@@ -1,4 +1,4 @@
-SnyderEncode::Application.routes.draw do
+Pulsar::Application.routes.draw do
 
   resources :crisprs do
 		get :select_chromosome_on_reference_genome, on: :collection
