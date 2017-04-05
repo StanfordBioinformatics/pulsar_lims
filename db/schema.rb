@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320224359) do
+ActiveRecord::Schema.define(version: 20170405175705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -381,7 +381,6 @@ ActiveRecord::Schema.define(version: 20170320224359) do
     t.datetime "updated_at"
     t.string   "name",                                 limit: 255
     t.integer  "user_id"
-    t.integer  "antibody_id"
     t.integer  "nucleic_acid_starting_quantity"
     t.string   "nucleic_acid_starting_quantity_units"
     t.integer  "library_fragmentation_method_id"

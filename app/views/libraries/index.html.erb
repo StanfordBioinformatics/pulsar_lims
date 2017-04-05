@@ -13,7 +13,6 @@
 			<th>Sequencing Library Prep Kit</th>
       <th>Nucleic acid term</th>
       <th>Biosample</th>
-      <th>Antibody</th>
       <th>Vendor</th>
       <th>Lot identifier</th>
       <th>Vendor product identifier</th>
@@ -34,12 +33,6 @@
 				<td><%= link_to library.sequencing_library_prep_kit.name, library.sequencing_library_prep_kit %></td>
         <td><%= library.nucleic_acid_term.name %></td>
         <td><%= link_to library.biosample.name, library.biosample %></td>
-
-        <% if library.antibody.present? %>
-          <td><%= library.antibody.name %></td>
-        <% else %>
-          <td></td>
-        <% end %>
 
         <% if library.vendor.present? %>
           <td><%= library.vendor.name %></td>

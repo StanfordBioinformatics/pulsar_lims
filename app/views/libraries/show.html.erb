@@ -49,15 +49,6 @@
 		<td><%= link_to @library.biosample.name, @library.biosample %></td>
 	</tr>
 
-	<tr>
-   <th><strong>Antibody:</strong></th>
-		<% if @library.antibody.present? %>
-     <td><%= link_to @library.antibody.name, @library.antibody %></td>
-		<% else %>
-			<td></td>
-		<% end %>
- </tr>
-
   <tr>
     <th><strong>Vendor:</strong></th>
     <% if @library.vendor.present? %>

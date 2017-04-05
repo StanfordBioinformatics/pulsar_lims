@@ -75,9 +75,6 @@
   <%= f.association :biosample, collection: Biosample.order(:name), label_method: :name, prompt: "Select the Biosample",
 			label_html: {"data-toggle" => "tooltip","title" => "The biosample that nucleic acid was isolated from to generate the library."} %>
 
-  <%= f.association :antibody, collection: Antibody.order(:name), label_method: :name, prompt: "Select the Antibody",
-			label_html: {"data-toggle" => "tooltip", "title" => "For Immunoprecipitation assays, the antibody used."} %>
-
   <%= f.association :vendor, collection: Vendor.order(:name), label_method: :name,  prompt: "Select the Vendor",
 			label_html: {"data-toggle" => "tooltip", "title" => "The vendor, for nucleic acids or proteins purchased directly from a vendor (e.g. total RNA)."} %>
 

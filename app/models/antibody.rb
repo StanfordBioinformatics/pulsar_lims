@@ -6,7 +6,6 @@ class Antibody < ActiveRecord::Base
 	belongs_to :organism
   belongs_to :isotype
   belongs_to :target
-	has_many   :libraries
 
 	validates  :name, length: { maximum: 20 }, presence: true, uniqueness: true
 	#validates  :antibody_purifications, presence: true

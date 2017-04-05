@@ -8,7 +8,6 @@ class Library < ActiveRecord::Base
 	has_and_belongs_to_many :sequencing_requests
 	has_and_belongs_to_many :barcodes
 	has_many   :barcode_sequencing_results, dependent: :destroy
-	belongs_to :antibody
 	belongs_to :biosample
 	belongs_to :library_fragmentation_method
 	belongs_to :nucleic_acid_term
@@ -23,7 +22,6 @@ class Library < ActiveRecord::Base
 	validates :documents, presence: true
 	#validates :vendor_id, presence: true
 	validates :biosample_id, presence: true
-	#The fkey antibody_id doesn't need to be required since some libraries, such as ATAC-SEq, don't have an antibody.
 	validates :nucleic_acid_starting_quantity_units, inclusion: NUCLEIC_ACID_STARTING_QUANTITY_UNITS, allow_blank: true #note that nil for string will be stored in the database as "".
 	validates :nucleic_acid_starting_quantity_units, presence: {message: "must be specified when the quantity is specified."}, if: "nucleic_acid_starting_quantity.present?"
 	#validates :nucleic_acid_starting_quantity, presence: true, if: "nucleic_acid_starting_quantity_units.present?", message: "Nucleic acid starting quantity must be set if the units for it are set"
