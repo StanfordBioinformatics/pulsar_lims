@@ -1,0 +1,15 @@
+<%= simple_form_for(@paired_barcode) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :name, {"data-toggle" => "tooltip", "title" => "Unique name"} %>
+
+  <%= f.association :sequencing_library_prep_kit, {"data-toggle" => "tooltip", "title" => "The name of the sequencing library preparation kit used that contains the barcode."} %>
+
+  <%= f.association :index1, {"data-toggle" => "tooltip", "title" => "Sequence of the index1 barcode (uppercase)."} %>
+
+  <%= f.association :index2, {"data-toggle" => "tooltip", "title" => "Sequence of the index2 barcode (uppercase)."} %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
+<% end %>

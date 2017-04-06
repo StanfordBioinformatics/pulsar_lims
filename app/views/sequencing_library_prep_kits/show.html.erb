@@ -33,4 +33,32 @@
 	</tr>
 </table>
 
+<div class="barcodes bg-info">
+  <h4> Barcodes</h4>
+  <table class="attributes">
+    <thead>
+      <tr>
+        <th>Name</th>
+				<th>Sequence</th>
+        <th class="actions">Actions</th>
+      </tr>
+    </thead>
+    <% @sequencing_library_prep_kit.barcodes.each do |bc| %>
+      <tr>
+        <td><%= link_to bc.name, bc %></td>
+        <td><%= bc.sequence %></td>
+        <td>
+          <%= link_to fa_icon("pencil"), [:edit,bc] %>
+          <%= link_to fa_icon("trash"), bc, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+	</table>
+</div>
+
+<div>
+<%= link_to "Add barcode", new_barcode_path, class: "reg-btn" %>
+</div>
+
+
 <%= link_to 'Back', sequencing_library_prep_kits_path %>

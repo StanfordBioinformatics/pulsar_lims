@@ -16,6 +16,8 @@
 
   <%= f.association :sequencing_library_prep_kit, label_html: {"data-toggle" => "tooltip", "title" => "The library prep kit used for creating the library."} %>
 
+	<%= f.input :paired_end %>
+
 	<% if @library.barcodes.persisted.any? %>
 	  <table>
 		  <tr><th>Barcodes:</th></tr>

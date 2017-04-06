@@ -11,6 +11,7 @@
     <tr>
 			<th>Name</th>
 			<th>Sequencing Library Prep Kit</th>
+			<th>Paired End</th>
       <th>Nucleic acid term</th>
       <th>Biosample</th>
       <th>Vendor</th>
@@ -31,6 +32,7 @@
       <tr>
 				<td><%= link_to library.name, library %></td>
 				<td><%= link_to library.sequencing_library_prep_kit.name, library.sequencing_library_prep_kit %></td>
+				<td><%= library.paired_end %></td>
         <td><%= library.nucleic_acid_term.name %></td>
         <td><%= link_to library.biosample.name, library.biosample %></td>
 

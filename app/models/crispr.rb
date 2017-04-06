@@ -14,6 +14,10 @@ class Crispr < ActiveRecord::Base
 
 	before_save :verify_target
 
+	def self.policy_class
+		ApplicationPolicy
+	end
+
 	protected
 		def verify_target
 			if self.crispr_construct.target.id != self.donor_construct.target.id
@@ -21,8 +25,4 @@ class Crispr < ActiveRecord::Base
 				return false
 			end
 		end
-
-	def self.policy_class
-		ApplicationPolicy
-	end
 end

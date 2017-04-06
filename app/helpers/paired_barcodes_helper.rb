@@ -1,0 +1,2 @@
+module PairedBarcodesHelper
+end

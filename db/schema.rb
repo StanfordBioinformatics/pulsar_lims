@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405175705) do
+ActiveRecord::Schema.define(version: 20170405184140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -385,6 +385,7 @@ ActiveRecord::Schema.define(version: 20170405175705) do
     t.string   "nucleic_acid_starting_quantity_units"
     t.integer  "library_fragmentation_method_id"
     t.integer  "sequencing_library_prep_kit_id"
+    t.boolean  "paired_end"
   end
 
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
@@ -432,6 +433,21 @@ ActiveRecord::Schema.define(version: 20170405175705) do
   end
 
   add_index "organisms", ["user_id"], name: "index_organisms_on_user_id", using: :btree
+
+  create_table "paired_barcodes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "index1_id"
+    t.integer  "index2_id"
+    t.integer  "sequencing_library_prep_kit_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "paired_barcodes", ["index1_id"], name: "index_paired_barcodes_on_index1_id", using: :btree
+  add_index "paired_barcodes", ["index2_id"], name: "index_paired_barcodes_on_index2_id", using: :btree
+  add_index "paired_barcodes", ["sequencing_library_prep_kit_id"], name: "index_paired_barcodes_on_sequencing_library_prep_kit_id", using: :btree
+  add_index "paired_barcodes", ["user_id"], name: "index_paired_barcodes_on_user_id", using: :btree
 
   create_table "reference_genomes", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -623,6 +639,10 @@ ActiveRecord::Schema.define(version: 20170405175705) do
   add_foreign_key "library_fragmentation_methods", "users"
   add_foreign_key "nucleic_acid_terms", "users"
   add_foreign_key "organisms", "users"
+  add_foreign_key "paired_barcodes", "barcodes", column: "index1_id"
+  add_foreign_key "paired_barcodes", "barcodes", column: "index2_id"
+  add_foreign_key "paired_barcodes", "sequencing_library_prep_kits"
+  add_foreign_key "paired_barcodes", "users"
   add_foreign_key "reference_genomes", "users"
   add_foreign_key "sequencing_centers", "users"
   add_foreign_key "sequencing_library_prep_kits", "users"

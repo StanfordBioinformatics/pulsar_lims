@@ -1,0 +1,32 @@
+<header>
+  <h1>Paired Barcodes</h1>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: PairedBarcode} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Sequencing library prep kit</th>
+      <th>Index1</th>
+      <th>Index2</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @paired_barcodes.each do |paired_barcode| %>
+      <tr>
+        <td><%= link_to paired_barcode.name, paired_barcode %></td>
+        <td><%= link_to paired_barcode.sequencing_library_prep_kit.name, paired_barcode.sequencing_library_prep_kit %></td>
+        <td><%= link_to paired_barcode.index1.name, paired_barcode.index1 %></td>
+        <td><%= link_to paired_barcode.index2.name, paired_barcode.index2 %></td>
+        <td><%= link_to fa_icon("pencil"), edit_paired_barcode_path(paired_barcode) %></td>
+        <td><%= link_to fa_icon("trash"), paired_barcode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

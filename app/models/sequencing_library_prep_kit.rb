@@ -2,6 +2,7 @@ class SequencingLibraryPrepKit < ActiveRecord::Base
 	has_and_belongs_to_many :documents
 	has_many :barcodes
 	has_many :libraries
+	has_many :paired_barcodes
   belongs_to :user
   belongs_to :vendor
 	#has a unique constraint on the combined columns :vendor_id and :name.

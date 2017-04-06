@@ -18,6 +18,11 @@
 	</tr>
 	
 	<tr>
+	  <th><strong>Sequencing library prep kit:</strong></th>
+		<td><%= link_to @barcode.sequencing_library_prep_kit.name, @barcode.sequencing_library_prep_kit %></td>
+	</tr>
+
+	<tr>
 	  <th><strong>Sequence:</strong></th>
 	  <td><%= @barcode.sequence %></td>
 	</tr>
@@ -27,10 +32,6 @@
 	  <td><%= @barcode.index_number %></td>
 	</tr>
 
-	<tr>
-	  <th><strong>Sequencing library prep kit:</strong></th>
-		<td><%= link_to @barcode.sequencing_library_prep_kit.name, @barcode.sequencing_library_prep_kit %></td>
-	</tr>
 </table>
 
 <%= link_to 'Back', barcodes_path %>

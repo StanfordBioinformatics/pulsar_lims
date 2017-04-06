@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Sequencing library prep kit</th>
       <th>Sequence</th>
 			<th>Index Number</th>
       <th>Sequencing library prep kit</th>
@@ -21,9 +22,9 @@
     <% @barcodes.each do |barcode| %>
       <tr>
         <td><%= link_to barcode.name, barcode %></td>
+        <td><%= link_to barcode.sequencing_library_prep_kit.name, barcode.sequencing_library_prep_kit %></td>
         <td><%= barcode.sequence %></td>
 				<td><%= barcode.index_number %></td>
-        <td><%= link_to barcode.sequencing_library_prep_kit.name, barcode.sequencing_library_prep_kit %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_barcode_path(barcode) %>
         	<%= link_to fa_icon("trash"), barcode, method: :delete, data: { confirm: 'Are you sure?' } %>

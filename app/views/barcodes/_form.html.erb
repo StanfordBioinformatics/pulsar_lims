@@ -2,9 +2,9 @@
   <%= f.error_notification %>
 
   <%= f.input :name, {"data-toggle" => "tooltip", "title" => "Unique name"} %>
-  <%= f.input :sequence %>
-	<%= f.input :index_number %>
-  <%= f.association :sequencing_library_prep_kit %>
+  <%= f.association :sequencing_library_prep_kit, {"data-toggle" => "tooltip", "title" => "The name of the sequencing library preparation kit used that contains the barcode."} %>
+  <%= f.input :sequence, {"data-toggle" => "tooltip", "title" => "Sequence of the barcode (uppercase)."} %>
+	<%= f.input :index_number, {"data-toggle" => "tooltip", "title" => "For paired-end sequencing, this could be 1 or 2, for single-end sequencing, this would be just 1. Make sure that the index number of the barcode matches the index number specified in the sequencing library prep kit."} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

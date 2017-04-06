@@ -93,13 +93,13 @@
             <%= link_to "Libraries",libraries_path, class: controller_name() == "libraries" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Nucleic Acid Terms",nucleic_acid_terms_path, class: controller_name() == "nucleic_acid_terms" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Organisms",organisms_path, class: controller_name() == "organisms" ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Paired Barcodes",paired_barcodes_path, class: controller_name() == "paired_barcodes" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Reference Genomes",reference_genomes_path, class: controller_name() == "reference_genomes" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Sequencing Centers",sequencing_centers_path, class: controller_name() == "sequencing_centers" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Sequencing Platforms",sequencing_platforms_path, class: controller_name() == "sequencing_platforms" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Sequencing Requests",sequencing_requests_path, class: controller_name() == "sequencing_requests" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Targets",targets_path, class: controller_name() == "targets" ? "list-group-item active" : "list-group-item" %>
-            <%= link_to "Vendors",vendors_path, class: current_page?("/vendors") ? "list-group-item active" : "list-group-item" %>
-            <%= link_to "Chromosomes",vendors_path, class: current_page?("/vendors") ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Vendors",vendors_path, class: controller_name() == "vendors" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Library Fragmentation Methods",library_fragmentation_methods_path, class: controller_name() == "library_fragmentation_methods" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Sequencing Library Prep Kits",sequencing_library_prep_kits_path, class: controller_name() == "sequencing_library_prep_kits" ? "list-group-item active" : "list-group-item" %>
           </ul>

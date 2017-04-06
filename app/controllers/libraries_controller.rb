@@ -86,7 +86,7 @@ class LibrariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_params
-      params.require(:library).permit(:sequencing_library_prep_kit_id, :barcodes, :library_fragmentation_method_id, :nucleic_acid_starting_quantity, :nucleic_acid_starting_quantity_units, :is_control, :nucleic_acid_term_id, :biosample_id, :antibody_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, documents_attributes: [:id,:_destroy], sequencing_requests_attributes: [:id,:_destroy], barcodes_attributes: [:id,:_destroy])
+      params.require(:library).permit(:paired_end, :sequencing_library_prep_kit_id, :barcodes, :library_fragmentation_method_id, :nucleic_acid_starting_quantity, :nucleic_acid_starting_quantity_units, :is_control, :nucleic_acid_term_id, :biosample_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, documents_attributes: [:id,:_destroy], sequencing_requests_attributes: [:id,:_destroy], barcodes_attributes: [:id,:_destroy])
     end
 
 end

@@ -22,6 +22,11 @@
 	</tr>
 
 	<tr>
+		<th><strong>Paired End</strong></th>
+		<td><%= @library.paired_end %></td>
+	</tr>
+
+	<tr>
 		<th><strong>Documents:</strong></th>
 		<td>
       <%= render partial: "documents/link_to_document", locals: {documents: @library.documents} %>
