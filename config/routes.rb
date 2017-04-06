@@ -15,8 +15,10 @@ Pulsar::Application.routes.draw do
   resources :construct_tags
   resources :cloning_vectors
   resources :genome_locations
-  resources :barcodes
-  resources :sequencing_library_prep_kits
+  resources :sequencing_library_prep_kits do
+		get :add_barcode, on: :member
+  	resources :barcodes, except: [:index]
+	end
   resources :library_fragmentation_methods
   resources :biosample_term_names
 
@@ -48,7 +50,7 @@ Pulsar::Application.routes.draw do
 	resources :welcome, only: [:index]
 
   resources :reference_genomes do
-	  resources :chromosomes
+	  resources :chromosomes, except: [:index]
 	end
 
   resources :experiment_types
