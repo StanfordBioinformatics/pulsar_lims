@@ -10,8 +10,41 @@
 @import "admin/application";
 @import "reference_genomes";
 @import "libraries";
+@import "sequencing_library_prep_kits";
+
 //@import "sequencing_results";
 
+@media (max-width: $screen-xs-min) {
+	body {
+		font-size: 1.2em;
+	}
+}
+
+@media (min-width: $screen-xs-min) and (max-width: $screen-xs-max) {
+	body {
+		font-size: 1.4em;
+	}
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+	body {
+		font-size: 1.4em;
+	}
+}
+
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+	body {
+		font-size: 1.4em;
+	}
+}
+
+@media (min-width: $screen-lg-min) {
+	body {
+		font-size: 1.4em;
+		color: green;
+	}
+}
 
 table.attributes i.fa-pencil {
 	margin-right: 1em;
