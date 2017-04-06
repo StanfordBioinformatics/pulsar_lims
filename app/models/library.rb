@@ -7,6 +7,7 @@ class Library < ActiveRecord::Base
 	has_and_belongs_to_many :documents
 	has_and_belongs_to_many :sequencing_requests
 	has_and_belongs_to_many :barcodes
+	has_and_belongs_to_many :paired_barcodes
 	has_many   :barcode_sequencing_results, dependent: :destroy
 	belongs_to :biosample
 	belongs_to :library_fragmentation_method

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405184140) do
+ActiveRecord::Schema.define(version: 20170406051701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -395,6 +395,14 @@ ActiveRecord::Schema.define(version: 20170405184140) do
   add_index "libraries", ["sequencing_library_prep_kit_id"], name: "index_libraries_on_sequencing_library_prep_kit_id", using: :btree
   add_index "libraries", ["user_id"], name: "index_libraries_on_user_id", using: :btree
   add_index "libraries", ["vendor_id"], name: "index_libraries_on_vendor_id", using: :btree
+
+  create_table "libraries_paired_barcodes", id: false, force: :cascade do |t|
+    t.integer "library_id"
+    t.integer "paired_barcode_id"
+  end
+
+  add_index "libraries_paired_barcodes", ["library_id", "paired_barcode_id"], name: "library_paired_barcode", using: :btree
+  add_index "libraries_paired_barcodes", ["paired_barcode_id", "library_id"], name: "paired_barcode_library", using: :btree
 
   create_table "libraries_sequencing_requests", id: false, force: :cascade do |t|
     t.integer "library_id",            null: false

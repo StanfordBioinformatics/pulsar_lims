@@ -1,4 +1,5 @@
 class PairedBarcode < ActiveRecord::Base
+	has_and_belongs_to_many :libraries
   belongs_to :user
   belongs_to :index1, class_name: "Barcode"
   belongs_to :index2, class_name: "Barcode"
