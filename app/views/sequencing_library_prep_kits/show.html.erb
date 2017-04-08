@@ -45,11 +45,11 @@
     </thead>
     <% @sequencing_library_prep_kit.barcodes.each do |bc| %>
       <tr>
-        <td><%= link_to bc.name, bc %></td>
+        <td><%= link_to bc.name, [@sequencing_library_prep_kit,bc] %></td>
         <td><%= bc.sequence %></td>
         <td>
-          <%= link_to fa_icon("pencil"), [:edit,bc] %>
-          <%= link_to fa_icon("trash"), bc, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to fa_icon("pencil"), [:edit,@sequencing_library_prep_kit,bc] %>
+          <%= link_to fa_icon("trash"), [@sequencing_library_prep_kit,bc], method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
@@ -57,7 +57,7 @@
 </div>
 
 <div>
-<%= link_to "Add barcode", new_barcode_path, class: "reg-btn" %>
+<%= link_to "Add barcode", new_sequencing_library_prep_kit_barcode_path(@sequencing_library_prep_kit), class: "reg-btn" %>
 </div>
 
 

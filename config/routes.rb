@@ -16,7 +16,6 @@ Pulsar::Application.routes.draw do
   resources :cloning_vectors
   resources :genome_locations
   resources :sequencing_library_prep_kits do
-		get :add_barcode, on: :member
   	resources :barcodes, except: [:index]
 	end
   resources :library_fragmentation_methods

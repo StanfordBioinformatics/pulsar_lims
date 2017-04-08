@@ -2,10 +2,6 @@ class ChromosomesController < ApplicationController
   before_action :set_reference_genome
   before_action :set_chromosome, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @chromosomes = policy_scope(Chromosome).order("lower(name)")
-  end
-
   def show
 		authorize @chromosome
   end
@@ -69,6 +65,6 @@ class ChromosomesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chromosome_params
-      params.require(:chromosome).permit(:name, :user_id, :reference_genome_id)
+      params.require(:chromosome).permit(:name)
     end
 end

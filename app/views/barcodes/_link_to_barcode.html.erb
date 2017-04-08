@@ -1,3 +1,3 @@
 <% barcodes.each do |barcode| %>
-	<%= link_to barcode.name, barcode_path(barcode) %></br>
+	<%= link_to "#{barcode.name} #{barcode.sequence}", [barcode.sequencing_library_prep_kit,barcode] %></br>
 <% end %>

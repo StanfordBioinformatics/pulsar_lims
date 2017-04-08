@@ -1,9 +1,6 @@
 class BarcodesController < ApplicationController
+	before_action :set_sequencing_library_prep_kit
   before_action :set_barcode, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @barcodes = policy_scope(Barcode.order(:sequence))
-	end
 
   def show
 		authorize @barcode
@@ -11,7 +8,7 @@ class BarcodesController < ApplicationController
 
   def new
 		authorize Barcode
-    @barcode = Barcode.new
+    @barcode = @sequencing_library_prep_kit.barcodes.build
   end
 
   def edit
@@ -20,12 +17,12 @@ class BarcodesController < ApplicationController
 
   def create
 		authorize Barcode
-    @barcode = Barcode.new(barcode_params)
+    @barcode = @sequencing_library_prep_kit.barcodes.build(barcode_params)
 		@barcode.user = current_user
 
     respond_to do |format|
       if @barcode.save
-        format.html { redirect_to @barcode, notice: 'Barcode was successfully created.' }
+        format.html { redirect_to @sequencing_library_prep_kit, notice: 'Barcode was successfully created.' }
         format.json { render json: @barcode, status: :created }
       else
         format.html { render action: 'new' }
@@ -52,13 +49,17 @@ class BarcodesController < ApplicationController
 		authorize @barcode
     @barcode.destroy
     respond_to do |format|
-      format.html { redirect_to barcodes_url }
+      format.html { redirect_to @sequencing_library_prep_kit }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_sequencing_library_prep_kit
+      @sequencing_library_prep_kit = SequencingLibraryPrepKit.find(params[:sequencing_library_prep_kit_id])
+    end 
+
     def set_barcode
       @barcode = Barcode.find(params[:id])
     end

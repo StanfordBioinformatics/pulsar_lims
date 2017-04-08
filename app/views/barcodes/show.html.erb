@@ -1,9 +1,9 @@
 <header>
-  <h1><%= @barcode.name %></h1>
+  <h1><%= @barcode.name %>on <%= @sequencing_library_prep_kit.name%></h1>
 
   <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @barcode} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @barcode} %>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @barcode, nested: @sequencing_library_prep_kit } %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @barcode, nested: @sequencing_library_prep_kit } %>
   </ul>
 </header>
 
@@ -19,7 +19,7 @@
 	
 	<tr>
 	  <th><strong>Sequencing library prep kit:</strong></th>
-		<td><%= link_to @barcode.sequencing_library_prep_kit.name, @barcode.sequencing_library_prep_kit %></td>
+		<td><%= link_to @barcode.sequencing_library_prep_kit.name, @sequencing_library_prep_kit %></td>
 	</tr>
 
 	<tr>
@@ -34,4 +34,4 @@
 
 </table>
 
-<%= link_to 'Back', barcodes_path %>
+<%= link_to 'Back', sequencing_library_prep_kit_path(@sequencing_library_prep_kit) %>
