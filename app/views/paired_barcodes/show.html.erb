@@ -22,12 +22,12 @@
 	
 	<tr>
 	  <th><strong>Index1:</strong></th>
-	  <td><%= link_to "#{@paired_barcode.index1.name} #{@paired_barcode.index1.sequence}", @paired_barcode.index1 %></td>
+	  <td><%= link_to "#{@paired_barcode.index1.name} #{@paired_barcode.index1.sequence}", [@paired_barcode.sequencing_library_prep_kit,@paired_barcode.index1] %></td>
 	</tr>
 	
 	<tr>
 	  <th><strong>Index2:</strong></th>
-	  <td><%= link_to "#{@paired_barcode.index2.name} #{@paired_barcode.index2.sequence}", @paired_barcode.index2 %></td>
+	  <td><%= link_to "#{@paired_barcode.index2.name} #{@paired_barcode.index2.sequence}", [@paired_barcode.sequencing_library_prep_kit,@paired_barcode.index2] %></td>
 	</tr>
 	
 </table>

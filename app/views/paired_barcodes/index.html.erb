@@ -18,14 +18,14 @@
   </thead>
 
   <tbody>
-    <% @paired_barcodes.each do |paired_barcode| %>
+    <% @paired_barcodes.each do |pb| %>
       <tr>
-        <td><%= link_to paired_barcode.name, paired_barcode %></td>
-        <td><%= link_to paired_barcode.sequencing_library_prep_kit.name, paired_barcode.sequencing_library_prep_kit %></td>
-        <td><%= link_to paired_barcode.index1.name, paired_barcode.index1 %></td>
-        <td><%= link_to paired_barcode.index2.name, paired_barcode.index2 %></td>
-        <td><%= link_to fa_icon("pencil"), edit_paired_barcode_path(paired_barcode) %></td>
-        <td><%= link_to fa_icon("trash"), paired_barcode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to pb.name, pb %></td>
+        <td><%= link_to pb.sequencing_library_prep_kit.name, pb.sequencing_library_prep_kit %></td>
+        <td><%= link_to "#{pb.index1.name} #{pb.index1.sequence}", [pb.sequencing_library_prep_kit,pb.index1] %></td>
+        <td><%= link_to "#{pb.index2.name} #{pb.index2.sequence}", [pb.sequencing_library_prep_kit,pb.index2] %></td>
+        <td><%= link_to fa_icon("pencil"), edit_paired_barcode_path(pb) %></td>
+        <td><%= link_to fa_icon("trash"), pb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

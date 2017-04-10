@@ -56,7 +56,10 @@ Pulsar::Application.routes.draw do
 
   resources :sequencing_platforms
 
-  resources :libraries
+  resources :libraries do
+		get :select_paired_barcode, on: :collection
+		get :select_barcode, on: :collection
+	end
 
   resources :antibodies
 

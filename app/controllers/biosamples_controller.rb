@@ -10,9 +10,6 @@ class BiosamplesController < ApplicationController
   def select_biosample_term_name
     @biosample = Biosample.new
     biosample_type = BiosampleType.find(params[:biosample][:biosample_type_id])
-		puts "###"
-		puts params
-		puts "###"
 		biosample_type_name = biosample_type.name
 
 		tissue = BiosampleType.find_by!(name: "tissue") #Uberon

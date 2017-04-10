@@ -2,6 +2,26 @@ class LibrariesController < ApplicationController
 	include DocumentsConcern #gives me add_documents()
 	include BarcodesConcern  #gives me add_barcodes()
   before_action :set_library, only: [:show, :edit, :update, :destroy]
+	skip_after_action :verify_authorized, only: [:select_barcode,:select_paired_barcode]
+
+  def select_barcode
+    #barcodes on a sequencing_library_prep_kit
+		@library = Library.new
+		kit_id = library_params()[:sequencing_library_prep_kit_id]
+		kit = SequencingLibraryPrepKit.find(kit_id)
+		@index1_barcodes = Barcode.where({sequencing_library_prep_kit_id: kit.id, index_number: 1})
+    render layout: false
+  end
+
+  def select_paired_barcode
+    #barcodes on a sequencing_library_prep_kit
+		@library = Library.new
+		kit_id = library_params()[:sequencing_library_prep_kit_id]
+		kit = SequencingLibraryPrepKit.find(kit_id)
+		@index1_barcodes = Barcode.where({sequencing_library_prep_kit_id: kit.id, index_number: 1})
+		@index2_barcodes = Barcode.where({sequencing_library_prep_kit_id: kit.id, index_number: 2})
+    render layout: false
+  end
 
   def index
     @libraries = policy_scope(Library).order("lower(name)")

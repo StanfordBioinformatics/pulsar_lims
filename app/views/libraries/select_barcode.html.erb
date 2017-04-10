@@ -1,0 +1,3 @@
+<%= simple_fields_for @library do |f| %>
+	<%= f.association :barcodes, collection: @index1_barcodes, label_html: {multiple: true, "data-toggle" => "tooltip", "title" => "If the library is barcoded, select the barcode used. If the library is pooled having multiple barcodes, select all barcodes used in the pooling."} %>
+<% end %>
