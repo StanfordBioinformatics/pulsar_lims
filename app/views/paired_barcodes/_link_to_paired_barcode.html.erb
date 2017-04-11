@@ -1,0 +1,3 @@
+<% paired_barcodes.each do |pb| %>
+	<%= link_to "#{pb.name} #{pb.index1.sequence}-#{pb.index2.sequence}", pb %></br>
+<% end %>

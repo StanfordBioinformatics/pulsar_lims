@@ -4,6 +4,7 @@ module BarcodesConcern
   private
 
 
+# Note: add_barcodes isn't used now as it has been replaced with model level methods in the library.
   def add_barcodes(model_obj,barcode_ids)
     """ 
     Function : Adds Barcode associations to the self.barcodes attr. 

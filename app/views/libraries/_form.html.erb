@@ -32,9 +32,11 @@
 	<% end %>
 
 
-	<%= f.association :barcodes, prompt: "Select barcodes",
+	<%= f.association :barcodes, prompt: "Select barcodes", include_blank: true,
 			label_html: {"data-toggle" => "tooltip", "title" => "If the library is barcoded, select the barcode used. If the library is pooled having multiple barcodes, select all barcodes used in the pooling."} %>
 
+	<%= f.association :paired_barcodes, prompt: "Select paired barcodes", include_blank: true,
+			label_html: {"data-toggle" => "tooltip", "title" => "If the library has paired-end indices, specify the index1 and index2 pair(s)"} %>
 
 	<% if @library.documents.persisted.any? %>
 	  <table>

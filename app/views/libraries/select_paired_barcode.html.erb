@@ -1,0 +1,3 @@
+<%= simple_fields_for @library do |f| %>
+	<%= f.association :paired_barcodes, prompt: "Select paired barcodes", include_blank: true, collection: @paired_barcodes, label_html: {multiple: true, "data-toggle" => "tooltip", "title" => "If the library has paired-end barcode(s), select the paired-end barcode(s) used."} %>
+<% end %>
