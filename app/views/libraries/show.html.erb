@@ -125,7 +125,8 @@
 <% if @library.paired_end? %>
 
 	<%= simple_form_for(@library) do |f| %>
-  	<%= f.input :add_paired_barcodes, as: :text %>
+  	<%= f.input :add_paired_barcodes, as: :text, placeholder: "ATCCGC-GTACAG\nCGTGAC-TAGGCA\n...",
+				hint: "Copy and paste paired-barcodes in - if there are any validation errors, you'll have to paste them all back in with the corrections." %>
 
   	<div class="actions">
    	 <%= f.button :submit, "Add Paired Barcodes", class: "btn-primary "%>
@@ -135,7 +136,8 @@
 <% else %>
 
 	<%= simple_form_for(@library) do |f| %>
-  	<%= f.input :add_barcodes, as: :text %>
+  	<%= f.input :add_barcodes, as: :text, placeholder: "ATCCGA\nTAGCGA\n...", 
+				hint: "Copy and paste barcodes in - if there are any validation errors, you'll have to paste them all back in with the corrections." %>
 
   	<div class="actions">
    	 <%= f.button :submit, "Add Barcodes", class: "btn-primary "%>

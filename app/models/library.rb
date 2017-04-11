@@ -1,3 +1,6 @@
+class BarcodeNotFoundError < StandardError
+end
+
 class Library < ActiveRecord::Base
 	attr_accessor :add_barcodes 
 	attr_accessor :add_paired_barcodes
@@ -45,8 +48,12 @@ class Library < ActiveRecord::Base
 	def add_barcodes=(barcodes)
 		#barcodes is a white-space delimited string of barcode sequences (i.e this attribute is set in a form on the library show page).
 		barcodes = barcodes.split().map { |b| b if b.present? }
+		prep_kit = self.sequencing_library_prep_kit
 		barcodes.each do |b|
-			bc = Barcode.where({sequencing_library_prep_kit_id: self.sequencing_library_prep_kit_id, sequence: b})
+			bc = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, sequence: b})
+			if bc.blank?
+				raise BarcodeNotFoundError, "Barcode #{b} is not present in sequencing library prep kit #{prep_kit.name}."
+			end 
 			if self.barcodes.include?(bc)
 				next
 			end
@@ -57,11 +64,18 @@ class Library < ActiveRecord::Base
 	def add_paired_barcodes=(paired_barcodes)
 		#paired_barcodes is a white-space delimited string of barcode sequences (i.e this attribute is set in a form on the library show page).
 		paired_barcodes = paired_barcodes.split().map { |b| b if b.present? }
+		prep_kit = self.sequencing_library_prep_kit
 		paired_barcodes.each do |b|
 			index1_seq,index2_seq = b.split("-")
-			index1 = Barcode.find_by({sequencing_library_prep_kit_id: self.sequencing_library_prep_kit_id,index_number: 1, sequence: index1_seq})
-			index2 = Barcode.find_by({sequencing_library_prep_kit_id: self.sequencing_library_prep_kit_id,index_number: 2, sequence: index2_seq})
-			bc = PairedBarcode.find_by({sequencing_library_prep_kit_id: self.sequencing_library_prep_kit_id, index1_id: index1.id, index2_id: index2.id})
+			index1 = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id,index_number: 1, sequence: index1_seq})
+			if index1.blank?
+				raise BarcodeNotFoundError, "Index1 barcode #{index1_seq} is not present in sequencing library prep kit #{prep_kit.name}."
+			end
+			index2 = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id,index_number: 2, sequence: index2_seq})
+			if index2.blank?
+				raise BarcodeNotFoundError, "Index2 barcode #{index2_seq} is not present in sequencing library prep kit #{prep_kit.name}."
+			end	
+			bc = PairedBarcode.find_by!({sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1.id, index2_id: index2.id})
 			if self.paired_barcodes.include?(bc)
 				next
 			end

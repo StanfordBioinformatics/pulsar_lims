@@ -86,6 +86,13 @@ class LibrariesController < ApplicationController
         format.json { render json: @library.errors, status: :unprocessable_entity }
       end
     end
+
+		#rescue BarcodeNotFoundError => err
+		rescue BarcodeNotFoundError => err
+			respond_to do |format|
+				format.html { redirect_to @library, alert: err.message }
+				format.json { render json: "hi" }
+			end
   end
 
   # DELETE /libraries/1
