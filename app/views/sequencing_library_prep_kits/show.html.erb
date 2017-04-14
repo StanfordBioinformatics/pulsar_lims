@@ -40,6 +40,7 @@
       <tr>
         <th>Name</th>
 				<th>Sequence</th>
+				<th>Index Number</th>
         <th class="actions">Actions</th>
       </tr>
     </thead>
@@ -47,6 +48,7 @@
       <tr>
         <td><%= link_to bc.name, [@sequencing_library_prep_kit,bc] %></td>
         <td><%= bc.sequence %></td>
+				<td><%= bc.index_number %></td>
         <td>
           <%= link_to fa_icon("pencil"), [:edit,@sequencing_library_prep_kit,bc] %>
           <%= link_to fa_icon("trash"), [@sequencing_library_prep_kit,bc], method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -58,7 +60,7 @@
 
 <div>
 <%= link_to "Add barcode", new_sequencing_library_prep_kit_barcode_path(@sequencing_library_prep_kit), class: "reg-btn" %>
-</div>
+</div></br>
 
 
 <%= link_to 'Back', sequencing_library_prep_kits_path %>

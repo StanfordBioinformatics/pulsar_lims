@@ -4,7 +4,11 @@
 
 
 div.chromosomes {
+	text-align: center;
   max-width: 15em;
   padding-top: 0.5em;
-  padding-left: 1em;
+
+  & th, & td {
+    text-align: center;
+  }
 }

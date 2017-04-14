@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406051701) do
+ActiveRecord::Schema.define(version: 20170414002245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -454,6 +454,7 @@ ActiveRecord::Schema.define(version: 20170406051701) do
 
   add_index "paired_barcodes", ["index1_id"], name: "index_paired_barcodes_on_index1_id", using: :btree
   add_index "paired_barcodes", ["index2_id"], name: "index_paired_barcodes_on_index2_id", using: :btree
+  add_index "paired_barcodes", ["sequencing_library_prep_kit_id", "index1_id", "index2_id"], name: "kit_index1_index2", unique: true, using: :btree
   add_index "paired_barcodes", ["sequencing_library_prep_kit_id"], name: "index_paired_barcodes_on_sequencing_library_prep_kit_id", using: :btree
   add_index "paired_barcodes", ["user_id"], name: "index_paired_barcodes_on_user_id", using: :btree
 

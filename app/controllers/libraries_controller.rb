@@ -1,5 +1,6 @@
 class LibrariesController < ApplicationController
 	include DocumentsConcern #gives me add_documents()
+	include LibrariesConcern #gives me add_barcodes(), add_paired_barcodes()
 	#include BarcodesConcern  #gives me add_barcodes() ###no longer used
   before_action :set_library, only: [:show, :edit, :update, :destroy]
 	skip_after_action :verify_authorized, only: [:select_barcode,:select_paired_barcode]
@@ -56,7 +57,6 @@ class LibrariesController < ApplicationController
 		@library.user = current_user
 
 		@library = add_documents(@library,params[:library][:document_ids])
-		#@library = add_barcodes(@library,params[:library][:barcode_ids])
 
     respond_to do |format|
       if @library.save
@@ -73,10 +73,30 @@ class LibrariesController < ApplicationController
   # PATCH/PUT /libraries/1.json
   def update
 		authorize @library
+#		render json: params[:library]
+#		return
 
 		#@library = remove_documents(@library,params[:remove_documents])
 		@library = add_documents(@library,params[:library][:documents])
-		#@library = add_barcodes(@library,params[:library][:barcode_ids])
+
+		barcode_ids_param = :add_barcodes
+		paired_bc_ids_param = :add_paired_barcodes
+
+		begin 
+			if library_params[barcode_ids_param].present?
+				add_barcodes(model_object=@library,barcodes=params[:library][barcode_ids_param])
+				library_params.delete(barcode_ids_param)
+			elsif library_params[paired_bc_ids_param].present?
+				add_paired_barcodes(model_object=@library,paired_barcodes=library_params[paired_bc_ids_param])
+				library_params.delete(paired_bc_ids_param)
+			end
+		rescue BarcodeNotFoundError => err #can be raised by either add_barcodes() or add_paired_barcodes()
+			respond_to do |format|
+				format.html { redirect_to @library, alert: err.message }
+			end
+			return
+		end
+
     respond_to do |format|
       if @library.update(library_params)
         format.html { redirect_to @library, notice: 'Library was successfully updated.' }
@@ -86,13 +106,6 @@ class LibrariesController < ApplicationController
         format.json { render json: @library.errors, status: :unprocessable_entity }
       end
     end
-
-		#rescue BarcodeNotFoundError => err
-		rescue BarcodeNotFoundError => err
-			respond_to do |format|
-				format.html { redirect_to @library, alert: err.message }
-				format.json { render json: "hi" }
-			end
   end
 
   # DELETE /libraries/1
