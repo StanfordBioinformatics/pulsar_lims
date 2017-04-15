@@ -86,6 +86,7 @@ ConstructTag.create!([
 
 illumina_truseq_dna_pcr_free = Rails.root.join("lib","seeds","truseq-dna-pcr-free-library-prep-guide-15036187-d.pdf")
 illumina_adapter_letter = Rails.root.join("lib","seeds","illumina-adapter-sequences_1000000002694-01.pdf")
+nebnext_oligos_E7600 = Rails.root.join("lib","seeds","nebnext_oligos_E7600.pdf")
 Document.delete_all
 Document.create!([
 	{user_id: admin, name: File.basename(illumina_truseq_dna_pcr_free), content_type: "application/pdf", 
@@ -96,6 +97,10 @@ Document.create!([
 	{user_id: admin, name: File.basename(illumina_adapter_letter), content_type: "application/pdf", 
 		data: File.open(illumina_adapter_letter,"rb").read(), is_protocol: false, 
 		description: "Illumina barcodes for various library prep kits.",
+		document_type_id: DocumentType.find_by(name: "general protocol").id},
+	{user_id: admin, name: File.basename(nebnext_oligos_E7600), content_type: "application/pdf", 
+		data: File.open(nebnext_oligos_E7600,"rb").read(), is_protocol: false, 
+		description: "The NEBNext Multiplex Oligos for Illumina (Dual Index Primers Set 1) contains the adaptor and index primers that are ideally suited for multiplex sample preparation for next-generation sequencing on the Illumina platform.",
 		document_type_id: DocumentType.find_by(name: "general protocol").id}
 ])
 
@@ -104,7 +109,7 @@ SequencingLibraryPrepKit.create!([
 	{user_id: admin, name: "Illumina TruSeq HT Kits", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")], vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes TruSeq DNA PCR-Free HT, TruSeq Nano HT, TruSeq Stranded mRNA HT, and TruSeq Total RNA HT"},
 	{user_id: admin, name: "Illumina TruSeq LT Kits", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes TruSeq DNA PCR-Free LT, TruSeq Nano DNA LT, TruSeq DNA v1/v2/LT (obsolete), TruSeq RNA v1/v2/LT, TruSeq Stranded mRNA LT, TruSeq Stranded Total RNA LT, TruSeq RNA Access, and TruSeq ChIP"},
 	{user_id: admin, name: "Illumina Nextera Kits", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes Nextera DNA, Nextera XT, Nextera Enrichment (obsolete), and Nextera Rapid Capture. Does not include Nextera XT Index Kit v2."},
-	{user_id: admin, name: "NEBNext Multiplex Oligos for Illumina (Dual Index Primers Set 1)", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "New England BioLabs").id, vendor_product_identifier: "E7600S", description: "Contains the adaptor and index primers that are ideally suited for multiplex sample preparation for next-generation sequencing on the Illumina platform. Designed for use with specific NEBNext Kits, see https://www.neb.com/~/media/Catalog/All-Products/E7CFA11A57424D299FAA2AF513787BBE/Datacards%20or%20Manuals/manualE7600.pdf."}
+	{user_id: admin, name: "NEBNext Multiplex Oligos for Illumina (Dual Index Primers Set 1)", documents: [Document.find_by(name: "nebnext_oligos_E7600.pdf")] ,vendor_id: Vendor.find_by(name: "New England BioLabs").id, vendor_product_identifier: "E7600S", description: "Contains the adaptor and index primers that are ideally suited for multiplex sample preparation for next-generation sequencing on the Illumina platform. Designed for use with specific NEBNext Kits, see https://www.neb.com/~/media/Catalog/All-Products/E7CFA11A57424D299FAA2AF513787BBE/Datacards%20or%20Manuals/manualE7600.pdf."}
 ])
 
 truseq_ht_kits_id = SequencingLibraryPrepKit.find_by!(name: "Illumina TruSeq HT Kits").id
