@@ -4,6 +4,7 @@
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library prep kit name"} %>
   <%= f.association :vendor,
 		label_html: {"data-toggle" => "tooltip", "title" => "Select the vendor of the library prep kit."} %>
+	<%= f.input :vendor_product_identifier %>
   <%= f.input :description %>
 
   <% if @sequencing_library_prep_kit.documents.persisted.any? %>

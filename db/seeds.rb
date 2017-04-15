@@ -12,6 +12,17 @@
 
 admin = User.find_by!(email: "admin@enc.com").id
 
+Vendor.delete_all
+Vendor.create!([
+	{user_id: admin, name: "Abcam", encode_identifier: "abcam", url: "http://www.abcam.com"},
+	{user_id: admin, name: "Active Motif", encode_identifier: "active-motif", url: "http://www.activemotif.com"},
+	{user_id: admin, name: "Agilent", encode_identifier: "agilent", url: "http://www.home.agilent.com"},
+	{user_id: admin, name: "Illumina", encode_identifier: "illumina", url: "http://www.illumina.com"},
+	{user_id: admin, name: "New England BioLabs", encode_identifier: "", url: "https://www.neb.com"},
+	{user_id: admin, name: "Sigma", encode_identifier: "sigma", url: "http://www.sigmaaldrich.com"},
+	{user_id: admin, name: "Thermo Fisher", encode_identifier: "thermo-fisher", url: "http://www.thermofisher.com/global/en/home.asp"}
+])
+
 BiosampleOntology.delete_all
 BiosampleOntology.create!([
 	{user_id: admin, name: "CL", url: "http://www.obofoundry.org/ontology/cl.html"},
@@ -62,12 +73,16 @@ Document.create!([
 
 SequencingLibraryPrepKit.delete_all
 SequencingLibraryPrepKit.create!([
-	{user_id: admin, name: "TruSeq HT Kits", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")], vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes TruSeq DNA PCR-Free HT, TruSeq Nano HT, TruSeq Stranded mRNA HT, and TruSeq Total RNA HT"},
-	{user_id: admin, name: "TruSeq LT Kits", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes TruSeq DNA PCR-Free LT, TruSeq Nano DNA LT, TruSeq DNA v1/v2/LT (obsolete), TruSeq RNA v1/v2/LT, TruSeq Stranded mRNA LT, TruSeq Stranded Total RNA LT, TruSeq RNA Access, and TruSeq ChIP"}
+	{user_id: admin, name: "Illumina TruSeq HT Kits", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")], vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes TruSeq DNA PCR-Free HT, TruSeq Nano HT, TruSeq Stranded mRNA HT, and TruSeq Total RNA HT"},
+	{user_id: admin, name: "Illumina TruSeq LT Kits", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes TruSeq DNA PCR-Free LT, TruSeq Nano DNA LT, TruSeq DNA v1/v2/LT (obsolete), TruSeq RNA v1/v2/LT, TruSeq Stranded mRNA LT, TruSeq Stranded Total RNA LT, TruSeq RNA Access, and TruSeq ChIP"},
+	{user_id: admin, name: "Illumina Nextera Kits", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes Nextera DNA, Nextera XT, Nextera Enrichment (obsolete), and Nextera Rapid Capture. Does not include Nextera XT Index Kit v2."},
+	{user_id: admin, name: "NEBNext Multiplex Oligos for Illumina (Dual Index Primers Set 1)", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "New England BioLabs").id, vendor_product_identifier: "E7600S", description: "Contains the adaptor and index primers that are ideally suited for multiplex sample preparation for next-generation sequencing on the Illumina platform. Designed for use with specific NEBNext Kits, see https://www.neb.com/~/media/Catalog/All-Products/E7CFA11A57424D299FAA2AF513787BBE/Datacards%20or%20Manuals/manualE7600.pdf."}
 ])
 
-truseq_ht_kits_id = SequencingLibraryPrepKit.find_by!(name: "TruSeq HT Kits").id
-truseq_lt_kits_id = SequencingLibraryPrepKit.find_by!(name: "TruSeq LT Kits").id
+truseq_ht_kits_id = SequencingLibraryPrepKit.find_by!(name: "Illumina TruSeq HT Kits").id
+truseq_lt_kits_id = SequencingLibraryPrepKit.find_by!(name: "Illumina TruSeq LT Kits").id
+nextera_kits_id = SequencingLibraryPrepKit.find_by!(name: "Illumina Nextera Kits").id
+nebnext_duel_set1_id = SequencingLibraryPrepKit.find_by!(name: "NEBNext Multiplex Oligos for Illumina (Dual Index Primers Set 1)").id
 Barcode.delete_all
 Barcode.create!([
 {user_id: admin, name: "D701", sequence: "ATTACTCG", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
@@ -115,6 +130,49 @@ Barcode.create!([
 {user_id: admin, name: "AD023", sequence: "GAGTGG", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
 {user_id: admin, name: "AD025", sequence: "ACTGAT", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
 {user_id: admin, name: "AD027", sequence: "ATTCCT", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
+
+{user_id: admin, name: "N701", sequence: "TAAGGCGA", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N702", sequence: "CGTACTAG", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N703", sequence: "AGGCAGAA", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N704", sequence: "TCCTGAGC", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N705", sequence: "GGACTCCT", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N706", sequence: "TAGGCATG", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N707", sequence: "CTCTCTAC", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N708", sequence: "CAGAGAGG", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N709", sequence: "GCTACGCT", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N710", sequence: "CGAGGCTG", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N711", sequence: "AAGAGGCA", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N712", sequence: "GTAGAGGA", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N501", sequence: "TAGATCGC", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N501", sequence: "CTCTCTAT", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N501", sequence: "TATCCTCT", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N501", sequence: "AGAGTAGA", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N501", sequence: "GTAAGGAG", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N501", sequence: "ACTGCATA", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N501", sequence: "AAGGAGTA", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N501", sequence: "CTAAGCCT", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N501", sequence: "GCGTAAGA", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+
+{user_id: admin, name: "i701", sequence: "ATTACTCG", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i702", sequence: "TCCGGAGA", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i703", sequence: "CGCTCATT", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i704", sequence: "GAGATTCC", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i705", sequence: "ATTCAGAA", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i706", sequence: "GAATTCGT", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i707", sequence: "CTGAAGCT", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i708", sequence: "TAATGCGC", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i709", sequence: "CGGCTATG", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i710", sequence: "TCCGCGAA", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i711", sequence: "TCTCGCGC", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i712", sequence: "AGCGATAG", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i501", sequence: "TATAGCCT", index_number: 2, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i502", sequence: "ATAGAGGC", index_number: 2, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i503", sequence: "CCTATCCT", index_number: 2, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i504", sequence: "GGCTCTGA", index_number: 2, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i505", sequence: "AGGCGAAG", index_number: 2, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i506", sequence: "TAATCTTA", index_number: 2, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i507", sequence: "CAGGACGT", index_number: 2, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
+{user_id: admin, name: "i508", sequence: "GTACTGAC", index_number: 2, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
 ])
 
 LibraryFragmentationMethod.delete_all

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170414002245) do
+ActiveRecord::Schema.define(version: 20170415003536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -483,8 +483,9 @@ ActiveRecord::Schema.define(version: 20170414002245) do
     t.string   "name"
     t.integer  "vendor_id"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "vendor_product_identifier"
   end
 
   add_index "sequencing_library_prep_kits", ["user_id"], name: "index_sequencing_library_prep_kits_on_user_id", using: :btree
