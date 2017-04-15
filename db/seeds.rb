@@ -6,21 +6,49 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-#User.delete_all
-#User.create!(email: "admin@enc.com", password: "password", admin: true)
-#User.create!(email: "viewer@enc.com",password: "password")
+User.delete_all
+User.create!(email: "admin@enc.com", password: "password", role: User::ADMIN_ROLE)
+User.create!(email: "viewer@enc.com",password: "password")
 
 admin = User.find_by!(email: "admin@enc.com").id
+
+DocumentType.delete_all
+DocumentType.create!([
+	{user_id: admin, name: "growth protocol"},
+	{user_id: admin, name: "extraction protocol"},
+	{user_id: admin, name: "certificate of analysis"},
+	{user_id: admin, name: "data QA"},
+	{user_id: admin, name: "differentiation protocol"},
+	{user_id: admin, name: "dedifferentiation protocol"},
+	{user_id: admin, name: "data sheet"},
+	{user_id: admin, name: "treatment protocol"},
+	{user_id: admin, name: "general protocol"},
+	{user_id: admin, name: "excision protocol"},
+	{user_id: admin, name: "transfection protocol"},
+	{user_id: admin, name: "construct image"},
+	{user_id: admin, name: "cell isolation protocol"},
+	{user_id: admin, name: "iPS reprogramming protocol"},
+	{user_id: admin, name: "standards document"},
+	{user_id: admin, name: "strain generation protocol"},
+	{user_id: admin, name: "spike-in concentrations"},
+	{user_id: admin, name: "pipeline protocol"},
+	{user_id: admin, name: "file format specification"},
+	{user_id: admin, name: "high resolution pathology slide image"},
+	{user_id: admin, name: "other"}
+	])
 
 Vendor.delete_all
 Vendor.create!([
 	{user_id: admin, name: "Abcam", encode_identifier: "abcam", url: "http://www.abcam.com"},
 	{user_id: admin, name: "Active Motif", encode_identifier: "active-motif", url: "http://www.activemotif.com"},
 	{user_id: admin, name: "Agilent", encode_identifier: "agilent", url: "http://www.home.agilent.com"},
+	{user_id: admin, name: "Bethyl Labs", encode_identifier: "bethyl-labs", url: "http://www.bethyl.com"},
+	{user_id: admin, name: "Coriell", encode_identifier: "coriell", url: "http://www.coriell.org"},
 	{user_id: admin, name: "Illumina", encode_identifier: "illumina", url: "http://www.illumina.com"},
 	{user_id: admin, name: "New England BioLabs", encode_identifier: "", url: "https://www.neb.com"},
 	{user_id: admin, name: "Sigma", encode_identifier: "sigma", url: "http://www.sigmaaldrich.com"},
-	{user_id: admin, name: "Thermo Fisher", encode_identifier: "thermo-fisher", url: "http://www.thermofisher.com/global/en/home.asp"}
+	{user_id: admin, name: "Thermo Fisher", encode_identifier: "thermo-fisher", url: "http://www.thermofisher.com/global/en/home.asp"},
+	{user_id: admin, name: "Millipore", encode_identifier: "millipore", url: "http://www.emdmillipore.com"}
 ])
 
 BiosampleOntology.delete_all
@@ -34,8 +62,7 @@ BiosampleTermName.delete_all
 BiosampleTermName.create!([
 	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "GM12878", accession: "EFO_0002784", description: "None provided"},
 	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "CL").id, name: "hepatic stellate cell", accession: "CL:0000632", description: "A cell that is found in the perisinusoidal space of the liver that is capable of multiple roles including storage of retinol, presentation of antigen to T cells (including CD1d-restricted NKT cells), and upon activation, production of extracellular matrix components that can contribute to liver fibrosis."},
-	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "CL").id, name: "mesenchymal stem cell of the bone marrow", accession: "CL:0002540", description: "A mesenchymal stem cell
-  that is part of the bone marrow. [database_cross_reference: GOC:tfm]"},
+	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "CL").id, name: "mesenchymal stem cell of the bone marrow", accession: "CL:0002540", description: "A mesenchymal stem cell that is part of the bone marrow. [database_cross_reference: GOC:tfm]"},
 	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "Uberon").id, name: "liver", accession: "UBERON:0002107", description: "Liver"},
 	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "Uberon").id, name: "heart left ventricle", accession: "UBERON:0002084", description: "A cardiac ventricle that is in the left side of the heart. [database_cross_reference: http://orcid.org/0000-0002-6601-2165]"},
 	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "K562", accession: "EFO_0002067", description: "Human chronic myeloid leukemia in blast crisis established from the pleural effusion of a 53-year-old woman with chronic myeloid leukemia (CML) in blast crisis in 1970; cells can be used as highly sensitive targets in in-vitro natural killer assays; cells produce hemoglobin; cells carry the Philadelphia chromosome with a b3-a2 fusion gene."},
@@ -59,6 +86,7 @@ ConstructTag.create!([
 
 illumina_truseq_dna_pcr_free = Rails.root.join("lib","seeds","truseq-dna-pcr-free-library-prep-guide-15036187-d.pdf")
 illumina_adapter_letter = Rails.root.join("lib","seeds","illumina-adapter-sequences_1000000002694-01.pdf")
+Document.delete_all
 Document.create!([
 	{user_id: admin, name: File.basename(illumina_truseq_dna_pcr_free), content_type: "application/pdf", 
 		data: File.open(illumina_truseq_dna_pcr_free,"rb").read(), is_protocol: false, 
@@ -144,14 +172,14 @@ Barcode.create!([
 {user_id: admin, name: "N711", sequence: "AAGAGGCA", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
 {user_id: admin, name: "N712", sequence: "GTAGAGGA", index_number: 1, sequencing_library_prep_kit_id: nextera_kits_id},
 {user_id: admin, name: "N501", sequence: "TAGATCGC", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
-{user_id: admin, name: "N501", sequence: "CTCTCTAT", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
-{user_id: admin, name: "N501", sequence: "TATCCTCT", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
-{user_id: admin, name: "N501", sequence: "AGAGTAGA", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
-{user_id: admin, name: "N501", sequence: "GTAAGGAG", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
-{user_id: admin, name: "N501", sequence: "ACTGCATA", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
-{user_id: admin, name: "N501", sequence: "AAGGAGTA", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
-{user_id: admin, name: "N501", sequence: "CTAAGCCT", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
-{user_id: admin, name: "N501", sequence: "GCGTAAGA", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N502", sequence: "CTCTCTAT", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N503", sequence: "TATCCTCT", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N504", sequence: "AGAGTAGA", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N505", sequence: "GTAAGGAG", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N506", sequence: "ACTGCATA", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N507", sequence: "AAGGAGTA", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N508", sequence: "CTAAGCCT", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
+{user_id: admin, name: "N517", sequence: "GCGTAAGA", index_number: 2, sequencing_library_prep_kit_id: nextera_kits_id},
 
 {user_id: admin, name: "i701", sequence: "ATTACTCG", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
 {user_id: admin, name: "i702", sequence: "TCCGGAGA", index_number: 1, sequencing_library_prep_kit_id: nebnext_duel_set1_id},
@@ -210,35 +238,6 @@ NucleicAcidTerm.create!([
 	{user_id: admin, name: "protein", accession: "SO:0000104", definition: "sequence of amino acids linked by peptide bonds which may lack appreciable tertiary structure and may not be liable to irreversible denaturation."}
 ])
 
-SequenceOntologyTerm.delete_all
-SequenceOntologyTerm.create!(name: "DNA",
-	accession: "SO:0000352",
-	definition: %{ An attribute describing a sequence consisting of nucleobases bound to a repeating unit made of a 
-			2-deoxy-D-ribose ring connected to a phosphate backbone.},
-	)
-
-SequenceOntologyTerm.create!(name: "RNA",
-	accession: "SO:0000356",
-	definition: %{An attribute describing a sequence consisting of nucleobases bound to a repeating unit made of a 
-		D-ribose ring connected to a phosphate backbone.},
-	)
-
-SequenceOntologyTerm.create!(name: "polyadenylated mRNA",
-	accession: 	"SO:0000871",
-	definition: "An mRNA that is polyadenylated."
-	)
-
-SequenceOntologyTerm.create!(name: "miRNA",
-	accession: "SO:0000276",
-	definition: "micro RNA"
-	)
-
-SequenceOntologyTerm.create!(name: "protein",
-	accession: "SO:0000104",
-	definition: %{ sequence of amino acids linked by peptide bonds which may lack appreciable tertiary structure 
-		and may not be liable to irreversible denaturation.}
-	)
-
 BiosampleType.delete_all
 BiosampleType.create!([
 	{user_id: admin, name: "primary cell"},
@@ -250,45 +249,6 @@ BiosampleType.create!([
 	{user_id: admin, name: "stem cell"}
 	])
 
-DocumentType.delete_all
-DocumentType.create!([
-	{user_id: admin, name: "growth protocol"},
-	{user_id: admin, name: "extraction protocol"},
-	{user_id: admin, name: "certificate of analysis"},
-	{user_id: admin, name: "data QA"},
-	{user_id: admin, name: "differentiation protocol"},
-	{user_id: admin, name: "dedifferentiation protocol"},
-	{user_id: admin, name: "data sheet"},
-	{user_id: admin, name: "treatment protocol"},
-	{user_id: admin, name: "general protocol"},
-	{user_id: admin, name: "excision protocol"},
-	{user_id: admin, name: "transfection protocol"},
-	{user_id: admin, name: "construct image"},
-	{user_id: admin, name: "cell isolation protocol"},
-	{user_id: admin, name: "iPS reprogramming protocol"},
-	{user_id: admin, name: "standards document"},
-	{user_id: admin, name: "strain generation protocol"},
-	{user_id: admin, name: "spike-in concentrations"},
-	{user_id: admin, name: "pipeline protocol"},
-	{user_id: admin, name: "file format specification"},
-	{user_id: admin, name: "high resolution pathology slide image"},
-	{user_id: admin, name: "other"}
-	])
-
-Uberon.delete_all
-Uberon.create!([
-	{user_id: admin, name: "head", accession: "UBERON_0000033"},
-	{user_id: admin, name: "limb", accession: "UBERON:0002101"},
-	{user_id: admin, name: "saliva-secreting gland", accession: "UBERON:0001044"},
-	{user_id: admin, name: "male accessory sex gland", accession: "UBERON:0010147"},
-	{user_id: admin, name: "testis", accession: "UBERON:0000473"},
-	{user_id: admin, name: "female gonad", accession: "UBERON:0000992"},
-	{user_id: admin, name: "digestive system", accession: "UBERON:0001007"},
-	{user_id: admin, name: "adult maxillary segment", accession: "FBbt:00003016"},
-	{user_id: admin, name: "female reproductive system", accession: "UBERON:0000474"},
-	{user_id: admin, name: "male reproductive system", accession: "UBERON:0000079"}
-	])
-
 #Vendor
 #see script in lib called upload_vendors.rb.
 
@@ -297,8 +257,8 @@ Donor.create!([
 	{user_id: admin, encode_identifier: "ENCDO268AAA", name:"bernstein:donor of NHEK cells"},
 	{user_id: admin, encode_identifier: "ENCDO000ABE", name:"encode:donor of HCT-116"},
 	{user_id: admin, encode_identifier: "ENCDO000ABF", name: "encode:donor of HEK293"},
-	{user_id: admin, encode_identifier: "ENCDO000AAK", name: "encode:donor of GM12878"
-	])
+	{user_id: admin, encode_identifier: "ENCDO000AAK", name: "encode:donor of GM12878"}
+])
 
 Isotype.delete_all
 Isotype.create!([
@@ -430,7 +390,8 @@ Chromosome.create!([
 
 Target.delete_all
 Target.create!([
-{user_id: admin, name: "RELB-human", encode_identifier: "4c8ef6d7-d7e9-4af5-9b8b-4e44450b5c3c"}
+{user_id: admin, name: "RELB-human", encode_identifier: "RELB-human"},
+{user_id: admin, name: "CTCF-human", encode_identifier: "CTCF-human"}
 ])
 
 Antibody.delete_all
@@ -441,9 +402,9 @@ Antibody.create!([
 
 Biosample.delete_all
 Biosample.create!([
-	{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS826GBM", encid: "ENCBS826GBM", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(encode_identifier: "dgrc").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+	{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS826GBM", encid: "ENCBS826GBM", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(encode_identifier: "coriell").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
-{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS758JEW", encid: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(encode_identifier: "dgrc").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS758JEW", encid: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(encode_identifier: "coriell").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
 {user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS389LEA", encid: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
 
@@ -452,8 +413,8 @@ Biosample.create!([
 
 Library.delete_all
 Library.create!([
-	{user_id: admin, name: "lib1", barcode: "ATCCGTA", nucleic_acid_term_id: NucleicAcidTerm.find_by!(name: "DNA").id, biosample_id: Biosample.find_by!(name: "ENCBS488GLI").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by!(name: "ENCAB140SNC").id},
-
-	{user_id: admin, name: "lib2", barcode: "GATGGAC", nucleic_acid_term_id: NucleicAcidTerm.find_by!(name: "DNA").id, biosample_id: Biosample.find_by!(name: "ENCBS389LEA").id, size_range: "450-650", documents: [Document.second],strand_specific: false, antibody_id: Antibody.find_by!(name: "ENCAB140SNC").id}
+	{user_id: admin, name: "lib1", sequencing_library_prep_kit_id: truseq_ht_kits_id, nucleic_acid_term_id: NucleicAcidTerm.find_by!(name: "DNA").id, biosample_id: Biosample.find_by!(name: "ENCBS488GLI").id, size_range: "450-650", documents: [Document.second],strand_specific: false},
+#
+	{user_id: admin, name: "lib2", sequencing_library_prep_kit_id: truseq_ht_kits_id, nucleic_acid_term_id: NucleicAcidTerm.find_by!(name: "DNA").id, biosample_id: Biosample.find_by!(name: "ENCBS389LEA").id, size_range: "450-650", documents: [Document.second],strand_specific: false}
 ])
 	

@@ -8,7 +8,7 @@ class Biosample < ActiveRecord::Base
   belongs_to  :vendor
 	has_many    :libraries
 	
-	validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
+	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
 	validates :documents, presence: true
 	validates :biosample_type_id, presence: true
 	validates :biosample_term_name_id, presence: true

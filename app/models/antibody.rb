@@ -7,7 +7,7 @@ class Antibody < ActiveRecord::Base
   belongs_to :isotype
   belongs_to :target
 
-	validates  :name, length: { maximum: 20 }, presence: true, uniqueness: true
+	validates  :name, length: { maximum: 40 }, presence: true, uniqueness: true
 	#validates  :antibody_purifications, presence: true
 	validates  :vendor_id, presence: true
 	validates  :target_id, presence: true

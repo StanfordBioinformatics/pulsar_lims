@@ -8,7 +8,7 @@ class SequencingLibraryPrepKit < ActiveRecord::Base
 	#has a unique constraint on the combined columns :vendor_id and :name.
 
 	validates :name, presence: true
-	validates_uniqueness_of :vendor_product_identifier, scope: :vendor_id
+	validates_uniqueness_of :vendor_product_identifier, scope: :vendor_id, allow_blank: true
 	validates_uniqueness_of :name, scope: :vendor_id
 	accepts_nested_attributes_for :documents, allow_destroy: true
 

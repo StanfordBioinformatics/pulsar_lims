@@ -4,7 +4,7 @@ class SequencingResult < ActiveRecord::Base
 	belongs_to :report, class_name: "Document"
 	has_many   :barcode_sequencing_results, dependent: :destroy
 
-	validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
+	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
 	validates :run_name, presence: true
 
 	def self.policy_class

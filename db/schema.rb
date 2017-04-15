@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415003536) do
+ActiveRecord::Schema.define(version: 20170415005010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -241,20 +241,6 @@ ActiveRecord::Schema.define(version: 20170415003536) do
   add_index "crispr_constructs", ["target_id"], name: "index_crispr_constructs_on_target_id", using: :btree
   add_index "crispr_constructs", ["user_id"], name: "index_crispr_constructs_on_user_id", using: :btree
   add_index "crispr_constructs", ["vendor_id"], name: "index_crispr_constructs_on_vendor_id", using: :btree
-
-  create_table "crispr_genetic_modifications", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "user_id"
-    t.integer  "vendor_id"
-    t.string   "vendor_product_identifier"
-    t.text     "guide_rna_sequences"
-    t.string   "insert_sequence"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  add_index "crispr_genetic_modifications", ["user_id"], name: "index_crispr_genetic_modifications_on_user_id", using: :btree
-  add_index "crispr_genetic_modifications", ["vendor_id"], name: "index_crispr_genetic_modifications_on_vendor_id", using: :btree
 
   create_table "crisprs", force: :cascade do |t|
     t.string   "name"
@@ -621,8 +607,6 @@ ActiveRecord::Schema.define(version: 20170415003536) do
   add_foreign_key "crispr_constructs", "targets"
   add_foreign_key "crispr_constructs", "users"
   add_foreign_key "crispr_constructs", "vendors"
-  add_foreign_key "crispr_genetic_modifications", "users"
-  add_foreign_key "crispr_genetic_modifications", "vendors"
   add_foreign_key "crisprs", "biosamples"
   add_foreign_key "crisprs", "crispr_constructs"
   add_foreign_key "crisprs", "donor_constructs"
