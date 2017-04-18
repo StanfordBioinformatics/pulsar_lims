@@ -18,7 +18,11 @@
 
 	<tr>
   	<th><strong>Sequencing library prep kit:</strong></th>
-  	<td><%= link_to @plate.sequencing_library_prep_kit.name, @plate.sequencing_library_prep_kit %></td>
+		<% if @plate.sequencing_library_prep_kit.present? %>
+  		<td><%= link_to @plate.sequencing_library_prep_kit.name, @plate.sequencing_library_prep_kit %></td>
+		<% else %>
+			<td></td>
+		<% end %>
 	</tr>
 
 	<tr>
@@ -27,13 +31,8 @@
 	</tr>
 
 	<tr>
-  	<th><strong>Num rows:</strong></th>
-  	<td><%= @plate.num_rows %></td>
-	</tr>
-
-	<tr>
-  	<th><strong>Num cols:</strong></th>
-  	<td><%= @plate.num_cols %></td>
+  	<th><strong>Plate dimensions:</strong></th>
+  	<td><%= @plate.num_rows %>x<%= @plate.num_cols %> (R x C)</td>
 	</tr>
 
 	<tr>

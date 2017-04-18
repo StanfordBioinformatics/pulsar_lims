@@ -12,8 +12,7 @@
       <th>Name</th>
       <th>Sequencing library prep kit</th>
       <th>Paired end</th>
-      <th>Num rows</th>
-      <th>Num cols</th>
+      <th>Plate dimensions</th>
       <th>Vendor</th>
       <th>Vendor product identifier</th>
       <th>Actions</th>
@@ -24,10 +23,13 @@
     <% @plates.each do |plate| %>
       <tr>
         <td><%= link_to plate.name, plate %></td>
-        <td><%= link_to plate.sequencing_library_prep_kit.name, plate.sequencing_library_prep_kit %></td>
+				<% if plate.sequencing_library_prep_kit.present? %>
+	        <td><%= link_to plate.sequencing_library_prep_kit.name, plate.sequencing_library_prep_kit %></td>
+				<% else %>
+					<td></td>
+				<% end %>
         <td><%= plate.paired_end %></td>
-        <td><%= plate.num_rows %></td>
-        <td><%= plate.num_cols %></td>
+        <td><%= plate.num_rows %>x<%= plate.num_cols %> (R x C)</td>
         <td><%= link_to plate.vendor.name, plate.vendor %></td>
         <td><%= plate.vendor_product_identifier %></td>
         <td><%= link_to fa_icon("pencil"), edit_plate_path(plate) %></td>

@@ -1,13 +1,27 @@
 <%= simple_form_for(@plate) do |f| %>
   <%= f.error_notification %>
+  <% if @plate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@plate.errors.count, "error") %> prohibited this plate from being saved:</h2>
+
+      <ul>
+      <% @plate.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <%= f.input :name %>
   <%= f.association :sequencing_library_prep_kit %>
 	<%= f.input :paired_end %>
 	<div class="dimensions">
-		<%= label_tag("Plate Dimensions") %>&nbsp
-		<%= f.input_field :num_rows %><span> x</span>
-		<%= f.input_field :num_cols %><span> (Rows x Columns)</span>
+		<%= label_tag("Plate Dimensions: ") %>&nbsp &nbsp
+		<%= f.input_field :num_rows%>
+		<label for="plate_num_rows" data-toggle="tooltip" title="The number of rows of wells on the plate."><span>Rows </span></label>
+		<span>  x  </span>
+		<%= f.input_field :num_cols, inline_label: "bobby"%>
+		<label for="plate_num_cols" data-toggle="tooltip" title="The number of columns of wells on the plate."><span>Columns</span></label>
 	</div></br>
   <%= f.association :vendor %>
   <%= f.input :vendor_product_identifier %>
