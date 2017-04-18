@@ -1,0 +1,61 @@
+<% title(@well.name, "Wells") %>
+<header>
+  <h1><%= @well.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @well} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @well} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @well } %>
+
+<table class="attributes">
+	<tr>
+	  <th><strong>Name:</strong></th>
+	  <td><%= @well.name %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Plate:</strong></th>
+	  <td><%= link_to @well.plate, [@plate, @well] %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Row:</strong></th>
+	  <td><%= @well.row %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Col:</strong></th>
+	  <td><%= @well.col %></td>
+	</tr>
+	
+	<tr>
+		<% if not @well.paired_end? %>
+		  <th><strong>Barcode:</strong></th>
+			<% if @well.barcode.present? %>
+			  <td><%= link_to "#{@well.barcode.name} #{@well.barcode.sequence}", @well.barcode %></td>
+			<% else %>
+				<td></td>
+			<% end %>
+		<% else %>
+			<% if @well.paired_barcode.present? %>
+				<td><%= link_to "#{@well.paired_barcode.name} #{@well.paired_barcode.sequence}", @well.paired_barcode %></td>
+			<% else %>
+				<td></td>
+		<% end %>
+	</tr>
+	
+	<tr>
+	  <th><strong>Fail:</strong></th>
+	  <td><%= @well.fail %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Comment:</strong></th>
+	  <td><%= @well.comment %></td>
+	</tr>
+</table>
+
+<%= link_to 'Back', plates_path(@plate) %>

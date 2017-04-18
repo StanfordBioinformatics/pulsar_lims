@@ -13,18 +13,11 @@
   <% end %>
 
   <%= f.input :name %>
-  <%= f.association :sequencing_library_prep_kit %>
-	<%= f.input :paired_end %>
-	<div class="dimensions">
-		<%= label_tag("Plate Dimensions: ") %>&nbsp &nbsp
-		<%= f.input_field :num_rows%>
-		<label for="plate_num_rows" data-toggle="tooltip" title="The number of rows of wells on the plate."><span>Rows </span></label>
-		<span>  x  </span>
-		<%= f.input_field :num_cols, inline_label: "bobby"%>
-		<label for="plate_num_cols" data-toggle="tooltip" title="The number of columns of wells on the plate."><span>Columns</span></label>
-	</div></br>
+	<%= f.input :dimensions, collection: Plate::DIMENSIONS, prompt: "Select the plate size" %>
   <%= f.association :vendor %>
   <%= f.input :vendor_product_identifier %>
+  <%= f.association :sequencing_library_prep_kit %>
+	<%= f.input :paired_end %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

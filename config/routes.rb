@@ -1,6 +1,9 @@
 Pulsar::Application.routes.draw do
 
-  resources :plates
+  resources :wells
+  resources :plates do
+		resources :wells, except: [:index, :new, :destroy]
+	end
   resources :paired_barcodes
   resources :crisprs do
 		get :select_chromosome_on_reference_genome, on: :collection

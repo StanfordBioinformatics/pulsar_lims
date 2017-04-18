@@ -1,0 +1,16 @@
+<%= simple_form_for([@plate, @well]) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :name %>
+  <%= f.association :plate %>
+  <%= f.input :row %>
+  <%= f.input :col %>
+  <%= f.association :barcode %>
+  <%= f.association :paired_barcode %>
+  <%= f.input :fail %>
+  <%= f.input :comment %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div>
+<% end %>

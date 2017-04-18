@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417231248) do
+ActiveRecord::Schema.define(version: 20170418053212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -449,12 +449,11 @@ ActiveRecord::Schema.define(version: 20170417231248) do
     t.string   "name"
     t.integer  "sequencing_library_prep_kit_id"
     t.boolean  "paired_end"
-    t.integer  "num_rows"
-    t.integer  "num_cols"
     t.integer  "vendor_id"
     t.string   "vendor_product_identifier"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.string   "dimensions"
   end
 
   add_index "plates", ["name"], name: "index_plates_on_name", unique: true, using: :btree
@@ -595,6 +594,25 @@ ActiveRecord::Schema.define(version: 20170417231248) do
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
   add_index "vendors", ["user_id"], name: "index_vendors_on_user_id", using: :btree
 
+  create_table "wells", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "plate_id"
+    t.integer  "row"
+    t.integer  "col"
+    t.integer  "barcode_id"
+    t.integer  "paired_barcode_id"
+    t.boolean  "fail",              default: false
+    t.text     "comment"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "wells", ["barcode_id"], name: "index_wells_on_barcode_id", using: :btree
+  add_index "wells", ["paired_barcode_id"], name: "index_wells_on_paired_barcode_id", using: :btree
+  add_index "wells", ["plate_id"], name: "index_wells_on_plate_id", using: :btree
+  add_index "wells", ["user_id"], name: "index_wells_on_user_id", using: :btree
+
   add_foreign_key "antibodies", "isotypes"
   add_foreign_key "antibodies", "organisms"
   add_foreign_key "antibodies", "targets"
@@ -672,4 +690,8 @@ ActiveRecord::Schema.define(version: 20170417231248) do
   add_foreign_key "targets", "users"
   add_foreign_key "uberons", "users"
   add_foreign_key "vendors", "users"
+  add_foreign_key "wells", "barcodes"
+  add_foreign_key "wells", "paired_barcodes"
+  add_foreign_key "wells", "plates"
+  add_foreign_key "wells", "users"
 end

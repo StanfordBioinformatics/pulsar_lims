@@ -65,6 +65,6 @@ class PlatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plate_params
-      params.require(:plate).permit(:name, :sequencing_library_prep_kit_id, :paired_end, :num_rows, :num_cols, :vendor_id, :vendor_product_identifier)
+      params.require(:plate).permit(:dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier)
     end
 end

@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
 	has_many :targets, dependent: :nullify
 	has_many :sequencing_library_prep_kits
 	has_many :vendors, dependent: :nullify
+	has_many :wells, dependent: :nullify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

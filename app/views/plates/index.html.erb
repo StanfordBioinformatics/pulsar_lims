@@ -10,11 +10,11 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Sequencing library prep kit</th>
-      <th>Paired end</th>
-      <th>Plate dimensions</th>
+      <th>Dimensions</th>
       <th>Vendor</th>
       <th>Vendor product identifier</th>
+      <th>Sequencing library prep kit</th>
+      <th>Paired end</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -23,15 +23,15 @@
     <% @plates.each do |plate| %>
       <tr>
         <td><%= link_to plate.name, plate %></td>
+				<td><%= "#{plate.nrows}x#{plate.ncols}" %></td>
+        <td><%= link_to plate.vendor.name, plate.vendor %></td>
+        <td><%= plate.vendor_product_identifier %></td>
 				<% if plate.sequencing_library_prep_kit.present? %>
 	        <td><%= link_to plate.sequencing_library_prep_kit.name, plate.sequencing_library_prep_kit %></td>
 				<% else %>
 					<td></td>
 				<% end %>
         <td><%= plate.paired_end %></td>
-        <td><%= plate.num_rows %>x<%= plate.num_cols %> (R x C)</td>
-        <td><%= link_to plate.vendor.name, plate.vendor %></td>
-        <td><%= plate.vendor_product_identifier %></td>
         <td><%= link_to fa_icon("pencil"), edit_plate_path(plate) %></td>
         <td><%= link_to fa_icon("trash"), plate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
