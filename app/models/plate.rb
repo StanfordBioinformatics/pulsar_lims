@@ -1,4 +1,5 @@
 class Plate < ActiveRecord::Base
+	ROW_LETTERS = ("A".."Z").to_a
 	DIMENSIONS = ["2x2","8x12"]
 	
 	has_many :wells, dependent: :destroy
@@ -14,11 +15,15 @@ class Plate < ActiveRecord::Base
 		ApplicationPolicy
 	end
 
-	def nrows
+	def self.row_letter(row_num)
+		return ROW_LETTERS[row_num - 1]
+	end
+
+	def nrow
 		return self.dimensions.split("x")[0].to_i
 	end
 
-	def ncols
+	def ncol
 		return self.dimensions.split("x")[1].to_i
 	end
 end

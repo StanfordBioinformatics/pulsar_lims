@@ -1,5 +1,4 @@
 class Well < ActiveRecord::Base
-	ROW_LETTERS = ("A".."Z").to_a
   belongs_to :user
   belongs_to :plate
   belongs_to :barcode
@@ -11,10 +10,13 @@ class Well < ActiveRecord::Base
 	before_create :set_name
 	before_save :verify_barcodes
 
+	def self.policy_class
+		ApplicationPolicy
+	end
 
 	protected	
 		def set_name
-			self.name = "#{ROW_LETTERS[self.row - 1]}#{col}"
+			self.name = "#{Plate::row_letter(self.row)}#{col}"
 		end
 
     def verify_barcodes

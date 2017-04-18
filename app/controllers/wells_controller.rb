@@ -30,7 +30,7 @@ class WellsController < ApplicationController
 		authorize @well
     respond_to do |format|
       if @well.update(well_params)
-        format.html { redirect_to @well, notice: 'Well was successfully updated.' }
+        format.html { redirect_to @plate, notice: 'Well was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

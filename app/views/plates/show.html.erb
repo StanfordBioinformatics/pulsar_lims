@@ -32,7 +32,7 @@
 
 	<tr>
   	<th><strong>Dimensions:</strong></th>
-		<td><%= "#{@plate.nrows}x#{@plate.ncols}" %></td>
+		<td><%= "#{@plate.nrow}x#{@plate.ncol}" %></td>
 	</tr>
 
 	<tr>
@@ -45,5 +45,29 @@
   	<td><%= @plate.vendor_product_identifier %></td>
 	</tr>
 </table>
+
+<div class="jumbotron">
+<h3>Plate Layout</h3>
+<table class="plate-table">
+	<tr><th></th>
+		<% (1..@plate.ncol).each do |c| %>
+			<th><%= c %></th>
+		<% end %>
+	</tr>
+	<% (1..@plate.nrow).each do |r| %>
+		<tr><th><%= Plate::row_letter(r) %></th>
+		<% (1..@plate.ncol).each do |c| %>
+			<% well = @plate.wells.find_by!({row: r, col: c}) %>
+			<% if well.fail? %>
+				<% class_val = "failure" %>
+			<% else %>
+				<% class_val = "success" %>
+			<% end %>
+			<td><%= link_to well.name, [@plate,well], class: "#{class_val}" %></td>
+		<% end %>
+		</tr>
+	<% end %>
+</table></br>
+</div>
 
 <%= link_to 'Back', plates_path %>

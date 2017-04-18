@@ -23,7 +23,7 @@
     <% @plates.each do |plate| %>
       <tr>
         <td><%= link_to plate.name, plate %></td>
-				<td><%= "#{plate.nrows}x#{plate.ncols}" %></td>
+				<td><%= "#{plate.nrow}x#{plate.ncol}" %></td>
         <td><%= link_to plate.vendor.name, plate.vendor %></td>
         <td><%= plate.vendor_product_identifier %></td>
 				<% if plate.sequencing_library_prep_kit.present? %>

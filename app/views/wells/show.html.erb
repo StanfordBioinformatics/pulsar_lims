@@ -3,8 +3,8 @@
   <h1><%= @well.name %></h1>
 
   <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @well} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @well} %>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @well, nested: @plate} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @well, nested: @plate} %>
   </ul>
 </header>
 
@@ -18,7 +18,7 @@
 	
 	<tr>
 	  <th><strong>Plate:</strong></th>
-	  <td><%= link_to @well.plate, [@plate, @well] %></td>
+	  <td><%= link_to @well.plate.name, @plate %></td>
 	</tr>
 	
 	<tr>
@@ -27,12 +27,12 @@
 	</tr>
 	
 	<tr>
-	  <th><strong>Col:</strong></th>
+	  <th><strong>Column:</strong></th>
 	  <td><%= @well.col %></td>
 	</tr>
 	
 	<tr>
-		<% if not @well.paired_end? %>
+		<% if not @plate.paired_end? %>
 		  <th><strong>Barcode:</strong></th>
 			<% if @well.barcode.present? %>
 			  <td><%= link_to "#{@well.barcode.name} #{@well.barcode.sequence}", @well.barcode %></td>
@@ -44,6 +44,7 @@
 				<td><%= link_to "#{@well.paired_barcode.name} #{@well.paired_barcode.sequence}", @well.paired_barcode %></td>
 			<% else %>
 				<td></td>
+			<% end %>
 		<% end %>
 	</tr>
 	
@@ -58,4 +59,4 @@
 	</tr>
 </table>
 
-<%= link_to 'Back', plates_path(@plate) %>
+<%= link_to 'Back', @plate %>
