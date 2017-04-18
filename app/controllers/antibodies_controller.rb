@@ -2,31 +2,23 @@ class AntibodiesController < ApplicationController
 	include AntibodyPurificationsConcern #provides add_antibody_purifications()
   before_action :set_antibody, only: [:show, :edit, :update, :destroy]
 
-  # GET /antibodies
-  # GET /antibodies.json
   def index
     @antibodies = policy_scope(Antibody).order("lower(name)")
   end
 
-  # GET /antibodies/1
-  # GET /antibodies/1.json
   def show
 		authorize @antibody
   end
 
-  # GET /antibodies/new
   def new
 		authorize Antibody
     @antibody = Antibody.new
   end
 
-  # GET /antibodies/1/edit
   def edit
 		authorize @antibody
   end
 
-  # POST /antibodies
-  # POST /antibodies.json
   def create
     @antibody = Antibody.new(antibody_params)
 		authorize @antibody
@@ -45,8 +37,6 @@ class AntibodiesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /antibodies/1
-  # PATCH/PUT /antibodies/1.json
   def update
 		authorize @antibody
 		@antibody = add_antibody_purifications(@antibody,params[:antibody][:antibody_purification_ids])
@@ -63,8 +53,6 @@ class AntibodiesController < ApplicationController
     end
   end
 
-  # DELETE /antibodies/1
-  # DELETE /antibodies/1.json
   def destroy
 		authorize @antibody
     @antibody.destroy

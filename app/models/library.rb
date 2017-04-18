@@ -7,11 +7,12 @@ class Library < ActiveRecord::Base
 	NUCLEIC_ACID_STARTING_QUANTITY_UNITS = ["cells","cell-equivalent","µg","ng","pg","mg"]
 
 	#The is_control bool column has a default of false.
+	has_many   :barcode_sequencing_results, dependent: :destroy
 	has_and_belongs_to_many :documents
 	has_and_belongs_to_many :sequencing_requests
 	has_and_belongs_to_many :barcodes
 	has_and_belongs_to_many :paired_barcodes
-	has_many   :barcode_sequencing_results, dependent: :destroy
+	has_many :plates
 	belongs_to :biosample
 	belongs_to :library_fragmentation_method
 	belongs_to :nucleic_acid_term

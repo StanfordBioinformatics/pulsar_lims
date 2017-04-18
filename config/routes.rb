@@ -1,5 +1,6 @@
 Pulsar::Application.routes.draw do
 
+  resources :plates
   resources :paired_barcodes
   resources :crisprs do
 		get :select_chromosome_on_reference_genome, on: :collection

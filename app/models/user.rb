@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
 	has_many :nucleic_acid_terms, dependent: :nullify
 	has_many :organisms, dependent: :nullify
 	has_many :paired_barcodes, dependent: :nullify
+	has_many :plates, dependent: :nullify
 	has_many :reference_genomes, dependent: :nullify
 	has_many :sequencing_centers, dependent: :nullify
 	has_many :sequencing_platforms, dependent: :nullify

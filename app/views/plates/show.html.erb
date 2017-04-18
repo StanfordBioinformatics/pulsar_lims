@@ -1,0 +1,50 @@
+<% title(@plate.name, "Plates") %>
+<header>
+  <h1><%= @plate.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @plate} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @plate} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @plate } %>
+
+<table class="attributes">
+	<tr>
+  	<th><strong>Name:</strong></th>
+  	<td><%= @plate.name %>
+	</tr>
+
+	<tr>
+  	<th><strong>Sequencing library prep kit:</strong></th>
+  	<td><%= link_to @plate.sequencing_library_prep_kit.name, @plate.sequencing_library_prep_kit %></td>
+	</tr>
+
+	<tr>
+  	<th><strong>Paired end:</strong></th>
+  	<td><%= @plate.paired_end %></td>
+	</tr>
+
+	<tr>
+  	<th><strong>Num rows:</strong></th>
+  	<td><%= @plate.num_rows %></td>
+	</tr>
+
+	<tr>
+  	<th><strong>Num cols:</strong></th>
+  	<td><%= @plate.num_cols %></td>
+	</tr>
+
+	<tr>
+  	<th><strong>Vendor:</strong></th>
+  	<td><%= link_to @plate.vendor.name, @plate.vendor %></td>
+	</tr>
+
+	<tr>
+  	<th><strong>Vendor product identifier:</strong></th>
+  	<td><%= @plate.vendor_product_identifier %></td>
+	</tr>
+</table>
+
+<%= link_to 'Back', plates_path %>

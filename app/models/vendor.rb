@@ -4,6 +4,7 @@ class Vendor < ActiveRecord::Base
 	has_many :crispr_constructs
 	has_many :donor_constructs
 	has_many :libraries
+	has_many :plates
 	has_many :sequencing_library_prep_kits
 	belongs_to :user
 	

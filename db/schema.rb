@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415005010) do
+ActiveRecord::Schema.define(version: 20170417231248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -444,6 +444,24 @@ ActiveRecord::Schema.define(version: 20170415005010) do
   add_index "paired_barcodes", ["sequencing_library_prep_kit_id"], name: "index_paired_barcodes_on_sequencing_library_prep_kit_id", using: :btree
   add_index "paired_barcodes", ["user_id"], name: "index_paired_barcodes_on_user_id", using: :btree
 
+  create_table "plates", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "sequencing_library_prep_kit_id"
+    t.boolean  "paired_end"
+    t.integer  "num_rows"
+    t.integer  "num_cols"
+    t.integer  "vendor_id"
+    t.string   "vendor_product_identifier"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "plates", ["name"], name: "index_plates_on_name", unique: true, using: :btree
+  add_index "plates", ["sequencing_library_prep_kit_id"], name: "index_plates_on_sequencing_library_prep_kit_id", using: :btree
+  add_index "plates", ["user_id"], name: "index_plates_on_user_id", using: :btree
+  add_index "plates", ["vendor_id"], name: "index_plates_on_vendor_id", using: :btree
+
   create_table "reference_genomes", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "url",        limit: 255
@@ -637,6 +655,9 @@ ActiveRecord::Schema.define(version: 20170415005010) do
   add_foreign_key "paired_barcodes", "barcodes", column: "index2_id"
   add_foreign_key "paired_barcodes", "sequencing_library_prep_kits"
   add_foreign_key "paired_barcodes", "users"
+  add_foreign_key "plates", "sequencing_library_prep_kits"
+  add_foreign_key "plates", "users"
+  add_foreign_key "plates", "vendors"
   add_foreign_key "reference_genomes", "users"
   add_foreign_key "sequencing_centers", "users"
   add_foreign_key "sequencing_library_prep_kits", "users"
