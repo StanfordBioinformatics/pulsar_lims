@@ -1,7 +1,7 @@
 class Plate < ActiveRecord::Base
-	DIMENSIONS = ["8x12"]
+	DIMENSIONS = ["2x2","8x12"]
 	
-	has_many :wells
+	has_many :wells, dependent: :destroy
   belongs_to :user
   belongs_to :sequencing_library_prep_kit
   belongs_to :vendor
@@ -15,10 +15,10 @@ class Plate < ActiveRecord::Base
 	end
 
 	def nrows
-		return self.dimensions.split("x")[0]
+		return self.dimensions.split("x")[0].to_i
 	end
 
 	def ncols
-		return self.dimensions.split("x")[1]
+		return self.dimensions.split("x")[1].to_i
 	end
 end

@@ -1,4 +1,5 @@
 class PlatesController < ApplicationController
+	include PlatesConcern #gives me add_wells()
   before_action :set_plate, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -23,6 +24,7 @@ class PlatesController < ApplicationController
     @plate = Plate.new(plate_params)
 
 		@plate.user = current_user
+		create_wells(@plate)
 
     respond_to do |format|
       if @plate.save
