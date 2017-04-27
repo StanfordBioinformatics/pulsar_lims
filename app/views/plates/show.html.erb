@@ -70,4 +70,30 @@
 </table></br>
 </div>
 
+<% tooltip = "Enter barcodes in matrix format (same format as the plate), such that barcode in position [1,1] corresponds to well A1, and the barcode in position [2,2] corresponds to well B2 ... Use a single tab to delimit values; for wells without barcodes just leave the corresponding field empty." %>
+<% if @plate.paired_end? %>
+  <%= simple_form_for(@plate) do |f| %>
+    <%= f.input :add_paired_barcodes, as: :text, placeholder: "ATCCGC-GTACAG\nCGTGAC-TAGGCA\n...",
+				label_html: {"data-toggle" => "tooltip", "title" => "#{tooltip}" },
+        hint: "Copy and paste paired-barcodes in - if there are any validation errors, you'll have to paste them all back in with the corrections." %>
+
+    <div class="actions">
+     <%= f.button :submit, "Add Paired Barcodes", class: "btn-primary "%>
+    </div></br>
+  <% end %>
+
+<% else %>
+
+  <%= simple_form_for(@plate) do |f| %>
+    <%= f.input :add_barcodes, as: :text, placeholder: "ATCCGA\nTAGCGA\n...", 
+				label_html: {"data-toggle" => "tooltip", "title" => "#{tooltip}"},
+        hint: "Copy and paste barcodes in - if there are any validation errors, you'll have to paste them all back in with the corrections." %>
+
+    <div class="actions">
+     <%= f.button :submit, "Add Barcodes", class: "btn-primary "%>
+    </div></br>
+  <% end %>
+<% end %>
+</br></br>
+
 <%= link_to 'Back', plates_path %>

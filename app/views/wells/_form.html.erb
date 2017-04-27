@@ -5,8 +5,11 @@
   <%= f.association :plate %>
   <%= f.input :row %>
   <%= f.input :col %>
-  <%= f.association :barcode %>
-  <%= f.association :paired_barcode %>
+	<% if @plate.paired_end? %>
+  	<%= f.association :paired_barcode %>
+	<% else %>
+	  <%= f.association :barcode %>
+	<% end %>
   <%= f.input :fail %>
   <%= f.input :comment %>
 

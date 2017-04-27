@@ -56,3 +56,25 @@ $ ->
   ###
   #The following code is used with the Library show partial:
   ###
+  $bc_submit = $('div.add_barcodes input[type="submit"]')
+  $add_paired_barcodes = $("#library_add_paired_barcodes")
+  $add_barcodes = $("#library_add_barcodes")
+  hide_bc_submit = -> 
+    alert("howdy")
+    if ( $add_barcodes.length == 1 && ! $add_barcodes.val() )
+      $bc_submit.attr("disabled","disabled")
+    else if ( $add_paired_barcodes.length == 1 && ! $add_paired_barcodes.val())
+      $bc_submit.attr("disabled","disabled")
+    else
+      $bc_submit.attr("disabled",false)
+      
+  hide_bc_submit()
+  $add_paired_barcodes.focus (event) ->
+    $bc_submit.attr("disabled",false)
+  $add_barcodes.focus (event) ->
+    $bc_submit.attr("disabled",false)
+  $add_paired_barcodes.blur (event) ->
+    hide_bc_submit()
+  $add_barcodes.blur (event) ->
+    hide_bc_submit()
+  

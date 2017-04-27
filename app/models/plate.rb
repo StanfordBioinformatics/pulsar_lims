@@ -1,6 +1,8 @@
 class Plate < ActiveRecord::Base
+  attr_accessor :add_barcodes #used only in the show view in the form at the bottom.
+  attr_accessor :add_paired_barcodes #used only in the show view in the form at the bottom.
 	ROW_LETTERS = ("A".."Z").to_a
-	DIMENSIONS = ["2x2","8x12"]
+	DIMENSIONS = ["2x2 (4)","8x12 (96)","16x24 (384)"]
 	
 	has_many :wells, dependent: :destroy
   belongs_to :user
@@ -20,10 +22,10 @@ class Plate < ActiveRecord::Base
 	end
 
 	def nrow
-		return self.dimensions.split("x")[0].to_i
+		return self.dimensions.split()[0].split("x")[0].to_i
 	end
 
 	def ncol
-		return self.dimensions.split("x")[1].to_i
+		return self.dimensions.split()[0].split("x")[1].to_i
 	end
 end

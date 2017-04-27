@@ -1,5 +1,5 @@
 class PlatesController < ApplicationController
-	include PlatesConcern #gives me add_wells()
+	include PlatesConcern #gives me add_wells(), add_barcodes(), and add_paired_barcodes()
   before_action :set_plate, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -39,6 +39,26 @@ class PlatesController < ApplicationController
 
   def update
 		authorize @plate
+
+    barcode_ids_param = :add_barcodes
+    paired_bc_ids_param = :add_paired_barcodes
+
+    begin 
+      if plate_params[barcode_ids_param].present?
+        @plate = add_barcodes(plate=@plate,barcodes=plate_params[barcode_ids_param])
+        plate_params.delete(barcode_ids_param)
+      elsif plate_params[paired_bc_ids_param].present?
+        @plate = add_paired_barcodes(plate=@plate,paired_barcodes=plate_params[paired_bc_ids_param])
+        plate_params.delete(paired_bc_ids_param)
+      end 
+    rescue Exceptions::BarcodeNotFoundError => err #can be raised by either add_barcodes() or add_paired_barcodes()
+      respond_to do |format|
+        format.html { redirect_to @plate, alert: err.message }
+      end 
+      return
+    end
+
+
     respond_to do |format|
       if @plate.update(plate_params)
         format.html { redirect_to @plate, notice: 'Plate was successfully updated.' }
@@ -67,6 +87,6 @@ class PlatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plate_params
-      params.require(:plate).permit(:dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier)
+      params.require(:plate).permit(:add_barcodes, :add_paired_barcodes, :dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier)
     end
 end

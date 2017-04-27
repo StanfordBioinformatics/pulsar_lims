@@ -40,6 +40,7 @@
 				<td></td>
 			<% end %>
 		<% else %>
+		  <th><strong>Paired Barcode:</strong></th>
 			<% if @well.paired_barcode.present? %>
 				<td><%= link_to "#{@well.paired_barcode.name} #{@well.paired_barcode.sequence}", @well.paired_barcode %></td>
 			<% else %>

@@ -83,14 +83,12 @@ class LibrariesController < ApplicationController
 		paired_bc_ids_param = :add_paired_barcodes
 
 		begin 
-			if library_params[barcode_ids_param].present?
-				@library = add_barcodes(model_object=@library,barcodes=params[:library][barcode_ids_param])
-				library_params.delete(barcode_ids_param)
-			elsif library_params[paired_bc_ids_param].present?
-				@library = add_paired_barcodes(model_object=@library,paired_barcodes=library_params[paired_bc_ids_param])
-				library_params.delete(paired_bc_ids_param)
+			if not @library.paired_end? and library_params[barcode_ids_param].present?
+				@library = add_barcodes(library=@library,barcodes=library_params[barcode_ids_param])
+			elsif @library.paired_end and library_params[paired_bc_ids_param].present?
+				@library = add_paired_barcodes(library=@library,paired_barcodes=library_params[paired_bc_ids_param])
 			end
-		rescue BarcodeNotFoundError => err #can be raised by either add_barcodes() or add_paired_barcodes()
+		rescue Exceptions::BarcodeNotFoundError => err #can be raised by either add_barcodes() or add_paired_barcodes()
 			respond_to do |format|
 				format.html { redirect_to @library, alert: err.message }
 			end

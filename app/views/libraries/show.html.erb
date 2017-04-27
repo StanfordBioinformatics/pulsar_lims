@@ -23,7 +23,7 @@
 
 	<tr>
 		<th><strong>Paired End</strong></th>
-		<td><%= @library.paired_end %></td>
+		<td><%= @library.paired_end? %></td>
 	</tr>
 
 	<tr>
@@ -64,23 +64,23 @@
   </tr>
 
   <!-- Either barcodes or paired_barcodes can be present, not both -->
-	<% if @library.barcodes.present? %>
-		<tr>
+	<tr>
+		<% if not @library.paired_end?%>
 			<th><strong>Barcodes:</strong></th>
-				<td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: @library.barcodes} %></td>
+			<% if @library.barcodes.present? %>
+					<td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: @library.barcodes} %></td>
+			<% else %>
+				<td></td>
+			<% end %>
 		<% else %>
-			<td></td>
-		</tr>
-	<% end %>
-
-	<% if @library.paired_barcodes.present? %>
-		<tr>
 			<th><strong>Paired Barcodes:</strong></th>
+			<% if  @library.paired_barcodes.present? %>
 				<td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: @library.paired_barcodes} %></td>
-		<% else %>
-			<td></td>
-		</tr>
-	<% end %>
+			<% else %>
+				<td></td>
+			<% end %>
+		<% end %>
+	</tr>
 
 	<tr>
 		<th><strong>Library Fragmentation Method:</strong></th>
@@ -122,28 +122,30 @@
  	</tr>
 </table>
 
-<% if @library.paired_end? %>
-
-	<%= simple_form_for(@library) do |f| %>
-  	<%= f.input :add_paired_barcodes, as: :text, placeholder: "ATCCGC-GTACAG\nCGTGAC-TAGGCA\n...",
-				hint: "Copy and paste paired-barcodes in - if there are any validation errors, you'll have to paste them all back in with the corrections." %>
-
-  	<div class="actions">
-   	 <%= f.button :submit, "Add Paired Barcodes", class: "btn-primary "%>
-  	</div></br>
+<div class="add_barcodes">
+	<% if @library.paired_end? %>
+	
+		<%= simple_form_for(@library) do |f| %>
+	  	<%= f.input :add_paired_barcodes, as: :text, placeholder: "ATCCGC-GTACAG\nCGTGAC-TAGGCA\n...",
+					hint: "Copy and paste paired-barcodes in - if there are any validation errors, you'll have to paste them all back in with the corrections." %>
+	
+	  	<div class="actions">
+	   	 <%= f.button :submit, "Add Paired Barcodes", class: "btn-primary "%>
+	  	</div></br>
+		<% end %>
+	
+	<% else %>
+	
+		<%= simple_form_for(@library) do |f| %>
+	  	<%= f.input :add_barcodes, as: :text, placeholder: "ATCCGA\nTAGCGA\n...", 
+					hint: "Copy and paste barcodes in - if there are any validation errors, you'll have to paste them all back in with the corrections." %>
+	
+	  	<div class="actions">
+	   	 <%= f.button :submit, "Add Barcodes", class: "btn-primary "%>
+	  	</div></br>
+		<% end %>
 	<% end %>
-
-<% else %>
-
-	<%= simple_form_for(@library) do |f| %>
-  	<%= f.input :add_barcodes, as: :text, placeholder: "ATCCGA\nTAGCGA\n...", 
-				hint: "Copy and paste barcodes in - if there are any validation errors, you'll have to paste them all back in with the corrections." %>
-
-  	<div class="actions">
-   	 <%= f.button :submit, "Add Barcodes", class: "btn-primary "%>
-  	</div></br>
-	<% end %>
-<% end %>
+</div>
 </br></br>
 
 <%= link_to 'Back', libraries_path %>
