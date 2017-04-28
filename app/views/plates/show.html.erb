@@ -72,7 +72,7 @@
 
 
 <div class="add_barcodes bg-info">
-	<% if @plate.paired_end? %>j
+	<% if @plate.paired_end? %>
 		<% placeholder="ATCCGC-GTACAG\nCGTGAC-TAGGCA\n..." %>
 		<% submit_text="Add Paired Barcodes" %>
 	<% else %>
@@ -80,10 +80,13 @@
 		<% submit_text="Add Barcodes" %>
 	<% end %>
 		
-	<% tooltip = "Enter barcodes in matrix format (same format as the plate), such that barcode in position [1,1] corresponds to well A1, and the barcode in position [2,2] corresponds to well B2 ... Use a single tab to delimit values; for wells without barcodes just leave the corresponding field empty." %>
+	<% tooltip = "Enter barcodes in matrix format (same format as the plate), such that barcode in position [1,1] corresponds to well A1, and the barcode in position [2,2] corresponds to well B2 ... Use a space or tab to delimit values; for wells without barcodes just leave the corresponding field empty." %>
   <%= simple_form_for(@plate) do |f| %>
-    <%= f.input :add_barcodes, as: :text, placeholder: placeholder,
+    <%= f.input :add_barcodes,
+				as: :text,
+				placeholder: placeholder, 
 				label_html: {"data-toggle" => "tooltip", "title" => tooltip },
+				input_html: {rows: 10},
         hint: "Copy and paste paired-barcodes in - if there are any validation errors, you'll have to paste them all back in with the corrections." %>
 	
 		<div class="actions">

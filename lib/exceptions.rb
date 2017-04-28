@@ -15,4 +15,7 @@ module Exceptions
 	class WellAndPlateMismatchError < StandardError
 	end
 
+	class WellNotSavedError < StandardError
+	end
+
 end

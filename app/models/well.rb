@@ -21,12 +21,12 @@ class Well < ActiveRecord::Base
 
     def verify_barcodes
       if self.barcode.present? and self.paired_barcode.present?
-        self.errors.add(:base, "Can't specify both the \"barcode\" attribute (which is used only for single-end libraries) and the \"paired_barcode\" attribute (which is used only for paired-end libraries).")
+        self.errors.add(:base,"Can't specify both the 'barcode' attribute (which is used only for single-end libraries) and the 'paired_barcode' attribute (which is used only for paired-end libraries).")
         return false
-      elsif self.barcode.present? and self.paired_end?
+      elsif self.barcode.present? and self.plate.paired_end?
         self.errors.add(:base, "Can't set single-end barcode when the library is marked as paired-end. You must instead select paired-end barcode.")
         return false
-      elsif self.paired_barcode.present? and not self.paired_end?
+      elsif self.paired_barcode.present? and not self.plate.paired_end?
         self.errors.add(:base, "Can't set paired-end barcode when the library is not marked as paired-end. You must instead select single-end barodes.")
         return false
       end 

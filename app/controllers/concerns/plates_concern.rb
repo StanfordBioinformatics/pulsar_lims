@@ -26,7 +26,7 @@ module PlatesConcern
     # ACGTAC-TCGAGT\tAGGCAG-ACTAGC\n
     # GTTACG-CTACGT\tCATGTC-TTCAGC
 		#
-		#Barcodes in each row are delimited by a tab character, and rows are delimited by a newline character.	
+		#Barcodes in each row are delimited by a space or tab character, and rows are delimited by a newline character.	
 		#The position of each barcode in the input matrix (matrix is a string here) corresponds to a well in the same position on the plate. For example, the wells represented by the barcode matrix above are
 		# A1 A2
  		# B1 B2
@@ -41,11 +41,12 @@ module PlatesConcern
 		end
 		max_row_len = 0
 		barcodes_rows.map! do |row|
-			row = row.split("\t")
+			row = row.split()
 			row_len = row.length
 			if row_len > max_row_len
 				max_row_len = row_len
 			end
+			row
 		end
 		#check for any rows having more columns than the plate
 		if max_row_len > plate.ncol
@@ -65,6 +66,10 @@ module PlatesConcern
 					raise Exceptions::WellNotFoundError, "No well on plate #{plate.name} could be found with row #{row_num} and column #{col_num}."
 				end
 				add_barcode_to_well(plate=plate,well=well,barcode=bc)
+				save_status = well.save
+				if not save_status
+					raise Exceptions::WellNotSavedError, "Error saving barcode #{bc} to well #{well.name}. Errors are: #{well.errors.full_messages.join('; ')}"
+				end
 			end
 		end
 		return plate
@@ -90,14 +95,14 @@ module PlatesConcern
 		
 		index1_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, sequence: index1}) 
 		if index1_rec.blank?
-			raise Exceptions::BarcodeNotFoundError, "Barcode #{index1} is not present in sequencing library prep kit #{prep_kit.name}."
+			raise Exceptions::BarcodeNotFoundError, "Barcode #{index1} is not present in sequencing library prep kit '#{prep_kit.name}'."
 		end
 		if not index2 #then single-end only
 			well.barcode = index1_rec
 		else #then paired-end
       index2_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id,index_number: 2, sequence: index2})
       if index2_rec.blank?
-        raise Exceptions::BarcodeNotFoundError, "Index2 barcode #{index2} is not present in sequencing library prep kit #{prep_kit.name}."
+        raise Exceptions::BarcodeNotFoundError, "Index2 barcode #{index2} is not present in sequencing library prep kit '#{prep_kit.name}'."
       end 
       paired_rec = PairedBarcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1_rec.id, index2_id: index2_rec.id})
       if paired_rec.blank? #then create it

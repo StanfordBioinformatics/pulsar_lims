@@ -7,7 +7,16 @@
 }
 
 div.add_barcodes {
-  max-width: 35em;
+	max-width: 100%;
+	
+	& form {
+		max-width: 100%;
+	}
+
+	& .form-group {
+		max-width: 100%;
+	}
+
   padding-top: 0.5em;
   padding-left: 0.5em;
 }
