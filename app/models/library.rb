@@ -2,8 +2,6 @@ class BarcodeNotFoundError < StandardError
 end
 
 class Library < ActiveRecord::Base
-	attr_accessor :add_barcodes #used only in the show view in the form at the bottom.
-	attr_accessor :add_paired_barcodes #used only in the show view in the form at the bottom. 
 	NUCLEIC_ACID_STARTING_QUANTITY_UNITS = ["cells","cell-equivalent","µg","ng","pg","mg"]
 
 	#The is_control bool column has a default of false.

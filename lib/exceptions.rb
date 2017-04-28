@@ -9,4 +9,10 @@ module Exceptions
 	class TooManyColumnsError < StandardError
 	end
 
+	class WellNotFoundError < StandardError
+	end
+	
+	class WellAndPlateMismatchError < StandardError
+	end
+
 end

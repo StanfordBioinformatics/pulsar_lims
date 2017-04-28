@@ -1,6 +1,5 @@
 class Plate < ActiveRecord::Base
   attr_accessor :add_barcodes #used only in the show view in the form at the bottom.
-  attr_accessor :add_paired_barcodes #used only in the show view in the form at the bottom.
 	ROW_LETTERS = ("A".."Z").to_a
 	DIMENSIONS = ["2x2 (4)","8x12 (96)","16x24 (384)"]
 	

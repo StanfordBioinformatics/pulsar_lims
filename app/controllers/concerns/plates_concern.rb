@@ -13,15 +13,21 @@ module PlatesConcern
 		end
 	end
 
-  def add_barcodes(plate,barcodes)
+  def add_barcodes_matrix_input(plate,barcodes)
     #barcodes is a string of barcodes in a matrix format like that of the plate, i.e. 
-		#"""
+		#
 		# CATCGA\tGTCAGT\n
 		# ACGTAC\tAGGCAG\n
 		# GTTACG\tCATGTC
 		#
+		#Alternatively the barcodes could be entered as paired-end barcodes of the form:
+		#
+    # CATCGA-GCATGA\tGTCAGT-TCGTAC\n
+    # ACGTAC-TCGAGT\tAGGCAG-ACTAGC\n
+    # GTTACG-CTACGT\tCATGTC-TTCAGC
+		#
 		#Barcodes in each row are delimited by a tab character, and rows are delimited by a newline character.	
-		#Each barcode corresponds to a well in the same position on the plate. For example, the wells represented by the barcode matrix above are
+		#The position of each barcode in the input matrix (matrix is a string here) corresponds to a well in the same position on the plate. For example, the wells represented by the barcode matrix above are
 		# A1 A2
  		# B1 B2
 		# C1 C2
@@ -51,46 +57,54 @@ module PlatesConcern
 			row_num += 1
 			col_num = 0
 			row.each do |bc|
-				bc.upcase! #Barcode sequences  are stored uppercase
 				col_num += 1
-				bc = bc.strip()
+				bc.strip!
+				bc.upcase! #Barcode sequences  are stored uppercase
 				well = plate.wells.find_by({row: row_num, col: col_num})
-      	bc = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, sequence: bc}) 
-	      if bc.blank?
- 	       raise Exceptions::BarcodeNotFoundError, "Barcode #{b} is not present in sequencing library prep kit #{prep_kit.name}."
+				if well.blank?
+					raise Exceptions::WellNotFoundError, "No well on plate #{plate.name} could be found with row #{row_num} and column #{col_num}."
 				end
-				well.barcode = bc
+				add_barcode_to_well(plate=plate,well=well,barcode=bc)
 			end
 		end
 		return plate
   end
 
-	def add_paired_barcodes(plate,paired_barcodes)
-    #paired_barcodes is a white-space delimited string of barcode sequences (i.e this attribute is set in a form on the plate show page).
+	def add_barcode_to_well(plate,well,barcode)
+		###
+		#Args  plate - a plate instance
+		#      well  - a well on the plate
+		#      barcode - a single-end barcode or a paired-end barcode. Paired-end will be assumed if the barcode has a '-' inside, 
+		#                i.e. ATCGAT-GCTGAC.
+		prep_kit = plate.sequencing_library_prep_kit
 		user = current_user
-    paired_barcodes = paired_barcodes.split().map { |b| b if b.present? }
-    prep_kit = plate.sequencing_library_prep_kit
-    paired_barcodes.each do |b| 
-      index1_seq,index2_seq = b.split("-")
-      index1 = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id,index_number: 1, sequence: index1_seq})
-      if index1.blank?
-        raise Exceptions::BarcodeNotFoundError, "Index1 barcode #{index1_seq} is not present in sequencing library prep kit #{prep_kit.name}."
+    if not plate.wells.include?(well)
+			raise Exceptions::WellAndPlateMismatchError, "Well #{well.name} does not belong on plate #{plate.name}."
+		end
+		barcode.upcase!
+		index1 = barcode
+		index2 = nil
+		if barcode.include?("-")
+			index1,index2 = barcode.split("-")
+		end
+		
+		index1_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, sequence: index1}) 
+		if index1_rec.blank?
+			raise Exceptions::BarcodeNotFoundError, "Barcode #{index1} is not present in sequencing library prep kit #{prep_kit.name}."
+		end
+		if not index2 #then single-end only
+			well.barcode = index1_rec
+		else #then paired-end
+      index2_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id,index_number: 2, sequence: index2})
+      if index2_rec.blank?
+        raise Exceptions::BarcodeNotFoundError, "Index2 barcode #{index2} is not present in sequencing library prep kit #{prep_kit.name}."
       end 
-      index2 = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id,index_number: 2, sequence: index2_seq})
-      if index2.blank?
-        raise Exceptions::BarcodeNotFoundError, "Index2 barcode #{index2_seq} is not present in sequencing library prep kit #{prep_kit.name}."
+      paired_rec = PairedBarcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1_rec.id, index2_id: index2_rec.id})
+      if paired_rec.blank? #then create it
+        paired_rec = PairedBarcode.create({user: current_user, name: "#{index1_rec.name}-#{index2_rec.name}",sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1_rec.id, index2_id: index2_rec.id})
       end 
-      bc = PairedBarcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1.id, index2_id: index2.id})
-      if bc.blank?
-        bc = PairedBarcode.create({user: current_user, name: "#{index1.name}-#{index2.name}",sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1.id, index2_id: index2.id})
-      end 
-       
-      if plate.paired_barcodes.include?(bc)
-        next
-      end
-      plate.paired_barcodes << bc
-    end
-		return plate
+      well.paired_barcode = paired_rec
+		end
 	end
 
 end

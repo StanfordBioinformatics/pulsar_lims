@@ -1,7 +1,5 @@
 class LibrariesController < ApplicationController
 	include DocumentsConcern #gives me add_documents()
-	include LibrariesConcern #gives me add_barcodes(), add_paired_barcodes()
-	#include BarcodesConcern  #gives me add_barcodes() ###no longer used
   before_action :set_library, only: [:show, :edit, :update, :destroy]
 	skip_after_action :verify_authorized, only: [:select_barcode,:select_paired_barcode]
 
@@ -29,25 +27,19 @@ class LibrariesController < ApplicationController
     @libraries = policy_scope(Library).order("lower(name)")
   end
 
-  # GET /libraries/1
-  # GET /libraries/1.json
   def show
 		authorize @library
   end
 
-  # GET /libraries/new
   def new
 		authorize Library
     @library = Library.new
   end
 
-  # GET /libraries/1/edit
   def edit
 		authorize @library	
   end
 
-  # POST /libraries
-  # POST /libraries.json
   def create
 		authorize Library
 #		render json: params
@@ -69,8 +61,6 @@ class LibrariesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /libraries/1
-  # PATCH/PUT /libraries/1.json
   def update
 		authorize @library
 #		render json: params[:library]
@@ -78,22 +68,6 @@ class LibrariesController < ApplicationController
 
 		#@library = remove_documents(@library,params[:remove_documents])
 		@library = add_documents(@library,params[:library][:documents])
-
-		barcode_ids_param = :add_barcodes
-		paired_bc_ids_param = :add_paired_barcodes
-
-		begin 
-			if not @library.paired_end? and library_params[barcode_ids_param].present?
-				@library = add_barcodes(library=@library,barcodes=library_params[barcode_ids_param])
-			elsif @library.paired_end and library_params[paired_bc_ids_param].present?
-				@library = add_paired_barcodes(library=@library,paired_barcodes=library_params[paired_bc_ids_param])
-			end
-		rescue Exceptions::BarcodeNotFoundError => err #can be raised by either add_barcodes() or add_paired_barcodes()
-			respond_to do |format|
-				format.html { redirect_to @library, alert: err.message }
-			end
-			return
-		end
 
     respond_to do |format|
       if @library.update(library_params)
@@ -106,8 +80,6 @@ class LibrariesController < ApplicationController
     end
   end
 
-  # DELETE /libraries/1
-  # DELETE /libraries/1.json
   def destroy
 		authorize @library
     @library.destroy
@@ -128,7 +100,7 @@ class LibrariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_params
-      params.require(:library).permit(:add_barcodes, :add_paired_barcodes, :paired_end, :sequencing_library_prep_kit_id, :library_fragmentation_method_id, :nucleic_acid_starting_quantity, :nucleic_acid_starting_quantity_units, :is_control, :nucleic_acid_term_id, :biosample_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, documents_attributes: [:id,:_destroy], sequencing_requests_attributes: [:id,:_destroy], :barcode_ids => [], :paired_barcode_ids => [], barcodes_attributes: [:id,:_destroy], paired_barcodes_attributes: [:id, :_destroy])
+      params.require(:library).permit(:paired_end, :sequencing_library_prep_kit_id, :library_fragmentation_method_id, :nucleic_acid_starting_quantity, :nucleic_acid_starting_quantity_units, :is_control, :nucleic_acid_term_id, :biosample_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, documents_attributes: [:id,:_destroy], sequencing_requests_attributes: [:id,:_destroy], :barcode_ids => [], :paired_barcode_ids => [], barcodes_attributes: [:id,:_destroy], paired_barcodes_attributes: [:id, :_destroy])
     end
 
 end
