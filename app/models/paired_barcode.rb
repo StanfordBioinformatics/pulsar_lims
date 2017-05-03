@@ -1,4 +1,5 @@
 class PairedBarcode < ActiveRecord::Base
+	attr_accessor :add_paired_barcodes #used in the form partial so the user can input multiple pairs to add. 
 	has_and_belongs_to_many :libraries
   belongs_to :user
   belongs_to :index1, class_name: "Barcode"
@@ -15,6 +16,10 @@ class PairedBarcode < ActiveRecord::Base
   def self.policy_class
     ApplicationPolicy
   end 
+
+	def self.make_name(index1_name, index2_name)
+		return "#{index1_name}-#{index2_name}"
+	end
 
 
   protected

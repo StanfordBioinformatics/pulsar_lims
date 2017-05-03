@@ -91,22 +91,25 @@ module PlatesConcern
 		index2 = nil
 		if barcode.include?("-")
 			index1,index2 = barcode.split("-")
+			index1.strip!
+			index2.strip!
 		end
 		
-		index1_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, sequence: index1}) 
+		index1_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, index_number: 1, sequence: index1}) 
 		if index1_rec.blank?
-			raise Exceptions::BarcodeNotFoundError, "Barcode #{index1} is not present in sequencing library prep kit '#{prep_kit.name}'."
+			raise Exceptions::BarcodeNotFoundError, "Barcode #{index1} is not present in sequencing library prep kit '#{prep_kit.name}' Make sure you provided the correct orientation and didn't reverse complement it."
 		end
 		if not index2 #then single-end only
 			well.barcode = index1_rec
 		else #then paired-end
       index2_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id,index_number: 2, sequence: index2})
       if index2_rec.blank?
-        raise Exceptions::BarcodeNotFoundError, "Index2 barcode #{index2} is not present in sequencing library prep kit '#{prep_kit.name}'."
+        raise Exceptions::BarcodeNotFoundError, "Index2 barcode #{index2} is not present in sequencing library prep kit '#{prep_kit.name}'. Make sure you provided the correct orientation and didn't reverse complement it"
       end 
       paired_rec = PairedBarcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1_rec.id, index2_id: index2_rec.id})
       if paired_rec.blank? #then create it
-        paired_rec = PairedBarcode.create({user: current_user, name: "#{index1_rec.name}-#{index2_rec.name}",sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1_rec.id, index2_id: index2_rec.id})
+				name = PairedBarcode.make_name(index1_rec.name,index2_rec.name)
+        paired_rec = PairedBarcode.create!({user: current_user, name: name,sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1_rec.id, index2_id: index2_rec.id})
       end 
       well.paired_barcode = paired_rec
 		end
