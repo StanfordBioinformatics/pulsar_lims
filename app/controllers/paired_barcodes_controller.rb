@@ -64,10 +64,11 @@ class PairedBarcodesController < ApplicationController
     respond_to do |format|
 			if create_count > 0
 				notice = "Paired barcodes were successfully created."
+      	format.html { redirect_to new_paired_barcode_path, notice: notice }
 			else
 				notice = "No new paired-barcodes were created as the input ones already existed or none were specified."
+      	format.html { redirect_to new_paired_barcode_path, alert: notice }
 			end
-      format.html { redirect_to new_paired_barcode_path, notice: notice }
     end
   end
 
