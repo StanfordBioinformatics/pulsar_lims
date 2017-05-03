@@ -36,6 +36,10 @@ class PairedBarcodesController < ApplicationController
 			line.strip!
 			index1_seq,index2_seq = line.split("-") #the sequences
 			index1_seq.strip!
+			if index2_seq.nil?
+				redirect_to new_paired_barcode_path, alert: "No index2 barcode specified in line #{line}."
+				return
+			end
 			index2_seq.strip!
 			index1 = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, sequence: index1_seq, index_number: 1})
 
