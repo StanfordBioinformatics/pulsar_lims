@@ -65,7 +65,7 @@ class PairedBarcodesController < ApplicationController
 			if create_count > 0
 				notice = "Paired barcodes were successfully created."
 			else
-				notice = "No new paired-barcodes were created as the input ones already existed."
+				notice = "No new paired-barcodes were created as the input ones already existed or none were specified."
 			end
       format.html { redirect_to paired_barcodes_path, notice: notice }
     end
