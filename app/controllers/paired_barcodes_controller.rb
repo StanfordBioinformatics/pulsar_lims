@@ -67,7 +67,7 @@ class PairedBarcodesController < ApplicationController
 			else
 				notice = "No new paired-barcodes were created as the input ones already existed or none were specified."
 			end
-      format.html { redirect_to paired_barcodes_path, notice: notice }
+      format.html { redirect_to new_paired_barcode_path, notice: notice }
     end
   end
 
