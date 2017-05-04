@@ -5,7 +5,7 @@
 @import "bootstrap";
 
 @import "font-awesome";
-@import "responsive.scss";
+//@import "responsive.scss";
 
 @import "admin/application";
 @import "reference_genomes";
@@ -159,15 +159,14 @@ body {
 }
 
 header {
-  @extend .page-header;
-  position: relative;
-  padding-bottom: 0px;
-  
-  &:first-child {
-    margin-top: 20px;
-  }
+  & ul.actions {
+  	//in the header of each show view
+  	@extend .list-unstyled;
+  	@extend .list-inline;
+		margin-bottom: 2em;
+	}
 }
-
+		
 #meta_attributes {
   border: 1px solid grey;
   @extend .table;
@@ -228,14 +227,6 @@ header {
 	}
 }
 
-ul.actions {
-  @extend .list-unstyled;
-  @extend .list-inline;
-/* sometimes the buttons may stack up if zoomed in too much, so add some bottom margin: */
-	& a {
-		 margin-bottom: 8px;
-	}
-}
 
 a.new, a.edit, a.delete {
   @extend .btn;
