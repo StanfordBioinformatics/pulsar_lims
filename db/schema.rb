@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503235030) do
+ActiveRecord::Schema.define(version: 20170504210614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,10 +75,14 @@ ActiveRecord::Schema.define(version: 20170503235030) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "user_id"
+    t.integer  "barcode_id"
+    t.integer  "paired_barcode_id"
   end
 
+  add_index "barcode_sequencing_results", ["barcode_id"], name: "index_barcode_sequencing_results_on_barcode_id", using: :btree
   add_index "barcode_sequencing_results", ["library_id"], name: "index_barcode_sequencing_results_on_library_id", using: :btree
   add_index "barcode_sequencing_results", ["name"], name: "index_barcode_sequencing_results_on_name", unique: true, using: :btree
+  add_index "barcode_sequencing_results", ["paired_barcode_id"], name: "index_barcode_sequencing_results_on_paired_barcode_id", using: :btree
   add_index "barcode_sequencing_results", ["sequencing_result_id"], name: "index_barcode_sequencing_results_on_sequencing_result_id", using: :btree
   add_index "barcode_sequencing_results", ["user_id"], name: "index_barcode_sequencing_results_on_user_id", using: :btree
 
@@ -621,7 +625,9 @@ ActiveRecord::Schema.define(version: 20170503235030) do
   add_foreign_key "antibodies", "vendors"
   add_foreign_key "antibody_purifications", "users"
   add_foreign_key "attachments", "users"
+  add_foreign_key "barcode_sequencing_results", "barcodes"
   add_foreign_key "barcode_sequencing_results", "libraries"
+  add_foreign_key "barcode_sequencing_results", "paired_barcodes"
   add_foreign_key "barcode_sequencing_results", "sequencing_results"
   add_foreign_key "barcode_sequencing_results", "users"
   add_foreign_key "barcodes", "sequencing_library_prep_kits"
