@@ -3,13 +3,55 @@
 
   <table class="form-inputs">
 		<tr>
-			<td><%= f.input :name %></td>
-      <td><%= f.association :library, collection: libs_on_sreq_without_seqresult(@sequencing_request) %></td>
-      <td><%= f.input :comment %></td>
-      <td><%= f.input :read1_count %></td>
-      <td><%= f.input :read1_uri %></td>
-      <td><%= f.input :read2_count %></td>
-      <td><%= f.input :read2_uri %></td>
+			<td>
+				<div>
+					<p>Name</p>
+					<%= f.input_field :name %>
+				</div>
+			</td>
+
+			<td>
+				<div>
+					<p>Library</p>
+      		<%= f.association :library, label: false, wrapper: false, collection: libs_on_sreq_without_seqresult(@sequencing_request) %>
+				</div>
+			</td>
+
+      <td>
+				<div>
+					<p>Comment</p>
+					<%= f.input_field :comment %>
+				</div>
+			</td>
+
+			<td>
+				<div>
+					<p>Read1 count</p>
+      		<%= f.input_field :read1_count %>
+				</div>
+			</td>
+
+			<td>
+				<div>
+					<p>Read1 URI</p>
+ 		     	<%= f.input_field :read1_uri %>
+				</div>
+			</td>
+
+			<%  if @sequencing_request.paired_end? %>
+      	<td>
+					<div>
+						<p>Read2 count</p>
+						<%= f.input_field :read2_count %>
+					</div>
+				</td>
+				<td>
+					<div>
+						<p>Read2 URI</p>
+      			<%= f.input_field :read2_uri %>
+					</div>
+				</td>
+			<% end %>
 		</tr>
   </table>
 

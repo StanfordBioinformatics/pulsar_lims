@@ -10,18 +10,20 @@
     <tr>
       <th>Name</th>
       <th>Address</th>
+			<th>Web URL</th>
       <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @sequencing_centers.each do |sequencing_center| %>
+    <% @sequencing_centers.each do |sc| %>
       <tr>
-        <td><%= link_to sequencing_center.name, sequencing_center %></td>
-        <td><%= sequencing_center.address %></td>
+        <td><%= link_to sc.name, sc %></td>
+        <td><%= sc.address %></td>
+				<td><%= link_to sc.url,sc.url %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_sequencing_center_path(sequencing_center) %>
-        	<%= link_to fa_icon("trash"), sequencing_center, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_sequencing_center_path(sc) %>
+        	<%= link_to fa_icon("trash"), sc, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

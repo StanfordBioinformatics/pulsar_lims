@@ -19,6 +19,11 @@
 		<th><strong>Address:</strong></th>
 		<td><%= @sequencing_center.address %></td>
 	</tr>
+
+	<tr>
+		<th><strong>Web URL:</strong></th>
+		<td><%= link_to @sequencing_center.url, @sequencing_center.url%></td>
+	</tr>
 </table>
 
 <%= link_to 'Back', sequencing_centers_path %>

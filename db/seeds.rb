@@ -12,6 +12,11 @@ User.create!(email: "viewer@enc.com",password: "password")
 
 admin = User.find_by!(email: "admin@enc.com").id
 
+SequencingCenter.delete_all
+SequencingCenter.create!([
+	{user_id: admin, name: "Stanford Genome Sequencing Service Center", url: "http://med.stanford.edu/gssc.html", address: "3155 Porter Dr; Palo Alto, CA 94304"}
+])
+
 DocumentType.delete_all
 DocumentType.create!([
 	{user_id: admin, name: "growth protocol"},

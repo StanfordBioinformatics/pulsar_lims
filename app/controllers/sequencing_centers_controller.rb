@@ -76,6 +76,6 @@ class SequencingCentersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_center_params
-      params.require(:sequencing_center).permit(:name, :address)
+      params.require(:sequencing_center).permit(:name, :address, :url)
     end
 end

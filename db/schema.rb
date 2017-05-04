@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418053212) do
+ActiveRecord::Schema.define(version: 20170503235030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -477,6 +477,7 @@ ActiveRecord::Schema.define(version: 20170418053212) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+    t.string   "url"
   end
 
   add_index "sequencing_centers", ["user_id"], name: "index_sequencing_centers_on_user_id", using: :btree
