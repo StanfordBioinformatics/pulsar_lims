@@ -5,13 +5,25 @@
 	<tr>
 		<td><%= link_to res.name, [@sequencing_request,@sequencing_result,res] %></td>
 		<td><%= link_to res.library.name, res.library %></td>
-		<td><%= res.library.barcode %></td>
-		<td><%= res.comment %></td>
+		<% if res.barcode.present? %>
+			<% display = Barcode.display(res.barcode.id) %>
+			<td><%= link_to display, [res.barcode.sequencing_library_prep_kit, res.barcode] %></td>
+		<% elsif res.paired_barcode.present? %>
+			<% display = PairedBarcode.display(res.paired_barcode.id) %>
+			<td><%= link_to display, res.paired_barcode %></td>
+		<% else %>
+			<td></td>
+		<% end %>
 		<td><%= res.read1_count %></td>
 		<td><%= res.read1_uri %></td>
-		<td><%= res.read2_count %></td>
-		<td><%= res.read2_uri %></td>
-		<td><%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_result,res] %></td>
-		<td><%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_result,res], method: :delete %></td>
+		<% if @sequencing_request.paired_end? %>
+			<td><%= res.read2_count %></td>
+			<td><%= res.read2_uri %></td>
+		<% end %>
+		<td><%= res.comment %></td>
+		<td>
+			<%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_result,res] %>
+			<%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_result,res], method: :delete %>
+		</td>
 	</tr>
 <% end %>

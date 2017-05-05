@@ -46,13 +46,19 @@
 			<tr>
 				<th>Name</th>
 				<th>Library</th>
-				<th>Barcode</th>
-				<th>Comment</th>
+				<% if @sequencing_request.paired_end? %>
+					<th>Paired Barcode</th>
+				<% else %>
+					<th>Barcode</th>
+				<% end %>
 				<th>Read1 Count</th>
 				<th>Read1 URI</th>
-				<th>Read2 Count </th>
-				<th>Read2 URI</th>
-				<th colspan="2">Actions</strong></th>
+				<% if @sequencing_request.paired_end? %>
+					<th>Read2 Count </th>
+					<th>Read2 URI</th>
+				<% end %>
+				<th>Comment</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -61,7 +67,7 @@
 	<% end %>
 </table>
 
-<% if libs_on_sreq_without_seqresult(@sequencing_request).blank? %>
+<% if not @sequencing_result.missing_barcode_sequencing_results? %>
 	<!-- Create hidden element for jQuery to look for. If jQuery finds it, then it will disable the link below with id="new_barcode_result" -->
 	<span id="hide_new_barcode_result" hidden></span>
 <% end %>

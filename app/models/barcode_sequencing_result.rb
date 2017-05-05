@@ -12,32 +12,33 @@ class BarcodeSequencingResult < ActiveRecord::Base
 
 	validate :barcode_valid
 
+  def self.policy_class
+    ApplicationPolicy
+  end 
+
 	def library_paired_end?
 		library.paired_end?
 	end
 
-	def barcode_valid
-		if paired_barcode.present? and barcode.present?
-			errors[:base] << "Can't specify both paired_barcode and barcode."
-		end
-
-		if library_paired_end?
-			if paired_barcode.present?
-				if not library.paired_barcodes.include?(paired_barcode)
-					errors[:base] << "Paired barcode #{paired_barcode.index1.sequence}-#{paired_barcode.index2.sequence} is not present on the library."
-				end
+	protected
+		def barcode_valid
+			if paired_barcode.present? and barcode.present?
+				errors[:base] << "Can't specify both paired_barcode and barcode."
 			end
 	
-		else
-			if barcode.present?
-				if not library.barcodes.include?(barcode)
-					errors[:base] << "Barcode #{barcode.sequence} is not present on the library."
+			if library_paired_end?
+				if paired_barcode.present?
+					if not library.paired_barcodes.include?(paired_barcode)
+						errors[:base] << "Paired barcode #{paired_barcode.index1.sequence}-#{paired_barcode.index2.sequence} is not present on the library."
+					end
+				end
+		
+			else
+				if barcode.present?
+					if not library.barcodes.include?(barcode)
+						errors[:base] << "Barcode #{barcode.sequence} is not present on the library."
+					end
 				end
 			end
 		end
-	end
-
-  def self.policy_class
-    ApplicationPolicy
-  end 
 end

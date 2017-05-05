@@ -17,6 +17,11 @@ class Barcode < ActiveRecord::Base
 		ApplicationPolicy
 	end
 
+	def self.display(barcode_id)
+		bc = Barcode.find(barcode_id)
+		return "#{bc.name} #{bc.sequence}"
+	end
+
 	def sequence=(sequence)
 		write_attribute(:sequence,sequence.upcase())
 	end

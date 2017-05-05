@@ -13,7 +13,7 @@
 			<td>
 				<div>
 					<p>Library</p>
-      		<%= f.association :library, label: false, wrapper: false, collection: libs_on_sreq_without_seqresult(@sequencing_request) %>
+      		<%= f.association :library, label: false, wrapper: false, collection: @sequencing_result.get_libs_without_barcode_seqresults %>
 				</div>
 			</td>
 
