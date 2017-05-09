@@ -189,7 +189,7 @@ header {
 }
 
 .attributes,.table-data {
-  @extend .table;
+	@extend .table;
   @extend .table-hover;
   @extend .table-condensed;
   @extend .table-responsive;

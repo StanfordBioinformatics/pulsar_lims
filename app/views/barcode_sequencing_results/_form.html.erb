@@ -1,59 +1,66 @@
 <%= simple_form_for([@sequencing_request,@sequencing_result,@barcode_sequencing_result]) do |f| %>
   <%= f.error_notification %>
 
-  <table class="attributes form-inputs">
-		<tr>
-			<td>
-				<div>
-					<p>Name</p>
-					<%= f.input_field :name %>
-				</div>
-			</td>
-
-			<td>
-				<div>
-					<p>Library</p>
-      		<%= f.association :library, label: false, wrapper: false, collection: @sequencing_result.get_libs_without_barcode_seqresults %>
-				</div>
-			</td>
-
-			<td>
-				<div>
-					<p>Read1 count</p>
-      		<%= f.input_field :read1_count %>
-				</div>
-			</td>
-
-			<td>
-				<div>
-					<p>Read1 URI</p>
- 		     	<%= f.input_field :read1_uri %>
-				</div>
-			</td>
-
-			<%  if @sequencing_request.paired_end? %>
-      	<td>
-					<div>
-						<p>Read2 count</p>
-						<%= f.input_field :read2_count %>
-					</div>
-				</td>
+  <table class="attributes">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Library</th>
+        <% if @sequencing_request.paired_end? %>
+          <th>Paired Barcode</th>
+        <% else %>
+          <th>Barcode</th>
+        <% end %>
+        <th>Read1 Count</th>
+        <th>Read1 URI</th>
+        <% if @sequencing_request.paired_end? %>
+          <th>Read2 Count </th>
+          <th>Read2 URI</th>
+        <% end %>
+        <th>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+			<tr>
 				<td>
-					<div>
-						<p>Read2 URI</p>
-      			<%= f.input_field :read2_uri %>
-					</div>
+					<%= f.input_field :name %>
 				</td>
-			<% end %>
-
-      <td>
-				<div>
-					<p>Comment</p>
+	
+				<td>
+	     		<%= f.association :library, label: false, wrapper: false, collection: @sequencing_result.get_libs_without_barcode_seqresults %>
+				</td>
+	
+				<td>
+					<%  if @sequencing_request.paired_end? %>
+						<%= f.association :paired_barcode, label: false, wrapper: false, disabled: true %>
+					<% else %>
+						<%= f.association :barcode, label: false, wrapper: false, disabled: true %>
+					<% end %>
+				</td>
+	
+				<td>
+	     		<%= f.input_field :read1_count %>
+				</td>
+	
+				<td>
+	 	     	<%= f.input_field :read1_uri %>
+				</td>
+	
+				<%  if @sequencing_request.paired_end? %>
+	      	<td>
+						<%= f.input_field :read2_count %>
+					</td>
+					<td>
+	     			<%= f.input_field :read2_uri %>
+					</td>
+				<% end %>
+	
+	      <td>
 					<%= f.input_field :comment %>
-				</div>
-			</td>
-
-		</tr>
+				</td>
+	
+			</tr>
+		</tbody>
   </table>
 
   <div class="form-actions">

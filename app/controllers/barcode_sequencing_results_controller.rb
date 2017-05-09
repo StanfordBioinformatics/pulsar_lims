@@ -1,32 +1,52 @@
 class BarcodeSequencingResultsController < ApplicationController
-	include BarcodeSequencingResultsHelper
   before_action :set_barcode_sequencing_result, only: [:show, :edit, :update, :destroy]
 	before_action :set_sequencing_request
 	before_action :set_sequencing_result
+	skip_after_action :verify_authorized, only: [:get_barcode_selector]
+
+	def get_barcode_selector
+		paired = false
+		library_id = barcode_sequencing_result_params()[:library_id]
+		lib = Library.find(library_id)
+		paired = lib.paired_end?
+		if not paired
+			barcodes = lib.barcodes
+			selector = '<select class="select form-control" id="barcode_sequencing_result_barcode_id>'
+		else
+			barcodes = lib.paired_barcodes
+			selector = '<select class="select form-control" id="barcode_sequencing_result_paired_barcode_id>'
+		end
+		barcodes.each do |bc|
+			if not paired
+				barcode_display = Barcode.display(bc)
+				selector += "<option value=\"#{bc.id}\">#{barcode_display}</option>"
+			else
+				barcode_display = PairedBarcode.display(bc)
+				selector += "<option value=\"#{bc.id}\">#{barcode_display}</option>"
+			end
+		end
+		selector += '</select>'
+		render text: selector
+		return
+	end
 
   def index
     @barcode_sequencing_results = policy_scope(BarcodeSequencingResult).order("lower(name)")
   end
 
-  # GET /barcode_sequencing_results/1
-  # GET /barcode_sequencing_results/1.json
   def show
 		authorize @barcode_sequencing_result
   end
 
-  # GET /barcode_sequencing_results/new
   def new
 		authorize BarcodeSequencingResult
     @barcode_sequencing_result = @sequencing_result.barcode_sequencing_results.build
   end
 
-  # GET /barcode_sequencing_results/1/edit
   def edit
 		authorize @barcode_sequencing_result
   end
 
-  # POST /barcode_sequencing_results
-  # POST /barcode_sequencing_results.json
   def create
 		authorize BarcodeSequencingResult
     @barcode_sequencing_result = @sequencing_result.barcode_sequencing_results.build(barcode_sequencing_result_params)
@@ -48,8 +68,6 @@ class BarcodeSequencingResultsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /barcode_sequencing_results/1
-  # PATCH/PUT /barcode_sequencing_results/1.json
   def update
 		authorize @barcode_sequencing_result
     respond_to do |format|
@@ -63,8 +81,6 @@ class BarcodeSequencingResultsController < ApplicationController
     end
   end
 
-  # DELETE /barcode_sequencing_results/1
-  # DELETE /barcode_sequencing_results/1.json
   def destroy
 		authorize @barcode_sequencing_result
     @barcode_sequencing_result.destroy
