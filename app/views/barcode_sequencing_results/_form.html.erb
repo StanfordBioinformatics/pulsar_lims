@@ -4,7 +4,6 @@
   <table class="attributes">
     <thead>
       <tr>
-        <th>Name</th>
         <th>Library</th>
         <% if @sequencing_request.paired_end? %>
           <th>Paired Barcode</th>
@@ -22,10 +21,6 @@
     </thead>
     <tbody>
 			<tr>
-				<td>
-					<%= f.input_field :name %>
-				</td>
-	
 				<td>
 	     		<%= f.association :library, label: false, wrapper: false, collection: @sequencing_result.get_libs_without_barcode_seqresults %>
 				</td>

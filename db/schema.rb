@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170504210614) do
+ActiveRecord::Schema.define(version: 20170509220021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 20170504210614) do
   add_index "attachments", ["user_id"], name: "index_attachments_on_user_id", using: :btree
 
   create_table "barcode_sequencing_results", force: :cascade do |t|
-    t.string   "name"
     t.integer  "sequencing_result_id"
     t.integer  "library_id"
     t.text     "comment"
@@ -81,7 +80,6 @@ ActiveRecord::Schema.define(version: 20170504210614) do
 
   add_index "barcode_sequencing_results", ["barcode_id"], name: "index_barcode_sequencing_results_on_barcode_id", using: :btree
   add_index "barcode_sequencing_results", ["library_id"], name: "index_barcode_sequencing_results_on_library_id", using: :btree
-  add_index "barcode_sequencing_results", ["name"], name: "index_barcode_sequencing_results_on_name", unique: true, using: :btree
   add_index "barcode_sequencing_results", ["paired_barcode_id"], name: "index_barcode_sequencing_results_on_paired_barcode_id", using: :btree
   add_index "barcode_sequencing_results", ["sequencing_result_id"], name: "index_barcode_sequencing_results_on_sequencing_result_id", using: :btree
   add_index "barcode_sequencing_results", ["user_id"], name: "index_barcode_sequencing_results_on_user_id", using: :btree

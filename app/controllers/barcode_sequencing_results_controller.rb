@@ -11,19 +11,13 @@ class BarcodeSequencingResultsController < ApplicationController
 		paired = lib.paired_end?
 		if not paired
 			barcodes = lib.barcodes
-			selector = '<select class="select form-control" id="barcode_sequencing_result_barcode_id>'
+			selector = '<select class="select form-control" id="barcode_sequencing_result_barcode_id">'
 		else
 			barcodes = lib.paired_barcodes
-			selector = '<select class="select form-control" id="barcode_sequencing_result_paired_barcode_id>'
+			selector = '<select class="select form-control" id="barcode_sequencing_result_paired_barcode_id">'
 		end
 		barcodes.each do |bc|
-			if not paired
-				barcode_display = Barcode.display(bc)
-				selector += "<option value=\"#{bc.id}\">#{barcode_display}</option>"
-			else
-				barcode_display = PairedBarcode.display(bc)
-				selector += "<option value=\"#{bc.id}\">#{barcode_display}</option>"
-			end
+			selector += "<option value=\"#{bc.id}\">#{bc.display}</option>"
 		end
 		selector += '</select>'
 		render text: selector
@@ -31,7 +25,7 @@ class BarcodeSequencingResultsController < ApplicationController
 	end
 
   def index
-    @barcode_sequencing_results = policy_scope(BarcodeSequencingResult).order("lower(name)")
+    @barcode_sequencing_results = policy_scope(BarcodeSequencingResult)
   end
 
   def show
@@ -56,9 +50,7 @@ class BarcodeSequencingResultsController < ApplicationController
 		@barcode_sequencing_result.user = current_user
 
     respond_to do |format|
-			if get_libraries_on_sequencing_result(@sequencing_result).include? lib
-				format.html {redirect_to [@sequencing_request,@sequencing_result], alert: "A Barcode Sequencing Result was already created for library #{lib.name}."}
-      elsif @barcode_sequencing_result.save
+      if @barcode_sequencing_result.save
         format.html { redirect_to [@sequencing_request,@sequencing_result], notice: 'Barcode sequencing result was successfully created.' }
         format.json { render json: @barcode_sequencing_result, status: :created }
       else
@@ -106,6 +98,6 @@ class BarcodeSequencingResultsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def barcode_sequencing_result_params
-      params.require(:barcode_sequencing_result).permit(:is_control, :name, :library_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count)
+      params.require(:barcode_sequencing_result).permit(:barcode_id, :paired_barcode_id, :is_control, :library_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count)
     end
 end

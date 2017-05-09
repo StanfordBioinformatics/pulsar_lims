@@ -21,11 +21,13 @@ class PairedBarcode < ActiveRecord::Base
 		return "#{index1_name}-#{index2_name}"
 	end
 
-	def self.display(paired_barcode_id)
-		pb = PairedBarcode.find(paired_barcode_id)
-		index1_seq = pb.index1.sequence
-		index2_seq = pb.index2.sequence
-		return "#{pb.name} #{index1_seq}-#{index2_seq}"
+	def display
+		seq = get_sequence()
+		return "#{name} #{seq}"
+	end
+
+	def get_sequence
+		return "#{index1.sequence}-#{index2.sequence}"
 	end
 
   protected

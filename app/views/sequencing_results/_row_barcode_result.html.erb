@@ -3,14 +3,12 @@
      ./new_barcode_result.html.erb.
 -->
 	<tr>
-		<td><%= link_to res.name, [@sequencing_request,@sequencing_result,res] %></td>
+		<td><%= link_to res.display, [@sequencing_request,@sequencing_result,res] %></td>
 		<td><%= link_to res.library.name, res.library %></td>
 		<% if res.barcode.present? %>
-			<% display = Barcode.display(res.barcode.id) %>
-			<td><%= link_to display, [res.barcode.sequencing_library_prep_kit, res.barcode] %></td>
+			<td><%= link_to res.barcode.display, [res.barcode.sequencing_library_prep_kit, res.barcode] %></td>
 		<% elsif res.paired_barcode.present? %>
-			<% display = PairedBarcode.display(res.paired_barcode.id) %>
-			<td><%= link_to display, res.paired_barcode %></td>
+			<td><%= link_to res.paired_barcode.display, res.paired_barcode %></td>
 		<% else %>
 			<td></td>
 		<% end %>

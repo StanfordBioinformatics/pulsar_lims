@@ -13,7 +13,6 @@
 <table class="attributes">
   <thead>
     <tr>
-      <th>Name</th>
       <th>Sequencing result</th>
       <th>Library</th>
       <th>Comment</th>
@@ -28,7 +27,6 @@
   <tbody>
     <% @barcode_sequencing_results.each do |res| %>
       <tr>
-        <td><%= res.name %></td>
         <td><%= link_to @sequencing_result.name, [@sequencing_request,@sequencing_result] %></td>
         <td><%= link_to res.library.name, res.library %></td>
         <td><%= res.comment %></td>
