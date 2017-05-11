@@ -15,7 +15,7 @@ class AntibodyPurificationsController < ApplicationController
 
   # GET /antibody_purifications/new
   def new
-		authorize AntibodyPurifiction
+		authorize AntibodyPurification
     @antibody_purification = AntibodyPurification.new
   end
 

@@ -67,7 +67,7 @@ class LibrariesController < ApplicationController
 #		return
 
 		#@library = remove_documents(@library,params[:remove_documents])
-		@library = add_documents(@library,params[:library][:documents])
+		@library = add_documents(@library,params[:library][:document_ids])
 
     respond_to do |format|
       if @library.update(library_params)

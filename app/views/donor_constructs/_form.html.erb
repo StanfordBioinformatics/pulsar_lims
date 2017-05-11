@@ -10,15 +10,22 @@
   <%= f.input :insert_sequence %>
 
 	<% if @donor_construct.construct_tags.persisted.any? %>
-    <table id="construct_tags">
-      <tr><th>Construct tags:</th></tr>
-      <%= f.simple_fields_for :construct_tags do |ff| %>
-        <% tag = @donor_construct.construct_tags[ff.index] %>
-        <tr>
-          <td><%= tag.name %></td>
-          <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
-        </tr>
-      <% end %>  
+    <table class="min-table" id="construct_tags">
+			<thead>
+	      <tr>
+					<th><strong>Construct tags:</strong></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+	      <%= f.simple_fields_for :construct_tags do |ff| %>
+  	      <% tag = @donor_construct.construct_tags[ff.index] %>
+    	    <tr>
+     	     <td><%= tag.name %></td>
+     	     <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+     	   </tr>
+     	 <% end %>  
+			</tbody>
 		</table></br>
   <% end %>
 

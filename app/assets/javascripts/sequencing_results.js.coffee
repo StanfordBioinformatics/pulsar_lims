@@ -20,8 +20,8 @@ $ ->
 
 
   $new_bc_res_btn.on "ajax:success", (event,data) ->  
-    $("#barcode_results").after(data)
-    #this appends a form with id new_barcode_result_form after the table with ID barcode_results.
+    $("#barcode_result_form").append(data)
+    #this appends a form with id new_barcode_result_form after the div with ID barcode_result_form.
     $("#new_barcode_result_form").hide().fadeIn("fast")
     $library_input = $("#barcode_sequencing_result_library_id")
     $library_input.change (event) -> 

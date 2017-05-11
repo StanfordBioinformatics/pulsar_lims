@@ -1,18 +1,25 @@
 <%= simple_form_for(@biosample) do |f| %>
 	<%= f.error_notification %>
 
-	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique biosample name"} %> (Max. 20 characters)
+	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique biosample name"} %> 
 
 	<% if @biosample.documents.persisted.any? %>
-		<table>
-			<tr><th>Associated Protocol Documents:</th></tr>
-			<%= f.simple_fields_for :documents do |ff| %>
-				<% doc = @biosample.documents[ff.index] %>
+		<table class="min-table">
+			<thead>
 				<tr>
-	 		   	<td><%= doc.name %></td>
-	 	 	  	<td><%= ff.input_field :_destroy, as: :boolean, label: "Remove" %></td>
-	   	</tr>
-	   	<% end %>  
+					<th><strong>Protocol Documents:</strong></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<%= f.simple_fields_for :documents do |ff| %>
+					<% doc = @biosample.documents[ff.index] %>
+					<tr>
+	 			   	<td><%= doc.name %></td>
+	 		 	  	<td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+		 	  	</tr>
+	 	  	<% end %>  
+			</tbody>
 	  </table></br>
 	<% end %>
 
@@ -22,7 +29,7 @@
 				 and I set the default selectioned to what the user had originally, 
 				 if any. -->
 
-	<%= f.association :documents, collection: sorted_document_name_id(), prompt: "Select documents",
+	<%= f.association :documents, label: "Add documents", collection: sorted_document_name_id(), prompt: "Select documents",
 			label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not data file)."} %>
 
 	<%= f.association :biosample_type, collection: BiosampleType.order(:name), prompt: "Select the Biosample Type",

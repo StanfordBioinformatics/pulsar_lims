@@ -8,7 +8,7 @@ class CrisprConstruct < ActiveRecord::Base
   belongs_to :vendor
 
 	validates :cloning_vector, presence: true
-	validates :name, uniqueness: true
+	validates :name, presence: true, uniqueness: true
 	validates :target, presence: true	
 	validates :vendor, presence: true
 

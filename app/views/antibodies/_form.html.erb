@@ -17,25 +17,33 @@
   <%= f.association :organism, collection: Organism.order(:name), label_method: :name, prompt: "Select the Organism",
 			label_html: {"data-toggle" => "tooltip", "title" => "The organism the antibody was grown in."} %>
 
-	<table>
-	<tr><th>Associated Antibody Purifications</th></tr>
 	<% if @antibody.antibody_purifications.present? %>
-		<%= f.simple_fields_for(:antibody_purifications) do |ff| %>
-			<% antibody_purification = @antibody.antibody_purifications[ff.index] %>
-			<tr>
-				<td><%= antibody_purification.name %></td>
-				<td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
-			</tr>
-		<% end %>
+		<table class="min-table">
+			<thead>
+				<tr>
+					<th><strong>Antibody Purifications</strong></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<%= f.simple_fields_for(:antibody_purifications) do |ff| %>
+					<% antibody_purification = @antibody.antibody_purifications[ff.index] %>
+					<tr>
+						<td><%= antibody_purification.name %></td>
+						<td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
 	<% end %>
-</table></br>
+	
 
   <!-- Show select for AntibodyPurifications. Mutliple can be selected.
        If the form was rejected due to a validation error, then the
        user will have been presented with this form again to correct it, 
        and I set the default selectioned to what the user had originally, 
        if any. -->
-	<%= f.association :antibody_purifications, collection: sorted_antibody_purification_name_id(), prompt: "Select antibody purifications",
+	<%= f.association :antibody_purifications, label: "Add antibody purifications", collection: sorted_antibody_purification_name_id(), prompt: "Select antibody purifications",
 			label_html: {"data-toggle" => "tooltip", "title" => "Purification protocol(s) used to isolate the antibody."} %>
 
   <%= f.association :vendor, collection: Vendor.order(:name), label_method: :name, prompt: "Select the Vendor",

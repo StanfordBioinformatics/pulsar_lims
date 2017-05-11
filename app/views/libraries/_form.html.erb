@@ -17,18 +17,41 @@
   <%= f.association :sequencing_library_prep_kit, label_html: {"data-toggle" => "tooltip", "title" => "The library prep kit used for creating the library."} %>
 
 	<%= f.input :paired_end %>
+  <%= f.input :strand_specific,
+			label_html: {"data-toggle" => "tooltip", "title" => "Whether the preparation of the library using a strand-specific protocol."} %>
 
 	<% if @library.barcodes.persisted.any? %>
-	  <table>
-		  <tr><th>Barcodes:</th></tr>
-		  <%= f.simple_fields_for :barcodes do |ff| %>
-		   <% bc = @library.barcodes[ff.index] %>
-		   <tr>
-		    <td><%= bc.name %></td>
-		    <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
-		   </tr>
-		   <% end %>  
+	  <table class="min-table">
+			<thead>
+			  <tr><th><strong>Barcodes:</strong></th><th></th></tr>
+			</thead>
+			<tbody>
+				<%= f.simple_fields_for :barcodes do |ff| %>
+					<% bc = @library.barcodes[ff.index] %>
+					<tr>
+						<td><%= bc.display %></td>
+						<td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+					</tr>
+		   	<% end %>  
+			</tbody>
 	  </table></br>
+	<% end %>
+
+	<% if @library.paired_barcodes.persisted.any? %>
+	  <table class="min-table">
+			<thead>
+			  <tr><th><strong>Paired barcodes:</strong></th><th></th></tr>
+			</thead>
+			<tbody>
+			  <%= f.simple_fields_for :paired_barcodes do |ff| %>
+			   <% bc = @library.paired_barcodes[ff.index] %>
+			   <tr>
+			    <td><%= bc.display %></td>
+			    <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+			   </tr>
+			   <% end %>  
+			</tbody>
+	  </table>
 	<% end %>
 
 	<!-- Note that I'm using jQuery to fill the choices of the selection boxes below for barcodes and paired_barcodes. 
@@ -39,17 +62,24 @@
 	<div hidden id="barcode_selector"></div>
 
 	<% if @library.documents.persisted.any? %>
-	  <table>
-		  <tr><th>Protocol Documents:</th></tr>
-		  <%= f.simple_fields_for :documents do |ff| %>
-		   <% doc = @library.documents[ff.index] %>
-		   <tr>
-		    <td><%= doc.name %></td>
-		    <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
-		   </tr>
-		   <% end %>  
-	  </table></br>
+	  <table class="min-table">
+			<thead>
+			  <tr><th><strong>Protocol documents:</strong></th><th></th></tr>
+			</thead>
+			<tbody>
+			  <%= f.simple_fields_for :documents do |ff| %>
+			   <% doc = @library.documents[ff.index] %>
+			   <tr>
+			    <td><%= doc.name %></td>
+			    <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+			   </tr>
+			   <% end %>  
+			</tbody>
+	  </table>
 	<% end %>
+
+	<%= f.association :documents, label: "Add documents", collection: sorted_document_name_id(), prompt: "Select documents", 
+			label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not data file)."} %>
 
   <table>
   <tr><th>Sequencing Requests:</th></tr>
@@ -58,20 +88,12 @@
       <% seqreq = @library.sequencing_requests[ff.index] %>
       <tr>
        <td><%= seqreq.name %></td>
-       <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
+       <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
       </tr>
       <% end %>  
   <% end %>
   </table></br>
 
-  <!-- Show select for Documents. Mutliple documents can be selected.
-       If the form was rejected due to a validation error, then the
-       user will have been presented with this form again to correct it, 
-       and I set the default selectioned to what the user had originally, 
-       if any. -->
-
-	<%= f.association :documents, collection: sorted_document_name_id(), prompt: "Select documents", 
-			label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not data file)."} %>
   <%= f.association :nucleic_acid_term, label: "Nucleic Acid Term Name", collection: NucleicAcidTerm.order(:name), 
 			label_method: :name, prompt: "Select the Term Name",
 			label_html: {"data-toggle" => "tooltip","title" => "SO (Sequence Ontology) term best matching the molecule isolated to generate the library (e.g. 'RNA' for a total RNA library, even if that library is subsequently reverse transcribed for DNA sequencing.)"} %>
@@ -99,9 +121,6 @@
 
   <%= f.input :size_range, as: :string,
 			label_html: {"data-toggle" => "tooltip", "title" => "The measured size range of the purified nucleic acid, in bp."} %>
-
-  <%= f.input :strand_specific,
-			label_html: {"data-toggle" => "tooltip", "title" => "Whether the preparation of the library using a strand-specific protocol."} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary "%>

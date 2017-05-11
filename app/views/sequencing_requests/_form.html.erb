@@ -16,18 +16,25 @@
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing request name"} %>
   <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Notes about the sequencing request"} %>
 
-  <table id="libraries">
-  <tr><th>Associated Libraries:</th></tr>
-   <% if @sequencing_request.libraries.present? %>
-    <%= f.simple_fields_for(:libraries) do |ff| %>
-      <% lib = @sequencing_request.libraries[ff.index] %>
-      <tr>
-      <td><%= lib.name %></td>
-      <td><%= ff.input :_destroy, as: :boolean, label: "Remove" %></td>
-      </tr>
-     <% end %>  
-  <% end %>
+  <% if @sequencing_request.libraries.present? %>
+		<table class="min-table" id="libraries">
+			<thead>
+				<tr>
+					<th><strong>Associated Libraries:</strong></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<%= f.simple_fields_for(:libraries) do |ff| %>
+					<% lib = @sequencing_request.libraries[ff.index] %>
+					<tr>
+						<td><%= lib.name %></td>
+			      <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+					</tr>
+	     <% end %>  
+			</tbody>
     </table>
+  <% end %>
 	<div class="added_libraries"></div>
 	<!-- .added_libraries will serve as the container for new library selections. -->
 

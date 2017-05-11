@@ -39,9 +39,9 @@
 	</tr>
 </table>
 
-<h4>Library Sequencing Results</h4>
-<table id="barcode_results" class="table-bordered table-data" >
-	<% if @sequencing_result.barcode_sequencing_results.present? %>
+<% if @sequencing_result.barcode_sequencing_results.present? %>
+	<h4>Library Sequencing Results</h4>
+	<table id="barcode_results" class="table-bordered table-data" >
 		<thead>
 			<tr>
 				<th>Display Name</th>
@@ -66,6 +66,7 @@
 		</tbody>
 	<% end %>
 </table>
+<div id="barcode_result_form"></div>
 
 <% if not @sequencing_result.missing_barcode_sequencing_results? %>
 	<!-- Create hidden element for jQuery to look for. If jQuery finds it, then it will disable the link below with id="new_barcode_result" -->

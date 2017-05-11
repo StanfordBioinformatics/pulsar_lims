@@ -44,7 +44,7 @@
 		<th><strong>Construct Tags:</strong></th>
 		<td>
 			<% if @donor_construct.construct_tags.present? %>
-				<ul>
+				<ul style="list-style: none;">
 					<% @donor_construct.construct_tags.each do |t| %>
 						<li><%= link_to t.name, t %></li>
 					<% end %>

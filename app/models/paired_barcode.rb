@@ -13,6 +13,8 @@ class PairedBarcode < ActiveRecord::Base
 
 	before_save :verify_sequencing_kit, :verify_index_number
 
+	scope :persisted, lambda { where.not(id: nil) }
+
   def self.policy_class
     ApplicationPolicy
   end 

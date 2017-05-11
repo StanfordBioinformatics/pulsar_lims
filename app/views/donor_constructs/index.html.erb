@@ -23,7 +23,7 @@
   <tbody>
     <% @donor_constructs.each do |donor_construct| %>
       <tr>
-        <td><%= donor_construct.name %></td>
+        <td><%= link_to donor_construct.name, donor_construct %></td>
         <td><%= link_to donor_construct.cloning_vector.name, donor_construct.cloning_vector %></td>
         <td><%= link_to donor_construct.vendor.name, donor_construct.vendor %></td>
         <td><%= donor_construct.vendor_product_identifier %></td>
