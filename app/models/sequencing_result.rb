@@ -11,17 +11,6 @@ class SequencingResult < ActiveRecord::Base
 		ApplicationPolicy
 	end
 
-  def missing_barcode_sequencing_results?
-    libs = sequencing_request.libraries
-    libs.each do |lib|
-      barcodes = get_barcodes_on_lib_without_barcode_seqresult(lib)
-      if barcodes.any?
-        return true
-      end 
-    end 
-    return false
-  end
-
   def get_libs_without_barcode_seqresults
     libs = []
     all_libs = sequencing_request.libraries
@@ -29,6 +18,12 @@ class SequencingResult < ActiveRecord::Base
 			barcodes = get_barcodes_on_lib_without_barcode_seqresult(lib)
       if barcodes.any?
         libs << lib 
+			elsif not lib.barcoded?
+				if BarcodeSequencingResult.find_by(library: lib, sequencing_result: self).blank?
+				#Could be that the library isn't barcoded at all. In this case, barcodes.any? above will always be False. Thus,
+				# need to add the library if not barcoded and not sequencing result exists for it on the given sequencing request.
+					libs << lib
+				end
       end 
     end 
     return libs

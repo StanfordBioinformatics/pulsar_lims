@@ -44,6 +44,16 @@ class Library < ActiveRecord::Base
 		ApplicationPolicy
 	end 
 
+	def barcoded?
+		if paired_end? and paired_barcodes.any?
+			return true
+		elsif not paired_end? and barcodes.any?
+			return true
+		end
+		return false
+	end
+		
+
   def barcode_ids=(ids)
     ids.each do |i| 
       if i.present?

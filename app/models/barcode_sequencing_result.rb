@@ -17,10 +17,18 @@ class BarcodeSequencingResult < ActiveRecord::Base
 
 	def display
 		seq = get_barcode_sequence
-		return "#{library.name} #{seq}"
+		if not seq
+			return library.name
+		else
+			return "#{library.name} #{seq}"
+		end
 	end
 
 	def get_barcode_sequence
+		if not library.barcoded?
+			return nil
+		end
+
 		if library_paired_end?
 			return paired_barcode.get_sequence
 		else
