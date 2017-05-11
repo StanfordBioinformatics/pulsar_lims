@@ -1,5 +1,5 @@
 <%= simple_form_for(@genome_location) do |f| %>
-  <%= f.error_notification %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @genome_location } %>
 
   <div class="form-inputs">
     <%= f.association :chromosome %>

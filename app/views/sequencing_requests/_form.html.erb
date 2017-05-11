@@ -1,17 +1,5 @@
 <%= simple_form_for(@sequencing_request) do |f| %>
-  <%= f.error_notification %>
-
-  <% if @sequencing_request.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@sequencing_request.errors.count, "error") %> prohibited this sequencing request from being saved:</h2>
-
-      <ul>
-      <% @sequencing_request.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @sequencing_request } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing request name"} %>
   <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Notes about the sequencing request"} %>

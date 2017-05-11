@@ -6,14 +6,12 @@ $ ->
 
   load_biosampel_term_name_selection = -> 
     $.get "/biosamples/select_biosample_term_name", $("#biosample_biosample_type_id").serialize(), (responseText,status,jqXHR) ->
-      $("#biosample_biosample_term_name_id").closest("div").replaceWith responseText
+      $(".biosample_term_name").html(responseText)
 
-  if not ($("#biosample_biosample_type_id").val())
-    $("#biosample_biosample_term_name_id").attr("disabled","disabled")
-  else
+  if $("#biosample_biosample_type_id").val()
     load_biosampel_term_name_selection()
-		#set when page loads to, because if the _form.html.erb refreshed with a validation error, the 
-		# biosample_type_id may already have been set, but no change event will fire.
+    #set when page loads to, because if the _form.html.erb refreshed with a validation error, the 
+    # biosample_type_id may already have been set, but no change event will fire.
 
   $("#biosample_biosample_type_id").change (event) -> 
     load_biosampel_term_name_selection()

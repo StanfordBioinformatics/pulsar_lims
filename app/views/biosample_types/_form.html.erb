@@ -1,15 +1,5 @@
 <%= simple_form_for(@biosample_type) do |f| %>
-  <% if @biosample_type.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@biosample_type.errors.count, "error") %> prohibited this biosample_type from being saved:</h2>
-
-      <ul>
-      <% @biosample_type.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @biosample_type } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique biosample type name"} %>
 

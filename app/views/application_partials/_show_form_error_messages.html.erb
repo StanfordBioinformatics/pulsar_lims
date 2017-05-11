@@ -1,0 +1,12 @@
+<%= f.error_notification %>
+<% if model_obj.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(model_obj.errors.count, "error") %> prohibited this library from being saved:</h2>
+
+    <ul>
+    <% model_obj.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

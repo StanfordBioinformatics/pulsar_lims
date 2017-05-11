@@ -1,5 +1,5 @@
 <%= simple_form_for(@construct_tag) do |f| %>
-  <%= f.error_notification %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @construct_tag } %>
 
   <%= f.input :name %>
   <%= f.input :description %>

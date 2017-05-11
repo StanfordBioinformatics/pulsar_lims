@@ -1,5 +1,5 @@
 <%= simple_form_for(@sequencing_center) do |f| %>
-  <%= f.error_notification %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @sequencing_center } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing center name"} %> (Max. 20 characters)
 

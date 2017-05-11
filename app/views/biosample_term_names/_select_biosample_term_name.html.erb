@@ -1,2 +1,2 @@
-<%= f.association :biosample_term_name, collection: selection.order(:name), prompt: "Select the biosample term name", input_html: {multiple: false} %>
+<%= f.association :biosample_term_name, collection: selection.order(:name), prompt: "Select the biosample term name", label_html: {"data-toggle" => "tooltip", "title" => "Ontology term describing biosample. Selection list is dependent upon value of the Biosample Type."} %>
 	

@@ -1,7 +1,9 @@
 <%= simple_form_for(@biosample) do |f| %>
-	<%= f.error_notification %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @biosample } %>
 
 	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique biosample name"} %> 
+
+	<%= f.input :control, label_html: {"data-toggle" => "tooltip", "title" => "Select if this biosample will be used as a control in an experiment."} %>
 
 	<% if @biosample.documents.persisted.any? %>
 		<table class="min-table">
@@ -33,10 +35,11 @@
 			label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not data file)."} %>
 
 	<%= f.association :biosample_type, collection: BiosampleType.order(:name), prompt: "Select the Biosample Type",
-			label_html: {"data-toggle" => "tooltip", "title" => "The categorization of the biosample."} %>
+			label_html: {"data-toggle" => "tooltip", "title" => "The categorization of the biosample. See 'Biosample Types' in the Object Store."} %>
 
-	<%= f.association :biosample_term_name,
-			label_html: {"data-toggle" => "tooltip", "title" => "Ontology term describing biosample. Selection list is dependent upon value of the Biosample Type."} %>
+	<div class="biosample_term_name"></div>
+	<!-- use div above to contain the 'input' to select the biosample_term_name. jQuery will add this input when biosample_type is set, and 
+			 update the input's option list whenever biosample_type changes. -->
 
   <%= f.input :description, label_html: {"data-toggle" => "tooltip", "title" => "A plain text description of the biosample. Do not include experiment details, constructs or treatments."} %>
 

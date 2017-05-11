@@ -1,5 +1,5 @@
 <%= simple_form_for(@cloning_vector) do |f| %>
-  <%= f.error_notification %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @cloning_vector } %>
 
   <%= f.input :name, {"data-toggle" => "tooltip", "title" => "Unique name"} %>
   <%= f.input :description %>

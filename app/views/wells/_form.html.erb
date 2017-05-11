@@ -1,5 +1,5 @@
 <%= simple_form_for([@plate, @well]) do |f| %>
-  <%= f.error_notification %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @well } %>
 
   <%= f.input :name %>
   <%= f.association :plate %>

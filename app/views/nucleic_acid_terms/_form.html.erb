@@ -1,5 +1,5 @@
 <%= simple_form_for(@nucleic_acid_term) do |f| %>
-	<%= f.error_notification %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @nucleic_acid_term } %>
 
 	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique nucleic acid term name"} %>
     

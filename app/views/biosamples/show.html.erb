@@ -12,7 +12,7 @@
 
 <table class="attributes">
   <tr>
-		<th><strong>Biosample Name</strong></th>
+		<th><strong>Name</strong></th>
 		<td><%= @biosample.name %></td>
 	</tr>
 	<tr>
@@ -26,7 +26,7 @@
 		<td><%= @biosample.biosample_type.name %></td>
 	</tr>
 	<tr>
-  	<th><strong>Term Name describing the biosample:</strong></th>
+  	<th><strong>Biosample Term Name:</strong></th>
   	<td><%= link_to @biosample.biosample_term_name.name, @biosample.biosample_term_name %></td>
 	</tr>
   <tr>

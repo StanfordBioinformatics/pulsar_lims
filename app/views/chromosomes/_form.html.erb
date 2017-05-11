@@ -1,5 +1,5 @@
 <%= simple_form_for([@reference_genome,@chromosome]) do |f| %>
-  <%= f.error_notification %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @chromosome } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique name"}  %>
 

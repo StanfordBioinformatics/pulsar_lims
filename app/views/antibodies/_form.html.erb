@@ -1,16 +1,5 @@
 <%= simple_form_for(@antibody) do |f| %>
-	<%= f.error_notification %>
-  <% if @antibody.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@antibody.errors.count, "error") %> prohibited this antibody from being saved:</h2>
-
-      <ul>
-      <% @antibody.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @antibody } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique antibody name"} %> (Max. 20 characters)
 
