@@ -1,4 +1,9 @@
 source 'https://rubygems.org'
+ruby "2.2.2"
+
+#Add production webserver gem for Puma
+gem "puma", group: :production
+gem 'rails_12factor', group: :production
 
 gem 'active_model_serializers', '~> 0.9.3' 
 
