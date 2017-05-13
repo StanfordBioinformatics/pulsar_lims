@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511210319) do
+ActiveRecord::Schema.define(version: 20170513004858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,7 +179,6 @@ ActiveRecord::Schema.define(version: 20170511210319) do
     t.datetime "updated_at",          null: false
   end
 
-  add_index "chromosomes", ["name"], name: "index_chromosomes_on_name", unique: true, using: :btree
   add_index "chromosomes", ["reference_genome_id"], name: "index_chromosomes_on_reference_genome_id", using: :btree
   add_index "chromosomes", ["user_id"], name: "index_chromosomes_on_user_id", using: :btree
 

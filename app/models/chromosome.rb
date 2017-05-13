@@ -3,7 +3,9 @@ class Chromosome < ActiveRecord::Base
   belongs_to :user
   belongs_to :reference_genome
 
-	validates :name, uniqueness: true
+	validates :reference_genome_id, presence: true
+	validates_uniqueness_of :name, scope: :reference_genome_id
+	validates :name, presence: true
 
 	def self.policy_class
 		ApplicationPolicy

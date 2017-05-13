@@ -29,10 +29,6 @@
   	<th><strong>Biosample Term Name:</strong></th>
   	<td><%= link_to @biosample.biosample_term_name.name, @biosample.biosample_term_name %></td>
 	</tr>
-  <tr>
-		<th><strong>Description:</strong></th>
-  	<td><%= @biosample.description %></td>
-	</tr>
 	<tr>
 		<th><strong>Vendor:</strong></th>
 		<td><%= link_to @biosample.vendor.name, @biosample.vendor.url %></td>
@@ -46,7 +42,7 @@
   	<td><%= @biosample.lot_identifier %></td>
 	</tr>
 	<tr>
-		<th><strong>Human Donor:</strong></th>
+		<th><strong>Donor:</strong></th>
 		<td><%= link_to @biosample.donor.name, encode_url(@biosample.donor.encode_identifier)%></td>
 	</tr>
 	<tr>
@@ -69,6 +65,13 @@
 	  <th><strong>Encid:</strong></th>
 	  <td><%= @biosample.encid %></td>
 	</tr>
+	<tr>
+		<th><strong>CRISPR</strong></th>
+		<% if @biosample.crispr.present? %>
+			<td><%= link_to @biosample.crispr.name, @biosample.crispr %></td>
+		<% else %>
+			<td></td>
+		<% end %>
 	<tr>
     <th><strong>Associated Libraries:</strong></th>
     <% if @biosample.libraries.present? %>

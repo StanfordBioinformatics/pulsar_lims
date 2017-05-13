@@ -15,6 +15,7 @@
       <th>Vendor</th>
 			<th>Biosample Type</th>
       <th>Biosample Term Name</th>
+			<th>CRISPR</th>
       <th>ENCID</th>
       <th>Actions</th>
     </tr>
@@ -28,6 +29,11 @@
         <td><%= biosample.vendor.name %></td>
 				<td><%= biosample.biosample_type.name %></td>
         <td><%= link_to biosample.biosample_term_name.name, biosample.biosample_term_name %></td>
+				<% if biosample.crispr.present? %>	
+					<td><%= link_to biosample.crispr.name, biosample.crispr %></td>
+				<% else %>
+					<td></td>
+				<% end %>
         <td><%= biosample.encid %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_biosample_path(biosample) %>
