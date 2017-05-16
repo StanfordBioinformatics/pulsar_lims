@@ -1,10 +1,11 @@
-<%= simple_form_for(@cloning_vector) do |f| %>
+<%= simple_form_for(@cloning_vector,html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
 	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @cloning_vector } %>
 
   <%= f.input :name, {"data-toggle" => "tooltip", "title" => "Unique name"} %>
   <%= f.input :description %>
   <%= f.association :vendor, label_html: {"data-toggle" => "tooltip", "title" => "The originating lab or vendor."} %>
   <%= f.input :product_url, label_html: {"data-toggle" => "tooltip", "title" => "Link to the vendor product."} %>
+	<%= f.input :map, as: :file, label: false %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

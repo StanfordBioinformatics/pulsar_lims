@@ -13,20 +13,26 @@
       <th>Description</th>
       <th>Vendor</th>
       <th>Product url</th>
+			<th>Map</th>
       <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @cloning_vectors.each do |cloning_vector| %>
+    <% @cloning_vectors.each do |cv| %>
       <tr>
-        <td><%= cloning_vector.name %></td>
-        <td><%= cloning_vector.description %></td>
-        <td><%= link_to cloning_vector.vendor.name, cloning_vector.vendor %></td>
-        <td><%= cloning_vector.product_url %></td>
-        <td>
-					<%= link_to fa_icon("pencil"), edit_cloning_vector_path(cloning_vector) %>
-        	<%= link_to fa_icon("trash"), cloning_vector, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <td><%= cv.name %></td>
+        <td><%= cv.description %></td>
+        <td><%= link_to cv.vendor.name, cv.vendor %></td>
+        <td><%= cv.product_url %></td>
+				<% if cv.map.present? %>
+	        <td><%= link_to cv.map, cv.map %></td>
+				<% else %>
+					<td></td>
+				<% end %>
+				<td>
+					<%= link_to fa_icon("pencil"), edit_cloning_vector_path(cv) %>
+        	<%= link_to fa_icon("trash"), cv, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

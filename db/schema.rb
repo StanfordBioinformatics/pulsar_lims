@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513004858) do
+ActiveRecord::Schema.define(version: 20170516215515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,10 +191,10 @@ ActiveRecord::Schema.define(version: 20170513004858) do
     t.datetime "updated_at",                null: false
     t.integer  "vendor_id"
     t.string   "vendor_product_identifier"
+    t.string   "map"
   end
 
   add_index "cloning_vectors", ["name"], name: "index_cloning_vectors_on_name", unique: true, using: :btree
-  add_index "cloning_vectors", ["product_url"], name: "index_cloning_vectors_on_product_url", unique: true, using: :btree
   add_index "cloning_vectors", ["user_id"], name: "index_cloning_vectors_on_user_id", using: :btree
   add_index "cloning_vectors", ["vendor_id"], name: "index_cloning_vectors_on_vendor_id", using: :btree
 

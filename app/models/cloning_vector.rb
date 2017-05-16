@@ -6,7 +6,7 @@ class CloningVector < ActiveRecord::Base
 
 	validates :name, uniqueness: true
 	validates :vendor_id, presence: true
-	validates :product_url, uniqueness: {message: "must be unique"}
+	validates :product_url, uniqueness: {message: "must be unique"}, allow_blank: true
 
 	def self.policy_class
 		ApplicationPolicy

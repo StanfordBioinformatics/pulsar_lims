@@ -39,6 +39,14 @@
   <th><strong>Product url:</strong></th>
   <td><%= @cloning_vector.product_url %></td>
 </tr>
+<tr>
+	<th><strong>Map</strong></th>
+	<% if @cloning_vector.map.present? %>
+		<td><%= image_tag @cloning_vector.map, alt: "Map", class: "map-img" %></td>
+	<% else %>
+		<td></td>
+	<% end %>
+</tr>
 </table>
 
 <%= link_to 'Back', cloning_vectors_path %>

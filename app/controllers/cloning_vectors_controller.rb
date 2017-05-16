@@ -1,5 +1,6 @@
 class CloningVectorsController < ApplicationController
   before_action :set_cloning_vector, only: [:show, :edit, :update, :destroy]
+	before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def index
     @cloning_vectors = policy_scope(CloningVector).order("lower(name)")
@@ -65,6 +66,10 @@ class CloningVectorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cloning_vector_params
-      params.require(:cloning_vector).permit(:vendor_id, :vendor_product_identifier, :name, :description, :product_url)
+      params.require(:cloning_vector).permit(:map, :vendor_id, :vendor_product_identifier, :name, :description, :product_url)
     end
+
+    def set_s3_direct_post
+      @s3_direct_post = S3_BUCKET.presigned_post(key: "images/${filename}", success_action_status: '201', acl: 'public-read')
+    end 
 end
