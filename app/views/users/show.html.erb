@@ -1,0 +1,30 @@
+<header>
+  <h1><%= @user %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @user} %>
+  </ul>
+</header>
+
+<table class="attributes">
+	<tr>
+		<th><strong>Email:</strong></th>
+		<td><%= @user.email%></td>
+	</tr>
+
+	<tr>
+		<th><strong>Role:</strong></th>
+		<td><%= @user.role_name %></td>
+	</tr>
+
+	<tr>
+		<th><strong>API Key:</strong></th>
+		<% if @user.api_key.present? %>
+			<td><%= link_to "Show", show_api_key_user_path(@user), remote: true, id: :show_api_key %></td>
+		<% else %>
+			<td><%= button_to "Generate", generate_api_key_user_path(@user) %></td>
+		<% end %>
+	</tr>
+</table>
+
+<%= link_to 'Back', organisms_path %>

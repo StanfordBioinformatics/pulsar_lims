@@ -1,5 +1,10 @@
 Pulsar::Application.routes.draw do
-
+	
+	resources :users, only: [:show, :edit, :update] do
+		post :generate_api_key, on: :member
+		get  :show_api_key, on: :member
+		get  :remove_api_key, on: :member
+	end
   resources :wells
   resources :plates do
 		resources :wells, except: [:index, :new, :destroy]
@@ -27,6 +32,9 @@ Pulsar::Application.routes.draw do
 
 
   resources :sequencing_centers
+
+	namespace :api do
+	end
 
   namespace :admin do
   	root "application#index"

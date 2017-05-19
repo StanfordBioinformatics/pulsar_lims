@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
 		self.update_column(:api_key, SecureRandom.hex(16))
 	end
 
+	def remove_api_key
+		self.update_column(:api_key, nil)
+	end
+
 	def archive
 		self.update(archived_at: Time.now)
 	end
