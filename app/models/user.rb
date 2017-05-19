@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
 		ApplicationPolicy
 	end 
 
+	def generate_api_key
+		self.update_column(:api_key, SecureRandom.hex(16))
+	end
+
 	def archive
 		self.update(archived_at: Time.now)
 	end
