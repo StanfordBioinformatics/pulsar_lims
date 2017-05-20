@@ -29,6 +29,7 @@ Pulsar::Application.routes.draw do
   resources :sequencing_centers
 
 	namespace :api do
+		resources :biosamples
 	end
 
   namespace :admin do
