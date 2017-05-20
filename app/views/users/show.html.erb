@@ -1,3 +1,5 @@
+<!-- I'm adding a custom user show view for my custom users_controller.rb show action. I added show since devise doesn't have one by default. -->
+
 <header>
   <h1><%= @user %></h1>
 
@@ -27,14 +29,16 @@
 		<td><%= @user.role_name %></td>
 	</tr>
 
-	<tr>
-		<th><strong>API Key:</strong></th>
-		<% if @user.api_key.present? %>
-			<td><%= link_to "Show", show_api_key_user_path(@user), remote: true, id: :show_api_key %></td>
-		<% else %>
-			<td><%= button_to "Generate", generate_api_key_user_path(@user) %></td>
-		<% end %>
-	</tr>
+	<% if @user.role >= User::MANAGER_ROLE %>
+		<tr>
+			<th><strong>API Key:</strong></th>
+			<% if @user.api_key.present? %>
+				<td><%= link_to "Show", show_api_key_user_path(@user), remote: true, id: :show_api_key %></td>
+			<% else %>
+				<td><%= button_to "Generate", generate_api_key_user_path(@user) %></td>
+			<% end %>
+		</tr>
+	<% end %>
 </table>
 
 <%= link_to 'Back', organisms_path %>
