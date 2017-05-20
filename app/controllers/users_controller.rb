@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:show, :edit, :update, :generate_api_key, :show_api_key, :remove_api_key]
+	before_action :set_user, only: [:show, :edit, :generate_api_key, :show_api_key, :remove_api_key]
 	skip_after_action :verify_authorized
 
 	def generate_api_key
@@ -20,27 +20,12 @@ class UsersController < ApplicationController
 	end
 
 	def edit
+		redirect_to :edit_user_registration
 	end
 
-	def update
-		if params[:user][:password].blank?
-			params[:user].delete(:password)
-		end
-		
-		respond_to do |format|
-			if @user.update(user_params)
-				format.html { redirect_to admin_users_path, notice: "User was successfully updated."}
-				format.json { head :no_content }
-			else
-				format.html { render :edit }
-				format.json { render json: @user.errors, status: :unprocessable_entity }
-			end
-		end
-	end
-				
 	private
 		def user_params
-			params.require(:user).permit(:email, :password, :role)
+			params.require(:user).permit()
 		end
 
 		def set_user

@@ -1,10 +1,5 @@
 Pulsar::Application.routes.draw do
-	
-	resources :users, only: [:show, :edit, :update] do
-		post :generate_api_key, on: :member
-		get  :show_api_key, on: :member
-		get  :remove_api_key, on: :member
-	end
+
   resources :wells
   resources :plates do
 		resources :wells, except: [:index, :new, :destroy]
@@ -56,7 +51,15 @@ Pulsar::Application.routes.draw do
 		end
 	end
 
-  devise_for :users
+  devise_for :users, controllers: {
+		registrations: 'registrations'
+	}
+  resources :users, only: [:show, :edit] do
+    post :generate_api_key, on: :member
+    get  :show_api_key, on: :member
+    get  :remove_api_key, on: :member
+  end 
+		
 
 	resources :attachments, only: [:show,:new]
 

@@ -2,11 +2,21 @@
   <h1><%= @user %></h1>
 
   <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @user} %>
+		<li><%= link_to "Edit", [:edit,@user], class: "edit" %></li>
   </ul>
 </header>
 
 <table class="attributes">
+	<tr>
+		<th><strong>First Name:</strong></th>
+		<td><%= @user.first_name %></td>
+	</tr>
+
+	<tr>
+		<th><strong>Last Name:</strong></th>
+		<td><%= @user.last_name %></td>
+	</tr>
+
 	<tr>
 		<th><strong>Email:</strong></th>
 		<td><%= @user.email%></td>
