@@ -21,7 +21,7 @@
   <tbody>
     <% @cloning_vectors.each do |cv| %>
       <tr>
-        <td><%= cv.name %></td>
+        <td><%= link_to cv.name, cv %></td>
         <td><%= cv.description %></td>
         <td><%= link_to cv.vendor.name, cv.vendor %></td>
         <td><%= cv.product_url %></td>

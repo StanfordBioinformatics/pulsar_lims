@@ -1,5 +1,14 @@
 class Admin::UsersController < Admin::ApplicationController
-	before_action :set_user, only: [:show, :edit, :update, :destroy, :archive]
+	before_action :set_user, only: [:show, :edit, :update, :destroy, :archive,:show_api_key, :remove_api_key]
+
+  def show_api_key
+    render layout: false
+  end 
+
+  def remove_api_key
+    @user.remove_api_key
+    render :show
+  end
 
   def index
 		@admins = User.admin_users

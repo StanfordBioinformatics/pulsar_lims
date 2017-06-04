@@ -14,27 +14,36 @@
 	</ul>
 </header>
 
-<table id="attributes">
-    <th>Date Created:</th>
-    <td><%= time_ago_in_words(@user.created_at) %> ago </td>
-  </tr>
+<%= render partial: "application_partials/record_meta", locals: { record: @user } %>
+
+
+<table class="attributes">
 	<tr>
-		<th>First Name</th>
+		<th>First Name:</th>
 		<td><%= @user.first_name %></td>
 	</tr>
 
 	<tr>
-		<th>Last Name </th>
+		<th>Last Name:</th>
 		<td><%= @user.last_name %></td>
 	</tr>
 
   <tr>
-    <th>Email</th>
+    <th>Email:</th>
     <td><%= @user.email %></td>
   </tr>
 
 	<tr>
-		<th>Role</th>
+		<th>Role:</th>
 		<td><%= @user.role_name %></td>
+	</tr>
+
+	<tr>
+		<th>API Key:</th>
+		<% if @user.api_key.present? %>
+			<td><%= link_to "Show", show_api_key_admin_user_path(@user), remote: true, id: :show_api_key %></td>
+		<% else %>
+			<td>None</td>
+		<% end %>
 	</tr>
 </table>

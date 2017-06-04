@@ -32,14 +32,14 @@ class SequencingResult < ActiveRecord::Base
   def get_barcodes_on_lib_without_barcode_seqresult(lib)
     #returns all barcodes/paired barcodes on a given Library that don't have a BarcodeSequencingResult on the 
     # associated SequencingResult object.
-    if sequencing_request.paired_end?
+    if lib.paired_end?
       barcodes = lib.paired_barcodes
     else
       barcodes = lib.barcodes
     end 
     missing_barcodes = [] #the ones to return w/o a barcode sequencing result.
     barcodes.each do |bc|
-      if sequencing_request.paired_end?
+      if lib.paired_end?
         res = BarcodeSequencingResult.find_by(library: lib, sequencing_result: self, paired_barcode: bc) 
       else
         res = BarcodeSequencingResult.find_by(library: lib, sequencing_result: self, barcode: bc) 

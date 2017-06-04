@@ -1,7 +1,11 @@
 <table id="meta_attributes">
 	<tr>
 		<th>Created By:</th>
-		<td><%= record.user.email %></td>
+		<% if record.model_name.name == "User" %>
+			<td><%= record.email %></td>
+		<% else %>
+			<td><%= record.user.email %></td>
+		<% end %>
 	</tr>
 	<tr>
 		<th>Date Created:</th>

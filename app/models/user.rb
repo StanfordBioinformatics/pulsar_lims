@@ -51,6 +51,9 @@ class User < ActiveRecord::Base
 	end 
 
 	def generate_api_key
+    if not role >= User::MANAGER_ROLE
+      raise Pundit::NotAuthorizedError  
+    end 
 		self.update_column(:api_key, SecureRandom.hex(16))
 	end
 

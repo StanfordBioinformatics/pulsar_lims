@@ -3,9 +3,6 @@ class UsersController < ApplicationController
 	skip_after_action :verify_authorized
 
 	def generate_api_key
-		if not @usesr.role >= User::MANAGER_ROLE
-			raise Pundit::NotAuthorizedError	
-		end
 		@user.generate_api_key
 		render :show
 	end

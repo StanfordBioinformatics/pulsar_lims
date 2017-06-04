@@ -6,7 +6,7 @@ class Api::ApplicationController < ApplicationController
 
 	def user_not_authorized
 		#overwrites the method defined in controllers/application_controller. This is a rescue-from callback. 
-		render json: { error: "Unauthorized" }, status: 403
+		render json: { error: "Forbidden" }, status: 403
 	end
 
 	def authenticate_user

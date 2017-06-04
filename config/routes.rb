@@ -38,6 +38,8 @@ Pulsar::Application.routes.draw do
 		resources :users do
 			member do
 				patch :archive
+    		get  :show_api_key
+    		get  :remove_api_key
 			end
 		end
   end
