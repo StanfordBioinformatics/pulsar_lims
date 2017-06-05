@@ -9,4 +9,20 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Pulsar::Application.config.secret_key_base = 'cf11f08ea1f262eb5ad34189b1dd94410761e0517124e63678e8e4e8a74514e070bcc25e8a07f7830d95481aff5e9cb86e88abb584b0751c7e4009a5da300a46'
+Pulsar::Application.config.secret_key_base = "d7759fd272c611f1c39d715a2757d8f248f9e0f36d78b65bd3c7cf9d95e68d9fbaf976677b27d1f26f009d651d10a61d43f79d300c9741e6baf72fc5771727cb"
+
+#nathan comments:
+#	Pulsar::Application.config.secret_key_base = ENV["SECRET_KEY_BASE"]
+#	SECRET_KEY_BASE key is used to encrypt sessions in a production environment.
+
+# Note that I actually set the secret key above verbosly since I am required to - I get this error otherwise when running
+#	bundle exec rake db:migrate RAILS_ENV=production:
+#	"""Devise.secret_key was not set. Please add the following to your Devise initializer:
+
+#	 config.secret_key = 'd7759fd272c611f1c39d715a2757d8f248f9e0f36d78b65bd3c7cf9d95e68d9fbaf976677b27d1f26f009d651d10a61d43f79d300c9741e6baf72fc5771727cb'"""
+#
+#	 The Rails 4 in Action book has an example of starting a production app like so:
+#
+#			bundle exec rake assets:precompile RAILS_ENV=production
+#			bundle exec rake db:migrate RAILS_ENV=production
+#	  	SECRET_KEY_BASE=`rake secret` rails s -e production
