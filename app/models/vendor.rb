@@ -9,7 +9,7 @@ class Vendor < ActiveRecord::Base
 	belongs_to :user
 	
 	validates :name, presence: true, uniqueness: true
-	validates :encode_identifier, uniqueness: true
+	validates :encode_identifier, uniqueness: true, allow_blank: true
 
 	def self.policy_class
 		ApplicationPolicy

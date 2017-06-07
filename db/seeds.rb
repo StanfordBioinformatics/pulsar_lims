@@ -53,7 +53,8 @@ Vendor.create!([
 	{user_id: admin, name: "New England BioLabs", encode_identifier: "", url: "https://www.neb.com"},
 	{user_id: admin, name: "Sigma", encode_identifier: "sigma", url: "http://www.sigmaaldrich.com"},
 	{user_id: admin, name: "Thermo Fisher", encode_identifier: "thermo-fisher", url: "http://www.thermofisher.com/global/en/home.asp"},
-	{user_id: admin, name: "Millipore", encode_identifier: "millipore", url: "http://www.emdmillipore.com"}
+	{user_id: admin, name: "Millipore", encode_identifier: "millipore", url: "http://www.emdmillipore.com"},
+	{user_id: admin, name: "genomics-online", encode_identifier: "", url: "https://www.genomics-online.com"}
 ])
 
 BiosampleOntology.delete_all

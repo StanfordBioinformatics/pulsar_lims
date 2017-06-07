@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520015333) do
+ActiveRecord::Schema.define(version: 20170607062339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -597,7 +597,6 @@ ActiveRecord::Schema.define(version: 20170520015333) do
     t.string   "encode_identifier"
   end
 
-  add_index "vendors", ["encode_identifier"], name: "index_vendors_on_encode_identifier", unique: true, using: :btree
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
   add_index "vendors", ["user_id"], name: "index_vendors_on_user_id", using: :btree
 
