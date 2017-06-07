@@ -24,7 +24,11 @@
         <td><%= link_to cv.name, cv %></td>
         <td><%= cv.description %></td>
         <td><%= link_to cv.vendor.name, cv.vendor %></td>
-        <td><%= cv.product_url %></td>
+				<% if cv.product_url.present? %>
+	        <td><%= link_to cv.product_url, cv.product_url %></td>
+				<% else %>
+					<td></td>
+				<% end %>
 				<% if cv.map.present? %>
 	        <td><%= link_to cv.map, cv.map %></td>
 				<% else %>

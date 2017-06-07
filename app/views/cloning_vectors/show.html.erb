@@ -37,7 +37,11 @@
 
 <tr>
   <th><strong>Product url:</strong></th>
-  <td><%= @cloning_vector.product_url %></td>
+	<% if @cloning_vector.product_url.present? %>
+  	<td><%= link_to @cloning_vector.product_url, @cloning_vector.product_url %></td>
+	<% else %>
+		<td></td>
+	<% end %>
 </tr>
 <tr>
 	<th><strong>Map</strong></th>

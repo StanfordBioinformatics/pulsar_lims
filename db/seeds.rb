@@ -57,6 +57,12 @@ Vendor.create!([
 	{user_id: admin, name: "genomics-online", encode_identifier: "", url: "https://www.genomics-online.com"}
 ])
 
+CloningVector.delete_all
+CloningVector.create!([
+	{user_id: admin, name: "pMD18-T Simple", product_url: "https://www.genomics-online.com/vector-backbone/37/pmd18-t-simple/"}
+])
+	
+
 BiosampleOntology.delete_all
 BiosampleOntology.create!([
 	{user_id: admin, name: "CL", url: "http://www.obofoundry.org/ontology/cl.html"},
