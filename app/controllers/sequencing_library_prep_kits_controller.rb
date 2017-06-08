@@ -1,6 +1,15 @@
 class SequencingLibraryPrepKitsController < ApplicationController
 	include DocumentsConcern #gives me add_documents()
   before_action :set_sequencing_library_prep_kit, only: [:show, :edit, :update, :destroy]
+	skip_after_action :verify_authorized, only: [:paired_end_kits]
+
+	def paired_end_kits
+		@pe_kits = SequencingLibraryPrepKit.paired_end_kits() #returns the entire objects in a list
+		ids = @pe_kits.map do |x|
+			x[:id]
+		end
+		render json: ids
+	end
 
   def index
     @sequencing_library_prep_kits = policy_scope(SequencingLibraryPrepKit.order("lower(name)"))
@@ -70,6 +79,6 @@ class SequencingLibraryPrepKitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_library_prep_kit_params
-      params.require(:sequencing_library_prep_kit).permit(:vendor_product_identifier, :name, :vendor_id, :description, documents_attributes: [:id,:_destroy])
+      params.require(:sequencing_library_prep_kit).permit(:supports_paired_end, :vendor_product_identifier, :name, :vendor_id, :description, documents_attributes: [:id,:_destroy])
     end
 end

@@ -16,4 +16,9 @@ class SequencingLibraryPrepKit < ActiveRecord::Base
 	def self.policy_class
 		ApplicationPolicy
 	end
+
+	def self.paired_end_kits
+		return SequencingLibraryPrepKit.where({:supports_paired_end => true})
+	end
+		
 end

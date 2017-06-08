@@ -17,8 +17,13 @@ $ ->
   #The following code is used with the Library form partial:
   ###
 
+
+  #$.get "/sequencing_library_prep_kits/get_pe_kits", (responseText,status,jqXHR) ->
+  #  alert($.inArray
+    
   $kit_selector = $("#library_sequencing_library_prep_kit_id")
   $paired_end_checkbox = $("#library_paired_end")
+  $paired_end_checkbox.closest("div").hide()
 
   $paired_barcode_selector = $("#paired_barcode_selector")
   $barcode_selector = $("#barcode_selector")
@@ -49,6 +54,18 @@ $ ->
     # biosample_type_id may already have been set, but no change event will fire.
 
   $kit_selector.change (event) -> 
-    load_barcode_selection()
+    kit_id = parseInt($kit_selector.val())
+    alert("change")
+    $.get "/sequencing_library_prep_kits/paired_end_kits", (responseText,status,jqXHR) ->
+      #responseText is JSON, i.e { "sequencing_library_prep_kits": [ 5 ] }
+      pe_kit_ids = responseText.sequencing_library_prep_kits
+      #alert($.type(pe_kit_ids)) #array
+      if $.inArray(parseInt($kit_selector.val()),pe_kit_ids) >= 0
+        $paired_end_checkbox.closest("div").show()
+      else
+        $paired_end_checkbox.attr("checked",false)
+        $paired_end_checkbox.closest("div").hide()
+      load_barcode_selection()
+
   $paired_end_checkbox.click (event) ->
     load_barcode_selection()
