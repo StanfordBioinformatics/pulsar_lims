@@ -19,7 +19,6 @@ $ ->
 
 
   #$.get "/sequencing_library_prep_kits/get_pe_kits", (responseText,status,jqXHR) ->
-  #  alert($.inArray
     
   $kit_selector = $("#library_sequencing_library_prep_kit_id")
   $paired_end_checkbox = $("#library_paired_end")
@@ -55,7 +54,6 @@ $ ->
 
   $kit_selector.change (event) -> 
     kit_id = parseInt($kit_selector.val())
-    alert("change")
     $.get "/sequencing_library_prep_kits/paired_end_kits", (responseText,status,jqXHR) ->
       #responseText is JSON, i.e { "sequencing_library_prep_kits": [ 5 ] }
       pe_kit_ids = responseText.sequencing_library_prep_kits
