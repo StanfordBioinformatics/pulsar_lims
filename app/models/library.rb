@@ -89,6 +89,9 @@ class Library < ActiveRecord::Base
 			elsif self.paired_barcodes.present? and not self.paired_end?
 				self.errors.add(:base, "Can't set paired-end barcodes when the library is not marked as paired-end. You must instead select single-end barodes.")
 				return false
+			elsif self.paired_end and not self.sequencing_library_prep_kit.supports_paired_end?
+				self.errors.add(:base, "Can't set paired_end to true when the sequencing library prep kit does not support paired-end sequencing.")
+				return false
 			end
 		end
 end
