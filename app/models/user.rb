@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
 	VIEWER_ROLE = 1
 	MANAGER_ROLE = 5
@@ -70,10 +70,26 @@ class User < ActiveRecord::Base
 	end
 
 	def active_for_authentication?
+		#As stated in Rails 4 In Action:
+		#
+		#Devise determines if a user can sign in to your app with a method called
+		# active_for_authentication?. Each of the Devise strategies we listed in chapter 6
+		# (lockable, confirmable, and so on) can add conditions to determine whether or not
+		# a user is able to sign in—for example, the lockable strategy will overwrite this
+		# Listing 7.64 Testing that archived users can’t sign in
+		# Licensed to Nathaniel Watson <nathan.watson86@gmail.com>
+		# 212 CHAPTER 7 Basic access control
+		# active_for_authentication? method to return false if the user’s record is locked.
+		# If the method returns false, then the user is not allowed to sign in.
+		# You can write your own active_for_authentication? method in your User
+		# model to disallow authentication if a user is archived.
 		super && archived_at.nil?
 	end
 
 	def inactive_message
+		#Extending Devise's inactive_message() method. As stated in Rails 4 In Action, "This method will get called by Devise when 
+		# active_for_authentication? returns False, and it should return the translation key of the message that should be displayed
+		# to the user." (p. 212). 
 		archived_at.nil? ? super : :archived
 	end
 

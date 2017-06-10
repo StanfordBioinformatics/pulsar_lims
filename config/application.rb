@@ -19,4 +19,21 @@ module Pulsar
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
   end
+
+	Application.configure do 
+
+	  ActionMailer::Base.delivery_method = :smtp
+	  host = "pulsar-encode.herokuapp.com"
+	  ActionMailer::Base.smtp_settings = { 
+	    port: ENV['MAILGUN_SMTP_PORT'],
+	    address: ENV['MAILGUN_SMTP_SERVER'],
+	    user_name: ENV['MAILGUN_SMTP_LOGIN'],
+	    password: ENV['MAILGUN_SMTP_PASSWORD'],
+	    domain: host,
+	    authentication: :plain,
+	  }
+	  config.action_mailer.default_url_options = { 
+	  host: host
+	  }
+	end
 end
