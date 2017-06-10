@@ -1,7 +1,7 @@
-<% content_for :bobby do %>
+<% content_for :rm_tag_selector do %>
 	<span>Construct Tag <a class="remove_construct_tag fa fa-remove"></a></span>
 <% end %>
 
-<%= f.association :construct_tags, label: content_for(:bobby), collection: construct_tags.order(:name), prompt: "Select a Construct Tag", input_html: {multiple: true} %>
+<%= f.association :construct_tags, label: content_for(:rm_tag_selector), collection: construct_tags.order(:name), prompt: "Select a Construct Tag", input_html: {multiple: true} %>
 
 <!-- Relevant jQuery in construct_tags.js.coffee -->
