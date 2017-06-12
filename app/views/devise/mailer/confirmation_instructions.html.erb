@@ -3,3 +3,7 @@
 <p>You can confirm your account email through the link below:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p>Once your account is active, you'll have viewer status by default.<hr>
+If you need access to create and edit objects, please email support at <%= ENV["SUPPORT_EMAIL_ADDR"] %><hr>
+</p>
