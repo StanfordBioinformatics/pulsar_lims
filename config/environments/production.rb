@@ -14,6 +14,7 @@ Pulsar::Application.configure do
       authentication: :plain,
     }   
 
+		#specify default URL for links that are sent in the emails (i.e confirmation email)
     config.action_mailer.default_url_options = { 
     host: host
     }   

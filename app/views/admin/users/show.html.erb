@@ -28,6 +28,20 @@
 		<td><%= @user.last_name %></td>
 	</tr>
 
+	<tr>
+		<th>Confirmed?</th>
+		<% if @user.confirmed_at.present? %>
+			<td>True</td>
+		<% else %>
+			<td>False</td>
+		<% end %>
+	</tr>
+
+	<tr>
+		<th>Confirmation sent at:</th>
+		<th><%= @user.confirmation_sent_at %></td>
+	</tr>
+
   <tr>
     <th>Email:</th>
     <td><%= @user.email %></td>

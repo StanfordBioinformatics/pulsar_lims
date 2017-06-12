@@ -1,6 +1,24 @@
 Pulsar::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+    ActionMailer::Base.delivery_method = :smtp
+
+    host = "localhost"
+
+    ActionMailer::Base.smtp_settings = { 
+      port: ENV['MAILGUN_SMTP_PORT'],
+      address: ENV['MAILGUN_SMTP_SERVER'],
+      user_name: ENV['MAILGUN_SMTP_LOGIN'],
+      password: ENV['MAILGUN_SMTP_PASSWORD'],
+      domain: host,
+      authentication: :plain,
+    }   
+
+		#specify default URL for links that are sent in the emails (i.e confirmation email)
+    config.action_mailer.default_url_options = { 
+    host: host
+    }
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
