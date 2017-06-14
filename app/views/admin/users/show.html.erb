@@ -28,6 +28,11 @@
 		<td><%= @user.last_name %></td>
 	</tr>
 
+	<!-- Not including the confirmation token here since what is stored in the database isn't what is sent out to the user via email. In fact, 
+       when the user clicks on a confirmation link, the token in the link is converted by Devise into a digest, which is then compared to 
+       the confirmatio_token that's stored in the database for the user.
+	-->
+
 	<tr>
 		<th>Confirmed?</th>
 		<% if @user.confirmed_at.present? %>

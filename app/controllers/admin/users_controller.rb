@@ -25,6 +25,7 @@ class Admin::UsersController < Admin::ApplicationController
 
 	def create
 		@user = User.new(user_params)
+		@user.skip_confirmation! #don't send out an email until I get the domain set up for Mailgun. This also sets the Users's to be confirmed by default.
     respond_to do |format|
       if @user.save
         format.html { redirect_to admin_users_path, notice: "User was successfully created." }
