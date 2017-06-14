@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:show, :edit, :generate_api_key, :show_api_key, :remove_api_key]
+	before_action :set_user, only: [:show, :edit, :generate_api_key, :show_api_key, :hide_api_key, :remove_api_key]
 	skip_after_action :verify_authorized
 
 	def generate_api_key

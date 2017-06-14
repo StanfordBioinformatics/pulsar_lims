@@ -35,7 +35,7 @@
 		<tr>
 			<th><strong>API Key:</strong></th>
 			<% if @user.api_key.present? %>
-				<td><%= link_to "Show", show_api_key_user_path(@user), remote: true, id: :show_api_key %></td>
+				<td id="api_key"><%= render partial: "users/link_to_show_api_key", locals: {user: @user} %></td>
 			<% else %>
 				<td><%= button_to "Generate", generate_api_key_user_path(@user) %></td>
 			<% end %>
