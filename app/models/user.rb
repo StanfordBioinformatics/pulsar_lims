@@ -36,6 +36,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+	validates :email, presence: true #already required, but for some reason with Devise the asterisk doesn't show up on the form.
+	validates :password, presence: true #already required, but for some reason with Devise the asterisk doesn't show up on the form.
+	validates :first_name, presence: true #already required, but for some reason with Devise the asterisk doesn't show up on the form.
+	validates :last_name, presence: true #already required, but for some reason with Devise the asterisk doesn't show up on the form.
+
 	VIEWER_ROLE = 1
 	MANAGER_ROLE = 5
 	ADMIN_ROLE = 10

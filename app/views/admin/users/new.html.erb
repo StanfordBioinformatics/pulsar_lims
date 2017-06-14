@@ -2,4 +2,10 @@
 	<h1>New User</h1>
 </header>
 
+<br>
+<p>
+If creating a user for someone else, you'll still need to enter a default password. You should email the user to inform them of their default password promptly since the mail service that is configured with Pulsar (Mailgun by default) will send the user a confirmation link. If they click that link without knowing their password, it'll make for a bad user experience.  Try not to use this feature when possible. Instead, let users create their own accounts.
+</p>
+<br>
+
 <%= render "form", user: @user %>
