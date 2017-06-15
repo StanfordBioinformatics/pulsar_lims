@@ -1,6 +1,20 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:show, :edit, :generate_api_key, :show_api_key, :hide_api_key, :remove_api_key]
+	before_action :set_user, only: [:show, :edit, :generate_api_key, :show_api_key, :hide_api_key, :remove_api_key, :archive]
 	skip_after_action :verify_authorized
+
+  def archive
+    unless @user == current_user
+			raise Pundit::NotAuthorizedError	
+      return
+    end 
+
+		@user.archive
+		reset_session
+
+		respond_to do |format|
+			format.html { redirect_to root_path, notice: "User account was successfully removed." }
+		end 
+	end
 
 	def generate_api_key
 		@user.generate_api_key

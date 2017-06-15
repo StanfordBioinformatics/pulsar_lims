@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::ApplicationController
-	before_action :set_user, only: [:show, :edit, :update, :destroy, :archive,:show_api_key, :remove_api_key]
+	before_action :set_user, only: [:show, :edit, :update, :destroy, :archive,:unarchive, :show_api_key, :remove_api_key]
 
   def show_api_key
     render layout: false
@@ -77,6 +77,14 @@ class Admin::UsersController < Admin::ApplicationController
 		
 		respond_to do |format|
 			format.html { redirect_to admin_users_path, notice: "User was successfully archived." }
+			format.json { head :no_content }
+		end
+	end
+
+	def unarchive 
+		@user.unarchive
+		respond_to do |format|
+			format.html { redirect_to admin_users_path, notice: "User was successfully unarchived." }
 			format.json { head :no_content }
 		end
 	end

@@ -39,6 +39,7 @@ Pulsar::Application.routes.draw do
 		resources :users do
 			member do
 				patch :archive
+				patch :unarchive
     		get  :show_api_key
     		get  :remove_api_key
 			end
@@ -62,6 +63,7 @@ Pulsar::Application.routes.draw do
     post :generate_api_key, on: :member
     get  :show_api_key, on: :member
     get  :remove_api_key, on: :member
+		patch :archive, on: :member
   end 
 		
 

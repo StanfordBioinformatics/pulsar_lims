@@ -68,6 +68,10 @@ class User < ActiveRecord::Base
 	def archive
 		self.update(archived_at: Time.now)
 	end
+	
+	def unarchive
+		self.update(archived_at: nil)
+	end
 
 	def to_s
 		"#{email}"

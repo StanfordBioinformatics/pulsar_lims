@@ -8,9 +8,13 @@
 				data: { confirm: "Are you sure you would like to delete this user?"},
 				class: "delete" %></li>
 		</li>
-		<li><%= link_to "Archive User", [:archive,:admin,@user], method: :patch,
+		<% if @user.archived_at.present? %>
+			<li><%= link_to "Unarchive User", [:unarchive,:admin,@user], method: :patch, class: "reg-btn" %></li>
+		<% else %>
+			<li><%= link_to "Archive User", [:archive,:admin,@user], method: :patch,
 				data: { confirm: "Are you sure you would like to archive this user?"},
 				class: "delete" %></li>
+		<% end %>
 	</ul>
 </header>
 
@@ -32,6 +36,11 @@
        when the user clicks on a confirmation link, the token in the link is converted by Devise into a digest, which is then compared to 
        the confirmatio_token that's stored in the database for the user.
 	-->
+
+  <tr>
+    <th>Archived?</th>
+    <td><%= @user.archived_at.present? %></td>
+  </tr>
 
 	<tr>
 		<th>Confirmed?</th>
