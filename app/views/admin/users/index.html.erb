@@ -8,12 +8,17 @@
 	</ul>
 </header>
 
-	
-<h4>Admins</h4>
-<%= render partial: "role_table", locals: {role_category: "Admins", users: @admins} %>
-
-<h4>Managers</h4>
-<%= render partial: "role_table", locals: {role_category: "Managers", users: @admins} %>
-
-<h4>Archived</h4>
-<%= render partial: "role_table", locals: {role_category: "Archived", users: @admins} %>
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>User</th>
+			<th>Role</th>
+      <th>Last Sign-in</th>
+    </tr>
+  </thead>
+  <tbody>
+     <%= render partial: "user_table_row", collection: @admins, as: :user %>
+     <%= render partial: "user_table_row", collection: @users, as: :user %>
+     <%= render partial: "user_table_row", collection: @archived, as: :user %>
+  </tbody>
+</table></br>
