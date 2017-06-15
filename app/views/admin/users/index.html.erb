@@ -9,29 +9,11 @@
 </header>
 
 	
-<div id="admins">	
-	<h4>Admin Users</h4>
-	<ul>
-		<% @admins.each do |user| %>
-			<li><%= link_to user, [:admin, user] %></li>
-		<% end %>
-	</ul>
-</div></br>
+<h4>Admins</h4>
+<%= render partial: "role_table", locals: {role_category: "Admins", users: @admins} %>
 
-<div id="users">	
-	<h4>Regular Users</h4>
-	<ul>
-		<% @users.each do |user| %>
-			<li><%= link_to user, [:admin, user] %></li>
-		<% end %>
-	</ul>
-</div></br>
+<h4>Managers</h4>
+<%= render partial: "role_table", locals: {role_category: "Managers", users: @admins} %>
 
-<div id="archived">	
-	<h4>Archived Users</h4>
-	<ul>
-		<% @archived.each do |user| %>
-			<li><%= link_to user, [:admin, user] %></li>
-		<% end %>
-	</ul>
-</div></br>
+<h4>Archived</h4>
+<%= render partial: "role_table", locals: {role_category: "Archived", users: @admins} %>
