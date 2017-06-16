@@ -13,12 +13,11 @@
     <tr>
       <th>User</th>
 			<th>Role</th>
+			<th>Created</th>
       <th>Last Sign-in</th>
     </tr>
   </thead>
   <tbody>
-     <%= render partial: "user_table_row", collection: @admins, as: :user %>
-     <%= render partial: "user_table_row", collection: @users, as: :user %>
-     <%= render partial: "user_table_row", collection: @archived, as: :user %>
+     <%= render partial: "user_table_row", collection: @all_users, as: :user %>
   </tbody>
 </table></br>

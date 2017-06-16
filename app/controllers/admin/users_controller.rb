@@ -11,9 +11,11 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def index
-		@admins = User.admin_users
-		@users = User.regular_users
-		@archived = User.archived_users
+		@all_users = User.all.order(:created_at).reverse
+		@admins = User.admins
+		@managers = User.managers
+		@viewers = User.viewers
+		@archived = User.archived
   end
 
 	def show

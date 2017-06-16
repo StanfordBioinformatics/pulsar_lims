@@ -45,9 +45,10 @@ class User < ActiveRecord::Base
 	ADMIN_ROLE = 10
 	ROLES = { :VIEWER_ROLE => VIEWER_ROLE, :MANAGER_ROLE => MANAGER_ROLE, :ADMIN_ROLE => ADMIN_ROLE }
 
-	scope :archived_users, lambda { where.not(archived_at: nil) }
-	scope :admin_users, lambda { where(role: ADMIN_ROLE, archived_at: nil) }
-	scope :regular_users, lambda { where.not(role: ADMIN_ROLE ).where(archived_at: nil) }
+	scope :archived, lambda { where.not(archived_at: nil) }
+	scope :admins, lambda { where(role: ADMIN_ROLE, archived_at: nil) }
+	scope :managers, lambda { where(role: MANAGER_ROLE ).where(archived_at: nil) }
+	scope :viewers, lambda { where(role: VIEWER_ROLE ).where(archived_at: nil) }
 
 
 	def self.policy_class
