@@ -1,5 +1,6 @@
 Pulsar::Application.routes.draw do
 
+  resources :addresses
   resources :wells
   resources :plates do
 		resources :wells, except: [:index, :new, :destroy]

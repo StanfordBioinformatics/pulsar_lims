@@ -1,0 +1,41 @@
+<% title(@address.name, "Addresses") %>
+<header>
+  <h1><%= @address.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @address} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @address} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @address } %>
+
+<table class="attributes">
+	<tr>
+		<th><strong>Name:</strong></th>
+		<td><%= @address.name %></td>
+	</tr>
+
+	<tr>
+		<th><strong>Street:</strong></th>
+		<td><%= @address.street %></td>
+	</tr>
+
+	<tr>
+		<th><strong>City:</strong></th>
+		<td><%= @address.city %></td>
+	</tr>
+
+	<tr>
+		<th><strong>State/Province:</strong></th>
+		<td><%= @address.state %></td>
+	</tr>
+
+	<tr>
+		<th><strong>Country:</strong></th>
+		<td><%= @address.country %></td>
+	</tr>
+</table>
+
+
+<%= link_to 'Back', address_path %>

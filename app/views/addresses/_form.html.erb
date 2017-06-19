@@ -1,0 +1,15 @@
+<%= simple_form_for(@address) do |f| %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @address} %>
+
+	<%= f.input :name %>
+	<%= f.input :street %>
+	<%= f.input :city %>
+	<%= f.input :state, label: "State/Province" %>
+	<%= f.input :postal_code, as: :string %>
+	<%= f.input :country, selected: "US" %>
+	<!-- the country is used by simple_form as a select box thanks to the country_select gem. See https://github.com/stefanpenner/country_select -->
+
+  <div class="actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
+<% end %>

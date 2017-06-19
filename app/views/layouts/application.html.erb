@@ -74,6 +74,7 @@
             <span class="navbar-brand"><h5>Object Store<h5></span>
           </div>
           <ul style="clear:left;" class="nav navbar-nav">
+						<%= link_to "Addresses",addresses_path, class: controller_name() == "addresses" ? "list-group-item active" : "list-group-item" %>
 						<%= link_to "Antibodies",antibodies_path, class: controller_name() == "antibodies" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Antibody Purifications",antibody_purifications_path, class: controller_name() == "antibody_purifications" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Biosamples",biosamples_path, class: controller_name() == "biosamples" ? "list-group-item active" : "list-group-item" %>

@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170610222534) do
+ActiveRecord::Schema.define(version: 20170619192210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "city"
+    t.string   "state"
+    t.integer  "postal_code"
+    t.string   "country"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.string   "street"
+    t.string   "name"
+  end
+
+  add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
 
   create_table "antibodies", force: :cascade do |t|
     t.integer  "organism_id"
@@ -625,6 +639,7 @@ ActiveRecord::Schema.define(version: 20170610222534) do
   add_index "wells", ["plate_id"], name: "index_wells_on_plate_id", using: :btree
   add_index "wells", ["user_id"], name: "index_wells_on_user_id", using: :btree
 
+  add_foreign_key "addresses", "users"
   add_foreign_key "antibodies", "isotypes"
   add_foreign_key "antibodies", "organisms"
   add_foreign_key "antibodies", "targets"

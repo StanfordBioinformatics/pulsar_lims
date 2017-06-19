@@ -1,0 +1,36 @@
+<header>
+	<h1>Addresses</h1>
+	
+  <ul class="actions">
+		<%= render partial: "application_partials/auth_new_record", locals: {model_class: Address} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Street</th>
+      <th>City</th>
+      <th>State/Province</th>
+      <th>Country</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @addresses.each do |address| %>
+      <tr>
+        <td><%= link_to address.name, address %></td>
+        <td><%= address.street %></td>
+        <td><%= address.city %></td>
+        <td><%= address.state %></td>
+        <td><%= address.country %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_address_path(address) %>
+        	<%= link_to fa_icon("trash"), address, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
