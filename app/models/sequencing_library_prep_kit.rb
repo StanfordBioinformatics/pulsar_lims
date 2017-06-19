@@ -3,6 +3,7 @@ class SequencingLibraryPrepKit < ActiveRecord::Base
 	has_many :barcodes
 	has_many :libraries
 	has_many :paired_barcodes
+	has_many :pooled_libraries
 	has_many :sequencing_library_prep_kits
   belongs_to :user
   belongs_to :vendor

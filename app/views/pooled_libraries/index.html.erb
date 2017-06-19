@@ -1,0 +1,36 @@
+<header>
+  <h1>Pooled Libraries</h1>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: PooledLibrary} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Paired end</th>
+      <th>Sequencing library prep kit</th>
+      <th>Size range</th>
+			<th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pooled_libraries.each do |pl| %>
+      <tr>
+        <td><%= link_to pl.name, pl %></td>
+        <td><%= pl.paired_end? %></td>
+        <td><%= link_to pl.sequencing_library_prep_kit.name, pl.sequencing_library_prep_kit %></td>
+        <td><%= pl.size_range %></td>
+        <td>
+					<%= link_to fa_icon("edit"), edit_pooled_library_path(pl) %>
+        	<%= link_to fa_icon("trash"), pl, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

@@ -1,5 +1,6 @@
 Pulsar::Application.routes.draw do
 
+  resources :pooled_libraries
   resources :addresses
   resources :wells
   resources :plates do

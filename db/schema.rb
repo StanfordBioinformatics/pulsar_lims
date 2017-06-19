@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619192210) do
+ActiveRecord::Schema.define(version: 20170619223948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -477,6 +477,19 @@ ActiveRecord::Schema.define(version: 20170619192210) do
   add_index "plates", ["user_id"], name: "index_plates_on_user_id", using: :btree
   add_index "plates", ["vendor_id"], name: "index_plates_on_vendor_id", using: :btree
 
+  create_table "pooled_libraries", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.boolean  "paired_end"
+    t.integer  "sequencing_library_prep_kit_id"
+    t.string   "size_range"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "pooled_libraries", ["sequencing_library_prep_kit_id"], name: "index_pooled_libraries_on_sequencing_library_prep_kit_id", using: :btree
+  add_index "pooled_libraries", ["user_id"], name: "index_pooled_libraries_on_user_id", using: :btree
+
   create_table "reference_genomes", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "url",        limit: 255
@@ -705,6 +718,8 @@ ActiveRecord::Schema.define(version: 20170619192210) do
   add_foreign_key "plates", "sequencing_library_prep_kits"
   add_foreign_key "plates", "users"
   add_foreign_key "plates", "vendors"
+  add_foreign_key "pooled_libraries", "sequencing_library_prep_kits"
+  add_foreign_key "pooled_libraries", "users"
   add_foreign_key "reference_genomes", "users"
   add_foreign_key "sequencing_centers", "users"
   add_foreign_key "sequencing_library_prep_kits", "users"

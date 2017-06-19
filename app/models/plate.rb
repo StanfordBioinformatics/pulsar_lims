@@ -4,6 +4,7 @@ class Plate < ActiveRecord::Base
 	DIMENSIONS = ["2x2 (4)","8x12 (96)","16x24 (384)"]
 	
 	has_many :wells, dependent: :destroy
+	belongs_to :pooled_library
   belongs_to :user
   belongs_to :sequencing_library_prep_kit
   belongs_to :vendor

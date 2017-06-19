@@ -1,9 +1,10 @@
 class SequencingRequest < ActiveRecord::Base
 	has_and_belongs_to_many :libraries
-	belongs_to :user
+	belongs_to :pooled_library
   belongs_to :sequencing_platform
   belongs_to :sequencing_center
 	has_one    :sequencing_result, dependent: :destroy
+	belongs_to :user
 
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
 	validates :sequencing_center, presence: true

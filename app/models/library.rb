@@ -14,6 +14,7 @@ class Library < ActiveRecord::Base
 	belongs_to :biosample
 	belongs_to :library_fragmentation_method
 	belongs_to :nucleic_acid_term
+	belongs_to :pooled_library
 	belongs_to :sequencing_library_prep_kit
 	belongs_to :user
 	belongs_to :vendor
