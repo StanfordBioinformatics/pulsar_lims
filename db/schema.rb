@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619223948) do
+ActiveRecord::Schema.define(version: 20170619234334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,14 +110,6 @@ ActiveRecord::Schema.define(version: 20170619223948) do
 
   add_index "barcodes", ["sequencing_library_prep_kit_id"], name: "index_barcodes_on_sequencing_library_prep_kit_id", using: :btree
   add_index "barcodes", ["user_id"], name: "index_barcodes_on_user_id", using: :btree
-
-  create_table "barcodes_libraries", id: false, force: :cascade do |t|
-    t.integer "barcode_id", null: false
-    t.integer "library_id", null: false
-  end
-
-  add_index "barcodes_libraries", ["barcode_id"], name: "index_barcodes_libraries_on_barcode_id", using: :btree
-  add_index "barcodes_libraries", ["library_id"], name: "index_barcodes_libraries_on_library_id", using: :btree
 
   create_table "biosample_ontologies", force: :cascade do |t|
     t.integer  "user_id"
@@ -388,12 +380,16 @@ ActiveRecord::Schema.define(version: 20170619223948) do
     t.integer  "library_fragmentation_method_id"
     t.integer  "sequencing_library_prep_kit_id"
     t.boolean  "paired_end"
+    t.integer  "barcode_id"
+    t.integer  "paired_barcode_id"
   end
 
+  add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
   add_index "libraries", ["library_fragmentation_method_id"], name: "index_libraries_on_library_fragmentation_method_id", using: :btree
   add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true, using: :btree
   add_index "libraries", ["nucleic_acid_term_id"], name: "index_libraries_on_nucleic_acid_term_id", using: :btree
+  add_index "libraries", ["paired_barcode_id"], name: "index_libraries_on_paired_barcode_id", using: :btree
   add_index "libraries", ["sequencing_library_prep_kit_id"], name: "index_libraries_on_sequencing_library_prep_kit_id", using: :btree
   add_index "libraries", ["user_id"], name: "index_libraries_on_user_id", using: :btree
   add_index "libraries", ["vendor_id"], name: "index_libraries_on_vendor_id", using: :btree
@@ -702,9 +698,11 @@ ActiveRecord::Schema.define(version: 20170619223948) do
   add_foreign_key "genome_locations", "chromosomes"
   add_foreign_key "genome_locations", "users"
   add_foreign_key "isotypes", "users"
+  add_foreign_key "libraries", "barcodes"
   add_foreign_key "libraries", "biosamples"
   add_foreign_key "libraries", "library_fragmentation_methods"
   add_foreign_key "libraries", "nucleic_acid_terms"
+  add_foreign_key "libraries", "paired_barcodes"
   add_foreign_key "libraries", "sequencing_library_prep_kits"
   add_foreign_key "libraries", "users"
   add_foreign_key "libraries", "vendors"

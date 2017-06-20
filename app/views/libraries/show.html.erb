@@ -63,19 +63,19 @@
     <% end %>
   </tr>
 
-  <!-- Either barcodes or paired_barcodes can be present, not both -->
+  <!-- Either a barcode or a paired_barcode can be present, not both -->
 	<tr>
 		<% if not @library.paired_end?%>
-			<th><strong>Barcodes:</strong></th>
-			<% if @library.barcodes.present? %>
-					<td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: @library.barcodes} %></td>
+			<th><strong>Barcode:</strong></th>
+			<% if @library.barcode.present? %>
+					<td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: [@library.barcode]} %></td>
 			<% else %>
 				<td></td>
 			<% end %>
 		<% else %>
-			<th><strong>Paired Barcodes:</strong></th>
-			<% if  @library.paired_barcodes.present? %>
-				<td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: @library.paired_barcodes} %></td>
+			<th><strong>Paired Barcode:</strong></th>
+			<% if  @library.paired_barcode.present? %>
+				<td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: [@library.paired_barcode]} %></td>
 			<% else %>
 				<td></td>
 			<% end %>

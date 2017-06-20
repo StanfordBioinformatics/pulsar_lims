@@ -1,6 +1,6 @@
 class PairedBarcode < ActiveRecord::Base
 	attr_accessor :add_paired_barcodes #used in the form partial so the user can input multiple pairs to add. 
-	has_and_belongs_to_many :libraries
+	has_many :libraries
   belongs_to :user
   belongs_to :index1, class_name: "Barcode"
   belongs_to :index2, class_name: "Barcode"

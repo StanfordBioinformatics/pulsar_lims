@@ -8,12 +8,11 @@ class Library < ActiveRecord::Base
 	has_many   :barcode_sequencing_results, dependent: :destroy
 	has_and_belongs_to_many :documents
 	has_and_belongs_to_many :sequencing_requests
-	has_and_belongs_to_many :barcodes
-	has_and_belongs_to_many :paired_barcodes
-	has_many :plates
+	belongs_to :barcode
 	belongs_to :biosample
 	belongs_to :library_fragmentation_method
 	belongs_to :nucleic_acid_term
+	belongs_to :paired_barcode
 	belongs_to :pooled_library
 	belongs_to :sequencing_library_prep_kit
 	belongs_to :user
@@ -34,61 +33,51 @@ class Library < ActiveRecord::Base
 
 	accepts_nested_attributes_for :documents, allow_destroy: true
 	accepts_nested_attributes_for :sequencing_requests, allow_destroy: true
-	accepts_nested_attributes_for :barcodes, allow_destroy: true
-	accepts_nested_attributes_for :paired_barcodes, allow_destroy: true
+	accepts_nested_attributes_for :barcode, allow_destroy: true
+	accepts_nested_attributes_for :paired_barcode, allow_destroy: true
 
 	scope :persisted, lambda { where.not(id: nil) }
 
-	before_save :verify_barcodes
+	before_save :verify_barcode #verifies self.barcode/self.paired_barcode
 
 	def self.policy_class
 		ApplicationPolicy
 	end 
 
 	def barcoded?
-		if paired_end? and paired_barcodes.any?
+		if paired_end? and paired_barcode.any?
 			return true
-		elsif not paired_end? and barcodes.any?
+		elsif not paired_end? and barcode.any?
 			return true
 		end
 		return false
 	end
 		
 
-  def barcode_ids=(ids)
-    ids.each do |i| 
-      if i.present?
-        barcode = Barcode.find(i) 
-        if self.barcodes.present? and self.barcodes.include?(barcode)
-          next
-        end 
-        self.barcodes << barcode
-      end 
+  def barcode_id=(bid)
+    if bid.present?
+      barcode = Barcode.find(bid) 
+      self.barcode = barcode
     end 
   end 
 
-  def paired_barcode_ids=(ids)
-    ids.each do |i| 
-      if i.present?
-        pb = PairedBarcode.find(i) 
-        if self.paired_barcodes.present? and self.paired_barcodes.include?(pb)
-          next
-        end 
-        self.paired_barcodes << pb 
-      end 
+  def paired_barcode_id=(pbid)
+    if i.present?
+      pb = PairedBarcode.find(i) 
+      self.paired_barcode << pb 
     end 
   end 
 
 	protected
-		def verify_barcodes
-			if self.barcodes.present? and self.paired_barcodes.present?
-				self.errors.add(:base, "Can't specify both the \"barcodes\" attribute (which is used only for single-end libraries) and the \"paired_barcodes\" attribute (which is used only for paired-end libraries).")
+		def verify_barcode
+			if self.barcode.present? and self.paired_barcode.present?
+				self.errors.add(:base, "Can't specify both the \"barcode\" attribute (which is used only for single-end libraries) and the \"paired_barcode\" attribute (which is used only for paired-end libraries).")
 				return false
-			elsif self.barcodes.present? and self.paired_end?
-				self.errors.add(:base, "Can't set single-end barcodes when the library is marked as paired-end. You must instead select paired-end barcodes.")
+			elsif self.barcode.present? and self.paired_end?
+				self.errors.add(:base, "Can't set a single-end barcode when the library is marked as paired-end. You must instead select a paired-end barcode.")
 				return false
-			elsif self.paired_barcodes.present? and not self.paired_end?
-				self.errors.add(:base, "Can't set paired-end barcodes when the library is not marked as paired-end. You must instead select single-end barodes.")
+			elsif self.paired_barcode.present? and not self.paired_end?
+				self.errors.add(:base, "Can't set a paired-end barcode when the library is not marked as paired-end. You must instead select a single-end barode.")
 				return false
 			elsif self.paired_end and not self.sequencing_library_prep_kit.supports_paired_end?
 				self.errors.add(:base, "Can't set paired_end to true when the sequencing library prep kit does not support paired-end sequencing.")

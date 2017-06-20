@@ -17,8 +17,8 @@
       <th>Vendor</th>
       <th>Lot identifier</th>
       <th>Vendor product identifier</th>
-      <th>Barcodes</th>
-			<th>Paired Barcodes</th>
+      <th>Barcode</th>
+			<th>Paired Barcode</th>
       <th>Library fragmentation method</th>
 			<th>Nucleic acid starting quantity</th>
 			<th>Nucleic acid starting quantity units</th>
@@ -46,15 +46,15 @@
         <td><%= library.lot_identifier %></td>
         <td><%= library.vendor_product_identifier %></td>
         
-        <!-- Either barcodes or paired_barcodes can be present, not both -->
-				<% if library.barcodes.any? %>
-					<td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: library.barcodes} %></td>
+        <!-- Either a barcode or a paired_barcode can be present, not both -->
+				<% if library.barcode.present? %>
+					<td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: [library.barcode]} %></td>
 				<% else %>
 					<td></td>
 				<% end %>
 
-				<% if library.paired_barcodes.any? %>
-					<td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: library.paired_barcodes} %></td>
+				<% if library.paired_barcode.present? %>
+					<td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: [library.paired_barcode]} %></td>
 				<% else %>
 					<td></td>
 				<% end %>

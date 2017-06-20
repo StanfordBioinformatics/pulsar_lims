@@ -24,33 +24,24 @@ $ ->
   $paired_end_checkbox = $("#library_paired_end")
   $paired_end_checkbox.closest("div").hide()
 
-  $paired_barcode_selector = $("#paired_barcode_selector")
   $barcode_selector = $("#barcode_selector")
 
-  hide_select_barcode = ->
-    $barcode_selector.hide()
-    
-  hide_select_paired_barcode = -> 
-    $paired_barcode_selector.hide()
-
-  load_barcode_selection = -> 
+  hide_barcode_selector = ->
     if ( ! $kit_selector.val() )
-      hide_select_barcode()
-      hide_select_paired_barcode()
-    else if ( $paired_end_checkbox.is(":checked") )
-      $barcode_selector.fadeOut()
+      $barcode_selector.hide()
+    
+  load_barcode_selection = -> 
+    hide_barcode_selector()
+    if ( $paired_end_checkbox.is(":checked") )
+      $barcode_selector.contents().fadeOut()
       $.get "/libraries/select_paired_barcode", $kit_selector.serialize(), (responseText,status,jqXHR) ->
-        $paired_barcode_selector.html(responseText)
-        $paired_barcode_selector.fadeIn()
+        $barcode_selector.html(responseText)
+        $barcode_selector.contents().fadeIn()
     else if ( ! $paired_end_checkbox.is(":checked") )
-      $paired_barcode_selector.fadeOut()
+      $barcode_selector.contents().fadeOut()
       $.get "/libraries/select_barcode", $kit_selector.serialize(), (responseText,status,jqXHR) ->
         $barcode_selector.html(responseText)
-        $barcode_selector.fadeIn()
-
-  load_barcode_selection()
-    #set when page loads to, because if the _form.html.erb refreshed with a validation error, the 
-    # biosample_type_id may already have been set, but no change event will fire.
+        $barcode_selector.contents().fadeIn()
 
   $kit_selector.change (event) -> 
     kit_id = parseInt($kit_selector.val())

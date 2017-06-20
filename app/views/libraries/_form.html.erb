@@ -9,46 +9,18 @@
   <%= f.input :strand_specific,
 			label_html: {"data-toggle" => "tooltip", "title" => "Whether the preparation of the library using a strand-specific protocol."} %>
 
-	<% if @library.barcodes.persisted.any? %>
-	  <table class="min-table">
-			<thead>
-			  <tr><th><strong>Barcodes:</strong></th><th></th></tr>
-			</thead>
-			<tbody>
-				<%= f.simple_fields_for :barcodes do |ff| %>
-					<% bc = @library.barcodes[ff.index] %>
-					<tr>
-						<td><%= bc.display %></td>
-						<td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
-					</tr>
-		   	<% end %>  
-			</tbody>
-	  </table></br>
-	<% end %>
-
-	<% if @library.paired_barcodes.persisted.any? %>
-	  <table class="min-table">
-			<thead>
-			  <tr><th><strong>Paired barcodes:</strong></th><th></th></tr>
-			</thead>
-			<tbody>
-			  <%= f.simple_fields_for :paired_barcodes do |ff| %>
-			   <% bc = @library.paired_barcodes[ff.index] %>
-			   <tr>
-			    <td><%= bc.display %></td>
-			    <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
-			   </tr>
-			   <% end %>  
-			</tbody>
-	  </table>
-	<% end %>
-
 	<!-- Note that I'm using jQuery to fill the choices of the selection boxes below for barcodes and paired_barcodes. 
 			 If the paired_end input is checked, then the barcodes input will be hidden. If not checked, then the
 			 paired_barcodes input will be hidden. Both select inputs will be disabled until the sequencing_library_prep_kit
 			 input has a value that is selected. -->
-	<div hidden id="paired_barcode_selector"></div>
-	<div hidden id="barcode_selector"></div>
+	<div id="barcode_selector">
+		<% if @library.barcode.present? %>
+			<%= f.association :barcode %>
+		<% end %>
+		<% if @library.paired_barcode.present? %>
+			<%= f.association :paired_barcode %>
+		<% end %>
+	</div>
 
 	<% if @library.documents.persisted.any? %>
 	  <table class="min-table">

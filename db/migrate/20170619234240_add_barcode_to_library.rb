@@ -1,5 +1,5 @@
 class AddBarcodeToLibrary < ActiveRecord::Migration
   def change
-    add_column :libraries, :barcode, :string
+    add_reference :libraries, :barcode, index: true, foreign_key: true
   end
 end

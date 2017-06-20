@@ -1,3 +1,3 @@
 <%= simple_fields_for @library do |f| %>
-	<%= f.association :barcodes, label: "Add barcodes", prompt: "Select barcodes", collection: @index1_barcodes.map {|x| [x.display,x.id]}, label_html: {multiple: true, "data-toggle" => "tooltip", "title" => "If the library is barcoded, select the barcode used. If the library is pooled having multiple barcodes, select all barcodes used in the pooling."} %>
+	<%= f.association :barcode, label: "Add barcode", prompt: "Select a barcode", collection: @index1_barcodes.map {|x| [x.display,x.id]}, label_html: {multiple: false, "data-toggle" => "tooltip", "title" => "If the library is barcoded, select the barcode used."} %>
 <% end %>

@@ -1,5 +1,5 @@
 class Barcode < ActiveRecord::Base
-	has_and_belongs_to_many :libraries
+	has_many :libraries
 
   belongs_to :user
   belongs_to :sequencing_library_prep_kit
