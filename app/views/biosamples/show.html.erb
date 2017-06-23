@@ -15,56 +15,76 @@
 		<th><strong>Name</strong></th>
 		<td><%= @biosample.name %></td>
 	</tr>
+
 	<tr>
 		<th><strong>Documents:</strong></th>
 		<td>
 			<%= render partial: "documents/link_to_document", locals: {documents: @biosample.documents} %>
 		</td>
 	</tr>
+
 	<tr>
 		<th><strong>Biosample Type:</strong></th>
 		<td><%= @biosample.biosample_type.name %></td>
 	</tr>
+
 	<tr>
   	<th><strong>Biosample Term Name:</strong></th>
   	<td><%= link_to @biosample.biosample_term_name.name, @biosample.biosample_term_name %></td>
 	</tr>
+
+	<% if @biosample.plate.present? %>
+		<tr>
+			<th><strong>Plate</strong></th>
+			<td><%= link_to @plate.name, @plate %></td>
+		</tr>
+	<% end %>
+	
 	<tr>
 		<th><strong>Vendor:</strong></th>
 		<td><%= link_to @biosample.vendor.name, @biosample.vendor.url %></td>
 	</tr>
+
 	<tr>
   	<th><strong>Vendor product identifier:</strong></th>
   	<td><%= @biosample.vendor_product_identifier %></td>
 	</tr>
+
 	<tr>
 	  <th><strong>Lot identifier:</strong></th>
   	<td><%= @biosample.lot_identifier %></td>
 	</tr>
+
 	<tr>
 		<th><strong>Donor:</strong></th>
 		<td><%= link_to @biosample.donor.name, encode_url(@biosample.donor.encode_identifier)%></td>
 	</tr>
+
 	<tr>
 	  <th><strong>Passage number:</strong></th>
 	  <td><%= @biosample.passage_number %></td>
 	</tr>
+
 	<tr>
 	  <th><strong>Culture harvest date:</strong></th>
 	  <td><%= @biosample.culture_harvest_date %></td>
 	</tr>
+
 	<tr>
 	  <th><strong>Submitter comments:</strong></th>
 	  <td><%= @biosample.submitter_comments %></td>
 	</tr>
+
 	<tr>
 	  <th><strong>Description:</strong></th>
 	  <td><%= @biosample.description %></td>
 	</tr>
+
 	<tr>
 	  <th><strong>Encid:</strong></th>
 	  <td><%= @biosample.encid %></td>
 	</tr>
+
 	<tr>
 		<th><strong>CRISPR</strong></th>
 		<% if @biosample.crispr.present? %>
@@ -72,6 +92,8 @@
 		<% else %>
 			<td></td>
 		<% end %>
+	</tr>
+
 	<tr>
     <th><strong>Associated Libraries:</strong></th>
     <% if @biosample.libraries.present? %>

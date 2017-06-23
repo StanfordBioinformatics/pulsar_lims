@@ -6,6 +6,8 @@ class Biosample < ActiveRecord::Base
 	belongs_to  :biosample_type
 	belongs_to  :donor
   belongs_to  :vendor
+	belongs_to  :well #i.e. in single cell experiments. Each sorted cell is a biosample in a well. Not required.
+	belongs_to  :plate #the starting biosample used for sorting. Not required.
 	has_many    :libraries
 	
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true

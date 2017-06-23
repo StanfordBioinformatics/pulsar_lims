@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619234334) do
+ActiveRecord::Schema.define(version: 20170621184830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 20170619234334) do
     t.integer  "user_id"
     t.integer  "biosample_term_name_id"
     t.boolean  "control"
+    t.integer  "well_id"
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
@@ -171,6 +172,7 @@ ActiveRecord::Schema.define(version: 20170619234334) do
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
   add_index "biosamples", ["user_id"], name: "index_biosamples_on_user_id", using: :btree
   add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id", using: :btree
+  add_index "biosamples", ["well_id"], name: "index_biosamples_on_well_id", using: :btree
 
   create_table "biosamples_documents", id: false, force: :cascade do |t|
     t.integer "biosample_id"
@@ -466,10 +468,12 @@ ActiveRecord::Schema.define(version: 20170619234334) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "dimensions"
+    t.integer  "starting_biosample_id"
   end
 
   add_index "plates", ["name"], name: "index_plates_on_name", unique: true, using: :btree
   add_index "plates", ["sequencing_library_prep_kit_id"], name: "index_plates_on_sequencing_library_prep_kit_id", using: :btree
+  add_index "plates", ["starting_biosample_id"], name: "index_plates_on_starting_biosample_id", using: :btree
   add_index "plates", ["user_id"], name: "index_plates_on_user_id", using: :btree
   add_index "plates", ["vendor_id"], name: "index_plates_on_vendor_id", using: :btree
 
@@ -635,16 +639,12 @@ ActiveRecord::Schema.define(version: 20170619234334) do
     t.integer  "plate_id"
     t.integer  "row"
     t.integer  "col"
-    t.integer  "barcode_id"
-    t.integer  "paired_barcode_id"
-    t.boolean  "fail",              default: false
+    t.boolean  "fail",       default: false
     t.text     "comment"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
-  add_index "wells", ["barcode_id"], name: "index_wells_on_barcode_id", using: :btree
-  add_index "wells", ["paired_barcode_id"], name: "index_wells_on_paired_barcode_id", using: :btree
   add_index "wells", ["plate_id"], name: "index_wells_on_plate_id", using: :btree
   add_index "wells", ["user_id"], name: "index_wells_on_user_id", using: :btree
 
@@ -672,6 +672,7 @@ ActiveRecord::Schema.define(version: 20170619234334) do
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"
   add_foreign_key "biosamples", "vendors"
+  add_foreign_key "biosamples", "wells"
   add_foreign_key "chromosomes", "reference_genomes"
   add_foreign_key "chromosomes", "users"
   add_foreign_key "cloning_vectors", "users"
@@ -713,6 +714,7 @@ ActiveRecord::Schema.define(version: 20170619234334) do
   add_foreign_key "paired_barcodes", "barcodes", column: "index2_id"
   add_foreign_key "paired_barcodes", "sequencing_library_prep_kits"
   add_foreign_key "paired_barcodes", "users"
+  add_foreign_key "plates", "biosamples", column: "starting_biosample_id"
   add_foreign_key "plates", "sequencing_library_prep_kits"
   add_foreign_key "plates", "users"
   add_foreign_key "plates", "vendors"
@@ -732,8 +734,6 @@ ActiveRecord::Schema.define(version: 20170619234334) do
   add_foreign_key "targets", "users"
   add_foreign_key "uberons", "users"
   add_foreign_key "vendors", "users"
-  add_foreign_key "wells", "barcodes"
-  add_foreign_key "wells", "paired_barcodes"
   add_foreign_key "wells", "plates"
   add_foreign_key "wells", "users"
 end

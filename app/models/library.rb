@@ -17,6 +17,7 @@ class Library < ActiveRecord::Base
 	belongs_to :sequencing_library_prep_kit
 	belongs_to :user
 	belongs_to :vendor
+	belongs_to :well
 
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true, presence: true
 #	validates :barcode, format: { with: /\A[acgtnACGTN]+-?[acgtnACGTN]+\z/ }, allow_blank: true

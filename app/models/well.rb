@@ -1,8 +1,7 @@
 class Well < ActiveRecord::Base
+	has_a :biosample
   belongs_to :user
   belongs_to :plate
-  belongs_to :barcode
-  belongs_to :paired_barcode
 
 	validates :row, presence: true
 	validates :col, presence: true

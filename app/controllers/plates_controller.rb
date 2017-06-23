@@ -1,5 +1,5 @@
 class PlatesController < ApplicationController
-	include PlatesConcern #gives me add_wells(), add_barcodes_matrix_input()
+	include PlatesConcern #gives me create_wells(), add_barcodes_matrix_input()
   before_action :set_plate, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -81,6 +81,6 @@ class PlatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plate_params
-      params.require(:plate).permit(:add_barcodes,:dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier)
+      params.require(:plate).permit(:biosample_id, :add_barcodes,:dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier)
     end
 end
