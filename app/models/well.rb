@@ -1,5 +1,5 @@
 class Well < ActiveRecord::Base
-	has_a :biosample
+	belongs_to  :biosample #i.e. in single cell experiments. Each sorted cell is a biosample in a well. Not required.
   belongs_to :user
   belongs_to :plate
 
@@ -7,28 +7,24 @@ class Well < ActiveRecord::Base
 	validates :col, presence: true
 
 	before_create :set_name
-	before_save :verify_barcodes
 
 	def self.policy_class
 		ApplicationPolicy
 	end
 
-	protected	
+	def set_biosample 
+		#well belongs to a plate that belongs to a single-cell sorting experiment.
+		plate_biosample = self.plate.starting_biosample
+		sub_biosample = plate_biosample.dup
+		sub_biosample.name = plate_biosample.name + "_" + self.plate.name + "_" +  self.row.to_s + "-" + self.col.to_s
+		sub_biosample.documents = plate_biosample.documents
+		attrs = sub_biosample.attributes
+		puts attrs
+		self.create_biosample!(sub_biosample.attributes.merge!({documents: plate_biosample.documents}))
+	end
+
+	protected
 		def set_name
 			self.name = "#{Plate::row_letter(self.row)}#{col}"
 		end
-
-    def verify_barcodes
-      if self.barcode.present? and self.paired_barcode.present?
-        self.errors.add(:base,"Can't specify both the 'barcode' attribute (which is used only for single-end libraries) and the 'paired_barcode' attribute (which is used only for paired-end libraries).")
-        return false
-      elsif self.barcode.present? and self.plate.paired_end?
-        self.errors.add(:base, "Can't set single-end barcode when the library is marked as paired-end. You must instead select paired-end barcode.")
-        return false
-      elsif self.paired_barcode.present? and not self.plate.paired_end?
-        self.errors.add(:base, "Can't set paired-end barcode when the library is not marked as paired-end. You must instead select single-end barodes.")
-        return false
-      end 
-    end
-
 end

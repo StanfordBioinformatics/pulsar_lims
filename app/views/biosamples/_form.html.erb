@@ -3,6 +3,8 @@
 
 	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique biosample name"} %> 
 
+	<%= f.association :parent_biosample, label_html: {"data-toggle" => "tooltip", "title" => "If this is a part of another biosample, specify which one."} %>
+
 	<%= f.input :control, label_html: {"data-toggle" => "tooltip", "title" => "Select if this biosample will be used as a control in an experiment."} %>
 
 	<% if @biosample.documents.persisted.any? %>

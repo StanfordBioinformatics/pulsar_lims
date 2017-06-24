@@ -16,6 +16,26 @@
 		<td><%= @biosample.name %></td>
 	</tr>
 
+	<% if @biosample.parent_biosample.present? %>
+		<tr>
+			<th><strong>Parent Biosample</strong></th>
+			<td><%= link_to @biosample.parent_biosample.name, @biosample.parent_biosample %></td>
+		</tr>
+	<% end %>
+
+	<% if @biosample.child_biosamples.any? %>
+		<tr>
+			<th><strong>Child Biosamples</strong></th>
+			<td>
+				<ul style="list-style: none;">
+					<% @biosample.child_biosamples.each do |x| %>
+						<li><%= link_to x.name, x %></li>
+					<% end %>
+				</ul>
+			</td>
+		</tr>
+	<% end %>
+
 	<tr>
 		<th><strong>Documents:</strong></th>
 		<td>
@@ -36,7 +56,7 @@
 	<% if @biosample.plate.present? %>
 		<tr>
 			<th><strong>Plate</strong></th>
-			<td><%= link_to @plate.name, @plate %></td>
+			<td><%= link_to @biosample.plate.name, @biosample.plate %></td>
 		</tr>
 	<% end %>
 	

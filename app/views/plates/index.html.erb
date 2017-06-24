@@ -32,8 +32,10 @@
 					<td></td>
 				<% end %>
         <td><%= plate.paired_end %></td>
-        <td><%= link_to fa_icon("pencil"), edit_plate_path(plate) %></td>
-        <td><%= link_to fa_icon("trash"), plate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_plate_path(plate) %>
+        	<%= link_to fa_icon("trash"), plate, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
   </tbody>

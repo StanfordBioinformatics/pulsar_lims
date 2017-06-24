@@ -36,6 +36,11 @@
 	</tr>
 
 	<tr>
+  	<th><strong>Biosample:</strong></th>
+		<td><%= link_to @plate.starting_biosample.name, @plate.starting_biosample %></td>
+	</tr>
+
+	<tr>
   	<th><strong>Vendor:</strong></th>
   	<td><%= link_to @plate.vendor.name, @plate.vendor %></td>
 	</tr>

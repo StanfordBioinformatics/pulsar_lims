@@ -30,25 +30,12 @@
 	  <th><strong>Column:</strong></th>
 	  <td><%= @well.col %></td>
 	</tr>
-	
+
 	<tr>
-		<% if not @plate.paired_end? %>
-		  <th><strong>Barcode:</strong></th>
-			<% if @well.barcode.present? %>
-			  <td><%= link_to "#{@well.barcode.name} #{@well.barcode.sequence}", @well.barcode %></td>
-			<% else %>
-				<td></td>
-			<% end %>
-		<% else %>
-		  <th><strong>Paired Barcode:</strong></th>
-			<% if @well.paired_barcode.present? %>
-				<td><%= link_to "#{@well.paired_barcode.name} #{@well.paired_barcode.index1.sequence}-#{@well.paired_barcode.index2.sequence}", @well.paired_barcode %></td>
-			<% else %>
-				<td></td>
-			<% end %>
-		<% end %>
+		<th><strong>Biosample</strong></th>
+		<td><%= link_to @well.biosample.name, @well.biosample %></td>
 	</tr>
-	
+
 	<tr>
 	  <th><strong>Fail:</strong></th>
 	  <td><%= @well.fail %></td>
