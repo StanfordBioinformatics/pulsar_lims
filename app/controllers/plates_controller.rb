@@ -27,7 +27,6 @@ class PlatesController < ApplicationController
 
     respond_to do |format|
       if @plate.save
-				@plate.set_wells
         format.html { redirect_to @plate, notice: 'Plate was successfully created.' }
         format.json { render json: @plate, status: :created }
       else

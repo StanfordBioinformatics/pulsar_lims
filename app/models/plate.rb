@@ -15,6 +15,8 @@ class Plate < ActiveRecord::Base
 	validates :name, presence: true, uniqueness: true	
 	validates :vendor, presence: true
 
+	after_create :add_wells
+
 	def self.policy_class
 		ApplicationPolicy
 	end
@@ -31,7 +33,9 @@ class Plate < ActiveRecord::Base
 		return self.dimensions.split()[0].split("x")[1].to_i
 	end
 
-  def set_wells
+	private
+
+  def add_wells
 		#should only be called after the plate has been persisted to the database.
 		rows = self.nrow
 		cols = self.ncol
@@ -39,7 +43,7 @@ class Plate < ActiveRecord::Base
 			(1..cols).each do |c| 
 				#name format is ${parent_biosample_name}_${plate_name}_${row_num}-${col_num}
 				well = self.wells.create!({user: self.user, row: r, col: c}) 
-				well.set_biosample
+			#	well.set_biosample
 			end 
 		end 
 	end 
