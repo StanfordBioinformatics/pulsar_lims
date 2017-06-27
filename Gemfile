@@ -62,7 +62,6 @@ group :development, :test do
 	#gem 'web_console' #trouble getting this to work. Maybe only in Rails 5 it works?
 	#add pry-rails, which replaces the Rails console with a Pry console. Nice formatting, syntax-highlighting, ...
 	gem 'pry-rails'
-	gem 'byebug'
 	gem 'rspec-rails'
 end
 

@@ -5,6 +5,7 @@ class Plate < ActiveRecord::Base
 	
 	has_many :wells, dependent: :destroy
 	belongs_to :starting_biosample, class_name: "Biosample"
+	belongs_to :sorting_biosample, class_name: "Biosample"
 	belongs_to :pooled_library
   belongs_to :user
   belongs_to :sequencing_library_prep_kit

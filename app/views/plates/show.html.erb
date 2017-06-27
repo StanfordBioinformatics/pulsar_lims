@@ -77,6 +77,13 @@
 </div>
 
 
+<!-- Capture information about the biosample being sorted into individual wells -->
+<div class="jumbotron" id="sorting_biosample">
+	<%= link_to "Add Sorting Biosample", add_sorting_biosample_plate_path(@plate), remote: true, id: "add_sorting_biosample" %>
+</div>
+
+
+
 <div class="add_barcodes bg-info">
 	<% if @plate.paired_end? %>
 		<% placeholder="ATCCGC-GTACAG\nCGTGAC-TAGGCA\n..." %>

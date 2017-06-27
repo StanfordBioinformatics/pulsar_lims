@@ -4,6 +4,7 @@ Pulsar::Application.routes.draw do
   resources :addresses
   resources :wells
   resources :plates do
+		get :add_sorting_biosample, on: :member	
 		resources :wells, except: [:index, :new, :destroy]
 	end
   resources :paired_barcodes

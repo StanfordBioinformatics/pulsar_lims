@@ -19,6 +19,8 @@ Pulsar::Application.configure do
     host: host
     }   
 
+	config.force_ssl = true
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

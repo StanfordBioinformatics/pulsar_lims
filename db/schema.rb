@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170626230614) do
+ActiveRecord::Schema.define(version: 20170627173912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -471,10 +471,12 @@ ActiveRecord::Schema.define(version: 20170626230614) do
     t.datetime "updated_at",                     null: false
     t.string   "dimensions"
     t.integer  "starting_biosample_id"
+    t.integer  "sorting_biosample_id"
   end
 
   add_index "plates", ["name"], name: "index_plates_on_name", unique: true, using: :btree
   add_index "plates", ["sequencing_library_prep_kit_id"], name: "index_plates_on_sequencing_library_prep_kit_id", using: :btree
+  add_index "plates", ["sorting_biosample_id"], name: "index_plates_on_sorting_biosample_id", using: :btree
   add_index "plates", ["starting_biosample_id"], name: "index_plates_on_starting_biosample_id", using: :btree
   add_index "plates", ["user_id"], name: "index_plates_on_user_id", using: :btree
   add_index "plates", ["vendor_id"], name: "index_plates_on_vendor_id", using: :btree
@@ -717,6 +719,7 @@ ActiveRecord::Schema.define(version: 20170626230614) do
   add_foreign_key "paired_barcodes", "barcodes", column: "index2_id"
   add_foreign_key "paired_barcodes", "sequencing_library_prep_kits"
   add_foreign_key "paired_barcodes", "users"
+  add_foreign_key "plates", "biosamples", column: "sorting_biosample_id"
   add_foreign_key "plates", "biosamples", column: "starting_biosample_id"
   add_foreign_key "plates", "sequencing_library_prep_kits"
   add_foreign_key "plates", "users"

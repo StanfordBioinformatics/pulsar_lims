@@ -32,3 +32,8 @@ $ ->
     hide_bc_submit()
   $add_barcodes.blur (event) ->
     hide_bc_submit()
+
+  #When the user clicks on the "Add Sorting Biosample" button, append the response from the action (PlatesController.add_sorting_biosamples) to the 
+  # in the show view at the end of the div element with id "sorting_biosample".
+  $("#add_sorting_biosample").on "ajax:success", (event,data) ->  
+    $("#sorting_biosample").append(data)
