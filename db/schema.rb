@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170623072401) do
+ActiveRecord::Schema.define(version: 20170626230614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(version: 20170623072401) do
     t.integer  "biosample_term_name_id"
     t.boolean  "control"
     t.integer  "parent_biosample_id"
+    t.integer  "well_id"
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
@@ -173,6 +174,7 @@ ActiveRecord::Schema.define(version: 20170623072401) do
   add_index "biosamples", ["parent_biosample_id"], name: "index_biosamples_on_parent_biosample_id", using: :btree
   add_index "biosamples", ["user_id"], name: "index_biosamples_on_user_id", using: :btree
   add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id", using: :btree
+  add_index "biosamples", ["well_id"], name: "index_biosamples_on_well_id", using: :btree
 
   create_table "biosamples_documents", id: false, force: :cascade do |t|
     t.integer "biosample_id"
@@ -639,14 +641,12 @@ ActiveRecord::Schema.define(version: 20170623072401) do
     t.integer  "plate_id"
     t.integer  "row"
     t.integer  "col"
-    t.boolean  "fail",         default: false
+    t.boolean  "fail",       default: false
     t.text     "comment"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "biosample_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
-  add_index "wells", ["biosample_id"], name: "index_wells_on_biosample_id", using: :btree
   add_index "wells", ["plate_id"], name: "index_wells_on_plate_id", using: :btree
   add_index "wells", ["user_id"], name: "index_wells_on_user_id", using: :btree
 
@@ -675,6 +675,7 @@ ActiveRecord::Schema.define(version: 20170623072401) do
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"
   add_foreign_key "biosamples", "vendors"
+  add_foreign_key "biosamples", "wells"
   add_foreign_key "chromosomes", "reference_genomes"
   add_foreign_key "chromosomes", "users"
   add_foreign_key "cloning_vectors", "users"
@@ -736,7 +737,6 @@ ActiveRecord::Schema.define(version: 20170623072401) do
   add_foreign_key "targets", "users"
   add_foreign_key "uberons", "users"
   add_foreign_key "vendors", "users"
-  add_foreign_key "wells", "biosamples"
   add_foreign_key "wells", "plates"
   add_foreign_key "wells", "users"
 end

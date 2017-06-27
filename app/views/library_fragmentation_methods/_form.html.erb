@@ -1,5 +1,5 @@
 <%= simple_form_for(@library_fragmentation_method) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @library_fragmentation_method } %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @library_fragmentation_method } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip","title" => "Unique library name"} %>
   <%= f.input :description, label_html: {"data-toggle" => "tooltip", "title" => "The description of fragmentation method." } %>

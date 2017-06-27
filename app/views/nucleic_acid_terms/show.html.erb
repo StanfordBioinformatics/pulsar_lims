@@ -1,4 +1,5 @@
 <% title(@nucleic_acid_term.name,"NucleicAcidTerms") %>
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @nucleic_acid_term } %>
 <header>
 	<h1><%= @nucleic_acid_term.name %></h1>
 	

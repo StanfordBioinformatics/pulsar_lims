@@ -1,5 +1,5 @@
 <%= simple_form_for(@target) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @target } %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @target } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "Unique target (i.e. gene) name"} %>
 

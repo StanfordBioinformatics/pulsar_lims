@@ -1,5 +1,6 @@
 class Well < ActiveRecord::Base
-	belongs_to  :biosample #i.e. in single cell experiments. Each sorted cell is a biosample in a well. Not required.
+	#has_one :biosample, dependent: :destroy #i.e. in single cell experiments. Each sorted cell is a biosample in a well.
+	has_one :biosample, dependent: :destroy
   belongs_to :user
   belongs_to :plate
 

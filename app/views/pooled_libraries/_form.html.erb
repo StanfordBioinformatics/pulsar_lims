@@ -1,5 +1,5 @@
 <%= simple_form_for(@pooled_library) do |f| %>
-  <%= f.error_notification %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @pooled_library } %>
 
   <%= f.input :name %>
   <%= f.input :paired_end %>

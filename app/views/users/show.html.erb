@@ -1,5 +1,5 @@
 <!-- I'm adding a custom user show view for my custom users_controller.rb show action. I added show since devise doesn't have one by default. -->
-
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @user } %>
 <header>
   <h1><%= @user %></h1>
 

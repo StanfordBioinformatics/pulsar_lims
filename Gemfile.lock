@@ -55,6 +55,7 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     builder (3.2.3)
+    byebug (9.0.6)
     capybara (2.12.1)
       addressable
       mime-types (>= 1.16)
@@ -240,6 +241,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.9.3)
   aws-sdk (~> 2)
   bootstrap-sass (~> 3.3.6)
+  byebug
   capybara (~> 2.4)
   carrierwave (~> 0.10.0)
   coffee-rails (~> 4.0.0)

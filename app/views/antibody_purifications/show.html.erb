@@ -1,4 +1,5 @@
 <% title(@antibody_purification.name, "AntibodyPurifications") %>
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @antibody_purification } %>
 <header>
   <h1><%= @antibody_purification.name %></h1>
 

@@ -1,7 +1,7 @@
 class Biosample < ActiveRecord::Base
 	###
 	#Add self reference so that a part_of biosample can be modelled:
-	has_one :well, dependent: :destroy
+	belongs_to :well  
 	has_many :child_biosamples, class_name: "Biosample", foreign_key: "parent_biosample_id", dependent: :destroy
 	belongs_to :parent_biosample, class_name: "Biosample"
 	###
@@ -24,6 +24,8 @@ class Biosample < ActiveRecord::Base
 
 	accepts_nested_attributes_for :documents, allow_destroy: true
 
+	before_destroy :check_if_well
+
 	def self.policy_class
 		ApplicationPolicy
 	end 
@@ -32,4 +34,12 @@ class Biosample < ActiveRecord::Base
 		BiosampleTermName.all
 	end
 
+	private
+	
+	def check_if_well
+		if self.well.present?
+			self.errors.add(:base,"Can't delete biosample that belongs to a well.")
+			return false
+		end
+	end
 end

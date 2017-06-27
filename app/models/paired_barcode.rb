@@ -32,7 +32,7 @@ class PairedBarcode < ActiveRecord::Base
 		return "#{index1.sequence}-#{index2.sequence}"
 	end
 
-  protected
+ 	private 
     def verify_sequencing_kit
       if self.index1.sequencing_library_prep_kit.id != self.index2.sequencing_library_prep_kit.id
         self.errors.add(:index1,": The sequencing library prep kit of the referenced barcode does not match that of index2.")

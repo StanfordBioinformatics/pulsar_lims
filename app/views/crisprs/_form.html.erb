@@ -1,5 +1,5 @@
 <%= simple_form_for(@crispr) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @crispr } %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique name"} %>
   <%= f.association :crispr_construct, label_html: {"data-toggle" => "tooltip", "title" => "The Crispr Construct that contains the guide sequence."} %>

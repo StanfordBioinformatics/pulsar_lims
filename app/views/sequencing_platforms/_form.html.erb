@@ -1,5 +1,5 @@
 <%= simple_form_for(@sequencing_platform) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @sequencing_platform } %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_platform } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing platform name"} %>
 

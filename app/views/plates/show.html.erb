@@ -1,4 +1,5 @@
 <% title(@plate.name, "Plates") %>
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @plate } %>
 <header>
   <h1><%= @plate.name %></h1>
 

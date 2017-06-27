@@ -1,5 +1,5 @@
 <%= simple_form_for(@crispr_construct) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @crispr_construct } %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr_construct } %>
 
   <%= f.input :name %>
   <%= f.association :target %>

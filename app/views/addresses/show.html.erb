@@ -1,4 +1,5 @@
 <% title(@address.name, "Addresses") %>
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @address } %>
 <header>
   <h1><%= @address.name %></h1>
 

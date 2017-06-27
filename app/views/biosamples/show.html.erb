@@ -1,4 +1,5 @@
 <% title(@biosample.name,"Biosamples") %> 
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @biosample } %>
 <header>
 	<h1><%= @biosample.name %></h1>
 
@@ -20,6 +21,13 @@
 		<tr>
 			<th><strong>Parent Biosample</strong></th>
 			<td><%= link_to @biosample.parent_biosample.name, @biosample.parent_biosample %></td>
+		</tr>
+	<% end %>
+
+	<% if @biosample.well.present? %>
+		<tr>
+			<th><strong>Well</strong></th>
+			<td>Plate: <%= link_to @biosample.well.plate.name, @biosample.well.plate %>, Well: <%= link_to @biosample.well.name, @biosample.well %></td>
 		</tr>
 	<% end %>
 

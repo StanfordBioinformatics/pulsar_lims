@@ -1,5 +1,5 @@
 <%= simple_form_for([@sequencing_request,@sequencing_result,@barcode_sequencing_result]) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @barcode_sequencing_result } %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @barcode_sequencing_result } %>
 
   <table class="attributes">
     <thead>

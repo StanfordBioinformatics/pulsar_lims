@@ -1,4 +1,5 @@
 <% title(@library.name, "Libraries") %>
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @library } %>
 <header>
 	<h1><%= @library.name %></h1>
 

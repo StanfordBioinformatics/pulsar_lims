@@ -1,4 +1,5 @@
 <% title(@donor.name, "Donors") %>
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @donor } %>
 <header>
   <h1><%= @donor.name %></h1>
 

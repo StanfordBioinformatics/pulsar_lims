@@ -1,5 +1,5 @@
 <%= simple_form_for(@address) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @address} %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @address} %>
 
 	<%= f.input :name %>
 	<%= f.input :street %>

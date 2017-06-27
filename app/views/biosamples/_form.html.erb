@@ -1,5 +1,5 @@
 <%= simple_form_for(@biosample) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: { :f => f, :model_obj => @biosample } %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @biosample } %>
 
 	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique biosample name"} %> 
 

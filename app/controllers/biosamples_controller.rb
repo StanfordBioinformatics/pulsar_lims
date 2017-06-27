@@ -93,10 +93,14 @@ class BiosamplesController < ApplicationController
   # DELETE /biosamples/1.json
   def destroy
 		authorize @biosample
-    @biosample.destroy
     respond_to do |format|
-      format.html { redirect_to biosamples_url, notice: "Biosample has been deleted." }
-      format.json { head :no_content }
+    	if @biosample.destroy
+	      format.html { redirect_to biosamples_url, notice: "Biosample has been deleted." }
+ 	     format.json { head :no_content }
+			else 
+				format.html { render action: 'show' }
+        format.json { render json: @biosample.errors, status: :unprocessable_entity }
+			end
     end
   end
 
@@ -112,6 +116,6 @@ class BiosamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_params
-      params.require(:biosample).permit(:parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, documents_attributes: [:id,:_destroy])
+      params.require(:biosample).permit(:well_id, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, documents_attributes: [:id,:_destroy])
     end
 end

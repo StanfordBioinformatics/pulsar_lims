@@ -1,4 +1,5 @@
 <% title(@well.name, "Wells") %>
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @well } %>
 <header>
   <h1><%= @well.name %></h1>
 
