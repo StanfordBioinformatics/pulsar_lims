@@ -1,0 +1,42 @@
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @single_cell_sorting } %>
+<header>
+  <h1><%= @single_cell_sorting.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @single_cell_sorting} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @single_cell_sorting} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @single_cell_sorting } %>
+
+<table class="attributes">
+	<tr>
+	  <th><strong>Name:</strong></th>
+	  <td><%= @single_cell_sorting.name %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Description:</strong></th>
+	  <td><%= @single_cell_sorting.description %></td>
+	</tr>
+	
+  <tr>
+    <th><strong>Biosample:</strong></th>
+    <td><%= link_to @single_cell_sorting.starting_biosample.name, @single_cell_sorting.starting_biosample %></td>
+  </tr>
+</table>
+
+<!-- Capture information about the biosample being sorted into individual wells (we'll call this the "sorting biosample prototype".
+     Only makes sense to do this if the plate has wells (so there will be a check for this) since there is a callback that will 
+     add biosamples to each well that are modeled ofter the sorting biosample prototype. By defualt, wells are created when the plate
+     is created.
+-->   
+	
+<div class="bg-info jumbotron" id="sorting_biosample">
+    <h3 class="display-3">What are your sorting?</h3>
+    <p class="lead">Enter details about the type of biosample that is being sorted into the wells of any plates added to this experiment.</p>
+    <%= link_to "Add Sorting Biosample", add_sorting_biosample_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "add_sorting_biosample", class: "reg-btn" %>
+	</div>
+	
+<%= link_to 'Back', single_cell_sortings_path %>

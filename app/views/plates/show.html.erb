@@ -37,11 +37,6 @@
 	</tr>
 
 	<tr>
-  	<th><strong>Biosample:</strong></th>
-		<td><%= link_to @plate.starting_biosample.name, @plate.starting_biosample %></td>
-	</tr>
-
-	<tr>
   	<th><strong>Vendor:</strong></th>
   	<td><%= link_to @plate.vendor.name, @plate.vendor %></td>
 	</tr>
@@ -53,7 +48,7 @@
 </table>
 
 <div class="jumbotron">
-<h3>Plate Layout</h3>
+<h3 class="display-3">Plate Layout</h3>
 <table class="plate-table">
 	<tr><th></th>
 		<% (1..@plate.ncol).each do |c| %>
@@ -75,14 +70,6 @@
 	<% end %>
 </table></br>
 </div>
-
-
-<!-- Capture information about the biosample being sorted into individual wells -->
-<div class="jumbotron" id="sorting_biosample">
-	<%= link_to "Add Sorting Biosample", add_sorting_biosample_plate_path(@plate), remote: true, id: "add_sorting_biosample" %>
-</div>
-
-
 
 <div class="add_barcodes bg-info">
 	<% if @plate.paired_end? %>

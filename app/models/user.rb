@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
 	has_many :sequencing_requests, dependent: :nullify
 	has_many :targets, dependent: :nullify
 	has_many :sequencing_library_prep_kits
+	has_many :single_cell_sortings
 	has_many :vendors, dependent: :nullify
 	has_many :wells, dependent: :nullify
   # Include default devise modules. Others available are:

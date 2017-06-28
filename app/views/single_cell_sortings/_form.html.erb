@@ -1,0 +1,12 @@
+<%= simple_form_for(@single_cell_sorting) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :name %>
+  <%= f.input :description %>
+	<%= f.association :starting_biosample, collection: @starting_biosample_collection,
+			label_html: { "data-toggle": "tooltip", "title": "The biosample that is used as input sorting material." } %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
+<% end %>

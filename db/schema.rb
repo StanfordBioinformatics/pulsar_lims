@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170627173912) do
+ActiveRecord::Schema.define(version: 20170627232023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 20170627173912) do
     t.boolean  "control"
     t.integer  "parent_biosample_id"
     t.integer  "well_id"
+    t.boolean  "prototype",                             default: false
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
@@ -470,14 +471,12 @@ ActiveRecord::Schema.define(version: 20170627173912) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "dimensions"
-    t.integer  "starting_biosample_id"
-    t.integer  "sorting_biosample_id"
+    t.integer  "single_cell_sorting_id"
   end
 
   add_index "plates", ["name"], name: "index_plates_on_name", unique: true, using: :btree
   add_index "plates", ["sequencing_library_prep_kit_id"], name: "index_plates_on_sequencing_library_prep_kit_id", using: :btree
-  add_index "plates", ["sorting_biosample_id"], name: "index_plates_on_sorting_biosample_id", using: :btree
-  add_index "plates", ["starting_biosample_id"], name: "index_plates_on_starting_biosample_id", using: :btree
+  add_index "plates", ["single_cell_sorting_id"], name: "index_plates_on_single_cell_sorting_id", using: :btree
   add_index "plates", ["user_id"], name: "index_plates_on_user_id", using: :btree
   add_index "plates", ["vendor_id"], name: "index_plates_on_vendor_id", using: :btree
 
@@ -572,6 +571,20 @@ ActiveRecord::Schema.define(version: 20170627173912) do
   add_index "sequencing_results", ["report_id"], name: "index_sequencing_results_on_report_id", using: :btree
   add_index "sequencing_results", ["sequencing_request_id"], name: "index_sequencing_results_on_sequencing_request_id", using: :btree
   add_index "sequencing_results", ["user_id"], name: "index_sequencing_results_on_user_id", using: :btree
+
+  create_table "single_cell_sortings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "sorting_biosample_id"
+    t.integer  "starting_biosample_id"
+  end
+
+  add_index "single_cell_sortings", ["sorting_biosample_id"], name: "index_single_cell_sortings_on_sorting_biosample_id", using: :btree
+  add_index "single_cell_sortings", ["starting_biosample_id"], name: "index_single_cell_sortings_on_starting_biosample_id", using: :btree
+  add_index "single_cell_sortings", ["user_id"], name: "index_single_cell_sortings_on_user_id", using: :btree
 
   create_table "targets", force: :cascade do |t|
     t.string   "encode_identifier", limit: 255
@@ -719,9 +732,8 @@ ActiveRecord::Schema.define(version: 20170627173912) do
   add_foreign_key "paired_barcodes", "barcodes", column: "index2_id"
   add_foreign_key "paired_barcodes", "sequencing_library_prep_kits"
   add_foreign_key "paired_barcodes", "users"
-  add_foreign_key "plates", "biosamples", column: "sorting_biosample_id"
-  add_foreign_key "plates", "biosamples", column: "starting_biosample_id"
   add_foreign_key "plates", "sequencing_library_prep_kits"
+  add_foreign_key "plates", "single_cell_sortings"
   add_foreign_key "plates", "users"
   add_foreign_key "plates", "vendors"
   add_foreign_key "pooled_libraries", "sequencing_library_prep_kits"
@@ -737,6 +749,9 @@ ActiveRecord::Schema.define(version: 20170627173912) do
   add_foreign_key "sequencing_results", "documents", column: "report_id"
   add_foreign_key "sequencing_results", "sequencing_requests"
   add_foreign_key "sequencing_results", "users"
+  add_foreign_key "single_cell_sortings", "biosamples", column: "sorting_biosample_id"
+  add_foreign_key "single_cell_sortings", "biosamples", column: "starting_biosample_id"
+  add_foreign_key "single_cell_sortings", "users"
   add_foreign_key "targets", "users"
   add_foreign_key "uberons", "users"
   add_foreign_key "vendors", "users"

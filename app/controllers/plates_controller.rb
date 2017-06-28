@@ -1,14 +1,6 @@
 class PlatesController < ApplicationController
 	include PlatesConcern #gives me add_barcodes_matrix_input()
-  before_action :set_plate, only: [:show, :edit, :update, :destroy, :add_sorting_biosample]
-	skip_after_action :verify_authorized, only: [:add_sorting_biosample]
-
-
-	def add_sorting_biosample
-		parent_biosample_params = @plate.starting_biosample.attributes
-		@biosample = @plate.build_sorting_biosample(parent_biosample_params)
-		render partial: "biosamples/form", layout: false
-	end
+  before_action :set_plate, only: [:show, :edit, :update, :destroy]
 
   def index
     @plates = policy_scope(Plate).order("lower(name)")

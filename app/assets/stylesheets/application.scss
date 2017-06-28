@@ -47,6 +47,10 @@
 	}
 }
 
+.bg-info.jumbotron {
+	@extend .bg-info;
+}
+
 .map-img {
 	width: 100%;
 }

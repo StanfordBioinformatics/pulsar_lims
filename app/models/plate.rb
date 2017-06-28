@@ -4,14 +4,12 @@ class Plate < ActiveRecord::Base
 	DIMENSIONS = ["2x2 (4)","8x12 (96)","16x24 (384)"]
 	
 	has_many :wells, dependent: :destroy
-	belongs_to :starting_biosample, class_name: "Biosample"
-	belongs_to :sorting_biosample, class_name: "Biosample"
 	belongs_to :pooled_library
   belongs_to :user
   belongs_to :sequencing_library_prep_kit
+	belongs_to :single_cell_sorting
   belongs_to :vendor
 
-	validates :starting_biosample, presence: true #single cell sorting exp. must start with a biosample having cells to sort.
 	validates :dimensions, inclusion: DIMENSIONS, presence: true
 	validates :name, presence: true, uniqueness: true	
 	validates :vendor, presence: true

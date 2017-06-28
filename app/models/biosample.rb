@@ -1,13 +1,17 @@
 class Biosample < ActiveRecord::Base
 	###
 	#Add self reference so that a part_of biosample can be modelled:
+	#Has a 'prototype' boolean column that defaults to false. When true, means that it's a virtual biosample.
+	# Virtual biosamples are used currently in the single_cell_sorting model via the sorting_biosample_id foreign key.
+	# This biosample is a prototype used as a reference for creating the biosamples in the wells of the plates on
+	# the single_cell_sorting experiment. 
 	belongs_to :well  
 	has_many :child_biosamples, class_name: "Biosample", foreign_key: "parent_biosample_id", dependent: :destroy
 	belongs_to :parent_biosample, class_name: "Biosample"
 	###
 	has_and_belongs_to_many :documents
 	has_one :crispr
-	has_one :plate, foreign_key: :starting_biosample_id, dependent: :destroy #the starting biosample used for sorting. Not required.
+	has_one :single_cell_sorting, foreign_key: :starting_biosample_id #the starting biosample used for sorting. Not required.
 	belongs_to  :user
 	belongs_to  :biosample_term_name
 	belongs_to  :biosample_type
@@ -25,6 +29,8 @@ class Biosample < ActiveRecord::Base
 	accepts_nested_attributes_for :documents, allow_destroy: true
 
 	before_destroy :check_if_well
+
+	scope :non_well_biosamples, lambda { where(well: nil) }
 
 	def self.policy_class
 		ApplicationPolicy

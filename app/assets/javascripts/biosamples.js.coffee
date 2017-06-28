@@ -13,5 +13,6 @@ $ ->
     #set when page loads to, because if the _form.html.erb refreshed with a validation error, the 
     # biosample_type_id may already have been set, but no change event will fire.
 
-  $("#biosample_biosample_type_id").change (event) -> 
+  #use event delegation (see jQuery in Action 3rd ed., p. 154 on "event delegation").
+  $(document).change "#biosample_biosample_type_id", (event) -> 
     load_biosampel_term_name_selection()

@@ -1,10 +1,12 @@
 Pulsar::Application.routes.draw do
 
+  resources :single_cell_sortings do
+		get :add_sorting_biosample, on: :member	
+	end
   resources :pooled_libraries
   resources :addresses
   resources :wells
   resources :plates do
-		get :add_sorting_biosample, on: :member	
 		resources :wells, except: [:index, :new, :destroy]
 	end
   resources :paired_barcodes
