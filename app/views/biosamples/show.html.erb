@@ -12,9 +12,15 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @biosample } %>
 
 <table class="attributes">
+
   <tr>
 		<th><strong>Name</strong></th>
 		<td><%= @biosample.name %></td>
+	</tr>
+
+	<tr>
+		<th><strong>Prototype?</strong></th>
+		<td><%= @biosample.prototype? %></th>
 	</tr>
 
 	<% if @biosample.parent_biosample.present? %>

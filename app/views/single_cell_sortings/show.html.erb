@@ -41,7 +41,7 @@
 	</div>
 <% end %>
 
-<% if @single_cell_sorting.plates.any? %>
+<% if @single_cell_sorting.sorting_biosample.present? %>
 	<div class="bg-info jumbotron" id="plate">
 	    <h3 class="display-3">Sort a plate</h3>
 	    <p class="lead">Wells and well-specific biosamples (one per well) will be created automatically.</p>
