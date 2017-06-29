@@ -5,14 +5,13 @@
 $ ->
 
   load_biosampel_term_name_selection = -> 
-    $.get "/biosamples/select_biosample_term_name", $("#biosample_biosample_type_id").serialize(), (responseText,status,jqXHR) ->
-      $(".biosample_term_name").html(responseText)
-
-  if $("#biosample_biosample_type_id").val()
-    load_biosampel_term_name_selection()
-    #set when page loads to, because if the _form.html.erb refreshed with a validation error, the 
-    # biosample_type_id may already have been set, but no change event will fire.
+    if $("#biosample_biosample_type_id").val()
+      $.get "/biosamples/select_biosample_term_name", $("#biosample_biosample_type_id").serialize(), (responseText,status,jqXHR) ->
+        $(".biosample_term_name").html(responseText)
 
   #use event delegation (see jQuery in Action 3rd ed., p. 154 on "event delegation").
-  $(document).change "#biosample_biosample_type_id", (event) -> 
+  $(document).on "change", "#biosample_biosample_type_id", (event) -> 
+    # $(document).change "#biosample_biosample_type_id", (event) -> 
+    # Note that using the CoffeeScript syntax (commented-out line above) for event delegation doesn't work, as any change events (i.e. selecting a document) cause the event below to fire.
+    event.stopPropagation()
     load_biosampel_term_name_selection()

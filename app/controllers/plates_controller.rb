@@ -10,10 +10,10 @@ class PlatesController < ApplicationController
 		authorize @plate
   end
 
-  def new
-		authorize Plate
-    @plate = Plate.new
-  end
+  #def new
+		#authorize Plate
+    #@plate = Plate.new
+  #end
 
   def edit
 		authorize @plate

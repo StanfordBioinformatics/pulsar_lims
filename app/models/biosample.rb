@@ -28,8 +28,6 @@ class Biosample < ActiveRecord::Base
 
 	accepts_nested_attributes_for :documents, allow_destroy: true
 
-	before_destroy :check_if_well
-
 	scope :non_well_biosamples, lambda { where(well: nil) }
 
 	def self.policy_class
@@ -42,10 +40,4 @@ class Biosample < ActiveRecord::Base
 
 	private
 	
-	def check_if_well
-		if self.well.present?
-			self.errors.add(:base,"Can't delete biosample that belongs to a well.")
-			return false
-		end
-	end
 end

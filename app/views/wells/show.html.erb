@@ -5,7 +5,10 @@
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_edit_record", locals: {record: @well, nested: @plate} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @well, nested: @plate} %>
+    <!-- <%# render partial: "application_partials/auth_destroy_record", locals: {record: @well, nested: @plate} %> 
+			#leave out the destroy button since users shouldn't be able to destroy well directly as it doens't make sense to. 
+			#It makes more sense for the user to instead destroy the plate and in turn the wells as a side effect.
+		-->
   </ul>
 </header>
 

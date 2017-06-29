@@ -61,13 +61,6 @@
   	<td><%= link_to @biosample.biosample_term_name.name, @biosample.biosample_term_name %></td>
 	</tr>
 
-	<% if @biosample.plate.present? %>
-		<tr>
-			<th><strong>Plate</strong></th>
-			<td><%= link_to @biosample.plate.name, @biosample.plate %></td>
-		</tr>
-	<% end %>
-	
 	<tr>
 		<th><strong>Vendor:</strong></th>
 		<td><%= link_to @biosample.vendor.name, @biosample.vendor.url %></td>

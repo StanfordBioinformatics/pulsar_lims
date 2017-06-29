@@ -3,7 +3,6 @@
 
   <%= f.input :name %>
 	<%= f.input :dimensions, collection: Plate::DIMENSIONS, prompt: "Select the plate size" %>
-	<%= f.association :starting_biosample, label_html: {"data-toggle": "tooltip", "title": "Select the starting biosample containing cells to be individually sorted into wells."} %>
   <%= f.association :vendor %>
   <%= f.input :vendor_product_identifier %>
   <%= f.association :sequencing_library_prep_kit %>

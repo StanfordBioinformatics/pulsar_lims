@@ -1,15 +1,20 @@
 class SingleCellSortingsController < ApplicationController
-  before_action :set_single_cell_sorting, only: [:show, :edit, :update, :destroy, :add_sorting_biosample]
-	skip_after_action :verify_authorized, only: [:add_sorting_biosample]
+  before_action :set_single_cell_sorting, only: [:show, :edit, :update, :destroy, :add_sorting_biosample, :add_plate]
+	skip_after_action :verify_authorized, only: [:add_sorting_biosample, :add_plate]
 
+
+	def add_plate
+		@single_cell_sorting.plates.build
+		render partial: "plates/form", layout: false
+	end
 
   def add_sorting_biosample
-    sorting_biosample_params = @single_cell_sorting.starting_biosample.attributes
-    sorting_biosample_params[:parent_biosample] =  @single_cell_sorting.starting_biosample
-		sorting_biosample_params[:prototype] = true
-    sorting_biosample_params[:name] =  @single_cell_sorting.name + " " + "prototype"
-    @biosample = @single_cell_sorting.build_sorting_biosample(sorting_biosample_params)
-    render partial: "sorting_biosample_form", layout: false
+    sorting_biosample_params = @single_cell_sorting.starting_biosample.dup
+    sorting_biosample_params.parent_biosample =  @single_cell_sorting.starting_biosample
+		sorting_biosample_params.prototype = true
+    sorting_biosample_params.name =  @single_cell_sorting.name + " " + "prototype"
+    @biosample = @single_cell_sorting.build_sorting_biosample(sorting_biosample_params.attributes)
+    render partial: "biosamples/form", layout: false
   end 
 
   def index
