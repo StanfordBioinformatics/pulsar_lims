@@ -22,10 +22,9 @@
 	</tr>
 	
   <tr>
-    <th><strong>Biosample:</strong></th>
+    <th><strong>Starting Biosample:</strong></th>
     <td><%= link_to @single_cell_sorting.starting_biosample.name, @single_cell_sorting.starting_biosample %></td>
   </tr>
-</table>
 
 <!-- Capture information about the biosample being sorted into individual wells (we'll call this the "sorting biosample prototype".
      Only makes sense to do this if the plate has wells (so there will be a check for this) since there is a callback that will 
@@ -33,15 +32,25 @@
      is created.
 -->   
 	
+	<% if @single_cell_sorting.sorting_biosample.present? %>
+		<tr>
+			<th><strong>Sorting Biosample:</strong></th>
+			<td><%= link_to @single_cell_sorting.sorting_biosample.name, @single_cell_sorting.sorting_biosample %></td>
+		</tr>
+	<% end %>
+</table>
+
 <% if @single_cell_sorting.sorting_biosample.blank? %>
+	<!-- Then create "Add Sorting Biosample" button. -->
 	<div class="bg-info jumbotron" id="sorting_biosample">
-	    <h3 class="display-3">What are your sorting?</h3>
-	    <p class="lead">Enter details about the type of biosample that is being sorted into the wells of any plates added to this experiment.</p>
-	    <%= link_to "Add Sorting Biosample", add_sorting_biosample_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "add_sorting_biosample", class: "new" %>
+		<h3 class="display-3">What are your sorting?</h3>
+		<p class="lead">Enter details about the type of biosample that is being sorted into the wells of any plates added to this experiment.</p>
+		<%= link_to "Add Sorting Biosample", add_sorting_biosample_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "add_sorting_biosample", class: "new" %>
 	</div>
 <% end %>
 
 <% if @single_cell_sorting.sorting_biosample.present? %>
+	<!-- Then create "Add Plate" button. -->
 	<div class="bg-info jumbotron" id="plate">
 	    <h3 class="display-3">Sort a plate</h3>
 	    <p class="lead">Wells and well-specific biosamples (one per well) will be created automatically.</p>

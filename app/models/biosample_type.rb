@@ -1,5 +1,5 @@
 class BiosampleType < ActiveRecord::Base
-	has_one :biosample
+	has_many :biosamples
 	belongs_to :user
 
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true

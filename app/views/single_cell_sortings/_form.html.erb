@@ -1,5 +1,5 @@
 <%= simple_form_for(@single_cell_sorting) do |f| %>
-  <%= f.error_notification %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @single_cell_sorting } %>
 
   <%= f.input :name %>
   <%= f.input :description %>

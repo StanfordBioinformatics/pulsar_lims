@@ -1,5 +1,8 @@
 <header>
 	<h1>New Biosample</h1>
 </header>
+<%= simple_form_for(@biosample) do |f| %>
+	<%= render partial: 'form', locals: {f: f} %>
+<% end %>
 
-<%= render 'form' %>
+<%= link_to 'Back', biosamples_path %>

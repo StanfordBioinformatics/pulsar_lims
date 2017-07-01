@@ -20,6 +20,7 @@ class PlatesController < ApplicationController
   end
 
   def create
+		@submit_btn = true
 		authorize Plate
     @plate = Plate.new(plate_params)
 

@@ -20,7 +20,7 @@ class Biosample < ActiveRecord::Base
 	has_many    :libraries
 	
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
-	validates :documents, presence: true
+	#validates :documents, presence: true
 	validates :biosample_type_id, presence: true
 	validates :biosample_term_name_id, presence: true
 	validates :vendor_id, presence: true
@@ -28,7 +28,8 @@ class Biosample < ActiveRecord::Base
 
 	accepts_nested_attributes_for :documents, allow_destroy: true
 
-	scope :non_well_biosamples, lambda { where(well: nil) }
+	scope :non_well_biosamples, lambda { where(well: nil, prototype: false) }
+	scope :non_prototypes, lambda { where(prototype: false) }
 
 	def self.policy_class
 		ApplicationPolicy

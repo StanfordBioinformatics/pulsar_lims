@@ -4,8 +4,8 @@ class SingleCellSortingsController < ApplicationController
 
 
 	def add_plate
-		@single_cell_sorting.plates.build
-		render partial: "plates/form", layout: false
+		@plate = @single_cell_sorting.plates.build
+		render partial: "add_plate", layout: false
 	end
 
   def add_sorting_biosample
@@ -93,6 +93,6 @@ class SingleCellSortingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def single_cell_sorting_params
-      params.require(:single_cell_sorting).permit(:starting_biosample_id, :sorting_biosample, :name, :description, sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, documents_attributes: [:id,:_destroy]])
+      params.require(:single_cell_sorting).permit(:starting_biosample_id, :sorting_biosample, :name, :description, sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, documents_attributes: [:id,:_destroy]], plates_attributs: [:starting_biosample_id, :dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier])
     end
 end

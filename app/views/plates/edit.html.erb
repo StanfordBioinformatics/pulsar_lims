@@ -1,5 +1,7 @@
-<h1>Editing Plate</h1>
-
-<%= render 'form' %>
-
+<header>
+	<h1>Editing Plate</h1>
+</header>
+<%= simple_form_for(@plate) do |f| %>
+	<%= render partial: 'form', locals: {f: f} %>
+<% end %>
 <%= link_to 'Back', plates_path %>

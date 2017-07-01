@@ -1,0 +1,8 @@
+<%= simple_form_for @single_cell_sorting do |f| %>
+	<%= f.simple_fields_for :plates, @plate do |ff| %>
+		<%= render partial: "plates/form", locals: {f: ff} %>
+	<% end %>
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
+<% end %>

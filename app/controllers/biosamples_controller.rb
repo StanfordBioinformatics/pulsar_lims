@@ -45,6 +45,7 @@ class BiosamplesController < ApplicationController
 
   # GET /biosamples/new
   def new
+		@submit_btn = true
 		authorize Biosample
     @biosample = Biosample.new
   end
@@ -57,6 +58,7 @@ class BiosamplesController < ApplicationController
   # POST /biosamples
   # POST /biosamples.json
   def create
+		@submit_btn = true
 		authorize Biosample
     @biosample = Biosample.new(biosample_params)
 		@biosample.user = current_user
