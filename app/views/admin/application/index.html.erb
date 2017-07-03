@@ -9,7 +9,10 @@
 	<div class="col-md-3">
 		<h2>Admin Links</h2>
 		<ul class="nav nav-stacked">
-			<li><%= link_to fa_icon("users") + " Users", admin_users_path %></li>
+			<% content_for :users_badge do %>
+				<span class="badge"><%= User.count %></span>
+			<% end %>
+			<li><%= link_to fa_icon("users") + " Users " + content_for(:users_badge),admin_users_path %></li>
 		</ul>
 	</div>
 </div>

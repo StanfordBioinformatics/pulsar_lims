@@ -10,6 +10,7 @@ class SingleCellSortingsController < ApplicationController
 
   def add_sorting_biosample
     sorting_biosample = @single_cell_sorting.starting_biosample.dup
+		sorting_biosample.encid = nil
     sorting_biosample.parent_biosample =  @single_cell_sorting.starting_biosample
 		sorting_biosample.prototype = true
     sorting_biosample.name =  @single_cell_sorting.name + " " + "prototype"
@@ -61,6 +62,7 @@ class SingleCellSortingsController < ApplicationController
 		authorize @single_cell_sorting
 		sorting_biosample_attributes = single_cell_sorting_params[:sorting_biosample_attributes]
 		if sorting_biosample_attributes.present? and not sorting_biosample_attributes.include?(:id)
+			#Then user is adding the sorting biosample. 
 			sorting_biosample = @single_cell_sorting.build_sorting_biosample(sorting_biosample_attributes)
 			sorting_biosample.user = current_user
 			params.delete(:sorting_biosample_attributes)
