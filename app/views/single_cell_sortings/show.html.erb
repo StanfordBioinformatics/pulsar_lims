@@ -38,6 +38,20 @@
 			<td><%= link_to @single_cell_sorting.sorting_biosample.name, @single_cell_sorting.sorting_biosample %></td>
 		</tr>
 	<% end %>
+
+	<% if @single_cell_sorting.plates.any? %>
+		<tr>
+			<th><strong>Plates:</strong></th>
+			<td>
+				<ul class="list-unstyled">
+					<% @single_cell_sorting.plates.each do |plate| %>
+						<li><%= link_to plate.name, plate %></li>
+					<% end %>
+				</ul>
+			</td>
+		</tr>
+	<% end %>
+		
 </table>
 
 <% if @single_cell_sorting.sorting_biosample.blank? %>

@@ -60,15 +60,19 @@ class SingleCellSortingsController < ApplicationController
 
   def update
 		authorize @single_cell_sorting
-		sorting_biosample_attributes = single_cell_sorting_params[:sorting_biosample_attributes]
-		if sorting_biosample_attributes.present? and not sorting_biosample_attributes.include?(:id)
+		scs_params = single_cell_sorting_params
+		if scs_params[:sorting_biosample_attributes].present? and scs_params[:sorting_biosample_attributes][:id].blank?
 			#Then user is adding the sorting biosample. 
-			sorting_biosample = @single_cell_sorting.build_sorting_biosample(sorting_biosample_attributes)
-			sorting_biosample.user = current_user
-			params.delete(:sorting_biosample_attributes)
+			scs_params[:sorting_biosample_attributes][:user_id] = current_user.id
+		end
+		if scs_params[:plates_attributes].present?
+			scs_params[:plates_attributes].each do |pos,plate_params| #keys are integers, like indices in a list.
+				next if plate_params.include?(:id) #Because the user is updating a plate
+				scs_params[:plates_attributes][pos][:user_id] = current_user.id
+			end
 		end
     respond_to do |format|
-      if @single_cell_sorting.update(single_cell_sorting_params)
+      if @single_cell_sorting.update(scs_params)
         format.html { redirect_to @single_cell_sorting, notice: 'Single cell sorting was successfully updated.' }
         format.json { head :no_content }
       else
@@ -95,6 +99,6 @@ class SingleCellSortingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def single_cell_sorting_params
-      params.require(:single_cell_sorting).permit(:starting_biosample_id, :sorting_biosample, :name, :description, sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, documents_attributes: [:id,:_destroy]], plates_attributs: [:starting_biosample_id, :dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier])
+      params.require(:single_cell_sorting).permit(:starting_biosample_id, :sorting_biosample, :name, :description, sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, documents_attributes: [:id,:_destroy]], plates_attributes: [:starting_biosample_id, :dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier])
     end
 end
