@@ -5,6 +5,7 @@ class SingleCellSortingsController < ApplicationController
 
 	def add_plate
 		@plate = @single_cell_sorting.plates.build
+		flash[:action] = "show"
 		render partial: "add_plate", layout: false
 	end
 
@@ -76,7 +77,7 @@ class SingleCellSortingsController < ApplicationController
         format.html { redirect_to @single_cell_sorting, notice: 'Single cell sorting was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render flash[:action] || 'edit' }
         format.json { render json: @single_cell_sorting.errors, status: :unprocessable_entity }
       end
     end

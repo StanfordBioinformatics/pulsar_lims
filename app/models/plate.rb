@@ -11,7 +11,8 @@ class Plate < ActiveRecord::Base
   belongs_to :vendor
 
 	validates :dimensions, inclusion: DIMENSIONS, presence: true
-	validates :name, presence: true, uniqueness: true	
+	validates :name, presence: true
+	validates_uniqueness_of :name, scope: :single_cell_sorting, message: "Another plate in this experiment already exists with this name."
 	validates :vendor, presence: true
 
 	after_create :add_wells
