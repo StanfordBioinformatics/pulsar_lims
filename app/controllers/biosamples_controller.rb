@@ -1,11 +1,7 @@
 class BiosamplesController < ApplicationController
-	include DocumentsConcern #gives me add_documents(), remove_documents()
+#	include DocumentsConcern #gives me add_documents(), remove_documents()
   before_action :set_biosample, only: [:show, :edit, :update, :destroy, :delete_biosample_document]
 	skip_after_action :verify_authorized, only: [:select_biosample_term_name]
-
-  # GET /biosamples
-  # GET /biosamples.json
-
 
   def select_biosample_term_name
     @biosample = Biosample.new
@@ -37,32 +33,24 @@ class BiosamplesController < ApplicationController
     @biosamples = policy_scope(Biosample).order("lower(name)")
   end
 
-  # GET /biosamples/1
-  # GET /biosamples/1.json
   def show
 		authorize @biosample
   end
 
-  # GET /biosamples/new
   def new
-		@submit_btn = true
 		authorize Biosample
     @biosample = Biosample.new
   end
 
-  # GET /biosamples/1/edit
   def edit
 		authorize @biosample
   end
 
-  # POST /biosamples
-  # POST /biosamples.json
   def create
-		@submit_btn = true
 		authorize Biosample
     @biosample = Biosample.new(biosample_params)
 		@biosample.user = current_user
-		@biosample = add_documents(@biosample,params[:biosample][:document_ids])
+		#@biosample = add_documents(@biosample,params[:biosample][:document_ids])
 		
     respond_to do |format|
       if @biosample.save
@@ -75,11 +63,9 @@ class BiosamplesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /biosamples/1
-  # PATCH/PUT /biosamples/1.json
   def update
 		authorize @biosample
-		@biosample = add_documents(@biosample,params[:biosample][:documents])
+		#@biosample = add_documents(@biosample,params[:biosample][:documents])
     respond_to do |format|
       if @biosample.update(biosample_params)
         format.html { redirect_to @biosample, notice: 'Biosample was successfully updated.' }
@@ -91,8 +77,6 @@ class BiosamplesController < ApplicationController
     end
   end
 
-  # DELETE /biosamples/1
-  # DELETE /biosamples/1.json
   def destroy
 		authorize @biosample
     respond_to do |format|
@@ -118,6 +102,6 @@ class BiosamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_params
-      params.require(:biosample).permit(:prototype, :well_id, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, documents_attributes: [:id,:_destroy])
+      params.require(:biosample).permit(:prototype, :well_id, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], documents_attributes: [:id,:_destroy])
     end
 end

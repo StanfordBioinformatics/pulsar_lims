@@ -31,6 +31,8 @@ class Biosample < ActiveRecord::Base
 	scope :non_well_biosamples, lambda { where(well: nil, prototype: false) }
 	scope :non_prototypes, lambda { where(prototype: false) }
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end 
@@ -39,6 +41,19 @@ class Biosample < ActiveRecord::Base
 		BiosampleTermName.all
 	end
 
-	private
-	
+	def document_ids=(ids)
+		""" 
+		Function : Adds associations to Documents that are stored in self.documents.
+		Args     : ids - array of Document IDs.
+		"""
+		ids.each do |i|
+			if i.blank?
+				next
+			end
+			doc = Document.find(i)
+			if not self.documents.include? doc
+				self.documents << doc
+			end 
+		end
+	end
 end

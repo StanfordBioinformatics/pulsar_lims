@@ -35,6 +35,7 @@ class BiosampleTermName < ActiveRecord::Base
 	scope :cl, lambda { where(biosample_ontology_id: BiosampleOntology.find_by(name: "CL")) }
 	scope :uberon, lambda { where(biosample_ontology_id: BiosampleOntology.find_by(name: "Uberon")) }
 	scope :efo, lambda { where(biosample_ontology_id: BiosampleOntology.find_by(name: "EFO")) }
+	scope :persisted, lambda { where.not(id: nil) }
 
 
 	def self.policy_class

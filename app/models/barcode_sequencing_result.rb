@@ -11,6 +11,8 @@ class BarcodeSequencingResult < ActiveRecord::Base
 
 	validate :barcode_valid
 
+	scope :persisted, lambda { where.not(id: nil) }
+
   def self.policy_class
     ApplicationPolicy
   end 

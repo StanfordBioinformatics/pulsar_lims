@@ -5,6 +5,8 @@ class NucleicAcidTerm < ActiveRecord::Base
 	validates :accession, presence: true, uniqueness: true
 	validates :definition, presence: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end 

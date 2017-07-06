@@ -12,6 +12,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Single Cell Sorting</th>
       <th>Dimensions</th>
       <th>Vendor</th>
       <th>Vendor product identifier</th>
@@ -25,6 +26,7 @@
     <% @plates.each do |plate| %>
       <tr>
         <td><%= link_to plate.name, plate %></td>
+				<td><%= link_to plate.single_cell_sorting.name, plate.single_cell_sorting %></td>
 				<td><%= "#{plate.nrow}x#{plate.ncol}" %></td>
         <td><%= link_to plate.vendor.name, plate.vendor %></td>
         <td><%= plate.vendor_product_identifier %></td>

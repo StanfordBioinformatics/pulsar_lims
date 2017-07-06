@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
 	scope :admins, lambda { where(role: ADMIN_ROLE, archived_at: nil) }
 	scope :managers, lambda { where(role: MANAGER_ROLE ).where(archived_at: nil) }
 	scope :viewers, lambda { where(role: VIEWER_ROLE ).where(archived_at: nil) }
-
+	scope :persisted, lambda { where.not(id: nil) }
 
 	def self.policy_class
 		ApplicationPolicy

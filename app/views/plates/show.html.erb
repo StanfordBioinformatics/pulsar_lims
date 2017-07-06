@@ -18,6 +18,11 @@
 	</tr>
 
 	<tr>
+		<th><strong>Single Cell Sorting</strong></th>
+		<td><%= link_to @plate.single_cell_sorting.name, @plate.single_cell_sorting %></td>
+	</tr>
+
+	<tr>
   	<th><strong>Sequencing library prep kit:</strong></th>
 		<% if @plate.sequencing_library_prep_kit.present? %>
   		<td><%= link_to @plate.sequencing_library_prep_kit.name, @plate.sequencing_library_prep_kit %></td>
@@ -50,23 +55,27 @@
 <div class="jumbotron">
 <h3 class="display-3">Plate Layout</h3>
 <table class="plate-table">
-	<tr><th></th>
-		<% (1..@plate.ncol).each do |c| %>
-			<th><%= c %></th>
-		<% end %>
-	</tr>
-	<% (1..@plate.nrow).each do |r| %>
-		<tr><th><%= Plate::row_letter(r) %></th>
-		<% (1..@plate.ncol).each do |c| %>
-			<% well = @plate.wells.find_by!({row: r, col: c}) %>
-			<% if well.fail? %>
-				<% class_val = "failure" %>
-			<% else %>
-				<% class_val = "success" %>
+	<thead>
+		<tr><th></th>
+			<% (1..@plate.ncol).each do |c| %>
+				<th><%= c %></th>
 			<% end %>
-			<td><%= link_to well.name, [@plate,well], class: "#{class_val}" %></td>
-		<% end %>
 		</tr>
+	</thead>
+	<% (1..@plate.nrow).each do |r| %>
+		<tbody>
+			<tr><th><%= Plate::row_letter(r) %></th>
+			<% (1..@plate.ncol).each do |c| %>
+				<% well = @plate.wells.find_by!({row: r, col: c}) %>
+				<% if well.fail? %>
+					<% class_val = "failure" %>
+				<% else %>
+					<% class_val = "success" %>
+				<% end %>
+				<td><%= link_to well.name, [@plate,well], class: "#{class_val}" %></td>
+			<% end %>
+			</tr>
+		</tbody>
 	<% end %>
 </table></br>
 </div>

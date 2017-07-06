@@ -14,6 +14,8 @@ class CrisprConstruct < ActiveRecord::Base
 
 	accepts_nested_attributes_for :construct_tags, allow_destroy: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end

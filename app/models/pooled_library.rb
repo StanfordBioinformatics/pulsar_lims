@@ -8,6 +8,8 @@ class PooledLibrary < ActiveRecord::Base
 	validates :sequencing_library_prep_kit, presence: true
 	validates  :size_range, format: {with: /\A\d+-\d+\Z/}, presence: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end

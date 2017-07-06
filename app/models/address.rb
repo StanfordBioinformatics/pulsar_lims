@@ -7,6 +7,8 @@ class Address < ActiveRecord::Base
 	validates :postal_code, presence: true
 	validates :country, presence: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end

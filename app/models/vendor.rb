@@ -11,6 +11,8 @@ class Vendor < ActiveRecord::Base
 	validates :name, presence: true, uniqueness: true
 	validates :encode_identifier, uniqueness: true, allow_blank: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end 

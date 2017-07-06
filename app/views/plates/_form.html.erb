@@ -2,12 +2,8 @@
 
   <%= f.input :name %>
 	<%= f.input :dimensions, collection: Plate::DIMENSIONS, prompt: "Select the plate size" %>
+	<%= f.association :single_cell_sorting, as: :hidden %>
   <%= f.association :vendor %>
   <%= f.input :vendor_product_identifier %>
   <%= f.association :sequencing_library_prep_kit %>
 	<%= f.input :paired_end %>
-
-  <!-- Add submit button -->
-  <% if @submit_btn.present? %>
-     <%= render partial: 'submit', locals: {f: f} %>
-  <% end %>

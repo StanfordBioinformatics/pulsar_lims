@@ -7,6 +7,8 @@ class Chromosome < ActiveRecord::Base
 	validates_uniqueness_of :name, scope: :reference_genome_id
 	validates :name, presence: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end

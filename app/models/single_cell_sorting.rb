@@ -10,6 +10,8 @@ class SingleCellSorting < ActiveRecord::Base
 	accepts_nested_attributes_for :sorting_biosample, allow_destroy: true
 	accepts_nested_attributes_for :plates, allow_destroy: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end

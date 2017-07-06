@@ -4,20 +4,21 @@ class SingleCellSortingsController < ApplicationController
 
 
 	def add_plate
-		@plate = @single_cell_sorting.plates.build
 		flash[:action] = "show"
+		@plate = @single_cell_sorting.plates.build
+		#Needed to set @plate above since that is used in the partial single_cell_sortings/_add_plate.html.erb that renders a Plate form. -->
 		render partial: "add_plate", layout: false
 	end
 
   def add_sorting_biosample
+		flash[:action] = "show"
     sorting_biosample = @single_cell_sorting.starting_biosample.dup
 		sorting_biosample.encid = nil
     sorting_biosample.parent_biosample =  @single_cell_sorting.starting_biosample
 		sorting_biosample.prototype = true
-    sorting_biosample.name =  @single_cell_sorting.name + " " + "prototype"
+    sorting_biosample.name =  @single_cell_sorting.name + " " + "prototype biosample"
     @biosample = sorting_biosample
-    #@biosample = @single_cell_sorting.build_sorting_biosample(sorting_biosample.attributes)
-    #render partial: "biosamples/form", layout: false
+		#Needed to set @biosample above since that is used in the partial single_cell_sortings/_add_sorting_biosample.html.erb that renders a Biosample form. -->
     render partial: "add_sorting_biosample", layout: false
   end 
 
@@ -77,6 +78,10 @@ class SingleCellSortingsController < ApplicationController
         format.html { redirect_to @single_cell_sorting, notice: 'Single cell sorting was successfully updated.' }
         format.json { head :no_content }
       else
+				action = flash[:action]
+				if action.present?
+					flash[:action] = action
+				end
         format.html { render flash[:action] || 'edit' }
         format.json { render json: @single_cell_sorting.errors, status: :unprocessable_entity }
       end
@@ -100,6 +105,6 @@ class SingleCellSortingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def single_cell_sorting_params
-      params.require(:single_cell_sorting).permit(:starting_biosample_id, :sorting_biosample, :name, :description, sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, documents_attributes: [:id,:_destroy]], plates_attributes: [:starting_biosample_id, :dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier])
+      params.require(:single_cell_sorting).permit(:starting_biosample_id, :sorting_biosample, :name, :description, sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], documents_attributes: [:id,:_destroy]], plates_attributes: [:starting_biosample_id, :dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier])
     end
 end

@@ -5,6 +5,8 @@ class GenomeLocation < ActiveRecord::Base
 
 	validates :start, presence: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end

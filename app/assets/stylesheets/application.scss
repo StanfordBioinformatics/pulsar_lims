@@ -67,7 +67,6 @@
   display: none;
 }
 
-
 //minimal table
 .min-table {
 	th,td {
@@ -230,8 +229,8 @@ header {
   @extend .table-condensed;
   @extend .table-responsive;
 
-  tr:first-child {
-    td, th {
+  thead tr:first-of-type {
+    th {
       border-top: 0px;
     }
 	}
@@ -248,8 +247,9 @@ header {
 .plate-table {
 	/* see additional styles selecting elements in this table in plates.js.coffee */
 	@extend .table-data;
-	td {
-		border: 1px solid;
+	@extend .table-bordered;
+	th {
+		font-size: larger;
 	}
 }
 

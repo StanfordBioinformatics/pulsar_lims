@@ -3,6 +3,8 @@ class AntibodyPurification < ActiveRecord::Base
 	belongs_to :user
 	validates :name, presence: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end 

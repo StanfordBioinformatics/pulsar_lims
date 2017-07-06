@@ -15,6 +15,8 @@ class Plate < ActiveRecord::Base
 	validates_uniqueness_of :name, scope: :single_cell_sorting, message: "Another plate in this experiment already exists with this name."
 	validates :vendor, presence: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	after_create :add_wells
 
 	def self.policy_class

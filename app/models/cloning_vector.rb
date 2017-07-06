@@ -8,6 +8,8 @@ class CloningVector < ActiveRecord::Base
 	validates :vendor_id, presence: true
 	validates :product_url, uniqueness: {message: "must be unique"}, allow_blank: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end

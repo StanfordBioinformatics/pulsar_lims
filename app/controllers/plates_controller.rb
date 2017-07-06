@@ -20,7 +20,6 @@ class PlatesController < ApplicationController
   end
 
   def create
-		@submit_btn = true
 		authorize Plate
     @plate = Plate.new(plate_params)
 
@@ -81,6 +80,6 @@ class PlatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plate_params
-      params.require(:plate).permit(:starting_biosample_id, :add_barcodes,:dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier)
+      params.require(:plate).permit(:single_cell_sorting_id, :starting_biosample_id, :add_barcodes,:dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier)
     end
 end

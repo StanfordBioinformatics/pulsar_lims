@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170627232023) do
+ActiveRecord::Schema.define(version: 20170706051806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -474,7 +474,6 @@ ActiveRecord::Schema.define(version: 20170627232023) do
     t.integer  "single_cell_sorting_id"
   end
 
-  add_index "plates", ["name"], name: "index_plates_on_name", unique: true, using: :btree
   add_index "plates", ["sequencing_library_prep_kit_id"], name: "index_plates_on_sequencing_library_prep_kit_id", using: :btree
   add_index "plates", ["single_cell_sorting_id"], name: "index_plates_on_single_cell_sorting_id", using: :btree
   add_index "plates", ["user_id"], name: "index_plates_on_user_id", using: :btree

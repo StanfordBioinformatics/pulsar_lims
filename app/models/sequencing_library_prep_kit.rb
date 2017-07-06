@@ -15,6 +15,8 @@ class SequencingLibraryPrepKit < ActiveRecord::Base
 	validates_uniqueness_of :name, scope: :vendor_id
 	accepts_nested_attributes_for :documents, allow_destroy: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end

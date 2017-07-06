@@ -10,6 +10,8 @@ class Well < ActiveRecord::Base
 	before_create :set_name
 	after_create  :add_biosample
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	def self.policy_class
 		ApplicationPolicy
 	end

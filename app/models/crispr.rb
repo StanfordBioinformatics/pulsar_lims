@@ -12,6 +12,8 @@ class Crispr < ActiveRecord::Base
 
 	accepts_nested_attributes_for :genomic_integration_site, allow_destroy: true
 
+	scope :persisted, lambda { where.not(id: nil) }
+
 	before_save :verify_target
 
 	def self.policy_class
