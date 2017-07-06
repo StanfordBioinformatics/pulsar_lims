@@ -1,5 +1,5 @@
 <%= simple_form_for @single_cell_sorting do |f| %>
-	<%= f.simple_fields_for :plates, @bob do |ff| %>
+	<%= f.simple_fields_for :plates, @plate  do |ff| %>
 		<%= render partial: "plates/form", locals: {f: ff} %>
 	<% end %>
   <div class="form-actions">
