@@ -16,11 +16,11 @@
 //= require_tree .
 
 //Nathaniel Watson notes:
-// While in dev mode, it appears that any updates to this file may not be reflected in the browser until the browser cache 
+// While in dev mode, it appears that any updates to this file are not be reflected in the browser until the browser cache 
 // has been cleared. This is at least the case with Google Chrome. Modifying other JS files in this directory don't appear
 // to need a clearning of the browser cache, as the changes take effect immediately.
 
-// When doing event delegation, the short of of an event type don't appear to work. One must use the .on() method. This is
+// When doing event delegation, the named event-handler methods don't appear to work; instead, one must use the .on() method. This is
 // the case for both jQuery and CoffeeScript. For example, instead of:
 //
 //    $(funcion() {
