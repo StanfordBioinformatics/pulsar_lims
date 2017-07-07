@@ -56,7 +56,7 @@
 
 <% if @single_cell_sorting.sorting_biosample.blank? or not @single_cell_sorting.sorting_biosample.persisted? %>
 	<!-- Then create "Add Sorting Biosample" button. -->
-	<div class="bg-info jumbotron" id="sorting_biosample">
+	<div style="position: relative" class="bg-info jumbotron" id="sorting_biosample">
 		<h3 class="display-3">What are your sorting?</h3>
 		<p class="lead">Enter details about the type of biosample that is being sorted into the wells of any plates added to this experiment.</p>
 		<% if @single_cell_sorting.sorting_biosample.present? %>
@@ -64,13 +64,13 @@
 			<!-- Needed to set @biosample above since that is used in the partial below that renders a Biosample form. -->
 			<%= render partial: "add_sorting_biosample" %>
 		<% else %>
-			<%= link_to "Add Sorting Biosample", add_sorting_biosample_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "add_sorting_biosample", class: "new" %>
+			<%= link_to "Add Sorting Biosample", add_sorting_biosample_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "scs_add_sorting_biosample", class: "new" %>
 		<% end %>
 	</div>
 <% end %>
 <% if @single_cell_sorting.sorting_biosample.present? and @single_cell_sorting.sorting_biosample.persisted? %>
 	<!-- Then create "Sort" button to sort a Plate. -->
-	<div class="bg-info jumbotron" id="plate">
+	<div style="position: relative;" class="bg-info jumbotron" id="plate">
 		<% if @single_cell_sorting.plates.persisted.any? %>
 			<% display_msg = "Sort another plate" %>
 		<% else %>
@@ -83,7 +83,7 @@
 			<!-- Needed to set @plate above since that is used in the partial below that renders a plate form. -->
 			<%= render partial: "add_plate" %>
 		<% else %>
-	    <%= link_to "Sort", add_plate_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "add_plate", class: "new" %>
+	    <%= link_to "Sort", add_plate_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "scs_add_plate", class: "new" %>
 		<% end %>
 	</div>
 <% end %>

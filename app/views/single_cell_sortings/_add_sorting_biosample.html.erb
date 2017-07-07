@@ -5,5 +5,8 @@
   <div class="form-actions">
     <%= f.button :submit, "Create Sorting Biosample", class: "btn-primary" %>
   </div></br>
-	<button class="toggle-up" type="button" class="btn btn-link"><%= fa_icon("toggle-up lg") %></button>
+	<% if not @biosample.errors.any? %>
+		<!-- Don't show toggle-up button if user is form was already submitted with errors. -->
+		<button style="position: absolute; right: 0; bottom: 0;" class="scs-toggle-up-biosample-form" type="button" class="btn btn-link"><%= fa_icon("toggle-up lg") %></button>
+	<% end %>
 <% end %>

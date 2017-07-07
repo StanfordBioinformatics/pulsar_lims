@@ -5,8 +5,20 @@
 
 $ -> 
   #When the user clicks on the "Add Sorting Biosample" button, append the response from the action (SingleCellSortingController.add_sorting_biosamples) to the show view at the end of the div element with id "sorting_biosample".
-  $("#add_sorting_biosample").on "ajax:success", (event,data) ->  
-    $("#add_sorting_biosample").replaceWith(data)
+  $("#scs_add_sorting_biosample").on "ajax:success", (event,data) ->  
+    $("#scs_add_sorting_biosample").after(data)
+    $("#scs_add_sorting_biosample").hide()
 
-  $("#add_plate").on "ajax:success", (event,data) ->  
-    $("#add_plate").replaceWith(data)
+  $(document).on "click", ".scs-toggle-up-biosample-form", (event) -> 
+    event.stopPropagation()
+    $(event.target).closest("form").slideUp("fast")
+    $("#scs_add_sorting_biosample").show()
+
+  $("#scs_add_plate").on "ajax:success", (event,data) ->  
+    $("#scs_add_plate").after(data)
+    $("#scs_add_plate").hide()
+
+  $(document).on "click", ".scs-toggle-up-plate-form", (event) -> 
+    event.stopPropagation()
+    $(event.target).closest("form").slideUp("fast")
+    $("#scs_add_plate").show()

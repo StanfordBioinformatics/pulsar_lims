@@ -38,13 +38,6 @@
 //		});
 
 $(function() {
-  $(document).on("click",".toggle-up", function(event) {
-    event.stopPropagation()
-    $(event.target).closest("form").slideUp("fast")
-  })  
-});
-
-$(function() {
   $('[data-toggle="tooltip"]').attr("data-delay",300)
   $('[data-toggle="tooltip"]').tooltip()
 });
