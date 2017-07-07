@@ -13,7 +13,7 @@
 			<th>Name</th>
 			<th>Parent Biosample</th>
 			<th>Well</th>
-      <th>Description</th>
+      <!-- <th>Description</th> -->
       <th>Vendor</th>
 			<th>Biosample Type</th>
       <th>Biosample Term Name</th>
@@ -32,11 +32,11 @@
 					<td></td>
 				<% end %>
 				<% if biosample.well.present? %>
-					<td><%= link_to biosample.well.name, biosample.well %></td>
+					<td><%= link_to biosample.well.name, [biosample.well.plate, biosample.well] %></td>
 				<% else %>
 					<td></td>
 				<% end %>
-        <td><%= biosample.description %></td>
+        <!-- <td><%# biosample.description %></td> -->
         <td><%= biosample.vendor.name %></td>
 				<td><%= biosample.biosample_type.name %></td>
         <td><%= link_to biosample.biosample_term_name.name, biosample.biosample_term_name %></td>

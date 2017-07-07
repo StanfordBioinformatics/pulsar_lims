@@ -6,7 +6,6 @@ Pulsar::Application.routes.draw do
 	end
   resources :pooled_libraries
   resources :addresses
-  resources :wells
   resources :plates do
 		resources :wells, except: [:index, :new, :destroy]
 	end

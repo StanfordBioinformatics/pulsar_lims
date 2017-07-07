@@ -1,5 +1,5 @@
 <%= simple_form_for(@antibody_purification) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @antibody_purifications } %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {model_obj: @antibody_purification } %>
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique antibody purification name"} %>
 
   <div class="actions">

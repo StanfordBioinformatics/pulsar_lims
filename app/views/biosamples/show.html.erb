@@ -30,12 +30,15 @@
 		</tr>
 	<% end %>
 
-	<% if @biosample.well.present? %>
-		<tr>
-			<th><strong>Well</strong></th>
-			<td>Plate: <%= link_to @biosample.well.plate.name, @biosample.well.plate %>, Well: <%= link_to @biosample.well.name, @biosample.well %></td>
-		</tr>
-	<% end %>
+	<tr>
+		<th><strong>Well</strong></th>
+		<% if @biosample.well.present? %>
+			<% plate = @biosample.well.plate %>
+			<td>Plate: <%= link_to plate.name, plate %>, Well: <%= link_to @biosample.well.name, [plate, @biosample.well] %></td>
+		<% else %>
+			<td></td>
+		<% end %>
+	</tr>
 
 	<% if @biosample.child_biosamples.any? %>
 		<tr>

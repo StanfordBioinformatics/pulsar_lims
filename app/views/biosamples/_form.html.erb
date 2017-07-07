@@ -76,7 +76,3 @@
 			label_html: {"data-toggle" => "tooltip", "title" => "Additional information specified by the submitter to be displayed as a comment on the portal."} %>
 
 	<%= f.input :encid, label_html: {"data-toggle" => "tooltip", "title" => "The corresponding ID for this biosample on the ENCODE Portal"} %>
-	<!-- Add submit button -->
-	<% if @submit_btn.present? %>
-	 	 <%= render partial: 'submit', locals: {f: f} %>
-	<% end %>

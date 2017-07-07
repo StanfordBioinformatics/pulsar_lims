@@ -15,9 +15,38 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
+//Nathaniel Watson notes:
+// While in dev mode, it appears that any updates to this file may not be reflected in the browser until the browser cache 
+// has been cleared. This is at least the case with Google Chrome. Modifying other JS files in this directory don't appear
+// to need a clearning of the browser cache, as the changes take effect immediately.
+
+// When doing event delegation, the short of of an event type don't appear to work. One must use the .on() method. This is
+// the case for both jQuery and CoffeeScript. For example, instead of:
+//
+//    $(funcion() {
+//       $(document).click(".someClass",function() {
+//					...
+//				})
+//		});
+//
+// it should instead be:
+//
+//		$(function() {
+//			$(document).on("click",".someClass",function() {
+//				...
+//			})
+//		});
+
 $(function() {
-		$('[data-toggle="tooltip"]').attr("data-delay",300)
-    $('[data-toggle="tooltip"]').tooltip()
+  $(document).on("click",".toggle-up", function(event) {
+    event.stopPropagation()
+    $(event.target).closest("form").slideUp("fast")
+  })  
+});
+
+$(function() {
+  $('[data-toggle="tooltip"]').attr("data-delay",300)
+  $('[data-toggle="tooltip"]').tooltip()
 });
 
 //The code below was derived from https://devcenter.heroku.com/articles/direct-to-s3-image-uploads-in-rails
@@ -65,7 +94,7 @@ $(function() {
       },
       fail: function(e, data) {
         submitButton.prop('disabled', false);
-				console.log(e)
+        console.log(e)
 
         progressBar.
           css("background", "red").

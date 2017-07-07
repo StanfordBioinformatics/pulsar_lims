@@ -24,7 +24,7 @@ class Well < ActiveRecord::Base
 		sorting_biosample = self.plate.single_cell_sorting.sorting_biosample
 		sub_biosample = sorting_biosample.dup
 		#the dup() method doesn't set the has_one or has_many associations. So will need to explicitely set those. 
-		sub_biosample.name = sorting_biosample.name + "_" + self.plate.name + "_" +  get_name
+		sub_biosample.name = sorting_biosample.name + " " + self.plate.name + " " +  get_name
 		sub_biosample.documents = sorting_biosample.documents
 		attrs = sub_biosample.attributes
 		#self.create_biosample!(sub_biosample.attributes.merge!({documents: sorting_biosample.documents}))
