@@ -3,7 +3,11 @@ class SingleCellSortingsController < ApplicationController
 	skip_after_action :verify_authorized, only: [:add_sorting_biosample, :add_plate, :add_library_prototype]
 
 	def add_library_prototype
-		custom_lib_params = {prototype: true, biosample_id: @single_cell_sorting.sorting_biosample_id}
+		custom_lib_params = {
+			name: "#{@single_cell_sorting.name} library prototype",
+			prototype: true, 
+			biosample_id: @single_cell_sorting.sorting_biosample_id
+		}
 		@library = @single_cell_sorting.build_library_prototype(custom_lib_params)
 		flash[:action] = :add_library_prototype
 	end
@@ -20,7 +24,7 @@ class SingleCellSortingsController < ApplicationController
 		sorting_biosample.encid = nil
     sorting_biosample.parent_biosample =  @single_cell_sorting.starting_biosample
 		sorting_biosample.prototype = true
-    sorting_biosample.name =  @single_cell_sorting.name + " " + "prototype biosample"
+    sorting_biosample.name =  @single_cell_sorting.name + " " + "biosample prototype"
     @biosample = sorting_biosample
 		#Needed to set @biosample above since that is used in the partial single_cell_sortings/_add_sorting_biosample.html.erb that renders a Biosample form. -->
     render partial: "add_sorting_biosample", layout: false

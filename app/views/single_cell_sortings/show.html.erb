@@ -27,7 +27,7 @@
 		<% if library_prototype.present? and library_prototype.persisted? %>
 			<td><%= link_to library_prototype.name, library_prototype %></td>
 		<% else %>
-			<td><%= link_to "Create", add_library_prototype_single_cell_sorting_path(@single_cell_sorting) %></td>
+			<td><%= link_to "Create", add_library_prototype_single_cell_sorting_path(@single_cell_sorting), class: "new" %></td>
 		<% end %>
 	</tr>
 	
@@ -78,24 +78,29 @@
 		<% end %>
 	</div>
 <% end %>
-<% if @single_cell_sorting.sorting_biosample.present? and @single_cell_sorting.sorting_biosample.persisted? %>
-	<!-- Then create "Sort" button to sort a Plate. -->
-	<div style="position: relative;" class="bg-info jumbotron" id="plate">
-		<% if @single_cell_sorting.plates.persisted.any? %>
-			<% display_msg = "Sort another plate" %>
-		<% else %>
-			<% display_msg = "Sort a plate" %>
-		<% end %>
-    <h3 class="display-3"><%= display_msg %></h3>
-    <p class="lead">Wells and well-specific biosamples (one per well) will be created automatically.</p>
-		<% if @single_cell_sorting.plates.any? and not @single_cell_sorting.plates.last.persisted? %>
-			<% @plate = @single_cell_sorting.plates.last %>
-			<!-- Needed to set @plate above since that is used in the partial below that renders a plate form. -->
-			<%= render partial: "add_plate" %>
-		<% else %>
-	    <%= link_to "Sort", add_plate_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "scs_add_plate", class: "new" %>
-		<% end %>
-	</div>
+
+<% if not @single_cell_sorting.library_prototype.present? %>
+		<div><p>You must create the library prototype before you can sort any plates.</p></div>
+<% else %>
+	<% if @single_cell_sorting.sorting_biosample.present? and @single_cell_sorting.sorting_biosample.persisted? %>
+		<!-- Then create "Sort" button to sort a Plate. -->
+		<div style="position: relative;" class="bg-info jumbotron" id="plate">
+			<% if @single_cell_sorting.plates.persisted.any? %>
+				<% display_msg = "Sort another plate" %>
+			<% else %>
+				<% display_msg = "Sort a plate" %>
+			<% end %>
+	    <h3 class="display-3"><%= display_msg %></h3>
+	    <p class="lead">Wells and well-specific biosamples (one per well) will be created automatically.</p>
+			<% if @single_cell_sorting.plates.any? and not @single_cell_sorting.plates.last.persisted? %>
+				<% @plate = @single_cell_sorting.plates.last %>
+				<!-- Needed to set @plate above since that is used in the partial below that renders a plate form. -->
+				<%= render partial: "add_plate" %>
+			<% else %>
+		    <%= link_to "Sort", add_plate_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "scs_add_plate", class: "new" %>
+			<% end %>
+		</div>
+	<% end %>
 <% end %>
 	
 <%= link_to 'Back', single_cell_sortings_path %>
