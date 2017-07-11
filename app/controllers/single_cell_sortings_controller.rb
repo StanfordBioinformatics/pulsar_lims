@@ -1,17 +1,21 @@
 class SingleCellSortingsController < ApplicationController
-  before_action :set_single_cell_sorting, only: [:show, :edit, :update, :destroy, :add_sorting_biosample, :add_plate]
-	skip_after_action :verify_authorized, only: [:add_sorting_biosample, :add_plate]
+  before_action :set_single_cell_sorting, only: [:show, :edit, :update, :destroy, :add_sorting_biosample, :add_plate, :add_library_prototype]
+	skip_after_action :verify_authorized, only: [:add_sorting_biosample, :add_plate, :add_library_prototype]
 
+	def add_library_prototype
+		custom_lib_params = {prototype: true, biosample_id: @single_cell_sorting.sorting_biosample_id}
+		@library = @single_cell_sorting.build_library_prototype(custom_lib_params)
+		flash[:action] = :add_library_prototype
+	end
 
 	def add_plate
-		flash[:action] = "show"
 		@plate = @single_cell_sorting.plates.build
 		#Needed to set @plate above since that is used in the partial single_cell_sortings/_add_plate.html.erb that renders a Plate form. -->
 		render partial: "add_plate", layout: false
+		flash[:action] = "show"
 	end
 
   def add_sorting_biosample
-		flash[:action] = "show"
     sorting_biosample = @single_cell_sorting.starting_biosample.dup
 		sorting_biosample.encid = nil
     sorting_biosample.parent_biosample =  @single_cell_sorting.starting_biosample
@@ -20,6 +24,7 @@ class SingleCellSortingsController < ApplicationController
     @biosample = sorting_biosample
 		#Needed to set @biosample above since that is used in the partial single_cell_sortings/_add_sorting_biosample.html.erb that renders a Biosample form. -->
     render partial: "add_sorting_biosample", layout: false
+		flash[:action] = "show"
   end 
 
   def index
@@ -63,6 +68,12 @@ class SingleCellSortingsController < ApplicationController
   def update
 		authorize @single_cell_sorting
 		scs_params = single_cell_sorting_params
+
+		if scs_params[:library_prototype_attributes].present? and scs_params[:library_prototype_attributes][:id].blank?
+			#Then user is adding the library_prototype.
+			scs_params[:library_prototype_attributes][:user_id] = current_user.id
+		end
+
 		if scs_params[:sorting_biosample_attributes].present? and scs_params[:sorting_biosample_attributes][:id].blank?
 			#Then user is adding the sorting biosample. 
 			scs_params[:sorting_biosample_attributes][:user_id] = current_user.id
@@ -83,6 +94,7 @@ class SingleCellSortingsController < ApplicationController
 					flash[:action] = action
 				end
         format.html { render flash[:action] || 'edit' }
+        #format.html { render json: @single_cell_sorting.errors }
         format.json { render json: @single_cell_sorting.errors, status: :unprocessable_entity }
       end
     end
@@ -105,6 +117,6 @@ class SingleCellSortingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def single_cell_sorting_params
-      params.require(:single_cell_sorting).permit(:starting_biosample_id, :sorting_biosample, :name, :description, sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], documents_attributes: [:id,:_destroy]], plates_attributes: [:starting_biosample_id, :dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier])
+			params.require(:single_cell_sorting).permit(:starting_biosample_id, :sorting_biosample_id, :name, :description, :library_prototype_id, library_prototype_attributes: [:prototype, :paired_end, :sequencing_library_prep_kit_id, :library_fragmentation_method_id, :nucleic_acid_starting_quantity, :nucleic_acid_starting_quantity_units, :is_control, :nucleic_acid_term_id, :biosample_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, :document_ids => []], sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], documents_attributes: [:id,:_destroy]], plates_attributes: [:starting_biosample_id, :dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier])
     end
 end

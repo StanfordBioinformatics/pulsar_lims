@@ -17,17 +17,17 @@
 	</tr>
 	
 	<tr>
-	  <strong>Paired end:</strong></th>
+	  <th><strong>Paired end:</strong></th>
 	  <td><%= @pooled_library.paired_end? %></td>
 	</tr>
 	
 	<tr>
-	  <strong>Sequencing library prep kit:</strong></th>
+	  <th><strong>Sequencing library prep kit:</strong></th>
 	  <td><%= link_to @pooled_library.sequencing_library_prep_kit.name, @pooled_library.sequencing_library_prep_kit %></td>
 	</tr>
 	
 	<tr>
-	  <strong>Size range:</strong></th>
+	  <th><strong>Size range:</strong></th>
 	  <td><%= @pooled_library.size_range %></td>
 	</tr>
 </table>

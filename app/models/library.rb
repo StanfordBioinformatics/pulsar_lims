@@ -8,6 +8,9 @@ class Library < ActiveRecord::Base
 	has_many   :barcode_sequencing_results, dependent: :destroy
 	has_and_belongs_to_many :documents
 	has_and_belongs_to_many :sequencing_requests
+	has_one :single_cell_sorting, foreign_key: :library_prototype_id, dependent: :nullify
+	#A virtual (prototype) library can be used as a template for a single_cell_sorting experiment. This would then be used
+	# as a template for making library objects associated to the each biosample in each well of each plate present on the singe_cell_sorting. 
 	belongs_to :barcode
 	belongs_to :biosample
 	belongs_to :library_fragmentation_method
@@ -68,6 +71,22 @@ class Library < ActiveRecord::Base
       self.paired_barcode << pb 
     end 
   end 
+
+  def document_ids=(ids)
+    """ 
+    Function : Adds associations to Documents that are stored in self.documents.
+    Args     : ids - array of Document IDs.
+    """
+    ids.each do |i| 
+      if i.blank?
+        next
+      end 
+      doc = Document.find(i)
+      if not self.documents.include? doc 
+        self.documents << doc 
+      end 
+    end 
+  end
 
 	protected
 		def verify_barcode

@@ -2,7 +2,9 @@
   <h1>Edit Library</h1>
 </header>
 
-
-<%= render 'form' %>
+<%= simple_form_for(@library) do |f| %>
+  <%= render partial: 'form', locals: {f: f} %>
+  <%= render partial: "application_partials/submit", locals: {f: f} %>
+<% end %>
 
 <%= link_to 'Back', libraries_path %>

@@ -20,6 +20,16 @@
 	  <th><strong>Description:</strong></th>
 	  <td><%= @single_cell_sorting.description %></td>
 	</tr>
+
+	<tr>
+		<th><strong>Library Prototype:</strong></th>
+		<% library_prototype = @single_cell_sorting.library_prototype %>
+		<% if library_prototype.present? and library_prototype.persisted? %>
+			<td><%= link_to library_prototype.name, library_prototype %></td>
+		<% else %>
+			<td><%= link_to "Create", add_library_prototype_single_cell_sorting_path(@single_cell_sorting) %></td>
+		<% end %>
+	</tr>
 	
   <tr>
     <th><strong>Starting Biosample:</strong></th>

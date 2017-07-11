@@ -1,0 +1,17 @@
+<%= simple_form_for @single_cell_sorting do |f| %>
+	<% if @single_cell_sorting.library_prototype.present? %>
+		<% @library = @single_cell_sorting.library_prototype %>
+		<!-- Set @library like this b/c, even though the 'add_protocol_library' action in the single_cell_sorting controller 
+			does set @library, when submitting the form to the update action there may be validation errors. The update action
+			is configured to render the 'add_library_protocol' action, but the @library instance variable will no longer be set (as
+			it isn't set in the update action). But @single_cell_sorting is set, and its 'library_prototype' attribute will also be
+			set at this point.
+		-->
+	<% end %>
+	<%= f.simple_fields_for :library_prototype, @library do |ff| %>
+		<%= render partial: "libraries/form", locals: {f: ff} %>
+	<% end %>
+	<div class="form-actions">
+    <%= f.button :submit, "Create Library Prototype", class: "btn-primary" %>
+  </div></br>
+<% end %>

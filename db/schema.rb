@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170706051806) do
+ActiveRecord::Schema.define(version: 20170710231053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -387,6 +387,7 @@ ActiveRecord::Schema.define(version: 20170706051806) do
     t.boolean  "paired_end"
     t.integer  "barcode_id"
     t.integer  "paired_barcode_id"
+    t.boolean  "prototype",                                        default: false
   end
 
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree
@@ -579,8 +580,10 @@ ActiveRecord::Schema.define(version: 20170706051806) do
     t.datetime "updated_at",            null: false
     t.integer  "sorting_biosample_id"
     t.integer  "starting_biosample_id"
+    t.integer  "library_prototype_id"
   end
 
+  add_index "single_cell_sortings", ["library_prototype_id"], name: "index_single_cell_sortings_on_library_prototype_id", using: :btree
   add_index "single_cell_sortings", ["sorting_biosample_id"], name: "index_single_cell_sortings_on_sorting_biosample_id", using: :btree
   add_index "single_cell_sortings", ["starting_biosample_id"], name: "index_single_cell_sortings_on_starting_biosample_id", using: :btree
   add_index "single_cell_sortings", ["user_id"], name: "index_single_cell_sortings_on_user_id", using: :btree
@@ -750,6 +753,7 @@ ActiveRecord::Schema.define(version: 20170706051806) do
   add_foreign_key "sequencing_results", "users"
   add_foreign_key "single_cell_sortings", "biosamples", column: "sorting_biosample_id"
   add_foreign_key "single_cell_sortings", "biosamples", column: "starting_biosample_id"
+  add_foreign_key "single_cell_sortings", "libraries", column: "library_prototype_id"
   add_foreign_key "single_cell_sortings", "users"
   add_foreign_key "targets", "users"
   add_foreign_key "uberons", "users"

@@ -7,7 +7,7 @@ class Plate < ActiveRecord::Base
 	belongs_to :pooled_library
   belongs_to :user
   belongs_to :sequencing_library_prep_kit
-	belongs_to :single_cell_sorting
+	belongs_to :single_cell_sorting, required: true
   belongs_to :vendor
 
 	validates :dimensions, inclusion: DIMENSIONS, presence: true

@@ -1,7 +1,7 @@
-<%= simple_form_for(@library) do |f| %>
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @library } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library name"} %>(Max. 20 characters)</br>
+  <%= f.input :prototype, label_html: {"data-toggle" => "tooltip", "title" => "If you want to use this as a template for building other biosamples, select this option."} %>(Max. 20 characters)</br>
 
   <%= f.association :sequencing_library_prep_kit, label_html: {"data-toggle" => "tooltip", "title" => "The library prep kit used for creating the library."} %>
 
@@ -82,8 +82,3 @@
 
   <%= f.input :size_range, as: :string,
 			label_html: {"data-toggle" => "tooltip", "title" => "The measured size range of the purified nucleic acid, in bp."} %>
-
-  <div class="actions">
-    <%= f.button :submit, class: "btn-primary "%>
-  </div></br>
-<% end %>
