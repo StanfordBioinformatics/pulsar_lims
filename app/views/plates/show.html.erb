@@ -23,20 +23,6 @@
 	</tr>
 
 	<tr>
-  	<th><strong>Sequencing library prep kit:</strong></th>
-		<% if @plate.sequencing_library_prep_kit.present? %>
-  		<td><%= link_to @plate.sequencing_library_prep_kit.name, @plate.sequencing_library_prep_kit %></td>
-		<% else %>
-			<td></td>
-		<% end %>
-	</tr>
-
-	<tr>
-  	<th><strong>Paired end:</strong></th>
-  	<td><%= @plate.paired_end %></td>
-	</tr>
-
-	<tr>
   	<th><strong>Dimensions:</strong></th>
 		<td><%= "#{@plate.nrow}x#{@plate.ncol}" %></td>
 	</tr>
@@ -81,7 +67,7 @@
 </div>
 
 <div class="add_barcodes bg-info">
-	<% if @plate.paired_end? %>
+	<% if @plate.single_cell_sorting.library_prototype.paired_end? %>
 		<% placeholder="ATCCGC-GTACAG\nCGTGAC-TAGGCA\n..." %>
 		<% submit_text="Add paired barcodes" %>
 		<% label_text="#{submit_text} to wells." %>

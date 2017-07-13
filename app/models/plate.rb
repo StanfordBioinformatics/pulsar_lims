@@ -6,7 +6,6 @@ class Plate < ActiveRecord::Base
 	has_many :wells, dependent: :destroy
 	belongs_to :pooled_library
   belongs_to :user
-  belongs_to :sequencing_library_prep_kit
 	belongs_to :single_cell_sorting, required: true
   belongs_to :vendor
 
@@ -17,7 +16,7 @@ class Plate < ActiveRecord::Base
 
 	scope :persisted, lambda { where.not(id: nil) }
 
-	after_create :add_wells
+	after_validation :add_wells, on: :create
 
 	def self.policy_class
 		ApplicationPolicy
@@ -39,13 +38,31 @@ class Plate < ActiveRecord::Base
 
   def add_wells
 		#should only be called after the plate has been persisted to the database.
+		sorting_biosample = single_cell_sorting.sorting_biosample
+		sub_biosample = sorting_biosample.dup
+		sub_biosample.documents = sorting_biosample.documents
 		rows = self.nrow
 		cols = self.ncol
 		(1..rows).each do |r| 
 			(1..cols).each do |c| 
 				#name format is ${parent_biosample_name}_${plate_name}_${row_num}-${col_num}
-				well = self.wells.create!({user: self.user, row: r, col: c}) 
-			#	well.set_biosample
+				well = wells.build({user: self.user, row: r, col: c}) 
+				if not well.valid?
+					well.errors.full_messages.each do |well_err|
+						errors["-> Well:"] << well_err
+					end
+					return
+				end
+
+				sub_biosample.name = sorting_biosample.name + " " + name + " " +  well.get_name
+				b = well.build_biosample(sub_biosample.attributes)
+				if not b.valid?
+					b.errors.full_messages.each do |e|
+						errors["well -> biosample:"] <<  e
+					end
+					return
+				else
+				end
 			end 
 		end 
 	end 

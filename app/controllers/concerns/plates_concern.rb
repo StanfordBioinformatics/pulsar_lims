@@ -22,7 +22,6 @@ module PlatesConcern
  		# B1 B2
 		# C1 C2
 
-    prep_kit = plate.sequencing_library_prep_kit
     barcodes_rows = barcodes.split("\n")
 		num_rows = barcodes_rows.length
 		#check for more rows than the plate
@@ -55,7 +54,7 @@ module PlatesConcern
 				if well.blank?
 					raise Exceptions::WellNotFoundError, "No well on plate #{plate.name} could be found with row #{row_num} and column #{col_num}."
 				end
-				add_barcode_to_well(plate=plate,well=well,barcode=bc)
+				well = create_library_for_well(plate=plate,well=well,barcode=bc)
 				save_status = well.save
 				if not save_status
 					raise Exceptions::WellNotSavedError, "Error saving barcode #{bc} to well #{well.name}. Errors are: #{well.errors.full_messages.join('; ')}"
@@ -65,17 +64,20 @@ module PlatesConcern
 		return plate
   end
 
-	def add_barcode_to_well(plate,well,barcode)
+	def create_library_for_well(plate,well,barcode)
 		###
 		#Args  plate - a plate instance
 		#      well  - a well on the plate
 		#      barcode - a single-end barcode or a paired-end barcode. Paired-end will be assumed if the barcode has a '-' inside, 
 		#                i.e. ATCGAT-GCTGAC.
-		prep_kit = plate.sequencing_library_prep_kit
-		user = current_user
     if not plate.wells.include?(well)
 			raise Exceptions::WellAndPlateMismatchError, "Well #{well.name} does not belong on plate #{plate.name}."
 		end
+		library_prototype = plate.single_cell_sorting.library_prototype
+		well_lib = library_prototype.dup
+		well_lib.documents = library_prototype.documents
+		#user = current_user
+		user = User.first
 		barcode.upcase!
 		index1 = barcode
 		index2 = nil
@@ -84,13 +86,16 @@ module PlatesConcern
 			index1.strip!
 			index2.strip!
 		end
+
+		prep_kit = library_prototype.sequencing_library_prep_kit
 		
 		index1_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, index_number: 1, sequence: index1}) 
 		if index1_rec.blank?
 			raise Exceptions::BarcodeNotFoundError, "Barcode #{index1} is not present in sequencing library prep kit '#{prep_kit.name}' Make sure you provided the correct orientation and didn't reverse complement it."
 		end
 		if not index2 #then single-end only
-			well.barcode = index1_rec
+			well_lib.barcode = index1_rec
+			well.biosample.libraries << well_lib
 		else #then paired-end
       index2_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id,index_number: 2, sequence: index2})
       if index2_rec.blank?
@@ -101,7 +106,8 @@ module PlatesConcern
 				name = PairedBarcode.make_name(index1_rec.name,index2_rec.name)
         paired_rec = PairedBarcode.create!({user: current_user, name: name,sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1_rec.id, index2_id: index2_rec.id})
       end 
-      well.paired_barcode = paired_rec
+			well_lib.paired_barcode = paired_rec
+      well.biosample.libraries << well_lib
 		end
 	end
 

@@ -2,13 +2,12 @@
 <!-- The above commented-out line accomplished the line below with classes "alert alert-danger" and I use this instead for clarity. -->
 <% if model_obj.errors.any? %>
 	<div class="alert alert-danger">Please review the problems below:</div>
-  <div id="error_explanation">
-    <h2><%= pluralize(model_obj.errors.count, "error") %> occurred:</h2>
-
-    <ul>
-    <% model_obj.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
+	<div id="error_explanation">
+		<h2><%= pluralize(model_obj.errors.count, "error") %> occurred:</h2>
+		<ul>
+			<% model_obj.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+	    <% end %>
     </ul>
   </div>
 <% end %>

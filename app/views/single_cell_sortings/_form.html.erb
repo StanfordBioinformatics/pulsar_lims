@@ -2,7 +2,7 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @single_cell_sorting } %>
   <%= f.input :name %>
   <%= f.input :description %>
-	<%= f.association :starting_biosample, collection: @starting_biosample_collection,
+	<%= f.association :starting_biosample, collection: Biosample.non_well_biosamples,
 			label_html: { "data-toggle": "tooltip", "title": "The biosample that is used as input sorting material." } %>
 
   <div class="form-actions">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170710231053) do
+ActiveRecord::Schema.define(version: 20170713043419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -465,17 +465,14 @@ ActiveRecord::Schema.define(version: 20170710231053) do
   create_table "plates", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.integer  "sequencing_library_prep_kit_id"
-    t.boolean  "paired_end"
     t.integer  "vendor_id"
     t.string   "vendor_product_identifier"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "dimensions"
     t.integer  "single_cell_sorting_id"
   end
 
-  add_index "plates", ["sequencing_library_prep_kit_id"], name: "index_plates_on_sequencing_library_prep_kit_id", using: :btree
   add_index "plates", ["single_cell_sorting_id"], name: "index_plates_on_single_cell_sorting_id", using: :btree
   add_index "plates", ["user_id"], name: "index_plates_on_user_id", using: :btree
   add_index "plates", ["vendor_id"], name: "index_plates_on_vendor_id", using: :btree
@@ -734,7 +731,6 @@ ActiveRecord::Schema.define(version: 20170710231053) do
   add_foreign_key "paired_barcodes", "barcodes", column: "index2_id"
   add_foreign_key "paired_barcodes", "sequencing_library_prep_kits"
   add_foreign_key "paired_barcodes", "users"
-  add_foreign_key "plates", "sequencing_library_prep_kits"
   add_foreign_key "plates", "single_cell_sortings"
   add_foreign_key "plates", "users"
   add_foreign_key "plates", "vendors"

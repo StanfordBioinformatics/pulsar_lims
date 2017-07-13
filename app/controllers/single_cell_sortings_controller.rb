@@ -46,7 +46,6 @@ class SingleCellSortingsController < ApplicationController
   def new
 		authorize SingleCellSorting
     @single_cell_sorting = SingleCellSorting.new
-		@starting_biosample_collection = Biosample.non_well_biosamples
   end
 
   def edit
@@ -99,6 +98,7 @@ class SingleCellSortingsController < ApplicationController
 				end
         format.html { render flash[:action] || 'edit' }
         #format.html { render json: @single_cell_sorting.errors }
+        #format.html { render json: @single_cell_sorting.errors }
         format.json { render json: @single_cell_sorting.errors, status: :unprocessable_entity }
       end
     end
@@ -121,6 +121,6 @@ class SingleCellSortingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def single_cell_sorting_params
-			params.require(:single_cell_sorting).permit(:starting_biosample_id, :sorting_biosample_id, :name, :description, :library_prototype_id, library_prototype_attributes: [:prototype, :paired_end, :sequencing_library_prep_kit_id, :library_fragmentation_method_id, :nucleic_acid_starting_quantity, :nucleic_acid_starting_quantity_units, :is_control, :nucleic_acid_term_id, :biosample_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, :document_ids => []], sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], documents_attributes: [:id,:_destroy]], plates_attributes: [:starting_biosample_id, :dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier])
+			params.require(:single_cell_sorting).permit(:starting_biosample_id, :sorting_biosample_id, :name, :description, :library_prototype_id, library_prototype_attributes: [:prototype, :paired_end, :sequencing_library_prep_kit_id, :library_fragmentation_method_id, :nucleic_acid_starting_quantity, :nucleic_acid_starting_quantity_units, :is_control, :nucleic_acid_term_id, :biosample_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, :document_ids => []], sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], documents_attributes: [:id,:_destroy]], plates_attributes: [:starting_biosample_id, :dimensions, :name, :vendor_id, :vendor_product_identifier])
     end
 end

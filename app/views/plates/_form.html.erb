@@ -1,8 +1,5 @@
-  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @plate } %>
 	<%= f.input :name %>
 	<%= f.input :dimensions, collection: Plate::DIMENSIONS, prompt: "Select the plate size" %>
 	<%= f.association :single_cell_sorting, as: :hidden %>
   <%= f.association :vendor %>
   <%= f.input :vendor_product_identifier %>
-  <%= f.association :sequencing_library_prep_kit %>
-	<%= f.input :paired_end %>

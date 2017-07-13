@@ -51,7 +51,6 @@ class PlatesController < ApplicationController
       return
     end
 
-
     respond_to do |format|
       if @plate.update(plate_params)
         format.html { redirect_to @plate, notice: 'Plate was successfully updated.' }
@@ -80,6 +79,6 @@ class PlatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plate_params
-      params.require(:plate).permit(:single_cell_sorting_id, :starting_biosample_id, :add_barcodes,:dimensions, :name, :sequencing_library_prep_kit_id, :paired_end, :vendor_id, :vendor_product_identifier)
+      params.require(:plate).permit(:single_cell_sorting_id, :starting_biosample_id, :add_barcodes,:dimensions, :name, :vendor_id, :vendor_product_identifier)
     end
 end

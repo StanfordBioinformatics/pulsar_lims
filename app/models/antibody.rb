@@ -8,6 +8,7 @@ class Antibody < ActiveRecord::Base
   belongs_to :target
 
 	validates  :name, length: { maximum: 40 }, presence: true, uniqueness: true
+	validates  :organism, presence: true
 	#validates  :antibody_purifications, presence: true
 	validates  :vendor_id, presence: true
 	validates  :target_id, presence: true
