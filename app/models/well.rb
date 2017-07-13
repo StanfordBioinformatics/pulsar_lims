@@ -8,6 +8,7 @@ class Well < ActiveRecord::Base
 	validates :col, presence: true
 
 	scope :persisted, lambda { where.not(id: nil) }
+	before_create :set_name
 
 	def self.policy_class
 		ApplicationPolicy
