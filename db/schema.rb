@@ -111,6 +111,14 @@ ActiveRecord::Schema.define(version: 20170713043419) do
   add_index "barcodes", ["sequencing_library_prep_kit_id"], name: "index_barcodes_on_sequencing_library_prep_kit_id", using: :btree
   add_index "barcodes", ["user_id"], name: "index_barcodes_on_user_id", using: :btree
 
+  create_table "barcodes_libraries", id: false, force: :cascade do |t|
+    t.integer "barcode_id", null: false
+    t.integer "library_id", null: false
+  end
+
+  add_index "barcodes_libraries", ["barcode_id"], name: "index_barcodes_libraries_on_barcode_id", using: :btree
+  add_index "barcodes_libraries", ["library_id"], name: "index_barcodes_libraries_on_library_id", using: :btree
+
   create_table "biosample_ontologies", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
