@@ -40,6 +40,7 @@ class Plate < ActiveRecord::Base
 		#should only be called after the plate has been persisted to the database.
 		sorting_biosample = single_cell_sorting.sorting_biosample
 		sub_biosample = sorting_biosample.dup
+		sub_biosample.prototype = false
 		sub_biosample.documents = sorting_biosample.documents
 		rows = self.nrow
 		cols = self.ncol
@@ -54,7 +55,7 @@ class Plate < ActiveRecord::Base
 					return
 				end
 
-				sub_biosample.name = sorting_biosample.name + " " + name + " " +  well.get_name
+				sub_biosample.name = single_cell_sorting.name + " " + name + " " +  well.get_name #(sorting exp name) + (plate name) + (well name)
 				b = well.build_biosample(sub_biosample.attributes)
 				if not b.valid?
 					b.errors.full_messages.each do |e|

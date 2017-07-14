@@ -66,8 +66,8 @@ class Library < ActiveRecord::Base
   end 
 
   def paired_barcode_id=(pbid)
-    if i.present?
-      pb = PairedBarcode.find(i) 
+    if pbid.present?
+      pb = PairedBarcode.find(pbid) 
       self.paired_barcode << pb 
     end 
   end 

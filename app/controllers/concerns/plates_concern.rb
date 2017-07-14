@@ -54,10 +54,10 @@ module PlatesConcern
 				if well.blank?
 					raise Exceptions::WellNotFoundError, "No well on plate #{plate.name} could be found with row #{row_num} and column #{col_num}."
 				end
-				well = create_library_for_well(plate=plate,well=well,barcode=bc)
-				save_status = well.save
+				new_library_record = create_library_for_well(plate=plate,well=well,barcode=bc)
+				save_status = new_library_record.save
 				if not save_status
-					raise Exceptions::WellNotSavedError, "Error saving barcode #{bc} to well #{well.name}. Errors are: #{well.errors.full_messages.join('; ')}"
+					raise Exceptions::WellNotSavedError, "Error saving library for well #{well.name}. Errors are: #{new_library_record.errors.full_messages.join('; ')}"
 				end
 			end
 		end
@@ -75,7 +75,8 @@ module PlatesConcern
 		end
 		library_prototype = plate.single_cell_sorting.library_prototype
 		well_lib = library_prototype.dup
-		well_lib.documents = library_prototype.documents
+		well_lib.prototype = false
+		well_lib.name = well.biosample.name
 		#user = current_user
 		user = User.first
 		barcode.upcase!
@@ -95,7 +96,8 @@ module PlatesConcern
 		end
 		if not index2 #then single-end only
 			well_lib.barcode = index1_rec
-			well.biosample.libraries << well_lib
+			new_library_record  = well.biosample.libraries.build(well_lib.attributes.merge!(documents: library_prototype.documents))
+			return new_library_record
 		else #then paired-end
       index2_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id,index_number: 2, sequence: index2})
       if index2_rec.blank?
@@ -107,8 +109,9 @@ module PlatesConcern
         paired_rec = PairedBarcode.create!({user: current_user, name: name,sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1_rec.id, index2_id: index2_rec.id})
       end 
 			well_lib.paired_barcode = paired_rec
-      well.biosample.libraries << well_lib
+      new_library_record = well.biosample.libraries.build(well_lib.attributes.merge!(documents: library_prototype.documents))
 		end
+		return new_library_record
 	end
 
 end
