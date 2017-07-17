@@ -1,6 +1,12 @@
 class PlatesController < ApplicationController
 	include PlatesConcern #gives me add_barcodes_matrix_input()
-  before_action :set_plate, only: [:show, :edit, :update, :destroy]
+  before_action :set_plate, only: [:show, :edit, :update, :destroy, :show_barcodes]
+	 skip_after_action :verify_authorized, only: [:show_barcodes]
+
+	def show_barcodes
+		@show_barcodes = 1
+		render :show
+	end	
 
   def index
     @plates = policy_scope(Plate).order("lower(name)")

@@ -99,7 +99,7 @@ module PlatesConcern
 		
 		index1_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, index_number: 1, sequence: index1}) 
 		if index1_rec.blank?
-			raise Exceptions::BarcodeNotFoundError, "Barcode #{index1} is not present in sequencing library prep kit '#{prep_kit.name}' Make sure you provided the correct orientation and didn't reverse complement it."
+			raise Exceptions::BarcodeNotFoundError, "Index 1 barcode #{index1} is not present in sequencing library prep kit '#{prep_kit.name}' Make sure you provided the correct orientation and didn't reverse complement it."
 		end
 		if not index2 #then single-end only
 			well_lib.barcode = index1_rec

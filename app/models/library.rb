@@ -72,6 +72,15 @@ class Library < ActiveRecord::Base
     end 
   end 
 
+	def get_index
+		return false unless barcoded?
+		if paired_end?
+			return paired_barcode
+		else
+			return barcode
+		end
+	end
+
   def document_ids=(ids)
     """ 
     Function : Adds associations to Documents that are stored in self.documents.

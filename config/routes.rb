@@ -7,6 +7,7 @@ Pulsar::Application.routes.draw do
 	end
   resources :addresses
   resources :plates do
+		get :show_barcodes, on: :member
 		resources :wells, except: [:index, :new, :destroy]
 	end
   resources :paired_barcodes
