@@ -70,11 +70,11 @@
 	<% if @plate.single_cell_sorting.library_prototype.paired_end? %>
 		<% placeholder="ATCCGC-GTACAG\nCGTGAC-TAGGCA\n..." %>
 		<% submit_text="Add paired barcodes" %>
-		<% label_text="#{submit_text} to wells." %>
+		<% label_text="#{submit_text} to wells to create libraries." %>
 	<% else %>
 		<% placeholder="ATCCGA\nTAGCGA\n..." %>
 		<% submit_text="Add barcodes" %>
-		<% label_text="#{submit_text} to wells." %>
+		<% label_text="#{submit_text} to wells to create libraries." %>
 	<% end %>
 		
 	<% tooltip = "Enter barcodes in matrix format (same format as the plate), such that barcode in position [1,1] corresponds to well A1, and the barcode in position [2,2] corresponds to well B2 ... Use a space or tab to delimit values; for wells without barcodes just leave the corresponding field empty." %>

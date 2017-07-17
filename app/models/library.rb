@@ -42,15 +42,16 @@ class Library < ActiveRecord::Base
 	scope :persisted, lambda { where.not(id: nil) }
 
 	before_save :verify_barcode #verifies self.barcode/self.paired_barcode
+	before_save :verify_plate_consistency #if biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
 
 	def self.policy_class
 		ApplicationPolicy
 	end 
 
 	def barcoded?
-		if paired_end? and paired_barcode.any?
+		if paired_end? and paired_barcode.present?
 			return true
-		elsif not paired_end? and barcode.any?
+		elsif not paired_end? and barcode.present?
 			return true
 		end
 		return false
@@ -89,6 +90,9 @@ class Library < ActiveRecord::Base
 
 	protected
 		def verify_barcode
+
+			return unless barcoded?
+
 			if self.barcode.present? and self.paired_barcode.present?
 				self.errors.add(:base, "Can't specify both the \"barcode\" attribute (which is used only for single-end libraries) and the \"paired_barcode\" attribute (which is used only for paired-end libraries).")
 				return false
@@ -102,5 +106,25 @@ class Library < ActiveRecord::Base
 				self.errors.add(:base, "Can't set paired_end to true when the sequencing library prep kit does not support paired-end sequencing.")
 				return false
 			end
+
+	end
+
+	def verify_plate_consistency
+		return unless barcoded?
+		if self.persisted?
+			action_term = "update"
+		else
+			action_term = "create"
 		end
+		logger.info("lalalala")
+		if biosample.well.present?
+			plate_barcodes = biosample.well.plate.get_barcodes
+			bc = paired_barcode.present? ? paired_barcode :  barcode
+			if plate_barcodes.include?(bc)
+				self.errors.add(:base, "Can't #{action_term} library with barcode '#{bc.display}' since this barcode is present on another library for a biosample in a well on plate '#{biosample.well.plate.name}'.")
+				return false
+			end
+		end
+	end				
+				
 end

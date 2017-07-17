@@ -4,9 +4,9 @@ class Plate < ActiveRecord::Base
 	DIMENSIONS = ["2x2 (4)","8x12 (96)","16x24 (384)"]
 	
 	has_many :wells, dependent: :destroy
-	belongs_to :pooled_library
-  belongs_to :user
+	has_and_belongs_to_many :sequencing_requests
 	belongs_to :single_cell_sorting, required: true
+  belongs_to :user
   belongs_to :vendor
 
 	validates :dimensions, inclusion: DIMENSIONS, presence: true
@@ -32,6 +32,22 @@ class Plate < ActiveRecord::Base
 
 	def ncol
 		return self.dimensions.split()[0].split("x")[1].to_i
+	end
+
+	def get_barcodes
+		barcodes = []
+			wells.each do |w|
+			if w.biosample.present? and w.biosample.libraries.present?
+				lib = w.biosample.libraries.last
+				if lib.paired_end?
+					barcode = lib.paired_barcode
+				else
+					barcode = lib.barcode 
+				end
+				barcodes << barcode #barcode could be nil if no barcoding is used.
+			end
+		end
+		return barcodes
 	end
 
 	private

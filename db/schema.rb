@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713043419) do
+ActiveRecord::Schema.define(version: 20170717002348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -476,6 +476,14 @@ ActiveRecord::Schema.define(version: 20170713043419) do
   add_index "plates", ["single_cell_sorting_id"], name: "index_plates_on_single_cell_sorting_id", using: :btree
   add_index "plates", ["user_id"], name: "index_plates_on_user_id", using: :btree
   add_index "plates", ["vendor_id"], name: "index_plates_on_vendor_id", using: :btree
+
+  create_table "plates_sequencing_requests", id: false, force: :cascade do |t|
+    t.integer "plate_id",              null: false
+    t.integer "sequencing_request_id", null: false
+  end
+
+  add_index "plates_sequencing_requests", ["plate_id", "sequencing_request_id"], name: "plate_sequencing_request", using: :btree
+  add_index "plates_sequencing_requests", ["sequencing_request_id", "plate_id"], name: "sequencing_request_plate", using: :btree
 
   create_table "reference_genomes", force: :cascade do |t|
     t.string   "name",       limit: 255

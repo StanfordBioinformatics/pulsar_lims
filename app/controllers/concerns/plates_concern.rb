@@ -73,6 +73,13 @@ module PlatesConcern
     if not plate.wells.include?(well)
 			raise Exceptions::WellAndPlateMismatchError, "Well #{well.name} does not belong on plate #{plate.name}."
 		end
+		if well.biosample.libraries.any?
+			well.biosample.libraries.destroy_all
+			#Could be that the user made a mistake when adding the libraries initially in matrix format to the plate and needs to redo this step.
+			# In this case, there could be a library added to one or more biosamples (wells) already. These need to be removed before making
+			# new libraries. Otherwise it will become too confusing as a user can unintentionally add many libraries to a biosample in a given well.
+      # This only concerns wells that are spanned by the barcode-matrix that the user submits. 
+		end
 		library_prototype = plate.single_cell_sorting.library_prototype
 		well_lib = library_prototype.dup
 		well_lib.prototype = false
