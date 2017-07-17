@@ -1,0 +1,43 @@
+<div id="plate_jumbotron" class="jumbotron">
+	<!-- check_box_tag format is check_box_tag(name=string, value=string, checked=bool, options={}) -->
+	<div class="pull-right">
+		<% if @show_barcodes.present? %>
+			<% checked = true %>
+		<% else %>
+			<% checked = false %>
+		<% end %>
+		<%= check_box_tag "plate_show_barcodes", "1", checked, id: "plate_show_barcodes", data: {plate_id: 135} %><span> Show Barcodes</span>
+	</div>
+	<h3 class="display-3">Plate Layout</h3>
+	<table class="plate-table">
+		<thead>
+			<tr><th></th>
+				<% (1..@plate.ncol).each do |c| %>
+					<th><%= c %></th>
+				<% end %>
+			</tr>
+		</thead>
+		<% (1..@plate.nrow).each do |r| %>
+			<tbody>
+				<tr><th><%= Plate::row_letter(r) %></th>
+				<% (1..@plate.ncol).each do |c| %>
+					<% well = @plate.wells.find_by!({row: r, col: c}) %>
+					<% if well.fail? %>
+						<% class_val = "failure" %>
+					<% else %>
+						<% class_val = "success" %>
+					<% end %>
+					<td><%= link_to well.name, [@plate,well], class: "#{class_val}" %>
+					<% if @show_barcodes.present? %>
+						<% lib = well.biosample.libraries.last %>
+						<% if lib.present? %>
+							<p style="font-size: small;"><%= lib.get_indexseq().display() %><p>
+						<% end %>
+					<% end %>
+					</td>
+				<% end %>
+				</tr>
+			</tbody>
+		<% end %>
+	</table></br>
+</div>

@@ -38,41 +38,7 @@
 	</tr>
 </table>
 
-<div class="jumbotron">
-	<% if not @show_barcodes.present? %>
-		<!-- Then the button below hasn't been clicked. -->
-		<%= link_to "Show Barcodes", show_barcodes_plate_path(@plate), class: " pull-right btn btn-info btn-sm", id: "plate_show_barcodes" %>
-	<% end %>
-	<h3 class="display-3">Plate Layout</h3>
-	<table class="plate-table">
-		<thead>
-			<tr><th></th>
-				<% (1..@plate.ncol).each do |c| %>
-					<th><%= c %></th>
-				<% end %>
-			</tr>
-		</thead>
-		<% (1..@plate.nrow).each do |r| %>
-			<tbody>
-				<tr><th><%= Plate::row_letter(r) %></th>
-				<% (1..@plate.ncol).each do |c| %>
-					<% well = @plate.wells.find_by!({row: r, col: c}) %>
-					<% if well.fail? %>
-						<% class_val = "failure" %>
-					<% else %>
-						<% class_val = "success" %>
-					<% end %>
-					<td><%= link_to well.name, [@plate,well], class: "#{class_val}" %>
-					<% if @show_barcodes.present? %>
-						<p style="font-size: small;"><%= well.biosample.libraries.last.get_index().display() %><p>
-					<% end %>
-					</td>
-				<% end %>
-				</tr>
-			</tbody>
-		<% end %>
-	</table></br>
-</div>
+<%= render partial: "plate" %>
 
 <div class="add_barcodes bg-info">
 	<% if @plate.single_cell_sorting.library_prototype.paired_end? %>

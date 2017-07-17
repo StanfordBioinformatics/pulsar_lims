@@ -4,8 +4,12 @@ class PlatesController < ApplicationController
 	 skip_after_action :verify_authorized, only: [:show_barcodes]
 
 	def show_barcodes
-		@show_barcodes = 1
-		render :show
+		if params[:checked] == "true"
+			@show_barcodes = 1
+		end
+		logger.info("huhh")
+		logger.info(params)
+		render partial: "plate", layout: false
 	end	
 
   def index

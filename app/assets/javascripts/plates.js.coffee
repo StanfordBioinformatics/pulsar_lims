@@ -5,9 +5,12 @@
 
 $ -> 
   #set the failed wells to red. The .failure class is set on wells where the 'fail' attribute is set to true, and this class
-  # is added in the Plate show view. 
-  $("td:has(a.failure)").css({"background-color":"red"})
-  $("a.failure").css({"color":"black"})
+  set_failed_wells_color = -> 
+    # is added in the Plate show view. 
+    $("td:has(a.failure)").css({"background-color":"red"})
+    $("a.failure").css({"color":"black"})
+
+  set_failed_wells_color()
 
   #The following code is used with the Library show form to support adding multiple barcodes:
   # The div containing all that logic (with calss add_barcodes) is hidden right now since this isn't a necessary feautre; in fact
@@ -32,3 +35,12 @@ $ ->
     hide_bc_submit()
   $add_barcodes.blur (event) ->
     hide_bc_submit()
+
+
+  #Check if user clicks 'Show Barcodes' button on plate jumbotron:
+  $(document).on "click", "#plate_show_barcodes", (event) -> 
+    plate_id = $(this).data("plate-id")
+    #data is from the _plate.html.erb partial
+    $.get "/plates/" + plate_id + "/show_barcodes", checked: this.checked, (responseText,status,jqXHR) -> 
+      $("#plate_jumbotron").replaceWith(responseText) 
+      set_failed_wells_color()
