@@ -5,7 +5,6 @@ Pulsar::Application.routes.draw do
 		get :add_sorting_biosample, on: :member	
 		get :add_library_prototype, on: :member
 	end
-  resources :pooled_libraries
   resources :addresses
   resources :plates do
 		resources :wells, except: [:index, :new, :destroy]

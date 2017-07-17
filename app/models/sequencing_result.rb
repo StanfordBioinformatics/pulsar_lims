@@ -17,7 +17,7 @@ class SequencingResult < ActiveRecord::Base
     libs = []
     all_libs = sequencing_request.libraries
     all_libs.each do |lib|
-			barcodes = get_barcodes_on_lib_without_barcode_seqresult(lib)
+			#barcodes = get_barcodes_on_lib_without_barcode_seqresult(lib)
       if barcodes.any?
         libs << lib 
 			elsif not lib.barcoded?
