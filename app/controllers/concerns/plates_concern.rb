@@ -80,12 +80,12 @@ module PlatesConcern
 			# new libraries. Otherwise it will become too confusing as a user can unintentionally add many libraries to a biosample in a given well.
       # This only concerns wells that are spanned by the barcode-matrix that the user submits. 
 		end
+		user = current_user
 		library_prototype = plate.single_cell_sorting.library_prototype
 		well_lib = library_prototype.dup
+		well_lib.user = user
 		well_lib.prototype = false
 		well_lib.name = well.biosample.name
-		#user = current_user
-		user = User.first
 		barcode.upcase!
 		index1 = barcode
 		index2 = nil

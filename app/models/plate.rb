@@ -53,9 +53,9 @@ class Plate < ActiveRecord::Base
 	private
 
   def add_wells
-		#should only be called after the plate has been persisted to the database.
 		sorting_biosample = single_cell_sorting.sorting_biosample
 		sub_biosample = sorting_biosample.dup
+		sub_biosample.user = self.user
 		sub_biosample.prototype = false
 		sub_biosample.documents = sorting_biosample.documents
 		rows = self.nrow

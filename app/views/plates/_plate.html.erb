@@ -6,7 +6,7 @@
 		<% else %>
 			<% checked = false %>
 		<% end %>
-		<%= check_box_tag "plate_show_barcodes", "1", checked, id: "plate_show_barcodes", data: {plate_id: 135} %><span> Show Barcodes</span>
+		<%= check_box_tag "plate_show_barcodes", "1", checked, id: "plate_show_barcodes", data: {plate_id: @plate.id} %><span> Show Barcodes</span>
 	</div>
 	<h3 class="display-3">Plate Layout</h3>
 	<table class="plate-table">
