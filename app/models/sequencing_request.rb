@@ -3,7 +3,7 @@ class SequencingRequest < ActiveRecord::Base
 	has_and_belongs_to_many :plates
   belongs_to :sequencing_platform
   belongs_to :sequencing_center
-	has_one    :sequencing_result, dependent: :destroy
+	has_many    :sequencing_runs, dependent: :destroy
 	belongs_to :user
 
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true

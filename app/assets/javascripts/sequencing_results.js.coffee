@@ -21,14 +21,14 @@ $ ->
 
   $new_bc_res_btn.on "ajax:success", (event,data) ->  
     $("#barcode_result_form").append(data)
-    #this appends a form with id new_barcode_result_form after the div with ID barcode_result_form.
-    $("#new_barcode_result_form").hide().fadeIn("fast")
-    $library_input = $("#barcode_sequencing_result_library_id")
+    #this appends a form with id new_sequencing_result_form after the div with ID barcode_result_form.
+    $("#new_sequencing_result_form").hide().fadeIn("fast")
+    $library_input = $("#sequencing_result_library_id")
     $library_input.change (event) -> 
-      get_path = window.location.pathname + "/barcode_sequencing_results/get_barcode_selector"
+      get_path = window.location.pathname + "/sequencing_results/get_barcode_selector"
       $.get get_path, $library_input.serialize(), (responseText,status,jqXHR) ->
-        $barcode_input = $("#barcode_sequencing_result_barcode_id")
-        $paired_barcode_input = $("#barcode_sequencing_result_paired_barcode_id")
+        $barcode_input = $("#sequencing_result_barcode_id")
+        $paired_barcode_input = $("#sequencing_result_paired_barcode_id")
         if ($barcode_input.length == 1)
           $barcode_input.html("<option>yep</option>")
           $barcode_input.html(responseText)
@@ -37,7 +37,7 @@ $ ->
           $paired_barcode_input.html(responseText)
           $paired_barcode_input.attr("disabled",false)
           
-    $("#rm_new_barcode_result_form").click (event) -> 
+    $("#rm_new_sequencing_result_form").click (event) -> 
       event.preventDefault()
-      $("#new_barcode_result_form").slideUp("fast")
+      $("#new_sequencinge_result_form").slideUp("fast")
       $new_bc_res_btn.show()

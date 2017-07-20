@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717002348) do
+ActiveRecord::Schema.define(version: 20170720175417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,27 +76,6 @@ ActiveRecord::Schema.define(version: 20170717002348) do
   end
 
   add_index "attachments", ["user_id"], name: "index_attachments_on_user_id", using: :btree
-
-  create_table "barcode_sequencing_results", force: :cascade do |t|
-    t.integer  "sequencing_result_id"
-    t.integer  "library_id"
-    t.text     "comment"
-    t.string   "read1_uri"
-    t.string   "read2_uri"
-    t.integer  "read1_count"
-    t.integer  "read2_count"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.integer  "user_id"
-    t.integer  "barcode_id"
-    t.integer  "paired_barcode_id"
-  end
-
-  add_index "barcode_sequencing_results", ["barcode_id"], name: "index_barcode_sequencing_results_on_barcode_id", using: :btree
-  add_index "barcode_sequencing_results", ["library_id"], name: "index_barcode_sequencing_results_on_library_id", using: :btree
-  add_index "barcode_sequencing_results", ["paired_barcode_id"], name: "index_barcode_sequencing_results_on_paired_barcode_id", using: :btree
-  add_index "barcode_sequencing_results", ["sequencing_result_id"], name: "index_barcode_sequencing_results_on_sequencing_result_id", using: :btree
-  add_index "barcode_sequencing_results", ["user_id"], name: "index_barcode_sequencing_results_on_user_id", using: :btree
 
   create_table "barcodes", force: :cascade do |t|
     t.integer  "user_id"
@@ -548,6 +527,27 @@ ActiveRecord::Schema.define(version: 20170717002348) do
   add_index "sequencing_requests", ["user_id"], name: "index_sequencing_requests_on_user_id", using: :btree
 
   create_table "sequencing_results", force: :cascade do |t|
+    t.integer  "sequencing_result_id"
+    t.integer  "library_id"
+    t.text     "comment"
+    t.string   "read1_uri"
+    t.string   "read2_uri"
+    t.integer  "read1_count"
+    t.integer  "read2_count"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "user_id"
+    t.integer  "barcode_id"
+    t.integer  "paired_barcode_id"
+  end
+
+  add_index "sequencing_results", ["barcode_id"], name: "index_sequencing_results_on_barcode_id", using: :btree
+  add_index "sequencing_results", ["library_id"], name: "index_sequencing_results_on_library_id", using: :btree
+  add_index "sequencing_results", ["paired_barcode_id"], name: "index_sequencing_results_on_paired_barcode_id", using: :btree
+  add_index "sequencing_results", ["sequencing_result_id"], name: "index_sequencing_results_on_sequencing_result_id", using: :btree
+  add_index "sequencing_results", ["user_id"], name: "index_sequencing_results_on_user_id", using: :btree
+
+  create_table "sequencing_runs", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "sequencing_request_id"
     t.integer  "report_id"
@@ -559,10 +559,10 @@ ActiveRecord::Schema.define(version: 20170717002348) do
     t.string   "name"
   end
 
-  add_index "sequencing_results", ["name"], name: "index_sequencing_results_on_name", unique: true, using: :btree
-  add_index "sequencing_results", ["report_id"], name: "index_sequencing_results_on_report_id", using: :btree
-  add_index "sequencing_results", ["sequencing_request_id"], name: "index_sequencing_results_on_sequencing_request_id", using: :btree
-  add_index "sequencing_results", ["user_id"], name: "index_sequencing_results_on_user_id", using: :btree
+  add_index "sequencing_runs", ["name"], name: "index_sequencing_runs_on_name", unique: true, using: :btree
+  add_index "sequencing_runs", ["report_id"], name: "index_sequencing_runs_on_report_id", using: :btree
+  add_index "sequencing_runs", ["sequencing_request_id"], name: "index_sequencing_runs_on_sequencing_request_id", using: :btree
+  add_index "sequencing_runs", ["user_id"], name: "index_sequencing_runs_on_user_id", using: :btree
 
   create_table "single_cell_sortings", force: :cascade do |t|
     t.integer  "user_id"
@@ -667,11 +667,6 @@ ActiveRecord::Schema.define(version: 20170717002348) do
   add_foreign_key "antibodies", "vendors"
   add_foreign_key "antibody_purifications", "users"
   add_foreign_key "attachments", "users"
-  add_foreign_key "barcode_sequencing_results", "barcodes"
-  add_foreign_key "barcode_sequencing_results", "libraries"
-  add_foreign_key "barcode_sequencing_results", "paired_barcodes"
-  add_foreign_key "barcode_sequencing_results", "sequencing_results"
-  add_foreign_key "barcode_sequencing_results", "users"
   add_foreign_key "barcodes", "sequencing_library_prep_kits"
   add_foreign_key "barcodes", "users"
   add_foreign_key "biosample_ontologies", "users"
@@ -737,9 +732,14 @@ ActiveRecord::Schema.define(version: 20170717002348) do
   add_foreign_key "sequencing_requests", "sequencing_centers"
   add_foreign_key "sequencing_requests", "sequencing_platforms"
   add_foreign_key "sequencing_requests", "users"
-  add_foreign_key "sequencing_results", "documents", column: "report_id"
-  add_foreign_key "sequencing_results", "sequencing_requests"
+  add_foreign_key "sequencing_results", "barcodes"
+  add_foreign_key "sequencing_results", "libraries"
+  add_foreign_key "sequencing_results", "paired_barcodes"
+  add_foreign_key "sequencing_results", "sequencing_runs", column: "sequencing_result_id"
   add_foreign_key "sequencing_results", "users"
+  add_foreign_key "sequencing_runs", "documents", column: "report_id"
+  add_foreign_key "sequencing_runs", "sequencing_requests"
+  add_foreign_key "sequencing_runs", "users"
   add_foreign_key "single_cell_sortings", "biosamples", column: "sorting_biosample_id"
   add_foreign_key "single_cell_sortings", "biosamples", column: "starting_biosample_id"
   add_foreign_key "single_cell_sortings", "libraries", column: "library_prototype_id"

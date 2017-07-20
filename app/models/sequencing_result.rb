@@ -1,56 +1,76 @@
-class SequencingResult < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :sequencing_request
-	belongs_to :report, class_name: "Document"
-	has_many   :barcode_sequencing_results, dependent: :destroy
+class BarcodeSequencingResult < ActiveRecord::Base
+	belongs_to :barcode	
+  belongs_to :library
+	belongs_to :paired_barcode
+	belongs_to :user
+  belongs_to :sequencing_run
 
-	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
-	validates :run_name, presence: true
+	validates :library, presence: true
+	validates_uniqueness_of :barcode, scope: [:sequencing_run, :library], message: "sequencing result already exists for the specified library and barcode.", unless: :library_paired_end?
+	validates_uniqueness_of :paired_barcode, scope: [:sequencing_run, :library], message: "sequencing result already exists for the specified library and paired_barcode.", if: :library_paired_end?
+
+	validate :barcode_valid
 
 	scope :persisted, lambda { where.not(id: nil) }
 
-	def self.policy_class
-		ApplicationPolicy
-	end
-
-  def get_libs_without_barcode_seqresults
-    libs = []
-    all_libs = sequencing_request.libraries
-    all_libs.each do |lib|
-			#barcodes = get_barcodes_on_lib_without_barcode_seqresult(lib)
-      if barcodes.any?
-        libs << lib 
-			elsif not lib.barcoded?
-				if BarcodeSequencingResult.find_by(library: lib, sequencing_result: self).blank?
-				#Could be that the library isn't barcoded at all. In this case, barcodes.any? above will always be False. Thus,
-				# need to add the library if not barcoded and not sequencing result exists for it on the given sequencing request.
-					libs << lib
-				end
-      end 
-    end 
-    return libs
+  def self.policy_class
+    ApplicationPolicy
   end 
 
-  def get_barcodes_on_lib_without_barcode_seqresult(lib)
-    #returns all barcodes/paired barcodes on a given Library that don't have a BarcodeSequencingResult on the 
-    # associated SequencingResult object.
-    if lib.paired_end?
-      barcodes = lib.paired_barcodes
-    else
-      barcodes = lib.barcodes
-    end 
-    missing_barcodes = [] #the ones to return w/o a barcode sequencing result.
-    barcodes.each do |bc|
-      if lib.paired_end?
-        res = BarcodeSequencingResult.find_by(library: lib, sequencing_result: self, paired_barcode: bc) 
-      else
-        res = BarcodeSequencingResult.find_by(library: lib, sequencing_result: self, barcode: bc) 
-      end 
-      if res.blank?
-        missing_barcodes << bc
-      end 
-    end 
-    return missing_barcodes
-  end
+	def display
+		seq = get_barcode_sequence
+		if not seq
+			return library.name
+		else
+			return "#{library.name} #{seq}"
+		end
+	end
 
+	def get_barcode_sequence
+		if not library.barcoded?
+			return nil
+		end
+
+		if library_paired_end?
+			return paired_barcode.get_sequence
+		else
+			return barcode.sequence
+		end
+	end
+
+	def library_paired_end?
+		library.paired_end?
+	end
+
+	protected
+		def barcode_valid
+			if paired_barcode.present? and barcode.present?
+				errors[:base] << "Can't specify both paired_barcode and barcode."
+				return
+			end
+	
+			if library_paired_end?
+				if paired_barcode.present?
+					if not library.paired_barcodes.include?(paired_barcode)
+						errors[:base] << "Paired barcode #{paired_barcode.index1.sequence}-#{paired_barcode.index2.sequence} is not present on the library."
+						return
+					end
+					if sequencing_run.sequencing_results.find_by({library_id: library.id, paired_barcode_id: paired_barcode.id}).present?
+						errors[:base] << "A barcode sequencing result object already exists for library #{library.name} and paired barcode #{paired_barcode.display}."
+						return
+					end
+				end
+		
+			else
+				if barcode.present?
+					if not library.barcodes.include?(barcode)
+						errors[:base] << "Barcode #{barcode.sequence} is not present on the library."
+						return
+					end
+					if sequencing_run.sequencing_results.find_by({library_id: library.id, barcode_id: barcode.id}).present?
+						errors[:base] << "A barcode sequencing result object already exists for library #{library.name} and barcode #{barcode.display}."
+					end
+				end
+			end
+		end
 end

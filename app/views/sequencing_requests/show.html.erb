@@ -53,18 +53,20 @@
 
 	<tr>
 		<th><strong>Sequencing Result:</strong></th>
-		<% if @sequencing_request.sequencing_result.present? %>
-			<td>
-				<%= link_to @sequencing_request.sequencing_result.name, [@sequencing_request,@sequencing_request.sequencing_result] %>
-			</td>
+		<% if @sequencing_request.sequencing_runs.present? %>
+			<% @sequencing_request.sequencing_runs.each do |run| %>
+				<td>
+					<%= link_to run.name, [@sequencing_request,run] %>
+				</td>
+			<% end %>
 		<% else %>
 			<td>None</td>
 		<% end %>
 	</tr>
 </table>
 
-<% unless @sequencing_request.sequencing_result.present? %>
-	<%= link_to "Add Sequencing Result", new_sequencing_request_sequencing_result_path(@sequencing_request), class: "reg-btn" %>
+<% unless @sequencing_request.sequencing_runs.present? %>
+	<%= link_to "Add Sequencing Result", new_sequencing_request_sequencing_run_path(@sequencing_request), class: "reg-btn" %>
 	</br>
 <% end %>
 </br>

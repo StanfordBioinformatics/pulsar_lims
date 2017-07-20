@@ -28,8 +28,10 @@
         <td><%= link_to sequencing_request.sequencing_center.name, sequencing_request.sequencing_center %></td>
         <td><%= sequencing_request.paired_end%></td>
         <td><%= sequencing_request.shipped %></td>
-				<% if sequencing_request.sequencing_result.present? %>
-	        <td><%= link_to sequencing_request.sequencing_result.name, [sequencing_request,sequencing_request.sequencing_result] %></td>
+				<% if sequencing_request.sequencing_runs.present? %>
+					<% sequencing_request.sequencing_runs.each do |run| %>
+		        <td><%= link_to run.name, [sequencing_request,run] %></td>
+					<% end %>
 				<% else %>
 					<td>None</td>
 				<% end %>

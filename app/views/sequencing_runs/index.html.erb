@@ -1,0 +1,37 @@
+<header>
+  <h1>Sequencing Results</h1>
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: SequencingRun} %>
+  </ul>   
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Comment</th>
+      <th>User</th>
+      <th>Sequencing request</th>
+      <th>Run name</th>
+      <th>Lane</th>
+      <th>Comment</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sequencing_runs.each do |sequencing_run| %>
+      <tr>
+				<td><%= link_to sequencing_run.name, sequencing_run %></td>
+        <td><%= sequencing_run.comment %></td>
+        <td><%= link_to sequencing_run.sequencing_request.name, sequencing_run.sequencing_request %></td>
+        <td><%= sequencing_run.run_name %></td>
+        <td><%= sequencing_run.lane %></td>
+				<td>
+					<%= link_to fa_icon("pencil"), edit_sequencing_run(library) %>
+        	<%= link_to 'Destroy', sequencing_run, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

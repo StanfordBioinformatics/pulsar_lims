@@ -54,9 +54,9 @@ Pulsar::Application.routes.draw do
 
 	resources :sequencing_requests do
 		get :select_library, on: :collection
-  	resources :sequencing_results do
-			get :new_barcode_result, on: :member
-			resources :barcode_sequencing_results do
+  	resources :sequencing_runs do
+			get :new_sequencing_result, on: :member
+			resources :sequencing_results do
 				get :get_barcode_selector, on: :collection
 			end
 		end

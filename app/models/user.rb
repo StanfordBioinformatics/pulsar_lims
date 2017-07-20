@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
 	has_many :sequencing_centers, dependent: :nullify
 	has_many :sequencing_platforms, dependent: :nullify
 	has_many :sequencing_requests, dependent: :nullify
+	has_many :sequencing_runs, dependent: :nullify
 	has_many :targets, dependent: :nullify
 	has_many :sequencing_library_prep_kits
 	has_many :single_cell_sortings

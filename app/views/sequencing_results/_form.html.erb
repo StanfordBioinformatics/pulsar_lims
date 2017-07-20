@@ -1,15 +1,65 @@
-<%= simple_form_for([@sequencing_request,@sequencing_result]) do |f| %>
+<%= simple_form_for([@sequencing_request,@sequencing_run,@sequencing_result]) do |f| %>
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_result } %>
 
-  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing result name"} %>
-  <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Notes about the sequencing result"} %>
-
-  <div class="form-inputs">
-    <%= f.input :run_name %>
-    <%= f.input :lane %>
-  </div>
+  <table class="attributes">
+    <thead>
+      <tr>
+        <th>Library</th>
+        <% if @sequencing_request.paired_end? %>
+          <th>Paired Barcode</th>
+        <% else %>
+          <th>Barcode</th>
+        <% end %>
+        <th>Read1 Count</th>
+        <th>Read1 URI</th>
+        <% if @sequencing_request.paired_end? %>
+          <th>Read2 Count </th>
+          <th>Read2 URI</th>
+        <% end %>
+        <th>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+			<tr>
+				<td>
+	     		<%= f.association :library, label: false, wrapper: false, collection: @sequencing_run.get_libs_without_sequencing_results %>
+				</td>
+	
+				<td>
+					<%  if @sequencing_request.paired_end? %>
+						<%= f.association :paired_barcode, label: false, wrapper: false, disabled: true %>
+					<% else %>
+						<%= f.association :barcode, label: false, wrapper: false, disabled: true %>
+					<% end %>
+				</td>
+	
+				<td>
+	     		<%= f.input_field :read1_count %>
+				</td>
+	
+				<td>
+	 	     	<%= f.input_field :read1_uri %>
+				</td>
+	
+				<%  if @sequencing_request.paired_end? %>
+	      	<td>
+						<%= f.input_field :read2_count %>
+					</td>
+					<td>
+	     			<%= f.input_field :read2_uri %>
+					</td>
+				<% end %>
+	
+	      <td>
+					<%= f.input_field :comment %>
+				</td>
+	
+			</tr>
+		</tbody>
+  </table>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
-  </div></br>
+  </div>
+	</br>	
 <% end %>

@@ -1,6 +1,5 @@
-<header>
-	<h1>New Sequencing Result</h1>
-	<small><%= @sequencing_request.name %></small>
-</header>
+<h1>New Sequencing Result</h1>
 
 <%= render 'form' %>
+
+<%= link_to 'Back', [@sequencing_request,@sequencing_run] %>

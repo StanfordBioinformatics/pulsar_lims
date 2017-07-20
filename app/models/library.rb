@@ -5,7 +5,7 @@ class Library < ActiveRecord::Base
 	NUCLEIC_ACID_STARTING_QUANTITY_UNITS = ["cells","cell-equivalent","µg","ng","pg","mg"]
 
 	#The is_control bool column has a default of false.
-	has_many   :barcode_sequencing_results, dependent: :destroy
+	has_many   :sequencing_results, dependent: :destroy
 	has_and_belongs_to_many :documents
 	has_and_belongs_to_many :sequencing_requests
 	has_one :single_cell_sorting, foreign_key: :library_prototype_id, dependent: :nullify

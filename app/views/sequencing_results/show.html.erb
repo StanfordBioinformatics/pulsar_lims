@@ -1,77 +1,48 @@
 <%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @sequencing_result } %>
 <header>
-  <h1><%= @sequencing_result.name %></h1>  
+  <h1><%= @sequencing_result.display %></h1>
+
   <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_result, nested: @sequencing_request} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_result, nested: @sequencing_request} %>
-		<!-- Note that I use the SequencingRequest policy class above. The authorization will be the same level
-        for both classes. I avoided using the SequencingResult class directly here since it's a nested resource
-				and the partial doesn't know how to calculate the full path to the policy class in this case.
-		-->
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_result, nested: [@sequencing_request,@sequencing_result]} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_result, nested: [@sequencing_request,@sequencing_result]} %>
   </ul>
 </header>
 
-<%= render partial: "application_partials/record_meta", locals: { record: @sequencing_result} %>
+<%= render partial: "application_partials/record_meta", locals: { record: @sequencing_result } %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name:</strong></th>
-  	<td><%= @sequencing_result.name %></td>
-	</tr>
-
-	<tr>
-		<th><strong>Comment:</strong></th>
-	  <td><%= @sequencing_result.comment %></td>
-	</tr>
-
-	<tr>
-		<th><strong>Sequencing request:</strong></th>
-  	<td><%= link_to @sequencing_request.name, @sequencing_request %></td>
-	</tr>
-
-	<tr>
-	  <th><strong>Run name:</strong></th>
- 	 	<td><%= @sequencing_result.run_name %></td>
-	</tr>
-
-	<tr>
-		<th><strong>Lane:</strong></th>
-  	<td><%= @sequencing_result.lane %></td>
-	</tr>
+		<tr>
+		  <th><strong>Sequencing result:</strong></th>
+	  	<td><%= link_to @sequencing_result.sequencing_run.name, [@sequencing_request,@sequencing_run] %></td>
+		</tr>
+	
+		<tr>
+		  <th><strong>Library:</strong></th>
+	  	<td><%= link_to @sequencing_result.library.name, @sequencing_result.library %></td>
+		</tr>
+	
+		<tr>
+	  	<th><strong>Comment:</strong></th>
+	  	<td><%= @sequencing_result.comment %></td>
+		</tr>
+	
+		<tr>
+	  	<th><strong>Read1 uri:</strong></th>
+	  	<td><%= @sequencing_result.read1_uri %></td>
+		</tr>
+	
+		<tr>
+	  	<th><strong>Read2 uri:</strong></th>
+	  	<td><%= @sequencing_result.read2_uri %></td>
+		</tr>
+	
+		<tr>
+	  	<th><strong>Read1 count:</strong></th>
+	  	<td><%= @sequencing_result.read1_count %></td>
+		</tr>
+	
+		<tr>
+	  	<th><strong>Read2 count:</strong></th>
+	  	<td><%= @sequencing_result.read2_count %></td>
+		</tr>
 </table>
-
-<% if @sequencing_result.barcode_sequencing_results.present? %>
-	<h4>Library Sequencing Results</h4>
-	<table id="barcode_results" class="table-bordered table-data" >
-		<thead>
-			<tr>
-				<th>Display Name</th>
-				<th>Library</th>
-				<% if @sequencing_request.paired_end? %>
-					<th>Paired Barcode</th>
-				<% else %>
-					<th>Barcode</th>
-				<% end %>
-				<th>Read1 Count</th>
-				<th>Read1 URI</th>
-				<% if @sequencing_request.paired_end? %>
-					<th>Read2 Count </th>
-					<th>Read2 URI</th>
-				<% end %>
-				<th>Comment</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-				<%= render partial: "row_barcode_result", locals: {barcode_sequencing_results: @sequencing_result.barcode_sequencing_results} %>
-		</tbody>
-	<% end %>
-</table>
-<div id="barcode_result_form"></div>
-
-<% if not @sequencing_result.get_libs_without_barcode_seqresults.any? %>
-	<!-- Create hidden element for jQuery to look for. If jQuery finds it, then it will disable the link below with id="new_barcode_result" -->
-	<span id="hide_new_barcode_result" hidden></span>
-<% end %>
-<%= link_to "New Barcode Result", [:new_barcode_result,@sequencing_request,@sequencing_result], class: "reg-btn", remote: true, id: "new_barcode_result" %>
-</br></br>
