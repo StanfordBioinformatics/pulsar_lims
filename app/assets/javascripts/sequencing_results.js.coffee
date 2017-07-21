@@ -7,9 +7,9 @@ $ ->
 
   #The following code is for the show view.
 
-  $new_bc_res_btn = $("#new_barcode_result")
+  $new_bc_res_btn = $("#new_sequencing_result") #the button
 
-  if $("#hide_new_barcode_result").length == 1 
+  if $("#hide_new_sequencing_result").length == 1 
     $new_bc_res_btn.attr("disabled", "disabled")
 
   $new_bc_res_btn.click (event) -> 
@@ -20,24 +20,25 @@ $ ->
 
 
   $new_bc_res_btn.on "ajax:success", (event,data) ->  
-    $("#barcode_result_form").append(data)
-    #this appends a form with id new_sequencing_result_form after the div with ID barcode_result_form.
+    $("#sequencing_result_form").append(data)
+    #this appends a form with id new_sequencing_result_form after the div with ID sequencing_result_form.
     $("#new_sequencing_result_form").hide().fadeIn("fast")
     $library_input = $("#sequencing_result_library_id")
     $library_input.change (event) -> 
       get_path = window.location.pathname + "/sequencing_results/get_barcode_selector"
       $.get get_path, $library_input.serialize(), (responseText,status,jqXHR) ->
         $barcode_input = $("#sequencing_result_barcode_id")
-        $paired_barcode_input = $("#sequencing_result_paired_barcode_id")
-        if ($barcode_input.length == 1)
-          $barcode_input.html("<option>yep</option>")
-          $barcode_input.html(responseText)
-          $barcode_input.attr("disabled",false)
-        else
-          $paired_barcode_input.html(responseText)
-          $paired_barcode_input.attr("disabled",false)
+        $barcode_input.html(responseText)
+        $barcode_input.attr("disabled",false)
+
+    $("#sequencing_result_barcode_id").change (event) -> 
+      get_path = window.location.pathname + "/sequencing_results/get_library_selector"
+      $.get get_path, $("#sequencing_result_barcode_id").serialize(), (responseText,status,jqXHR) ->
+        alert(responseText)
+        $library_input.html(responseText)
           
     $("#rm_new_sequencing_result_form").click (event) -> 
       event.preventDefault()
-      $("#new_sequencinge_result_form").slideUp("fast")
-      $new_bc_res_btn.show()
+      $("#new_sequencing_result_form").slideUp "normal", ->  
+        $("#new_sequencing_result_form").remove()
+        $new_bc_res_btn.show()

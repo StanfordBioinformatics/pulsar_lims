@@ -18,7 +18,7 @@ class SequencingRunsController < ApplicationController
   end
 
   def new
-    @sequencing_run = @sequencing_request.build_sequencing_run
+    @sequencing_run = @sequencing_request.sequencing_runs.build
 		authorize @sequencing_run
   end
 
@@ -27,7 +27,7 @@ class SequencingRunsController < ApplicationController
   end
 
   def create
-    @sequencing_run = @sequencing_request.build_sequencing_run(sequencing_run_params)
+    @sequencing_run = @sequencing_request.sequencing_runs.build(sequencing_run_params)
 		authorize @sequencing_run
 		@sequencing_run.user = current_user
 

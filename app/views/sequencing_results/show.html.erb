@@ -3,8 +3,8 @@
   <h1><%= @sequencing_result.display %></h1>
 
   <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_result, nested: [@sequencing_request,@sequencing_result]} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_result, nested: [@sequencing_request,@sequencing_result]} %>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_result, nested: [@sequencing_request,@sequencing_run]} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_result, nested: [@sequencing_request,@sequencing_run]} %>
   </ul>
 </header>
 

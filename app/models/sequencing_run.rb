@@ -13,44 +13,34 @@ class SequencingRun< ActiveRecord::Base
 		ApplicationPolicy
 	end
 
-  def get_libs_without_sequencing_results
-    libs = []
-    all_libs = sequencing_request.libraries
-    all_libs.each do |lib|
-			#barcodes = get_barcodes_on_lib_without_sequencing_results(lib)
-      if barcodes.any?
-        libs << lib 
-			elsif not lib.barcoded?
-				if BarcodeSequencingResult.find_by(library: lib, sequencing_run: self).blank?
-				#Could be that the library isn't barcoded at all. In this case, barcodes.any? above will always be False. Thus,
-				# need to add the library if not barcoded and not sequencing run exists for it on the given sequencing request.
-					libs << lib
+	def get_barcodes_on_request(without_sequencing_result=False)
+		barcodes = []
+		sequencing_request.libraries.each do |lib|
+			bc = lib.get_indexseq()
+			if bc.present?
+				if without_sequencing_result
+					if not library_sequencing_result_present(lib)
+						barcodes << bc
+					end
+				else
+					barcodes << bc
 				end
-      end 
+		 	end 
     end 
-    return libs
-  end 
+		return barcodes
+	end
 
-  def get_barcodes_on_lib_without_sequencing_results(lib)
-    #returns all barcodes/paired barcodes on a given Library that don't have a BarcodeSequencingResult on the 
-    # associated SequencingRun object.
-    if lib.paired_end?
-      barcodes = lib.paired_barcodes
-    else
-      barcodes = lib.barcodes
-    end 
-    missing_barcodes = [] #the ones to return w/o a barcode sequencing run.
-    barcodes.each do |bc|
-      if lib.paired_end?
-        res = BarcodeSequencingResult.find_by(library: lib, sequencing_run: self, paired_barcode: bc) 
-      else
-        res = BarcodeSequencingResult.find_by(library: lib, sequencing_run: self, barcode: bc) 
-      end 
-      if res.blank?
-        missing_barcodes << bc
-      end 
-    end 
-    return missing_barcodes
-  end
+	def library_sequencing_result_present(lib)
+		return sequencing_results.where({library_id: lib.id}).present?
+	end
 
+	def get_libraries_without_sequencing_results
+		res = []
+		sequencing_request.libraries.each do |lib|
+			if not library_sequencing_result_present(lib)
+				res << lib
+			end
+		end
+		return res
+	end
 end

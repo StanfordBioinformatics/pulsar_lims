@@ -20,8 +20,8 @@
 		<% end %>
 		<td><%= res.comment %></td>
 		<td>
-			<%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_run,res] %>
-			<%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_run,res], method: :delete %>
+			<span><%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_run,res] %>&nbsp;&nbsp;&nbsp;
+			<%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_run,res], method: :delete %></span>
 		</td>
 	</tr>
 <% end %>

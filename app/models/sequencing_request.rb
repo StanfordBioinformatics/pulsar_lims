@@ -14,7 +14,17 @@ class SequencingRequest < ActiveRecord::Base
 
 	scope :persisted, lambda { where.not(id: nil) }
 
+	def get_library_with_barcode(barcode_id)
+		if paired_end
+			lib = libraries.find_by(paired_barcode_id: barcode_id)
+		else
+			lib = libraries.find_by(barcode_id: barcode_id)
+		end
+		return lib
+	end
+
 	def self.policy_class
 		ApplicationPolicy
 	end
+
 end

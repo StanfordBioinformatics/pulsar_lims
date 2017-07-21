@@ -2,24 +2,30 @@ class SequencingResultsController < ApplicationController
   before_action :set_sequencing_result, only: [:show, :edit, :update, :destroy]
 	before_action :set_sequencing_request
 	before_action :set_sequencing_run
-	skip_after_action :verify_authorized, only: [:get_barcode_selector]
+	skip_after_action :verify_authorized, only: [:get_barcode_selector, :get_library_selector]
 
 	def get_barcode_selector
-		paired = false
-		library_id = sequencing_result_params()[:library_id]
+		#Takes :library_id as a param
+		library_id = sequencing_result_params[:library_id]
 		lib = Library.find(library_id)
-		paired = lib.paired_end?
-		if not paired
-			barcodes = lib.barcodes
-			selector = '<select class="select form-control" id="sequencing_result_barcode_id">'
+		barcode = lib.get_indexseq
+		if barcode.present?
+			barcode_id = barcode.id
+			barcode_display = barcode.display
 		else
-			barcodes = lib.paired_barcodes
-			selector = '<select class="select form-control" id="sequencing_result_paired_barcode_id">'
+			barcode_id = ""
+			barcode_display = ""
 		end
-		barcodes.each do |bc|
-			selector += "<option value=\"#{bc.id}\">#{bc.display}</option>"
-		end
-		selector += '</select>'
+		selector = "<option value=\"#{barcode_id}\">#{barcode_display}</option>"
+		render text: selector
+		return
+	end
+
+	def get_library_selector
+		#Takes :barcode_id as a param, which can be a Barcode or PairedEndBarcode.
+		barcode_id = sequencing_result_params[:barcode_id]
+		lib = @sequencing_request.get_library_with_barcode(barcode_id=barcode_id)
+		selector = "<option value=\"#{lib.id}\">#{lib.name}</option>"
 		render text: selector
 		return
 	end
@@ -93,7 +99,7 @@ class SequencingResultsController < ApplicationController
 		end
 
 		def set_sequencing_run
-			@sequencing_run = SequencingRRun.find(params[:sequencing_run_id])
+			@sequencing_run = SequencingRun.find(params[:sequencing_run_id])
 		end
 
     # Never trust parameters from the scary internet, only allow the white list through.

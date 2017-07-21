@@ -22,14 +22,15 @@
     <tbody>
 			<tr>
 				<td>
-	     		<%= f.association :library, label: false, wrapper: false, collection: @sequencing_run.get_libs_without_sequencing_results %>
+	     		<%= f.association :library, label: false, wrapper: false, collection: @sequencing_run.get_libraries_without_sequencing_results, include_blank: false %>
 				</td>
 	
 				<td>
+					<% barcodes = @sequencing_run.get_barcodes_on_request(without_sequencing_result=true) %>
 					<%  if @sequencing_request.paired_end? %>
-						<%= f.association :paired_barcode, label: false, wrapper: false, disabled: true %>
+						<%= f.association :paired_barcode, collection: barcodes, include_blank: false, label: false, wrapper: false %>
 					<% else %>
-						<%= f.association :barcode, label: false, wrapper: false, disabled: true %>
+						<%= f.association :barcode, collection: barcodes, include_blank: false, label: false, wrapper: false %>
 					<% end %>
 				</td>
 	
