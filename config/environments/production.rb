@@ -10,11 +10,10 @@ Pulsar::Application.configure do
       address: ENV['MAILGUN_SMTP_SERVER'],
       user_name: ENV['MAILGUN_SMTP_LOGIN'],
       password: ENV['MAILGUN_SMTP_PASSWORD'],
-      #domain: ENC['APP_HOST_NAME'],
-      domain: ENV['EMAIL_DOMAIN_HOST'],
+      domain: host,
       authentication: :plain,
     }   
-
+		#the from email is set in app/mailers/user_mailer.rb.
 		#specify default URL for links that are sent in the emails (i.e confirmation email)
     config.action_mailer.default_url_options = { 
     host: host

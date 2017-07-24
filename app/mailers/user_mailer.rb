@@ -6,7 +6,8 @@ class UserMailer < Devise::Mailer
 
   def confirmation_instructions(record, token, opts={})
     opts[:subject] = "New Account on #{ENV["APP_NAME"]}"
-    opts[:from] = ENV["SUPPORT_EMAIL_ADDR"] #set in applia
+    #opts[:from] = "postmaster@pulsar-encode.stanford.edu" 
+    opts[:from] = ENV["APP_EMAIL_ADDR"]
     super
   end
 
