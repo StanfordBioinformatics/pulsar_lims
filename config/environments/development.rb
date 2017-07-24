@@ -10,7 +10,8 @@ Pulsar::Application.configure do
       address: ENV['MAILGUN_SMTP_SERVER'],
       user_name: ENV['MAILGUN_SMTP_LOGIN'],
       password: ENV['MAILGUN_SMTP_PASSWORD'],
-      domain: host,
+      #domain: host,
+      domain: ENV['EMAIL_DOMAIN_HOST'],
       authentication: :plain,
     }   
 
