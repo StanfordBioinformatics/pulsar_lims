@@ -5,12 +5,12 @@ class Biosample < ActiveRecord::Base
 	# Virtual biosamples are used currently in the single_cell_sorting model via the sorting_biosample_id foreign key.
 	# This biosample is a prototype used as a reference for creating the biosamples in the wells of the plates on
 	# the single_cell_sorting experiment. 
-	belongs_to :well  
+	belongs_to :well
 	has_many :child_biosamples, class_name: "Biosample", foreign_key: "parent_biosample_id", dependent: :destroy
 	belongs_to :parent_biosample, class_name: "Biosample"
 	###
 	has_and_belongs_to_many :documents
-	has_one :crispr
+	has_one :crispr, validate: true
 	has_one :starting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id #the starting biosample used for sorting. Not required.
 	has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id #the starting biosample used for sorting. Not required.
 	belongs_to  :user
@@ -18,9 +18,10 @@ class Biosample < ActiveRecord::Base
 	belongs_to  :biosample_type
 	belongs_to  :donor
   belongs_to  :vendor
-	has_many    :libraries
+	has_many    :libraries, dependent: :destroy
 	
-	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
+	#validates :name, uniqueness: true, length: { minimum: 2, maximum: 40 }, presence: true
+	validates :name, uniqueness: true
 	#validates :documents, presence: true
 	validates :biosample_type_id, presence: true
 	validates :biosample_term_name_id, presence: true
@@ -31,8 +32,10 @@ class Biosample < ActiveRecord::Base
 
 	scope :non_well_biosamples, lambda { where(well: nil, prototype: false) }
 	scope :non_prototypes, lambda { where(prototype: false) }
-
 	scope :persisted, lambda { where.not(id: nil) }
+
+	#after_update :propagate_update_if_prototype
+	after_validation :propagate_update_if_prototype, on: :update
 
 	def self.policy_class
 		ApplicationPolicy
@@ -57,4 +60,28 @@ class Biosample < ActiveRecord::Base
 			end 
 		end
 	end
+
+	#private #comment-out for testing in the console.
+
+		def propagate_update_if_prototype
+			#errors["jacky"] << "hi"
+			#If this is a prototype biosample, then we need to propagate the update to dependent biosamples.
+			# In the case of single_cell_sorting, dependent biosamples are those sorted into the wells of each plate on the experiment
+			# (each well has a single biosample and such a biosample has a single library).
+			# This makes updating all of the biosample objects with regard to all the plates on a single_cell_sorting 
+			# easy to do just by changing the biosample prototype (starting biosample) assocated with the single_cell_sorting.
+			if sorting_biosample_single_cell_sorting.present? 
+				sorting_biosample_single_cell_sorting.plates.each do |plate|
+					plate.wells.each do |well|
+						well.add_or_update_biosample(self)
+						if well.biosample.errors.any?
+							well.biosample.errors.full_messages.each do |msg|
+								errors["Wellll #{well.name} -> "] << msg
+							end
+							return false #doens't matter whether I say false here
+						end
+					end
+				end
+			end
+		end
 end

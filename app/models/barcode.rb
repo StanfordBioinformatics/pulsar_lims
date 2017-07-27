@@ -17,6 +17,10 @@ class Barcode < ActiveRecord::Base
 		ApplicationPolicy
 	end
 
+	def to_s
+		display()
+	end
+
 	def display
 		return "#{name} #{sequence}"
 	end

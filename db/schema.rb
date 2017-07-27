@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720193525) do
+ActiveRecord::Schema.define(version: 20170727040422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -536,14 +536,10 @@ ActiveRecord::Schema.define(version: 20170720193525) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "user_id"
-    t.integer  "barcode_id"
-    t.integer  "paired_barcode_id"
     t.integer  "sequencing_run_id"
   end
 
-  add_index "sequencing_results", ["barcode_id"], name: "index_sequencing_results_on_barcode_id", using: :btree
   add_index "sequencing_results", ["library_id"], name: "index_sequencing_results_on_library_id", using: :btree
-  add_index "sequencing_results", ["paired_barcode_id"], name: "index_sequencing_results_on_paired_barcode_id", using: :btree
   add_index "sequencing_results", ["sequencing_run_id"], name: "index_sequencing_results_on_sequencing_run_id", using: :btree
   add_index "sequencing_results", ["user_id"], name: "index_sequencing_results_on_user_id", using: :btree
 
@@ -732,9 +728,7 @@ ActiveRecord::Schema.define(version: 20170720193525) do
   add_foreign_key "sequencing_requests", "sequencing_centers"
   add_foreign_key "sequencing_requests", "sequencing_platforms"
   add_foreign_key "sequencing_requests", "users"
-  add_foreign_key "sequencing_results", "barcodes"
   add_foreign_key "sequencing_results", "libraries"
-  add_foreign_key "sequencing_results", "paired_barcodes"
   add_foreign_key "sequencing_results", "sequencing_runs"
   add_foreign_key "sequencing_results", "users"
   add_foreign_key "sequencing_runs", "documents", column: "report_id"

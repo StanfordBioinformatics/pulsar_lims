@@ -3,9 +3,9 @@ class Plate < ActiveRecord::Base
 	ROW_LETTERS = ("A".."Z").to_a
 	DIMENSIONS = ["2x2 (4)","8x12 (96)","16x24 (384)"]
 	
-	has_many :wells, dependent: :destroy
+	has_many :wells, dependent: :destroy  #"validate: true" is default for has_many
 	has_and_belongs_to_many :sequencing_requests
-	belongs_to :single_cell_sorting, required: true
+	belongs_to :single_cell_sorting, required: true 
   belongs_to :user
   belongs_to :vendor
 
@@ -53,33 +53,13 @@ class Plate < ActiveRecord::Base
 	private
 
   def add_wells
-		sorting_biosample = single_cell_sorting.sorting_biosample
-		sub_biosample = sorting_biosample.dup
-		sub_biosample.user = self.user
-		sub_biosample.prototype = false
-		sub_biosample.documents = sorting_biosample.documents
 		rows = self.nrow
 		cols = self.ncol
 		(1..rows).each do |r| 
 			(1..cols).each do |c| 
 				#name format is ${parent_biosample_name}_${plate_name}_${row_num}-${col_num}
 				well = wells.build({user: self.user, row: r, col: c}) 
-				if not well.valid?
-					well.errors.full_messages.each do |well_err|
-						errors["-> Well:"] << well_err
-					end
-					return
-				end
-
-				sub_biosample.name = single_cell_sorting.name + " " + name + " " +  well.get_name #(sorting exp name) + (plate name) + (well name)
-				b = well.build_biosample(sub_biosample.attributes)
-				if not b.valid?
-					b.errors.full_messages.each do |e|
-						errors["well -> biosample:"] <<  e
-					end
-					return
-				else
-				end
+				well.add_or_update_biosample(single_cell_sorting.sorting_biosample)
 			end 
 		end 
 	end 

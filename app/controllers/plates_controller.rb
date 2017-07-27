@@ -7,8 +7,6 @@ class PlatesController < ApplicationController
 		if params[:checked] == "true"
 			@show_barcodes = 1
 		end
-		logger.info("huhh")
-		logger.info(params)
 		render partial: "plate", layout: false
 	end	
 
@@ -34,7 +32,6 @@ class PlatesController < ApplicationController
     @plate = Plate.new(plate_params)
 
 		@plate.user = current_user
-
     respond_to do |format|
       if @plate.save
         format.html { redirect_to @plate, notice: 'Plate was successfully created.' }

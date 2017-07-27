@@ -19,6 +19,10 @@ class PairedBarcode < ActiveRecord::Base
     ApplicationPolicy
   end 
 
+	def to_s
+		display()
+	end
+
 	def self.make_name(index1_name, index2_name)
 		return "#{index1_name}-#{index2_name}"
 	end

@@ -40,6 +40,7 @@ class Library < ActiveRecord::Base
 
 	scope :persisted, lambda { where.not(id: nil) }
 
+	after_update :propagate_update_if_prototype
 	before_save :verify_barcode #verifies self.barcode/self.paired_barcode
 	before_save :verify_plate_consistency #if biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
 
@@ -97,8 +98,19 @@ class Library < ActiveRecord::Base
   end
 
 	protected
-		def verify_barcode
 
+		def propagate_update_if_prototype
+			#If this is a prototype library, then we need to propagate the update to dependent libraries.
+			# In the case of single_cell_sorting, dependent libraries are those associated to the biosamples
+			# of the wells of a plate (each well has a single biosample and such a biosample has a single library).
+			# This makes updating all of the library objects with regard to all the plates on a single_cell_sorting 
+			# easy to do just by changing the library prototype assocated with the single_cell_sorting.
+			##if single_cell_sorting.present?
+				
+		end
+
+
+		def verify_barcode
 			return unless barcoded?
 
 			if self.barcode.present? and self.paired_barcode.present?
@@ -118,20 +130,22 @@ class Library < ActiveRecord::Base
 	end
 
 	def verify_plate_consistency
+		#Called in the before_save callback.
+		#If the library is barcoded, and the biosample is in the well of a plate, then we need to make sure that no
+		# other library on the plate has the same barcode.
 		return unless barcoded?
+		return unless biosample.well.present?
 		if self.persisted?
 			action_term = "update"
 		else
 			action_term = "create"
 		end
 		logger.info("lalalala")
-		if biosample.well.present?
-			plate_barcodes = biosample.well.plate.get_barcodes
-			bc = paired_barcode.present? ? paired_barcode :  barcode
-			if plate_barcodes.include?(bc)
-				self.errors.add(:base, "Can't #{action_term} library with barcode '#{bc.display}' since this barcode is present on another library for a biosample in a well on plate '#{biosample.well.plate.name}'.")
-				return false
-			end
+		plate_barcodes = biosample.well.plate.get_barcodes
+		bc = get_indexseq
+		if plate_barcodes.include?(bc)
+			self.errors.add(:base, "Can't #{action_term} library with barcode '#{bc.display}' since this barcode is present on another library for a biosample in a well on plate '#{biosample.well.plate.name}'.")
+			return false
 		end
 	end				
 				

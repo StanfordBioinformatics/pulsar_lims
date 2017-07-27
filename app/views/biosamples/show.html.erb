@@ -26,14 +26,14 @@
 	<% if @biosample.starting_biosample_single_cell_sorting.present? %>
 		<tr>
 			<th><strong>Starting biosample for Single Cell Sorting</strong></th>
-			<td><span>Single Cell Sorting:</span><%= link_to "#{@biosample.starting_biosample_single_cell_sorting.name}", @biosample.starting_biosample_single_cell_sorting %></td>
+			<td><span>Single Cell Sorting: </span><%= link_to "#{@biosample.starting_biosample_single_cell_sorting.name}", @biosample.starting_biosample_single_cell_sorting %></td>
 		</tr>
 	<% end %>
 
 	<% if @biosample.sorting_biosample_single_cell_sorting.present? %>
 		<tr>
 			<th><strong>Sorting biosample for Single Cell Sorting</strong></th>
-			<td><span>Single Cell Sorting:</span><%= link_to "#{@biosample.sorting_biosample_single_cell_sorting.name}", @biosample.sorting_biosample_single_cell_sorting %></td>
+			<td><span>Single Cell Sorting: </span><%= link_to "#{@biosample.sorting_biosample_single_cell_sorting.name}", @biosample.sorting_biosample_single_cell_sorting %></td>
 		</tr>
 	<% end %>
 
