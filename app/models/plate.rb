@@ -55,7 +55,7 @@ class Plate < ActiveRecord::Base
   def add_wells
 		if not self.valid?
 			return false
-			#otherwise, the callbacks will continue on. 
+			#otherwise, the callbacks will continue on. The whole transaction would still fail
 		end
 		rows = self.nrow
 		cols = self.ncol
@@ -65,8 +65,8 @@ class Plate < ActiveRecord::Base
 				well = wells.create({user: self.user, row: r, col: c}) 
 				if not well.valid?
 					raise "Unable to create well #{well.name}: #{well.errors.full_messages}"
+					#caught in single_cell_sortings_controller.rb, where it sets a :alert in the flash.
 				end
-				well.add_or_update_biosample(single_cell_sorting.sorting_biosample)
 			end 
 		end 
 	end 

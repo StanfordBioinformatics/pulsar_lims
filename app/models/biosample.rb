@@ -34,8 +34,9 @@ class Biosample < ActiveRecord::Base
 	scope :non_prototypes, lambda { where(prototype: false) }
 	scope :persisted, lambda { where.not(id: nil) }
 
-	#after_update :propagate_update_if_prototype
-	after_validation :propagate_update_if_prototype, on: :update
+	after_update :propagate_update_if_prototype
+	#after_validation :propagate_update_if_prototype, on: :update
+	before_save :set_name
 
 	def self.policy_class
 		ApplicationPolicy
@@ -64,7 +65,7 @@ class Biosample < ActiveRecord::Base
 	#private #comment-out for testing in the console.
 
 		def propagate_update_if_prototype
-			#errors["jacky"] << "hi"
+			#An after_update callback.
 			#If this is a prototype biosample, then we need to propagate the update to dependent biosamples.
 			# In the case of single_cell_sorting, dependent biosamples are those sorted into the wells of each plate on the experiment
 			# (each well has a single biosample and such a biosample has a single library).
@@ -73,15 +74,24 @@ class Biosample < ActiveRecord::Base
 			if sorting_biosample_single_cell_sorting.present? 
 				sorting_biosample_single_cell_sorting.plates.each do |plate|
 					plate.wells.each do |well|
-						well.add_or_update_biosample(self)
-						if well.biosample.errors.any?
-							well.biosample.errors.full_messages.each do |msg|
-								errors["Wellll #{well.name} -> "] << msg
-							end
-							return false #doens't matter whether I say false here
-						end
+						well.update_biosample_from_prototype
+#						if well.biosample.errors.any?
+#							well.biosample.errors.full_messages.each do |msg|
+#								errors["Wellll #{well.name} -> "] << msg
+#							end
+#							return false #doens't matter whether I say false here
+#						end
 					end
 				end
 			end
 		end
+
+	private
+
+	def set_name
+		if self.well.present?
+			#A well biosample has it's own naming format
+			self.name = self.well.plate.single_cell_sorting.name + " " + self.well.plate.name + " " +  self.well.get_name #(sorting exp name) + (plate name) + (well name)
+		end
+	end
 end
