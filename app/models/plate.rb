@@ -16,7 +16,7 @@ class Plate < ActiveRecord::Base
 
 	scope :persisted, lambda { where.not(id: nil) }
 
-	after_validation :add_wells, on: :create
+	after_create :add_wells
 
 	def self.policy_class
 		ApplicationPolicy
@@ -53,12 +53,19 @@ class Plate < ActiveRecord::Base
 	private
 
   def add_wells
+		if not self.valid?
+			return false
+			#otherwise, the callbacks will continue on. 
+		end
 		rows = self.nrow
 		cols = self.ncol
 		(1..rows).each do |r| 
 			(1..cols).each do |c| 
 				#name format is ${parent_biosample_name}_${plate_name}_${row_num}-${col_num}
-				well = wells.build({user: self.user, row: r, col: c}) 
+				well = wells.create({user: self.user, row: r, col: c}) 
+				if not well.valid?
+					raise "Unable to create well #{well.name}: #{well.errors.full_messages}"
+				end
 				well.add_or_update_biosample(single_cell_sorting.sorting_biosample)
 			end 
 		end 

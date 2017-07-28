@@ -88,7 +88,13 @@ class SingleCellSortingsController < ApplicationController
 			end
 		end
     respond_to do |format|
-      if @single_cell_sorting.update(scs_params)
+			begin
+				res = @single_cell_sorting.update(scs_params)
+			rescue RuntimeError => e
+				res = false
+				flash[:alert] = e.message
+			end
+      if res
         format.html { redirect_to @single_cell_sorting, notice: 'Single cell sorting was successfully updated.' }
         format.json { head :no_content }
       else
@@ -96,7 +102,8 @@ class SingleCellSortingsController < ApplicationController
 				if action.present?
 					flash[:action] = action
 				end
-        format.html { render flash[:action] || 'edit' }
+				#flash[:alert] = @single_cell_sorting.plates.last.wells.second.valid?
+        format.html { render flash[:action] || 'edit'} 
         #format.html { render json: @single_cell_sorting.errors }
         #format.html { render json: @single_cell_sorting.errors }
         format.json { render json: @single_cell_sorting.errors, status: :unprocessable_entity }

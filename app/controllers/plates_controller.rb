@@ -37,7 +37,7 @@ class PlatesController < ApplicationController
         format.html { redirect_to @plate, notice: 'Plate was successfully created.' }
         format.json { render json: @plate, status: :created }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new', alert: "uh-oh" }
         format.json { render json: @plate.errors, status: :unprocessable_entity }
       end
     end

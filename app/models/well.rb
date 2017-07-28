@@ -37,20 +37,16 @@ class Well < ActiveRecord::Base
 		attrs["name"] = "marryyy" #test
 		if self.biosample.blank?
 			#then the biosample is being created
-			self.build_biosample(attrs) #No validations run yet. New Biosample object returned (at the same time setting self.biosample).
+			#self.build_biosample(attrs) #No validations run yet. New Biosample object returned (at the same time setting self.biosample).
+			biosample = self.create_biosample(attrs)
+			if not biosample.valid?
+				raise "Unable to create biosample for well #{self.name}: #{biosample.errors.full_messages}"
+			end
 		else
 			#then the bioample is being updated
 			#attrs["name"] = "marry" #test
 			res = self.biosample.update(attrs) #returns true or false. Validations are already run so any errors would be set by now. 
 		end
-#		if self.biosample.errors.any?
-#			self.biosample.errors.full_messages.each do |msg| 
-#				logger.info("tatag")
-#				logger.info(msg)
-#				logger.info("bb #{self.get_name}")
-#				self.errors["well -> biosample:"] <<  msg
-#			end 
-#		end
 	end
 
 	private
