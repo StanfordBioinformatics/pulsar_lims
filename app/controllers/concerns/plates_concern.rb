@@ -85,7 +85,7 @@ module PlatesConcern
 		well_lib = library_prototype.dup
 		well_lib.user = user
 		well_lib.prototype = false
-		well_lib.name = well.biosample.name
+		#the name is set to the biosample name in the library.rb model file.
 		barcode.upcase!
 		index1 = barcode
 		index2 = nil

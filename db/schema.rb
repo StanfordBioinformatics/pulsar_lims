@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170727040422) do
+ActiveRecord::Schema.define(version: 20170729030648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,11 +145,13 @@ ActiveRecord::Schema.define(version: 20170727040422) do
     t.integer  "parent_biosample_id"
     t.integer  "well_id"
     t.boolean  "prototype",                             default: false
+    t.integer  "from_prototype_id"
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
   add_index "biosamples", ["biosample_type_id"], name: "index_biosamples_on_biosample_type_id", using: :btree
   add_index "biosamples", ["donor_id"], name: "index_biosamples_on_donor_id", using: :btree
+  add_index "biosamples", ["from_prototype_id"], name: "index_biosamples_on_from_prototype_id", using: :btree
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
   add_index "biosamples", ["parent_biosample_id"], name: "index_biosamples_on_parent_biosample_id", using: :btree
   add_index "biosamples", ["user_id"], name: "index_biosamples_on_user_id", using: :btree
@@ -367,10 +369,12 @@ ActiveRecord::Schema.define(version: 20170727040422) do
     t.integer  "barcode_id"
     t.integer  "paired_barcode_id"
     t.boolean  "prototype",                                        default: false
+    t.integer  "from_prototype_id"
   end
 
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
+  add_index "libraries", ["from_prototype_id"], name: "index_libraries_on_from_prototype_id", using: :btree
   add_index "libraries", ["library_fragmentation_method_id"], name: "index_libraries_on_library_fragmentation_method_id", using: :btree
   add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true, using: :btree
   add_index "libraries", ["nucleic_acid_term_id"], name: "index_libraries_on_nucleic_acid_term_id", using: :btree
@@ -671,6 +675,7 @@ ActiveRecord::Schema.define(version: 20170727040422) do
   add_foreign_key "biosample_types", "users"
   add_foreign_key "biosamples", "biosample_term_names"
   add_foreign_key "biosamples", "biosample_types"
+  add_foreign_key "biosamples", "biosamples", column: "from_prototype_id"
   add_foreign_key "biosamples", "biosamples", column: "parent_biosample_id"
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"
@@ -704,6 +709,7 @@ ActiveRecord::Schema.define(version: 20170727040422) do
   add_foreign_key "isotypes", "users"
   add_foreign_key "libraries", "barcodes"
   add_foreign_key "libraries", "biosamples"
+  add_foreign_key "libraries", "libraries", column: "from_prototype_id"
   add_foreign_key "libraries", "library_fragmentation_methods"
   add_foreign_key "libraries", "nucleic_acid_terms"
   add_foreign_key "libraries", "paired_barcodes"

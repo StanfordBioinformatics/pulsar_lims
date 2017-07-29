@@ -20,4 +20,8 @@ div.add_barcodes {
   padding-top: 0.5em;
   padding-left: 0.5em;
   padding-right: 0.5em;
+
+	& input {
+		font-family: Lucida Console, Courier, monospace;
+	}
 }

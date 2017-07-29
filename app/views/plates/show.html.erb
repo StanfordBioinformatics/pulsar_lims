@@ -42,11 +42,11 @@
 
 <div class="add_barcodes bg-info">
 	<% if @plate.single_cell_sorting.library_prototype.paired_end? %>
-		<% placeholder="ATCCGC-GTACAG\nCGTGAC-TAGGCA\n..." %>
+		<% placeholder="ATCCGC-GTACAG	CGTGAC-TAGGCA\nCGCTCA-CCTATCCT	ATTCAGAA-ATAGAGGC\n..." %>
 		<% submit_text="Add paired barcodes" %>
 		<% label_text="#{submit_text} to wells to create libraries." %>
 	<% else %>
-		<% placeholder="ATCCGA\nTAGCGA\n..." %>
+		<% placeholder="ATCCGA	TAGCGA\nCGAGTA	ACTGCG\n..." %>
 		<% submit_text="Add barcodes" %>
 		<% label_text="#{submit_text} to wells to create libraries." %>
 	<% end %>
@@ -65,7 +65,7 @@
 			<%= f.button :submit, submit_text, class: "btn-primary "%>
 		</div>
   <% end %>
-<div>
-</br></br>
+</div>
+</br>
 
 <%= link_to 'Back', plates_path %>

@@ -8,6 +8,7 @@ class Biosample < ActiveRecord::Base
 	belongs_to :well
 	has_many :child_biosamples, class_name: "Biosample", foreign_key: "parent_biosample_id", dependent: :destroy
 	belongs_to :parent_biosample, class_name: "Biosample"
+	belongs_to :from_prototype, class_name: "Biosample"
 	###
 	has_and_belongs_to_many :documents
 	has_one :crispr, validate: true
@@ -37,6 +38,7 @@ class Biosample < ActiveRecord::Base
 	after_update :propagate_update_if_prototype
 	#after_validation :propagate_update_if_prototype, on: :update
 	before_save :set_name
+	before_save :validate_prototype
 
 	def self.policy_class
 		ApplicationPolicy
@@ -62,31 +64,66 @@ class Biosample < ActiveRecord::Base
 		end
 	end
 
-	#private #comment-out for testing in the console.
+  def self.instantiate_prototype(prototype_biosample)
+    #A helper used for updating or creating a well biosample.
+    #Since the single_cell_sorting.sorting_biosample is duplicated as a 
+    #starting point for creating or updating a new well biosample, several fields need to be filtered out,
+    #such as the original id and well id, to name a few. When the user updates the sorting biosample,
+    #all well biosamples need to be updated based on what the updated sorting biosample looks like.
+    #In this case, we'll again need to call this method to filter out properties that we shouldn't explicitly
+    #set.
+    well_biosample = prototype_biosample.dup
+    well_biosample.documents = prototype_biosample.documents
+    attrs = well_biosample.attributes
+    attrs["prototype"] = false #this should always be false for a well biosample
+    #Remove attributes that shouldn't be explicitely set for the well biosample
+    attrs.delete("name") #the name is expicitely set in the biosample model when it has a well associated.
+    attrs.delete("id")
+    attrs.delete("well_id")
+    attrs.delete("created_at")
+    attrs.delete("updated_at")
+    return attrs
+  end 
 
-		def propagate_update_if_prototype
-			#An after_update callback.
-			#If this is a prototype biosample, then we need to propagate the update to dependent biosamples.
-			# In the case of single_cell_sorting, dependent biosamples are those sorted into the wells of each plate on the experiment
-			# (each well has a single biosample and such a biosample has a single library).
-			# This makes updating all of the biosample objects with regard to all the plates on a single_cell_sorting 
-			# easy to do just by changing the biosample prototype (starting biosample) assocated with the single_cell_sorting.
-			if sorting_biosample_single_cell_sorting.present? 
-				sorting_biosample_single_cell_sorting.plates.each do |plate|
-					plate.wells.each do |well|
-						well.update_biosample_from_prototype
-#						if well.biosample.errors.any?
-#							well.biosample.errors.full_messages.each do |msg|
-#								errors["Wellll #{well.name} -> "] << msg
-#							end
-#							return false #doens't matter whether I say false here
-#						end
-					end
-				end
-			end
+  def update_biosample_from_prototype(biosample_prototype)
+    biosample_attrs = Biosample.instantiate_prototype(biosample_prototype)
+    success = self.update(biosample_attrs)
+		if not success
+			raise "Unable to update biosample '#{self.name}': #{self.errors.full_messages}"
 		end
+  end 
 
-	private
+	private 
+
+	def validate_prototype
+		#A biosample can either be a prototype (virtual biosample) or an actuated biosample created based on a biosample prototype, not both.
+		if self.prototype and self.from_prototype.present?
+			self.errors[:base] << "Invalid: can't set both the 'prototype' and 'from_prototype' attributes."
+			return false
+		end
+	end
+
+	def propagate_update_if_prototype
+		#An after_update callback.
+		#If this is a prototype biosample, then we need to propagate the update to dependent biosamples.
+		# In the case of single_cell_sorting, dependent biosamples are those sorted into the wells of each plate on the experiment
+		# (each well has a single biosample and such a biosample has a single library).
+		# This makes updating all of the biosample objects with regard to all the plates on a single_cell_sorting 
+		# easy to do just by changing the biosample prototype (starting biosample) assocated with the single_cell_sorting.
+		if self.prototype?
+			biosamples = Biosample.where({from_prototype_id: self.id})
+			biosamples.each do |b|
+				b.update_biosample_from_prototype(self)
+			end
+		end	
+#		if self.sorting_biosample_single_cell_sorting.present? 
+#			sorting_biosample_single_cell_sorting.plates.each do |plate|
+#				plate.wells.each do |well|
+#					well.biosample.update_biosample_from_prototype(self)
+#				end
+#			end
+#		end
+	end
 
 	def set_name
 		if self.well.present?

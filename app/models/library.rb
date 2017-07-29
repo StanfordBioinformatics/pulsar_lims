@@ -12,6 +12,7 @@ class Library < ActiveRecord::Base
 	# as a template for making library objects associated to the each biosample in each well of each plate present on the singe_cell_sorting. 
 	belongs_to :barcode
 	belongs_to :biosample
+	belongs_to :from_prototype, class_name: "Library"
 	belongs_to :library_fragmentation_method
 	belongs_to :nucleic_acid_term
 	belongs_to :paired_barcode
@@ -43,6 +44,8 @@ class Library < ActiveRecord::Base
 	after_update :propagate_update_if_prototype
 	before_save :verify_barcode #verifies self.barcode/self.paired_barcode
 	before_save :verify_plate_consistency #if biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
+	before_save :set_name
+	before_save :validate_prototype
 
 	def self.policy_class
 		ApplicationPolicy
@@ -97,36 +100,88 @@ class Library < ActiveRecord::Base
     end 
   end
 
-	protected
-
-		def propagate_update_if_prototype
-			#If this is a prototype library, then we need to propagate the update to dependent libraries.
-			# In the case of single_cell_sorting, dependent libraries are those associated to the biosamples
-			# of the wells of a plate (each well has a single biosample and such a biosample has a single library).
-			# This makes updating all of the library objects with regard to all the plates on a single_cell_sorting 
-			# easy to do just by changing the library prototype assocated with the single_cell_sorting.
-			##if single_cell_sorting.present?
-				
+  def self.instantiate_prototype(prototype_library)
+		# Args: prototype_library - A Library record with the 'prototype' attribute set to true.
+		#
+    #A helpler used for updating or creating a library.
+    #Since the single_cell_sorting.sorting_biosample is duplicated as a 
+    #starting point for creating or updating a new well biosample, several fields need to be filtered out,
+    #such as the original id and well id, to name a few. When the user updates the sorting biosample,
+    #all well biosamples need to be updated based on what the updated sorting biosample looks like.
+    #In this case, we'll again need to call this method to filter out properties that we shouldn't explicitly
+    #set.
+		if not prototype_library.prototype?
+			return false
 		end
+    library_dup = prototype_library.dup
+    library_dup.documents = prototype_library.documents
+    attrs = library_dup.attributes
+    attrs["prototype"] = false
+    #Remove attributes that shouldn't be explicitely set for the new library
+    attrs.delete("name") #the name is explicitly set in the library model when it has a well associated.
+    attrs.delete("id")
+		attrs.delete("biosamaple_id")
+    attrs.delete("single_cell_sorting_id")
+    attrs.delete("created_at")
+    attrs.delete("updated_at")
+    return attrs
+	end
 
+  def update_library_from_prototype(library_prototype)
+    library_attrs = Library.instantiate_prototype(library_prototype)
+    success = self.update(library_attrs)
+		if not success
+			raise "Unable to update library '#{self.name}': #{self.errors.full_messges}"
+		end
+  end 
 
-		def verify_barcode
-			return unless barcoded?
+	private
 
-			if self.barcode.present? and self.paired_barcode.present?
-				self.errors.add(:base, "Can't specify both the \"barcode\" attribute (which is used only for single-end libraries) and the \"paired_barcode\" attribute (which is used only for paired-end libraries).")
-				return false
-			elsif self.barcode.present? and self.paired_end?
-				self.errors.add(:base, "Can't set a single-end barcode when the library is marked as paired-end. You must instead select a paired-end barcode.")
-				return false
-			elsif self.paired_barcode.present? and not self.paired_end?
-				self.errors.add(:base, "Can't set a paired-end barcode when the library is not marked as paired-end. You must instead select a single-end barode.")
-				return false
-			elsif self.paired_end and not self.sequencing_library_prep_kit.supports_paired_end?
-				self.errors.add(:base, "Can't set paired_end to true when the sequencing library prep kit does not support paired-end sequencing.")
-				return false
-			end
+  def validate_prototype
+    #A library can either be a prototype (virtual library) or an actuated library created based on a library prototype, not both.
+    if self.prototype and self.from_prototype.present?
+      self.errors[:base] << "Invalid: can't set both the 'prototype' and 'from_prototype' attributes."
+      return false
+    end 
+  end
 
+	def propagate_update_if_prototype
+		#If this is a prototype library, then we need to propagate the update to dependent libraries.
+		# In the case of single_cell_sorting, dependent libraries are those associated to the biosamples
+		# of the wells of a plate (each well has a single biosample and such a biosample has a single library).
+		# This makes updating all of the library objects with regard to all the plates on a single_cell_sorting 
+		# easy to do just by changing the library prototype assocated with the single_cell_sorting.
+		##if single_cell_sorting.present?
+    if self.prototype?
+      libraries = Library.where({from_prototype_id: self.id})
+      libraries.each do |l| 
+        l.update_library_from_prototype(self)
+      end 
+    end
+	end
+
+	def set_name
+		if self.biosample.well.present?
+			self.name = self.biosample.name
+		end
+	end
+
+	def verify_barcode
+		return unless barcoded?
+
+		if self.barcode.present? and self.paired_barcode.present?
+			self.errors.add(:base, "Can't specify both the \"barcode\" attribute (which is used only for single-end libraries) and the \"paired_barcode\" attribute (which is used only for paired-end libraries).")
+			return false
+		elsif self.barcode.present? and self.paired_end?
+			self.errors.add(:base, "Can't set a single-end barcode when the library is marked as paired-end. You must instead select a paired-end barcode.")
+			return false
+		elsif self.paired_barcode.present? and not self.paired_end?
+			self.errors.add(:base, "Can't set a paired-end barcode when the library is not marked as paired-end. You must instead select a single-end barode.")
+			return false
+		elsif self.paired_end and not self.sequencing_library_prep_kit.supports_paired_end?
+			self.errors.add(:base, "Can't set paired_end to true when the sequencing library prep kit does not support paired-end sequencing.")
+			return false
+		end
 	end
 
 	def verify_plate_consistency
