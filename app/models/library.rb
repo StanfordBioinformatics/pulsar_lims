@@ -13,6 +13,7 @@ class Library < ActiveRecord::Base
 	belongs_to :barcode
 	belongs_to :biosample
 	belongs_to :from_prototype, class_name: "Library"
+	has_many   :libraries, foreign_key: :from_prototype_id, dependent: :destroy
 	belongs_to :library_fragmentation_method
 	belongs_to :nucleic_acid_term
 	belongs_to :paired_barcode
@@ -41,11 +42,11 @@ class Library < ActiveRecord::Base
 
 	scope :persisted, lambda { where.not(id: nil) }
 
-	after_update :propagate_update_if_prototype
+	before_validation :set_name, on: :create
 	before_save :verify_barcode #verifies self.barcode/self.paired_barcode
 	before_save :verify_plate_consistency #if biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
-	before_save :set_name
 	before_save :validate_prototype
+	after_update :propagate_update_if_prototype
 
 	def self.policy_class
 		ApplicationPolicy
@@ -114,13 +115,15 @@ class Library < ActiveRecord::Base
 			return false
 		end
     library_dup = prototype_library.dup
-    library_dup.documents = prototype_library.documents
     attrs = library_dup.attributes
+		#attrs["id"] is currently nil:
+		attrs["from_prototype_id"] = prototype_library.id
+		attrs["document_ids"] = prototype_library.document_ids
     attrs["prototype"] = false
     #Remove attributes that shouldn't be explicitely set for the new library
     attrs.delete("name") #the name is explicitly set in the library model when it has a well associated.
     attrs.delete("id")
-		attrs.delete("biosamaple_id")
+		attrs.delete("biosample_id")
     attrs.delete("single_cell_sorting_id")
     attrs.delete("created_at")
     attrs.delete("updated_at")

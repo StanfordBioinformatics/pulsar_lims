@@ -35,10 +35,10 @@ class Biosample < ActiveRecord::Base
 	scope :non_prototypes, lambda { where(prototype: false) }
 	scope :persisted, lambda { where.not(id: nil) }
 
+	before_validation :set_name, on: :create
+	before_save :validate_prototype
 	after_update :propagate_update_if_prototype
 	#after_validation :propagate_update_if_prototype, on: :update
-	before_save :set_name
-	before_save :validate_prototype
 
 	def self.policy_class
 		ApplicationPolicy
@@ -73,8 +73,11 @@ class Biosample < ActiveRecord::Base
     #In this case, we'll again need to call this method to filter out properties that we shouldn't explicitly
     #set.
     well_biosample = prototype_biosample.dup
-    well_biosample.documents = prototype_biosample.documents
+    #well_biosample.documents = prototype_biosample.documents
     attrs = well_biosample.attributes
+		#attrs["id"] is currently nil:
+		attrs["from_prototype_id"] = prototype_biosample.id
+		attrs["document_ids"] = prototype_biosample.document_ids
     attrs["prototype"] = false #this should always be false for a well biosample
     #Remove attributes that shouldn't be explicitely set for the well biosample
     attrs.delete("name") #the name is expicitely set in the biosample model when it has a well associated.

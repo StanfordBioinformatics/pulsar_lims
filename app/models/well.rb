@@ -10,7 +10,7 @@ class Well < ActiveRecord::Base
 	validates_uniqueness_of :name, scope: :plate_id
 
 	scope :persisted, lambda { where.not(id: nil) }
-	before_create :set_name
+	before_validation :set_name
 	after_create  :add_biosample
 
 	def self.policy_class
