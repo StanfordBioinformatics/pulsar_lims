@@ -54,10 +54,11 @@ module PlatesConcern
 				if well.blank?
 					raise Exceptions::WellNotFoundError, "No well on plate #{plate.name} could be found with row #{row_num} and column #{col_num}."
 				end
-				new_library_record = create_library_for_well(plate=plate,well=well,barcode=bc)
-				save_status = new_library_record.save
-				if not save_status
-					raise Exceptions::WellNotSavedError, "Error saving library '#{new_library_record.name}' for well #{well.name}. Errors are: #{new_library_record.errors.full_messages.join('; ')}"
+				ActiveRecord::Base.transaction do
+					#Transaction needed because the call below will delete any existing library(ies) for the given well.
+					# If there is a problem when creating the new well, i.e. teh barcode is already present in another 
+					# well, then an RuntimeError will occur (which is caught in the plates_controller.rb and a flash error is set. 
+					create_library_for_well(plate=plate,well=well,barcode=bc)
 				end
 			end
 		end
@@ -73,14 +74,12 @@ module PlatesConcern
     if not plate.wells.include?(well)
 			raise Exceptions::WellAndPlateMismatchError, "Well #{well.name} does not belong on plate #{plate.name}."
 		end
+		user = current_user
 		if well.biosample.libraries.any?
 			well.biosample.libraries.destroy_all
-			#Could be that the user made a mistake when adding the libraries initially in matrix format to the plate and needs to redo this step.
-			# In this case, there could be a library added to one or more biosamples (wells) already. These need to be removed before making
-			# new libraries. Otherwise it will become too confusing as a user can unintentionally add many libraries to a biosample in a given well.
-      # This only concerns wells that are spanned by the barcode-matrix that the user submits. 
+			#Could be that the user made a mistake when adding the libraries initially in matrix format (i.e. incorrect barcode layout)
+			# to the plate and needs to redo this step.
 		end
-		user = current_user
 		library_prototype = plate.single_cell_sorting.library_prototype
 		well_lib_attrs = Library.instantiate_prototype(library_prototype)
 		well_lib_attrs["user_id"] = user.id
@@ -102,8 +101,7 @@ module PlatesConcern
 		end
 		if not index2 #then single-end only
 			well_lib_attrs["barcode_id"] = index1_rec.id
-			new_library_record  = well.biosample.libraries.build(well_lib_attrs)
-			return new_library_record
+			new_library_record  = well.biosample.libraries.create(well_lib_attrs)
 		else #then paired-end
       index2_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id,index_number: 2, sequence: index2})
       if index2_rec.blank?
@@ -115,9 +113,12 @@ module PlatesConcern
         paired_rec = PairedBarcode.create!({user: current_user, name: name,sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1_rec.id, index2_id: index2_rec.id})
       end 
 			well_lib_attrs["paired_barcode"] = paired_rec.id
-      new_library_record = well.biosample.libraries.build(well_lib_attrs)
+      new_library_record = well.biosample.libraries.create(well_lib_attrs)
 		end
-		return new_library_record
+
+		if new_library_record.errors.any?
+			raise Exceptions::WellNotSavedError, "Error saving library '#{new_library_record.name}' for well #{well.name}. Errors are: #{new_library_record.errors.full_messages.join('; ')}"
+		end
 	end
 
 end

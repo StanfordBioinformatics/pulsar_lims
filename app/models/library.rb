@@ -43,9 +43,9 @@ class Library < ActiveRecord::Base
 	scope :persisted, lambda { where.not(id: nil) }
 
 	before_validation :set_name, on: :create
-	before_save :verify_barcode #verifies self.barcode/self.paired_barcode
-	before_save :verify_plate_consistency #if biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
-	before_save :validate_prototype
+	validate :verify_barcode #verifies self.barcode/self.paired_barcode
+	validate :verify_plate_consistency #if biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
+	validate :validate_prototype
 	after_update :propagate_update_if_prototype
 
 	def self.policy_class
@@ -123,6 +123,8 @@ class Library < ActiveRecord::Base
     #Remove attributes that shouldn't be explicitely set for the new library
     attrs.delete("name") #the name is explicitly set in the library model when it has a well associated.
     attrs.delete("id")
+		attrs.delete("barcode_id")
+		attrs.delete("paired_barcode_id")
 		attrs.delete("biosample_id")
     attrs.delete("single_cell_sorting_id")
     attrs.delete("created_at")
@@ -134,7 +136,7 @@ class Library < ActiveRecord::Base
     library_attrs = Library.instantiate_prototype(library_prototype)
     success = self.update(library_attrs)
 		if not success
-			raise "Unable to update library '#{self.name}': #{self.errors.full_messges}"
+			raise "Unable to update library '#{self.name}': #{self.errors.full_messages}"
 		end
   end 
 
@@ -191,16 +193,14 @@ class Library < ActiveRecord::Base
 		#Called in the before_save callback.
 		#If the library is barcoded, and the biosample is in the well of a plate, then we need to make sure that no
 		# other library on the plate has the same barcode.
-		return unless barcoded?
-		return unless biosample.well.present?
+		return unless self.biosample.well.present? and self.barcoded?
 		if self.persisted?
 			action_term = "update"
 		else
 			action_term = "create"
 		end
-		logger.info("lalalala")
-		plate_barcodes = biosample.well.plate.get_barcodes
-		bc = get_indexseq
+		plate_barcodes = self.biosample.well.plate.get_barcodes([self.biosample.well])
+		bc = self.get_indexseq
 		if plate_barcodes.include?(bc)
 			self.errors.add(:base, "Can't #{action_term} library with barcode '#{bc.display}' since this barcode is present on another library for a biosample in a well on plate '#{biosample.well.plate.name}'.")
 			return false
