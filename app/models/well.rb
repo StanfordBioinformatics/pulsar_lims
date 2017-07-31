@@ -8,6 +8,7 @@ class Well < ActiveRecord::Base
 	validates :col, presence: true
 	validates_uniqueness_of :row, scope: [:plate_id, :col]
 	validates_uniqueness_of :name, scope: :plate_id
+	validate :validate_location
 
 	scope :persisted, lambda { where.not(id: nil) }
 	before_validation :set_name
@@ -38,6 +39,22 @@ class Well < ActiveRecord::Base
   end
 
 	private
+
+	def validate_location
+		row = self.row
+		col = self.col
+		row_valid = (row > 0) && (row <= self.plate.nrow)
+		if not row_valid
+			self.errors[:row] << "Must be > 0 and <= the number of rows on the plate."
+			return false
+		end
+		col_valid = (col > 0) && (col <= self.plate.ncol)
+		if not col_valid
+			self.errors[:col] << "Must be > 0 and <= the number of columns on the plate."
+			return false
+		end
+		return true
+	end
 
 	def add_biosample
 		biosample_attrs = Biosample.instantiate_prototype(self.plate.single_cell_sorting.sorting_biosample)
