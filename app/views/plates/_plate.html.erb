@@ -1,12 +1,19 @@
 <div id="plate_jumbotron" class="jumbotron">
 	<!-- check_box_tag format is check_box_tag(name=string, value=string, checked=bool, options={}) -->
 	<div class="pull-right">
-		<% if @show_barcodes.present? %>
-			<% checked = true %>
-		<% else %>
-			<% checked = false %>
+		<% if @plate.get_barcodes.any? %>
+			<% if @show_barcodes.present? %>
+				<!-- @show_barcodes is initialized in the show_barcodes action of plates_controller.
+						 Initially, it is not set, but when the user selects the check box below, then an AJAX call
+						 to the aforementioned action causes this to be initialized so we can show it as checked when
+						 this page is re-rendered.
+				-->
+				<% checked = true %>
+			<% else %>
+				<% checked = false %>
+			<% end %>
+			<%= check_box_tag "plate_show_barcodes", "1", checked, id: "plate_show_barcodes", data: {plate_id: @plate.id} %><span> Show Barcodes</span>
 		<% end %>
-		<%= check_box_tag "plate_show_barcodes", "1", checked, id: "plate_show_barcodes", data: {plate_id: @plate.id} %><span> Show Barcodes</span>
 	</div>
 	<h3 class="display-3">Plate Layout</h3>
 	<table class="plate-table">

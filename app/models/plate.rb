@@ -34,7 +34,7 @@ class Plate < ActiveRecord::Base
 		return self.dimensions.split()[0].split("x")[1].to_i
 	end
 
-	def get_barcodes(exclude_wells)
+	def get_barcodes(exclude_wells=[])
 		#Function: For each well on the plate, fetches the ID of the barcode that is associated to the
 		#					 biosample in the well.
 		#Args    : exclude_well - list of one or more wells to skip.
