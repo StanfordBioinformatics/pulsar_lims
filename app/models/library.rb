@@ -5,6 +5,7 @@ class Library < ActiveRecord::Base
 	NUCLEIC_ACID_STARTING_QUANTITY_UNITS = ["cells","cell-equivalent","µg","ng","pg","mg"]
 
 	#The is_control bool column has a default of false.
+	#has_many :sequencing_results, dependent: :destroy
 	has_and_belongs_to_many :documents
 	has_and_belongs_to_many :sequencing_requests
 	has_one :single_cell_sorting, foreign_key: :library_prototype_id, dependent: :nullify
@@ -41,16 +42,26 @@ class Library < ActiveRecord::Base
 	accepts_nested_attributes_for :paired_barcode, allow_destroy: true
 
 	scope :persisted, lambda { where.not(id: nil) }
+	scope :non_plated, lambda { where(plated: false) }
 
 	before_validation :set_name, on: :create
 	validate :verify_barcode #verifies self.barcode/self.paired_barcode
 	validate :verify_plate_consistency #if biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
 	validate :validate_prototype
+	before_validation :check_plated
 	after_update :propagate_update_if_prototype
 
 	def self.policy_class
 		ApplicationPolicy
 	end 
+
+	def check_plated
+		if self.biosample.well.present?
+			self.plated = true
+		else
+			self.plated = false
+		end
+	end
 
 	def barcoded?
 		if paired_end? and paired_barcode.present?

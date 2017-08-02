@@ -2,7 +2,7 @@ class SequencingResult < ActiveRecord::Base
 	attr_accessor :barcode_id
 	#Does not have a :name attribute, which  most other models do. Instead, the display() methods is used to show a name where
 	# needed.
-  belongs_to :library 
+  belongs_to :library
 	belongs_to :user
   belongs_to :sequencing_run
 

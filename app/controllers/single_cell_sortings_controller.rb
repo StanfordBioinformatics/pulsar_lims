@@ -106,8 +106,7 @@ class SingleCellSortingsController < ApplicationController
 					#set again for next request.
 					flash[:action] = action
 				end
-				#flash[:alert] = @single_cell_sorting.plates.last.wells.second.valid?
-        format.html { render flash[:action] || 'edit'} 
+        format.html { render flash[:action] || 'edit' } 
         #format.html { render json: @single_cell_sorting.errors }
         #format.html { render json: @single_cell_sorting.errors }
         format.json { render json: @single_cell_sorting.errors, status: :unprocessable_entity }
