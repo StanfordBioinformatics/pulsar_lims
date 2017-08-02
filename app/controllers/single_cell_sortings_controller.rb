@@ -3,6 +3,7 @@ class SingleCellSortingsController < ApplicationController
 	skip_after_action :verify_authorized, only: [:add_sorting_biosample, :add_plate, :add_library_prototype]
 
 	def add_library_prototype
+		#non AJAX
 		custom_lib_params = {
 			name: "#{@single_cell_sorting.name} library prototype",
 			prototype: true, 
@@ -13,6 +14,7 @@ class SingleCellSortingsController < ApplicationController
 	end
 
 	def add_plate
+		#called via AJAX
 		@plate = @single_cell_sorting.plates.build
 		#Needed to set @plate above since that is used in the partial single_cell_sortings/_add_plate.html.erb that renders a Plate form. -->
 		render partial: "add_plate", layout: false
@@ -20,6 +22,7 @@ class SingleCellSortingsController < ApplicationController
 	end
 
   def add_sorting_biosample
+		#called via AJAX
     sorting_biosample = @single_cell_sorting.starting_biosample.dup
 		sorting_biosample.encid = nil
     sorting_biosample.parent_biosample =  @single_cell_sorting.starting_biosample
@@ -100,6 +103,7 @@ class SingleCellSortingsController < ApplicationController
       else
 				action = flash[:action]
 				if action.present?
+					#set again for next request.
 					flash[:action] = action
 				end
 				#flash[:alert] = @single_cell_sorting.plates.last.wells.second.valid?

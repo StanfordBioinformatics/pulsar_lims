@@ -7,6 +7,8 @@ class SequencingResult < ActiveRecord::Base
   belongs_to :sequencing_run
 
 	validates :library, presence: true
+	validates :read1_count, numericality: { greater_than: 0 }, allow_nil: true
+	validates :read2_count, numericality: { greater_than: 0 }, allow_nil: true
 	validates_uniqueness_of :library, message: "sequencing result already exists for this library."
 
 
@@ -32,10 +34,12 @@ class SequencingResult < ActiveRecord::Base
 
 	protected
 		def validate_library
-			if sequencing_run.sequencing_request.libraries.include?(library)
+			#I think rails runs the custom validations first, so need to check below that the library was set.
+			return unless self.library.present?
+			if sequencing_run.sequencing_request.libraries.include?(self.library)
 				return true
 			end
-			errors[:library] << "#{library.name} is not present on the sequencing request."
+			errors[:library] << "#{self.library.name} is not present on the sequencing request."
 			return false
 		end
 end

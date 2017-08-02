@@ -1,5 +1,11 @@
-<h1>Editing Sequencing Result</h1>
+<header>
+	<h1>Editing Sequencing Result</h1>
+</header>
 
-<%= render 'form' %>
+<%= simple_form_for([@sequencing_request,@sequencing_run,@sequencing_result]) do |f| %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_result } %>
+  <%= render partial: 'form', locals: {f: f} %>
+  <%= render partial: "application_partials/submit", locals: {f: f} %>
+<% end %>
 
 <%= link_to 'Back', [@sequencing_request,@sequencing_run] %>

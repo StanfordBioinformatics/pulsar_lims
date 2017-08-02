@@ -5,8 +5,8 @@ class SequencingRunsController < ApplicationController
 
 	def new_sequencing_result
 		@sequencing_result = @sequencing_run.sequencing_results.build	
-		render layout: "fieldset_sequencing_result", partial: "sequencing_results/form"
-		return
+		flash[:action] = "show"
+		render layout: "fieldset_sequencing_result", partial: "add_sequencing_result"
 	end
 
   def index
@@ -49,7 +49,12 @@ class SequencingRunsController < ApplicationController
         format.html { redirect_to [@sequencing_request,@sequencing_run], notice: 'Sequencing run was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        action = flash[:action]
+        if action.present?
+					#set again for next request.
+          flash[:action] = action
+        end 
+        format.html { render action: action }
         format.json { render json: @sequencing_run.errors, status: :unprocessable_entity }
       end
     end
@@ -76,6 +81,6 @@ class SequencingRunsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_run_params
-      params.require(:sequencing_run).permit(:name, :sequencing_request_id, :run_name, :lane, :comment)
+      params.require(:sequencing_run).permit(:name, :sequencing_request_id, :run_name, :lane, :comment, sequencing_results_attributes: [:library_id, :sequencing_run_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count])
     end
 end

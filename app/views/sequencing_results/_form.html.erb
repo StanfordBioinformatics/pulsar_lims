@@ -1,5 +1,4 @@
-<%= simple_form_for([@sequencing_request,@sequencing_run,@sequencing_result]) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_result } %>
+<%= f.association :sequencing_run, as: :hidden %>
 
   <table class="attributes">
     <thead>
@@ -22,41 +21,50 @@
     <tbody>
 			<tr>
 				<td>
-	     		<%= f.association :library, label: false, wrapper: false, collection: @sequencing_run.get_libraries_without_sequencing_results, include_blank: false %>
+					<% if @sequencing_result.persisted? %>
+						<!-- Then this form is being used for editing and we need to allow the user to change the library and the barcode.
+								 We also need to set the library and barcode selectors to what the current values are as a default.
+						-->
+						<% libs = @sequencing_request.libraries %>
+						<% library_selected = @sequencing_result.library.id %>
+						<% barcodes = @sequencing_run.get_barcodes_on_request() %>
+						<% selected_barcode = @sequencing_result.library.get_indexseq.id %>
+					<% else %>
+						<% libs = @sequencing_run.get_libraries_without_sequencing_results %>
+						<% selected_library = nil %>
+						<% selected_barcode = nil %>
+					<% end %>
+					<% include_blank = false %>
+					<% if libs.length > 1 %>
+						<% include_blank = true %>
+					<% end %>
+	     		<%= f.association :library, label: false, collection: libs.map {|x| [x.name, x.id]}, selected: library_selected, include_blank: include_blank, input_html: { id: "sequencing_result_library_id" } %>
 				</td>
 	
 				<td>
-					<% barcodes = @sequencing_run.get_barcodes_on_request(without_sequencing_result=true) %>
-						<%= f.input :barcode_id, as: :select,  collection: barcodes.map {|x| x.display}, include_blank: false, label: false, wrapper: false %>
+					<%= f.input :barcode_id, as: :select,  collection: barcodes.map {|x| [x.display,x.id]}, selected: selected_barcode, include_blank: include_blank, label: false, input_html: { id: "sequencing_result_barcode_id" } %>
 				</td>
 	
 				<td>
-	     		<%= f.input_field :read1_count %>
+	     		<%= f.input :read1_count, label: false %>
 				</td>
 	
 				<td>
-	 	     	<%= f.input_field :read1_uri %>
+	 				<%= f.input :read1_uri, label: false %>
 				</td>
 	
-				<%  if @sequencing_request.paired_end? %>
-	      	<td>
-						<%= f.input_field :read2_count %>
+				<% if @sequencing_request.paired_end? %>
+					<td>
+						<%= f.input :read2_count, label: false %>
 					</td>
 					<td>
-	     			<%= f.input_field :read2_uri %>
+	     			<%= f.input :read2_uri, label: false %>
 					</td>
 				<% end %>
 	
-	      <td>
-					<%= f.input_field :comment %>
+				<td>
+					<%= f.input :comment, label: false %>
 				</td>
-	
 			</tr>
 		</tbody>
-  </table>
-
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn-primary" %>
-  </div>
-	</br>	
-<% end %>
+	</table>

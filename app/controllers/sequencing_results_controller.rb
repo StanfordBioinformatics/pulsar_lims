@@ -6,7 +6,7 @@ class SequencingResultsController < ApplicationController
 
 	def get_barcode_selector
 		#Takes :library_id as a param
-		library_id = sequencing_result_params[:library_id]
+		library_id = params[:library_id]
 		lib = Library.find(library_id)
 		barcode = lib.get_indexseq
 		if barcode.present?
@@ -17,17 +17,19 @@ class SequencingResultsController < ApplicationController
 			barcode_display = ""
 		end
 		selector = "<option value=\"#{barcode_id}\">#{barcode_display}</option>"
-		render text: selector
-		return
+		#render text: selector
+		render text: barcode_id
 	end
 
 	def get_library_selector
 		#Takes :barcode_id as a param, which can be a Barcode or PairedEndBarcode.
-		barcode_id = params[:sequencing_result][:barcode_id]
+		barcode_id = params[:barcode_id]
+		logger.info("bubab")
+		logger.info(barcode_id)
 		lib = @sequencing_request.get_library_with_barcode(barcode_id=barcode_id)
 		selector = "<option value=\"#{lib.id}\">#{lib.name}</option>"
-		render text: selector
-		return
+		#render text: selector
+		render text: lib.id
 	end
 
   def index
@@ -60,7 +62,10 @@ class SequencingResultsController < ApplicationController
         format.html { redirect_to [@sequencing_request,@sequencing_run], notice: 'Barcode sequencing result was successfully created.' }
         format.json { render json: @sequencing_result, status: :created }
       else
-        format.html { render action: :new }
+				@sequencing_result.errors.full_messages.each do |msg|
+					@sequencing_run.errors[:base] << msg
+				end
+        format.html { redirect_to [@sequencing_request,@sequencing_run] }
         format.json { render json: @sequencing_result.errors, status: :unprocessable_entity }
       end
     end

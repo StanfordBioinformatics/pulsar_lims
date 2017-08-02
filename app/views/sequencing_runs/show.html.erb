@@ -1,4 +1,5 @@
 <%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @sequencing_run} %>
+<div>
 <header>
   <h1><%= @sequencing_run.name %></h1>  
   <ul class="actions">
@@ -40,7 +41,7 @@
 	</tr>
 </table>
 
-<% if @sequencing_run.sequencing_results.present? %>
+<% if @sequencing_run.sequencing_results.persisted.any? %>
 	<h4>Library Sequencing Results</h4>
 	<table id="sequencing_results" class="table-bordered table-data" >
 		<thead>
@@ -62,15 +63,22 @@
 			</tr>
 		</thead>
 		<tbody>
-				<%= render partial: "row_sequencing_result", locals: {sequencing_results: @sequencing_run.sequencing_results} %>
+				<%= render partial: "sequencing_runs/row_sequencing_result", locals: {sequencing_results: @sequencing_run.sequencing_results.persisted} %>
 		</tbody>
 	<% end %>
 </table>
 <div id="sequencing_result_form"></div>
-
+<!-- The div above with id="sequencing_result_form" will serve as the container for the sequencing_results form that jQuery will add
+		 when the user clicks on the button below with id="new_sequencing_result". 
+-->
 <% if not @sequencing_run.get_libraries_without_sequencing_results.any? %>
 	<!-- Create hidden element for jQuery to look for. If jQuery finds it, then it will disable the link below with id="new_sequencing_result" -->
 	<span id="hide_new_sequencing_result" hidden></span>
 <% end %>
-<%= link_to "New Sequencing Result", [:new_sequencing_result,@sequencing_request,@sequencing_run], class: "reg-btn", remote: true, id: "new_sequencing_result" %>
+<% if @sequencing_run.sequencing_results.present? and not @sequencing_run.sequencing_results.last.persisted? %>
+	<% @sequencing_result = @sequencing_run.sequencing_results.last %>
+	<%= render partial: "add_sequencing_result", layout: "layouts/fieldset_sequencing_result" %>
+<% else %>
+	<%= link_to "New Sequencing Result", [:new_sequencing_result,@sequencing_request,@sequencing_run], class: "reg-btn", remote: true, id: "new_sequencing_result" %>
+<% end %>
 </br></br>

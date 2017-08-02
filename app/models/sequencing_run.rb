@@ -8,12 +8,13 @@ class SequencingRun< ActiveRecord::Base
 	validates :run_name, presence: true
 
 	scope :persisted, lambda { where.not(id: nil) }
+	accepts_nested_attributes_for :sequencing_results, allow_destroy: true
 
 	def self.policy_class
 		ApplicationPolicy
 	end
 
-	def get_barcodes_on_request(without_sequencing_result=False)
+	def get_barcodes_on_request(without_sequencing_result=false)
 		barcodes = []
 		sequencing_request.libraries.each do |lib|
 			bc = lib.get_indexseq()
@@ -31,13 +32,13 @@ class SequencingRun< ActiveRecord::Base
 	end
 
 	def library_sequencing_result_present(lib)
-		return sequencing_results.where({library_id: lib.id}).present?
+		return self.sequencing_results.where({library_id: lib.id}).present?
 	end
 
 	def get_libraries_without_sequencing_results
 		res = []
-		sequencing_request.libraries.each do |lib|
-			if not library_sequencing_result_present(lib)
+		self.sequencing_request.libraries.each do |lib|
+			if not self.library_sequencing_result_present(lib)
 				res << lib
 			end
 		end
