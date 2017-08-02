@@ -31,6 +31,7 @@
 						<% selected_barcode = @sequencing_result.library.get_indexseq.id %>
 					<% else %>
 						<% libs = @sequencing_run.get_libraries_without_sequencing_results %>
+						<% barcodes = @sequencing_run.get_barcodes_on_request(without_sequencing_result=true) %>
 						<% selected_library = nil %>
 						<% selected_barcode = nil %>
 					<% end %>
