@@ -1,5 +1,8 @@
 	<%= f.input :name %>
-	<%= f.input :dimensions, collection: Plate::DIMENSIONS, prompt: "Select the plate size" %>
+	<% if not @plate.persisted? %>
+		<!-- Don't allow user to change dimensions of plate once it has been created. If they need to, they'll have to instead create another plate. -->
+		<%= f.input :dimensions, collection: Plate::DIMENSIONS, prompt: "Select the plate size" %>
+	<% end %>
 	<%= f.association :single_cell_sorting, as: :hidden %>
   <%= f.association :vendor %>
   <%= f.input :vendor_product_identifier %>

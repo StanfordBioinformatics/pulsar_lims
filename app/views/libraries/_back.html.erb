@@ -1,0 +1,8 @@
+<% if @library.single_cell_sorting.present? %>
+  <% path = @library.single_cell_sorting %>
+<% elsif @library.plated? %>
+	<% path = @library.biosample %>
+<% else %>
+  <% path = libraries_path %>
+<% end %>
+<%= link_to 'Back', path %>

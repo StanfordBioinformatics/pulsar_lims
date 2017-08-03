@@ -56,11 +56,14 @@ class Library < ActiveRecord::Base
 	end 
 
 	def check_plated
+		#See the Pulsar wiki page "Rails Tips", specificially the section called "Callback gotchas".
+		# It's important that we return true here.
 		if self.biosample.well.present?
 			self.plated = true
 		else
 			self.plated = false
 		end
+		return true
 	end
 
 	def barcoded?

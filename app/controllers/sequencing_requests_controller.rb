@@ -42,8 +42,13 @@ class SequencingRequestsController < ApplicationController
 		@sequencing_request.user = current_user
 		@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:library_ids])
 
+		begin
+			saved = @sequencing_request.save
+		rescue RuntimeError => e
+			flash[:alert] = e.message
+		end
     respond_to do |format|
-      if @sequencing_request.save
+      if saved
         format.html { redirect_to @sequencing_request, notice: 'Sequencing request was successfully created.' }
         format.json { render action: 'show', status: :created, location: @sequencing_request }
       else
@@ -58,8 +63,13 @@ class SequencingRequestsController < ApplicationController
 		@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:library_ids])
 		#render text: params
 		#return
+		begin
+			updated = @sequencing_request.update(sequencing_request_params)
+		rescue RuntimeError => e
+			flash[:alert] = e.message
+		end
     respond_to do |format|
-      if @sequencing_request.update(sequencing_request_params)
+      if updated
         format.html { redirect_to @sequencing_request, notice: 'Sequencing request was successfully updated.' }
         format.json { head :no_content }
       else

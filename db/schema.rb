@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170802071218) do
+ActiveRecord::Schema.define(version: 20170803000821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -397,6 +397,7 @@ ActiveRecord::Schema.define(version: 20170802071218) do
     t.integer "sequencing_request_id", null: false
   end
 
+  add_index "libraries_sequencing_requests", ["library_id", "sequencing_request_id"], name: "lib_sreq_index", unique: true, using: :btree
   add_index "libraries_sequencing_requests", ["library_id"], name: "index_libraries_sequencing_requests_on_library_id", using: :btree
   add_index "libraries_sequencing_requests", ["sequencing_request_id"], name: "index_libraries_sequencing_requests_on_sequencing_request_id", using: :btree
 

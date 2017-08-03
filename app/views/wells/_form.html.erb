@@ -1,7 +1,9 @@
 <%= simple_form_for([@plate, @well]) do |f| %>
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @well } %>
 
-  <%= f.input :fail %>
+  <%= f.input :fail,
+			label_html: {"data-toggle" => "tooltip",
+				"title" => "Select when the well failed to receive a sorted biosample, or the sorted biosample isn't a live cell, for example."}  %>
   <%= f.input :comment %>
 
   <div class="form-actions">
