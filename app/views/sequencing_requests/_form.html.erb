@@ -8,18 +8,20 @@
 		<table class="min-table" id="libraries">
 			<thead>
 				<tr>
-					<th><strong>Associated Libraries:</strong></th>
+					<th data-toggle="tooltip" title="Libraries must all be using the same Sequencing Library Prep Kit, and no two can share the same barcode." ><strong>Associated Libraries:</strong></th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
-				<%= f.simple_fields_for(:libraries) do |ff| %>
-					<% lib = @sequencing_request.libraries[ff.index] %>
-					<tr>
-						<td><%= lib.name %></td>
-			      <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
-					</tr>
-	     <% end %>  
+				<% if @sequencing_request.libraries.persisted.any? %>
+					<%= f.simple_fields_for(:libraries) do |ff| %>
+						<% lib = @sequencing_request.libraries.persisted[ff.index] %>
+						<tr>
+							<td><%= lib.name %></td>
+				      <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+						</tr>
+		     <% end %>  
+			<% end %>
 			</tbody>
     </table>
   <% end %>

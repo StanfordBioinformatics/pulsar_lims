@@ -15,14 +15,15 @@ class SequencingRequest < ActiveRecord::Base
 	accepts_nested_attributes_for :libraries, allow_destroy: true
 
 	scope :persisted, lambda { where.not(id: nil) }
-	after_update :verify_unique_barcodes
+	before_save :verify_unique_barcodes
+	before_save :verify_libs_have_same_kit
 
 	def self.policy_class
 		ApplicationPolicy
 	end
 
 	def get_barcodes(sequences=false)
-		#Args : sequences - boolean. If true, then an array of barcode sequences is return rather
+		#Args : sequences - boolean. If true, then an array of barcode sequences is returned rather
 		# then the objects.
 		barcodes = []
 		libraries.each do |lib|
@@ -58,6 +59,21 @@ class SequencingRequest < ActiveRecord::Base
 			end
 			if dups.present?
 				raise "Duplicate barcodes detected: #{dups.to_json}"
+			end
+		end
+
+		def verify_libs_have_same_kit
+			libs = self.libraries
+			return unless libs.any?
+			prev_kit_name = libs.first.sequencing_library_prep_kit.name
+			count = -1
+			libs.each do |lib|
+				count += 1
+				kit_name = lib.sequencing_library_prep_kit.name	
+				if kit_name != prev_kit_name
+					raise "Multiple library prep kits are present. For example, library #{lib.name} was prepared with #{kit_name}, whereas libary #{libs[count -1].name} was prepared with #{prev_kit_name}." 
+				end
+				prev_kit_name = kit_name
 			end
 		end
 end

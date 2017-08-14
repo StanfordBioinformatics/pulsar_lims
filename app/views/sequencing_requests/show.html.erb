@@ -65,7 +65,9 @@
 	</tr>
 </table>
 
-<%= link_to "Add Sequencing Run", new_sequencing_request_sequencing_run_path(@sequencing_request), class: "reg-btn" %>
+<% if @sequencing_request.libraries.persisted.any? %>
+	<%= link_to "Add Sequencing Run", new_sequencing_request_sequencing_run_path(@sequencing_request), class: "reg-btn" %>
+<% end %>
 </br></br>
 
 <%= link_to 'Back', sequencing_requests_path %>

@@ -13,7 +13,7 @@ class SequencingResult < ActiveRecord::Base
 
 
 	scope :persisted, lambda { where.not(id: nil) }
-	validate :validate_library
+	validate :validate_library #make sure library is present on sequencing_request.
 
   def self.policy_class
     ApplicationPolicy
