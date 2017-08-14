@@ -1,10 +1,8 @@
 class SequencingRequestsController < ApplicationController
-	include LibrariesConcern #gives me add_libraries()
-  before_action :set_sequencing_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_sequencing_request, only: [:show, :edit, :update, :destroy, :select_library]
 	skip_after_action :verify_authorized, only: [:select_library]
 
 	def select_library
-		@sequencing_request = SequencingRequest.new
 		exclude_libs = params[:exclude_libraries]
 		if exclude_libs.present?
 			if exclude_libs.is_a?(String)
@@ -15,7 +13,7 @@ class SequencingRequestsController < ApplicationController
 				@exclude_library_ids << x.to_i
 			end
 		end
-				
+		flash[:action] = :show
 		render layout: false
 	end
 		
@@ -40,7 +38,7 @@ class SequencingRequestsController < ApplicationController
     @sequencing_request = SequencingRequest.new(sequencing_request_params)
 		authorize @sequencing_request
 		@sequencing_request.user = current_user
-		@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:library_ids])
+		#@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:library_ids])
 
 		begin
 			saved = @sequencing_request.save
@@ -60,7 +58,7 @@ class SequencingRequestsController < ApplicationController
 
   def update
 		authorize @sequencing_request
-		@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:library_ids])
+		#@sequencing_request = add_libraries(@sequencing_request,params[:sequencing_request][:library_ids])
 		#render text: params
 		#return
 		begin
@@ -73,7 +71,12 @@ class SequencingRequestsController < ApplicationController
         format.html { redirect_to @sequencing_request, notice: 'Sequencing request was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+				action = flash[:action]
+				if action.present?
+					#set action for next request
+					flash[:action] = action
+				end
+        format.html { render action || "edit" }
         format.json { render json: @sequencing_request.errors, status: :unprocessable_entity }
       end
     end
@@ -96,6 +99,6 @@ class SequencingRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_request_params
-      params.require(:sequencing_request).permit(:name,:paired_end,:comment, :sequencing_platform_id, :sequencing_center_id, :shipped, libraries_attributes: [:id,:_destroy])
+      params.require(:sequencing_request).permit(:name,:paired_end,:comment, :sequencing_platform_id, :sequencing_center_id, :shipped, :library_ids => [], libraries_attributes: [:id,:_destroy])
     end
 end

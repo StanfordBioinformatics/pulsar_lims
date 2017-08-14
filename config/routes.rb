@@ -53,7 +53,7 @@ Pulsar::Application.routes.draw do
   end
 
 	resources :sequencing_requests do
-		get :select_library, on: :collection
+		get :select_library, on: :member
   	resources :sequencing_runs do
 			get :new_sequencing_result, on: :member
 			resources :sequencing_results do

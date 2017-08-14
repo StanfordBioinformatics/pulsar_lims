@@ -22,6 +22,16 @@ class SequencingRequest < ActiveRecord::Base
 		ApplicationPolicy
 	end
 
+	def library_ids=(ids)
+		return unless ids.present?
+		ids.each do |i|
+			next if i.blank?
+			lib = Library.find(i)
+			next if self.libraries.include?(lib)
+			self.libraries << lib
+		end	
+	end
+
 	def get_barcodes(sequences=false)
 		#Args : sequences - boolean. If true, then an array of barcode sequences is returned rather
 		# then the objects.

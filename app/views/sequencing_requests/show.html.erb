@@ -24,7 +24,7 @@
 		<th><strong>Libraries:</strong></th>
 		<% if @sequencing_request.libraries.present? %>
 			<td>
-        <%= render partial: "libraries/link_to_library", locals: {libraries: @sequencing_request.libraries} %>
+        <%= render partial: "libraries/link_to_library", locals: {libraries: @sequencing_request.libraries.persisted} %>
       </td>
     <% else %>
       <td>None</td>
@@ -65,9 +65,16 @@
 	</tr>
 </table>
 
+<div class="added_libraries"></div>
+<!-- .added_libraries will serve as the container for new library selections. -->
+<% exclude_libraries = [] %>
 <% if @sequencing_request.libraries.persisted.any? %>
-	<%= link_to "Add Sequencing Run", new_sequencing_request_sequencing_run_path(@sequencing_request), class: "reg-btn" %>
+  <% exclude_libraries = @sequencing_request.libraries.persisted.each { |x| x.id } %>
 <% end %>
-</br></br>
+<%= link_to "Add Library", select_library_sequencing_request_path(@sequencing_request,:exclude_libraries => exclude_libraries), class: "reg-btn", remote: true, id: "add_library" %>&nbsp;&nbsp;&nbsp;
 
-<%= link_to 'Back', sequencing_requests_path %>
+<% if @sequencing_request.libraries.persisted.any? %>
+	<%= link_to "Add Sequencing Run", new_sequencing_request_sequencing_run_path(@sequencing_request), class: "reg-btn", id: "add_sequencing_run" %>
+<% end %></br>
+
+<%= link_to 'Back', sequencing_requests_path, class: "back-btn" %>
