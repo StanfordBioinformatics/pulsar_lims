@@ -9,35 +9,42 @@ $(document).on("click",".remove_library", function(event) {
 
 $( function() {
   $add_library_btn = $("#add_library");
-  $add_sequencing_run_btn = $("#add_sequencing_run")
+  $add_scs_plates_btn = $("#add_scs_plates");
+  $bl_btns = $(".bl-btns");
 })
 
 //Listen for a successful AJAX response
+$(document).on("click",".sreq-toggle-up", function(event) {
+  //The toggle up btn for the jumbotron that came as part of the AJAX response when one of $bl_btns was clicked. 
+  event.stopPropagation();
+  $(event.target).closest(".jumbotron").slideUp("fast").remove();
+  $bl_btns.show();
+})
+
 $(document).ajaxSuccess(function(event,jqXHR,ajaxProps) {
     //If the add library button was clicked, append the response to the #added_libraries element
     // and 1) adjust the default label text, 2) Add a remove link, and 3) have the new library selector fade in.
-    if (event.currentTarget.activeElement.id === $add_library_btn.attr("id")) {
+    event.stopPropagation();
+    event_target = event.currentTarget.activeElement;
+    if ((event_target.id === $add_library_btn.attr("id")) || (event_target.id === $add_scs_plates_btn.attr("id"))) {
       //newContent = jqXHR.responseText;
       //console.log(newContent);
-      $add_library_btn.hide()
-      if ($add_sequencing_run_btn.length == 1) {
-        $add_sequencing_run_btn.hide();
-      }
-      $(".added_libraries").append(jqXHR.responseText);
-      $newContent = $(".sequencing_request_libraries");
-      $newContentLabel = $newContent.children("label").first();
-      $newContentLabel.text("Library") //default label set by simple form is Libraries.
-      //$newContentLabel.append('<span>  <a class="remove_library fa fa-remove"></a></span>');
-      //$newContent.hide().fadeIn("slow");
+      $bl_btns.hide()
+      $bl_btns.after(jqXHR.responseText);
+      $newContent = $(".jumbotron").last();
+      //$newContent = $(".sequencing_request_libraries");
       $newContent.hide().slideDown("fast");
-      $(".sreq-toggle-up-library-form").on("click",function(event) { 
-        event.stopPropagation();
-        $(this).closest(".jumbotron").slideUp("fast");
-        $add_library_btn.show();
-        if ($add_sequencing_run_btn.length == 1) {
-          $add_sequencing_run_btn.show();
-        }
+
+		} 
+    if (event_target.id === $add_scs_plates_btn.attr("id")) {
+      $("#single_cell_sorting_selector").on("change", function(event) {
+        sreq_id = $(this).data("sequencing-request-id")
+        $.get("/sequencing_requests/" + sreq_id + "/select_scs_plates", function(responseText,status,jqXHR) {
+          //$(this).closest("div").append(responseText);
+          $("#single_cell_sorting_selector").closest("div").append(responseText);
+        })
       })
+      $newContent = $("#single_cell_sorting_selector");
     }
   }
 )

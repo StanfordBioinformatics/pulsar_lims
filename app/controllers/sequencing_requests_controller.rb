@@ -1,6 +1,17 @@
 class SequencingRequestsController < ApplicationController
-  before_action :set_sequencing_request, only: [:show, :edit, :update, :destroy, :select_library]
-	skip_after_action :verify_authorized, only: [:select_library]
+  before_action :set_sequencing_request, only: [:show, :edit, :update, :destroy, :select_library, :select_scs, :select_scs_plates]
+	skip_after_action :verify_authorized, only: [:select_library,:select_scs, :select_scs_plates]
+
+
+	def select_scs
+		render layout: false
+	end
+
+	def select_scs_plates
+		#Add plates on a Single Cell Sorting experimnt
+		flash[:action] = :show
+		render text: "howdy", layout: false
+	end
 
 	def select_library
 		exclude_libs = params[:exclude_libraries]

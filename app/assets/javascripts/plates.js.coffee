@@ -32,6 +32,7 @@ $ ->
 
   #Check if user clicks 'Show Barcodes' button on plate jumbotron:
   $(document).on "click", "#plate_show_barcodes", (event) -> 
+    event.stopPropagation();
     plate_id = $(this).data("plate-id")
     #data is from the _plate.html.erb partial
     $.get "/plates/" + plate_id + "/show_barcodes", checked: this.checked, (responseText,status,jqXHR) -> 

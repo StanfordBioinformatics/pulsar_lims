@@ -1,5 +1,5 @@
 <% if defined?(exclude_library_ids) %>
-	<%= f.association :libraries, collection: Library.non_plated.where.not(id: [exclude_library_ids]), prompt: "Select a Library", input_html: {multiple: true} %>
+	<%= f.association :libraries, collection: Library.non_plated.where.not(id: exclude_library_ids), prompt: "Select a Library", input_html: {multiple: true} %>
 <% else %>
 	<%= f.association :libraries, collection: Library.non_plated.order(:name), prompt: "Select a Library", input_html: {multiple: true} %>
 <% end %>

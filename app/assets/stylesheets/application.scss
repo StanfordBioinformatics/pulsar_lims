@@ -204,13 +204,11 @@ body {
   padding-right: 1em;
 }
 
-header {
-  & ul.actions {
-  	//in the header of each show view
-  	@extend .list-unstyled;
-  	@extend .list-inline;
-		margin-bottom: 2em;
-	}
+ul.actions {
+	//in the header of each show view
+	@extend .list-unstyled;
+	@extend .list-inline;
+	margin-bottom: 2em;
 }
 		
 #meta_attributes {
