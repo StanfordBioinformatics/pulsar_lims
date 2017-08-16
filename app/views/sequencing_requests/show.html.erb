@@ -32,6 +32,15 @@
   </tr>
 
 	<tr>
+		<th><strong>Plates:</strong></th>
+		<% if @sequencing_request.plates.present?%>
+			<% @sequencing_request.plates.each do |p| %>
+				<td><%= link_to p.name, p %></td>
+			<% end %>
+		<% end %>
+	</tr>
+			
+	<tr>
   	<th><strong>Sequencing platform:</strong></th>
   	<td><%= link_to @sequencing_request.sequencing_platform.name, @sequencing_request.sequencing_platform %></td>
 	</tr>
