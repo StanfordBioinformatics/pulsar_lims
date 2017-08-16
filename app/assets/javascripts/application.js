@@ -38,6 +38,16 @@
 //		});
 
 $(function() {
+  $(document).on("click",".close-modal",function(event) {
+    $(".modal").hide();
+  }) 
+  window.onclick = function(event) {
+    if (event.target.className == "modal") {
+      //i.e. see model in views/sequencing_requests/select_scs_plates.html.erb, which is displayed when
+      // the user clicks on the "Add Single Cell Sorting plates" button on the show view of a sequencing_request.
+      $(".modal").hide();
+    }
+  }
   $('[data-toggle="tooltip"]').attr("data-delay",300)
   $('[data-toggle="tooltip"]').tooltip()
 });

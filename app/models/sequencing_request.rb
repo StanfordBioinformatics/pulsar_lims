@@ -22,6 +22,16 @@ class SequencingRequest < ActiveRecord::Base
 		ApplicationPolicy
 	end
 
+	def plate_ids=(ids)
+		return unless ids.present?
+		ids.each do |i|
+			next if i.blank?
+			plate = Plate.find(i)
+			next if self.plates.include?(plate)
+			self.plates << plate 
+		end	
+	end
+
 	def library_ids=(ids)
 		return unless ids.present?
 		ids.each do |i|

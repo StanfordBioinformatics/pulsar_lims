@@ -10,7 +10,13 @@ class SequencingRequestsController < ApplicationController
 	def select_scs_plates
 		#Add plates on a Single Cell Sorting experimnt
 		flash[:action] = :show
-		render text: "howdy", layout: false
+		ssc_id = params[:single_cell_sorting_selector]
+		logger.info("WINN")
+		ssc = SingleCellSorting.find(ssc_id)
+		@plates = ssc.plates.where.not(id: @sequencing_request.plates.persisted)
+		logger.info(@plates.ids)
+		#ssc_plate_ids = ssc.plate_ids
+		render layout: false
 	end
 
 	def select_library
@@ -110,6 +116,6 @@ class SequencingRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_request_params
-      params.require(:sequencing_request).permit(:name,:paired_end,:comment, :sequencing_platform_id, :sequencing_center_id, :shipped, :library_ids => [], libraries_attributes: [:id,:_destroy])
+      params.require(:sequencing_request).permit(:name,:paired_end,:comment, :sequencing_platform_id, :sequencing_center_id, :shipped, :plate_ids => [], :library_ids => [], libraries_attributes: [:id,:_destroy])
     end
 end
