@@ -1,5 +1,4 @@
 class SequencingLibraryPrepKitsController < ApplicationController
-	include DocumentsConcern #gives me add_documents()
   before_action :set_sequencing_library_prep_kit, only: [:show, :edit, :update, :destroy]
 	skip_after_action :verify_authorized, only: [:paired_end_kits]
 
@@ -33,7 +32,6 @@ class SequencingLibraryPrepKitsController < ApplicationController
     @sequencing_library_prep_kit = SequencingLibraryPrepKit.new(sequencing_library_prep_kit_params)
 		@sequencing_library_prep_kit.user = current_user
 
-		@sequencing_library_prep_kit = add_documents(@sequencing_library_prep_kit,params[:sequencing_library_prep_kit][:document_ids])
     respond_to do |format|
       if @sequencing_library_prep_kit.save
         format.html { redirect_to @sequencing_library_prep_kit, notice: 'Sequencing library prep kit was successfully created.' }
@@ -47,7 +45,6 @@ class SequencingLibraryPrepKitsController < ApplicationController
 
   def update
 		authorize @sequencing_library_prep_kit
-		@sequencing_library_prep_kit = add_documents(@sequencing_library_prep_kit,params[:sequencing_library_prep_kit][:document_ids])
 
     respond_to do |format|
       if @sequencing_library_prep_kit.update(sequencing_library_prep_kit_params)
