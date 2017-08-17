@@ -58,3 +58,4 @@ $ ->
 
   $paired_end_checkbox.click (event) ->
     load_barcode_selection()
+  $kit_selector.change()

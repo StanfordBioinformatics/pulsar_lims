@@ -38,6 +38,7 @@
 //		});
 
 $(function() {
+  $("label[data-toggle='tooltip']").append('<sup><i style="padding-left: 0.3em;" class="fa fa-info-circle"></i></sup>');
   $(document).on("click",".close-modal",function(event) {
     $(".modal").hide();
   }) 

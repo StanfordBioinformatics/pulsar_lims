@@ -5,8 +5,8 @@
 
   <%= f.association :sequencing_library_prep_kit, label_html: {"data-toggle" => "tooltip", "title" => "The library prep kit used for creating the library."} %>
 
-	<%= f.input :paired_end %>
-  <%= f.input :strand_specific, label_html: {"data-toggle" => "tooltip", "title" => "Whether the preparation of the library using a strand-specific protocol."} %>
+	<%= f.input :paired_end, label_html: {"data-toggle": "tooltip", title: "Check the box if this library is duel-indexed."} %>
+  <%= f.input :strand_specific, label_html: {"data-toggle" => "tooltip", "title" => "Check the box if this is a strand-specific library."} %>
 
 	<!-- Note that I'm using jQuery to fill the choices of the selection boxes below for barcodes and paired_barcodes. 
 			 If the paired_end input is checked, then the barcodes input will be hidden. If not checked, then the

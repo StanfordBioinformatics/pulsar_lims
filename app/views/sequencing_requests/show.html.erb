@@ -34,9 +34,11 @@
 	<tr>
 		<th><strong>Plates:</strong></th>
 		<% if @sequencing_request.plates.present?%>
-			<% @sequencing_request.plates.each do |p| %>
-				<td><%= link_to p.name, p %></td>
-			<% end %>
+			<td>
+				<%= render partial: "plates/link_to_plate", locals: {plates: @sequencing_request.plates.persisted} %>
+			</td>
+		<% else %>
+			<td>None</td>
 		<% end %>
 	</tr>
 			
