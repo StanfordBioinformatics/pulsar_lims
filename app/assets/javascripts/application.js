@@ -38,6 +38,7 @@
 //		});
 
 $(function() {
+	//Add fonts awesome icon 'info-circle' after all labels that have a tooltip:
   $("label[data-toggle='tooltip']").append('<sup><i style="padding-left: 0.3em;" class="fa fa-info-circle"></i></sup>');
   $(document).on("click",".close-modal",function(event) {
     $(".modal").hide();
@@ -49,8 +50,10 @@ $(function() {
       $(".modal").hide();
     }
   }
-  $('[data-toggle="tooltip"]').attr("data-delay",300)
-  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').attr("data-delay",1000)
+  $('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' })
+  //Above I pass in { trigger: 'hover' }, since the default is "trigger: 'focus'". The default is an issue for 
+	//inputs such as checkboxes that maintain focus after selection until another elements gains focus.
 });
 
 //The code below was derived from https://devcenter.heroku.com/articles/direct-to-s3-image-uploads-in-rails
