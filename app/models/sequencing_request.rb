@@ -2,7 +2,7 @@ class SequencingRequest < ActiveRecord::Base
 	#There is a unique index on the compound key in the libraries_sequencing_requests join table, disallowing
 	# the same library to be added twice.
 	has_and_belongs_to_many :libraries
-	has_and_belongs_to_many :plates
+	has_and_belongs_to_many :plates, after_remove: :remove_plate_libraries
   belongs_to :sequencing_platform
   belongs_to :sequencing_center
 	has_many    :sequencing_runs, dependent: :destroy
@@ -13,6 +13,7 @@ class SequencingRequest < ActiveRecord::Base
 	validates :sequencing_platform, presence: true
 
 	accepts_nested_attributes_for :libraries, allow_destroy: true
+	accepts_nested_attributes_for :plates, allow_destroy: true
 
 	scope :persisted, lambda { where.not(id: nil) }
 	validate :validate_unique_barcodes
@@ -76,6 +77,16 @@ class SequencingRequest < ActiveRecord::Base
 		end
 
 	private
+
+		def remove_plate_libraries(plate)
+			#Gets called after an associated plate is removed so that its libraries, which were added to self.libraries, can be also removed
+			# from the sequencing_request.
+			plate.get_libraries().each do |lib|
+				if self.libraries.include?(lib)
+					self.libraries.destroy(lib)
+				end
+			end
+		end
 
 		def validate_unique_barcodes
 			seqs = self.get_barcodes(sequences=true)

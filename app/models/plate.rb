@@ -34,18 +34,29 @@ class Plate < ActiveRecord::Base
 		return self.dimensions.split()[0].split("x")[1].to_i
 	end
 
+	def get_libraries(exclude_wells=[])
+		#Function: For each well on the plate, fetches the ID of the barcode that is associated to the
+		#					 biosample in the well.
+		#Args    : exclude_well - list of one or more wells to skip.
+		libraries = []
+		self.wells.each do |w|
+			next if exclude_wells.include?(w)
+			if w.biosample.present? and w.biosample.libraries.present?
+				libraries << w.get_library()
+			end
+		end
+		return libraries
+	end
+
 	def get_barcodes(exclude_wells=[])
 		#Function: For each well on the plate, fetches the ID of the barcode that is associated to the
 		#					 biosample in the well.
 		#Args    : exclude_well - list of one or more wells to skip.
+		libraries = self.get_libraries(exclude_wells)
 		barcodes = []
-		self.wells.each do |w|
-			next if exclude_wells.include?(w)
-			if w.biosample.present? and w.biosample.libraries.present?
-				lib = w.biosample.libraries.last
-				barcode = lib.get_indexseq
-				barcodes << barcode #barcode could be nil if no barcoding is used.
-			end
+		libraries.each do |lib|
+			barcode = lib.get_indexseq()
+			barcodes << barcode #barcode could be nil if no barcoding is used.
 		end
 		return barcodes
 	end

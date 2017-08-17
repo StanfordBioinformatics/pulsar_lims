@@ -4,7 +4,7 @@
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing request name"} %>
   <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Notes about the sequencing request"} %>
 
-  <% if @sequencing_request.libraries.present? %>
+  <% if @sequencing_request.libraries.persisted.any? %>
 		<table class="min-table" id="libraries">
 			<thead>
 				<tr>
@@ -13,19 +13,43 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% if @sequencing_request.libraries.persisted.any? %>
-					<%= f.simple_fields_for(:libraries) do |ff| %>
-						<% lib = @sequencing_request.libraries.persisted[ff.index] %>
-						<tr>
-							<td><%= lib.name %></td>
-				      <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
-						</tr>
-		     <% end %>  
-			<% end %>
+				<%= f.simple_fields_for(:libraries) do |ff| %>
+					<% lib = @sequencing_request.libraries[ff.index] %>
+					<% if not lib.persisted?%>
+						<% next %>
+					<% end %>
+					<tr>
+						<td><%= link_to lib.name, lib %></td>
+			      <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+					</tr>
+		    <% end %>  
 			</tbody>
     </table>
-  <% end %>
+  <% end %></br>
 
+	<% if @sequencing_request.plates.persisted.any? %>
+		<table class="min-table">
+			<thead>
+				<tr>
+					<th><strong>Associated Plates:</strong></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<%= f.simple_fields_for :plates do |ff| %>
+          <% plate = @sequencing_request.plates[ff.index] %>
+					<% if not plate.persisted? %>
+						<% next %>
+					<% end %>
+          <tr>
+            <td><%= link_to plate.name, plate %></td>
+            <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+          </tr>
+		    <% end %>  
+			</tbody>
+    </table>
+  <% end %></br>
+					
   <%= f.association :sequencing_platform, collection: SequencingPlatform.order(:name), label_method: :name, prompt: "Select the Sequencing Platform" %>
   <%= f.association :sequencing_center, collection: SequencingCenter.order(:name), label_method: :name, prompt: "Select the Sequencing Center" %>
 	<%= f.input :paired_end %>
