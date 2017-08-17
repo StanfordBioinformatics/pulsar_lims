@@ -15,8 +15,8 @@ class SequencingRequest < ActiveRecord::Base
 	accepts_nested_attributes_for :libraries, allow_destroy: true
 
 	scope :persisted, lambda { where.not(id: nil) }
-	before_save :verify_unique_barcodes
-	before_save :verify_libs_have_same_kit
+	validate :validate_unique_barcodes
+	validate :validate_libs_have_same_kit
 
 	def self.policy_class
 		ApplicationPolicy
@@ -29,6 +29,7 @@ class SequencingRequest < ActiveRecord::Base
 			plate = Plate.find(i)
 			next if self.plates.include?(plate)
 			self.plates << plate 
+			self.add_libraries_from_plate(plate)
 		end	
 	end
 
@@ -67,8 +68,16 @@ class SequencingRequest < ActiveRecord::Base
 		return lib
 	end
 
+	protected
+		def add_libraries_from_plate(plate)
+			plate.wells.each do |w|
+				self.libraries << w.get_library()
+			end
+		end
+
 	private
-		def verify_unique_barcodes
+
+		def validate_unique_barcodes
 			seqs = self.get_barcodes(sequences=true)
 			dups = {}
 			seqs.uniq.each do |s|
@@ -78,11 +87,12 @@ class SequencingRequest < ActiveRecord::Base
 				end
 			end
 			if dups.present?
-				raise "Duplicate barcodes detected: #{dups.to_json}"
+				self.errors[:base] << "Duplicate barcodes detected. Their counts are: #{dups.to_json}"
+				#raise "Duplicate barcodes detected: #{dups.to_json}"
 			end
 		end
 
-		def verify_libs_have_same_kit
+		def validate_libs_have_same_kit
 			libs = self.libraries
 			return unless libs.any?
 			prev_kit_name = libs.first.sequencing_library_prep_kit.name
@@ -91,7 +101,9 @@ class SequencingRequest < ActiveRecord::Base
 				count += 1
 				kit_name = lib.sequencing_library_prep_kit.name	
 				if kit_name != prev_kit_name
-					raise "Multiple library prep kits are present. For example, library #{lib.name} was prepared with #{kit_name}, whereas libary #{libs[count -1].name} was prepared with #{prev_kit_name}." 
+					self.errors[:base] << "Multiple library prep kits are present. For example, library #{lib.name} was prepared with #{kit_name}, whereas libary #{libs[count -1].name} was prepared with #{prev_kit_name}." 
+					return false
+					#raise "Multiple library prep kits are present. For example, library #{lib.name} was prepared with #{kit_name}, whereas libary #{libs[count -1].name} was prepared with #{prev_kit_name}." 
 				end
 				prev_kit_name = kit_name
 			end

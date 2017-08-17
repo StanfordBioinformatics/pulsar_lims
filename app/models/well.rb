@@ -22,6 +22,10 @@ class Well < ActiveRecord::Base
 		return "#{Plate::row_letter(self.row)}#{col}"
 	end
 
+	def get_library
+		return self.biosample.libraries.first
+	end
+
   def add_library_to_biosample(biosample)
 		if not biosample.well.plate.id == self.plate.id
 			raise "Invalid biosample #{biosample.name} does not exist on the same Plate as does this Well #{well.name}."
