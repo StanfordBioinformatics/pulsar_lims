@@ -1,0 +1,28 @@
+<header>
+  <h1>Concentration Units</h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: ConcentrationUnit} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @concentration_units.each do |cu| %>
+      <tr>
+        <td><%= link_to cu.name, cu %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_concentration_unit_path(cu) %>
+       		<%= link_to fa_icon("trash"), cu, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

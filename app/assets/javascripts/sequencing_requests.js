@@ -2,7 +2,7 @@
 $(document).on("click",".remove_library", function(event) {
   $parentSelector = $(this).closest(".sequencing_request_libraries");
   $parentSelector.fadeOut("slow",function() {
-    $parentSelector.remove();
+    //$parentSelector.remove();
   })
 });
 
@@ -10,7 +10,7 @@ $(document).on("click",".remove_library", function(event) {
 $( function() {
   $add_library_btn = $("#add_library");
   $add_scs_plates_btn = $("#add_scs_plates");
-  $bl_btns = $(".bl-btns");
+  $bl_btns = $(".bl-btns"); //bl means business logic
   $sreq_lib_or_scs_selector = $(".sreq_lib_or_scs_selector"); //container for AJAX response.
   $sreq_plate_selector = $(".sreq_plate_selector"); //container for AJAX response.
 })
@@ -19,8 +19,10 @@ $( function() {
 $(document).on("click",".sreq-toggle-up", function(event) {
   //The toggle up btn for the jumbotron that came as part of the AJAX response when one of $bl_btns was clicked. 
   event.stopPropagation();
-  $(event.target).closest(".jumbotron").slideUp("fast").remove();
-  $bl_btns.show();
+  $(event.target).closest(".jumbotron").slideUp("fast",function(){ 
+    $(this).remove();
+  	$bl_btns.show();
+  })
 })
 
 $(document).ajaxSuccess(function(event,jqXHR,ajaxProps) {

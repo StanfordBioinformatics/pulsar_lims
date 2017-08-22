@@ -1,31 +1,23 @@
 class NucleicAcidTermsController < ApplicationController
   before_action :set_nucleic_acid_term, only: [:show, :edit, :update, :destroy]
 
-  # GET /nucleic_acid_terms
-  # GET /nucleic_acid_terms.json
   def index
     @nucleic_acid_terms = policy_scope(NucleicAcidTerm).order("lower(name)")
   end
 
-  # GET /nucleic_acid_terms/1
-  # GET /nucleic_acid_terms/1.json
   def show
 		authorize @nucleic_acid_term
   end
 
-  # GET /nucleic_acid_terms/new
   def new
 		authorize NucleicAcidTerm
     @nucleic_acid_term = NucleicAcidTerm.new
   end
 
-  # GET /nucleic_acid_terms/1/edit
   def edit
 		authorize @nucleic_acid_term
   end
 
-  # POST /nucleic_acid_terms
-  # POST /nucleic_acid_terms.json
   def create
     @nucleic_acid_term = NucleicAcidTerm.new(nucleic_acid_term_params)
 		authorize @nucleic_acid_term
@@ -42,8 +34,6 @@ class NucleicAcidTermsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /nucleic_acid_terms/1
-  # PATCH/PUT /nucleic_acid_terms/1.json
   def update
 		authorize @nucleic_acid_term
     respond_to do |format|
@@ -57,8 +47,6 @@ class NucleicAcidTermsController < ApplicationController
     end
   end
 
-  # DELETE /nucleic_acid_terms/1
-  # DELETE /nucleic_acid_terms/1.json
   def destroy
 		authorize @nucleic_acid_term
     @nucleic_acid_term.destroy

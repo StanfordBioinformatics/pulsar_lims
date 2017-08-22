@@ -12,6 +12,7 @@
       <th>Comment</th>
       <th>Sequencing platform</th>
       <th>Sequencing center</th>
+			<th>Concentration</th>
 			<th>Paired-end</th>
       <th>Shipped</th>
 			<th>Sequencing Result</th>
@@ -20,24 +21,29 @@
   </thead>
 
   <tbody>
-    <% @sequencing_requests.each do |sequencing_request| %>
+    <% @sequencing_requests.each do |sr| %>
       <tr>
-        <td><%= link_to sequencing_request.name, sequencing_request %></td>
-        <td><%= sequencing_request.comment %></td>
-        <td><%= link_to sequencing_request.sequencing_platform.name, sequencing_request.sequencing_platform %></td>
-        <td><%= link_to sequencing_request.sequencing_center.name, sequencing_request.sequencing_center %></td>
-        <td><%= sequencing_request.paired_end%></td>
-        <td><%= sequencing_request.shipped %></td>
-				<% if sequencing_request.sequencing_runs.present? %>
-					<% sequencing_request.sequencing_runs.each do |run| %>
-		        <td><%= link_to run.name, [sequencing_request,run] %></td>
+        <td><%= link_to sr.name, sr %></td>
+        <td><%= sr.comment %></td>
+        <td><%= link_to sr.sequencing_platform.name, sr.sequencing_platform %></td>
+        <td><%= link_to sr.sequencing_center.name, sr.sequencing_center %></td>
+				<% if sr.concentration.present? %>
+					<td><%= sr.concentration %>&nbsp;<%= sr.concentration_unit.name %></td>
+				<% else %>
+					<td></td>
+				<% end %>
+        <td><%= sr.paired_end%></td>
+        <td><%= sr.shipped %></td>
+				<% if sr.sequencing_runs.present? %>
+					<% sr.sequencing_runs.each do |run| %>
+		        <td><%= link_to run.name, [sr,run] %></td>
 					<% end %>
 				<% else %>
 					<td>None</td>
 				<% end %>
         <td>
-					<%= link_to fa_icon("pencil"), edit_sequencing_request_path(sequencing_request) %>
-        	<%= link_to fa_icon("trash"), sequencing_request, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_sequencing_request_path(sr) %>
+        	<%= link_to fa_icon("trash"), sr, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

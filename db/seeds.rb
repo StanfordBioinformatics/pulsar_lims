@@ -17,6 +17,17 @@ SequencingCenter.create!([
 	{user_id: admin, name: "Stanford Genome Sequencing Service Center", url: "http://med.stanford.edu/gssc.html", address: "3155 Porter Dr; Palo Alto, CA 94304"}
 ])
 
+ConcentrationUnit.delete_all
+ConcentrationUnit.create!([
+	{user_id: admin, name: "cells" },
+	{user_id: admin, name: "cell-equivalent" },
+	{user_id: admin, name: "µg" },
+	{user_id: admin, name: "ng" },
+	{user_id: admin, name: "pg" },
+	{user_id: admin, name: "mg" }
+])
+	
+
 DocumentType.delete_all
 DocumentType.create!([
 	{user_id: admin, name: "growth protocol"},
@@ -40,7 +51,7 @@ DocumentType.create!([
 	{user_id: admin, name: "file format specification"},
 	{user_id: admin, name: "high resolution pathology slide image"},
 	{user_id: admin, name: "other"}
-	])
+])
 
 Vendor.delete_all
 Vendor.create!([

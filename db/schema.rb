@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170803000821) do
+ActiveRecord::Schema.define(version: 20170822040142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,15 @@ ActiveRecord::Schema.define(version: 20170803000821) do
   add_index "cloning_vectors", ["user_id"], name: "index_cloning_vectors_on_user_id", using: :btree
   add_index "cloning_vectors", ["vendor_id"], name: "index_cloning_vectors_on_vendor_id", using: :btree
 
+  create_table "concentration_units", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "concentration_units", ["user_id"], name: "index_concentration_units_on_user_id", using: :btree
+
   create_table "construct_tags", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -353,28 +362,29 @@ ActiveRecord::Schema.define(version: 20170803000821) do
     t.integer  "nucleic_acid_term_id"
     t.integer  "biosample_id"
     t.integer  "vendor_id"
-    t.string   "lot_identifier",                       limit: 255
-    t.string   "vendor_product_identifier",            limit: 255
-    t.string   "size_range",                           limit: 255
+    t.string   "lot_identifier",                  limit: 255
+    t.string   "vendor_product_identifier",       limit: 255
+    t.string   "size_range",                      limit: 255
     t.boolean  "strand_specific"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",                                 limit: 255
+    t.string   "name",                            limit: 255
     t.integer  "user_id"
-    t.integer  "nucleic_acid_starting_quantity"
-    t.string   "nucleic_acid_starting_quantity_units"
+    t.float    "concentration"
     t.integer  "library_fragmentation_method_id"
     t.integer  "sequencing_library_prep_kit_id"
     t.boolean  "paired_end"
     t.integer  "barcode_id"
     t.integer  "paired_barcode_id"
-    t.boolean  "prototype",                                        default: false
+    t.boolean  "prototype",                                   default: false
     t.integer  "from_prototype_id"
-    t.boolean  "plated",                                           default: false
+    t.boolean  "plated",                                      default: false
+    t.integer  "concentration_unit_id"
   end
 
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
+  add_index "libraries", ["concentration_unit_id"], name: "index_libraries_on_concentration_unit_id", using: :btree
   add_index "libraries", ["from_prototype_id"], name: "index_libraries_on_from_prototype_id", using: :btree
   add_index "libraries", ["library_fragmentation_method_id"], name: "index_libraries_on_library_fragmentation_method_id", using: :btree
   add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true, using: :btree
@@ -525,8 +535,11 @@ ActiveRecord::Schema.define(version: 20170803000821) do
     t.datetime "updated_at",             null: false
     t.integer  "user_id"
     t.boolean  "paired_end"
+    t.integer  "concentration_unit_id"
+    t.float    "concentration"
   end
 
+  add_index "sequencing_requests", ["concentration_unit_id"], name: "index_sequencing_requests_on_concentration_unit_id", using: :btree
   add_index "sequencing_requests", ["name"], name: "index_sequencing_requests_on_name", unique: true, using: :btree
   add_index "sequencing_requests", ["sequencing_center_id"], name: "index_sequencing_requests_on_sequencing_center_id", using: :btree
   add_index "sequencing_requests", ["sequencing_platform_id"], name: "index_sequencing_requests_on_sequencing_platform_id", using: :btree
@@ -687,6 +700,7 @@ ActiveRecord::Schema.define(version: 20170803000821) do
   add_foreign_key "chromosomes", "users"
   add_foreign_key "cloning_vectors", "users"
   add_foreign_key "cloning_vectors", "vendors"
+  add_foreign_key "concentration_units", "users"
   add_foreign_key "construct_tags", "users"
   add_foreign_key "crispr_constructs", "cloning_vectors"
   add_foreign_key "crispr_constructs", "targets"
@@ -711,6 +725,7 @@ ActiveRecord::Schema.define(version: 20170803000821) do
   add_foreign_key "isotypes", "users"
   add_foreign_key "libraries", "barcodes"
   add_foreign_key "libraries", "biosamples"
+  add_foreign_key "libraries", "concentration_units"
   add_foreign_key "libraries", "libraries", column: "from_prototype_id"
   add_foreign_key "libraries", "library_fragmentation_methods"
   add_foreign_key "libraries", "nucleic_acid_terms"
@@ -733,6 +748,7 @@ ActiveRecord::Schema.define(version: 20170803000821) do
   add_foreign_key "sequencing_library_prep_kits", "users"
   add_foreign_key "sequencing_library_prep_kits", "vendors"
   add_foreign_key "sequencing_platforms", "users"
+  add_foreign_key "sequencing_requests", "concentration_units"
   add_foreign_key "sequencing_requests", "sequencing_centers"
   add_foreign_key "sequencing_requests", "sequencing_platforms"
   add_foreign_key "sequencing_requests", "users"

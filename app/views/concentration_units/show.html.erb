@@ -1,0 +1,21 @@
+<% title(@concentration_unit.name, "ConcentrationUnits") %>
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @concentration_unit } %>
+<header>
+  <h1><%= @concentration_unit.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @concentration_unit} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @concentration_unit} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @concentration_unit} %>
+
+<table class="attributes">
+	<tr>
+		<th><strong>Name:</strong></th>
+		<td><%= @concentration_unit.name %></td>
+	</tr>
+</table>
+
+<%= link_to 'Back', concentration_units_path %>

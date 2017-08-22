@@ -108,13 +108,12 @@
   </tr>
 
 	<tr>
-		<th><strong>Nucleic Acid Starting Quantity</strong></th>
-		<td><%= @library.nucleic_acid_starting_quantity %></td>
-	</tr>
-
-	<tr>
-		<th><strong>Nucleic Acid Starting Quantity Units</strong></th>
-		<td><%= @library.nucleic_acid_starting_quantity_units %></td>
+		<th><strong>Concentration:</strong></th>
+		<% if @library.concentration.present? %>
+			<td><%= @library.concentration %>&nbsp;<%= @library.concentration_unit.name %></td>
+		<% else %>
+			<td></td>
+		<% end %>
 	</tr>
 
 	<tr>	

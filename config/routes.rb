@@ -1,5 +1,6 @@
 Pulsar::Application.routes.draw do
 
+  resources :concentration_units
   resources :single_cell_sortings do
 		get :add_plate, on: :member
 		get :add_sorting_biosample, on: :member	

@@ -2,8 +2,6 @@ class BarcodeNotFoundError < StandardError
 end
 
 class Library < ActiveRecord::Base
-	NUCLEIC_ACID_STARTING_QUANTITY_UNITS = ["cells","cell-equivalent","µg","ng","pg","mg"]
-
 	#The is_control bool column has a default of false.
 	#has_many :sequencing_results, dependent: :destroy
 	has_and_belongs_to_many :documents
@@ -13,6 +11,7 @@ class Library < ActiveRecord::Base
 	# as a template for making library objects associated to the each biosample in each well of each plate present on the singe_cell_sorting. 
 	belongs_to :barcode
 	belongs_to :biosample
+	belongs_to :concentration_unit
 	belongs_to :from_prototype, class_name: "Library"
 	has_many   :libraries, foreign_key: :from_prototype_id, dependent: :destroy
 	belongs_to :library_fragmentation_method
@@ -30,10 +29,8 @@ class Library < ActiveRecord::Base
 	validates :documents, presence: true
 	#validates :vendor_id, presence: true
 	validates :biosample_id, presence: true
-	validates :nucleic_acid_starting_quantity_units, inclusion: NUCLEIC_ACID_STARTING_QUANTITY_UNITS, allow_blank: true #note that nil for string will be stored in the database as "".
-	validates :nucleic_acid_starting_quantity_units, presence: {message: "must be specified when the quantity is specified."}, if: "nucleic_acid_starting_quantity.present?"
-	#validates :nucleic_acid_starting_quantity, presence: true, if: "nucleic_acid_starting_quantity_units.present?", message: "Nucleic acid starting quantity must be set if the units for it are set"
-	validates :nucleic_acid_starting_quantity, presence: {message: "must be specified when the units are set."}, if: "nucleic_acid_starting_quantity_units.present?"
+	validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"
+	validates :concentration, presence: {message: "must be specified when the units are set."}, if: "concentration_unit.present?"
 	validates :sequencing_library_prep_kit_id, presence: true
 
 	accepts_nested_attributes_for :documents, allow_destroy: true

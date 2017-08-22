@@ -39,7 +39,7 @@
 
 $(function() {
 	//Add fonts awesome icon 'info-circle' after all labels that have a tooltip:
-  $("label[data-toggle='tooltip']").append('<sup><i style="padding-left: 0.3em;" class="fa fa-info-circle"></i></sup>');
+  $("label[data-toggle='tooltip']").append('<sup><i style="padding-left: 0.1em;" class="fa fa-info-circle"></i></sup>');
   $(document).on("click",".close-modal",function(event) {
     $(".modal").hide();
   }) 

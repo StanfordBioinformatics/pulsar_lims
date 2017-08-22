@@ -100,7 +100,7 @@ class LibrariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_params
-      params.require(:library).permit(:from_prototype_id, :prototype, :paired_end, :sequencing_library_prep_kit_id, :library_fragmentation_method_id, :nucleic_acid_starting_quantity, :nucleic_acid_starting_quantity_units, :is_control, :nucleic_acid_term_id, :biosample_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, :barcode_id, :paired_barcode_id, :document_ids => [], documents_attributes: [:id,:_destroy], sequencing_requests_attributes: [:id,:_destroy], barcode_attributes: [:id,:_destroy], paired_barcode_attributes: [:id, :_destroy])
+      params.require(:library).permit(:from_prototype_id, :prototype, :paired_end, :sequencing_library_prep_kit_id, :library_fragmentation_method_id, :concentration, :concentration_unit_id, :is_control, :nucleic_acid_term_id, :biosample_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, :barcode_id, :paired_barcode_id, :document_ids => [], documents_attributes: [:id,:_destroy], sequencing_requests_attributes: [:id,:_destroy], barcode_attributes: [:id,:_destroy], paired_barcode_attributes: [:id, :_destroy])
     end
 
 end

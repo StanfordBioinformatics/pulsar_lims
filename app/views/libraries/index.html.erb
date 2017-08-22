@@ -20,8 +20,8 @@
       <th>Barcode</th>
 			<th>Paired Barcode</th>
       <th>Library fragmentation method</th>
-			<th>Nucleic acid starting quantity</th>
-			<th>Nucleic acid starting quantity units</th>
+			<th>Concentration</th>
+			<th>Concentration Unit</th>
       <th>Size range</th>
       <th>Strand specificity</th>
       <th>Actions</th>
@@ -64,8 +64,11 @@
 				<% else %>
 					<td></td>
 				<% end %>
-				<td><%= library.nucleic_acid_starting_quantity %></td>
-				<td><%= library.nucleic_acid_starting_quantity_units %></td>
+				<% if library.concentration.present? %>
+					<td><%= library.concentration %>&nbsp;<%= library.concentration_unit.name %></td>
+				<% else %>
+					<td></td>
+				<% end %>
         <td><%= library.size_range %></td>
         <td><%= library.strand_specific %></td>
         <td>

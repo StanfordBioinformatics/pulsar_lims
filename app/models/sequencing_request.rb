@@ -3,6 +3,7 @@ class SequencingRequest < ActiveRecord::Base
 	# the same library to be added twice.
 	has_and_belongs_to_many :libraries
 	has_and_belongs_to_many :plates, after_remove: :remove_plate_libraries
+	belongs_to :concentration_unit
   belongs_to :sequencing_platform
   belongs_to :sequencing_center
 	has_many    :sequencing_runs, dependent: :destroy
@@ -11,6 +12,8 @@ class SequencingRequest < ActiveRecord::Base
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
 	validates :sequencing_center, presence: true
 	validates :sequencing_platform, presence: true
+  validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"
+  validates :concentration, presence: {message: "must be specified when the units are set."}, if: "concentration_unit.present?"
 
 	accepts_nested_attributes_for :libraries, allow_destroy: true
 	accepts_nested_attributes_for :plates, allow_destroy: true
@@ -71,6 +74,9 @@ class SequencingRequest < ActiveRecord::Base
 
 	protected
 		def add_libraries_from_plate(plate)
+			#I Set this method under the protected block so that this can be called from an instance method within the class definition.
+			#Originally I had this under the protected block, but that didn't allow for instance methods in the class definition
+			# to call it. 
 			plate.wells.each do |w|
 				self.libraries << w.get_library()
 			end

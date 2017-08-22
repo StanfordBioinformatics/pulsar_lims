@@ -46,6 +46,15 @@
   	<th><strong>Sequencing platform:</strong></th>
   	<td><%= link_to @sequencing_request.sequencing_platform.name, @sequencing_request.sequencing_platform %></td>
 	</tr>
+
+  <tr>
+    <th><strong>Concentration:</strong></th>
+    <% if @sequencing_request.concentration.present? %>
+      <td><%= @sequencing_request.concentration %>&nbsp;<%= @sequencing_request.concentration_unit.name %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+  </tr>
   
 	<tr>
 		<th><strong>Sequencing center:</strong></th>
