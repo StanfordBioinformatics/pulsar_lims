@@ -52,7 +52,7 @@
 
   <label for="sequencing_request_concentration" data-toggle="tooltip" title="The concentration of nucleic acids in the pooled library."><span>Concentration</span></label>
   <%= f.input_field :concentration %>
-  <label for="sequencing_request_concentration_unit" data-toggle="tooltip" title="The units used for starting amount of nucleic acid."><span>Units</span></label>
+  <label for="sequencing_request_concentration_unit" data-toggle="tooltip" title="The concentration units."><span>Units</span></label>
   <%= f.input_field :concentration_unit_id, collection: ConcentrationUnit.all %>
   </br></br>
 					
