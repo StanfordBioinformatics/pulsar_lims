@@ -24,7 +24,8 @@ ConcentrationUnit.create!([
 	{user_id: admin, name: "µg" },
 	{user_id: admin, name: "ng" },
 	{user_id: admin, name: "pg" },
-	{user_id: admin, name: "mg" }
+	{user_id: admin, name: "mg" },
+	{user_id: admin, name: "nM" }
 ])
 	
 

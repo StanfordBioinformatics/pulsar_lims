@@ -36,7 +36,7 @@
 					<% end %>
 					<td><%= link_to well.name, [@plate,well], class: "#{class_val}" %>
 					<% if @show_barcodes.present? %>
-						<% lib = well.biosample.libraries.last %>
+						<% lib = well.get_library %>
 						<% if lib.present? %>
 							<p style="font-size: small;"><%= lib.get_indexseq().display() %><p>
 						<% end %>

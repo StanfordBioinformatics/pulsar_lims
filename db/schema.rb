@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822040142) do
+ActiveRecord::Schema.define(version: 20170822064157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -671,7 +671,9 @@ ActiveRecord::Schema.define(version: 20170822040142) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_index "wells", ["col"], name: "index_wells_on_col", using: :btree
   add_index "wells", ["plate_id"], name: "index_wells_on_plate_id", using: :btree
+  add_index "wells", ["row"], name: "index_wells_on_row", using: :btree
   add_index "wells", ["user_id"], name: "index_wells_on_user_id", using: :btree
 
   add_foreign_key "addresses", "users"
