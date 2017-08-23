@@ -64,9 +64,7 @@ class Library < ActiveRecord::Base
 	end
 
 	def barcoded?
-		if paired_end? and paired_barcode.present?
-			return true
-		elsif not paired_end? and barcode.present?
+		if barcode.present? or paired_barcode.present?
 			return true
 		end
 		return false
@@ -83,7 +81,7 @@ class Library < ActiveRecord::Base
   def paired_barcode_id=(pbid)
     if pbid.present?
       pb = PairedBarcode.find(pbid) 
-      self.paired_barcode << pb 
+      self.paired_barcode = pb 
     end 
   end 
 
@@ -191,9 +189,11 @@ class Library < ActiveRecord::Base
 		elsif self.barcode.present? and self.paired_end?
 			self.errors.add(:base, "Can't set a single-end barcode when the library is marked as paired-end. You must instead select a paired-end barcode.")
 			return false
-		elsif self.paired_barcode.present? and not self.paired_end?
-			self.errors.add(:base, "Can't set a paired-end barcode when the library is not marked as paired-end. You must instead select a single-end barode.")
-			return false
+		elsif self.paired_barcode_id.present?
+			if not self.paired_end?
+				self.errors.add(:base, "Can't set a paired-end barcode when the library is not marked as paired-end. You must instead select a single-end barode.")
+				return false
+			end
 		elsif self.paired_end and not self.sequencing_library_prep_kit.supports_paired_end?
 			self.errors.add(:base, "Can't set paired_end to true when the sequencing library prep kit does not support paired-end sequencing.")
 			return false

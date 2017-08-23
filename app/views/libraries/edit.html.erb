@@ -7,4 +7,8 @@
   <%= render partial: "application_partials/submit", locals: {f: f} %>
 <% end %>
 
-<%= link_to "Back", @library %>
+<% if @library.single_cell_sorting.present? %>
+	<%= link_to "Back", @library.single_cell_sorting %>
+<% else %>
+	<%= link_to "Back", @library %>
+<% end %>

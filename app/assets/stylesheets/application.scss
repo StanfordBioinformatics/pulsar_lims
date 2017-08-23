@@ -46,6 +46,10 @@
 	}
 }
 
+.fa-info-circle:hover {
+	cursor: help;
+}
+
 .waiting * {
 	cursor: progress;
 }

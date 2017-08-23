@@ -83,7 +83,7 @@ module PlatesConcern
 		library_prototype = plate.single_cell_sorting.library_prototype
 		well_lib_attrs = Library.instantiate_prototype(library_prototype)
 		well_lib_attrs["user_id"] = user.id
-		#the name is set to the biosample name in the library.rb model file.
+		#the name is set to the biosample name (see code in the library.rb model file).
 		barcode.upcase!
 		index1 = barcode
 		index2 = nil
@@ -100,7 +100,7 @@ module PlatesConcern
 			raise Exceptions::BarcodeNotFoundError, "Index 1 barcode #{index1} is not present in sequencing library prep kit '#{prep_kit.name}' Make sure you provided the correct orientation and didn't reverse complement it."
 		end
 		if not index2 #then single-end only
-			well_lib_attrs["barcode_id"] = index1_rec.id
+			well_lib_attrs["barcode"] = index1_rec
 			new_library_record  = well.biosample.libraries.create(well_lib_attrs)
 		else #then paired-end
       index2_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id,index_number: 2, sequence: index2})
@@ -112,7 +112,7 @@ module PlatesConcern
 				name = PairedBarcode.make_name(index1_rec.name,index2_rec.name)
         paired_rec = PairedBarcode.create!({user: current_user, name: name,sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1_rec.id, index2_id: index2_rec.id})
       end 
-			well_lib_attrs["paired_barcode"] = paired_rec.id
+			well_lib_attrs["paired_barcode"] = paired_rec
       new_library_record = well.biosample.libraries.create(well_lib_attrs)
 		end
 
