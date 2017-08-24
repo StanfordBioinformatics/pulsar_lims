@@ -46,7 +46,24 @@
 
 <div class="barcodes bg-info">
   <h4> Barcodes</h4>
-  <table class="attributes">
+	<table class="table table-bordered" id="bobba" style="width: 25%;margin: auto;"> 
+		<thead>
+			<tr>
+				<th>Index</th>
+				<th>Count</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @sequencing_library_prep_kit.barcodes.group(:index_number).count.each do |index,cnt| %>
+				<tr>
+					<td><%= index %></td>
+					<td><%= cnt %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table></br>
+
+  <table class="attributes" style="font-family: Courier, monospace;" >
     <thead>
       <tr>
         <th>Name</th>
@@ -55,17 +72,19 @@
         <th class="actions">Actions</th>
       </tr>
     </thead>
-    <% @sequencing_library_prep_kit.barcodes.each do |bc| %>
-      <tr>
-        <td><%= link_to bc.name, [@sequencing_library_prep_kit,bc] %></td>
-        <td><%= bc.sequence %></td>
-				<td><%= bc.index_number %></td>
-        <td>
-          <%= link_to fa_icon("pencil"), [:edit,@sequencing_library_prep_kit,bc] %>
-          <%= link_to fa_icon("trash"), [@sequencing_library_prep_kit,bc], method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
+		<tbody>
+	    <% @sequencing_library_prep_kit.barcodes.order("index_number").each do |bc| %>
+	      <tr>
+	        <td><%= link_to bc.name, [@sequencing_library_prep_kit,bc] %></td>
+	        <td><%= bc.sequence %></td>
+					<td><%= bc.index_number %></td>
+	        <td>
+	          <%= link_to fa_icon("pencil"), [:edit,@sequencing_library_prep_kit,bc] %>
+	          <%= link_to fa_icon("trash"), [@sequencing_library_prep_kit,bc], method: :delete, data: { confirm: 'Are you sure?' } %>
+	        </td>
+	      </tr>
+	    <% end %>
+		</tbody>
 	</table>
 </div>
 

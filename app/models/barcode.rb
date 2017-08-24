@@ -22,7 +22,11 @@ class Barcode < ActiveRecord::Base
 	end
 
 	def display
-		return "#{self.name} #{self.sequence}"
+		val = "#{self.name} #{self.sequence}"
+		if self.name == self.sequence
+			val = self.sequence
+		end
+		return val
 	end
 
 	def sequence=(sequence)
