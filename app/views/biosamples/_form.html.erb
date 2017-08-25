@@ -42,7 +42,7 @@
 			label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not data file)."} %>
 
 	<%= f.association :biosample_type, collection: BiosampleType.order(:name), prompt: "Select the Biosample Type",
-			label_html: {"data-toggle" => "tooltip", "title" => "The categorization of the biosample. See 'Biosample Types' in the Object Store."} %>
+			input_html: {class: "biosample_type_selector"}, label_html: {"data-toggle" => "tooltip", "title" => "The categorization of the biosample. See 'Biosample Types' in the Object Store."} %>
 
 	<div class="biosample_term_name">
 		<% if @biosample.biosample_term_name.present? %>
