@@ -1,0 +1,5 @@
+<%= simple_fields_for @single_cell_sorting do |f| %>
+	<%= f.simple_fields_for :sorting_biosample, @biosample do |ff| %>
+		<%= render partial: "biosample_term_names/select_biosample_term_name", locals: {f: ff, selection: @biosample_term_name_selection} %>
+	<% end %>
+<% end %>

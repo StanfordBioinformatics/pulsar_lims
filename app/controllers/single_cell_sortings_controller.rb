@@ -1,6 +1,14 @@
 class SingleCellSortingsController < ApplicationController
   before_action :set_single_cell_sorting, only: [:show, :edit, :update, :destroy, :add_sorting_biosample, :add_plate, :add_library_prototype]
-	skip_after_action :verify_authorized, only: [:add_sorting_biosample, :add_plate, :add_library_prototype]
+	skip_after_action :verify_authorized, only: [:add_sorting_biosample, :add_plate, :add_library_prototype, :select_biosample_term_name]
+
+  def select_biosample_term_name
+    @single_cell_sorting = SingleCellSorting.new
+		@biosample = Biosample.new
+    biosample_type = BiosampleType.find(params[:biosample_type_selector])
+    @biosample_term_name_selection = BiosampleType.get_biosample_term_names(biosample_type.id)
+    render layout: false
+  end
 
 	def add_library_prototype
 		#non AJAX
