@@ -31,13 +31,14 @@ class Biosample < ActiveRecord::Base
 
 	accepts_nested_attributes_for :documents, allow_destroy: true
 
-	scope :non_well_biosamples, lambda { where(well: nil, prototype: false) }
+	scope :non_plated, lambda { where(plated: false, prototype: false) }
 	scope :non_prototypes, lambda { where(prototype: false) }
 	scope :persisted, lambda { where.not(id: nil) }
 
 	before_validation :set_name, on: :create
 	before_save :validate_prototype
 	after_update :propagate_update_if_prototype
+	after_validation :check_plated #true if it belongs to a well.
 	#after_validation :propagate_update_if_prototype, on: :update
 
 	def self.policy_class
@@ -97,6 +98,17 @@ class Biosample < ActiveRecord::Base
   end 
 
 	private 
+
+  def check_plated
+    #See the Pulsar wiki page "Rails Tips", specificially the section called "Callback gotchas".
+    # It's important that we return true here.
+    if self.well.present?
+      self.plated = true
+    else
+      self.plated = false
+    end 
+    return true
+  end
 
 	def validate_prototype
 		#A biosample can either be a prototype (virtual biosample) or an actuated biosample created based on a biosample prototype, not both.

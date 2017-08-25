@@ -21,18 +21,18 @@
   </thead>
 
   <tbody>
-    <% @crispr_constructs.each do |crispr_construct| %>
+    <% @crispr_constructs.each do |cc| %>
       <tr>
-        <td><%= crispr_construct.name %></td>
-        <td><%= link_to crispr_construct.target.name, crispr_construct.target %></td>
-        <td><%= crispr_construct.guide_sequence %></td>
-        <td><%= link_to crispr_construct.cloning_vector.name, crispr_construct.cloning_vector %></td>
-        <td><%= crispr_construct.description %></td>
-        <td><%= link_to crispr_construct.vendor.name, crispr_construct.vendor %></td>
-        <td><%= crispr_construct.vendor_product_identifier %></td>
+        <td><%= link_to cc.name, cc %></td>
+        <td><%= link_to cc.target.name, cc.target %></td>
+        <td><%= cc.guide_sequence %></td>
+        <td><%= link_to cc.cloning_vector.name, cc.cloning_vector %></td>
+        <td><%= cc.description %></td>
+        <td><%= link_to cc.vendor.name, cc.vendor %></td>
+        <td><%= cc.vendor_product_identifier %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_crispr_construct_path(crispr_construct) %>
-        	<%= link_to fa_icon("trash"), crispr_construct, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_crispr_construct_path(cc) %>
+        	<%= link_to fa_icon("trash"), cc, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

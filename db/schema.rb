@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822064157) do
+ActiveRecord::Schema.define(version: 20170825005705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 20170822064157) do
     t.integer  "well_id"
     t.boolean  "prototype",                             default: false
     t.integer  "from_prototype_id"
+    t.boolean  "plated",                                default: false
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
@@ -378,8 +379,8 @@ ActiveRecord::Schema.define(version: 20170822064157) do
     t.integer  "paired_barcode_id"
     t.boolean  "prototype",                                   default: false
     t.integer  "from_prototype_id"
-    t.boolean  "plated",                                      default: false
     t.integer  "concentration_unit_id"
+    t.boolean  "plated",                                      default: false
   end
 
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree

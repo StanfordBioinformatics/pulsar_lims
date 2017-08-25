@@ -66,6 +66,7 @@
   <table class="attributes" style="font-family: Courier, monospace;" >
     <thead>
       <tr>
+				<th>Row</th>
         <th>Name</th>
 				<th>Sequence</th>
 				<th>Index Number</th>
@@ -73,8 +74,11 @@
       </tr>
     </thead>
 		<tbody>
+			<% row_num = 0 %>
 	    <% @sequencing_library_prep_kit.barcodes.order("index_number").each do |bc| %>
+				<% row_num += 1 %>
 	      <tr>
+					<td><%= row_num %></td>
 	        <td><%= link_to bc.name, [@sequencing_library_prep_kit,bc] %></td>
 	        <td><%= bc.sequence %></td>
 					<td><%= bc.index_number %></td>

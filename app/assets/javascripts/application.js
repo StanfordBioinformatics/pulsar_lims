@@ -59,8 +59,8 @@ $(function() {
       $(".modal").hide();
     }
   }
-  $('[data-toggle="tooltip"]').attr("data-delay",1000)
-  $('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' })
+  //$('[data-toggle="tooltip"]').attr("data-delay",900)
+  $('[data-toggle="tooltip"]').tooltip({ trigger: 'click' })
   //Above I pass in { trigger: 'hover' }, since the default is "trigger: 'focus'". The default is an issue for 
 	//inputs such as checkboxes that maintain focus after selection until another elements gains focus.
 });

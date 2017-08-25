@@ -39,29 +39,18 @@ class Library < ActiveRecord::Base
 	accepts_nested_attributes_for :paired_barcode, allow_destroy: true
 
 	scope :persisted, lambda { where.not(id: nil) }
-	scope :non_plated, lambda { where(plated: false) }
+	scope :non_plated, lambda { where(plated: false, prototype: false) }
 
 	before_validation :set_name, on: :create
+	after_validation :check_plated
 	validate :verify_barcode #verifies self.barcode/self.paired_barcode
 	validate :verify_plate_consistency #if biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
 	validate :validate_prototype
-	before_validation :check_plated
 	after_update :propagate_update_if_prototype
 
 	def self.policy_class
 		ApplicationPolicy
 	end 
-
-	def check_plated
-		#See the Pulsar wiki page "Rails Tips", specificially the section called "Callback gotchas".
-		# It's important that we return true here.
-		if self.biosample.well.present?
-			self.plated = true
-		else
-			self.plated = false
-		end
-		return true
-	end
 
 	def barcoded?
 		if barcode.present? or paired_barcode.present?
@@ -150,6 +139,15 @@ class Library < ActiveRecord::Base
   end 
 
 	private
+
+	def check_plated
+		if self.biosample.plated
+			self.plated = true
+		else
+			self.plated = false
+		end
+		return true
+	end
 
   def validate_prototype
     #A library can either be a prototype (virtual library) or an actuated library created based on a library prototype, not both.
