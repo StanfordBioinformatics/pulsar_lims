@@ -6,9 +6,9 @@ $ ->
 
   load_biosample_term_name_selection = -> 
     if $(".biosample_type_selector").val()
-      $.get "/single_cell_sortings/select_biosample_term_name", {biosample_type_selector: $(".biosample_type_selector").val()}, (responseText,status,jqXHR) ->
-        #.biosample_biosample_term_name is the wrapper div.
-        $(".biosample_term_name").html(responseText)
+      $.get "/biosamples/select_biosample_term_name", {biosample_term_name_selector: $(".biosample_term_name_selector").val(), biosample_type_selector: $(".biosample_type_selector").val()}, (responseText,status,jqXHR) ->
+        $(".biosample_term_name_selector option").remove()
+        $(".biosample_term_name_selector").append(responseText)
 
   #use event delegation (see jQuery in Action 3rd ed., p. 154 on "event delegation").
   $(document).on "change", ".biosample_type_selector", (event) -> 

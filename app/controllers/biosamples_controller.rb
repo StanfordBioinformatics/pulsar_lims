@@ -4,9 +4,23 @@ class BiosamplesController < ApplicationController
 	skip_after_action :verify_authorized, only: [:select_biosample_term_name]
 
   def select_biosample_term_name
-    @biosample = Biosample.new
     biosample_type = BiosampleType.find(params[:biosample_type_selector])
+		biosample_term_name_id = params[:biosample_term_name_selector]
+		#here I pass in param biosample_term_name_selector in biosamples.js.coffee in order to save the 
+		# selected biosample_term_name, if there is one selected. That way, if there is a validation error
+		# when the user submits the form (perhaps regarding some other field), I can set the biosample_term_name 
+    # to what the user had already set it to.  Normally, it would be reset to what it was since on a page re-render, 
+		# the AJAX request goes through again to repopulate the list of possible values for the biosample_term_name, based on teh
+		# biosample_type selection.
+    biosample_term_name = nil
+		if biosample_term_name_id.present?
+			biosample_term_name = BiosampleTermName.find(biosample_term_name_id)
+		end
 		@biosample_term_name_selection = BiosampleType.get_biosample_term_names(biosample_type.id)
+		@selected = nil
+		if biosample_term_name.present?
+			@selected = biosample_term_name.id
+		end
     render layout: false
   end
 

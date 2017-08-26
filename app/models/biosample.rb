@@ -22,7 +22,7 @@ class Biosample < ActiveRecord::Base
 	has_many    :libraries, dependent: :destroy
 	
 	#validates :name, uniqueness: true, length: { minimum: 2, maximum: 40 }, presence: true
-	validates :name, uniqueness: true
+	validates :name, uniqueness: true, presence: true
 	#validates :documents, presence: true
 	validates :biosample_type_id, presence: true
 	validates :biosample_term_name_id, presence: true

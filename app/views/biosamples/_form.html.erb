@@ -44,13 +44,8 @@
 	<%= f.association :biosample_type, collection: BiosampleType.order(:name), prompt: "Select the Biosample Type",
 			input_html: {class: "biosample_type_selector"}, label_html: {"data-toggle" => "tooltip", "title" => "The categorization of the biosample. See 'Biosample Types' in the Object Store."} %>
 
-	<div class="biosample_term_name">
-		<% if @biosample.biosample_term_name.present? %>
-			<%= f.association :biosample_term_name %>
-		<% end %>
-	</div>
-	<!-- use div above to contain the 'input' to select the biosample_term_name. jQuery will add this input when biosample_type is set, and 
-			 update the input's option list whenever biosample_type changes. -->
+  <%= f.association :biosample_term_name, input_html: {class: "biosample_term_name_selector"} %>
+  <!-- When the user changes the value in the biosample_type selector, jQuery will update the biosample_term_name list. -->
 
   <%= f.input :description, label_html: {"data-toggle" => "tooltip", "title" => "A plain text description of the biosample. Do not include experiment details, constructs or treatments."} %>
 
