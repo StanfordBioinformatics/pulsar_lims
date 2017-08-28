@@ -24,7 +24,7 @@ class LibrariesController < ApplicationController
   end
 
   def index
-    @libraries = policy_scope(Library).order("lower(name)")
+    @libraries = policy_scope(Library).non_plated_non_prototype.order("lower(name)")
   end
 
   def show

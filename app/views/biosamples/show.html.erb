@@ -44,15 +44,13 @@
 		</tr>
 	<% end %>
 
-	<tr>
-		<th><strong>Well</strong></th>
-		<% if @biosample.well.present? %>
+	<% if @biosample.well.present? %>
+		<tr>
+			<th><strong>Well</strong></th>
 			<% plate = @biosample.well.plate %>
 			<td>Plate: <%= link_to plate.name, plate %>, Well: <%= link_to @biosample.well.name, [plate, @biosample.well] %></td>
-		<% else %>
-			<td></td>
-		<% end %>
-	</tr>
+		</tr>
+	<% end %>
 
 	<% if @biosample.child_biosamples.any? %>
 		<tr>

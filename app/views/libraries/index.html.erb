@@ -16,7 +16,6 @@
       <th>Biosample</th>
       <th>Vendor</th>
       <th>Lot identifier</th>
-      <th>Vendor product identifier</th>
       <th>Barcode</th>
 			<th>Paired Barcode</th>
       <th>Library fragmentation method</th>
@@ -43,7 +42,6 @@
         <% end %>
   
         <td><%= library.lot_identifier %></td>
-        <td><%= library.vendor_product_identifier %></td>
         
         <!-- Either a barcode or a paired_barcode can be present, not both -->
 				<% if library.barcode.present? %>

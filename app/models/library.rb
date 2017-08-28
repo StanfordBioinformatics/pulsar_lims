@@ -28,7 +28,7 @@ class Library < ActiveRecord::Base
 	validates :nucleic_acid_term_id, presence: true
 	validates :documents, presence: true
 	#validates :vendor_id, presence: true
-	validates :biosample_id, presence: true
+	validates :biosample_id, presence: true, unless: Proc.new {|lib| lib.prototype? }
 	validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"
 	validates :concentration, presence: {message: "must be specified when the units are set."}, if: "concentration_unit.present?"
 	validates :sequencing_library_prep_kit_id, presence: true
@@ -39,12 +39,12 @@ class Library < ActiveRecord::Base
 	accepts_nested_attributes_for :paired_barcode, allow_destroy: true
 
 	scope :persisted, lambda { where.not(id: nil) }
-	scope :non_plated, lambda { where(plated: false, prototype: false) }
+	scope :non_plated_non_prototype, lambda { where(plated: false, prototype: false) }
 
-	before_validation :set_name, on: :create
+	before_validation :set_name, on: :create, unless: Proc.new {|lib| lib.prototype? }
 	after_validation :check_plated
-	validate :verify_barcode #verifies self.barcode/self.paired_barcode
-	validate :verify_plate_consistency #if biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
+	validate :validate_barcode, unless: Proc.new {|lib| lib.prototype? } #verifies self.barcode/self.paired_barcode
+	validate :validate_plate_consistency, unless: "self.prototype?" #if biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
 	validate :validate_prototype
 	after_update :propagate_update_if_prototype
 
@@ -102,7 +102,7 @@ class Library < ActiveRecord::Base
   def self.instantiate_prototype(prototype_library)
 		# Args: prototype_library - A Library record with the 'prototype' attribute set to true.
 		#
-    #A helpler used for updating or creating a library.
+    #A helper used for updating or creating a library.
     #Since the single_cell_sorting.sorting_biosample is duplicated as a 
     #starting point for creating or updating a new well biosample, several fields need to be filtered out,
     #such as the original id and well id, to name a few. When the user updates the sorting biosample,
@@ -141,7 +141,7 @@ class Library < ActiveRecord::Base
 	private
 
 	def check_plated
-		if self.biosample.plated
+		if biosample.present? and self.biosample.plated?
 			self.plated = true
 		else
 			self.plated = false
@@ -178,7 +178,7 @@ class Library < ActiveRecord::Base
 		end
 	end
 
-	def verify_barcode
+	def validate_barcode
 		return unless barcoded?
 
 		if self.barcode.present? and self.paired_barcode.present?
@@ -198,8 +198,7 @@ class Library < ActiveRecord::Base
 		end
 	end
 
-	def verify_plate_consistency
-		#Called in the before_save callback.
+	def validate_plate_consistency
 		#If the library is barcoded, and the biosample is in the well of a plate, then we need to make sure that no
 		# other library on the plate has the same barcode.
 		return unless self.biosample.well.present? and self.barcoded?
@@ -215,5 +214,4 @@ class Library < ActiveRecord::Base
 			return false
 		end
 	end				
-				
 end

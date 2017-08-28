@@ -1,7 +1,7 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @library } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library name"} %>
-  <%= f.input :prototype, as: :hidden, label_html: {"data-toggle" => "tooltip", "title" => "If you want to use this as a template for building other biosamples, select this option."} %>
+  <%= f.input :prototype, as: :hidden, label_html: {"data-toggle" => "tooltip", "title" => "If you want to use this as a template for building other libraries, select this option."} %>
 
   <%= f.association :sequencing_library_prep_kit, label_html: {"data-toggle" => "tooltip", "title" => "The library prep kit used for creating the library."} %>
 
@@ -61,8 +61,6 @@
 	<% if not @library.prototype %>
 	  <%= f.association :biosample, collection: Biosample.order(:name), label_method: :name, prompt: "Select the Biosample",
 			label_html: {"data-toggle" => "tooltip","title" => "The biosample that nucleic acid was isolated from to generate the library."} %>
-	<% else %>
-		<%= f.association :biosample, as: :hidden %> <!-- Whatever server-side code set it as a prototype should also set the default biosampe. -->
 	<% end %>
 
   <%= f.association :vendor, collection: Vendor.order(:name), label_method: :name,  prompt: "Select the Vendor",
