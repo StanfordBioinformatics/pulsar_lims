@@ -1,7 +1,16 @@
 class CrisprsController < ApplicationController
   before_action :set_crispr, only: [:show, :edit, :update, :destroy]
-  skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome]
+  skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct]
 
+	def select_crispr_construct
+		#Function: Called via AJAX in the crispr form when the user clicks the "Add Crispr Construct" button. 
+		#Parsed params : exclude_ids - Array of CrisprConstruct IDs to exclude from the selection.
+		exclude_ids = params[:exclude_ids]
+		@crispr = Crispr.new
+		@crispr_constructs = CrisprConstruct.where.not(id: exclude_ids)
+		render layout: false
+	end
+	
   def select_chromosome_on_reference_genome
     @crispr = Crispr.new
 		@crispr.build_genomic_integration_site
@@ -76,6 +85,6 @@ class CrisprsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def crispr_params
-      params.require(:crispr).permit(:name, :crispr_construct_id, :donor_construct_id, :biosample_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end] )
+      params.require(:crispr).permit(:name, :donor_construct_id, :biosample_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy] )
     end
 end

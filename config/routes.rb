@@ -13,6 +13,7 @@ Pulsar::Application.routes.draw do
 	end
   resources :paired_barcodes
   resources :crisprs do
+		get :select_crispr_construct, on: :collection
 		get :select_chromosome_on_reference_genome, on: :collection
 	end
   resources :crispr_constructs do

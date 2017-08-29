@@ -4,11 +4,10 @@
 
 $ ->  
 
-  $(document).on("click",".remove_construct_tag", -> 
+  $(document).on "click",".remove_construct_tag", -> 
     $parentSelector = $(@).closest("div")
-    $parentSelector.fadeOut("fast")
-    $parentSelector.remove()
-  )
+    $parentSelector.fadeOut () ->
+      $parentSelector.remove()
 
   $("#add_construct_tag").on "ajax:success", (event,data) ->  
     $("#added_construct_tags").append(data)

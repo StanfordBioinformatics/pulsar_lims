@@ -2,7 +2,22 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique name"} %>
-  <%= f.association :crispr_construct, label_html: {"data-toggle" => "tooltip", "title" => "The Crispr Construct that contains the guide sequence."} %>
+	<div id="added_crispr_constructs"></div>
+	<!-- .added_crispr_constructs will serve as the container for new crispr_construct selections added by jQuery. -->
+
+	<% if not @crispr.persisted? and @crispr.crispr_constructs.any? %>
+		<!-- Then the form was rerendered (perhaps due to input error on submission), and 
+         we want to show what the user originally selected.
+		-->
+		<%= render partial: "crispr_constructs/select_crispr_construct", 
+				locals: {f: f, crispr_constructs: CrisprConstruct.all} %>
+	<% end %>
+
+	<%= link_to "Add Crispr Construct", select_crispr_construct_crisprs_path(exclude_ids: @crispr.crispr_constructs.ids), 
+			remote: true, 
+			class: "crispr_select_crispr_construct reg-btn" %>
+	</br></br>	
+
   <%= f.association :donor_construct, label_html: {"data-toggle" => "tooltip", "title" => "The Donor Construct that contains the donor sequence to integrate at the genomic site of the genetic modification."} %>
   <%= f.association :biosample, collection: Biosample.non_plated, label_html: {"data-toggle" => "tooltip", "title" => "The biosample on which the CRISPR was performed."} %>
 

@@ -3,6 +3,7 @@ class Plate < ActiveRecord::Base
 	ROW_LETTERS = ("A".."Z").to_a
 	DIMENSIONS = ["2x2 (4)","8x12 (96)","16x24 (384)"]
 	
+	has_and_belongs_to_many :antibodies
 	has_many :wells, dependent: :destroy  #"validate: true" is default for has_many
 	has_and_belongs_to_many :sequencing_requests
 	belongs_to :single_cell_sorting, required: true 
@@ -24,6 +25,18 @@ class Plate < ActiveRecord::Base
 
 	def self.row_letter(row_num)
 		return ROW_LETTERS[row_num - 1]
+	end
+
+	def antibody_ids(ids)
+    ids.each do |i| 
+      if i.present?
+        ab = Antibody.find(i) 
+        if self.antibodies.include?(ab)
+          next
+        end 
+        self.antibodies << ab
+      end 
+    end 
 	end
 
 	def nrow

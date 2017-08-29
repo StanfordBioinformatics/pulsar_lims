@@ -10,7 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Crispr construct</th>
+      <th>Crispr constructs</th>
       <th>Donor construct</th>
       <th>Biosample</th>
 			<th>Target</th>
@@ -22,10 +22,15 @@
     <% @crisprs.each do |crispr| %>
       <tr>
         <td><%= link_to crispr.name, crispr %></td>
-        <td><%= link_to crispr.crispr_construct.name, crispr.crispr_construct %></td>
+				<td>
+					<% crispr.crispr_constructs.each do |cc| %>
+		        <%= link_to cc.name, cc %>
+					<% end %>
+				</td>
         <td><%= link_to crispr.donor_construct.name, crispr.donor_construct %></td>
         <td><%= link_to crispr.biosample.name, crispr.biosample %></td>
-				<td><%= link_to crispr.crispr_construct.target.name, crispr.crispr_construct.target %></td>
+				<% target = crispr.crispr_constructs.first.target %>
+				<td><%= link_to target.name, target %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_crispr_path(crispr) %>
 	        <%= link_to fa_icon("trash"), crispr, method: :delete, data: { confirm: 'Are you sure?' } %>

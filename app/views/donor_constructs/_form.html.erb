@@ -38,7 +38,7 @@
     <% if @donor_construct.construct_tags.persisted.any? %>
       <% exclude_tags = @donor_construct.construct_tags.persisted.each { |x| x.id } %>
     <% end %>
-    <%= link_to "Add Tag", select_construct_tag_donor_constructs_path(:exclude_construct_tags => exclude_tags), remote: true, id: "add_construct_tag" %>
+    <%= link_to "Add Tag", select_construct_tag_donor_constructs_path(:exclude_construct_tags => exclude_tags), remote: true, id: "crispr_add_construct_tag" %>
   </p>
 
   <div class="form-actions">

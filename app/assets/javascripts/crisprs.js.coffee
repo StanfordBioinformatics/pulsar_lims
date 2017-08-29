@@ -19,3 +19,12 @@ $ ->
 
   $("#reference_genome_id").change (event) ->
     chromosome_selection()
+
+  $(document).on "click",".remove_crispr_construct", ->  
+    $parentSelector = $(@).closest("div")
+    $parentSelector.fadeOut () -> 
+      $parentSelector.remove()
+
+  $(".crispr_select_crispr_construct",document).on "ajax:success", (event,data) ->
+    $("#added_crispr_constructs").append(data)
+    

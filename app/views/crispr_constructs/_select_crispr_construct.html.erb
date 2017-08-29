@@ -1,0 +1,7 @@
+<% content_for :rm_tag_selector do %>
+	<span>Construct Tags <a class="remove_crispr_construct fa fa-remove"></a></span>
+<% end %>
+
+<%= f.association :crispr_constructs, label: content_for(:rm_tag_selector), collection: crispr_constructs.order(:name), input_html: {multiple: true}, label_html: {"data-toggle" => "tooltip", "title" => "The Crispr Construct that contains the guide sequence."} %>
+
+<!-- Relevant jQuery in construct_tags.js.coffee -->

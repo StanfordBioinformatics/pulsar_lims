@@ -56,7 +56,7 @@
 		<tr>
 			<th><strong>Child Biosamples</strong></th>
 			<td>
-				<ul style="list-style: none;">
+				<ul class="list-unstyled">
 					<% @biosample.child_biosamples.each do |x| %>
 						<li><%= link_to x.name, x %></li>
 					<% end %>

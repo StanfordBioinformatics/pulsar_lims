@@ -17,8 +17,14 @@
 	</tr>
 	
 	<tr>
-	  <th><strong>Crispr construct:</strong></th>
-	  <td><%= link_to @crispr.crispr_construct.name, @crispr.crispr_construct %></td>
+	  <th><strong>Crispr constructs:</strong></th>
+	  <td>
+			<ul class="list-unstyled">
+				<% @crispr.crispr_constructs.each do |cc| %>
+					<li><%= link_to cc.name, cc %></li>
+				<% end %>
+			</ul>
+		</td>
 	</tr>
 	
 	<tr>
@@ -33,7 +39,8 @@
 
 	<tr>
 		<th><strong>Target</strong</th>
-		<td><%= link_to @crispr.crispr_construct.target.name, @crispr.crispr_construct.target %></td>
+		<% target = @crispr.crispr_constructs.first.target %>
+		<td><%= link_to target.name, target %></td>
 	</tr>
 
 </table>

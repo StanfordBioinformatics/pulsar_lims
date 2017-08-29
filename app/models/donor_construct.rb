@@ -25,7 +25,7 @@ class DonorConstruct < ActiveRecord::Base
 		ids.each do |i|
 			if i.present?
 				construct = ConstructTag.find(i) 
-				if self.construct_tags.present? and self.construct_tags.include?(construct)
+				if self.construct_tags.include?(construct)
 					next
 				end
 				self.construct_tags << construct

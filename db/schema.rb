@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825005705) do
+ActiveRecord::Schema.define(version: 20170828220655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,14 @@ ActiveRecord::Schema.define(version: 20170825005705) do
     t.integer "antibody_id"
     t.integer "antibody_purification_id"
   end
+
+  create_table "antibodies_plates", id: false, force: :cascade do |t|
+    t.integer "antibody_id", null: false
+    t.integer "plate_id",    null: false
+  end
+
+  add_index "antibodies_plates", ["antibody_id", "plate_id"], name: "index_antibodies_plates_on_antibody_id_and_plate_id", using: :btree
+  add_index "antibodies_plates", ["plate_id", "antibody_id"], name: "index_antibodies_plates_on_plate_id_and_antibody_id", using: :btree
 
   create_table "antibody_purifications", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -245,6 +253,14 @@ ActiveRecord::Schema.define(version: 20170825005705) do
   add_index "crispr_constructs", ["target_id"], name: "index_crispr_constructs_on_target_id", using: :btree
   add_index "crispr_constructs", ["user_id"], name: "index_crispr_constructs_on_user_id", using: :btree
   add_index "crispr_constructs", ["vendor_id"], name: "index_crispr_constructs_on_vendor_id", using: :btree
+
+  create_table "crispr_constructs_crisprs", id: false, force: :cascade do |t|
+    t.integer "crispr_id",           null: false
+    t.integer "crispr_construct_id", null: false
+  end
+
+  add_index "crispr_constructs_crisprs", ["crispr_construct_id", "crispr_id"], name: "crispr_construct_crispr", using: :btree
+  add_index "crispr_constructs_crisprs", ["crispr_id", "crispr_construct_id"], name: "crispr_crispr_construct", using: :btree
 
   create_table "crisprs", force: :cascade do |t|
     t.string   "name"
