@@ -25,22 +25,44 @@
 //
 //    $(funcion() {
 //       $(document).click(".someClass",function() {
-//					...
-//				})
-//		});
+//          ...
+//        })
+//    });
 //
 // it should instead be:
 //
-//		$(function() {
-//			$(document).on("click",".someClass",function() {
-//				...
-//			})
-//		});
+//    $(function() {
+//      $(document).on("click",".someClass",function() {
+//        ...
+//      })
+//    });
 
 $(function() {
+  //Deletes table rows when the user clicks on the trash icon. Does so remotely w/o a page refresh. 
+  $("tr a .fa-trash").on("click",function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (confirm("Are you sure you want to delete this?") == true) {
+      url = $(this).closest("a").attr("href");
+      $tr = $(this).closest("tr");
+      $.ajax(url, {
+        method: "DELETE", 
+        dataType: "json",
+        error: function(xhr,errmsg,err) {
+          alert("Error deleting row.")
+        },
+        success: function(data,status,xhr) {
+          $tr.fadeOut(function(){
+            $tr.remove()
+          })
+        }
+      })
+    }
+  })
+
   //Add spinner cursor whenever the user clicks on a button
-	//Add fonts awesome icon 'info-circle' after all labels that have a tooltip:
-	$(document).ajaxSend(function() {
+  //Add fonts awesome icon 'info-circle' after all labels that have a tooltip:
+  $(document).ajaxSend(function() {
     $("body").addClass("waiting")
   })
 
@@ -62,7 +84,7 @@ $(function() {
   //$('[data-toggle="tooltip"]').attr("data-delay",900)
   $('[data-toggle="tooltip"]').tooltip({ trigger: 'click' })
   //Above I pass in { trigger: 'hover' }, since the default is "trigger: 'focus'". The default is an issue for 
-	//inputs such as checkboxes that maintain focus after selection until another elements gains focus.
+  //inputs such as checkboxes that maintain focus after selection until another elements gains focus.
 });
 
 //The code below was derived from https://devcenter.heroku.com/articles/direct-to-s3-image-uploads-in-rails

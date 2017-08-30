@@ -53,6 +53,7 @@ class ConstructTagsController < ApplicationController
     @construct_tag.destroy
     respond_to do |format|
       format.html { redirect_to construct_tags_url }
+      format.js   {head :no_content }
       format.json { head :no_content }
     end
   end

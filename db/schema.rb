@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170828220655) do
+ActiveRecord::Schema.define(version: 20170830004555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -265,7 +265,6 @@ ActiveRecord::Schema.define(version: 20170828220655) do
   create_table "crisprs", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.integer  "crispr_construct_id"
     t.integer  "donor_construct_id"
     t.integer  "biosample_id"
     t.text     "description"
@@ -275,7 +274,6 @@ ActiveRecord::Schema.define(version: 20170828220655) do
   end
 
   add_index "crisprs", ["biosample_id"], name: "index_crisprs_on_biosample_id", using: :btree
-  add_index "crisprs", ["crispr_construct_id"], name: "index_crisprs_on_crispr_construct_id", using: :btree
   add_index "crisprs", ["donor_construct_id"], name: "index_crisprs_on_donor_construct_id", using: :btree
   add_index "crisprs", ["genomic_integration_site_id"], name: "index_crisprs_on_genomic_integration_site_id", using: :btree
   add_index "crisprs", ["name"], name: "index_crisprs_on_name", unique: true, using: :btree
@@ -726,7 +724,6 @@ ActiveRecord::Schema.define(version: 20170828220655) do
   add_foreign_key "crispr_constructs", "users"
   add_foreign_key "crispr_constructs", "vendors"
   add_foreign_key "crisprs", "biosamples"
-  add_foreign_key "crisprs", "crispr_constructs"
   add_foreign_key "crisprs", "donor_constructs"
   add_foreign_key "crisprs", "genome_locations", column: "genomic_integration_site_id"
   add_foreign_key "crisprs", "users"

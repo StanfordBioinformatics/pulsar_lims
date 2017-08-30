@@ -24,7 +24,10 @@
 	<% if @library.documents.persisted.any? %>
 	  <table class="min-table">
 			<thead>
-			  <tr><th><strong>Protocol documents:</strong></th><th></th></tr>
+			  <tr>
+					<th><strong>Protocol documents:</strong></th>
+					<th></th>
+				</tr>
 			</thead>
 			<tbody>
 			  <%= f.simple_fields_for :documents do |ff| %>

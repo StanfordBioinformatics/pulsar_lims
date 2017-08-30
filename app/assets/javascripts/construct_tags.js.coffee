@@ -9,7 +9,7 @@ $ ->
     $parentSelector.fadeOut () ->
       $parentSelector.remove()
 
-  $("#add_construct_tag").on "ajax:success", (event,data) ->  
+  $(".add_construct_tag").on "ajax:success", (event,data) ->  
     $("#added_construct_tags").append(data)
     #$newContentLabel = $(".donor_construct_construct_tags").last().children("label").first()
     #$newContentLabel.text("Construct Tag") #default label set by simple form is Construct Tags.

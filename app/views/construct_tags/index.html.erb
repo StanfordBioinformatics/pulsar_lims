@@ -18,11 +18,11 @@
   <tbody>
     <% @construct_tags.each do |construct_tag| %>
       <tr>
-        <td><%= construct_tag.name %></td>
+        <td><%= link_to construct_tag.name, construct_tag %></td>
         <td><%= construct_tag.description %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_construct_tag_path(construct_tag) %>
-        	<%= link_to fa_icon("trash"), construct_tag, method: :delete, data: { confirm: 'Are you sure?' } %>
+        	<%= link_to fa_icon("trash"), construct_tag %>
 				</td>
       </tr>
     <% end %>

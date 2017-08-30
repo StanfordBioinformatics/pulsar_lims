@@ -32,7 +32,7 @@
         <td><%= donor_construct.insert_sequence %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_donor_construct_path(donor_construct) %>
-        	<%= link_to fa_icon("trash"), donor_construct, method: :delete, data: { confirm: 'Are you sure?' } %>
+        	<%= link_to fa_icon("trash"), donor_construct, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
 				</td>
       </tr>
     <% end %>

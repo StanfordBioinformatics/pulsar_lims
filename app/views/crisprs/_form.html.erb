@@ -2,6 +2,28 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique name"} %>
+
+	<% pers_crispr_constructs = @crispr.crispr_constructs.persisted %>
+	<% if @crispr.persisted? and pers_crispr_constructs.any? %>
+		<table class="min-table">
+			<thead>
+				<tr>
+					<th><strong>Crispr constructs:</strong></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<%= f.simple_fields_for :crispr_constructs, pers_crispr_constructs do |ff| %>
+					<% cc = pers_crispr_constructs[ff.index] %>
+					<tr>
+						<td><%= cc.name %></td>
+						<td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table></br>
+	<% end %>
+				
 	<div id="added_crispr_constructs"></div>
 	<!-- .added_crispr_constructs will serve as the container for new crispr_construct selections added by jQuery. -->
 
