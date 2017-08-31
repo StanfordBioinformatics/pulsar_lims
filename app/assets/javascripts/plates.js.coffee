@@ -46,6 +46,8 @@ $ ->
     if ($("#fluorophore_antibodies option[value=\"#{$ab_id}\"]").length == 0)
       $("#fluorophore_antibodies").append($(@).clone())
     
+  $selected_abs = $(".plate_select_antibodies option:selected")
+  $("#fluorophore_antibodies").append($selected_abs.clone())
   $(document).on "dblclick", "#fluorophore_antibodies option", (event) ->
     $(@).fadeOut () ->
        $(@).remove()

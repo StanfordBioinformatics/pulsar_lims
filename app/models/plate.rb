@@ -28,15 +28,16 @@ class Plate < ActiveRecord::Base
 	end
 
 	def antibody_ids=(ids)
+		new_selection = []
     ids.each do |i| 
       if i.present?
         ab = Antibody.find(i) 
-        if self.antibodies.include?(ab)
-          next
-        end 
-        self.antibodies << ab
+				new_selection << ab
       end 
-    end 
+		end
+		if new_selection.length > 0
+			self.antibodies = new_selection
+		end
 	end
 
 	def nrow
