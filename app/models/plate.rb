@@ -27,7 +27,7 @@ class Plate < ActiveRecord::Base
 		return ROW_LETTERS[row_num - 1]
 	end
 
-	def antibody_ids(ids)
+	def antibody_ids=(ids)
     ids.each do |i| 
       if i.present?
         ab = Antibody.find(i) 

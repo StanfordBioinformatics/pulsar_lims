@@ -36,6 +36,18 @@
   	<th><strong>Vendor product identifier:</strong></th>
   	<td><%= @plate.vendor_product_identifier %></td>
 	</tr>
+	
+	<tr>
+		<th><strong>Fluorophore-conjugated antibodies:</strong></th>
+		<td>
+      <ul class="list-unstyled">
+				<% @plate.antibodies.each do |ab| %>
+ 	       <li><%= link_to ab.name, ab %></li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+				
 </table>
 
 <%= render partial: "plate" %>

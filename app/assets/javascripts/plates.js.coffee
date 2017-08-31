@@ -38,3 +38,21 @@ $ ->
     $.get "/plates/" + plate_id + "/show_barcodes", checked: this.checked, (responseText,status,jqXHR) -> 
       $("#plate_jumbotron").replaceWith(responseText) 
       set_failed_wells_color()
+
+  #Adding fluorophore-conjugated barcodes
+  $(document).on "dblclick", ".plate_select_antibodies option", (event) ->
+    #$ab_name = $(@).text()
+    $ab_id = $(@).val()
+    if ($("#fluorophore_antibodies option[value=\"#{$ab_id}\"]").length == 0)
+      $("#fluorophore_antibodies").append($(@).clone())
+    
+  $(document).on "dblclick", "#fluorophore_antibodies option", (event) ->
+    $(@).fadeOut () ->
+       $(@).remove()
+
+  $('input[type="submit"].submit_plate').on "click", (event) -> 
+    selected = $("#fluorophore_antibodies option").map( () ->
+      return $(this).val()
+    ).get()
+    $(".plate_select_antibodies").val(selected)
+    

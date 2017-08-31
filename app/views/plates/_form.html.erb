@@ -6,3 +6,20 @@
 	<%= f.association :single_cell_sorting, as: :hidden %>
   <%= f.association :vendor %>
   <%= f.input :vendor_product_identifier %>
+
+	<div class="plate_select_antibodies_container" style="margin-bottom: 1em;" >
+		<div style="width: 10em;float: left;">
+			<%= f.input_field :antibodies, collection: Antibody.all, style: "width: 100%", size: 6, class: "plate_select_antibodies" %>
+			<div>Double-click items to add</div>
+		</div>
+     <div style="margin-left:1em; margin-right: 1em;position:relative; top: 1em;float: left;">
+       <i style="display: inline-block;width: 20%;" class="fa fa-arrow-right fa-lg"></i>
+     </div>
+		<div style="float: left;width: 10em;">
+			<%= select_tag "fluorophore_antibodies", nil, size: 6, style: "width: 10em;" %>
+			<div>Double-click items to remove</div>
+		</div>
+		<div style="clear: both;">djfkdjafdasdfdfdf</div>
+	</div>
+	<div></div>
+

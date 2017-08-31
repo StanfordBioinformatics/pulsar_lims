@@ -1,3 +1,7 @@
 <div class="actions">
-  <%= f.button :submit, class: "btn-primary" %>
+	<% class_val = "btn-primary" %>
+  <% if defined?(:add_classes) %>
+    <% class_val += " " + add_classes %>
+	<% end %>
+  <%= f.button :submit, class: class_val %>
 </div></br>
