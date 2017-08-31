@@ -60,16 +60,17 @@ $(function() {
     }
   })
 
-  //Add spinner cursor whenever the user clicks on a button
-  //Add fonts awesome icon 'info-circle' after all labels that have a tooltip:
+  //Add spinner cursor whenever the user initiates AJAX request.
   $(document).ajaxSend(function() {
     $("body").addClass("waiting")
   })
 
+  //Remove spinner cursor when AJAX request completes.
   $(document).ajaxComplete(function() {
     $("body").removeClass("waiting")
   })
 
+  //Add fonts awesome icon 'info-circle' after all labels that have a tooltip:
   $("label[data-toggle='tooltip']",document).append('<sup><i style="padding-left: 0.1em;" class="fa fa-info-circle"></i></sup>');
   $(document).on("click",".close-modal",function(event) {
     $(".modal").hide();
