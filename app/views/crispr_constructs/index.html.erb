@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Target</th>
       <th>Guide sequence</th>
       <th>Cloning vector</th>
@@ -21,18 +22,19 @@
   </thead>
 
   <tbody>
-    <% @crispr_constructs.each do |cc| %>
+    <% @crispr_constructs.each do |rec| %>
       <tr>
-        <td><%= link_to cc.name, cc %></td>
-        <td><%= link_to cc.target.name, cc.target %></td>
-        <td><%= cc.guide_sequence %></td>
-        <td><%= link_to cc.cloning_vector.name, cc.cloning_vector %></td>
-        <td><%= cc.description %></td>
-        <td><%= link_to cc.vendor.name, cc.vendor %></td>
-        <td><%= cc.vendor_product_identifier %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= link_to rec.target.name, rec.target %></td>
+        <td><%= rec.guide_sequence %></td>
+        <td><%= link_to rec.cloning_vector.name, rec.cloning_vector %></td>
+        <td><%= rec.description %></td>
+        <td><%= link_to rec.vendor.name, rec.vendor %></td>
+        <td><%= rec.vendor_product_identifier %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_crispr_construct_path(cc) %>
-        	<%= link_to fa_icon("trash"), cc, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_crispr_construct_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

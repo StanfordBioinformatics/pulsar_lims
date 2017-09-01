@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>ENCID</th>
       <th>Description</th>
 			<th>URL</th>
@@ -18,15 +19,16 @@
   </thead>
 
   <tbody>
-    <% @vendors.each do |vendor| %>
+    <% @vendors.each do |rec| %>
       <tr>
-				<td><%= link_to vendor.name, vendor%></td>
-				<td><%= vendor.encode_identifier %></td>
-        <td><%= vendor.description %></td>
-        <td><%= link_to vendor.url, vendor.url %></td>
+				<td><%= link_to rec.name, rec%></td>
+				<td><%= rec.user.display() %></td>
+				<td><%= rec.encode_identifier %></td>
+        <td><%= rec.description %></td>
+        <td><%= link_to rec.url, rec.url %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_vendor_path(vendor) %>j
-        	<%= link_to fa_icon("trash"), vendor, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_vendor_path(rec) %>j
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

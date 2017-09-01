@@ -10,17 +10,19 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @antibody_purifications.each do |antibody_purification| %>
+    <% @antibody_purifications.each do |rec| %>
       <tr>
-        <td><%= link_to antibody_purification.name, antibody_purification %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_antibody_purification_path(antibody_purification) %>
-        	<%= link_to fa_icon("trash"), antibody_purification, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_antibody_purification_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

@@ -11,6 +11,7 @@
   <thead>
     <tr>
 			<th>Name</th>
+			<th>Creator</th>
 			<th>Owner</th>
 			<th>Parent Biosample</th>
 			<th>Well</th>
@@ -25,36 +26,37 @@
   </thead>
 
   <tbody>
-    <% @biosamples.each do |biosample| %>
-				<td><%= link_to biosample.name, biosample %></td>
+    <% @biosamples.each do |rec| %>
+				<td><%= link_to rec.name, rec%></td>
+				<td><%= rec.user.display() %></td>
 				<td>
-					<% if biosample.owner.present? %>
-						<%= biosample.owner.display %>
+					<% if rec.owner.present? %>
+						<%= rec.owner.display %>
 					<% end %>
 				</td>
-				<% if biosample.parent_biosample.present? %>
-					<td><%= link_to biosample.parent_biosample.name, biosample.parent_biosample %></td>
+				<% if rec.parent_biosample.present? %>
+					<td><%= link_to rec.parent_biosample.name, rec.parent_biosample %></td>
 				<% else %>
 					<td></td>
 				<% end %>
-				<% if biosample.well.present? %>
-					<td><%= link_to biosample.well.name, [biosample.well.plate, biosample.well] %></td>
+				<% if rec.well.present? %>
+					<td><%= link_to rec.well.name, [rec.well.plate, rec.well] %></td>
 				<% else %>
 					<td></td>
 				<% end %>
-        <!-- <td><%# biosample.description %></td> -->
-        <td><%= biosample.vendor.name %></td>
-				<td><%= biosample.biosample_type.name %></td>
-        <td><%= link_to biosample.biosample_term_name.name, biosample.biosample_term_name %></td>
-				<% if biosample.crispr.present? %>	
-					<td><%= link_to biosample.crispr.name, biosample.crispr %></td>
+        <!-- <td><%# rec.description %></td> -->
+        <td><%= rec.vendor.name %></td>
+				<td><%= rec.biosample_type.name %></td>
+        <td><%= link_to rec.biosample_term_name.name, rec.biosample_term_name %></td>
+				<% if rec.crispr.present? %>	
+					<td><%= link_to rec.crispr.name, rec.crispr %></td>
 				<% else %>
 					<td></td>
 				<% end %>
-        <td><%= biosample.encid %></td>
+        <td><%= rec.encid %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_biosample_path(biosample) %>
-        	<%= link_to fa_icon("trash"), biosample, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_biosample_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

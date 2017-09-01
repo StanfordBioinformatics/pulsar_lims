@@ -9,6 +9,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Comment</th>
       <th>Sequencing platform</th>
       <th>Sequencing center</th>
@@ -21,29 +22,30 @@
   </thead>
 
   <tbody>
-    <% @sequencing_requests.each do |sr| %>
+    <% @sequencing_requests.each do |rec| %>
       <tr>
-        <td><%= link_to sr.name, sr %></td>
-        <td><%= sr.comment %></td>
-        <td><%= link_to sr.sequencing_platform.name, sr.sequencing_platform %></td>
-        <td><%= link_to sr.sequencing_center.name, sr.sequencing_center %></td>
-				<% if sr.concentration.present? %>
-					<td><%= sr.concentration %>&nbsp;<%= sr.concentration_unit.name %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= rec.comment %></td>
+        <td><%= link_to rec.sequencing_platform.name, rec.sequencing_platform %></td>
+        <td><%= link_to rec.sequencing_center.name, rec.sequencing_center %></td>
+				<% if rec.concentration.present? %>
+					<td><%= rec.concentration %>&nbsp;<%= rec.concentration_unit.name %></td>
 				<% else %>
 					<td></td>
 				<% end %>
-        <td><%= sr.paired_end%></td>
-        <td><%= sr.shipped %></td>
-				<% if sr.sequencing_runs.present? %>
-					<% sr.sequencing_runs.each do |run| %>
-		        <td><%= link_to run.name, [sr,run] %></td>
+        <td><%= rec.paired_end%></td>
+        <td><%= rec.shipped %></td>
+				<% if rec.sequencing_runs.present? %>
+					<% rec.sequencing_runs.each do |run| %>
+		        <td><%= link_to run.name, [rec,run] %></td>
 					<% end %>
 				<% else %>
 					<td>None</td>
 				<% end %>
         <td>
-					<%= link_to fa_icon("pencil"), edit_sequencing_request_path(sr) %>
-        	<%= link_to fa_icon("trash"), sr, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_sequencing_request_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

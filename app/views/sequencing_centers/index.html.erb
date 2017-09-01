@@ -9,6 +9,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Address</th>
 			<th>Web URL</th>
       <th>Actions</th>
@@ -16,14 +17,15 @@
   </thead>
 
   <tbody>
-    <% @sequencing_centers.each do |sc| %>
+    <% @sequencing_centers.each do |rec| %>
       <tr>
-        <td><%= link_to sc.name, sc %></td>
-        <td><%= sc.address %></td>
-				<td><%= link_to sc.url,sc.url %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= rec.address %></td>
+				<td><%= link_to rec.url,rec.url %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_sequencing_center_path(sc) %>
-        	<%= link_to fa_icon("trash"), sc, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_sequencing_center_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Accession</th>
       <th>Definition</th>
       <th>Actions</th>
@@ -17,14 +18,15 @@
   </thead>
 
   <tbody>
-    <% @nucleic_acid_terms.each do |nucleic_acid_term| %>
+    <% @nucleic_acid_terms.each do |rec| %>
       <tr>
-        <td><%= link_to nucleic_acid_term.name, nucleic_acid_term %></td>
-        <td><%= nucleic_acid_term.accession %></td>
-        <td><%= nucleic_acid_term.definition %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= rec.accession %></td>
+        <td><%= rec.definition %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_nucleic_acid_term_path(nucleic_acid_term) %>
-        	<%= link_to fa_icon("trash"), nucleic_acid_term, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_nucleic_acid_term_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

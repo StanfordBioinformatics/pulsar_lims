@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Sequencing library prep kit</th>
       <th>Index1</th>
       <th>Index2</th>
@@ -18,14 +19,15 @@
   </thead>
 
   <tbody>
-    <% @paired_barcodes.each do |pb| %>
+    <% @paired_barcodes.each do |rec| %>
       <tr>
-        <td><%= link_to pb.name, pb %></td>
-        <td><%= link_to pb.sequencing_library_prep_kit.name, pb.sequencing_library_prep_kit %></td>
-        <td><%= link_to "#{pb.index1.name} #{pb.index1.sequence}", [pb.sequencing_library_prep_kit,pb.index1] %></td>
-        <td><%= link_to "#{pb.index2.name} #{pb.index2.sequence}", [pb.sequencing_library_prep_kit,pb.index2] %></td>
-        <td><%= link_to fa_icon("pencil"), edit_paired_barcode_path(pb) %></td>
-        <td><%= link_to fa_icon("trash"), pb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= link_to rec.sequencing_library_prep_kit.name, rec.sequencing_library_prep_kit %></td>
+        <td><%= link_to "#{rec.index1.name} #{rec.index1.sequence}", [rec.sequencing_library_prep_kit,rec.index1] %></td>
+        <td><%= link_to "#{rec.index2.name} #{rec.index2.sequence}", [rec.sequencing_library_prep_kit,rec.index2] %></td>
+        <td><%= link_to fa_icon("pencil"), edit_paired_barcode_path(rec) %></td>
+        <td><%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

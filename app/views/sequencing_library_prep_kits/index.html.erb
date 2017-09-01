@@ -11,6 +11,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Vendor</th>
 			<th>Vendor Product ID</th>
 			<th>Supports Paired End</th>
@@ -20,16 +21,17 @@
   </thead>
 
   <tbody>
-    <% @sequencing_library_prep_kits.each do | prep_kit | %>
+    <% @sequencing_library_prep_kits.each do | rec | %>
       <tr>
-        <td><%= link_to prep_kit.name, prep_kit %></td>
-        <td><%= link_to prep_kit.vendor.name, prep_kit.vendor %></td>
-        <td><%= prep_kit.vendor_product_identifier %></td>
-				<td><%= prep_kit.supports_paired_end %></td>
-        <td><%= prep_kit.description %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= link_to rec.vendor.name, rec.vendor %></td>
+        <td><%= rec.vendor_product_identifier %></td>
+				<td><%= rec.supports_paired_end %></td>
+        <td><%= rec.description %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_sequencing_library_prep_kit_path(prep_kit) %>
-        	<%= link_to fa_icon("trash"), prep_kit, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_sequencing_library_prep_kit_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

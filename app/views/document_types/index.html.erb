@@ -10,17 +10,19 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @document_types.each do |document_type| %>
+    <% @document_types.each do |rec| %>
       <tr>
-        <td><%= link_to document_type.name, document_type %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_document_type_path(document_type) %>
-        	<%= link_to fa_icon("trash"), document_type, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_document_type_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

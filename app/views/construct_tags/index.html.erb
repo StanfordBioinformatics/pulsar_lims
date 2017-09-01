@@ -10,19 +10,21 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Description</th>
       <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @construct_tags.each do |construct_tag| %>
+    <% @construct_tags.each do |rec| %>
       <tr>
-        <td><%= link_to construct_tag.name, construct_tag %></td>
-        <td><%= construct_tag.description %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= rec.description %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_construct_tag_path(construct_tag) %>
-        	<%= link_to fa_icon("trash"), construct_tag %>
+					<%= link_to fa_icon("pencil"), edit_construct_tag_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec %>
 				</td>
       </tr>
     <% end %>

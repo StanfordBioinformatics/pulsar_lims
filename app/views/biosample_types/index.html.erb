@@ -1,5 +1,4 @@
-<header>
-	<h1>Biosample Types</h1>
+<header> <h1>Biosample Types</h1>
 
 	<ul class="actions">
 		<%= render partial: "application_partials/auth_new_record", locals: {model_class: BiosampleType} %>	
@@ -10,17 +9,19 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @biosample_types.each do |biosample_type| %>
+    <% @biosample_types.each do |rec| %>
       <tr>
-        <td><%= link_to biosample_type.name, biosample_type %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_biosample_type_path(biosample_type) %>
-        	<%= link_to fa_icon("trash"), biosample_type, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_biosample_type_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

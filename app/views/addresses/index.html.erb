@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Street</th>
       <th>City</th>
       <th>State/Province</th>
@@ -19,16 +20,17 @@
   </thead>
 
   <tbody>
-    <% @addresses.each do |address| %>
+    <% @addresses.each do |rec| %>
       <tr>
-        <td><%= link_to address.name, address %></td>
-        <td><%= address.street %></td>
-        <td><%= address.city %></td>
-        <td><%= address.state %></td>
-        <td><%= address.country %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= rec.street %></td>
+        <td><%= rec.city %></td>
+        <td><%= rec.state %></td>
+        <td><%= rec.country %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_address_path(address) %>
-        	<%= link_to fa_icon("trash"), address, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_address_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

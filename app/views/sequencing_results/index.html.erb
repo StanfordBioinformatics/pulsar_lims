@@ -14,6 +14,7 @@
   <thead>
     <tr>
       <th>Sequencing run</th>
+			<th>Creator</th>
       <th>Library</th>
       <th>Comment</th>
       <th>Read1 uri</th>
@@ -25,18 +26,19 @@
   </thead>
 
   <tbody>
-    <% @_sequencing_results.each do |res| %>
+    <% @_sequencing_results.each do |rec| %>
       <tr>
         <td><%= link_to @sequencing_run.name, [@sequencing_request,@sequencing_run] %></td>
-        <td><%= link_to res.library.name, res.library %></td>
-        <td><%= res.comment %></td>
-        <td><%= res.read1_uri %></td>
-        <td><%= res.read2_uri %></td>
-        <td><%= res.read1_count %></td>
-        <td><%= res.read2_count %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= link_to rec.library.name, rec.library %></td>
+        <td><%= rec.comment %></td>
+        <td><%= rec.read1_uri %></td>
+        <td><%= rec.read2_uri %></td>
+        <td><%= rec.read1_count %></td>
+        <td><%= rec.read2_count %></td>
         <td>
-					<%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_run,res] %>
-        	<%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_run,res], method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_run,rec] %>
+        	<%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_run,rec], method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

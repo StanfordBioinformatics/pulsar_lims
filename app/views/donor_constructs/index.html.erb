@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Cloning vector</th>
       <th>Vender</th>
       <th>Vender product identifier</th>
@@ -21,18 +22,19 @@
   </thead>
 
   <tbody>
-    <% @donor_constructs.each do |donor_construct| %>
+    <% @donor_constructs.each do |rec| %>
       <tr>
-        <td><%= link_to donor_construct.name, donor_construct %></td>
-        <td><%= link_to donor_construct.cloning_vector.name, donor_construct.cloning_vector %></td>
-        <td><%= link_to donor_construct.vendor.name, donor_construct.vendor %></td>
-        <td><%= donor_construct.vendor_product_identifier %></td>
-        <td><%= link_to donor_construct.target.name, donor_construct.target %></td>
-        <td><%= donor_construct.description %></td>
-        <td><%= donor_construct.insert_sequence %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= link_to rec.cloning_vector.name, rec.cloning_vector %></td>
+        <td><%= link_to rec.vendor.name, rec.vendor %></td>
+        <td><%= rec.vendor_product_identifier %></td>
+        <td><%= link_to rec.target.name, rec.target %></td>
+        <td><%= rec.description %></td>
+        <td><%= rec.insert_sequence %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_donor_construct_path(donor_construct) %>
-        	<%= link_to fa_icon("trash"), donor_construct, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+					<%= link_to fa_icon("pencil"), edit_donor_construct_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
 				</td>
       </tr>
     <% end %>

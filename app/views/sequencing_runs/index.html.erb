@@ -9,6 +9,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Comment</th>
       <th>User</th>
       <th>Sequencing request</th>
@@ -20,16 +21,17 @@
   </thead>
 
   <tbody>
-    <% @sequencing_runs.each do |sequencing_run| %>
+    <% @sequencing_runs.each do |rec| %>
       <tr>
-				<td><%= link_to sequencing_run.name, sequencing_run %></td>
-        <td><%= sequencing_run.comment %></td>
-        <td><%= link_to sequencing_run.sequencing_request.name, sequencing_run.sequencing_request %></td>
-        <td><%= sequencing_run.run_name %></td>
-        <td><%= sequencing_run.lane %></td>
+				<td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= rec.comment %></td>
+        <td><%= link_to rec.sequencing_request.name, rec.sequencing_request %></td>
+        <td><%= rec.run_name %></td>
+        <td><%= rec.lane %></td>
 				<td>
 					<%= link_to fa_icon("pencil"), edit_sequencing_run(library) %>
-        	<%= link_to 'Destroy', sequencing_run, method: :delete, data: { confirm: 'Are you sure?' } %>
+        	<%= link_to 'Destroy', rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

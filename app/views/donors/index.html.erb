@@ -9,6 +9,7 @@
 <table class="attributes">
   <thead>
     <tr>
+			<th>Creator</th>
       <th>Encode</th>
       <th>Encode alias</th>
       <th>Actions</th>
@@ -16,13 +17,14 @@
   </thead>
 
   <tbody>
-    <% @donors.each do |donor| %>
+    <% @donors.each do |rec| %>
       <tr>
-        <td><%= link_to donor.encode_identifier, donor %></td>
-        <td><%= donor.name %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= link_to rec.encode_identifier, rec %></td>
+        <td><%= rec.name %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_donor_path(donor) %>
-        	<%= link_to fa_icon("trash"), donor, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_donor_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

@@ -10,6 +10,7 @@
   <thead>
     <tr>
 			<th>Name</th>
+			<th>Creator</th>
 			<th>Sequencing Library Prep Kit</th>
 			<th>Paired End</th>
       <th>Nucleic acid term</th>
@@ -27,50 +28,51 @@
   </thead>
 
   <tbody>
-    <% @libraries.each do |library| %>
+    <% @libraries.each do |rec| %>
       <tr>
-				<td><%= link_to library.name, library %></td>
-				<td><%= link_to library.sequencing_library_prep_kit.name, library.sequencing_library_prep_kit %></td>
-				<td><%= library.paired_end %></td>
-        <td><%= library.nucleic_acid_term.name %></td>
-        <td><%= link_to library.biosample.name, library.biosample %></td>
+				<td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+				<td><%= link_to rec.sequencing_library_prep_kit.name, rec.sequencing_library_prep_kit %></td>
+				<td><%= rec.paired_end %></td>
+        <td><%= rec.nucleic_acid_term.name %></td>
+        <td><%= link_to rec.biosample.name, rec.biosample %></td>
 
-        <% if library.vendor.present? %>
-          <td><%= library.vendor.name %></td>
+        <% if rec.vendor.present? %>
+          <td><%= rec.vendor.name %></td>
         <% else %>
           <td></td>
         <% end %>
   
-        <td><%= library.lot_identifier %></td>
+        <td><%= rec.lot_identifier %></td>
         
         <!-- Either a barcode or a paired_barcode can be present, not both -->
-				<% if library.barcode.present? %>
-					<td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: [library.barcode]} %></td>
+				<% if rec.barcode.present? %>
+					<td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: [rec.barcode]} %></td>
 				<% else %>
 					<td></td>
 				<% end %>
 
-				<% if library.paired_barcode.present? %>
-					<td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: [library.paired_barcode]} %></td>
+				<% if rec.paired_barcode.present? %>
+					<td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: [rec.paired_barcode]} %></td>
 				<% else %>
 					<td></td>
 				<% end %>
 
-				<% if library.library_fragmentation_method.present? %>
-	        <td><%= link_to library.library_fragmentation_method.name, library.library_fragmentation_method.name %></td>
+				<% if rec.library_fragmentation_method.present? %>
+	        <td><%= link_to rec.library_fragmentation_method.name, rec.library_fragmentation_method.name %></td>
 				<% else %>
 					<td></td>
 				<% end %>
-				<% if library.concentration.present? %>
-					<td><%= library.concentration %>&nbsp;<%= library.concentration_unit.name %></td>
+				<% if rec.concentration.present? %>
+					<td><%= rec.concentration %>&nbsp;<%= rec.concentration_unit.name %></td>
 				<% else %>
 					<td></td>
 				<% end %>
-        <td><%= library.size_range %></td>
-        <td><%= library.strand_specific %></td>
+        <td><%= rec.size_range %></td>
+        <td><%= rec.strand_specific %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_library_path(library) %>
-        	<%= link_to fa_icon("trash"),library, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_library_path(rec) %>
+        	<%= link_to fa_icon("trash"),rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

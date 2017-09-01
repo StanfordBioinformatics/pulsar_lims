@@ -14,15 +14,16 @@
   </thead>
 
   <tbody>
-    <% @genome_locations.each do |genome_location| %>
+    <% @genome_locations.each do |rec| %>
       <tr>
-        <td><%= genome_location.user %></td>
-        <td><%= genome_location.chromosome %></td>
-        <td><%= genome_location.start %></td>
-        <td><%= genome_location.end %></td>
-        <td><%= link_to 'Show', genome_location %></td>
-        <td><%= link_to 'Edit', edit_genome_location_path(genome_location) %></td>
-        <td><%= link_to 'Destroy', genome_location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= rec.user %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= rec.chromosome %></td>
+        <td><%= rec.start %></td>
+        <td><%= rec.end %></td>
+        <td><%= link_to 'Show', rec %></td>
+        <td><%= link_to 'Edit', edit_genome_location_path(rec) %></td>
+        <td><%= link_to 'Destroy', rec, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

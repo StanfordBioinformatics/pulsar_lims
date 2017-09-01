@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
 			<th>Is Protocol?</th>
       <th>Content type</th>
       <th>File Link</th>
@@ -19,16 +20,17 @@
   </thead>
 
   <tbody>
-    <% @documents.each do |document| %>
+    <% @documents.each do |rec| %>
       <tr>
-        <td><%= link_to document.name, document %></td>
-				<td><%= document.is_protocol %></td>
-        <td><%= document.content_type %></td>
-        <td><%= link_to(document.name,:action => "document", :id => document.id) %></td>
-        <td><%= link_to document.document_type.name, document.document_type %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+				<td><%= rec.is_protocol %></td>
+        <td><%= rec.content_type %></td>
+        <td><%= link_to(rec.name,:action => "document", :id => rec.id) %></td>
+        <td><%= link_to rec.document_type.name, rec.document_type %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_document_path(document) %>
-        	<%= link_to fa_icon("trash"), document, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_document_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

@@ -10,19 +10,21 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Description</th>
       <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @library_fragmentation_methods.each do |lfm| %>
+    <% @library_fragmentation_methods.each do |rec| %>
       <tr>
-        <td><%= link_to lfm.name, lfm %></td>
-        <td><%= lfm.description %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= rec.description %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_library_fragmentation_method_path(lfm) %>
-        	<%= link_to fa_icon("trash"), lfm, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_library_fragmentation_method_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

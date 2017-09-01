@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Crispr constructs</th>
       <th>Donor construct</th>
       <th>Biosample</th>
@@ -19,21 +20,22 @@
   </thead>
 
   <tbody>
-    <% @crisprs.each do |crispr| %>
+    <% @crisprs.each do |rec| %>
       <tr>
-        <td><%= link_to crispr.name, crispr %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
 				<td>
-					<% crispr.crispr_constructs.each do |cc| %>
+					<% rec.crispr_constructs.each do |cc| %>
 		        <%= link_to cc.name, cc %>
 					<% end %>
 				</td>
-        <td><%= link_to crispr.donor_construct.name, crispr.donor_construct %></td>
-        <td><%= link_to crispr.biosample.name, crispr.biosample %></td>
-				<% target = crispr.crispr_constructs.first.target %>
+        <td><%= link_to rec.donor_construct.name, rec.donor_construct %></td>
+        <td><%= link_to rec.biosample.name, rec.biosample %></td>
+				<% target = rec.crispr_constructs.first.target %>
 				<td><%= link_to target.name, target %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_crispr_path(crispr) %>
-	        <%= link_to fa_icon("trash"), crispr, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_crispr_path(rec) %>
+	        <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

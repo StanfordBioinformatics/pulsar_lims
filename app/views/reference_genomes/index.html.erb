@@ -10,19 +10,21 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Url</th>
       <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @reference_genomes.each do |reference_genome| %>
+    <% @reference_genomes.each do |rec| %>
       <tr>
-        <td><%= link_to reference_genome.name, reference_genome %></td>
-        <td><%= reference_genome.url %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= rec.url %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_reference_genome_path(reference_genome) %>
-        	<%= link_to fa_icon("trash"), reference_genome, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_reference_genome_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

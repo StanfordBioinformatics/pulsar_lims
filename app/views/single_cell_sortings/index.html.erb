@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Description</th>
 			<th>Starting Biosample</th>
       <th>Actions</th>
@@ -17,14 +18,15 @@
   </thead>
 
   <tbody>
-    <% @single_cell_sortings.each do |scs| %>
+    <% @single_cell_sortings.each do |rec| %>
       <tr>
-        <td><%= link_to scs.name, scs %></td>
-        <td><%= scs.description %></td>
-				<td><%= link_to scs.starting_biosample.name, scs.starting_biosample %></td>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
+        <td><%= rec.description %></td>
+				<td><%= link_to rec.starting_biosample.name, rec.starting_biosample %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_single_cell_sorting_path(scs) %>
-        	<%= link_to fa_icon("trash"), scs, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to fa_icon("pencil"), edit_single_cell_sorting_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>
