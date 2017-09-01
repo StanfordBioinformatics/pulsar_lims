@@ -18,6 +18,13 @@
 		<td><%= @biosample.name %></td>
 	</tr>
 
+	<% if @biosample.owner.present? %>
+		<tr>
+			<th><strong>Owner</strong></th>
+			<td><%= @biosample.owner.display %></td>
+		</tr>
+	<% end %>
+
 	<tr>
 		<th><strong>Prototype?</strong></th>
 		<td><%= @biosample.prototype? %></th>

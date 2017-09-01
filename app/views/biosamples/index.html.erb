@@ -11,6 +11,7 @@
   <thead>
     <tr>
 			<th>Name</th>
+			<th>Owner</th>
 			<th>Parent Biosample</th>
 			<th>Well</th>
       <!-- <th>Description</th> -->
@@ -26,6 +27,11 @@
   <tbody>
     <% @biosamples.each do |biosample| %>
 				<td><%= link_to biosample.name, biosample %></td>
+				<td>
+					<% if biosample.owner.present? %>
+						<%= biosample.owner.display %>
+					<% end %>
+				</td>
 				<% if biosample.parent_biosample.present? %>
 					<td><%= link_to biosample.parent_biosample.name, biosample.parent_biosample %></td>
 				<% else %>

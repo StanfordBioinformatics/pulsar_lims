@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830004555) do
+ActiveRecord::Schema.define(version: 20170901044417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(version: 20170830004555) do
     t.boolean  "prototype",                             default: false
     t.integer  "from_prototype_id"
     t.boolean  "plated",                                default: false
+    t.integer  "owner_id"
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
@@ -162,6 +163,7 @@ ActiveRecord::Schema.define(version: 20170830004555) do
   add_index "biosamples", ["donor_id"], name: "index_biosamples_on_donor_id", using: :btree
   add_index "biosamples", ["from_prototype_id"], name: "index_biosamples_on_from_prototype_id", using: :btree
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
+  add_index "biosamples", ["owner_id"], name: "index_biosamples_on_owner_id", using: :btree
   add_index "biosamples", ["parent_biosample_id"], name: "index_biosamples_on_parent_biosample_id", using: :btree
   add_index "biosamples", ["user_id"], name: "index_biosamples_on_user_id", using: :btree
   add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id", using: :btree
@@ -711,6 +713,7 @@ ActiveRecord::Schema.define(version: 20170830004555) do
   add_foreign_key "biosamples", "biosamples", column: "parent_biosample_id"
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"
+  add_foreign_key "biosamples", "users", column: "owner_id"
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "biosamples", "wells"
   add_foreign_key "chromosomes", "reference_genomes"

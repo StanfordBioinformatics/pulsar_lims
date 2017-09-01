@@ -15,6 +15,7 @@ class Biosample < ActiveRecord::Base
 	has_one :starting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id #the starting biosample used for sorting. Not required.
 	has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :nullify #the starting biosample used for sorting. Not required.
 	belongs_to  :user
+	belongs_to  :owner, class_name: "User"
 	belongs_to  :biosample_term_name
 	belongs_to  :biosample_type
 	belongs_to  :donor

@@ -59,6 +59,10 @@ class User < ActiveRecord::Base
 		ApplicationPolicy
 	end 
 
+	def display
+		return "#{first_name} #{last_name}"
+	end
+
 	def generate_api_key
     if not role >= User::MANAGER_ROLE
       raise Pundit::NotAuthorizedError  
