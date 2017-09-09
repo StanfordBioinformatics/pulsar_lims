@@ -70,11 +70,7 @@ class CrisprsController < ApplicationController
 
   def destroy
 		authorize @crispr
-    @crispr.destroy
-    respond_to do |format|
-      format.html { redirect_to crisprs_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@crispr,crisprs_path)
   end
 
   private

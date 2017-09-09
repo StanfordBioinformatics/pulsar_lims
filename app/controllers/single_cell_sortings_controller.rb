@@ -116,11 +116,7 @@ class SingleCellSortingsController < ApplicationController
 
   def destroy
 		authorize @single_cell_sorting
-    @single_cell_sorting.destroy
-    respond_to do |format|
-      format.html { redirect_to single_cell_sortings_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@sequencing_result,single_cell_sortings_path))
   end
 
   private

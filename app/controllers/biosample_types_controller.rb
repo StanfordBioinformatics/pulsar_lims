@@ -1,31 +1,23 @@
 class BiosampleTypesController < ApplicationController
   before_action :set_biosample_type, only: [:show, :edit, :update, :destroy]
 
-  # GET /biosample_types
-  # GET /biosample_types.json
   def index
     @biosample_types = policy_scope(BiosampleType).order("lower(name)")
   end
 
-  # GET /biosample_types/1
-  # GET /biosample_types/1.json
   def show
 		authorize @biosample_type
   end
 
-  # GET /biosample_types/new
   def new
 		authorize BiosampleType
     @biosample_type = BiosampleType.new
   end
 
-  # GET /biosample_types/1/edit
   def edit
 		authorize @biosample_type
   end
 
-  # POST /biosample_types
-  # POST /biosample_types.json
   def create
     @biosample_type = BiosampleType.new(biosample_type_params)
 		authorize @biosample_type
@@ -42,8 +34,6 @@ class BiosampleTypesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /biosample_types/1
-  # PATCH/PUT /biosample_types/1.json
   def update
 		authorize @biosample_type
     respond_to do |format|
@@ -57,15 +47,9 @@ class BiosampleTypesController < ApplicationController
     end
   end
 
-  # DELETE /biosample_types/1
-  # DELETE /biosample_types/1.json
   def destroy
 		authorize @biosample_type
-    @biosample_type.destroy
-    respond_to do |format|
-      format.html { redirect_to biosample_types_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@biosample_type,biosample_types_path)
   end
 
   private

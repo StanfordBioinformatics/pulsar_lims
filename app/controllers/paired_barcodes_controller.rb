@@ -91,11 +91,7 @@ class PairedBarcodesController < ApplicationController
 
   def destroy
 		authorize @paired_barcode
-    @paired_barcode.destroy
-    respond_to do |format|
-      format.html { redirect_to paired_barcodes_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@paired_barcode,paired_barcodes_path)
   end
 
   private

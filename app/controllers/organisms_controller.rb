@@ -1,31 +1,23 @@
 class OrganismsController < ApplicationController
   before_action :set_organism, only: [:show, :edit, :update, :destroy]
 
-  # GET /organisms
-  # GET /organisms.json
   def index
     @organisms = policy_scope(Organism).order("lower(name)")
   end
 
-  # GET /organisms/1
-  # GET /organisms/1.json
   def show
 		authorize @organism
   end
 
-  # GET /organisms/new
   def new
 		authorize Organism
     @organism = Organism.new
   end
 
-  # GET /organisms/1/edit
   def edit
 		authorize @organism
   end
 
-  # POST /organisms
-  # POST /organisms.json
   def create
     @organism = Organism.new(organism_params)
 		authorize @organism
@@ -42,8 +34,6 @@ class OrganismsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /organisms/1
-  # PATCH/PUT /organisms/1.json
   def update
 		authorize @organism
     respond_to do |format|
@@ -57,15 +47,9 @@ class OrganismsController < ApplicationController
     end
   end
 
-  # DELETE /organisms/1
-  # DELETE /organisms/1.json
   def destroy
 		authorize @organism
-    @organism.destroy
-    respond_to do |format|
-      format.html { redirect_to organisms_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@organism,organisms_path)
   end
 
   private

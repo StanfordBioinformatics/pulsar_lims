@@ -1,31 +1,23 @@
 class VendorsController < ApplicationController
   before_action :set_vendor, only: [:show, :edit, :update, :destroy]
 
-  # GET /vendors
-  # GET /vendors.json
   def index
     @vendors = policy_scope(Vendor).order("lower(name)")
   end
 
-  # GET /vendors/1
-  # GET /vendors/1.json
   def show
 		authorize @vendor
   end
 
-  # GET /vendors/new
   def new
 		authorize Vendor
     @vendor = Vendor.new
   end
 
-  # GET /vendors/1/edit
   def edit
 		authorize @vendor
   end
 
-  # POST /vendors
-  # POST /vendors.json
   def create
     @vendor = Vendor.new(vendor_params)
 		authorize @vendor
@@ -42,8 +34,6 @@ class VendorsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /vendors/1
-  # PATCH/PUT /vendors/1.json
   def update
 		authorize @vendor
     respond_to do |format|
@@ -57,15 +47,9 @@ class VendorsController < ApplicationController
     end
   end
 
-  # DELETE /vendors/1
-  # DELETE /vendors/1.json
   def destroy
 		authorize @vendor
-    @vendor.destroy
-    respond_to do |format|
-      format.html { redirect_to vendors_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@vendor,vendors_path)
   end
 
   private

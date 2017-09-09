@@ -48,12 +48,8 @@ class AddressesController < ApplicationController
   end
 
   def destroy
-		authorize @address
-    @address.destroy
-    respond_to do |format|
-      format.html { redirect_to addresses_url }
-      format.json { head :no_content }
-    end
+    authorize @address
+    ddestroy(@address,addresses_path)
   end
 
   private

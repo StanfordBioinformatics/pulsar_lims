@@ -74,15 +74,7 @@ class BiosamplesController < ApplicationController
 
   def destroy
 		authorize @biosample
-    respond_to do |format|
-    	if @biosample.destroy
-	      format.html { redirect_to biosamples_url, notice: "Biosample has been deleted." }
- 	     format.json { head :no_content }
-			else 
-				format.html { render action: 'show' }
-        format.json { render json: @biosample.errors, status: :unprocessable_entity }
-			end
-    end
+		ddestroy(@biosample,biosamples_path)
   end
 
 

@@ -1,31 +1,23 @@
 class AntibodyPurificationsController < ApplicationController
   before_action :set_antibody_purification, only: [:show, :edit, :update, :destroy]
 
-  # GET /antibody_purifications
-  # GET /antibody_purifications.json
   def index
     @antibody_purifications = policy_scope(AntibodyPurification).order("lower(name)")
   end
 
-  # GET /antibody_purifications/1
-  # GET /antibody_purifications/1.json
   def show
 		authorize @antibody_purification
   end
 
-  # GET /antibody_purifications/new
   def new
 		authorize AntibodyPurification
     @antibody_purification = AntibodyPurification.new
   end
 
-  # GET /antibody_purifications/1/edit
   def edit
 		authorize @antibody_purification
   end
 
-  # POST /antibody_purifications
-  # POST /antibody_purifications.json
   def create
     @antibody_purification = AntibodyPurification.new(antibody_purification_params)
 		authorize @antibody_purification
@@ -42,8 +34,6 @@ class AntibodyPurificationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /antibody_purifications/1
-  # PATCH/PUT /antibody_purifications/1.json
   def update
 		authorize @antibody_purification
     respond_to do |format|
@@ -57,15 +47,9 @@ class AntibodyPurificationsController < ApplicationController
     end
   end
 
-  # DELETE /antibody_purifications/1
-  # DELETE /antibody_purifications/1.json
   def destroy
 		authorize @antibody_purification
-    @antibody_purification.destroy
-    respond_to do |format|
-      format.html { redirect_to antibody_purifications_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@antibody_purification,antibody_purifications_path)
   end
 
   private

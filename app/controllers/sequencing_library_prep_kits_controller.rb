@@ -57,15 +57,9 @@ class SequencingLibraryPrepKitsController < ApplicationController
     end
   end
 
-  # DELETE /sequencing_library_prep_kits/1
-  # DELETE /sequencing_library_prep_kits/1.json
   def destroy
 		authorize @sequencing_library_prep_kit
-    @sequencing_library_prep_kit.destroy
-    respond_to do |format|
-      format.html { redirect_to sequencing_library_prep_kits_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@sequencing_library_prep_kit,sequencing_library_prep_kits_path)
   end
 
   private

@@ -66,11 +66,7 @@ class CrisprConstructsController < ApplicationController
 
   def destroy
 		authorize @crispr_construct
-    @crispr_construct.destroy
-    respond_to do |format|
-      format.html { redirect_to crispr_constructs_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@crispr_construct,crispr_constructs_path)
   end
 
   private

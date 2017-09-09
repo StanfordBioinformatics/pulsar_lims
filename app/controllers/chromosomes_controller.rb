@@ -46,11 +46,7 @@ class ChromosomesController < ApplicationController
 
   def destroy
 		authorize @chromosome
-    @chromosome.destroy
-    respond_to do |format|
-      format.html { redirect_to @reference_genome }
-      format.json { head :no_content }
-    end
+		ddestroy(@chromosome,chromosomes_path)
   end
 
   private

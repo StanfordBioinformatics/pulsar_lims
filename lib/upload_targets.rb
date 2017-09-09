@@ -6,7 +6,7 @@ require "json"
 
 SPECIES="Homo sapiens"
 
-Target.delete_all
+Target.destroy_all
 
 options = {}
 OptionParser.new do |opts|

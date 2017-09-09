@@ -72,11 +72,7 @@ class PlatesController < ApplicationController
 
   def destroy
 		authorize @plate
-    @plate.destroy
-    respond_to do |format|
-      format.html { redirect_to plates_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@plate,plates_path)
   end
 
   private

@@ -49,11 +49,7 @@ class NucleicAcidTermsController < ApplicationController
 
   def destroy
 		authorize @nucleic_acid_term
-    @nucleic_acid_term.destroy
-    respond_to do |format|
-      format.html { redirect_to nucleic_acid_terms_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@nucleic_acid_term,nucleic_acid_terms_path)
   end
 
   private

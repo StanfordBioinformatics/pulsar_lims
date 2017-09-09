@@ -62,11 +62,7 @@ class SequencingRunsController < ApplicationController
 
   def destroy
 		authorize @sequencing_run
-    @sequencing_run.destroy
-    respond_to do |format|
-      format.html { redirect_to @sequencing_request}
-      format.json { head :no_content }
-    end
+		ddestroy(@sequencing_run,@sequencing_request)
   end
 
   private

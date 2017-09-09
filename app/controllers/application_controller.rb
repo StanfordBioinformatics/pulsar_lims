@@ -12,6 +12,24 @@ class ApplicationController < ActionController::Base
 
 
 	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+	rescue_from ActiveRecord::DeleteRestrictionError, with: :destroy_not_allowed
+
+	def ddestroy(record,redirect_path_success)
+		#Named somewhat strangely as ddestroy instead of destroy in order to 
+		# not overwrite the destroy() method in the controllers that inherit from here.
+		# The idea is that each individual controller's destroy() method will call this one
+		# in order to avoid duplicating logic and make updates a breeze. 
+    respond_to do |format|
+      if record.destroy
+        format.html { redirect_to redirect_path_success }
+        format.json { head :no_content }
+      else
+        #format.html { render action: 'show' }
+        format.html { render Rails.application.routes.recognize_path(request.referer)[:action] }
+        format.json { render json: @record.errors.full_messages,status: :unprocessable_entity }
+      end 
+    end 
+	end
 
 	private
 
@@ -20,6 +38,11 @@ class ApplicationController < ActionController::Base
 		redirect_to(request.referrer || root_path)
 	end
 	
+	def destroy_not_allowed(err)
+		flash[:alert] = err.message
+		redirect_to(request.referrer || root_path)
+	end
+
 	def check_signed_in
 		unless user_signed_in?
 			flash[:alert] = "You must be singed in in order to use this web application."

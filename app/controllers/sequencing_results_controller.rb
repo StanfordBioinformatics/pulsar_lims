@@ -86,11 +86,7 @@ class SequencingResultsController < ApplicationController
 
   def destroy
 		authorize @sequencing_result
-    @sequencing_result.destroy
-    respond_to do |format|
-      format.html { redirect_to [@sequencing_request,@sequencing_run]}
-      format.json { head :no_content }
-    end
+		ddestroy(@sequencing_result,polymorphic_url([@sequencing_request,@sequencing_run]))
   end
 
   private

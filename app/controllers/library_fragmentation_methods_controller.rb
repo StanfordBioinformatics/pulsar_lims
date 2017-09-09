@@ -1,30 +1,22 @@
 class LibraryFragmentationMethodsController < ApplicationController
   before_action :set_library_fragmentation_method, only: [:show, :edit, :update, :destroy]
 
-  # GET /library_fragmentation_methods
-  # GET /library_fragmentation_methods.json
   def index
     @library_fragmentation_methods = policy_scope(LibraryFragmentationMethod).order("lower(name)")
   end
 
-  # GET /library_fragmentation_methods/1
-  # GET /library_fragmentation_methods/1.json
   def show
 		authorize @library_fragmentation_method
   end
 
-  # GET /library_fragmentation_methods/new
   def new
 		authorize LibraryFragmentationMethod
     @library_fragmentation_method = LibraryFragmentationMethod.new
   end
 
-  # GET /library_fragmentation_methods/1/edit
   def edit
   end
 
-  # POST /library_fragmentation_methods
-  # POST /library_fragmentation_methods.json
   def create
 		authorize @library_fragmentation_method
     @library_fragmentation_method = LibraryFragmentationMethod.new(library_fragmentation_method_params)
@@ -40,8 +32,6 @@ class LibraryFragmentationMethodsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /library_fragmentation_methods/1
-  # PATCH/PUT /library_fragmentation_methods/1.json
   def update
 		authorize @library_fragmentation_method
     respond_to do |format|
@@ -55,15 +45,9 @@ class LibraryFragmentationMethodsController < ApplicationController
     end
   end
 
-  # DELETE /library_fragmentation_methods/1
-  # DELETE /library_fragmentation_methods/1.json
   def destroy
 		authorize @library_fragmentation_method
-    @library_fragmentation_method.destroy
-    respond_to do |format|
-      format.html { redirect_to library_fragmentation_methods_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@library_fragmentation_method,library_fragmentation_methods_path)
   end
 
   private

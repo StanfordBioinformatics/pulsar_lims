@@ -55,13 +55,10 @@ class ConcentrationUnitsController < ApplicationController
     end
   end
 
+
   def destroy
 		authorize @concentration_unit
-    @concentration_unit.destroy
-    respond_to do |format|
-      format.html { redirect_to concentration_units_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@concentration_unit,concentration_units_path)
   end
 
   private

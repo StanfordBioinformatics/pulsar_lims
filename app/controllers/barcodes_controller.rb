@@ -47,11 +47,7 @@ class BarcodesController < ApplicationController
 
   def destroy
 		authorize @barcode
-    @barcode.destroy
-    respond_to do |format|
-      format.html { redirect_to @sequencing_library_prep_kit }
-      format.json { head :no_content }
-    end
+		ddestroy(@barcode,barcodes_path)
   end
 
   private

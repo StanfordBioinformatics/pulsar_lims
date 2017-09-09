@@ -66,11 +66,7 @@ class DonorConstructsController < ApplicationController
 
   def destroy
 		authorize @donor_construct
-    @donor_construct.destroy
-    respond_to do |format|
-      format.html { redirect_to donor_constructs_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@donor_construct,donor_constructs_path)
   end
 
   private

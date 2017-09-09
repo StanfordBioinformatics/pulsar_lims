@@ -256,6 +256,7 @@ DEPENDENCIES
   pundit (~> 0.3.0)
   rails (~> 4.2.1)
   rails_12factor
+  responders (~> 2.0)
   rspec-rails
   sass-rails
   sdoc

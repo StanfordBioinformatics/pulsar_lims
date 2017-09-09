@@ -16,3 +16,4 @@
 /tmp
 .env
 .byebug_history
+lib/DataFiles

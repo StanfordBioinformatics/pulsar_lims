@@ -1,31 +1,23 @@
 class DocumentTypesController < ApplicationController
   before_action :set_document_type, only: [:show, :edit, :update, :destroy]
 
-  # GET /document_types
-  # GET /document_types.json
   def index
     @document_types = policy_scope(DocumentType).order("lower(name)")
   end
 
-  # GET /document_types/1
-  # GET /document_types/1.json
   def show
 		authorize @document_type
   end
 
-  # GET /document_types/new
   def new
 		authorize DocumentType
     @document_type = DocumentType.new
   end
 
-  # GET /document_types/1/edit
   def edit
 		authorize @document_type
   end
 
-  # POST /document_types
-  # POST /document_types.json
   def create
     @document_type = DocumentType.new(document_type_params)
 		authorize @document_type
@@ -42,8 +34,6 @@ class DocumentTypesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /document_types/1
-  # PATCH/PUT /document_types/1.json
   def update
 		authorize @document_type
     respond_to do |format|
@@ -57,15 +47,9 @@ class DocumentTypesController < ApplicationController
     end
   end
 
-  # DELETE /document_types/1
-  # DELETE /document_types/1.json
   def destroy
 		authorize @document_type
-    @document_type.destroy
-    respond_to do |format|
-      format.html { redirect_to document_types_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@document_type,document_types_path)
   end
 
   private

@@ -82,11 +82,7 @@ class LibrariesController < ApplicationController
 
   def destroy
 		authorize @library
-    @library.destroy
-    respond_to do |format|
-      format.html { redirect_to libraries_url, notice: "Library has been deleted." }
-      format.json { head :no_content }
-    end
+		ddestroy(@library,libraries_path)
   end
 
   private

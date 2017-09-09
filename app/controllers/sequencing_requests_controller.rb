@@ -101,11 +101,7 @@ class SequencingRequestsController < ApplicationController
 
   def destroy
 		authorize @sequencing_request
-    @sequencing_request.destroy
-    respond_to do |format|
-      format.html { redirect_to sequencing_requests_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@sequencing_requests,sequencing_requests_path)
   end
 
   private

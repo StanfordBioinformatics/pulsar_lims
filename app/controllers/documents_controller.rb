@@ -1,31 +1,23 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
 
-  # GET /documents
-  # GET /documents.json
   def index
     @documents = policy_scope(Document).order("lower(name)")
   end
 
-  # GET /documents/1
-  # GET /documents/1.json
   def show
 		authorize @document
   end
 
-  # GET /documents/new
   def new
 		authorize Document
     @document = Document.new
   end
 
-  # GET /documents/1/edit
   def edit
 		authorize @document
   end
 
-  # POST /documents
-  # POST /documents.json
   def create
 		authorize Document
 		@document = Document.new(document_params)
@@ -51,15 +43,9 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # DELETE /documents/1
-  # DELETE /documents/1.json
   def destroy
 		authorize @document
-    @document.destroy
-    respond_to do |format|
-      format.html { redirect_to documents_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@document,documents_path)
   end
 
 	def document

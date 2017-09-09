@@ -51,11 +51,7 @@ class CloningVectorsController < ApplicationController
 
   def destroy
 		authorize @cloning_vector
-    @cloning_vector.destroy
-    respond_to do |format|
-      format.html { redirect_to cloning_vectors_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@cloning_vector,cloning_vectors_path)
   end
 
   private

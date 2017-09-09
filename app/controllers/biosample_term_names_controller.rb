@@ -1,32 +1,23 @@
 class BiosampleTermNamesController < ApplicationController
   before_action :set_biosample_term_name, only: [:show, :edit, :update, :destroy]
 
-  # GET /biosample_term_names
-  # GET /biosample_term_names.json
-
   def index
     @biosample_term_names = policy_scope(BiosampleTermName).order("lower(name)")
   end
 
-  # GET /biosample_term_names/1
-  # GET /biosample_term_names/1.json
   def show
 		authorize @biosample_term_name
   end
 
-  # GET /biosample_term_names/new
   def new
 		authorize BiosampleTermName
     @biosample_term_name = BiosampleTermName.new
   end
 
-  # GET /biosample_term_names/1/edit
   def edit
 		authorize @biosample_term_name
   end
 
-  # POST /biosample_term_names
-  # POST /biosample_term_names.json
   def create
 		authorize BiosampleTermName 
     @biosample_term_name = BiosampleTermName.new(biosample_term_name_params)
@@ -43,8 +34,6 @@ class BiosampleTermNamesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /biosample_term_names/1
-  # PATCH/PUT /biosample_term_names/1.json
   def update
 		authorize @biosample_term_name
     respond_to do |format|
@@ -58,15 +47,9 @@ class BiosampleTermNamesController < ApplicationController
     end
   end
 
-  # DELETE /biosample_term_names/1
-  # DELETE /biosample_term_names/1.json
   def destroy
 		authorize @biosample_term_name
-    @biosample_term_name.destroy
-    respond_to do |format|
-      format.html { redirect_to biosample_term_names_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@biosample_term_name,biosample_term_names_path)
   end
 
   private

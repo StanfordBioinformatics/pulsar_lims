@@ -55,11 +55,7 @@ class AntibodiesController < ApplicationController
 
   def destroy
 		authorize @antibody
-    @antibody.destroy
-    respond_to do |format|
-      format.html { redirect_to antibodies_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@antibody,antibodies_path)
   end
 
   private

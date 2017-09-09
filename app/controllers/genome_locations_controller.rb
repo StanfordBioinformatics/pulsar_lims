@@ -49,11 +49,7 @@ class GenomeLocationsController < ApplicationController
 
   def destroy
 		authorize $genome_location
-    @genome_location.destroy
-    respond_to do |format|
-      format.html { redirect_to genome_locations_url }
-      format.json { head :no_content }
-    end
+		ddestroy(@genome_location,genome_locations_path)
   end
 
   private

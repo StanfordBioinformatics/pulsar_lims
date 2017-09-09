@@ -49,7 +49,11 @@ $(function() {
         method: "DELETE", 
         dataType: "json",
         error: function(xhr,errmsg,err) {
-          alert("Error deleting row.")
+          alert(xhr.responseText) //i.e.
+          //alert(errmsg) //i.e. error
+          //alert(err)    //i.e. Internal Server Error
+          //alert(xhr.status) //i.e. 55
+          //alert(xhr.statusText) //i.e  Internal Server Error
         },
         success: function(data,status,xhr) {
           $tr.fadeOut(function(){
