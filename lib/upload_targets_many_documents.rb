@@ -6,33 +6,32 @@ require "json"
 
 SPECIES="Homo sapiens"
 
-Target.destroy_all
+#Target.destroy_all
 
 options = {}
 OptionParser.new do |opts|
-	opts.on("--infile [INFILE]",help="Full path to input file containing JSON to import into the human genes portion from ENCODE's targets table. The JSON targets can be retrieved via the URL https://www.encodeproject.org/targets/?format=json&limit=all.") do |infile|
+	opts.on("--infile [INFILE]",help="File containing DCC Target JSON records, one per line, to be imported into the 'targets' table.") do |infile|
 		options[:infile] = infile
 	end
 end.parse!
 
 admin = User.find_by(email: "admin@enc.com")
 
-fh = File.read(options[:infile])
-json_data = JSON.parse(fh)
-#if json_data.has_key?("@graph")
-#	json_data = json_data["@graph"]
-#end
-
 count = 0
-json_data.each do |x|
-	organism = x["organism"]["scientific_name"]
+File.open(options[:infile]).each do |line|
+	rec = JSON.parse(line.chomp)	
+	organism = rec["organism"]["scientific_name"]
 	if organism != SPECIES
 		next
 	end
 	params = {}
 	params[:user_id] = admin.id
-	params[:encode_identifier] = x["@id"].split("/").last
-	params[:name] = x["label"]
+	encode_identifier = rec["@id"].split("/").last
+	params[:encode_identifier] = encode_identifier
+	if Target.find_by(encode_identifier: encode_identifier)
+		next
+	end
+	params[:name] = rec["label"]
 	#Using the label since it's unique and all entries have it. The 
 	
 	Target.create!(params)
