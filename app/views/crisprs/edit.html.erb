@@ -1,5 +1,7 @@
 <h1>Editing Crispr</h1>
 
-<%= render 'form' %>
-
+<%= simple_form_for(@crispr) do |f| %>
+  <%= render 'form', locals: {f: f} %>
+  <%= render partial: "application_partials/submit", locals: {f: f} %>
+<% end %>
 <%= link_to 'Back', crisprs_path %>

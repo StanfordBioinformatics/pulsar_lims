@@ -31,6 +31,7 @@ class Biosample < ActiveRecord::Base
 	validates :donor_id, presence: true
 
 	accepts_nested_attributes_for :documents, allow_destroy: true
+	accepts_nested_attributes_for :crispr, allow_destroy: true
 
 	scope :non_plated, lambda { where(plated: false, prototype: false) }
 	scope :non_prototypes, lambda { where(prototype: false) }

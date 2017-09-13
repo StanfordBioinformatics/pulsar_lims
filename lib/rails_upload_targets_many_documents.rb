@@ -5,6 +5,7 @@ require "optparse"
 require "json"
 
 SPECIES="Homo sapiens"
+#BATCH_SIZE=300
 
 #Target.destroy_all
 

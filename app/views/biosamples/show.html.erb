@@ -136,7 +136,7 @@
 
 	<tr>
 		<th><strong>CRISPR</strong></th>
-		<% if @biosample.crispr.present? %>
+		<% if @biosample.crispr.present? and @biosample.crispr.persisted?%>
 			<td><%= link_to @biosample.crispr.name, @biosample.crispr %></td>
 		<% else %>
 			<td></td>
@@ -155,4 +155,19 @@
 	</tr>
 </p>
 </table>
+
+<% if @biosample.crispr.blank? %>
+	<%= link_to "Add CRISPR modification", add_crispr_modification_biosample_path(@biosample), class: "new", 
+			remote: true, 
+			id: "biosample_add_crispr_modification" %>
+<% else %>
+	<% if not @biosample.crispr.persisted? %>
+		<!-- The an attempt to create one was made, but there was a validation issue -->
+		<%= render partial: "add_crispr_modification" %>
+	<% end %>
+<% end %>
+<div id="biosample_crispr_modification_form" ></div>
+  <!-- #biosample_crispr_modification_form will serve as the container for the result of the AJAX request above. See relevant jQuery in biosamples.js.coffee. -->
+</br></br>
+
 <%= render partial: "back" %>

@@ -1,3 +1,5 @@
-<%= simple_fields_for @crispr do |f| %>
-		<%= render partial: "crispr_constructs/select_crispr_construct", locals: {f: f, crispr_constructs: @crispr_constructs} %>
+<%= simple_fields_for @biosample do |f| %>
+	<%= f.simple_fields_for :crispr, @crispr do |ff| %>
+		<%= render partial: "crispr_constructs/select_crispr_construct", locals: {f: ff, crispr_constructs: @crispr_constructs} %>
+	<% end %>
 <% end %>

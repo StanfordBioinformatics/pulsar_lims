@@ -1,7 +1,14 @@
 class BiosamplesController < ApplicationController
 #	include DocumentsConcern #gives me add_documents(), remove_documents()
-  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :delete_biosample_document]
-	skip_after_action :verify_authorized, only: [:select_biosample_term_name]
+  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :delete_biosample_document,:add_crispr_modification]
+	skip_after_action :verify_authorized, only: [:select_biosample_term_name,:add_crispr_modification]
+
+
+	def add_crispr_modification
+		@biosample.build_crispr({user: current_user})
+		flash[:action] = :show
+		render partial: "add_crispr_modification", layout: false
+	end
 
   def select_biosample_term_name
     biosample_type = BiosampleType.find(params[:biosample_type_selector])
@@ -61,12 +68,23 @@ class BiosamplesController < ApplicationController
   def update
 		authorize @biosample
 		#@biosample = add_documents(@biosample,params[:biosample][:documents])
+		crispr_attrs = biosample_params()[:crispr_attributes]
+		if crispr_attrs.present?
+			params[:biosample][:crispr_attributes].update({user_id: current_user.id})
+		end
+		#render json: biosample_params
+		#return
     respond_to do |format|
       if @biosample.update(biosample_params)
         format.html { redirect_to @biosample, notice: 'Biosample was successfully updated.' }
         format.json { head :no_content }
       else
-				format.html { render "edit" }
+        action = flash[:action]
+        if action.present?
+          #set again for next request.
+          flash[:action] = action
+        end 
+        format.html { render flash[:action] || 'edit' } 
         format.json { render json: @biosample.errors, status: :unprocessable_entity }
       end
     end
@@ -89,6 +107,6 @@ class BiosamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_params
-      params.require(:biosample).permit(:owner_id, :from_prototype_id, :prototype, :well_id, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], documents_attributes: [:id,:_destroy])
+      params.require(:biosample).permit(:owner_id, :from_prototype_id, :prototype, :well_id, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], :crispr_attributes => [:user_id,:_destroy, :name, :donor_construct_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy]])
     end
 end

@@ -6,6 +6,7 @@ class CrisprsController < ApplicationController
 		#Function: Called via AJAX in the crispr form when the user clicks the "Add Crispr Construct" button. 
 		#Parsed params : exclude_ids - Array of CrisprConstruct IDs to exclude from the selection.
 		exclude_ids = params[:exclude_ids]
+		@biosample = Biosample.new
 		@crispr = Crispr.new
 		@crispr_constructs = CrisprConstruct.where.not(id: exclude_ids)
 		render layout: false
@@ -81,6 +82,6 @@ class CrisprsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def crispr_params
-      params.require(:crispr).permit(:name, :donor_construct_id, :biosample_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy] )
+      params.require(:crispr).permit(:name, :donor_construct_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy] )
     end
 end

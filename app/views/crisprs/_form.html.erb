@@ -1,7 +1,9 @@
-<%= simple_form_for(@crispr) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr } %>
 
-  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique name"} %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr } %>
+	<%# is_crispr_path = request.fullpath.start_with?(crisprs_path) %>
+
+
+	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique name"} %>
 
 	<% pers_crispr_constructs = @crispr.crispr_constructs.persisted %>
 	<% if @crispr.persisted? and pers_crispr_constructs.any? %>
@@ -41,7 +43,8 @@
 	</br></br>	
 
   <%= f.association :donor_construct, label_html: {"data-toggle" => "tooltip", "title" => "The Donor Construct that contains the donor sequence to integrate at the genomic site of the genetic modification."} %>
-  <%= f.association :biosample, collection: Biosample.non_plated, label_html: {"data-toggle" => "tooltip", "title" => "The biosample on which the CRISPR was performed."} %>
+
+  <%# f.association :biosample, collection: Biosample.non_plated, label_html: {"data-toggle" => "tooltip", "title" => "The biosample on which the CRISPR was performed."} %>
 
 	<%= label_tag(:reference_genome_id, "Reference Genome  ", {"data-toggle" => "tooltip", "title" => "Select reference genome you will use to describe the location of the genetic modification."}) %>
 	<%= select_tag(:reference_genome_id, options_for_select( ReferenceGenome.order("lower(name)").map {|x| [x.name, x.id]}),
@@ -52,7 +55,3 @@
 	<!-- Jquery will fill in the div above when a reference_genome is selected -->
 
 	</br>
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn-primary"  %>
-  </div></br>
-<% end %>

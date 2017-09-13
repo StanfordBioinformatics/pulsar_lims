@@ -1,4 +1,5 @@
 class Crispr < ActiveRecord::Base
+	#crisprs only belong to biosamples.
   belongs_to :user
   belongs_to :biosample
   belongs_to :donor_construct

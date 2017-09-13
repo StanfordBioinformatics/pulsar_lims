@@ -13,7 +13,10 @@ Pulsar::Application.routes.draw do
 	end
   resources :paired_barcodes
   resources :crisprs do
+		#crisprs only belong to biosamples.
 		get :select_crispr_construct, on: :collection
+		#select_crispr_construct on collection instead of member b/c the user selects this when creating or editing the crispr object, and
+		# since the crispr won't have an id yet when being created, we can't use :member.
 		get :select_chromosome_on_reference_genome, on: :collection
 	end
   resources :crispr_constructs do
@@ -107,6 +110,7 @@ Pulsar::Application.routes.draw do
 
   resources :biosamples do
 		get :select_biosample_term_name, on: :collection
+		get :add_crispr_modification, on: :member
 	end
 
   resources :donors
