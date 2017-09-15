@@ -25,5 +25,5 @@ $ ->
     $parentSelector.fadeOut () -> 
       $parentSelector.remove()
 
-  $(document).on "ajax:success", ".crispr_select_crispr_construct", (event,data) ->
+  $(document).on "ajax:success", ".select_crispr_construct", (event,data) ->
     $("#added_crispr_constructs").append(data)

@@ -19,10 +19,12 @@ $ ->
   load_biosample_term_name_selection()
 
   $("#biosample_add_crispr_modification",document).on "ajax:success", (event,data) -> 
-    $("#biosample_add_crispr_modification").hide()
-    $("#biosample_crispr_modification_form").html(data)
+    $("#biosample_add_crispr_modification").fadeOut "fast", () ->
+      $("#biosample_crispr_modification_form").html(data).hide()
+      $(".select_crispr_construct",document).click()
+      $("#biosample_crispr_modification_form").show()
 
   $(document).on "click", ".biosample-toggle-up_add_crispr_form", (event) ->  
     event.stopPropagation()
-    $(event.target).closest("form").slideUp("fast")
+    $(".jumbotron-select-crispr").slideUp("fast")
     $("#biosample_add_crispr_modification", document).show()

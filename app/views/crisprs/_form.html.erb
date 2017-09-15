@@ -5,6 +5,7 @@
 
 	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique name"} %>
 
+	<!-- If crispr is being updated, show any existing associated crispr_constructs and allow user to be able to delete them. -->
 	<% pers_crispr_constructs = @crispr.crispr_constructs.persisted %>
 	<% if @crispr.persisted? and pers_crispr_constructs.any? %>
 		<table class="min-table">
@@ -39,7 +40,7 @@
 
 	<%= link_to "Add Crispr Construct", select_crispr_construct_crisprs_path(exclude_ids: @crispr.crispr_constructs.ids), 
 			remote: true, 
-			class: "crispr_select_crispr_construct reg-btn" %>
+			class: "select_crispr_construct reg-btn" %>
 	</br></br>	
 
   <%= f.association :donor_construct, label_html: {"data-toggle" => "tooltip", "title" => "The Donor Construct that contains the donor sequence to integrate at the genomic site of the genetic modification."} %>
