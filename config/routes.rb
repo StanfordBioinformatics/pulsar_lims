@@ -12,7 +12,7 @@ Pulsar::Application.routes.draw do
 		resources :wells, except: [:index, :new, :destroy]
 	end
   resources :paired_barcodes
-  resources :crisprs do
+  resources :crispr_modifications do
 		#crisprs only belong to biosamples.
 		get :select_crispr_construct, on: :collection
 		#select_crispr_construct on collection instead of member b/c the user selects this when creating or editing the crispr object, and

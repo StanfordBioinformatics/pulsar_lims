@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901044417) do
+ActiveRecord::Schema.define(version: 20170915010641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -256,15 +256,15 @@ ActiveRecord::Schema.define(version: 20170901044417) do
   add_index "crispr_constructs", ["user_id"], name: "index_crispr_constructs_on_user_id", using: :btree
   add_index "crispr_constructs", ["vendor_id"], name: "index_crispr_constructs_on_vendor_id", using: :btree
 
-  create_table "crispr_constructs_crisprs", id: false, force: :cascade do |t|
-    t.integer "crispr_id",           null: false
-    t.integer "crispr_construct_id", null: false
+  create_table "crispr_constructs_modifications", id: false, force: :cascade do |t|
+    t.integer "crispr_construct_id",    null: false
+    t.integer "crispr_modification_id", null: false
   end
 
-  add_index "crispr_constructs_crisprs", ["crispr_construct_id", "crispr_id"], name: "crispr_construct_crispr", using: :btree
-  add_index "crispr_constructs_crisprs", ["crispr_id", "crispr_construct_id"], name: "crispr_crispr_construct", using: :btree
+  add_index "crispr_constructs_modifications", ["crispr_construct_id", "crispr_modification_id"], name: "crispr_construct_crispr_mod", using: :btree
+  add_index "crispr_constructs_modifications", ["crispr_modification_id", "crispr_construct_id"], name: "crispr_mod_crispr_construct", using: :btree
 
-  create_table "crisprs", force: :cascade do |t|
+  create_table "crispr_modifications", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
     t.integer  "donor_construct_id"
@@ -275,11 +275,11 @@ ActiveRecord::Schema.define(version: 20170901044417) do
     t.integer  "genomic_integration_site_id"
   end
 
-  add_index "crisprs", ["biosample_id"], name: "index_crisprs_on_biosample_id", using: :btree
-  add_index "crisprs", ["donor_construct_id"], name: "index_crisprs_on_donor_construct_id", using: :btree
-  add_index "crisprs", ["genomic_integration_site_id"], name: "index_crisprs_on_genomic_integration_site_id", using: :btree
-  add_index "crisprs", ["name"], name: "index_crisprs_on_name", unique: true, using: :btree
-  add_index "crisprs", ["user_id"], name: "index_crisprs_on_user_id", using: :btree
+  add_index "crispr_modifications", ["biosample_id"], name: "index_crispr_modifications_on_biosample_id", using: :btree
+  add_index "crispr_modifications", ["donor_construct_id"], name: "index_crispr_modifications_on_donor_construct_id", using: :btree
+  add_index "crispr_modifications", ["genomic_integration_site_id"], name: "index_crispr_modifications_on_genomic_integration_site_id", using: :btree
+  add_index "crispr_modifications", ["name"], name: "index_crispr_modifications_on_name", unique: true, using: :btree
+  add_index "crispr_modifications", ["user_id"], name: "index_crispr_modifications_on_user_id", using: :btree
 
   create_table "document_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -726,10 +726,10 @@ ActiveRecord::Schema.define(version: 20170901044417) do
   add_foreign_key "crispr_constructs", "targets"
   add_foreign_key "crispr_constructs", "users"
   add_foreign_key "crispr_constructs", "vendors"
-  add_foreign_key "crisprs", "biosamples"
-  add_foreign_key "crisprs", "donor_constructs"
-  add_foreign_key "crisprs", "genome_locations", column: "genomic_integration_site_id"
-  add_foreign_key "crisprs", "users"
+  add_foreign_key "crispr_modifications", "biosamples"
+  add_foreign_key "crispr_modifications", "donor_constructs"
+  add_foreign_key "crispr_modifications", "genome_locations", column: "genomic_integration_site_id"
+  add_foreign_key "crispr_modifications", "users"
   add_foreign_key "document_types", "users"
   add_foreign_key "documents", "document_types"
   add_foreign_key "documents", "users"
