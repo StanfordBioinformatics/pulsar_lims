@@ -7,7 +7,7 @@ $ ->
   $genomic_integration_site = $(".genomic_integration_site")
 
   chromosome_selection = ->  
-    $.get "/crisprs/select_chromosome_on_reference_genome", $("#reference_genome_id").serialize(), (responseText,status,jqXHR) ->
+    $.get "/crispr_modifications/select_chromosome_on_reference_genome", $("#reference_genome_id").serialize(), (responseText,status,jqXHR) ->
       $genomic_integration_site.html responseText
       $genomic_integration_site.hide().fadeIn("fast")
 

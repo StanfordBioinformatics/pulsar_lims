@@ -2,7 +2,7 @@ class DonorConstruct < ActiveRecord::Base
 	attr_accessor :construct_tag_ids
 
 	has_and_belongs_to_many :construct_tags
-	has_many :crisprs
+	has_many :crispr_modifications
   belongs_to :user
   belongs_to :cloning_vector
   belongs_to :vendor

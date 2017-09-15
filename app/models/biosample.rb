@@ -11,7 +11,7 @@ class Biosample < ActiveRecord::Base
 	belongs_to :from_prototype, class_name: "Biosample"
 	###
 	has_and_belongs_to_many :documents
-	has_one :crispr, validate: true, dependent: :restrict_with_error
+	has_one :crispr_modification, validate: true, dependent: :restrict_with_error
 	has_one :starting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id #the starting biosample used for sorting. Not required.
 	has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :nullify #the starting biosample used for sorting. Not required.
 	belongs_to  :user
@@ -31,7 +31,7 @@ class Biosample < ActiveRecord::Base
 	validates :donor_id, presence: true
 
 	accepts_nested_attributes_for :documents, allow_destroy: true
-	accepts_nested_attributes_for :crispr, allow_destroy: true
+	accepts_nested_attributes_for :crispr_modification, allow_destroy: true
 
 	scope :non_plated, lambda { where(plated: false, prototype: false) }
 	scope :non_prototypes, lambda { where(prototype: false) }

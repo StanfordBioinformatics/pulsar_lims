@@ -1,5 +1,5 @@
 class GenomeLocation < ActiveRecord::Base
-	has_many :crisprs
+	has_many :crispr_modifications
   belongs_to :user
   belongs_to :chromosome
 

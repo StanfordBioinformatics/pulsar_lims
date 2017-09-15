@@ -48,8 +48,8 @@
         <td><%= rec.vendor.name %></td>
 				<td><%= rec.biosample_type.name %></td>
         <td><%= link_to rec.biosample_term_name.name, rec.biosample_term_name %></td>
-				<% if rec.crispr.present? %>	
-					<td><%= link_to rec.crispr.name, rec.crispr %></td>
+				<% if rec.crispr_modification.present? %>	
+					<td><%= link_to rec.crispr_modification.name, rec.crispr_modification %></td>
 				<% else %>
 					<td></td>
 				<% end %>

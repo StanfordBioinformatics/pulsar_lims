@@ -5,7 +5,7 @@ class BiosamplesController < ApplicationController
 
 
 	def add_crispr_modification
-		@biosample.build_crispr({user: current_user})
+		@biosample.build_crispr_modification({user: current_user})
 		flash[:action] = :show
 		render partial: "add_crispr_modification", layout: false
 	end

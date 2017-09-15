@@ -26,5 +26,5 @@ $ ->
 
   $(document).on "click", ".biosample-toggle-up_add_crispr_form", (event) ->  
     event.stopPropagation()
-    $(".jumbotron-select-crispr").slideUp("fast")
-    $("#biosample_add_crispr_modification", document).show()
+    $(".jumbotron-select-crispr").slideUp "fast", () ->
+      $("#biosample_add_crispr_modification", document).show()

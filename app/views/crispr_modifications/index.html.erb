@@ -36,7 +36,7 @@
 				<% target = rec.crispr_constructs.first.target %>
 				<td><%= link_to target.name, target %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_crispr_path(rec) %>
+					<%= link_to fa_icon("pencil"), edit_crispr_modification_path(rec) %>
 	        <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>

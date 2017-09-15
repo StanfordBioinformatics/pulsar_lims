@@ -1,5 +1,5 @@
-class CrisprsController < ApplicationController
-  before_action :set_crispr, only: [:show, :edit, :update, :destroy]
+class CrisprModificationsController < ApplicationController
+  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy]
   skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct]
 
 	def select_crispr_construct
@@ -7,13 +7,13 @@ class CrisprsController < ApplicationController
 		#Parsed params : exclude_ids - Array of CrisprConstruct IDs to exclude from the selection.
 		exclude_ids = params[:exclude_ids]
 		@biosample = Biosample.new
-		@crispr = Crispr.new
+		@crispr = CrisprModification.new
 		@crispr_constructs = CrisprConstruct.where.not(id: exclude_ids)
 		render layout: false
 	end
 	
   def select_chromosome_on_reference_genome
-    @crispr = Crispr.new
+    @crispr = CrisprModification.new
 		@crispr.build_genomic_integration_site
     @chromosomes = Chromosome.where(reference_genome_id: params["reference_genome_id"])
     render layout: false
@@ -29,7 +29,7 @@ class CrisprsController < ApplicationController
 
   def new
 		authorize Crispr
-    @crispr = Crispr.new
+    @crispr = CrisprModification.new
 		@crispr.build_genomic_integration_site
   end
 
@@ -41,7 +41,7 @@ class CrisprsController < ApplicationController
 		authorize Crispr
 		#render json: params
 		#return 
-    @crispr = Crispr.new(crispr_params)
+    @crispr = CrisprModification.new(crispr_params)
 
 		@crispr.user = current_user
 
@@ -71,13 +71,13 @@ class CrisprsController < ApplicationController
 
   def destroy
 		authorize @crispr
-		ddestroy(@crispr,crisprs_path)
+		ddestroy(@crispr,crispr_modifications_path)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_crispr
-      @crispr = Crispr.find(params[:id])
+    def set_crispr_modification
+      @crispr = CrisprModification.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

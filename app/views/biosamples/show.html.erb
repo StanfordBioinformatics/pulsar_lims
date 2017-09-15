@@ -136,8 +136,8 @@
 
 	<tr>
 		<th><strong>CRISPR</strong></th>
-		<% if @biosample.crispr.present? and @biosample.crispr.persisted?%>
-			<td><%= link_to @biosample.crispr.name, @biosample.crispr %></td>
+		<% if @biosample.crispr_modification.present? and @biosample.crispr_modification.persisted?%>
+			<td><%= link_to @biosample.crispr_modification.name, @biosample.crispr_modification %></td>
 		<% else %>
 			<td></td>
 		<% end %>
@@ -156,12 +156,12 @@
 </p>
 </table>
 
-<% if @biosample.crispr.blank? %>
+<% if @biosample.crispr_modification.blank? %>
 	<%= link_to "Add CRISPR modification", add_crispr_modification_biosample_path(@biosample), class: "new", 
 			remote: true, 
 			id: "biosample_add_crispr_modification" %>
 <% else %>
-	<% if not @biosample.crispr.persisted? %>
+	<% if not @biosample.crispr_modification.persisted? %>
 		<!-- The an attempt to create one was made, but there was a validation issue -->
 		<%= render partial: "add_crispr_modification" %>
 	<% end %>
