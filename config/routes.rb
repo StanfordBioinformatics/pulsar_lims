@@ -42,6 +42,10 @@ Pulsar::Application.routes.draw do
 
 	namespace :api do
 		resources :biosamples
+		resources :sequencing_requests do
+			get :find_by_name, on: :collection
+		end
+
 	end
 
   namespace :admin do
