@@ -20,7 +20,7 @@ class CrisprModificationsController < ApplicationController
   end
 
   def index
-    @crisprs = policy_scope(Crispr).order("lower(name)")
+    @crisprs = policy_scope(CrisprModification).order("lower(name)")
   end
 
   def show
@@ -28,7 +28,7 @@ class CrisprModificationsController < ApplicationController
   end
 
   def new
-		authorize Crispr
+		authorize CrisprModification
     @crispr = CrisprModification.new
 		@crispr.build_genomic_integration_site
   end
@@ -38,16 +38,16 @@ class CrisprModificationsController < ApplicationController
   end
 
   def create
-		authorize Crispr
+		authorize CrisprModification
 		#render json: params
 		#return 
-    @crispr = CrisprModification.new(crispr_params)
+    @crispr = CrisprModification.new(crispr_modification_params)
 
 		@crispr.user = current_user
 
     respond_to do |format|
       if @crispr.save
-        format.html { redirect_to @crispr, notice: 'Crispr was successfully created.' }
+        format.html { redirect_to @crispr, notice: 'CRISPR Modification was successfully created.' }
         format.json { render json: @crispr, status: :created }
       else
         format.html { render action: 'new' }
@@ -59,8 +59,8 @@ class CrisprModificationsController < ApplicationController
   def update
 		authorize @crispr
     respond_to do |format|
-      if @crispr.update(crispr_params)
-        format.html { redirect_to @crispr, notice: 'Crispr was successfully updated.' }
+      if @crispr.update(crispr_modification_params)
+        format.html { redirect_to @crispr, notice: 'CRISPR Modification was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -81,7 +81,7 @@ class CrisprModificationsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def crispr_params
-      params.require(:crispr).permit(:name, :donor_construct_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy] )
+    def crispr_modification_params
+      params.require(:crispr_modification).permit(:name, :donor_construct_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy] )
     end
 end

@@ -4,6 +4,7 @@ class GenomeLocation < ActiveRecord::Base
   belongs_to :chromosome
 
 	validates :start, presence: true
+	validates :chromosome, presence: true
 
 	scope :persisted, lambda { where.not(id: nil) }
 

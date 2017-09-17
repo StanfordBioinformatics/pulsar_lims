@@ -16,7 +16,7 @@ class CrisprModification < ActiveRecord::Base
 
 	scope :persisted, lambda { where.not(id: nil) }
 
-	before_save :verify_target #validations have already run at this point - see callback order at http://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html
+	validate :verify_target 
 
 	def self.policy_class
 		ApplicationPolicy

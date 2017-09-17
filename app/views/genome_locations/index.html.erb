@@ -2,33 +2,31 @@
 
 <h1>Listing Genome Locations</h1>
 
-<table>
+<table class="attributes">
   <thead>
     <tr>
-      <th>User</th>
+			<th>Creator</th>
+			<th>Reference Genome</th>
       <th>Chromosome</th>
       <th>Start</th>
       <th>End</th>
-      <th colspan="3"></th>
+      <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @genome_locations.each do |rec| %>
       <tr>
-        <td><%= rec.user %></td>
 				<td><%= rec.user.display() %></td>
-        <td><%= rec.chromosome %></td>
+        <td><%= link_to rec.chromosome.reference_genome.name, rec.chromosome.reference_genome %></td>
+        <td><%= rec.chromosome.name %></td>
         <td><%= rec.start %></td>
         <td><%= rec.end %></td>
-        <td><%= link_to 'Show', rec %></td>
-        <td><%= link_to 'Edit', edit_genome_location_path(rec) %></td>
-        <td><%= link_to 'Destroy', rec, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("pencil"), edit_genome_location_path(rec) %></td>
+        <td><%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Genome location', new_genome_location_path %>

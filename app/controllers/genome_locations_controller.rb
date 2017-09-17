@@ -2,7 +2,7 @@ class GenomeLocationsController < ApplicationController
   before_action :set_genome_location, only: [:show, :edit, :update, :destroy]
 
   def index
-    @genome_locations = policy_scope(GenomeLocation).order("lower(name)")
+    @genome_locations = policy_scope(GenomeLocation).all
   end
 
   def show
@@ -60,6 +60,6 @@ class GenomeLocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def genome_location_params
-      params.require(:genome_location).permit(:name, :chromosome_id, :start, :end)
+      params.require(:genome_location).permit(:chromosome_id, :start, :end)
     end
 end

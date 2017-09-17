@@ -3,7 +3,7 @@
 	<%= simple_form_for @biosample do |f| %>
 		<% @crispr = @biosample.crispr_modification %>
 		<!-- Need to explicitely set @crispr since the Crispr form expects this variable. -->
-	  <%= f.simple_fields_for :crispr, @crispr do |ff| %>
+	  <%= f.simple_fields_for :crispr_modification, @crispr do |ff| %>
 	    <%= render partial: "crispr_modifications/form", locals: {f: ff} %>
 	  <% end %>
 	  <div class="form-actions">
