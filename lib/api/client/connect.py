@@ -47,6 +47,17 @@ class Model:
 	HEADERS = {'content-type': 'application/json', 'Authorization': 'Token token={}'.format(TOKEN)}
 	URL = os.environ["PULSAR_API_URL"]
 	MODEL_NAME = "" #subclasses define
+
+	def delete(self,uid):
+		"""
+		Function : Deletes the record. 
+		Args     : uid - The database identifier of the record to fetch. Will be converted to a string.
+		"""
+		uid = str(uid)
+		url = os.path.join(self.URL,uid)
+		res = requests.delete(url=url,headers=self.HEADERS,verify=False)
+		return res
+		
 	
 	def get(self,uid):
 		"""
@@ -55,7 +66,8 @@ class Model:
 		"""
 		uid = str(uid)
 		url = os.path.join(self.URL,uid)
-		return requests.get(url=url,headers=self.HEADERS,verify=False)
+		res = requests.get(url=url,headers=self.HEADERS,verify=False)
+		return res.json()
 
 	def patch(self,uid, data):
 		"""
@@ -67,7 +79,8 @@ class Model:
 		url = os.path.join(self.URL,uid)
 		if not self.MODEL_NAME in data:
 			data = {self.MODEL_NAME: data}
-		return requests.patch(url=url,data=json.dumps(data),headers=self.HEADERS,verify=False)
+		res = requests.patch(url=url,data=json.dumps(data),headers=self.HEADERS,verify=False)
+		return res
 
 	def post(self, data):
 		"""
@@ -80,6 +93,7 @@ class Model:
 		return requests.post(url=self.URL,data=json.dumps(data),headers=self.HEADERS,verify=False)
 
 
+
 class Biosamples(Model):
 	URL = os.path.join(Model.URL,"biosamples")
 	MODEL_NAME = "biosample"
@@ -90,10 +104,11 @@ class ConstructTags(Model):
 	
 if __name__ == "__main__":
 	print("Starting")
-#	b = Biosamples()
-#	res = b.get(uid=1772)
-#	res = b.patch(uid=1772,data={"name": "Fred"})
-	c = ConstructTags()
-	res = c.post(data={"name": "howdy there partner"})	
+	b = Biosamples()
+	#res = b.get(uid=1772)
+	#res = b.patch(uid=1772,data={"name": "Freddy"})
+	res = b.delete(uid=1719)
+	#c = ConstructTags()
+	#res = c.post(data={"name": "howdy there partner"})	
 	pdb.set_trace()
 	

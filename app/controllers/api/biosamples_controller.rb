@@ -1,7 +1,7 @@
 class Api::BiosamplesController < Api::ApplicationController
 	#example with curl:
 	# curl -H "Authorization: Token token=${token}" http://localhost:3000/api/biosamples/3
-	before_action :set_biosample, only: [:show, :update, :add_crispr_modification]
+	before_action :set_biosample, only: [:show, :update, :destroy, :add_crispr_modification]
 
 	def index
 		biosamples = policy_scope(Biosample).order("lower(name)")
@@ -30,7 +30,15 @@ class Api::BiosamplesController < Api::ApplicationController
 		else
 			render json: { errors: @biosample.errors.full_messages }, status: 422
 		end
-		
+	end
+
+	def destroy
+		authorize @biosample
+		if @biosample.destroy
+			render json: @biosample, status: 204
+		else
+			render json: { errors: @biosample.errors.full_messages}, status: :unprocessable_entity
+		end
 	end
 
 	def add_crispr_modification
