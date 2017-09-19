@@ -94,9 +94,21 @@ class Model:
 
 
 
+class Antibody(Model):
+	URL = os.path.join(Model.URL,"antibodies")
+	MODEL_NAME = "antibody"
+
+class AntibodyPurification(Model):
+	URL = os.path.join(Model.URL,"antibody_purifications")
+	MODEL_NAME = "antibody_purification"
+
 class Biosamples(Model):
 	URL = os.path.join(Model.URL,"biosamples")
 	MODEL_NAME = "biosample"
+
+class Biosamples(Model):
+	URL = os.path.join(Model.URL,"biosample_term_names")
+	MODEL_NAME = "biosample_term_name"
 	
 class ConstructTags(Model):
 	URL = os.path.join(Model.URL,"construct_tags")
