@@ -42,8 +42,11 @@ Pulsar::Application.routes.draw do
 
 	namespace :api do
 		resources :biosamples
+		resources :construct_tags
+		resources :crispr_constructs
 		resources :sequencing_requests do
 			get :find_by_name, on: :collection
+			post :add_crispr_modification, on: :member
 		end
 
 	end

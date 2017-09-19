@@ -1,4 +1,5 @@
 class Api::ApplicationController < ApplicationController
+	protect_from_forgery with: :null_session
 	attr_reader :current_user
 	before_action :authenticate_user
 
@@ -10,6 +11,7 @@ class Api::ApplicationController < ApplicationController
 	end
 
 	def authenticate_user
+    logger.info("#TT#A")
 		authenticate_with_http_token do |token|
 		#authenticate_with_http_token is a rails method
 			@current_user = User.find_by(api_key: token)
