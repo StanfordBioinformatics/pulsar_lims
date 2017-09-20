@@ -15,6 +15,15 @@
 	  <th><strong>Name:</strong></th>
 	  <td><%= @donor_construct.name %></td>
 	</tr>
+
+	<tr>
+		<th><strong>Addgene:</strong></th>
+		<td>
+			<% if @donor_construct.addgene_id %>
+				<%= link_to @donor_construct.addgene_id, ENV["ADDGENE_WEBSITE"] + @donor_construct.addgene_id %>
+			<% end %>
+		</td>
+	</tr>
 	
 	<tr>
 	  <th><strong>Cloning vector:</strong></th>

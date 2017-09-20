@@ -11,6 +11,7 @@
     <tr>
       <th>Name</th>
 			<th>Creator</th>
+			<th>Addgene ID</th>
       <th>Target</th>
       <th>Guide sequence</th>
       <th>Cloning vector</th>
@@ -26,6 +27,11 @@
       <tr>
         <td><%= link_to rec.name, rec %></td>
 				<td><%= rec.user.display() %></td>
+        <td>
+          <% if rec.addgene_id %>
+            <%= link_to rec.addgene_id, ENV["ADDGENE_WEBSITE"] + rec.addgene_id %>
+          <% end %>
+        </td>
         <td><%= link_to rec.target.name, rec.target %></td>
         <td><%= rec.guide_sequence %></td>
         <td><%= link_to rec.cloning_vector.name, rec.cloning_vector %></td>

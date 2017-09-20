@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170919222018) do
+ActiveRecord::Schema.define(version: 20170920062402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -248,8 +248,10 @@ ActiveRecord::Schema.define(version: 20170919222018) do
     t.string   "vendor_product_identifier"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.string   "addgene_id"
   end
 
+  add_index "crispr_constructs", ["addgene_id"], name: "index_crispr_constructs_on_addgene_id", using: :btree
   add_index "crispr_constructs", ["cloning_vector_id"], name: "index_crispr_constructs_on_cloning_vector_id", using: :btree
   add_index "crispr_constructs", ["name"], name: "index_crispr_constructs_on_name", unique: true, using: :btree
   add_index "crispr_constructs", ["target_id"], name: "index_crispr_constructs_on_target_id", using: :btree
@@ -327,8 +329,10 @@ ActiveRecord::Schema.define(version: 20170919222018) do
     t.text     "insert_sequence"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.string   "addgene_id"
   end
 
+  add_index "donor_constructs", ["addgene_id"], name: "index_donor_constructs_on_addgene_id", using: :btree
   add_index "donor_constructs", ["cloning_vector_id"], name: "index_donor_constructs_on_cloning_vector_id", using: :btree
   add_index "donor_constructs", ["name"], name: "index_donor_constructs_on_name", unique: true, using: :btree
   add_index "donor_constructs", ["target_id"], name: "index_donor_constructs_on_target_id", using: :btree

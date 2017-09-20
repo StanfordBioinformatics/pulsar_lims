@@ -2,6 +2,7 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @donor_construct } %>
 
   <%= f.input :name %>
+	<%= f.input :addgene_id, label_html: {"data-toggle" => "tooltip", "title" => "The catalog number (i.e. 50661) of the plasmid in www.addgene.org."} %>
   <%= f.association :cloning_vector %>
   <%= f.association :vendor %>
   <%= f.input :vendor_product_identifier %>

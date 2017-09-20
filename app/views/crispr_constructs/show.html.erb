@@ -15,6 +15,15 @@
 	  <th><strong>Name:</strong></th>
 	  <td><%= @crispr_construct.name %></td>
 	</tr>
+
+  <tr>
+    <th><strong>Addgene:</strong></th>
+    <td>
+      <% if @crispr_construct.addgene_id %>
+        <%= link_to @crispr_construct.addgene_id, ENV["ADDGENE_WEBSITE"] + @crispr_construct.addgene_id %>
+			<% end %>
+    </td>
+  </tr>
 	
 	<tr>
 	  <th><strong>Target:</strong></th>
