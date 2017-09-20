@@ -9,7 +9,7 @@ class SequencingResult < ActiveRecord::Base
 	validates :library, presence: true
 	validates :read1_count, numericality: { greater_than: 0 }, allow_nil: true
 	validates :read2_count, numericality: { greater_than: 0 }, allow_nil: true
-	validates_uniqueness_of :library, message: "sequencing result already exists for this library."
+	validates_uniqueness_of :library, scope: :sequencing_run, message: "sequencing result already exists for this library."
 
 
 	scope :persisted, lambda { where.not(id: nil) }

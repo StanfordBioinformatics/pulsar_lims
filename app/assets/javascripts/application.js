@@ -59,6 +59,10 @@ $(function() {
           $tr.fadeOut(function(){
             $tr.remove()
           })
+          if ($(event.target).closest("a").hasClass("sequencing_result")) {
+            //Then make sure the btn to add new seq res is activated:
+            $("#new_sequencing_result",document).removeAttr("disabled"); //See sequencing_results.js.coffee for details.
+          }
         }
       })
     }

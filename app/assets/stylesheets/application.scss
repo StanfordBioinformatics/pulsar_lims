@@ -13,9 +13,6 @@
 @import "plates";
 @import "sequencing_library_prep_kits";
 
-//@import "sequencing_results";
-
-
 @media (max-width: $screen-xs-min) {
 	body {
 		font-size: 1.0em;
@@ -299,17 +296,6 @@ ul.actions {
 		font-size: larger;
 	}
 }
-
-#barcode_results {
-	@extend .attributes;
-	thead {
-		font-weight: bold;
-		color: white;
-		background-color: #3a4749;
-		opacity: 0.7;
-	}
-}
-
 
 a.new, a.edit, a.delete {
   @extend .btn;

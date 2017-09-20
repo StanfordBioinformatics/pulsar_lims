@@ -42,3 +42,5 @@ $ ->
     $("#new_sequencing_result_form").slideUp "normal", ->  
       $("#new_sequencing_result_form").remove()
       $new_bc_res_btn.show()
+
+  
