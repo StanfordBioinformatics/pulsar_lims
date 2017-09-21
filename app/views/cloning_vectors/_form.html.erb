@@ -5,7 +5,7 @@
   <%= f.input :description %>
   <%= f.association :vendor, label_html: {"data-toggle" => "tooltip", "title" => "The originating lab or vendor."} %>
   <%= f.input :product_url, label_html: {"data-toggle" => "tooltip", "title" => "Link to the vendor product."} %>
-	<%= f.input :map, as: :file, label: false %>
+	<%= f.input :map, as: :file, label: "Map image" %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
