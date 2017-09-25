@@ -44,6 +44,18 @@
 	}
 }
 
+// See defaults for tooltip in .rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap
+.tooltip.in {
+	opacity: 1.0;
+}
+
+.tooltip-inner  {
+	font-size: 1.3em;
+	color: black;
+	//aquamarine
+	background-color: rgb(127,255,212);
+}
+
 .fa-info-circle:hover {
 	cursor: help;
 }
