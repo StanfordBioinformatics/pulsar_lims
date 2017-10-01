@@ -1,5 +1,5 @@
 <div id="plate_jumbotron" class="jumbotron">
-	<div class="container-fluid">
+<div class="table-responsive">
 		<!-- check_box_tag format is check_box_tag(name=string, value=string, checked=bool, options={}) -->
 		<div class="pull-right">
 			<% if @plate.get_barcodes.any? %>
@@ -17,7 +17,7 @@
 			<% end %>
 		</div>
 		<h3 class="display-3">Plate Layout</h3>
-		<table class="plate-table">
+		<table style="border: 2px solid red;" class="table">
 			<thead>
 				<tr><th></th>
 					<% (1..@plate.ncol).each do |c| %>
@@ -48,5 +48,5 @@
 				</tbody>
 			<% end %>
 		</table></br>
-	</div>
+</div>
 </div>
