@@ -37,15 +37,6 @@
 	</tr>
 
 	<tr>
-		<th><strong>Isotpye</strong></th>
-		<td>
-			<% if @antibody.isotype.present? %>
-			  <%= link_to @antibody.isotype.name, @antibody.isotype %>
-			<% end %>
-		</td>
-	</tr>
-
-	<tr>
 		<th><strong>Vendor Product Identifier</strong></th>
 		<td><%= @antibody.vendor_product_identifier %></td>
 	</tr>
@@ -53,6 +44,15 @@
 	<tr>
 		<th><strong>Vendor Product URL</strong></th>
 		<td><%= link_to @antibody.vendor_product_url %></td>
+	</tr>
+
+	<tr>
+		<th><strong>Isotpye</strong></th>
+		<td>
+			<% if @antibody.isotype.present? %>
+			  <%= link_to @antibody.isotype.name, @antibody.isotype %>
+			<% end %>
+		</td>
 	</tr>
 
 	<tr>
