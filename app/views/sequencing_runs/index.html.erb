@@ -10,6 +10,7 @@
     <tr>
       <th>Name</th>
 			<th>Creator</th>
+			<th>Date created</th>
       <th>Comment</th>
       <th>User</th>
       <th>Sequencing request</th>
@@ -25,6 +26,7 @@
       <tr>
 				<td><%= link_to rec.name, rec %></td>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
         <td><%= rec.comment %></td>
         <td><%= link_to rec.sequencing_request.name, rec.sequencing_request %></td>
         <td><%= rec.run_name %></td>

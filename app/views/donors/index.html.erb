@@ -10,6 +10,7 @@
   <thead>
     <tr>
 			<th>Creator</th>
+			<th>Date created</th>
       <th>Encode</th>
       <th>Encode alias</th>
       <th>Actions</th>
@@ -20,6 +21,7 @@
     <% @donors.each do |rec| %>
       <tr>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
         <td><%= link_to rec.encode_identifier, rec %></td>
         <td><%= rec.name %></td>
         <td>

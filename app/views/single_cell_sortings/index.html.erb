@@ -11,6 +11,7 @@
     <tr>
       <th>Name</th>
 			<th>Creator</th>
+			<th>Date created</th>
       <th>Description</th>
 			<th>Starting Biosample</th>
       <th>Actions</th>
@@ -22,6 +23,7 @@
       <tr>
         <td><%= link_to rec.name, rec %></td>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
         <td><%= rec.description %></td>
 				<td><%= link_to rec.starting_biosample.name, rec.starting_biosample %></td>
         <td>

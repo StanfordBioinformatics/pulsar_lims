@@ -13,6 +13,7 @@
     <tr>
       <th>Name</th>
 			<th>Creator</th>
+			<th>Date created</th>
       <th>Crispr constructs</th>
       <th>Donor construct</th>
       <th>Biosample</th>
@@ -26,6 +27,7 @@
       <tr>
         <td><%= link_to rec.name, rec %></td>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
 				<td>
 					<% rec.crispr_constructs.each do |cc| %>
 		        <%= link_to cc.name, cc %>

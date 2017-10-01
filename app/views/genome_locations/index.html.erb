@@ -6,6 +6,7 @@
   <thead>
     <tr>
 			<th>Creator</th>
+			<th>Date created</th>
 			<th>Reference Genome</th>
       <th>Chromosome</th>
       <th>Start</th>
@@ -18,6 +19,7 @@
     <% @genome_locations.each do |rec| %>
       <tr>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
         <td><%= link_to rec.chromosome.reference_genome.name, rec.chromosome.reference_genome %></td>
         <td><%= rec.chromosome.name %></td>
         <td><%= rec.start %></td>

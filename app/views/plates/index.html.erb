@@ -13,6 +13,7 @@
     <tr>
       <th>Name</th>
 			<th>Creator</th>
+			<th>Date created</th>
 			<th>Single Cell Sorting</th>
       <th>Dimensions</th>
       <th>Vendor</th>
@@ -26,6 +27,7 @@
       <tr>
         <td><%= link_to rec.name, rec %></td>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
 				<td><%= link_to rec.single_cell_sorting.name, rec.single_cell_sorting %></td>
 				<td><%= "#{rec.nrow}x#{rec.ncol}" %></td>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>

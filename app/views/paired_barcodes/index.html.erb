@@ -11,6 +11,7 @@
     <tr>
       <th>Name</th>
 			<th>Creator</th>
+			<th>Date created</th>
       <th>Sequencing library prep kit</th>
       <th>Index1</th>
       <th>Index2</th>
@@ -23,6 +24,7 @@
       <tr>
         <td><%= link_to rec.name, rec %></td>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
         <td><%= link_to rec.sequencing_library_prep_kit.name, rec.sequencing_library_prep_kit %></td>
         <td><%= link_to "#{rec.index1.name} #{rec.index1.sequence}", [rec.sequencing_library_prep_kit,rec.index1] %></td>
         <td><%= link_to "#{rec.index2.name} #{rec.index2.sequence}", [rec.sequencing_library_prep_kit,rec.index2] %></td>

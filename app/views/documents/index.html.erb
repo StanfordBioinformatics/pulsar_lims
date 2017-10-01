@@ -11,6 +11,7 @@
     <tr>
       <th>Name</th>
 			<th>Creator</th>
+			<th>Date created</th>
 			<th>Is Protocol?</th>
       <th>Content type</th>
       <th>File Link</th>
@@ -24,6 +25,7 @@
       <tr>
         <td><%= link_to rec.name, rec %></td>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
 				<td><%= rec.is_protocol %></td>
         <td><%= rec.content_type %></td>
         <td><%= link_to(rec.name,:action => "document", :id => rec.id) %></td>

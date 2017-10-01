@@ -11,6 +11,7 @@
     <tr>
       <th>Name</th>
 			<th>Creator</th>
+			<th>Date created</th>
       <th>Description</th>
       <th>Vendor</th>
       <th>Product url</th>
@@ -24,6 +25,7 @@
       <tr>
         <td><%= link_to rec.name, rec %></td>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
         <td><%= rec.description %></td>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
 				<% if rec.product_url.present? %>

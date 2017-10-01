@@ -12,6 +12,7 @@
     <tr>
 			<th>Name</th>
 			<th>Creator</th>
+			<th>Date created</th>
 			<th>Owner</th>
 			<th>Parent Biosample</th>
 			<th>Well</th>
@@ -29,6 +30,7 @@
     <% @biosamples.each do |rec| %>
 				<td><%= link_to rec.name, rec%></td>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
 				<td>
 					<% if rec.owner.present? %>
 						<%= rec.owner.display %>

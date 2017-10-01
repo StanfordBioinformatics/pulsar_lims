@@ -12,9 +12,10 @@
     <tr>
       <th>Name</th>
 			<th>Creator</th>
+			<th>Date created</th>
       <th>Vendor</th>
-			<th>Vendor Product ID</th>
-			<th>Supports Paired End</th>
+			<th>Vendor product ID</th>
+			<th>Supports paired end</th>
       <th>Description</th>
       <th>Actions</th>
     </tr>
@@ -25,6 +26,7 @@
       <tr>
         <td><%= link_to rec.name, rec %></td>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
         <td><%= rec.vendor_product_identifier %></td>
 				<td><%= rec.supports_paired_end %></td>

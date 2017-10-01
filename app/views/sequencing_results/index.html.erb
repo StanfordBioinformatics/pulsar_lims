@@ -15,6 +15,7 @@
     <tr>
       <th>Sequencing run</th>
 			<th>Creator</th>
+			<th>Date created</th>
       <th>Library</th>
       <th>Comment</th>
       <th>Read1 uri</th>
@@ -30,6 +31,7 @@
       <tr>
         <td><%= link_to @sequencing_run.name, [@sequencing_request,@sequencing_run] %></td>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
         <td><%= link_to rec.library.name, rec.library %></td>
         <td><%= rec.comment %></td>
         <td><%= rec.read1_uri %></td>

@@ -11,6 +11,7 @@
     <tr>
 			<th>Name</th>
 			<th>Creator</th>
+			<th>Date created</th>
 			<th>Sequencing Library Prep Kit</th>
 			<th>Paired End</th>
       <th>Nucleic acid term</th>
@@ -32,6 +33,7 @@
       <tr>
 				<td><%= link_to rec.name, rec %></td>
 				<td><%= rec.user.display() %></td>
+				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
 				<td><%= link_to rec.sequencing_library_prep_kit.name, rec.sequencing_library_prep_kit %></td>
 				<td><%= rec.paired_end %></td>
         <td><%= rec.nucleic_acid_term.name %></td>
