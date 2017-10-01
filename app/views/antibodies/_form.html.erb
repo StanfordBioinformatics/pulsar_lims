@@ -38,18 +38,18 @@
   <%= f.association :vendor, collection: Vendor.order(:name), label_method: :name, prompt: "Select the Vendor",
 			label_html: {"data-toggle" => "tooltip", "title" => "The originating lab or vendor."} %>
 
+  <%= f.input :vendor_product_identifier,
+			label_html: {"data-toggle" => "tooltip", "title" => "The product identifier provided by the originating lab or vendor."} %>
+
+  <%= f.input :vendor_product_url,
+			label_html: {"data-toggle" => "tooltip", "title" => "An external resource with additional information about the antibody."} %>
+
   <%= f.association :isotype, collection: Isotype.order(:name), label_method: :name, prompt: "Select the Isotype",
 			label_html: {"data-toggle" => "tooltip", "title" => "The class of antibody ( e.g. IgA, IgD, IgE, IgG or IgM)"} %>
 
   <%= f.association :target, collection: Target.order(:name), label_method: :name, prompt: "Select the Target",
 			label_html: {"data-toggle" => "tooltip", "title" => "The name of the gene whose expression or product is the intended goal of the antibody."} %>
 
-  <%= f.input :vendor_product_identifier,
-			label_html: {"data-toggle" => "tooltip", "title" => "The product identifier provided by the originating lab or vendor."} %>
-
-  <%= f.input :vendor_product_url,
-			label_html: {"data-toggle" => "tooltip", "title" => "An external resource with additional information about the antibody."} %>
-    
   <%= f.input :lot_identifier,
 			label_html: {"data-toggle" => "tooltip", "title" => "The lot identifier provided by the originating lab or vendor."} %>
 
