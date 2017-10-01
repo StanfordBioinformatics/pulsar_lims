@@ -111,7 +111,7 @@
           </ul>
         </nav>
       </div>
-      <div style="float: left" id="main-body" class="data-container col-xs-8">
+      <div style="float: left" id="main-body" class="data-container col-xs-8 col-sm-9 col-md-10">
         <% flash.each do |key, message| %>
 					<% next if ! [:alert,:notice].include?(key.to_sym) %>
           <div class="alert alert-<%= key %>">
@@ -120,7 +120,7 @@
         <% end %>
         <%= yield %>
       </div>
-			<div id="right_sidebar" class="data-container col-xs-0 col-sm-1 col-md-2"></div>
+			<!-- <div id="right_sidebar" class="data-container col-xs-0 col-sm-1 col-md-2"></div> -->
     </div>
 		</br style="clear:both">
   </div>
