@@ -28,11 +28,11 @@ class PairedBarcode < ActiveRecord::Base
 	end
 
 	def display
-		seq = get_sequence()
+		seq = self.sequence()
 		return "#{name} #{seq}"
 	end
 
-	def get_sequence
+	def sequence
 		return "#{index1.sequence}-#{index2.sequence}"
 	end
 

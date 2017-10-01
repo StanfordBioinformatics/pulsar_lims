@@ -21,17 +21,6 @@
 	</tr>
 	
 	<tr>
-		<th><strong>Libraries:</strong></th>
-		<% if @sequencing_request.libraries.present? %>
-			<td>
-        <%= render partial: "libraries/link_to_library", locals: {libraries: @sequencing_request.libraries.persisted} %>
-      </td>
-    <% else %>
-      <td>None</td>
-    <% end %>
-  </tr>
-
-	<tr>
 		<th><strong>Plates:</strong></th>
 		<% if @sequencing_request.plates.present?%>
 			<td>
@@ -83,6 +72,17 @@
 			<td>None</td>
 		<% end %>
 	</tr>
+
+	<tr>
+		<th><strong>Libraries:</strong></th>
+		<% if @sequencing_request.libraries.present? %>
+			<td>
+        <%= render partial: "libraries/link_to_library", locals: {libraries: @sequencing_request.libraries.persisted} %>
+      </td>
+    <% else %>
+      <td>None</td>
+    <% end %>
+  </tr>
 </table>
 
 <div class="added_libraries"></div>

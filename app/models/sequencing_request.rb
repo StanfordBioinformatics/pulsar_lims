@@ -75,9 +75,10 @@ class SequencingRequest < ActiveRecord::Base
 	protected
 		def add_libraries_from_plate(plate)
 			#I Set this method under the protected block so that this can be called from an instance method within the class definition.
-			#Originally I had this under the protected block, but that didn't allow for instance methods in the class definition
+			# Originally I had this under the private block, but that didn't allow for instance methods in the class definition
 			# to call it. 
 			plate.wells.each do |w|
+				next if w.fail?
 				self.libraries << w.get_library()
 			end
 		end
