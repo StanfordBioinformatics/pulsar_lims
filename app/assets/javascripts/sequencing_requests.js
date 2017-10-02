@@ -48,7 +48,13 @@ $(document).on("change","#single_cell_sorting_selector", function(event) {
   $.get("/sequencing_requests/" + sreq_id + "/select_scs_plates", val, function(responseText,status,jqXHR) {
     //$(this).closest("div").append(responseText);
     $sreq_plate_selector.html(responseText);
+
+    //Disable the plate selection form's input btn until a plate has been selected:
+    $("#select_plates_modal input").attr("disabled","disabled");
     $("#select_plates_modal").show();
+    $("#sequencing_request_plate_ids").change( function() {
+      $("#select_plates_modal input").removeAttr("disabled");
+    })
   })
 })
 
