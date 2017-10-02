@@ -11,7 +11,6 @@ class SequencingRequestsController < ApplicationController
 		#Add plates on a Single Cell Sorting experimnt
 		flash[:action] = :show
 		ssc_id = params[:single_cell_sorting_selector]
-		logger.info("WINN")
 		ssc = SingleCellSorting.find(ssc_id)
 		@plates = ssc.plates.where.not(id: @sequencing_request.plates.persisted)
 		logger.info(@plates.ids)

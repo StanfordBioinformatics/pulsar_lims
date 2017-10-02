@@ -70,8 +70,14 @@ $(function() {
 
   //Add spinner cursor whenever the user initiates AJAX request.
   $(document).ajaxSend(function() {
-    $("body").addClass("waiting")
+    $("body").addClass("waiting");
   })
+
+  //Add spinner whenever a form's submit btn is clicked.
+  $(document).on("click","input[type='submit']", function(event) {
+    $("body").addClass("waiting");
+  })
+
 
   //Remove spinner cursor when AJAX request completes.
   $(document).ajaxComplete(function() {
