@@ -51,7 +51,7 @@ class PlatesController < ApplicationController
       if plate_params[barcode_ids_param].present?
         @plate = add_barcodes_matrix_input(plate=@plate,barcodes=plate_params[barcode_ids_param])
       end 
-    #rescue Exceptions::BarcodeNotFoundError, Exceptions::TooManyRowsError, Exceptions::TooManyColumnsError, Exceptions::WellNotFoundError, Exceptions::WellAndPlateMismatchError, Exceptions::WellNotSavedError => err #any of these could be raised when calling add_barcodes().
+    #rescue Exceptions::BarcodeNotFoundError, Exceptions::TooManyRowsError, Exceptions::TooManyColumnsError, Exceptions::WellNotFoundError, Exceptions::WellAndPlateMismatchError, Exceptions::WellNotSavedError => err #any of these could be raised when calling add_barcodes(). And they all inherit from StandardError.
     rescue StandardError => err #any of these could be raised when calling add_barcodes().
       respond_to do |format|
         format.html { redirect_to @plate, alert: err.message }

@@ -79,7 +79,12 @@ class SequencingRequest < ActiveRecord::Base
 			# to call it. 
 			plate.wells.each do |w|
 				next if w.fail?
-				self.libraries << w.get_library()
+				lib = w.get_library()
+        if lib.nil?
+					raise "Error adding plates to sequencing request: No library found for well '#{w.name}' on plate '#{plate.name}' - can't be added to sequening request. If you intend to have this well empty, then go into the well and mark is as failed."
+				else
+					self.libraries << w.get_library()
+				end
 			end
 		end
 

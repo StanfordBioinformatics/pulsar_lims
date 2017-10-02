@@ -68,7 +68,7 @@
 		/* Code from example at https://www.w3schools.com/howto/howto_css_modals.asp */
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 10; /* Sit on top. I found out that the active element in the left-hand navbar has a z-index of 2. */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
