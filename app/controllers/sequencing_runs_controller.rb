@@ -77,6 +77,6 @@ class SequencingRunsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_run_params
-      params.require(:sequencing_run).permit(:name, :sequencing_request_id, :run_name, :lane, :comment, sequencing_results_attributes: [:library_id, :sequencing_run_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count])
+      params.require(:sequencing_run).permit(:name, :sequencing_request_id, :lane, :comment, sequencing_results_attributes: [:library_id, :sequencing_run_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count])
     end
 end

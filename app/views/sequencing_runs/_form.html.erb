@@ -1,13 +1,10 @@
 <%= simple_form_for([@sequencing_request,@sequencing_run]) do |f| %>
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_run} %>
 
-  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing result name"} %>
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing run name"} %>
   <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Notes about the sequencing result"} %>
 
-  <div class="form-inputs">
-    <%= f.input :run_name %>
-    <%= f.input :lane %>
-  </div>
+  <%= f.input :lane %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

@@ -14,7 +14,6 @@
       <th>Comment</th>
       <th>User</th>
       <th>Sequencing request</th>
-      <th>Run name</th>
       <th>Lane</th>
       <th>Comment</th>
       <th>Actions</th>
@@ -29,7 +28,6 @@
 				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
         <td><%= rec.comment %></td>
         <td><%= link_to rec.sequencing_request.name, rec.sequencing_request %></td>
-        <td><%= rec.run_name %></td>
         <td><%= rec.lane %></td>
 				<td>
 					<%= link_to fa_icon("pencil"), edit_sequencing_run(library) %>

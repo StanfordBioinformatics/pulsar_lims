@@ -5,7 +5,7 @@ class SequencingRun< ActiveRecord::Base
 	has_many   :sequencing_results, dependent: :destroy
 
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
-	validates :run_name, presence: true
+	validates :name
 
 	scope :persisted, lambda { where.not(id: nil) }
 	accepts_nested_attributes_for :sequencing_results, allow_destroy: true
