@@ -1,0 +1,36 @@
+<header>
+  <h1>Data Storages</h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: DataStorage} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+			<th>Data storage provider</th>
+      <th>Bucket</th>
+      <th>Project identifier</th>
+      <th>Folder base path</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @data_storages.each do |rec| %>
+      <tr>
+        <td><%= link_to rec.name, rec %></td>
+				<td><%= link_to rec.data_storage_provider.name, rec.data_storage_provider %></td>
+        <td><%= rec.bucket %></td>
+        <td><%= rec.project_identifier %></td>
+        <td><%= rec.folder_base_path %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_data_storage_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

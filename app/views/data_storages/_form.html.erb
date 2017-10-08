@@ -1,0 +1,13 @@
+<%= simple_form_for(@data_storage) do |f| %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @data_storage } %>
+
+    <%= f.input :name %>
+		<%= f.association :data_storage_provider %>
+    <%= f.input :bucket, label_html: {"data-toggle" => "tooltip", "title" => "Name of the S3 bucket" } %>
+    <%= f.input :project_identifier %>
+    <%= f.input :folder_base_path, label_html: {"data-toggle" => "tooltip", "title" => "Folder path within your bucket or project that doesn't change. Useful for when creating FileReferences so you don't have to retype this base path each time to get to a nested path." } %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div>
+<% end %>

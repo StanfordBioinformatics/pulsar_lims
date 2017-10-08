@@ -1,5 +1,9 @@
 Pulsar::Application.routes.draw do
 
+  resources :data_storage_providers
+  resources :data_storages do
+		get :customize_for_data_storage_provider, on: :collection
+	end
   resources :concentration_units
   resources :single_cell_sortings do
 		get :add_plate, on: :member

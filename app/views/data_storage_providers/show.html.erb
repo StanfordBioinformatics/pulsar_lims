@@ -1,0 +1,20 @@
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @data_storage_provider } %>
+<header>
+  <h1><%= @data_storage_provider.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @data_storage_provider} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @data_storage_provider} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @data_storage_provider } %>
+
+<table class="attributes">
+	<tr>
+  	<th><strong>Name:</strong></th>
+  	<td><%= @data_storage_provider.name %></td>
+	</tr>
+</table>
+
+<%= link_to 'Back', data_storage_providers_path %>

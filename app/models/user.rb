@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 	has_many :construct_tags, dependent: :nullify
 	has_many :crispr_modification, dependent: :nullify
 	has_many :crispr_constructs, dependent: :nullify
+	has_many :data_storages, dependent: :nullify
 	has_many :documents, dependent: :nullify
 	has_many :document_types, dependent: :nullify
 	has_many :donors, dependent: :nullify

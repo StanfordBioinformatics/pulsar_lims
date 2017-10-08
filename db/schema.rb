@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171006234827) do
+ActiveRecord::Schema.define(version: 20171008055923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -282,6 +282,29 @@ ActiveRecord::Schema.define(version: 20171006234827) do
   add_index "crispr_modifications", ["genomic_integration_site_id"], name: "index_crispr_modifications_on_genomic_integration_site_id", using: :btree
   add_index "crispr_modifications", ["name"], name: "index_crispr_modifications_on_name", unique: true, using: :btree
   add_index "crispr_modifications", ["user_id"], name: "index_crispr_modifications_on_user_id", using: :btree
+
+  create_table "data_storage_providers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "data_storage_providers", ["user_id"], name: "index_data_storage_providers_on_user_id", using: :btree
+
+  create_table "data_storages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "bucket"
+    t.string   "project_identifier"
+    t.string   "folder_base_path"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "data_storage_provider_id"
+  end
+
+  add_index "data_storages", ["data_storage_provider_id"], name: "index_data_storages_on_data_storage_provider_id", using: :btree
+  add_index "data_storages", ["user_id"], name: "index_data_storages_on_user_id", using: :btree
 
   create_table "document_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -732,6 +755,9 @@ ActiveRecord::Schema.define(version: 20171006234827) do
   add_foreign_key "crispr_modifications", "donor_constructs"
   add_foreign_key "crispr_modifications", "genome_locations", column: "genomic_integration_site_id"
   add_foreign_key "crispr_modifications", "users"
+  add_foreign_key "data_storage_providers", "users"
+  add_foreign_key "data_storages", "data_storage_providers"
+  add_foreign_key "data_storages", "users"
   add_foreign_key "document_types", "users"
   add_foreign_key "documents", "document_types"
   add_foreign_key "documents", "users"

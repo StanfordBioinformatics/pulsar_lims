@@ -1,0 +1,39 @@
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @data_storage } %>
+<header>
+  <h1><%= @data_storage.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @data_storage} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @data_storage} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @data_storage } %>
+
+<table class="attributes">
+	<tr>
+	  <th><strong>Name:</strong></th>
+	  <td><%= @data_storage.name %></td>
+	</tr>
+
+	<tr>
+	  <th><strong>Data Storage Provider:</strong></th>
+	  <td><%= link_to @data_storage.data_storage_provider.name, @data_storage.data_storage_provider %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Bucket:</strong></th>
+	  <td><%= @data_storage.bucket %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Project identifier:</strong></th>
+	  <td><%= @data_storage.project_identifier %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Folder base path:</strong></th>
+	  <td><%= @data_storage.folder_base_path %></td>
+	</tr>
+</table>
+<%= link_to 'Back', data_storages_path %>
