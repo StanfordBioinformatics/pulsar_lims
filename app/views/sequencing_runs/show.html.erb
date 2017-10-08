@@ -74,7 +74,11 @@
 	<% @sequencing_result = @sequencing_run.sequencing_results.last %>
 	<%= render partial: "add_sequencing_result", layout: "layouts/fieldset_sequencing_result" %>
 <% else %>
-	<%= link_to "New Sequencing Result", [:new_sequencing_result,@sequencing_request,@sequencing_run], class: "reg-btn", remote: true, id: "new_sequencing_result" %>
+		<table class="">
+			<td><%= link_to "Add Sequencing Result", [:new_sequencing_result,@sequencing_request,@sequencing_run], class: "reg-btn", remote: true, id: "new_sequencing_result" %></td>
+			<td style="padding-left: 2em; padding-right: 2em;">or</td>
+			<td><%= link_to "Automated Fetch","#", class: "reg-btn" %></td>
+		</table>
 <% end %>
 </br></br>
 <%= render partial: "back" %>

@@ -103,8 +103,12 @@
 		%>
 	</li>
 	<% if @sequencing_request.libraries.persisted.any? %>
+		<% btn_txt = "Add Sequencing Run" %>
+		<% if @sequencing_request.sequencing_runs.persisted.any? %>
+			<% btn_txt = "Add Another Sequencing Run" %>
+		<% end %>
 		<li>
-			<%= link_to "Add Sequencing Run",
+			<%= link_to btn_txt,
 					new_sequencing_request_sequencing_run_path(@sequencing_request),
 					class: "reg-btn", id: "add_sequencing_run"
 			%>

@@ -4,8 +4,9 @@ class SequencingRun< ActiveRecord::Base
 	belongs_to :report, class_name: "Document"
 	has_many   :sequencing_results, dependent: :destroy
 
-	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
-	validates :name
+	validates :name, length: { minimum: 2, maximum: 40 }
+	validates :name, presence: true
+	validates_uniqueness_of :name, scope: :sequencing_request_id
 
 	scope :persisted, lambda { where.not(id: nil) }
 	accepts_nested_attributes_for :sequencing_results, allow_destroy: true

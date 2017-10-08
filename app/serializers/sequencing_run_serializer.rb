@@ -1,4 +1,4 @@
 class SequencingRunSerializer < ActiveModel::Serializer
-  attributes :id, :run_name, :lane, :comment
+  attributes :id, :lane, :comment
   has_one :user
 end

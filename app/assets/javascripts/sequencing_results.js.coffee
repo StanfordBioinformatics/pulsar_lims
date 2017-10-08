@@ -39,7 +39,7 @@ $ ->
   $(document).on "click", "#rm_new_sequencing_result_form", (event) -> 
     #use event delegation above
     event.preventDefault()
-    $("#new_sequencing_result_form").slideUp "normal", ->  
+    $("#new_sequencing_result_form").fadeOut "normal", ->  
       $("#new_sequencing_result_form").remove()
       $new_bc_res_btn.show()
 
