@@ -3,7 +3,8 @@ Pulsar::Application.configure do
 
     ActionMailer::Base.delivery_method = :smtp
 
-    host = "localhost:5000"
+    #host = "localhost:5000"
+		host = ENV['APP_HOST_NAME']
 
     ActionMailer::Base.smtp_settings = { 
       port: ENV['MAILGUN_SMTP_PORT'],

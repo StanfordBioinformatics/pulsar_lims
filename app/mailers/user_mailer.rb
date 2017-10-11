@@ -11,4 +11,11 @@ class UserMailer < Devise::Mailer
     super
   end
 
+  def reset_password_instructions(record, token, opts={})
+    #opts[:subject] = "New Account on #{ENV["APP_NAME"]}"
+    #opts[:from] = "postmaster@pulsar-encode.stanford.edu" 
+    opts[:from] = ENV["APP_EMAIL_ADDR"]
+    super
+  end
+
 end
