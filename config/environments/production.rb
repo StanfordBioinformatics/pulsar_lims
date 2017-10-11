@@ -6,6 +6,7 @@ Pulsar::Application.configure do
     host = ENV['APP_HOST_NAME']
 
     ActionMailer::Base.smtp_settings = { 
+			from: "postmaster@pulsar-encode.stanford.edu",
       port: ENV['MAILGUN_SMTP_PORT'],
       address: ENV['MAILGUN_SMTP_SERVER'],
       user_name: ENV['MAILGUN_SMTP_LOGIN'],
