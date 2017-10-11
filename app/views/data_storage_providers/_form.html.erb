@@ -2,8 +2,9 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @data_storage_provider } %>
 
   <%= f.input :name %>
+  <%= f.input :bucket_storage, label_html: {"data-toggle": "tooltip", "title": "Select if the provider uses storage in the sense of an AWS S3 bucket."} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
   </div>
-<% end %>
+<% end %></br>

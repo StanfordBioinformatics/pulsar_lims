@@ -5,8 +5,11 @@ class DataStoragesController < ApplicationController
 	def customize_for_data_storage_provider
 		provider_id = params[:data_storage_provider_id]
 		provider = DataStorageProvider.find(provider_id)
-		if provider.name == "AWS S3
-		render text: 
+		if provider.bucket_storage?
+			render text: "bucket"
+		else
+			render text: "other"
+		end
 	end
 
   def index
@@ -15,6 +18,7 @@ class DataStoragesController < ApplicationController
 
   def show
 		authorize @data_storage
+		@bucketed = @data_storage.bucketed?
   end
 
   def new

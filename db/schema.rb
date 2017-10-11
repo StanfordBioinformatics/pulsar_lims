@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008055923) do
+ActiveRecord::Schema.define(version: 20171011050556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -286,8 +286,9 @@ ActiveRecord::Schema.define(version: 20171008055923) do
   create_table "data_storage_providers", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "bucket_storage", default: false
   end
 
   add_index "data_storage_providers", ["user_id"], name: "index_data_storage_providers_on_user_id", using: :btree
@@ -380,6 +381,18 @@ ActiveRecord::Schema.define(version: 20171008055923) do
   end
 
   add_index "experiment_types", ["user_id"], name: "index_experiment_types_on_user_id", using: :btree
+
+  create_table "file_references", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "data_storage_id"
+    t.string   "file_path"
+    t.string   "fileid"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "file_references", ["data_storage_id"], name: "index_file_references_on_data_storage_id", using: :btree
+  add_index "file_references", ["user_id"], name: "index_file_references_on_user_id", using: :btree
 
   create_table "genome_locations", force: :cascade do |t|
     t.integer  "user_id"
@@ -767,6 +780,8 @@ ActiveRecord::Schema.define(version: 20171008055923) do
   add_foreign_key "donor_constructs", "vendors"
   add_foreign_key "donors", "users"
   add_foreign_key "experiment_types", "users"
+  add_foreign_key "file_references", "data_storages"
+  add_foreign_key "file_references", "users"
   add_foreign_key "genome_locations", "chromosomes"
   add_foreign_key "genome_locations", "users"
   add_foreign_key "isotypes", "users"

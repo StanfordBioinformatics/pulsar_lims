@@ -1,5 +1,6 @@
 Pulsar::Application.routes.draw do
 
+  resources :file_references
   resources :data_storage_providers
   resources :data_storages do
 		get :customize_for_data_storage_provider, on: :collection

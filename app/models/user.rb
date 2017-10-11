@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
 	has_many :donors, dependent: :nullify
 	has_many :donor_constructs, dependent: :nullify
 	has_many :experiment_types, dependent: :nullify
+	has_many :file_references, dependent: :nullify
 	has_many :isotypes, dependent: :nullify
 	has_many :libraries, dependent: :nullify
 	has_many :library_fragmentation_methods, dependent: :nullify

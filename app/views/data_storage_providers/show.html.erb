@@ -15,6 +15,10 @@
   	<th><strong>Name:</strong></th>
   	<td><%= @data_storage_provider.name %></td>
 	</tr>
+	<tr>
+  	<th><strong>Bucket storage?:</strong></th>
+  	<td><%= @data_storage_provider.bucket_storage? %></td>
+	</tr>
 </table>
 
 <%= link_to 'Back', data_storage_providers_path %>

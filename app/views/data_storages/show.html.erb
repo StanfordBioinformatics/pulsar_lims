@@ -20,11 +20,13 @@
 	  <th><strong>Data Storage Provider:</strong></th>
 	  <td><%= link_to @data_storage.data_storage_provider.name, @data_storage.data_storage_provider %></td>
 	</tr>
-	
-	<tr>
-	  <th><strong>Bucket:</strong></th>
-	  <td><%= @data_storage.bucket %></td>
-	</tr>
+
+	<% if @bucketed %>
+		<tr>
+		  <th><strong>Bucket:</strong></th>
+		  <td><%= @data_storage.bucket %></td>
+		</tr>
+	<% end %>	
 	
 	<tr>
 	  <th><strong>Project identifier:</strong></th>
