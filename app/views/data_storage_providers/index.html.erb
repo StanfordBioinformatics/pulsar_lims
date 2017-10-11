@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
       <th>Bucket storage?</th>
       <th>Actions</th>
     </tr>
@@ -19,6 +20,7 @@
     <% @data_storage_providers.each do |rec| %>
       <tr>
         <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
         <td><%= rec.bucket_storage? %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_data_storage_provider_path(rec) %>

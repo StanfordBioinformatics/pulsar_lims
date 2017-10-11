@@ -12,6 +12,14 @@ User.create!(email: "viewer@enc.com",password: "password")
 
 admin = User.find_by!(email: "admin@enc.com").id
 
+DataStorageProvider.delete_all
+DataStorageProvider.create!([
+	{user_id: admin, name: "AWS S3 Bucket", bucket_storage: true},
+	{user_id: admin, name: "Azure Storage Account", bucket_storage: true},
+	{user_id: admin, name: "DNAnexus", bucket_storage: false},
+	{user_id: admin, name: "Google Storage Bucket", bucket_storage: true}
+])
+
 SequencingCenter.delete_all
 SequencingCenter.create!([
 	{user_id: admin, name: "Stanford Genome Sequencing Service Center", url: "http://med.stanford.edu/gssc.html", address: "3155 Porter Dr; Palo Alto, CA 94304"}

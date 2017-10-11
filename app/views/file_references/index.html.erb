@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>File path</th>
+			<th>Creator</th>
       <th>Data storage</th>
       <th>Fileid</th>
       <th>Actions</th>
@@ -20,6 +21,7 @@
     <% @file_references.each do |rec| %>
       <tr>
         <td><%= link_to rec.file_path, rec %></td>
+				<td><%= rec.user.display() %></td>
         <td><%= link_to rec.data_storage.name, rec.data_storage %></td>
         <td><%= rec.fileid %></td>
         <td>

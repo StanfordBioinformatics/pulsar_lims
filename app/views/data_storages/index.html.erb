@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+			<th>Creator</th>
 			<th>Data storage provider</th>
       <th>Bucket</th>
       <th>Project identifier</th>
@@ -22,6 +23,7 @@
     <% @data_storages.each do |rec| %>
       <tr>
         <td><%= link_to rec.name, rec %></td>
+				<td><%= rec.user.display() %></td>
 				<td><%= link_to rec.data_storage_provider.name, rec.data_storage_provider %></td>
         <td><%= rec.bucket %></td>
         <td><%= rec.project_identifier %></td>
