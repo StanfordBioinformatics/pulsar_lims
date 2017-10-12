@@ -1,9 +1,10 @@
-<%= simple_form_for(@single_cell_sorting) do |f| %>
+<%= simple_form_for(@single_cell_sorting, html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @single_cell_sorting } %>
   <%= f.input :name %>
   <%= f.input :description %>
 	<%= f.association :starting_biosample, collection: Biosample.non_plated,
 			label_html: { "data-toggle": "tooltip", "title": "The biosample that is used as input sorting material." } %>
+	<%= f.input :fluorescence_intensity_file, as: :file %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

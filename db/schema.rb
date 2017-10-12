@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011050556) do
+ActiveRecord::Schema.define(version: 20171012065157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -638,11 +638,12 @@ ActiveRecord::Schema.define(version: 20171011050556) do
     t.integer  "user_id"
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "sorting_biosample_id"
     t.integer  "starting_biosample_id"
     t.integer  "library_prototype_id"
+    t.string   "fluorescence_intensity_file"
   end
 
   add_index "single_cell_sortings", ["library_prototype_id"], name: "index_single_cell_sortings_on_library_prototype_id", using: :btree

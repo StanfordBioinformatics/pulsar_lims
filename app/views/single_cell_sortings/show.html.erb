@@ -49,6 +49,11 @@
 		</tr>
 	<% end %>
 
+	<tr>
+		<th><strong>Fluorescence intensity file</strong></th>
+		<td><%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " intensity file", @single_cell_sorting.fluorescence_intensity_file %></td>
+	</tr>
+
 	<% if @single_cell_sorting.plates.any? %>
 		<tr>
 			<th><strong>Plates:</strong></th>
