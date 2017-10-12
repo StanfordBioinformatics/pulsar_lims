@@ -50,8 +50,12 @@
 	<% end %>
 
 	<tr>
-		<th><strong>Fluorescence intensity file</strong></th>
-		<td><%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " intensity file", @single_cell_sorting.fluorescence_intensity_file %></td>
+		<th><strong>Fluorescence intensity file:</strong></th>
+		<% if @single_cell_sorting.fluorescence_intensity_file.present? %>
+			<td><%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " intensity file", @single_cell_sorting.fluorescence_intensity_file %></td>
+		<% else %>
+			<td></td>
+		<% end %>
 	</tr>
 
 	<% if @single_cell_sorting.plates.any? %>
