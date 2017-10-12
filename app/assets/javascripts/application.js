@@ -107,54 +107,66 @@ $(function() {
   //inputs such as checkboxes that maintain focus after selection until another elements gains focus.
 });
 
-//The code below was derived from https://devcenter.heroku.com/articles/direct-to-s3-image-uploads-in-rails
+//The code below was derived from https://devcenter.heroku.com/articles/direct-to-s3-image-uploads-in-rails.
+//Also see wiki page https://github.com/blueimp/jQuery-File-Upload/wiki/Options.
 $(function() {
   $('.directUpload').find("input:file").each(function(i, elem) {
-    var fileInput    = $(elem);
-    var form         = $(fileInput.closest('form'));
-    var submitButton = form.find('input[type="submit"]');
-    var progressBar  = $("<div class='bar'></div>");
-    var barContainer = $("<div class='progress'></div>").append(progressBar);
-    fileInput.after(barContainer);
-    fileInput.fileupload({
-      fileInput:       fileInput,
-      url:             form.data('url'),
+    var $fileInput    = $(elem); //The file input field jQuery object, that is listened for change events.
+    var $form         = $($fileInput.closest('form'));
+    var $submitButton = $form.find('input[type="submit"]');
+    var $progressBar  = $("<div class='bar'></div>");
+    var $barContainer = $("<div class='progress'></div>").append($progressBar);
+    $fileInput.after($barContainer);
+    $fileInput.fileupload({
+      fileInput:       $fileInput,
+      url:             $form.data('url'),
       type:            'POST',
       autoUpload:       true, //upload starts autom. when file is selected.
-      formData:         form.data('form-data'), //includes things like AWS Access Keys.
+      formData:         $form.data('form-data'), //includes things like AWS Access Keys.
       paramName:        'file', // S3 does not like nested name fields i.e. name="user[avatar_url]"
-      dataType:         'XML',  // S3 returns XML if success_action_status is set to 201
+      dataType:         'XML',  // The type of data that is expected back from the server. S3 returns XML if success_action_status is set to 201
       replaceFileInput: false,
       progressall: function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
-        progressBar.css('width', progress + '%')
+        $progressBar.css('width', progress + '%')
       },
-      start: function (e) {
-        submitButton.prop('disabled', true);
 
-        progressBar.
+      //Callback for the submit event of each file upload. If this callback returns false, the file upload request is not started.
+      submit: function (e) {
+        //Only allow the MIME type of text/plain since it will be programatically parsed.
+        if (! $fileInput.val().endsWith(".txt")) {
+          alert("Invalid file type. Only plain text files are allowed and should have a .txt extension.");
+          return false;
+        }
+      },
+
+      //start: equivalent to the global ajaxStart event (but for file upload requests only)
+      start: function (e) {
+        $submitButton.prop('disabled', true);
+
+        $progressBar.
           css('background', 'green').
           css('display', 'block').
           css('width', '0%').
           text("Loading...");
       },
       done: function(e, data) {
-        submitButton.prop('disabled', false);
-        progressBar.text("Uploading done");
+        $submitButton.prop('disabled', false);
+        $progressBar.text("Uploading done");
 
         // extract key and generate URL from response
         var key   = $(data.jqXHR.responseXML).find("Key").text();
-        var url   = '//' + form.data('host') + '/' + key;
+        var url   = '//' + $form.data('host') + '/' + key;
 
         // create hidden field
-        var input = $("<input />", { type:'hidden', name: fileInput.attr('name'), value: url })
-        form.append(input);
+        var input = $("<input />", { type:'hidden', name: $fileInput.attr('name'), value: url })
+        $form.append(input);
       },
       fail: function(e, data) {
-        submitButton.prop('disabled', false);
+        $submitButton.prop('disabled', false);
         console.log(e)
 
-        progressBar.
+        $progressBar.
           css("background", "red").
           text("Failed");
       }

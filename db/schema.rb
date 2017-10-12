@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012065157) do
+ActiveRecord::Schema.define(version: 20171012205255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -283,6 +283,16 @@ ActiveRecord::Schema.define(version: 20171012065157) do
   add_index "crispr_modifications", ["name"], name: "index_crispr_modifications_on_name", unique: true, using: :btree
   add_index "crispr_modifications", ["user_id"], name: "index_crispr_modifications_on_user_id", using: :btree
 
+  create_table "data_file_types", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "data_file_types", ["user_id"], name: "index_data_file_types_on_user_id", using: :btree
+
   create_table "data_storage_providers", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -387,10 +397,12 @@ ActiveRecord::Schema.define(version: 20171012065157) do
     t.integer  "data_storage_id"
     t.string   "file_path"
     t.string   "fileid"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "data_file_type_id"
   end
 
+  add_index "file_references", ["data_file_type_id"], name: "index_file_references_on_data_file_type_id", using: :btree
   add_index "file_references", ["data_storage_id"], name: "index_file_references_on_data_storage_id", using: :btree
   add_index "file_references", ["user_id"], name: "index_file_references_on_user_id", using: :btree
 
@@ -593,6 +605,7 @@ ActiveRecord::Schema.define(version: 20171012065157) do
     t.boolean  "paired_end"
     t.integer  "concentration_unit_id"
     t.float    "concentration"
+    t.string   "sample_sheet"
   end
 
   add_index "sequencing_requests", ["concentration_unit_id"], name: "index_sequencing_requests_on_concentration_unit_id", using: :btree
@@ -769,6 +782,7 @@ ActiveRecord::Schema.define(version: 20171012065157) do
   add_foreign_key "crispr_modifications", "donor_constructs"
   add_foreign_key "crispr_modifications", "genome_locations", column: "genomic_integration_site_id"
   add_foreign_key "crispr_modifications", "users"
+  add_foreign_key "data_file_types", "users"
   add_foreign_key "data_storage_providers", "users"
   add_foreign_key "data_storages", "data_storage_providers"
   add_foreign_key "data_storages", "users"
@@ -781,6 +795,7 @@ ActiveRecord::Schema.define(version: 20171012065157) do
   add_foreign_key "donor_constructs", "vendors"
   add_foreign_key "donors", "users"
   add_foreign_key "experiment_types", "users"
+  add_foreign_key "file_references", "data_file_types"
   add_foreign_key "file_references", "data_storages"
   add_foreign_key "file_references", "users"
   add_foreign_key "genome_locations", "chromosomes"

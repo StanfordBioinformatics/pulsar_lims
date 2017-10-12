@@ -1,5 +1,6 @@
 Pulsar::Application.routes.draw do
 
+  resources :data_file_types
   resources :file_references
   resources :data_storage_providers
   resources :data_storages do

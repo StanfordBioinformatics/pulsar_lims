@@ -1,0 +1,28 @@
+<header>
+  <h1>Data File Types</h1>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: DataFileType} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @data_file_types.each do |rec| %>
+      <tr>
+        <td><%= rec.name %></td>
+        <td><%= rec.description %></td>
+        <td><%= link_to fa_icon("fa-pencil"), edit_data_file_type_path(rec) %></td>
+        <td><%= link_to fa_icon("fa-trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

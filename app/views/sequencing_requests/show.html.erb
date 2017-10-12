@@ -11,9 +11,18 @@
 
 <table class="attributes">
   <tr>
-    <th><strong>Sequencing Request Name:</strong></th>
+    <th><strong>Sequencing request name:</strong></th>
     <td><%= @sequencing_request.name %></td>
   </tr>
+
+	<tr>
+		<th><strong>Sample sheet:</strong></th>
+		<% if @sequencing_request.sample_sheet.present? %>
+			<td><%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " sample sheet", @sequencing_request.sample_sheet %></td>
+		<% else %>
+			<td></td>
+		<% end %>
+	</tr>
 
   <tr>
   	<th><strong>Comment:</strong></th>

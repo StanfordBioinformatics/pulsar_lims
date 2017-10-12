@@ -12,6 +12,7 @@
       <th>File path</th>
 			<th>Creator</th>
       <th>Data storage</th>
+			<th>Data file type</th>
       <th>Fileid</th>
       <th>Actions</th>
     </tr>
@@ -23,6 +24,7 @@
         <td><%= link_to rec.file_path, rec %></td>
 				<td><%= rec.user.display() %></td>
         <td><%= link_to rec.data_storage.name, rec.data_storage %></td>
+				<td><%= link_to rec.data_file_type.name, rec.data_file_type %></td>
         <td><%= rec.fileid %></td>
         <td>
 						<%= link_to fa_icon("pencil"), edit_file_reference_path(rec) %>

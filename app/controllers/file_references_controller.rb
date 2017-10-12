@@ -62,6 +62,6 @@ class FileReferencesController < ApplicationController
     end
 
     def file_reference_params
-      params.require(:file_reference).permit(:data_storage_id, :file_path, :fileid)
+      params.require(:file_reference).permit(:data_file_type_id, :data_storage_id, :file_path, :fileid)
     end
 end

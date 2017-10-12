@@ -1,0 +1,10 @@
+<%= simple_form_for(@data_file_type) do |f| %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @data_file_type} %>
+
+	<%= f.input :name %>
+	<%= f.input :description %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
+<% end %>

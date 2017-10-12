@@ -15,12 +15,17 @@
 	  <th><strong>Data storage:</strong></th>
 	  <td><%= link_to @file_reference.data_storage.name, @file_reference.data_storage %></td>
 	</tr>
+
+	<tr>
+		<th><strong>Data File Type:</strong></th>
+		<td><%= link_to @file_reference.data_file_type.name, @file_reference.data_file_type %></th>
+	</tr>
 	
 	<tr>
 	  <th><strong>File path:</strong></th>
 	  <td><%= @file_reference.file_path %></td>
 	</tr>
-	
+
 	<tr>
 	  <th><strong>Fileid:</strong></th>
 	  <td><%= @file_reference.fileid %></td>
