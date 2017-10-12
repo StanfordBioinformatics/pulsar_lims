@@ -4,7 +4,14 @@
   <%= f.input :description %>
 	<%= f.association :starting_biosample, collection: Biosample.non_plated,
 			label_html: { "data-toggle": "tooltip", "title": "The biosample that is used as input sorting material." } %>
-	<%= f.input :fluorescence_intensity_file, as: :file %>
+
+	<% file_upload_hint="" %>
+	<% if @single_cell_sorting.fluorescence_intensity_file.present? %>
+		<% file_upload_hint="You previously uploaded #{@single_cell_sorting.fluorescence_intensity_file}." %>
+	<% end %>
+		
+	</br>
+	<%= f.input :fluorescence_intensity_file, as: :file, hint: file_upload_hint %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
