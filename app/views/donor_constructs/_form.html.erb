@@ -6,8 +6,8 @@
   <%= f.association :cloning_vector %>
   <%= f.association :vendor %>
   <%= f.input :vendor_product_identifier %>
-  <%= f.association :target %>
-	<%= f.input :ensembl_transcript %>
+  <%= f.association :target, label: "Gene target" %>
+	<%= f.input :ensembl_transcript, label_html: {"data-toggle": "tooltip", "title": "Ensembl transcript ID that the donor construct is designed for, if applicable."} %>
   <%= f.input :description %>
   <%= f.input :insert_sequence %>
 	<%= f.input :primer_left_forward, label_html: {"data-toggle": "tooltip", "title": "The forward primer in the sense of the gene, on the left homology arm"} %>
