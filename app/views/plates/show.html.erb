@@ -47,6 +47,17 @@
 			</ul>
 		</td>
 	</tr>
+
+	<tr>
+		<th><strong>Sequencing Requests:</strong></th>
+		<% if @plate.sequencing_requests.any? %>
+			<td><ul class="list-unstyled">
+				<% @plate.sequencing_requests.each do |sreq| %>
+					<li><%= link_to sreq.name, sreq %></li>
+				<% end %>
+			</ul></td>
+		<% end %>	
+	</tr>
 				
 </table>
 

@@ -8,6 +8,7 @@ class CrisprConstruct < ActiveRecord::Base
   belongs_to :vendor
 
 	validates :cloning_vector, presence: true
+	validates :guide_sequence, presence: true, format: { with: /\A[acgtnACGTN]+\z/, message: "can only contain characters in the set ACTGN" }
 	validates :name, presence: true, uniqueness: true
 	validates :target, presence: true	
 	validates :vendor, presence: true

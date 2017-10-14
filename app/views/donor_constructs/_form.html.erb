@@ -2,13 +2,18 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @donor_construct } %>
 
   <%= f.input :name %>
-  <%= f.input :addgene_id, label_html: {"data-toggle" => "tooltip", "title" => "The catalog number (i.e. 50661) of the plasmid in www.addgene.org if deposited there. Note - this could be the same as the 'Vender product identifier' if you procured this from Addene."} %>
+  <%= f.input :addgene_id, label_html: {"data-toggle": "tooltip", "title": "The catalog number (i.e. 50661) of the plasmid in www.addgene.org if deposited there. Note - this could be the same as the 'Vender product identifier' if you procured this from Addene."} %>
   <%= f.association :cloning_vector %>
   <%= f.association :vendor %>
   <%= f.input :vendor_product_identifier %>
   <%= f.association :target %>
+	<%= f.input :ensembl_transcript %>
   <%= f.input :description %>
   <%= f.input :insert_sequence %>
+	<%= f.input :primer_left_forward, label_html: {"data-toggle": "tooltip", "title": "The forward primer in the sense of the gene, on the left homology arm"} %>
+	<%= f.input :primer_left_reverse, label_html: {"data-toggle": "tooltip", "title": "The reverse primer in the opposite sense of the gene, on the left homology arm."} %>
+	<%= f.input :primer_right_forward, label_html: {"data-toggle": "tooltip", "title": "The forward primer in the sense of the gene, on the right homology arm"} %>
+	<%= f.input :primer_right_reverse, label_html: {"data-toggle": "tooltip", "title": "The reverse primer in the opposite sense of the gene, on the right homology arm"} %>
 
 	<% if @donor_construct.construct_tags.persisted.any? %>
     <table class="min-table" id="construct_tags">

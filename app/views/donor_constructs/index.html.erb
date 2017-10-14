@@ -17,6 +17,7 @@
       <th>Vender</th>
       <th>Vender product identifier</th>
       <th>Target</th>
+			<th>Ensembl transcript</th>
       <th>Description</th>
       <th>Insert sequence</th>
       <th>Actions</th>
@@ -38,6 +39,7 @@
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
         <td><%= rec.vendor_product_identifier %></td>
         <td><%= link_to rec.target.name, rec.target %></td>
+        <td><%= rec.ensembl_transcript %></td>
         <td><%= rec.description %></td>
         <td><%= rec.insert_sequence %></td>
         <td>

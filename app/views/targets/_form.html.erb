@@ -5,6 +5,8 @@
 
   <%= f.input :encode_identifier, label_html: {"data-toggle": "tooltip", "title": "An identifier for the target on the ENCODE Portal, such as the value of the 'uuid' or 'name' property of the Portal's record entry."} %>
 
+	<%= f.input :ensembl, label_html: {"data-toggle": "tooltip", "title": "The Ensembl id."} %>
+
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary" %>

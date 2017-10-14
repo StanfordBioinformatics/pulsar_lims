@@ -18,6 +18,7 @@
       <th>Dimensions</th>
       <th>Vendor</th>
       <th>Vendor product identifier</th>
+			<th>Sequencing requests</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -32,6 +33,15 @@
 				<td><%= "#{rec.nrow}x#{rec.ncol}" %></td>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
         <td><%= rec.vendor_product_identifier %></td>
+				<td>
+					<% if rec.sequencing_requests.any? %>
+						<ul class="list-unstyled">
+							<% rec.sequencing_requests.each do |sreq| %>
+								<li><%= link_to sreq.name, sreq %></li>
+							<% end %>
+						</ul>
+					<% end %>
+				</td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_plate_path(rec) %>
         	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>

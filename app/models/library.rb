@@ -58,7 +58,6 @@ class Library < ActiveRecord::Base
 		end
 		return false
 	end
-		
 
   def barcode_id=(bid)
     if bid.present?

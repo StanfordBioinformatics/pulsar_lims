@@ -44,10 +44,35 @@
 	  <th><strong>Target:</strong></th>
 	  <td><%= link_to @donor_construct.target.name, @donor_construct.target %></td>
 	</tr>
+
+	<tr>
+	  <th><strong>Ensembl transcript:</strong></th>
+	  <td><%= @donor_construct.ensembl_transcript %></td>
+	</tr>
 	
 	<tr>
 	  <th><strong>Insert sequence:</strong></th>
 	  <td><%= @donor_construct.insert_sequence %></td>
+	</tr>
+
+	<tr>
+		<th><strong>Left forward primer:</strong></th>
+		<td><%= @donor_construct.primer_left_forward %></th>
+	</tr>
+
+	<tr>
+		<th><strong>Left reverse primer:</strong></th>
+		<td><%= @donor_construct.primer_left_reverse %></th>
+	</tr>
+
+	<tr>
+		<th><strong>Right forward primer:</strong></th>
+		<td><%= @donor_construct.primer_right_forward %></th>
+	</tr>
+
+	<tr>
+		<th><strong>Right reverse primer:</strong></th>
+		<td><%= @donor_construct.primer_right_reverse %></th>
 	</tr>
 
 	<tr>

@@ -77,6 +77,6 @@ class CrisprConstructsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def crispr_construct_params
-      params.require(:crispr_construct).permit(:addgene_id, :name, :target_id, :guide_sequence, :cloning_vector_id, :description, :vendor_id, :vendor_product_identifier, :construct_tag_ids => [], construct_tags_attributes: [:id,:_destroy])
+      params.require(:crispr_construct).permit(:ensembl_transcript, :addgene_id, :name, :target_id, :guide_sequence, :cloning_vector_id, :description, :vendor_id, :vendor_product_identifier, :construct_tag_ids => [], construct_tags_attributes: [:id,:_destroy])
     end
 end

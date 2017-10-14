@@ -4,6 +4,7 @@
   <%= f.input :name %>
 	<%= f.input :addgene_id, label_html: {"data-toggle" => "tooltip", "title" => "The catalog number (i.e. 50661) of the plasmid in www.addgene.org if deposited there. Note - this could be the same as the 'Vender product identifier' if you procured this from Addene."} %>
   <%= f.association :target %>
+	<%= f.input :ensembl_transcript %>
   <%= f.input :guide_sequence %>
   <%= f.association :cloning_vector %>
   <%= f.input :description %>

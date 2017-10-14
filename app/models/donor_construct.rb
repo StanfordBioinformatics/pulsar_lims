@@ -10,6 +10,11 @@ class DonorConstruct < ActiveRecord::Base
 
 	validates :name, presence: true
 	validates :cloning_vector, presence: true
+  validates :primer_left_forward, format: { with: /\A[acgtnACGTN]+\z/, message: "can only contain characters in the set ACTGN" }, allow_blank: true
+  validates :primer_left_reverse, format: { with: /\A[acgtnACGTN]+\z/, message: "can only contain characters in the set ACTGN" }, allow_blank: true
+  validates :primer_right_forward, format: { with: /\A[acgtnACGTN]+\z/, message: "can only contain characters in the set ACTGN" }, allow_blank: true
+  validates :primer_right_reverse, format: { with: /\A[acgtnACGTN]+\z/, message: "can only contain characters in the set ACTGN" }, allow_blank: true
+	validates :insert_sequence, format: { with: /\A[acgtnACGTN]+\z/, message: "can only contain characters in the set ACTGN" }, allow_blank: true
 	validates :vendor_id, presence: true
 	validates :target_id, presence: true
 
