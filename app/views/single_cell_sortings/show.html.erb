@@ -82,7 +82,9 @@
 					<td>
 						<ul class="list-unstyled">
 							<% @single_cell_sorting.plates.persisted.each do |plate| %>
-								<li><%= link_to plate.name, plate %></li>
+								<% plate.sequencing_requests.each do |sreq| %>
+									<li><%= link_to sreq.name, sreq %></li>
+								<% end %>
 							<% end %>
 						</ul>
 					</td>
