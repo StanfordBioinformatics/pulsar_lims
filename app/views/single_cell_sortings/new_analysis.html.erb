@@ -1,0 +1,6 @@
+<h1>New Analysis</h1>
+<%= simple_form_for(@analysis) do |f| %>
+	<%= render partial: 'analyses/form', locals: {f: f} %>
+	<%= render partial: "application_partials/submit", locals: {f: f} %>
+<% end %>
+		

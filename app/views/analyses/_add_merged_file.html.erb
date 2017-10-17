@@ -1,0 +1,8 @@
+<div class="container-fluid merged-file-form-fields bg-info" style="position: relative">
+<%= simple_fields_for @analysis do |f| %>
+	<%= f.simple_fields_for @file_attr, @file_reference do |ff| %>
+		<%= render partial: "file_references/form", locals: {f: ff} %>
+	<% end %>
+	<button style="position: absolute; right: 0; bottom: 0;" class="toggle-up-merged-file-form" type="button" class="btn btn-link"><%= fa_icon("toggle-up lg") %></button>
+<% end %>
+</div>

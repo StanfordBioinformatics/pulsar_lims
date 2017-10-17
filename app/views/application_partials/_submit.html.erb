@@ -3,5 +3,9 @@
   <% if defined?(add_classes) %>
     <% class_val += " " + add_classes %>
 	<% end %>
-  <%= f.button :submit, class: class_val %>
+  <% if defined?(btn_txt) %>
+  	<%= f.button :submit, btn_txt, class: class_val %>
+	<% else %>
+	  <%= f.button :submit, class: class_val %>
+	<% end %>
 </div></br>

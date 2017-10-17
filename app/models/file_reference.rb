@@ -10,4 +10,12 @@ class FileReference < ActiveRecord::Base
   def self.policy_class
     ApplicationPolicy
   end 
+
+	def display
+		if self.file_path
+			return self.file_path
+		else
+			return self.fileid
+		end
+	end
 end

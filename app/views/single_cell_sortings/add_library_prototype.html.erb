@@ -1,3 +1,4 @@
+<h1>Library Prototype</h1>
 <%= simple_form_for @single_cell_sorting do |f| %>
 	<% if @single_cell_sorting.library_prototype.present? %>
 		<% @library = @single_cell_sorting.library_prototype %>
@@ -11,7 +12,7 @@
 	<%= f.simple_fields_for :library_prototype, @library do |ff| %>
 		<%= render partial: "libraries/form", locals: {f: ff} %>
 	<% end %>
-	<div class="form-actions">
-    <%= f.button :submit, "Create Library Prototype", class: "btn-primary" %>
-  </div></br>
+	<%= render partial: "application_partials/submit", locals: {f: f,btn_txt: "Create Library Prototype"} %>
+  
+	</br>
 <% end %>

@@ -44,6 +44,11 @@
 	}
 }
 
+//Set class="td-spacing-2" to 'table' elements to set 1em padding top and bottom:
+.td-spacing-2 tr td {
+		padding-bottom: 2em;
+}
+
 // See defaults for tooltip in .rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap
 .tooltip.in {
 	opacity: 1.0;

@@ -1,0 +1,36 @@
+<header>
+  <h1>Analyses</h1>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: Analysis} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+			<th>ID</th>
+      <th>Description</th>
+			<th>Single cell sorting</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @analyses.each do |rec| %>
+      <tr>
+				<td><%= link_to rec.id, rec %></td>
+        <td><%= rec.description %></td>
+				<% if rec.single_cell_sorting_id.present? %>
+					<td><%= link_to rec.single_cell_sorting.name, rec.single_cell_sorting %></td>
+				<% else %>
+					<td></td>
+				<% end %>
+        <td>
+						<%= link_to fa_icon("pencil"), edit_analysis_path(rec) %>
+        		<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,5 +1,8 @@
 Pulsar::Application.routes.draw do
 
+  resources :analyses do
+		get :add_merged_file, on: :collection
+	end
   resources :data_file_types
   resources :file_references
   resources :data_storage_providers
@@ -11,6 +14,7 @@ Pulsar::Application.routes.draw do
 		get :add_plate, on: :member
 		get :add_sorting_biosample, on: :member	
 		get :add_library_prototype, on: :member
+		get :new_analysis, on: :member
 	end
   resources :addresses
   resources :plates do

@@ -4,6 +4,7 @@ class SingleCellSorting < ActiveRecord::Base
 	belongs_to :sorting_biosample, class_name: "Biosample", dependent: :destroy
 	belongs_to :starting_biosample, class_name: "Biosample"
   belongs_to :user
+	has_many :analyses, dependent: :destroy
 	has_many :plates, dependent: :destroy
 
 	validates :name, presence: true, uniqueness: true

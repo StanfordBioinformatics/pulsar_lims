@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171014004042) do
+ActiveRecord::Schema.define(version: 20171016181923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,23 @@ ActiveRecord::Schema.define(version: 20171014004042) do
   end
 
   add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
+
+  create_table "analyses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "description"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "merged_peaks_file_id"
+    t.integer  "merged_bam_file_id"
+    t.integer  "merged_qc_file_id"
+    t.integer  "single_cell_sorting_id"
+  end
+
+  add_index "analyses", ["merged_bam_file_id"], name: "index_analyses_on_merged_bam_file_id", using: :btree
+  add_index "analyses", ["merged_peaks_file_id"], name: "index_analyses_on_merged_peaks_file_id", using: :btree
+  add_index "analyses", ["merged_qc_file_id"], name: "index_analyses_on_merged_qc_file_id", using: :btree
+  add_index "analyses", ["single_cell_sorting_id"], name: "index_analyses_on_single_cell_sorting_id", using: :btree
+  add_index "analyses", ["user_id"], name: "index_analyses_on_user_id", using: :btree
 
   create_table "antibodies", force: :cascade do |t|
     t.integer  "organism_id"
@@ -753,6 +770,11 @@ ActiveRecord::Schema.define(version: 20171014004042) do
   add_index "wells", ["user_id"], name: "index_wells_on_user_id", using: :btree
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "analyses", "file_references", column: "merged_bam_file_id"
+  add_foreign_key "analyses", "file_references", column: "merged_peaks_file_id"
+  add_foreign_key "analyses", "file_references", column: "merged_qc_file_id"
+  add_foreign_key "analyses", "single_cell_sortings"
+  add_foreign_key "analyses", "users"
   add_foreign_key "antibodies", "isotypes"
   add_foreign_key "antibodies", "organisms"
   add_foreign_key "antibodies", "targets"

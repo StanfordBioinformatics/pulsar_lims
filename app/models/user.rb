@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 	has_many :addresses, dependent: :nullify
+	has_many :analyses, dependent: :nullify
 	has_many :antibodies, dependent: :nullify
 	has_many :antibody_purifications, dependent: :nullify
 	has_many :attachments, dependent: :nullify

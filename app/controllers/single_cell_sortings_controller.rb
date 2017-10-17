@@ -1,7 +1,14 @@
 class SingleCellSortingsController < ApplicationController
-  before_action :set_single_cell_sorting, only: [:show, :edit, :update, :destroy, :add_sorting_biosample, :add_plate, :add_library_prototype]
+  before_action :set_single_cell_sorting, only: [:show, :edit, :update, :destroy, :add_sorting_biosample, :add_plate, :add_library_prototype, :new_analysis]
 	before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
-	skip_after_action :verify_authorized, only: [:add_sorting_biosample, :add_plate, :add_library_prototype]
+	skip_after_action :verify_authorized, only: [:add_sorting_biosample, :add_plate, :add_library_prototype, :new_analysis]
+
+
+	def new_analysis
+    #non AJAX
+    @analysis = @single_cell_sorting.analyses.build
+    flash[:action] = :new_analysis
+  end 
 
 	def add_library_prototype
 		#non AJAX
@@ -74,6 +81,8 @@ class SingleCellSortingsController < ApplicationController
 
   def update
 		authorize @single_cell_sorting
+		#render json: params
+		#return
 		scs_params = single_cell_sorting_params
 
 		if scs_params[:library_prototype_attributes].present? and scs_params[:library_prototype_attributes][:id].blank?
@@ -128,7 +137,7 @@ class SingleCellSortingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def single_cell_sorting_params
-			params.require(:single_cell_sorting).permit(:fluorescence_intensity_file, :starting_biosample_id, :sorting_biosample_id, :name, :description, :library_prototype_id, library_prototype_attributes: [:prototype, :paired_end, :sequencing_library_prep_kit_id, :library_fragmentation_method_id, :concentration, :concentration_unit_id, :is_control, :nucleic_acid_term_id, :biosample_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, :document_ids => []], sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], documents_attributes: [:id,:_destroy]], plates_attributes: [:starting_biosample_id, :dimensions, :name, :vendor_id, :vendor_product_identifier, antibody_ids: []] )
+			params.require(:single_cell_sorting).permit(:fluorescence_intensity_file, :starting_biosample_id, :sorting_biosample_id, :name, :description, :library_prototype_id, library_prototype_attributes: [:prototype, :paired_end, :sequencing_library_prep_kit_id, :library_fragmentation_method_id, :concentration, :concentration_unit_id, :is_control, :nucleic_acid_term_id, :biosample_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, :document_ids => []], sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], documents_attributes: [:id,:_destroy]], plates_attributes: [:starting_biosample_id, :dimensions, :name, :vendor_id, :vendor_product_identifier, antibody_ids: []], analyses_ids: [])
     end
 
     def set_s3_direct_post

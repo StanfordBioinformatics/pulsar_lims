@@ -57,6 +57,18 @@
 			<td></td>
 		<% end %>
 	</tr>
+
+	<tr>
+		<th><strong>Analyses:</strong></th>
+		<td>
+			<ul class="list-unstyled">
+				<% @single_cell_sorting.analyses.each do |a| %>
+					<li><%= link_to a.id, a %></li>
+				<% end %>
+				<li style="padding-top: 0.5em"><%= link_to "Add",new_analysis_single_cell_sorting_path, class: "reg-btn btn-sm", id: "scs-add-analysis" %></li>
+			</ul>
+		</td>
+	</tr>
 </table>
 
 
@@ -69,7 +81,7 @@
 				<th><strong>Plate:</strong></th>
 				<th><strong>Dimensions:</strong></th>
 				<th><strong>Num. wells with a library:</strong></th>
-				<th><strong>Num failed wells:</strong></th>
+				<th><strong>Num. failed wells:</strong></th>
 				<th><strong>Sequencing requests:</strong></th>
 			</tr>
 			<% @single_cell_sorting.plates.each do |p| %>
@@ -93,6 +105,10 @@
 		</table>
 	</div>
 <% end %>
+
+
+
+
 
 <% if @single_cell_sorting.sorting_biosample.blank? or not @single_cell_sorting.sorting_biosample.persisted? %>
 	<!-- Then create "Add Sorting Biosample" button. -->

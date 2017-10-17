@@ -1,0 +1,46 @@
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @analysis } %>
+
+	<%= f.input :description %>
+	<%= f.association :single_cell_sorting, as: :hidden %>
+	
+	<table class="td-spacing-2 min-table">
+		<tr>
+			<th><strong>Merged BAM file:</strong></th>
+			<% if @analysis.merged_bam_file.present? %>
+				<%= f.simple_fields_for @analysis.merged_bam_file do |ff| %>
+					<td>
+							<%= link_to @analysis.merged_bam_file.display(), @analysis.merged_bam_file %>&nbsp&nbsp
+							<%= ff.input_field :_destroy, as: :boolean %> Remove
+					</td>
+				<% end %>
+			<% else %>
+				<td><%= link_to "Add", add_merged_file_analyses_path({attr: :merged_bam_file}), remote: true, class: "reg-btn analysis-add-merged-file" %></td>
+			<% end %>
+		</tr></br>
+		<tr>
+			<th><strong>Merged Peaksfile:</strong></th>
+			<% if @analysis.merged_peaks_file.present? %>
+				<%= f.simple_fields_for @analysis.merged_peaks_file do |ff| %>
+					<td>
+						<%= link_to @analysis.merged_peaks_file.display(), @analysis.merged_peaks_file %>&nbsp&nbsp
+						<%= ff.input_field :_destroy, as: :boolean %> Remove
+					</td>
+				<% end %>
+			<% else %>
+				<td><%= link_to "Add", add_merged_file_analyses_path({attr: :merged_peaks_file}), remote: true, class: "reg-btn analysis-add-merged-file" %></td>
+			<% end %>
+		</tr></br>
+		<tr>
+			<th><strong>Merged QC file:</strong></th>
+  		<% if @analysis.merged_qc_file.present? %>
+				<%= f.simple_fields_for @analysis.merged_qc_file do |ff| %>
+					<td>
+						<%= link_to @analysis.merged_qc_file.display(), @analysis.merged_qc_file %>&nbsp&nbsp
+						<%= ff.input_field :_destroy, as: :boolean %> Remove
+					</td>
+				<% end %>
+			<% else %>
+				<td><%= link_to "Add", add_merged_file_analyses_path({attr: :merged_qc_file}), remote: true, class: "reg-btn analysis-add-merged-file" %></td>
+			<% end %>
+		</tr>
+	</table></br>
