@@ -134,9 +134,11 @@ $(function() {
       //Callback for the submit event of each file upload. If this callback returns false, the file upload request is not started.
       submit: function (e) {
         //Only allow the MIME type of text/plain since it will be programatically parsed.
-        if (! $fileInput.val().endsWith(".txt")) {
-          alert("Invalid file type. Only plain text files are allowed and should have a .txt extension.");
-          return false;
+        if (! $fileInput.hasClass("image")) {
+          if (! $fileInput.val().endsWith(".txt")) {
+            alert("Invalid file type. Only plain text files are allowed and should have a .txt extension.");
+            return false;
+          }
         }
       },
 

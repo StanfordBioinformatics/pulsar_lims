@@ -10,7 +10,7 @@
 	<% if @cloning_vector.map.present? %>
 		<% file_upload_hint="You previously uploaded #{@cloning_vector.map}." %>
 	<% end %>
-	<%= f.input :map, as: :file, label: "Map image", hint: file_upload_hint %>
+	<%= f.input :map, as: :file, label: "Map image", hint: file_upload_hint, input_html: {class: "image"} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
