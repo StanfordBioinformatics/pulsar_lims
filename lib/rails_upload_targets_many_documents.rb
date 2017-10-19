@@ -28,14 +28,22 @@ File.open(options[:infile]).each do |line|
 	params = {}
 	params[:user_id] = admin.id
 	encode_identifier = rec["@id"].split("/").last
-	params[:encode_identifier] = encode_identifier
-	if Target.find_by(encode_identifier: encode_identifier)
-		next
-	end
 	params[:name] = rec["label"]
-	#Using the label since it's unique and all entries have it. The 
-	
-	Target.create!(params)
+	params[:encode_identifier] = encode_identifier
+	xrefs = rec["dbxref"]
+	xrefs.each do |ref|
+		if ref.start_with?("ENSEMBL")
+			params[:ensembl] = ref.split("ENSEMBL:")[-1].strip()
+			break
+		end
+	end
+	target = Target.find_by(encode_identifier: encode_identifier)
+	if target.present?
+		target.update(params)
+	else
+		#Using the label since it's unique and all entries have it. The 
+		Target.create!(params)
+	end
 end
 puts count
 

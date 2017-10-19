@@ -11,7 +11,8 @@
     <tr>
       <th>Encode identifier</th>
       <th>Name</th>
-			<th>Ensembl id</th>
+			<th>Ensembl accession</th>
+			<th>RefSeq accession</th>
 			<th>Creator</th>
 			<th>Date created</th>
       <th>Actions</th>
@@ -24,6 +25,7 @@
         <td><%= rec.encode_identifier %></td>
         <td><%= link_to rec.name, rec %></td>
         <td><%= rec.ensembl %></td>
+        <td><%= rec.refseq %></td>
 				<td><%= rec.user.display() %></td>
 				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
         <td>

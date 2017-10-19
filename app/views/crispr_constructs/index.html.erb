@@ -15,6 +15,7 @@
 			<th>Addgene ID</th>
       <th>Target</th>
 			<th>Ensembl transcript</th>
+			<th>RefSeq transcript</th>
       <th>Guide sequence</th>
       <th>Cloning vector</th>
       <th>Description</th>
@@ -37,6 +38,7 @@
         </td>
         <td><%= link_to rec.target.name, rec.target %></td>
 				<td><%= rec.ensembl_transcript %></td>
+				<td><%= rec.refseq_transcript %></td>
         <td><%= rec.guide_sequence %></td>
         <td><%= link_to rec.cloning_vector.name, rec.cloning_vector %></td>
         <td><%= rec.description %></td>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016181923) do
+ActiveRecord::Schema.define(version: 20171018234709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -267,6 +267,7 @@ ActiveRecord::Schema.define(version: 20171016181923) do
     t.datetime "updated_at",                null: false
     t.string   "addgene_id"
     t.string   "ensembl_transcript"
+    t.string   "refseq_transcript"
   end
 
   add_index "crispr_constructs", ["addgene_id"], name: "index_crispr_constructs_on_addgene_id", using: :btree
@@ -387,6 +388,7 @@ ActiveRecord::Schema.define(version: 20171016181923) do
     t.string   "primer_right_forward"
     t.string   "primer_right_reverse"
     t.string   "ensembl_transcript"
+    t.string   "refseq_transcript"
   end
 
   add_index "donor_constructs", ["addgene_id"], name: "index_donor_constructs_on_addgene_id", using: :btree
@@ -694,6 +696,7 @@ ActiveRecord::Schema.define(version: 20171016181923) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "ensembl"
+    t.string   "refseq"
   end
 
   add_index "targets", ["encode_identifier"], name: "index_targets_on_encode_identifier", unique: true, using: :btree

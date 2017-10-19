@@ -29,6 +29,16 @@
 	  <th><strong>Target:</strong></th>
 	  <td><%= link_to @crispr_construct.target.name, @crispr_construct.target %></td>
 	</tr>
+
+	<tr>
+	  <th><strong>Ensembl transcript:</strong></th>
+	  <td><%= @crispr_construct.ensembl_transcript %></td>
+	</tr>
+
+	<tr>
+	  <th><strong>RefSeq transcript:</strong></th>
+	  <td><%= @crispr_construct.refseq_transcript %></td>
+	</tr>
 	
 	<tr>
 	  <th><strong>Guide sequence:</strong></th>
