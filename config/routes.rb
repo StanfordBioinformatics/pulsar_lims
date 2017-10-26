@@ -7,6 +7,7 @@ Pulsar::Application.routes.draw do
   resources :file_references
   resources :data_storage_providers
   resources :data_storages do
+		get :get_base_path, on: :member
 		get :customize_for_data_storage_provider, on: :collection
 	end
   resources :concentration_units
@@ -79,6 +80,7 @@ Pulsar::Application.routes.draw do
 		get :select_scs_plates, on: :member
 		get :select_library, on: :member
   	resources :sequencing_runs do
+			get :add_storage_location, on: :member
 			get :new_sequencing_result, on: :member
 			resources :sequencing_results do
 				get :get_barcode_selector, on: :collection

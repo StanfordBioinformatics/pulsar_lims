@@ -39,11 +39,15 @@
         <td><%= rec.paired_end%></td>
         <td><%= rec.shipped %></td>
 				<% if rec.sequencing_runs.present? %>
-					<% rec.sequencing_runs.each do |run| %>
-		        <td><%= link_to run.name, [rec,run] %></td>
-					<% end %>
+					<td>
+						<ul>
+							<% rec.sequencing_runs.each do |run| %>
+			     	   <li><%= link_to run.name, [rec,run] %></li>
+							<% end %>
+						</ul>
+					</td>
 				<% else %>
-					<td>None</td>
+					<td></td>
 				<% end %>
         <td>
 					<%= link_to fa_icon("pencil"), edit_sequencing_request_path(rec) %>

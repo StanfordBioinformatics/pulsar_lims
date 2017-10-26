@@ -1,7 +1,12 @@
 class SequencingRunsController < ApplicationController
-  before_action :set_sequencing_run, only: [:show, :edit, :update, :destroy, :new_sequencing_result]
+  before_action :set_sequencing_run, only: [:show, :edit, :update, :destroy, :new_sequencing_result, :add_storage_location]
 	before_action :set_sequencing_request
-	skip_after_action :verify_authorized, only: [:new_sequencing_result]
+	skip_after_action :verify_authorized, only: [:new_sequencing_result,:add_storage_location]
+
+	def add_storage_location 
+		@file_reference = @sequencing_run.build_storage_location({user_id: current_user.id})
+		flash[:action] = :show
+	end
 
 	def new_sequencing_result
 		@sequencing_result = @sequencing_run.sequencing_results.build	
@@ -77,6 +82,6 @@ class SequencingRunsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_run_params
-      params.require(:sequencing_run).permit(:name, :sequencing_request_id, :lane, :comment, sequencing_results_attributes: [:library_id, :sequencing_run_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count])
+      params.require(:sequencing_run).permit(:sequencing_run_id, :name, :sequencing_request_id, :lane, :comment, sequencing_results_attributes: [:library_id, :sequencing_run_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count], storage_location_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id])
     end
 end

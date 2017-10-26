@@ -20,7 +20,7 @@
 		<% if @analysis.merged_bam_file.blank? %>
 			<td></td>
 		<% else %>
-			<td><%= @analysis.merged_bam_file %></td>
+			<td><%= link_to @analysis.merged_bam_file.display(), @analysis.merged_bam_file %></td>
 		<% end %>
 	</tr>
 	<tr>
@@ -28,7 +28,7 @@
 		<% if @analysis.merged_peaks_file.blank? %>
 			<td></td>
 		<% else %>
-			<td><%= @analysis.merged_peaks_file %></td>
+			<td><%= link_to @analysis.merged_peaks_file.display(), @analysis.merged_peaks_file %></td>
 		<% end %>
 	</tr>
 	<tr>
@@ -36,7 +36,7 @@
 		<% if @analysis.merged_qc_file.blank? %>
 			<td></td>
 		<% else %>
-			<td><%= @analysis.merged_qc_file %></td>
+			<td><%= link_to @analysis.merged_qc_file.display(), @analysis.merged_peaks_file %></td>
 		<% end %>
 	</tr>
 </table>

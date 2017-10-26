@@ -12,7 +12,7 @@
 			<%= f.input :project_identifier, label_html: {"data-toggle": "tooltip", "title": "For project-based systems, such as DNAnexus, this is the project ID."} %>
 		</div>
 
-    <%= f.input :folder_base_path, label_html: {"data-toggle" => "tooltip", "title" => "Folder path within your bucket or project that doesn't change. Useful for when creating FileReferences so you don't have to retype this base path each time to get to a nested path." } %>
+    <%= f.input :folder_base_path, label_html: {"data-toggle" => "tooltip", "title" => "Folder path within your bucket or project that doesn't change. Use the '/' character to separate folders. Useful for when creating FileReferences so you don't have to retype this base path each time to get to a nested path." } %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

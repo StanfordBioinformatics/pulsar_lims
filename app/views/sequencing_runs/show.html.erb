@@ -34,7 +34,21 @@
 		<th><strong>Lane:</strong></th>
   	<td><%= @sequencing_run.lane %></td>
 	</tr>
+
+	<% if @sequencing_run.storage_location.present? %>
+		<tr>
+			<th><strong>Storage location:</strong></th>
+			<td><%= link_to @sequencing_run.storage_location.display, @sequencing_run.storage_location %>
+		</tr>
+	<% end %>
 </table>
+
+<% if not @sequencing_run.storage_location.present? %>
+	<div style="padding-left: 5px;" class="jumbotron bg-info"%>
+		<p class="lead">Sequencing results storage location</p>
+		<%= link_to "Add",[:add_storage_location, @sequencing_request,@sequencing_run], class: 	"reg-btn" %>
+	</div>
+<% end %>
 
 <% if @sequencing_run.sequencing_results.persisted.any? %>
 	<h4>Library Sequencing Results</h4>
@@ -60,8 +74,9 @@
 		<tbody>
 				<%= render partial: "sequencing_runs/row_sequencing_result", locals: {sequencing_results: @sequencing_run.sequencing_results.persisted} %>
 		</tbody>
-	<% end %>
-</table>
+	</table>
+<% end %>
+
 <div id="sequencing_result_form"></div>
 <!-- The div above with id="sequencing_result_form" will serve as the container for the sequencing_results form that jQuery will add
 		 when the user clicks on the button below with id="new_sequencing_result". 
@@ -70,15 +85,19 @@
 	<!-- Create hidden element for jQuery to look for. If jQuery finds it, then it will disable the link below with id="new_sequencing_result" -->
 	<span id="hide_new_sequencing_result" hidden></span>
 <% end %>
+
 <% if @sequencing_run.sequencing_results.present? and not @sequencing_run.sequencing_results.last.persisted? %>
+	<!-- Then the user was trying to add one and there was a validation error upon submission. Display form again. -->
 	<% @sequencing_result = @sequencing_run.sequencing_results.last %>
 	<%= render partial: "add_sequencing_result", layout: "layouts/fieldset_sequencing_result" %>
 <% else %>
+	<% if @sequencing_run.storage_location.present? and @sequencing_run.storage_location.persisted? %>
 		<table class="">
 			<td><%= link_to "Add Sequencing Result", [:new_sequencing_result,@sequencing_request,@sequencing_run], class: "reg-btn", remote: true, id: "new_sequencing_result" %></td>
-			<td style="padding-left: 2em; padding-right: 2em;">or</td>
+			<td style="padding-left: 1em; padding-right: 1em;">or</td>
 			<td><%= link_to "Automated Fetch","#", class: "reg-btn" %></td>
 		</table>
+	<% end %>
 <% end %>
 </br></br>
-<%= render partial: "back" %>
+<%# render partial: "back" %>

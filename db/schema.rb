@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018234709) do
+ActiveRecord::Schema.define(version: 20171021230453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -665,11 +665,13 @@ ActiveRecord::Schema.define(version: 20171018234709) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.string   "name"
+    t.integer  "storage_location_id"
   end
 
   add_index "sequencing_runs", ["name"], name: "index_sequencing_runs_on_name", unique: true, using: :btree
   add_index "sequencing_runs", ["report_id"], name: "index_sequencing_runs_on_report_id", using: :btree
   add_index "sequencing_runs", ["sequencing_request_id"], name: "index_sequencing_runs_on_sequencing_request_id", using: :btree
+  add_index "sequencing_runs", ["storage_location_id"], name: "index_sequencing_runs_on_storage_location_id", using: :btree
   add_index "sequencing_runs", ["user_id"], name: "index_sequencing_runs_on_user_id", using: :btree
 
   create_table "single_cell_sortings", force: :cascade do |t|
@@ -866,6 +868,7 @@ ActiveRecord::Schema.define(version: 20171018234709) do
   add_foreign_key "sequencing_results", "sequencing_runs"
   add_foreign_key "sequencing_results", "users"
   add_foreign_key "sequencing_runs", "documents", column: "report_id"
+  add_foreign_key "sequencing_runs", "file_references", column: "storage_location_id"
   add_foreign_key "sequencing_runs", "sequencing_requests"
   add_foreign_key "sequencing_runs", "users"
   add_foreign_key "single_cell_sortings", "biosamples", column: "sorting_biosample_id"

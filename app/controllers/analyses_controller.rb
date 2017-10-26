@@ -8,11 +8,11 @@ class AnalysesController < ApplicationController
 		@file_attr = params[:attr].to_sym
     logger.info(@file_attr == :merged_peaks_file)
 		if @file_attr == :merged_bam_file
-			@file_reference = @analysis.build_merged_bam_file
+			@file_reference = @analysis.build_merged_bam_file({user_id: current_user.id,data_file_type_id: DataFileType.find_by(name: "BAM").id})
 		elsif @file_attr == :merged_peaks_file
-			@file_reference = @analysis.build_merged_peaks_file
+			@file_reference = @analysis.build_merged_peaks_file({user_id: current_user.id, data_file_type_id: DataFileType.find_by(name: "BED").id})
 		elsif @file_attr == :merged_qc_file
-			@file_reference = @analysis.build_merged_qc_file
+			@file_reference = @analysis.build_merged_qc_file({user_id: current_user.id})
 		end
 		render partial: "add_merged_file", layout: false
 	end
@@ -78,6 +78,6 @@ class AnalysesController < ApplicationController
     end
 
     def analysis_params
-      params.require(:analysis).permit(:single_cell_sorting_id, :merged_bam_file_id, :merged_peaks_file_id, :merged_qc_file_id, :description, merged_bam_file_attributes: [:data_storage_id, :file_path, :fileid, :data_file_type_id])
+      params.require(:analysis).permit(:single_cell_sorting_id, :merged_bam_file_id, :merged_peaks_file_id, :merged_qc_file_id, :description, merged_bam_file_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_peaks_file_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_qc_file_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id])
     end
 end

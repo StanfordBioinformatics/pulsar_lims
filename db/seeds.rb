@@ -12,6 +12,15 @@ User.create!(email: "viewer@enc.com",password: "password")
 
 admin = User.find_by!(email: "admin@enc.com").id
 
+DataFileType.delete_all
+DataFileType.create!([
+	{user_id: admin, name: "BAM"},
+	{user_id: admin, name: "CSV", description: "Comma-separated values"},
+	{user_id: admin, name: "BED"},
+	{user_id: admin, name: "FASTQ"},
+	{user_id: admin, name: "TSV", description: "Tab-separated values"}
+])
+
 DataStorageProvider.delete_all
 DataStorageProvider.create!([
 	{user_id: admin, name: "AWS S3 Bucket", bucket_storage: true},

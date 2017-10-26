@@ -1,7 +1,7 @@
 <h1>Editing File Reference</h1>
 <%= simple_form_for(@file_reference) do |f| %>
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @file_reference } %>
-	<%= render 'form' %>
+	<%= render partial: 'form', locals: {f: f} %>
 	<%= render partial: "application_partials/submit", locals: {f: f} %>
 <% end %>
 
