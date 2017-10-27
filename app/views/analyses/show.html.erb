@@ -15,6 +15,12 @@
 		<th><strong>Description:</strong></th>
 		<td><%= @analysis.description %></td>
 	</tr>
+
+	<tr>
+		<th><strong>Protocol:</strong></th>
+		<td><%= render partial: "documents/link_to_document", locals: {documents: [@analysis.protocol]} %></td>
+	</tr>
+		
 	<tr>
 		<th><strong>Merged BAM file:</strong></th>
 		<% if @analysis.merged_bam_file.blank? %>

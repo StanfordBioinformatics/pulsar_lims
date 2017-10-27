@@ -52,7 +52,7 @@
 	<tr>
 		<th><strong>Fluorescence intensity file:</strong></th>
 		<% if @single_cell_sorting.fluorescence_intensity_file.present? %>
-			<td><%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " intensity file", @single_cell_sorting.fluorescence_intensity_file %></td>
+			<td><%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " " + File.basename(@single_cell_sorting.fluorescence_intensity_file), @single_cell_sorting.fluorescence_intensity_file %></td>
 		<% else %>
 			<td></td>
 		<% end %>

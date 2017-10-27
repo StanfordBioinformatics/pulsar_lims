@@ -34,7 +34,7 @@
 	
 	<tr>
 	  <th><strong>Data:</strong></th>
-		<td><%= link_to(@document.name,:action => "document", :id => @document.id) %></td>
+		<td><%= link_to(fa_icon("download") + " #{@document.name}",:action => "document", :id => @document.id) %></td>
 	</tr>
 	
 	<tr>

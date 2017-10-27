@@ -78,6 +78,6 @@ class AnalysesController < ApplicationController
     end
 
     def analysis_params
-      params.require(:analysis).permit(:single_cell_sorting_id, :merged_bam_file_id, :merged_peaks_file_id, :merged_qc_file_id, :description, merged_bam_file_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_peaks_file_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_qc_file_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id])
+      params.require(:analysis).permit(:protocol_id, :single_cell_sorting_id, :merged_bam_file_id, :merged_peaks_file_id, :merged_qc_file_id, :description, merged_bam_file_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_peaks_file_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_qc_file_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id])
     end
 end

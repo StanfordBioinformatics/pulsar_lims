@@ -18,7 +18,7 @@
 	<tr>
 		<th><strong>Sample sheet:</strong></th>
 		<% if @sequencing_request.sample_sheet.present? %>
-			<td><%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " sample sheet", @sequencing_request.sample_sheet %></td>
+			<td><%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " " + File.basename(@sequencing_request.sample_sheet), @sequencing_request.sample_sheet %></td>
 		<% else %>
 			<td></td>
 		<% end %>
