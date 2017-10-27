@@ -4,7 +4,7 @@ class SequencingRunsController < ApplicationController
 	skip_after_action :verify_authorized, only: [:new_sequencing_result,:add_storage_location]
 
 	def add_storage_location 
-		@file_reference = @sequencing_run.build_storage_location({user_id: current_user.id})
+		@file_reference = @sequencing_run.build_storage_location({user_id: current_user.id, data_file_type_id: DataFileType.find_by(name: "FASTQ").id })
 		flash[:action] = :show
 	end
 
