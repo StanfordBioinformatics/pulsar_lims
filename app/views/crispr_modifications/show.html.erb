@@ -46,7 +46,8 @@
 </table>
 
 </br>
-<h4>Genomic Integration Site</h4>
+<div class="container">
+<h3>Genomic Integration Site</h3>
 <% if not @crispr.genomic_integration_site.present? %>
 	<span>Not provided</span></br></br>
 <% else %>
@@ -69,4 +70,18 @@
 		</tr>
 	</table>
 <% end %>
+</div>
+
+</br>
+<div class="container">
+	<h3>PCR Validations</h3>
+	<% @crispr.pcr_validations.each do |v| %>
+		<ul>
+			<li><%= link_to v.id, v %></li>
+		</ul>
+	<% end %>
+</div></br>
+
+<%= link_to "New PCR Validation", new_pcr_validation_crispr_modification_path(@crispr), class: "reg-btn" %>
+</br></br>
 <%= link_to 'Back', crispr_modifications_path %>

@@ -10,18 +10,30 @@ import json
 import requests
 import pdb
 
+import inflection 
+#pip install reflection.
+#Ported from RoR's inflector.
+#See https://inflection.readthedocs.io/en/latest/.
+
 ###Curl Examples 
 #
 # 1) Create a construct tag:
 #
 #    curl -X POST 
 #			 -d "construct_tags[name]=plasmid3" 
-#			 -H 'Accept: application/json' 
+#			 -H "Accept: application/json"
 #			 -H "Authorization: Token token=${TOKEN}" http://localhost:3000/api/construct_tags
+#
+# 2) Update the construct tag with ID of 3:
+#
+#		 curl -X PUT
+#			 -d "construct_tag[name]=AMP"
+#			 -H "Accept: application/json"
+#			 -H "Authorization: Token token=${TOKEN}" http://localhost:3000/api/construct_tags/3"
 #
 # 2) Get a construct_tag:
 #
-#		 curl -H 'Accept: application/json'
+#		 curl -H "Accept: application/json"
 #		 	 -H "Authorization: Token token=${TOKEN}" http://localhost:3000/api/construct_tags/5
 ###
 
@@ -48,35 +60,39 @@ class Model:
 	URL = os.environ["PULSAR_API_URL"]
 	MODEL_NAME = "" #subclasses define
 
+	def record_url(self,uid):
+		"""
+		Function : Given a record identifier, returns the URL to the record.
+		Args     : uid - The database identifier of the record to fetch. Will be converted to a string.
+		"""
+		uid = str(uid)
+		return os.path.join(self.URL,uid)
+
 	def delete(self,uid):
 		"""
 		Function : Deletes the record. 
 		Args     : uid - The database identifier of the record to fetch. Will be converted to a string.
 		"""
-		uid = str(uid)
-		url = os.path.join(self.URL,uid)
+		url = self.record_url(uid)
 		res = requests.delete(url=url,headers=self.HEADERS,verify=False)
-		return res
+		return res.json()
 		
-	
 	def get(self,uid):
 		"""
 		Function : Fetches a record by the records ID.
 		Args     : uid - The database identifier of the record to fetch. Will be converted to a string. 
 		"""
-		uid = str(uid)
-		url = os.path.join(self.URL,uid)
+		url = self.record_url(uid)
 		res = requests.get(url=url,headers=self.HEADERS,verify=False)
 		return res.json()
 
 	def patch(self,uid, data):
 		"""
 		Function : Patches the data to the specified record.
-		Args     : uid - The database identifier of the record to fetch. Will be converted to a string.
+		Args     : uid - The database identifier of the record to patch. Will be converted to a string.
 							 data - hash. This will be JSON-formatted prior to sending the request.
 		"""
-		uid = str(uid)
-		url = os.path.join(self.URL,uid)
+		url = self.record_url(uid)
 		if not self.MODEL_NAME in data:
 			data = {self.MODEL_NAME: data}
 		res = requests.patch(url=url,data=json.dumps(data),headers=self.HEADERS,verify=False)
@@ -95,32 +111,33 @@ class Model:
 
 
 class Antibody(Model):
-	URL = os.path.join(Model.URL,"antibodies")
 	MODEL_NAME = "antibody"
+	URL = os.path.join(Model.URL,inflection.pluralize(MODEL_NAME))
 
 class AntibodyPurification(Model):
-	URL = os.path.join(Model.URL,"antibody_purifications")
 	MODEL_NAME = "antibody_purification"
+	URL = os.path.join(Model.URL,inflection.pluralize(MODEL_NAME))
 
-class Biosamples(Model):
-	URL = os.path.join(Model.URL,"biosamples")
+class Biosample(Model):
 	MODEL_NAME = "biosample"
+	URL = os.path.join(Model.URL,inflection.pluralize(MODEL_NAME))
 
-class Biosamples(Model):
-	URL = os.path.join(Model.URL,"biosample_term_names")
+class BiosampleTermName(Model):
 	MODEL_NAME = "biosample_term_name"
+	URL = os.path.join(Model.URL,inflection.pluralize(MODEL_NAME))
 	
 class ConstructTags(Model):
-	URL = os.path.join(Model.URL,"construct_tags")
 	MODEL_NAME = "construct_tag"
+	URL = os.path.join(Model.URL,inflection.pluralize(MODEL_NAME))
 	
 if __name__ == "__main__":
 	print("Starting")
-	b = Biosamples()
-	#res = b.get(uid=1772)
-	#res = b.patch(uid=1772,data={"name": "Freddy"})
-	res = b.delete(uid=1719)
-	#c = ConstructTags()
+	pdb.set_trace()
+	b = Biosample()
+	res = b.get(uid=1716)
+	res = b.patch(uid=1772,data={"name": "bobq_a"})
+	#res = b.delete(uid=1719)
+	#c = ConstructTag()
 	#res = c.post(data={"name": "howdy there partner"})	
 	pdb.set_trace()
 	

@@ -1,6 +1,11 @@
 class CrisprModificationsController < ApplicationController
-  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy]
-  skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct]
+  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy, :new_pcr_validation]
+  skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct, :new_pcr_validation]
+
+
+	def new_pcr_validation
+		@pcr_validation = @crispr.pcr_validations.build
+	end
 
 	def select_crispr_construct
 		#Function: Called via AJAX in the crispr form when the user clicks the "Add Crispr Construct" button. 

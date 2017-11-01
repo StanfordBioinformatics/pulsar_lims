@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027000543) do
+ActiveRecord::Schema.define(version: 20171101053049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -552,6 +552,40 @@ ActiveRecord::Schema.define(version: 20171027000543) do
   add_index "paired_barcodes", ["sequencing_library_prep_kit_id"], name: "index_paired_barcodes_on_sequencing_library_prep_kit_id", using: :btree
   add_index "paired_barcodes", ["user_id"], name: "index_paired_barcodes_on_user_id", using: :btree
 
+  create_table "pcr_master_mixes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "vendor_id"
+    t.string   "vendor_product_identifier"
+    t.string   "vendor_product_url"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "lot_identifier"
+  end
+
+  add_index "pcr_master_mixes", ["user_id"], name: "index_pcr_master_mixes_on_user_id", using: :btree
+  add_index "pcr_master_mixes", ["vendor_id"], name: "index_pcr_master_mixes_on_vendor_id", using: :btree
+
+  create_table "pcr_validations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "description"
+    t.integer  "pcr_master_mix_id"
+    t.string   "forward_primer"
+    t.string   "reverse_primer"
+    t.integer  "amplicon_size"
+    t.float    "annealing_temperature"
+    t.integer  "extension_time"
+    t.integer  "num_cycles"
+    t.integer  "crispr_modification_id"
+    t.boolean  "success"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "pcr_validations", ["crispr_modification_id"], name: "index_pcr_validations_on_crispr_modification_id", using: :btree
+  add_index "pcr_validations", ["pcr_master_mix_id"], name: "index_pcr_validations_on_pcr_master_mix_id", using: :btree
+  add_index "pcr_validations", ["user_id"], name: "index_pcr_validations_on_user_id", using: :btree
+
   create_table "plates", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -855,6 +889,11 @@ ActiveRecord::Schema.define(version: 20171027000543) do
   add_foreign_key "paired_barcodes", "barcodes", column: "index2_id"
   add_foreign_key "paired_barcodes", "sequencing_library_prep_kits"
   add_foreign_key "paired_barcodes", "users"
+  add_foreign_key "pcr_master_mixes", "users"
+  add_foreign_key "pcr_master_mixes", "vendors"
+  add_foreign_key "pcr_validations", "crispr_modifications"
+  add_foreign_key "pcr_validations", "pcr_master_mixes"
+  add_foreign_key "pcr_validations", "users"
   add_foreign_key "plates", "single_cell_sortings"
   add_foreign_key "plates", "users"
   add_foreign_key "plates", "vendors"

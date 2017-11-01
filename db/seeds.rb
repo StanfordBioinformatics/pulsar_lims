@@ -29,6 +29,11 @@ DataStorageProvider.create!([
 	{user_id: admin, name: "Google Storage Bucket", bucket_storage: true}
 ])
 
+PcrMasterMix.delete_all
+PcrMasterMix.create!([
+	{user_id: admin, name: "LongAMp Taq 2X Master Mix", vendor_id: Vendor.find_by(name: "New England BioLabs").id, vendor_product_identifier: "M0782S", lot_identifier: "0321708", vendor_product_url: "https://www.neb.com/products/m0287-longamp-taq-2x-master-mix#Product%20Information"}
+])
+
 SequencingCenter.delete_all
 SequencingCenter.create!([
 	{user_id: admin, name: "Stanford Genome Sequencing Service Center", url: "http://med.stanford.edu/gssc.html", address: "3155 Porter Dr; Palo Alto, CA 94304"}

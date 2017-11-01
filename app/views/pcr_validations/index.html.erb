@@ -1,0 +1,56 @@
+<header>
+  <h1>PCR Validations</h1>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: PcrValidation} %>
+  </ul> 
+</header>
+
+<table class="attributes">
+  <thead>
+    <tr>
+			<th>ID</th>
+      <th>Creator</th>
+      <th>Date created</th>
+      <th>Description</th>
+      <th>Pcr master mix</th>
+      <th>Forward primer</th>
+      <th>Reverse primer</th>
+      <th>Amplicon size</th>
+      <th>Annealing temperature</th>
+      <th>Extension time</th>
+      <th>Num cycles</th>
+      <th>Crispr modification</th>
+      <th>Success</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pcr_validations.each do |rec| %>
+      <tr>
+				<td><%= link_to rec.id, rec %></td>
+        <td><%= rec.user.display() %></td>
+        <td><%= time_ago_in_words(rec.created_at) %> ago </td>
+        <td><%= rec.description %></td>
+        <td><%= link_to rec.pcr_master_mix.name, rec.pcr_master_mix %></td>
+        <td><%= rec.forward_primer %></td>
+        <td><%= rec.reverse_primer %></td>
+        <td><%= rec.amplicon_size %></td>
+        <td><%= rec.annealing_temperature %></td>
+        <td><%= rec.extension_time %></td>
+        <td><%= rec.num_cycles %></td>
+				<% if rec.crispr_modification.present? %>
+	        <td><%= link_to rec.crispr_modification.name, rec.crispr_modification  %></td>
+				<% else %>
+					<td></td>
+				<% end %>
+        <td><%= rec.success %></td>
+        <td>
+					<%= link_to fa_icon("pencil"), edit_pcr_validation_path(rec) %>
+        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

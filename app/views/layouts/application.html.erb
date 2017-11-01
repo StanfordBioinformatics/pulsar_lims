@@ -113,6 +113,14 @@
             <%= link_to "Library Fragmentation Methods",library_fragmentation_methods_path, class: controller_name() == "library_fragmentation_methods" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Sequencing Library Prep Kits",sequencing_library_prep_kits_path, class: controller_name() == "sequencing_library_prep_kits" ? "list-group-item active" : "list-group-item" %>
           </ul>
+					<!-- And now the less common object list -->
+          <div style="" class="navbar-header">
+            <span class="navbar-brand"><h5>Units<h5></span>
+          </div>
+					<ul style="clear:left;" class="nav navbar-nav">
+						<%= link_to "PCR Master Mixes",pcr_master_mixes_path, class: controller_name() == "pcr_master_mixes" ? "list-group-item active" : "list-group-item" %>
+						<%= link_to "PCR Validations",pcr_validations_path, class: controller_name() == "pcr_validations" ? "list-group-item active" : "list-group-item" %>
+					</ul>
         </nav>
       </div>
       <div style="float: left" id="main-body" class="data-container col-xs-8 col-sm-9 col-md-10">

@@ -1,0 +1,8 @@
+<h1>Editing Pcr Validation</h1>
+
+<%= simple_form_for(@pcr_validation) do |f| %>
+  <%= render partial: 'form', locals: {f: f} %>
+  <%= render partial: "application_partials/submit", locals: {f: f} %>
+<% end %>
+
+<%= link_to 'Back', pcr_validations_path %>

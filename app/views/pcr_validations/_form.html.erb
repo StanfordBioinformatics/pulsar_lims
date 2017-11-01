@@ -1,0 +1,12 @@
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @pcr_validation } %>
+
+  <%= f.input :description %>
+  <%= f.association :pcr_master_mix %>
+  <%= f.input :forward_primer %>
+  <%= f.input :reverse_primer %>
+  <%= f.input :amplicon_size %>
+  <%= f.input :annealing_temperature %>
+  <%= f.input :extension_time %>
+  <%= f.input :num_cycles %>
+  <%= f.association :crispr_modification %>
+  <%= f.input :success %>

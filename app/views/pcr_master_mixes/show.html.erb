@@ -1,0 +1,43 @@
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @pcr_master_mix } %>
+<header>
+  <h1><%= @pcr_master_mix.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @pcr_master_mix} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @pcr_master_mix} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @pcr_master_mix } %>
+<table class="attributes">
+	<tr>
+	  <th><strong>Name:</strong></th>
+	  <td><%= @pcr_master_mix.name %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Vendor:</strong></th>
+	  <td><%= link_to @pcr_master_mix.vendor.name, @pcr_master_mix.vendor %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Vendor product identifier:</strong></th>
+	  <td><%= @pcr_master_mix.vendor_product_identifier %></td>
+	</tr>
+
+	<tr>
+	  <th><strong>Lot identifier:</strong></th>
+	  <td><%= @pcr_master_mix.lot_identifier %></td>
+	</tr>
+	
+	<tr>
+	  <th><strong>Vendor product url:</strong></th>
+		<% if @pcr_master_mix.vendor_product_url.present? %>
+		  <td><%= link_to @pcr_master_mix.vendor_product_url, @pcr_master_mix.vendor_product_url %></td>
+		<% else %>
+			<td></td>
+		<% end %>
+	</tr>
+</table>
+
+<%= link_to 'Back', pcr_master_mixes_path %>

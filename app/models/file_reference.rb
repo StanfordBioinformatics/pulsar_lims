@@ -21,10 +21,7 @@ class FileReference < ActiveRecord::Base
 		if bucket.present?
 			txt += " #{bucket}"
 		else
-			txt += " project #{ds.project_identifier}" 
-		end
-		if self.file_path.present?
-			txt += ", path "  + self.file_path
+			txt += " #{ds.project_identifier}:#{self.file_path}" 
 		end
 		return txt
 	end
@@ -33,11 +30,8 @@ class FileReference < ActiveRecord::Base
 
 	def validate_file_path
 		base_path = self.data_storage.folder_base_path
-		if base_path.present?
-			if not self.file_path.start_with?(base_path)
-				path = File.join(base_path,self.file_path)
-				self.file_path = path
-			end
+		if not self.file_path.start_with?(base_path)
+			self.file_path = File.join(base_path,self.file_path)
 		end
 	end
 end
