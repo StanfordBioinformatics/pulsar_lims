@@ -1,7 +1,11 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @file_reference } %>
 
 	<%= f.association :user, as: :hidden %>
+
 	<%= f.association :data_storage, input_html: {class: "file-reference-data-storage"}, label_html: {"data-toggle": "tooltip", "title": "The bucket or project in which this file is stored."} %>
-	<%= f.association :data_file_type %>
+
 	<%= f.input :file_path, input_html: {class: "file-reference-file-path"}, label_html: {"data-toggle": "tooltip", "title": "The path to a file (or folder, depending on the context) within the bucket or project. If the referenced data storage object has a base folder path specified, then this path must be given as a relative (subpath) of the base path."}  %>
+
 	<%= f.input :fileid %>
+
+	<%= f.association :data_file_type %>
