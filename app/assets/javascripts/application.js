@@ -39,11 +39,15 @@
 
 $(function() {
 
-  //This block is specific for the index views with regards to displaying the model definition.
-  //For this to work properly, for a given index view you must code a block element at the bottom of
-  // the header tag, and give it a class of 'model-definition'. I suggest a '<p>' tag. The textual content of the
-  // block should be a definition describing the models purpose. I suggest storing the definition as a class
-  // variable within the model's own class, and referencing this within the block using ERB. 
+  //This block is specific for the index views with regards to displaying the model's definition.
+  //For this to work properly, for a given index view you must add the class "index-page-header" to <h1> tag (or <h2>, <h3>, etc) in the 
+  // <header> tag and code a block element immediately after the <h1> tag with a class of 'model-definition'. 
+  // I suggest using a <p> tag. The textual content of the block should be a definition describing the models purpose.
+  // I suggest storing the definition as a class variable within the model's own class, and referencing this within the block using ERB. 
+  // Take a look at app/views/crispr_modifications/index.html.erb for an example.
+
+  //Add a fa-icon plus sign that the user can click in the <header> element to trigger the display of the model's definition.
+  $(".index-page-header").css("display","inline-block").after('<span class="define-model btn fa fa-plus-square-o"></span>');
   $model_definition = $(".model-definition")
   $model_definition.hide();
 
@@ -51,6 +55,8 @@ $(function() {
   $define_model_btn.on("click", function(event) {
     event.stopPropagation();
     $(this).hide();
+    //First wrap definition in <div> in order to add a btn (fa-thumbs-up icon) to hide the definition content.
+    // when the user clicks on it. This will only happen the first time the user clicks on the fa-plus btn. 
     definition_wrapper_id = "definition_wrapper";
     $definition_wrapper = $("#" + definition_wrapper_id); //Not defined until after first click of $(".define-model").
     if ( $definition_wrapper.length == 0 ) {
@@ -79,8 +85,7 @@ $(function() {
   })
 
 
-  //Deletes table rows when the user clicks on the trash icon. Does so remotely w/o a page refresh. 
-
+  //Delete table rows when the user clicks on the trash icon. Does so remotely w/o a page refresh. 
   //Create variable that can be used in all other JavaScript files. This one is to add the asterisk next to the label
   // of an input field when the is conditional requirements. For an example of a conditional requirement, see
   // data_storages.js.coffee, which referneces this variable. 
