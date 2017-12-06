@@ -1,6 +1,6 @@
 Pulsar::Application.routes.draw do
 
-  resources :pcr_validations
+  resources :pcrs
   resources :pcr_master_mixes
   resources :analyses do
 		get :add_merged_file, on: :collection
@@ -27,7 +27,7 @@ Pulsar::Application.routes.draw do
   resources :paired_barcodes
   resources :crispr_modifications do
 		#crisprs only belong to biosamples.
-		get :new_pcr_validation, on: :member
+		get :new_pcr, on: :member
 		get :select_crispr_construct, on: :collection
 		#select_crispr_construct on collection instead of member b/c the user selects this when creating or editing the crispr object, and
 		# since the crispr won't have an id yet when being created, we can't use :member.

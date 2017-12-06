@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101053049) do
+ActiveRecord::Schema.define(version: 20171204231317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -566,7 +566,7 @@ ActiveRecord::Schema.define(version: 20171101053049) do
   add_index "pcr_master_mixes", ["user_id"], name: "index_pcr_master_mixes_on_user_id", using: :btree
   add_index "pcr_master_mixes", ["vendor_id"], name: "index_pcr_master_mixes_on_vendor_id", using: :btree
 
-  create_table "pcr_validations", force: :cascade do |t|
+  create_table "pcrs", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "description"
     t.integer  "pcr_master_mix_id"
@@ -582,9 +582,9 @@ ActiveRecord::Schema.define(version: 20171101053049) do
     t.datetime "updated_at",             null: false
   end
 
-  add_index "pcr_validations", ["crispr_modification_id"], name: "index_pcr_validations_on_crispr_modification_id", using: :btree
-  add_index "pcr_validations", ["pcr_master_mix_id"], name: "index_pcr_validations_on_pcr_master_mix_id", using: :btree
-  add_index "pcr_validations", ["user_id"], name: "index_pcr_validations_on_user_id", using: :btree
+  add_index "pcrs", ["crispr_modification_id"], name: "index_pcrs_on_crispr_modification_id", using: :btree
+  add_index "pcrs", ["pcr_master_mix_id"], name: "index_pcrs_on_pcr_master_mix_id", using: :btree
+  add_index "pcrs", ["user_id"], name: "index_pcrs_on_user_id", using: :btree
 
   create_table "plates", force: :cascade do |t|
     t.integer  "user_id"
@@ -891,9 +891,9 @@ ActiveRecord::Schema.define(version: 20171101053049) do
   add_foreign_key "paired_barcodes", "users"
   add_foreign_key "pcr_master_mixes", "users"
   add_foreign_key "pcr_master_mixes", "vendors"
-  add_foreign_key "pcr_validations", "crispr_modifications"
-  add_foreign_key "pcr_validations", "pcr_master_mixes"
-  add_foreign_key "pcr_validations", "users"
+  add_foreign_key "pcrs", "crispr_modifications"
+  add_foreign_key "pcrs", "pcr_master_mixes"
+  add_foreign_key "pcrs", "users"
   add_foreign_key "plates", "single_cell_sortings"
   add_foreign_key "plates", "users"
   add_foreign_key "plates", "vendors"

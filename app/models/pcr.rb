@@ -1,4 +1,4 @@
-class PcrValidation < ActiveRecord::Base
+class Pcr < ActiveRecord::Base
   belongs_to :user
   belongs_to :pcr_master_mix
   belongs_to :crispr_modification

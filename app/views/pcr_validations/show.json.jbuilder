@@ -1,1 +1,0 @@
-json.extract! @pcr_validation, :id, :user_id, :description, :pcr_master_mix_id, :forward_primer, :reverse_primer, :amplicon_size, :annealing_temperature, :extension_time, :num_cycles, :crispr_modification_id, :success, :created_at, :updated_at

@@ -1,8 +1,8 @@
 <header>
-  <h1>PCR Validations</h1>
+  <h1>PCRs </h1>
   
   <ul class="actions">
-    <%= render partial: "application_partials/auth_new_record", locals: {model_class: PcrValidation} %>
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: Pcr, uppercase: 1} %>
   </ul> 
 </header>
 
@@ -27,7 +27,7 @@
   </thead>
 
   <tbody>
-    <% @pcr_validations.each do |rec| %>
+    <% @pcrs.each do |rec| %>
       <tr>
 				<td><%= link_to rec.id, rec %></td>
         <td><%= rec.user.display() %></td>
@@ -47,7 +47,7 @@
 				<% end %>
         <td><%= rec.success %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_pcr_validation_path(rec) %>
+					<%= link_to fa_icon("pencil"), edit_pcr_path(rec) %>
         	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>

@@ -38,6 +38,47 @@
 //    });
 
 $(function() {
+
+  //This block is specific for the index views with regards to displaying the model definition.
+  //For this to work properly, for a given index view you must code a block element at the bottom of
+  // the header tag, and give it a class of 'model-definition'. I suggest a '<p>' tag. The textual content of the
+  // block should be a definition describing the models purpose. I suggest storing the definition as a class
+  // variable within the model's own class, and referencing this within the block using ERB. 
+  $model_definition = $(".model-definition")
+  $model_definition.hide();
+
+  $define_model_btn = $(".define-model"); //A button that, when clicked, expands to show the model's definition.
+  $define_model_btn.on("click", function(event) {
+    event.stopPropagation();
+    $(this).hide();
+    definition_wrapper_id = "definition_wrapper";
+    $definition_wrapper = $("#" + definition_wrapper_id); //Not defined until after first click of $(".define-model").
+    if ( $definition_wrapper.length == 0 ) {
+      //Then this is the first time the user is clicking to view the model definition.
+      $model_definition.wrap('<div id="' + definition_wrapper_id + '" style="padding: 1em; background-color: #ffffcc;">');
+      //See w3schools color picker at https://www.w3schools.com/colors/colors_picker.asp
+      // #ffffcc is a creamy white color. 
+      $definition_wrapper = $("#" + definition_wrapper_id);
+      //Add thumbs-up icon that, when clicked, closes the model definition.
+      $model_definition.append('&nbsp;<span style="font-size: 0.9em;" class="btn btn-default fa fa-thumbs-up hide-model-definition"></span>') 
+      
+      //Register handler to close the definition.
+      $(".hide-model-definition").on("click",function(event) {
+        event.stopPropagation();
+        $definition_wrapper.fadeOut("fast", function() {
+          $define_model_btn.show();
+        })
+      })
+
+      $model_definition.show();
+
+    }
+    else {
+      $definition_wrapper.show();
+    }
+  })
+
+
   //Deletes table rows when the user clicks on the trash icon. Does so remotely w/o a page refresh. 
 
   //Create variable that can be used in all other JavaScript files. This one is to add the asterisk next to the label

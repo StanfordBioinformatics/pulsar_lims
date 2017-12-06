@@ -4,7 +4,7 @@ class CrisprModificationsController < ApplicationController
 
 
 	def new_pcr_validation
-		@pcr_validation = @crispr.pcr_validations.build
+		@pcr = @crispr.pcr_validations.build
 	end
 
 	def select_crispr_construct
