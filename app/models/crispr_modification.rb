@@ -6,7 +6,7 @@ class CrisprModification < ActiveRecord::Base
   belongs_to :donor_construct
 	belongs_to :genomic_integration_site, class_name: "GenomeLocation"
 
-	has_many :pcr_validations, dependent: :nullify
+	has_many :pcr_validations, class_name: "Pcr", dependent: :nullify
   has_and_belongs_to_many :crispr_constructs
 	validates :name, presence: true, uniqueness: true
 	validates :biosample, presence: true

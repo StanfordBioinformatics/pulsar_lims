@@ -46,47 +46,46 @@ $(function() {
   // I suggest storing the definition as a class variable within the model's own class, and referencing this within the block using ERB. 
   // Take a look at app/views/crispr_modifications/index.html.erb for an example.
 
-  $model_definition = $("header .model-definition")
-  if ($model_definition.length != 1) {
-    return;
-  }
+  $model_definition = $("header .model-definition");
+  if ($model_definition.length == 1) {
 
-  $model_definition.hide();
-  //Add a fa-icon plus sign that the user can click in the <header> element to trigger the display of the model's definition.
-  $(".index-page-header").css("display","inline-block").after('<span class="define-model btn fa fa-plus-square-o"></span>');
-  $define_model_btn = $(".define-model"); //A button that, when clicked, expands to show the model's definition.
-
-  $define_model_btn.on("click", function(event) {
-    event.stopPropagation();
-    $(this).hide();
-    //First wrap definition in <div> in order to add a btn (fa-thumbs-up icon) to hide the definition content.
-    // when the user clicks on it. This will only happen the first time the user clicks on the fa-plus btn. 
-    definition_wrapper_id = "definition_wrapper";
-    $definition_wrapper = $("#" + definition_wrapper_id); //Not defined until after first click of $(".define-model").
-    if ( $definition_wrapper.length == 0 ) {
-      //Then this is the first time the user is clicking to view the model definition.
-      $model_definition.wrap('<div id="' + definition_wrapper_id + '" style="padding: 1em; margin-bottom: 1em; background-color: #ffffcc;">');
-      //See w3schools color picker at https://www.w3schools.com/colors/colors_picker.asp
-      // #ffffcc is a creamy white color. 
-      $definition_wrapper = $("#" + definition_wrapper_id);
-      //Add thumbs-up icon that, when clicked, closes the model definition.
-      $model_definition.append('&nbsp;</br><span style="margin-top: 1em;font-size: 0.9em;" class="btn btn-default fa fa-thumbs-up hide-model-definition"></span>') 
-      
-      //Register handler to close the definition.
-      $(".hide-model-definition").on("click",function(event) {
-        event.stopPropagation();
-        $definition_wrapper.fadeOut("fast", function() {
-          $define_model_btn.show();
+    $model_definition.hide();
+    //Add a fa-icon plus sign that the user can click in the <header> element to trigger the display of the model's definition.
+    $(".index-page-header").css("display","inline-block").after('<span class="define-model btn fa fa-plus-square-o"></span>');
+    $define_model_btn = $(".define-model"); //A button that, when clicked, expands to show the model's definition.
+  
+    $define_model_btn.on("click", function(event) {
+      event.stopPropagation();
+      $(this).hide();
+      //First wrap definition in <div> in order to add a btn (fa-thumbs-up icon) to hide the definition content.
+      // when the user clicks on it. This will only happen the first time the user clicks on the fa-plus btn. 
+      definition_wrapper_id = "definition_wrapper";
+      $definition_wrapper = $("#" + definition_wrapper_id); //Not defined until after first click of $(".define-model").
+      if ( $definition_wrapper.length == 0 ) {
+        //Then this is the first time the user is clicking to view the model definition.
+        $model_definition.wrap('<div id="' + definition_wrapper_id + '" style="padding: 1em; margin-bottom: 1em; background-color: #ffffcc;">');
+        //See w3schools color picker at https://www.w3schools.com/colors/colors_picker.asp
+        // #ffffcc is a creamy white color. 
+        $definition_wrapper = $("#" + definition_wrapper_id);
+        //Add thumbs-up icon that, when clicked, closes the model definition.
+        $model_definition.append('&nbsp;</br><span style="margin-top: 1em;font-size: 0.9em;" class="btn btn-default fa fa-thumbs-up hide-model-definition"></span>') 
+        
+        //Register handler to close the definition.
+        $(".hide-model-definition").on("click",function(event) {
+          event.stopPropagation();
+          $definition_wrapper.fadeOut("fast", function() {
+            $define_model_btn.show();
+          })
         })
-      })
-
-      $model_definition.show();
-
-    }
-    else {
-      $definition_wrapper.show();
-    }
-  })
+  
+        $model_definition.show();
+  
+      }
+      else {
+        $definition_wrapper.show();
+      }
+    })
+  }
 
 
   //Delete table rows when the user clicks on the trash icon. Does so remotely w/o a page refresh. 

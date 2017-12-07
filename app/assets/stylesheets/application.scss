@@ -44,6 +44,14 @@
 	}
 }
 
+.celsius {
+	&:after {
+		content: " \2103";
+    //2103 is the hexadecimal value of the UTF code point for the Celsius symbol.
+    // See https://www.w3schools.com/charsets/ref_utf_letterlike.asp
+	}
+}
+
 //Set class="td-spacing-2" to 'table' elements to set 1em padding top and bottom:
 .td-spacing-2 tr td,th {
 		padding-bottom: 2em;

@@ -1,7 +1,7 @@
 <%= simple_form_for(@antibody) do |f| %>
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @antibody } %>
 
-  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique antibody name"} %> (Max. 20 characters)
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique antibody name"} %>
 
   <%= f.association :organism, collection: Organism.order(:name), label_method: :name, prompt: "Select the Organism",
 			label_html: {"data-toggle" => "tooltip", "title" => "The organism the antibody was grown in."} %>
