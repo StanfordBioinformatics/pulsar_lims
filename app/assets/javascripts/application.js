@@ -46,12 +46,16 @@ $(function() {
   // I suggest storing the definition as a class variable within the model's own class, and referencing this within the block using ERB. 
   // Take a look at app/views/crispr_modifications/index.html.erb for an example.
 
+  $model_definition = $("header .model-definition")
+  if ($model_definition.length != 1) {
+    return;
+  }
+
+  $model_definition.hide();
   //Add a fa-icon plus sign that the user can click in the <header> element to trigger the display of the model's definition.
   $(".index-page-header").css("display","inline-block").after('<span class="define-model btn fa fa-plus-square-o"></span>');
-  $model_definition = $(".model-definition")
-  $model_definition.hide();
-
   $define_model_btn = $(".define-model"); //A button that, when clicked, expands to show the model's definition.
+
   $define_model_btn.on("click", function(event) {
     event.stopPropagation();
     $(this).hide();
@@ -66,7 +70,7 @@ $(function() {
       // #ffffcc is a creamy white color. 
       $definition_wrapper = $("#" + definition_wrapper_id);
       //Add thumbs-up icon that, when clicked, closes the model definition.
-      $model_definition.append('&nbsp;<span style="font-size: 0.9em;" class="btn btn-default fa fa-thumbs-up hide-model-definition"></span>') 
+      $model_definition.append('&nbsp;</br><span style="margin-top: 1em;font-size: 0.9em;" class="btn btn-default fa fa-thumbs-up hide-model-definition"></span>') 
       
       //Register handler to close the definition.
       $(".hide-model-definition").on("click",function(event) {
