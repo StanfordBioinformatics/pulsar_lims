@@ -1,4 +1,5 @@
 class CloningVector < ActiveRecord::Base
+	DEFINITION = "The vector backbone that you use to insert DNA of interest for cloning."
 	has_many :crispr_constructs
 	has_many :donor_constructs
   belongs_to :user

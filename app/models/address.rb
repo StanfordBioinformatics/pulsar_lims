@@ -1,4 +1,5 @@
 class Address < ActiveRecord::Base
+	DEFINITION = "A postal address."
 	belongs_to :user
 
 	validates :street, presence: true

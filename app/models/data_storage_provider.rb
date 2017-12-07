@@ -1,4 +1,5 @@
 class DataStorageProvider < ActiveRecord::Base
+	DEFINITION = "A cloud vendor that provides data storage services, i.e. AWS, Google, Azure, DNAnexus."
 	has_many :data_storages, dependent: :nullify
   belongs_to :user
 

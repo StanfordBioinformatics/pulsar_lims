@@ -1,4 +1,5 @@
 class Chromosome < ActiveRecord::Base
+	DEFINITION = "A chromosome identifier of a particular reference genome build."
 	has_many :genome_locations
   belongs_to :user
   belongs_to :reference_genome

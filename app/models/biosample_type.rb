@@ -1,4 +1,5 @@
 class BiosampleType < ActiveRecord::Base
+	DEFINITION = "Broad category of the type of biosample, such as tissue, primary cell, immortalized cell line, ..."
 	has_many :biosamples
 	belongs_to :user
 

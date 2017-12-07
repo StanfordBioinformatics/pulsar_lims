@@ -1,4 +1,5 @@
 class DocumentType < ActiveRecord::Base
+	DEFINITION = "The type of protocol."
 	has_many :documents
 	belongs_to :user
 

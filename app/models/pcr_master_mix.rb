@@ -1,4 +1,5 @@
 class PcrMasterMix < ActiveRecord::Base
+	DEFINITION = "The master mix used in a PCR assay."
   belongs_to :user
   belongs_to :vendor
 

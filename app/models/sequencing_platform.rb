@@ -1,4 +1,5 @@
 class SequencingPlatform < ActiveRecord::Base
+	DEFINITION = "The type sequencing machine, i.e. Illumina MiSeq, Illumina HiSeq 4000."
 	belongs_to :user
 
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true

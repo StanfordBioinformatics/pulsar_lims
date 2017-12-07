@@ -1,4 +1,5 @@
 class LibraryFragmentationMethod < ActiveRecord::Base
+	DEFINITION = "The method used to shear the DNA during Library preparation."
   belongs_to :user
 	has_many :libraries
 

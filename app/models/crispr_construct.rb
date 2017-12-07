@@ -1,4 +1,5 @@
 class CrisprConstruct < ActiveRecord::Base
+	DEFINITION = "A DNA construct (i.e. plasmid) that you or a third party created using a Cloning Vector for a CRISPR experiment, and that contains a single guide sequence. This construct is separate from a Donor Construct, which contains the sequence to insert in the genome for genome editing."
 	attr_accessor :construct_tag_ids
 	has_and_belongs_to_many :construct_tags
 	has_and_belongs_to_many :crispr_modifications

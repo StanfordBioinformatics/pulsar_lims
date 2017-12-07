@@ -1,4 +1,5 @@
 class Donor < ActiveRecord::Base
+	DEFINITION = "The donor of a biosample, whether human or some other type of organism. Currently, this linkes to an accession from a consortium, such as an ENCODE Donor, i.e. see https://www.encodeproject.org/donors/."
 	has_many :biosamples
 	belongs_to :user
 	validates :encode_identifier, uniqueness: true, presence: true
