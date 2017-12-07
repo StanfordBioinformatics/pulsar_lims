@@ -65,7 +65,7 @@ $(function() {
     $definition_wrapper = $("#" + definition_wrapper_id); //Not defined until after first click of $(".define-model").
     if ( $definition_wrapper.length == 0 ) {
       //Then this is the first time the user is clicking to view the model definition.
-      $model_definition.wrap('<div id="' + definition_wrapper_id + '" style="padding: 1em; background-color: #ffffcc;">');
+      $model_definition.wrap('<div id="' + definition_wrapper_id + '" style="padding: 1em; margin-bottom: 1em; background-color: #ffffcc;">');
       //See w3schools color picker at https://www.w3schools.com/colors/colors_picker.asp
       // #ffffcc is a creamy white color. 
       $definition_wrapper = $("#" + definition_wrapper_id);
