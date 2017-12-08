@@ -330,6 +330,12 @@ ul.actions {
   }
 }
 
+.attributes tbody th {
+	//The <th> tags in the show views (not the index views) can take up way too much space, with the header value all the way on the left and the <td> value all the way on the right.
+	// This fixes that for the show views.
+	width: 15%;
+}
+
 .plate-table {
 	/* see additional styles selecting elements in this table in plates.js.coffee */
 	@extend .table-data;
