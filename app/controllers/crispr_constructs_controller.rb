@@ -72,7 +72,7 @@ class CrisprConstructsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_crispr_construct
-      @crispr_construct = CrisprConstruct.find(params[:id])
+      @crispr_construct = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

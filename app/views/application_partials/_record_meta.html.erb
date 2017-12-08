@@ -1,5 +1,9 @@
 <table id="meta_attributes">
 	<tr>
+		<th>Record ID:</th>
+		<td><%= "#{record.class::ABBR}-#{record.id}" %></td>
+	</tr>
+	<tr>
 		<th>Created By:</th>
 		<% if record.model_name.name == "User" %>
 			<td><%= record.email %></td>

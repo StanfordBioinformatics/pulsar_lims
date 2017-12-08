@@ -33,6 +33,18 @@ class ApplicationController < ActionController::Base
 
 	private
 
+	def set_record(model_name, id_param)
+		# Function : Call this method in individual controllers to set the instance variable. 
+		# Args     : model_name - The value of controller_name(), which the caller supplies in the controller.
+		#              See https://apidock.com/rails/ActionController/Metal/controller_name/class.
+		# Returns  : An instance of the model that is represented by the model_name argument.
+		model = model_name.classify.constantize
+		if /^[[:alpha:]]/.match(id_param)
+			id_param = id_param.split("-")[1]
+		end
+		return model.find(id_param)
+	end
+
 	def user_not_authorized
 		flash[:alert] = "You are not authorized to perform this action."
 		redirect_to(request.referrer || root_path)

@@ -58,7 +58,7 @@ class PcrMasterMixesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pcr_master_mix
-      @pcr_master_mix = PcrMasterMix.find(params[:id])
+      @pcr_master_mix = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,5 +1,6 @@
 class ExperimentType < ActiveRecord::Base
 	DEFINITION = "The type of experiment, such as ATAC-Seq, ChIP-Seq, ..."
+	ABBR = "ETY"
 	belongs_to :user
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
 

@@ -57,7 +57,7 @@ class BarcodesController < ApplicationController
     end 
 
     def set_barcode
-      @barcode = Barcode.find(params[:id])
+      @barcode = set_record(controller_name,params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

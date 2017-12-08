@@ -73,11 +73,11 @@ class SequencingRunsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sequencing_run
-      @sequencing_run = SequencingRun.find(params[:id])
+      @sequencing_run = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
 		def set_sequencing_request
-			@sequencing_request = SequencingRequest.find(params[:sequencing_request_id])
+			@sequencing_request = set_record("SequencingRequest",params[:sequencing_request_id])
 		end
 
     # Never trust parameters from the scary internet, only allow the white list through.

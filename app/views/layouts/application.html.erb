@@ -70,25 +70,17 @@
   </nav>
 
   <div id="main" class="container-fluid">
+        <form style="margin-left: 40%;margin-top: 1em;" class="" role="search">    
+            <input style="width: 18em;display: inline-block;" type="text" class="search" placeholder="">
+          <button style="margin-left: -3em;" type="submit" class="search-btn btn"><%= fa_icon("search") %></button>
+  			</form>
     <div class="row">
       <div id="sidebar" class="col-xs-4 col-sm-3 col-md-2">
         <nav class="navbar navbar-default navbar-side">
-          <div class="navbar-header">
-            <span class="navbar-brand"><h5>Object Store<h5></span>
-          </div>
-          <ul style="clear:left;" class="nav navbar-nav">
-						<%= link_to "Addresses",addresses_path, class: controller_name() == "addresses" ? "list-group-item active" : "list-group-item" %>
-						<%= link_to "Antibodies",antibodies_path, class: controller_name() == "antibodies" ? "list-group-item active" : "list-group-item" %>
-            <%= link_to "Antibody Purifications",antibody_purifications_path, class: controller_name() == "antibody_purifications" ? "list-group-item active" : "list-group-item" %>
-            <%= link_to "Biosamples",biosamples_path, class: controller_name() == "biosamples" ? "list-group-item active" : "list-group-item" %>
-            <%= link_to "Biosample Term Names",biosample_term_names_path, class: controller_name() == "biosample_term_names" ? "list-group-item active" : "list-group-item" %>
-            <%= link_to "Biosample Types",biosample_types_path, class: controller_name() == "biosample_types" ? "list-group-item active" : "list-group-item" %>
-					</ul>
-
-          <div style="clear:left" class="navbar-header">
+          <div style="" class="navbar-header">
             <span class="navbar-brand"><h5>CRISPR and Cloning<h5></span>
           </div>
-					<ul style="clear:left;" class="nav navbar-nav">
+					<ul style="" class="nav navbar-nav">
             <%= link_to "Cloning Vectors",cloning_vectors_path, class: controller_name() == "cloning_vectors" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Construct Tags",construct_tags_path, class: controller_name() == "construct_tags" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "CRISPR Constructs",crispr_constructs_path, class: controller_name() == "crispr_constructs" ? "list-group-item active" : "list-group-item" %>
@@ -96,10 +88,10 @@
             <%= link_to "Donor Constructs",donor_constructs_path, class: controller_name() == "donor_constructs" ? "list-group-item active" : "list-group-item" %>
 					</ul>
 
-          <div style="clear:left" class="navbar-header">
+          <div class="navbar-header">
             <span class="navbar-brand"><h5>Files and Storage<h5></span>
           </div>
-					<ul style="clear:left;" class="nav navbar-nav">
+					<ul style="" class="nav navbar-nav">
             <%= link_to "Data File Types",data_file_types_path, class: controller_name() == "data_file_types" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Data Storages",data_storages_path, class: controller_name() == "data_storages" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Data Storage Providers",data_storage_providers_path, class: controller_name() == "data_storage_providers" ? "list-group-item active" : "list-group-item" %>
@@ -108,10 +100,10 @@
             <%= link_to "File References",file_references_path, class: controller_name() == "file_references" ? "list-group-item active" : "list-group-item" %>
 					</ul>
 
-          <div style="clear:left" class="navbar-header">
+          <div class="navbar-header">
             <span class="navbar-brand"><h5>Sequencing<h5></span>
           </div>
-					<ul style="clear:left;" class="nav navbar-nav">
+					<ul style="" class="nav navbar-nav">
             <%= link_to "Libraries",libraries_path, class: controller_name() == "libraries" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Library Fragmentation Methods",library_fragmentation_methods_path, class: controller_name() == "library_fragmentation_methods" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Paired Barcodes",paired_barcodes_path, class: controller_name() == "paired_barcodes" ? "list-group-item active" : "list-group-item" %>
@@ -121,29 +113,29 @@
             <%= link_to "Sequencing Requests",sequencing_requests_path, class: controller_name() == "sequencing_requests" ? "list-group-item active" : "list-group-item" %>
 					</ul>
 
-          <div style="clear:left" class="navbar-header">
+          <div class="navbar-header">
             <span class="navbar-brand"><h5>Other<h5></span>
           </div>
-					<ul style="clear:left;" class="nav navbar-nav">
+					<ul style="" class="nav navbar-nav">
+						<%= link_to "Addresses",addresses_path, class: controller_name() == "addresses" ? "list-group-item active" : "list-group-item" %>
+						<%= link_to "Antibodies",antibodies_path, class: controller_name() == "antibodies" ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Antibody Purifications",antibody_purifications_path, class: controller_name() == "antibody_purifications" ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Biosamples",biosamples_path, class: controller_name() == "biosamples" ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Biosample Term Names",biosample_term_names_path, class: controller_name() == "biosample_term_names" ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Biosample Types",biosample_types_path, class: controller_name() == "biosample_types" ? "list-group-item active" : "list-group-item" %>
+            <%= link_to "Concentration Units",concentration_units_path, class: controller_name() == "concentration_units" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Donors",donors_path, class: controller_name() == "donors" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Experiment Types",experiment_types_path, class: controller_name() == "experiment_types" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Isotypes",isotypes_path, class: controller_name() == "isotypes" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Nucleic Acid Terms",nucleic_acid_terms_path, class: controller_name() == "nucleic_acid_terms" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Organisms",organisms_path, class: controller_name() == "organisms" ? "list-group-item active" : "list-group-item" %>
+						<%= link_to "PCRs ",pcrs_path, class: controller_name() == "pcrs" ? "list-group-item active" : "list-group-item" %>
+						<%= link_to "PCR Master Mixes",pcr_master_mixes_path, class: controller_name() == "pcr_master_mixes" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Plates",plates_path, class: controller_name() == "plates" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Reference Genomes",reference_genomes_path, class: controller_name() == "reference_genomes" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Single Cell Sortings",single_cell_sortings_path, class: controller_name() == "single_cell_sortings" ? "list-group-item active" : "list-group-item" %>
             <%= link_to "Targets",targets_path, class: controller_name() == "targets" ? "list-group-item active" : "list-group-item" %>
 						<%= link_to "Vendors",vendors_path, class: controller_name() == "vendors" ? "list-group-item active" : "list-group-item" %>
-            <%= link_to "Concentration Units",concentration_units_path, class: controller_name() == "concentration_units" ? "list-group-item active" : "list-group-item" %>
-          </ul>
-					<!-- And now the less common object list -->
-          <div style="clear:left" class="navbar-header">
-            <span class="navbar-brand"><h5>Units<h5></span>
-          </div>
-					<ul style="clear:left;" class="nav navbar-nav">
-						<%= link_to "PCR Master Mixes",pcr_master_mixes_path, class: controller_name() == "pcr_master_mixes" ? "list-group-item active" : "list-group-item" %>
-						<%= link_to "PCRs ",pcrs_path, class: controller_name() == "pcrs" ? "list-group-item active" : "list-group-item" %>
 					</ul>
         </nav>
       </div>

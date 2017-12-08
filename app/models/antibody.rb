@@ -1,5 +1,6 @@
 class Antibody < ActiveRecord::Base
 	DEFINITION = "An antibody that was either purchased from a third party, or created from within the lab."
+	ABBR = "AB"
 	CLONALITY_TYPES = ["monoclonal", "polyclonal"]
   has_and_belongs_to_many :antibody_purifications
 	has_and_belongs_to_many :plates

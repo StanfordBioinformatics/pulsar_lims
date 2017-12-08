@@ -1,4 +1,5 @@
 class Vendor < ActiveRecord::Base
+	ABBR = "V"
 	has_many :biosample
 	has_many :antibodies
 	has_many :crispr_constructs

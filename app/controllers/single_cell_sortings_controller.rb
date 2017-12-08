@@ -132,7 +132,7 @@ class SingleCellSortingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_single_cell_sorting
-      @single_cell_sorting = SingleCellSorting.find(params[:id])
+      @single_cell_sorting = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

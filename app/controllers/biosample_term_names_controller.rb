@@ -55,7 +55,7 @@ class BiosampleTermNamesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_biosample_term_name
-      @biosample_term_name = BiosampleTermName.find(params[:id])
+      @biosample_term_name = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb.
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

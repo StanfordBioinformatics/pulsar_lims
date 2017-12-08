@@ -88,10 +88,7 @@ class LibrariesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_library
-      @library = Library.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      flash[:alert] = "The library you were looking for could not be found."
-      redirect_to libraries_path
+      @library = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

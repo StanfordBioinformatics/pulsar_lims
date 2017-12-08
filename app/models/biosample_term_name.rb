@@ -1,5 +1,6 @@
 class BiosampleTermName < ActiveRecord::Base
 	DEFINITION = "A term name and accession that describes what a particular biosample is, i.e. anatomical provenance (tissue) or cell type, and which belongs to a particular Biosample Ontology."
+	ABBR = "BTN"
 	#The ENCODE DCC uses three ontologies for Biosamples:
 	#
 	# 1) Cell Ontology (CL),

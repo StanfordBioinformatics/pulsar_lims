@@ -1,5 +1,6 @@
 class SequencingRun< ActiveRecord::Base
 	DEFINITION = "Represents the realization of a Sequencing Request. The details of the actual sequencing run are provided here. A Sequencing Run belongs to a Sequencing Request, and has a Sequencing Result for each Libary on the Sequencing Request."
+	ABBR = "SR"
   belongs_to :user
   belongs_to :sequencing_request
 	belongs_to :report, class_name: "Document"

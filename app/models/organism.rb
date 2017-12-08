@@ -1,4 +1,5 @@
 class Organism < ActiveRecord::Base
+	ABBR = "ORG"
 	has_many :antibodies
 	belongs_to :user
 	validates :name, uniqueness: true, presence: true

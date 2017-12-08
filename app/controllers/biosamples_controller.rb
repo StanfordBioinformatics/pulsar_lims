@@ -99,10 +99,7 @@ class BiosamplesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_biosample
-      @biosample = Biosample.find(params[:id])
-		rescue ActiveRecord::RecordNotFound
-			flash[:alert] = "The biosample you were looking for could not be found."
-			redirect_to biosamples_path
+      @biosample = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

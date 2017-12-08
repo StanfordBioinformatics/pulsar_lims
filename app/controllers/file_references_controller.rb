@@ -58,7 +58,7 @@ class FileReferencesController < ApplicationController
 
   private
     def set_file_reference
-      @file_reference = FileReference.find(params[:id])
+      @file_reference = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     def file_reference_params

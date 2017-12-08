@@ -61,7 +61,7 @@ class AntibodiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_antibody
-      @antibody = Antibody.find(params[:id])
+      @antibody = set_record(controller_name,params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

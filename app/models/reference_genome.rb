@@ -1,5 +1,6 @@
 class ReferenceGenome < ActiveRecord::Base
 	DEFINITION = "A reference genome build for a particular organism, i.e. hg38."
+	ABBR = "RG"
 	has_many :chromosomes, dependent: :destroy
 	belongs_to :user
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true

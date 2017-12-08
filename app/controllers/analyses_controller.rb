@@ -74,7 +74,7 @@ class AnalysesController < ApplicationController
 
   private
     def set_analysis
-      @analysis = Analysis.find(params[:id])
+      @analysis = set_record(controller_name,params[:id])
     end
 
     def analysis_params

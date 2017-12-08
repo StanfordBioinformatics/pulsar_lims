@@ -58,7 +58,7 @@ class DataFileTypesController < ApplicationController
 
   private
     def set_data_file_type
-      @data_file_type = DataFileType.find(params[:id])
+      @data_file_type = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     def data_file_type_params

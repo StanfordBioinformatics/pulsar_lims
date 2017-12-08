@@ -75,7 +75,7 @@ class DataStoragesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_data_storage
-      @data_storage = DataStorage.find(params[:id])
+      @data_storage = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     def data_storage_params

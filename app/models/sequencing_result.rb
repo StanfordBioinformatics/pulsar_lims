@@ -1,5 +1,6 @@
 class SequencingResult < ActiveRecord::Base
 	DEFINITION = "Represents the sequencing results for a given Library."
+	ABBR = "SREQ"
 	attr_accessor :barcode_id
 	#Does not have a :name attribute, which  most other models do. Instead, the display() methods is used to show a name where
 	# needed.

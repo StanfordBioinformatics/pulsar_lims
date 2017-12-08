@@ -55,10 +55,7 @@ class OrganismsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organism
-      @organism = Organism.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      flash[:alert] = "The organism you were looking for could not be found."
-      redirect_to organisms_path
+      @organism = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

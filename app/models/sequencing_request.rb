@@ -1,5 +1,6 @@
 class SequencingRequest < ActiveRecord::Base
 	DEFINITION = "Represents the type of sequencing that you will have done on one or more Libraries together. When more than one Library is added to a given Sequencing Request, then this also represents a pooled Library to be sequenced."
+	ABBR = "SRES"
 	#There is a unique index on the compound key in the libraries_sequencing_requests join table, disallowing
 	# the same library to be added twice.
 	has_and_belongs_to_many :libraries

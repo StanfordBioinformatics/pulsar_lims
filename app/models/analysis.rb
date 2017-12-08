@@ -1,5 +1,6 @@
 class Analysis < ActiveRecord::Base
 	DEFINITION = "An analysis object, which currenlty is only configured to be added to a Single Cell Sorting experiment."
+	ABBR = "AN"
   belongs_to :protocol, class_name: "Document"
 	belongs_to :merged_bam_file, class_name: "FileReference"
 	belongs_to :merged_peaks_file, class_name: "FileReference"

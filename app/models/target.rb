@@ -1,4 +1,5 @@
 class Target < ActiveRecord::Base
+	ABBR = "T"
 	has_many :antibodies
 	has_many :crispr_constructs
 	has_many :donor_constructs

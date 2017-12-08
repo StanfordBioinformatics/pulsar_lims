@@ -55,10 +55,7 @@ class DocumentTypesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_document_type
-      @document_type = DocumentType.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      flash[:alert] = "The document type you were looking for could not be found."
-      redirect_to document_types_path
+      @document_type = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

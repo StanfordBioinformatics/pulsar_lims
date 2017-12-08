@@ -55,10 +55,7 @@ class DonorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_donor
-      @donor = Donor.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      flash[:alert] = "The donor you were looking for could not be found."
-      redirect_to donors_path
+      @donor = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -78,7 +78,7 @@ class PlatesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plate
-      @plate = Plate.find(params[:id])
+      @plate = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

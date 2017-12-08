@@ -52,7 +52,7 @@ class ChromosomesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
 		def set_reference_genome
-			@reference_genome = ReferenceGenome.find(params[:reference_genome_id])
+			@reference_genome = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
 		end
 
     def set_chromosome

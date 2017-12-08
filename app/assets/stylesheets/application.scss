@@ -79,6 +79,20 @@
 	cursor: progress;
 }
 
+.search, .search-btn {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	height: 34px;
+	line-height: 1.5em;
+	vertical-align: top;
+}
+
+.search-btn {
+	border-left: none;
+	border-right: none;
+}
+
 .modal {
 		/* Code from example at https://www.w3schools.com/howto/howto_css_modals.asp */
     display: none; /* Hidden by default */
@@ -223,7 +237,7 @@ html {
 }
 
 body { 
-  padding-top: $navbar-height;
+  //padding-top: $navbar-height;
 }
 
 #footer {

@@ -1,5 +1,6 @@
 class DataFileType < ActiveRecord::Base
-	DEFINITION = "A file containing raw data or analysis results, i.e. FASTQ, BAM, BED, VCF, TSV."
+	DEFINITION = "Indicates the type of a file containing raw data or analysis results, i.e. FASTQ, BAM, BED, VCF, TSV.  The File Reference model references this one."
+	ABBR = "DFTY"
   belongs_to :user
 	has_many :file_references
 

@@ -42,11 +42,11 @@ class WellsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
 		def set_plate
-			@plate = Plate.find(params[:plate_id])
+			@plate = set_record("Plate",params[:plate_id])
 		end
 
     def set_well
-      @well = Well.find(params[:id])
+      @well = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
