@@ -11,15 +11,17 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @construct_tag } %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name:</strong></th>
-		<td><%= @construct_tag.name %></td>
-	</tr>
-
-	<tr>
-		<th><strong>Description:</strong></th>
-		<td><%= @construct_tag.description %></td>
-	</tr>
+	<tbody>
+		<tr>
+			<th><strong>Name:</strong></th>
+			<td><%= @construct_tag.name %></td>
+		</tr>
+	
+		<tr>
+			<th><strong>Description:</strong></th>
+			<td><%= @construct_tag.description %></td>
+		</tr>
+	</tbody>
 </table>
 
 <%= link_to 'Back', construct_tags_path %>
