@@ -79,46 +79,57 @@
 	cursor: progress;
 }
 
+
+/* 
+Styles for the search
+*/
 .search, .search-btn {
+  // Consists of search input field and search icon.
+  // Want to make them look as one continuous element with icon at the right end.
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	height: 34px;
 	line-height: 1.5em;
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 .search-btn {
-	border-left: none;
-	border-right: none;
+	border: none;
+	height: 30px;
+  //Give height just enough so that the search icon doesn't touch the borders of the input.
 }
+/* 
+End search box styles
+*/
+
 
 .modal {
-		/* Code from example at https://www.w3schools.com/howto/howto_css_modals.asp */
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 10; /* Sit on top. I found out that the active element in the left-hand navbar has a z-index of 2. */
+		// Code from example at https://www.w3schools.com/howto/howto_css_modals.asp.
+    display: none; // Hidden by default.
+    position: fixed; // Stay in place.
+    z-index: 10; // Sit on top. I found out that the active element in the left-hand navbar has a z-index of 2.
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    height: 100%;
+    overflow: auto; // Enable scroll if needed
+    background-color: rgb(0,0,0); // Fallback color
+    background-color: rgba(0,0,0,0.4); // Black w/ opacity
 }	
 
 .modal-content {
-		/* Code from example at https://www.w3schools.com/howto/howto_css_modals.asp */
+		// Code from example at https://www.w3schools.com/howto/howto_css_modals.asp.
     background-color: #fefefe;
-    width: 80%; /* Could be more or less, depending on screen size */
-    margin: 15% auto; /* 15% from the top and centered */
+    width: 80%; // Could be more or less, depending on screen size.
+    margin: 15% auto; // 15% from the top and centered.
     padding: 20px;
     border: 1px solid #888;
 }
 
 .close-modal {
-		/* Code from example at https://www.w3schools.com/howto/howto_css_modals.asp */
-		/* class of span tag I often use in a model */
+		// Code from example at https://www.w3schools.com/howto/howto_css_modals.asp.
+		// class of span tag I often use in a model.
 		color: #aaa;
     float: right;
     font-size: 28px;
@@ -189,6 +200,13 @@ label.radio_buttons {
 
 select:focus, input:focus, textarea:focus {
   background-color: #FFFFCC; 
+}
+
+
+input.search:focus + .search-btn {
+    //Set background color of main search icon (search form on all pages) to same color as input's new background color (above style) when in focus.
+    // Otherwise, it'll stay white on yellow background. 
+	  background-color: #FFFFCC;
 }
 
 #app-title {
@@ -332,7 +350,7 @@ ul.actions {
 
 .attributes tbody th {
 	//The <th> tags in the show views (not the index views) can take up way too much space, with the header value all the way on the left and the <td> value all the way on the right.
-	// This fixes that for the show views.
+	// This fixes that for the show views. Not sure why 'max-width' property doesn't have any effect here; only the 'width' property appears to. 
 	width: 15%;
 }
 

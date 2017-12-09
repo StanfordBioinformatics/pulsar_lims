@@ -70,9 +70,9 @@
   </nav>
 
   <div id="main" class="container-fluid">
-        <form style="margin-left: 40%;margin-top: 1em;" class="" role="search">    
-            <input style="width: 18em;display: inline-block;" type="text" class="search" placeholder=" Not yet implemented">
-          <button style="margin-left: -3em;" type="submit" class="search-btn btn"><%= fa_icon("search") %></button>
+				<%= form_tag("/search", method: "get", style: "margin-left: 40%; margin-top: 1em; margin-bottom: 1em;", role: "search" ) %>
+						<%= text_field_tag(:query_id,nil, placeholder: "Not yet implemented", class: "search", style: "width: 18em;display: inline-block;" ) %>
+						<%= button_tag("", type: "submit", style: "margin-left: -2.3em;", class: "fa fa-search search-btn" ) %>
   			</form>
     <div class="row">
       <div id="sidebar" class="col-xs-4 col-sm-3 col-md-2">
