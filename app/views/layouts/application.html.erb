@@ -70,7 +70,7 @@
   </nav>
 
   <div id="main" class="container-fluid">
-				<%= form_tag("/search", method: "get", style: "margin-left: 40%; margin-top: 1em; margin-bottom: 1em;", role: "search" ) %>
+				<%= form_tag("", method: "get", style: "margin-left: 40%; margin-top: 1em; margin-bottom: 1em;", role: "search" ) %>
 						<%= text_field_tag(:query_id,nil, placeholder: "Not yet implemented", class: "search", style: "width: 18em;display: inline-block;" ) %>
 						<%= button_tag("", type: "submit", style: "margin-left: -2.3em;", class: "fa fa-search search-btn" ) %>
   			</form>

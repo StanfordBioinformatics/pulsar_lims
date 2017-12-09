@@ -39,6 +39,34 @@
 
 $(function() {
 
+  //This block is for the search box at the top of each page.
+  $search_btn = $(".search-btn");
+  $search_input = $(".search");
+  function go_to_record(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    val = $search_input.val().trim();
+    alert(val);
+    search_input_id = $search_input[0].id;
+    data = {}
+    data[search_input_id] = val
+    res = $.get("/welcome/search", data, function(responseText,status,jqXHR) {
+      //alert(responseText);
+      window.location.replace(responseText);
+    })
+  }
+
+  //Trigger search when either the search btn is clicked, or the Enter key was typed while in the
+  // search box.
+  $search_btn.on("click",go_to_record)
+  $search_input.on("keypress", function(event) {
+    if (event.which == 13) {
+      //All Google search answers point to 13 as meaning the Enter key. 
+      go_to_record();
+    }
+  })
+
+
   //This block is specific for the index views with regards to displaying the model's definition.
   //For this to work properly, for a given index view you must add the class "index-page-header" to <h1> tag (or <h2>, <h3>, etc) in the 
   // <header> tag and code a block element immediately after the <h1> tag with a class of 'model-definition'. 
