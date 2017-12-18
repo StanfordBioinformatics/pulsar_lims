@@ -46,7 +46,6 @@ $(function() {
     event.preventDefault();
     event.stopPropagation();
     val = $search_input.val().trim();
-    alert(val);
     search_input_id = $search_input[0].id;
     data = {}
     data[search_input_id] = val
