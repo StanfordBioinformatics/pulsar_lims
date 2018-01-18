@@ -1,6 +1,6 @@
 class BiosampleType < ActiveRecord::Base
-	DEFINITION = "Broad category of the type of biosample, such as tissue, primary cell, immortalized cell line, ..."
 	ABBR = "BTY"
+	DEFINITION = "Broad category of the type of biosample, such as tissue, primary cell, immortalized cell line, ... Model abbreviation: #{ABBR}"
 	has_many :biosamples
 	belongs_to :user
 

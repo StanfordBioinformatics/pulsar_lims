@@ -1,6 +1,6 @@
 class PcrMasterMix < ActiveRecord::Base
-	DEFINITION = "The master mix used in a PCR assay."
 	ABBR = "PCRM"
+	DEFINITION = "The master mix used in a PCR assay. Model abbreviation: #{ABBR}"
   belongs_to :user
   belongs_to :vendor
 

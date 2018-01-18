@@ -1,6 +1,6 @@
 class DataStorageProvider < ActiveRecord::Base
-	DEFINITION = "A cloud vendor that provides data storage services, i.e. AWS, Google, Azure, DNAnexus."
 	ABBR = "DSP"
+	DEFINITION = "A cloud vendor that provides data storage services, i.e. AWS, Google, Azure, DNAnexus. Model abbreviation: #{ABBR}"
 	has_many :data_storages, dependent: :nullify
   belongs_to :user
 

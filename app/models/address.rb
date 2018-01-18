@@ -1,6 +1,6 @@
 class Address < ActiveRecord::Base
-	DEFINITION = "A postal address."
 	ABBR = "AD"
+	DEFINITION = "A postal address. Model abbreviation: #{ABBR}"
 	belongs_to :user
 
 	validates :street, presence: true

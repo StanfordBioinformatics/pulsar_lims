@@ -1,6 +1,6 @@
 class SequencingLibraryPrepKit < ActiveRecord::Base
-	DEFINITION = "A sequencing kit used to prepare your libraries, which can have multiple Barcode and Paired Barcode objects."
 	ABBR = "SLPK"
+	DEFINITION = "A sequencing kit used to prepare your libraries, which can have multiple Barcode and Paired Barcode objects. Model abbreviation: #{ABBR}"
 	has_and_belongs_to_many :documents
 	has_many :barcodes
 	has_many :libraries

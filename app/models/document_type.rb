@@ -1,6 +1,6 @@
 class DocumentType < ActiveRecord::Base
-	DEFINITION = "The type of protocol."
 	ABBR = "DOCTY"
+	DEFINITION = "The type of protocol. Model abbreviation: #{ABBR}"
 	has_many :documents
 	belongs_to :user
 
