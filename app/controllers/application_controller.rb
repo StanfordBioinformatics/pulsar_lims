@@ -43,7 +43,12 @@ class ApplicationController < ActionController::Base
 		if /^[[:alpha:]]/.match(id_param)
 			id_param = id_param.split("-")[1]
 		end
-		return model.find(id_param)
+		begin
+			rec = model.find(id_param)
+		rescue ActiveRecord::RecordNotFound
+			return
+		end
+		return rec
 	end
 
 	def user_not_authorized

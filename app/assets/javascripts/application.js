@@ -50,7 +50,6 @@ $(function() {
     data = {}
     data[search_input_id] = val
     res = $.get("/welcome/search", data, function(responseText,status,jqXHR) {
-      //alert(responseText);
       window.location.replace(responseText);
     })
   }
