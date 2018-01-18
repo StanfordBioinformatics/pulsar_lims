@@ -71,8 +71,8 @@
 
 
 	<div id="main">
-		<%= form_tag("", method: "get", role: "search", class: "",style: "margin-left: 50%;margin-top: 1em; margin-bottom: 1em;") do %>
-			<%= text_field_tag(:query_id,nil, placeholder: "Not yet implemented", class: "search") %>
+		<%= form_tag("", method: "get", role: "search", class: "",style: "margin-left: 45%;margin-top: 1em; margin-bottom: 1em;") do %>
+			<%= text_field_tag(:query_id,nil,placeholder: "Find record", class: "search") %>
 			<%= button_tag("", type: "submit", style: "margin-left: -2.3em;", class: "fa fa-search search-btn" ) %>
 			&nbsp;<%= content_tag(:span,"",class: "search-desc fa fa-lightbulb-o", style: "position: relative; top: -0.5em;", "data-toggle": "tooltip", "title": "Search for a record by using the record's Record ID, i.e. AB-1 for the antibody with primary key 1. Case-insensitive." ) %>
 		<% end %>

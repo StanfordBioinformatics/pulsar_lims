@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
 		model_abbr = query_val.split("-")[0]
 		model = ApplicationLogic::ABBR_MODEL[model_abbr]
 		if model.nil?
-			flash[:alert] = "Unknown Model abbreviation '#{model_abbr}'. Search for #{query_val} failed."
+			flash[:alert] = "Unknown Model abbreviation '#{model_abbr}'. Search for record #{query_val} failed."
 			render text: request.referrer
 			return
 		end
