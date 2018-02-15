@@ -11,11 +11,15 @@ class Api::ApplicationController < ApplicationController
 	end
 
 	def authenticate_user
+    #The RAILS method authenticate_with_http_token checks the Authorization request header for a token and passes it
+    # as an argument to the given block.
+    # See (https://www.codeschool.com/blog/2014/02/03/token-based-authentication-rails/)
+
 		authenticate_with_http_token do |token|
-		#authenticate_with_http_token is a rails method
 			@current_user = User.find_by(api_key: token)
 			if @current_user.nil?
-				render json: { error: "Unauthorized" }, status: 401
+        response.headers["WWW-Authenticate"] = "Token realm=Application"
+				render json: { error: "hiUnauthorized" }, status: 401
 				return
 			end
 		end

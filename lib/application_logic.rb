@@ -1,5 +1,8 @@
 module ApplicationLogic
 
+  #Defines a constant ABBR_MODEL that is a hash. Each key is a model's abbreviation (model.ABBR).
+  # Each value is the modle object.
+
 	x = {}
 	tables= ActiveRecord::Base.connection.tables.sort
 	tables.each do |t|
