@@ -92,7 +92,7 @@
 	<%= render partial: "add_sequencing_result", layout: "layouts/fieldset_sequencing_result" %>
 <% else %>
 	<% if @sequencing_run.storage_location.present? and @sequencing_run.storage_location.persisted? %>
-		<table class="">
+		<table class="seqresult-table-btns">
 			<td><%= link_to "Add Sequencing Result", [:new_sequencing_result,@sequencing_request,@sequencing_run], class: "reg-btn", remote: true, id: "new_sequencing_result" %></td>
 			<td style="padding-left: 1em; padding-right: 1em;">or</td>
 			<td><%= link_to "Automated Fetch","#", class: "reg-btn" %></td>

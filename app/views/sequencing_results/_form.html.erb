@@ -7,7 +7,10 @@
 	<% libs = @sequencing_request.libraries %>
 	<% library_selected = @sequencing_result.library.id %>
 	<% barcodes = @sequencing_run.get_barcodes_on_request() %>
-	<% selected_barcode = @sequencing_result.library.get_indexseq.id %>
+	<% selected_barcode = @sequencing_result.library.get_indexseq %>
+  <% if not selected_barcode.nil? %>
+    <% selected_barcode = selected_barcode.id %>
+  <% end %>
 <% else %>
 	<% libs = @sequencing_run.get_libraries_without_sequencing_results %>
 	<% barcodes = @sequencing_run.get_barcodes_on_request(without_sequencing_result=true) %>

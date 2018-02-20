@@ -76,7 +76,7 @@ class Library < ActiveRecord::Base
   end 
 
 	def get_indexseq
-		return false unless barcoded?
+		return nil unless barcoded?
 		if paired_end?
 			return paired_barcode
 		else

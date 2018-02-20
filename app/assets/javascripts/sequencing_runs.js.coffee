@@ -8,6 +8,7 @@ $ ->
   #The following code is for the show view.
 
   $new_bc_res_btn = $("#new_sequencing_result") #the button
+  $seqresult_table_btns = $(".seqresult-table-btns")
 
   if $("#hide_new_sequencing_result").length == 1 
     $new_bc_res_btn.attr("disabled", "disabled")
@@ -16,8 +17,7 @@ $ ->
     if ($new_bc_res_btn.attr("disabled") == "disabled")
       event.preventDefault()
     else
-      $(@).hide()
-
+      $seqresult_table_btns.hide()
 
   $new_bc_res_btn.on "ajax:success", (event,data) ->  
     $("#sequencing_result_form").append(data)
@@ -41,6 +41,6 @@ $ ->
     event.preventDefault()
     $("#new_sequencing_result_form").fadeOut "normal", ->  
       $("#new_sequencing_result_form").remove()
-      $new_bc_res_btn.show()
+      $seqresult_table_btns.show()
 
   

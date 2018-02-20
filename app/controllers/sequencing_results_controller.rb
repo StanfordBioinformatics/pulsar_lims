@@ -1,7 +1,7 @@
 class SequencingResultsController < ApplicationController
-  before_action :set_sequencing_result, only: [:show, :edit, :update, :destroy]
 	before_action :set_sequencing_request
 	before_action :set_sequencing_run
+  before_action :set_sequencing_result, only: [:show, :edit, :update, :destroy]
 	skip_after_action :verify_authorized, only: [:get_barcode_selector, :get_library_selector]
 
 	def get_barcode_selector
@@ -24,8 +24,6 @@ class SequencingResultsController < ApplicationController
 	def get_library_selector
 		#Takes :barcode_id as a param, which can be a Barcode or PairedEndBarcode.
 		barcode_id = params[:barcode_id]
-		logger.info("bubab")
-		logger.info(barcode_id)
 		lib = @sequencing_request.get_library_with_barcode(barcode_id=barcode_id)
 		selector = "<option value=\"#{lib.id}\">#{lib.name}</option>"
 		#render text: selector
@@ -105,6 +103,6 @@ class SequencingResultsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_result_params
-      params.require(:sequencing_result).permit(:is_control, :library_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count)
+      params.require(:sequencing_result).permit(:user_id, :is_control, :library_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count)
     end
 end

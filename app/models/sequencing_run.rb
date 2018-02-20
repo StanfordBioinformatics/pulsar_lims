@@ -49,4 +49,10 @@ class SequencingRun< ActiveRecord::Base
 		end
 		return res
 	end
+
+  def params_for_url_for
+    #See https://github.com/nathankw/pulsar_lims/wiki/search.
+    return [self.sequencing_request,self]
+  end
+
 end

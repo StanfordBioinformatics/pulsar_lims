@@ -19,6 +19,11 @@ class Barcode < ActiveRecord::Base
 		ApplicationPolicy
 	end
 
+  def params_for_url_for
+    #See https://github.com/nathankw/pulsar_lims/wiki/search.
+  return [self.sequencing_library_prep_kit,self]
+  end
+
 	def to_s
 		display()
 	end

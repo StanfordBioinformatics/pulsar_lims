@@ -3,6 +3,7 @@
      ./new_sequencing_result.html.erb.
 -->
 	<tr>
+    <td><%= link_to_record_id(res) %></td>
 		<td><%= link_to res.library.name, res.library %></td>
 		<% barcode = res.library.get_indexseq %>
 		<% if barcode %>

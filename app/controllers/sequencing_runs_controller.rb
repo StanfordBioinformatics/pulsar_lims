@@ -49,8 +49,21 @@ class SequencingRunsController < ApplicationController
 
   def update
 		authorize @sequencing_run
+    params = sequencing_run_params
+    #Check for the addition of new sequencing_result objects. If present, we'll need to fill in
+    # the value for the 'user' attribute. If there is a new one, params would look like:
+    # {"sequencing_results_attributes"=>{"0"=>{"library_id"=>"136", "sequencing_run_id"=>"10", "comment"=>"", "read1_uri"=>"", "read1_count"=>""}}
+    if params[:sequencing_results_attributes].present?
+      results = params[:sequencing_results_attributes]
+      results.each do |num,|
+        if results[num]["id"].nil?
+          results[num]["user_id"] = current_user.id
+        end
+      end
+    end
+
     respond_to do |format|
-      if @sequencing_run.update(sequencing_run_params)
+      if @sequencing_run.update(params)
         format.html { redirect_to [@sequencing_request,@sequencing_run], notice: 'Sequencing run was successfully updated.' }
         format.json { head :no_content }
       else

@@ -2,7 +2,7 @@
   <% unless record.model_name.name == "User" %>
 		<tr>
 			<th>Record ID:</th>
-			<td><%= "#{record.class::ABBR}-#{record.id}" %></td>
+			<td><%= get_record_id(record) %></td> <!-- get_record_id() is a custom helper -->
 		</tr>
 		<tr>
 	<% end %>

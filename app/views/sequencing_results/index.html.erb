@@ -14,6 +14,7 @@
 <table class="attributes">
   <thead>
     <tr>
+      <th>Record ID</th>
       <th>Sequencing run</th>
 			<th>Creator</th>
 			<th>Date created</th>
@@ -28,8 +29,9 @@
   </thead>
 
   <tbody>
-    <% @_sequencing_results.each do |rec| %>
-      <tr>
+    <% @sequencing_results.each do |rec| %>
+      <tr> 
+        <td><%= link_to_record_id(rec) %></td> <!-- link_to_record_id() is a custom helper. -->
         <td><%= link_to @sequencing_run.name, [@sequencing_request,@sequencing_run] %></td>
 				<td><%= rec.user.display() %></td>
 				<td><%= time_ago_in_words(rec.created_at) %> ago </td>

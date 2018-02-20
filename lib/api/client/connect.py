@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 
 ###Author
 #Nathaniel Watson
@@ -11,6 +12,7 @@ import requests
 import pdb
 
 import inflection 
+
 #pip install reflection.
 #Ported from RoR's inflector.
 #See https://inflection.readthedocs.io/en/latest/.
@@ -119,23 +121,18 @@ class Model(metaclass=Meta):
 
 class Antibody(Model):
   MODEL_NAME = "antibody"
-  #URL = os.path.join(Model.URL,inflection.pluralize(MODEL_NAME))
 
 class AntibodyPurification(Model):
   MODEL_NAME = "antibody_purification"
-  #URL = os.path.join(Model.URL,inflection.pluralize(MODEL_NAME))
 
 class Biosample(Model):
   MODEL_NAME = "biosample"
-  #URL = os.path.join(Model.URL,inflection.pluralize(MODEL_NAME))
 
 class BiosampleTermName(Model):
   MODEL_NAME = "biosample_term_name"
-  #URL = os.path.join(Model.URL,inflection.pluralize(MODEL_NAME))
   
 class ConstructTags(Model):
   MODEL_NAME = "construct_tag"
-  #URL = os.path.join(Model.URL,inflection.pluralize(MODEL_NAME))
   
 if __name__ == "__main__":
   #pdb.set_trace()

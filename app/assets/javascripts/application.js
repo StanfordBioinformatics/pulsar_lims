@@ -42,7 +42,10 @@ $(function() {
   //This block is for the search box at the top of each page.
   $search_btn = $(".search-btn");
   $search_input = $(".search");
+
   function go_to_record(event) {
+    //Function: Called when the user does a search. The search value is sent as a parameter to
+    // the action /welcome/search, and the page is redirected to the URL that is returned. 
     event.preventDefault();
     event.stopPropagation();
     val = $search_input.val().trim();
@@ -50,7 +53,7 @@ $(function() {
     data = {}
     data[search_input_id] = val
     res = $.get("/welcome/search", data, function(responseText,status,jqXHR) {
-      window.location.replace(responseText);
+      window.location.assign(responseText); //https://www.w3schools.com/jsref/met_loc_replace.asp
     })
   }
 

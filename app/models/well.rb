@@ -43,6 +43,11 @@ class Well < ActiveRecord::Base
     end 
   end
 
+  def params_for_url_for
+    #See https://github.com/nathankw/pulsar_lims/wiki/search.
+    return [self.plate,self]
+  end
+
 	private
 
 	def validate_location
