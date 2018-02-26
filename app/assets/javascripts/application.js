@@ -39,7 +39,25 @@
 
 $(function() {
 
-  //This block is for the search box at the top of each page.
+  //Highlight table columns in the index views when user mouses over a table cell.
+  // Note that highlighting the table rows is already taken care of in application.css thanks to
+  // bootstrap's .table-hover class.
+  function handler_in() {
+    index = $(this).index() + 1; //+1 since the first column is the row header.
+    $table = $(this).closest("table.attributes")
+    //Set background color of column to same color used in the bootstrap .table-hover class:
+    $("tr td:nth-child(" + index + ")",$table).add("thead tr th:nth-child(" + index + ")",$table).css("background-color","#f5f5f5")
+  }
+
+  function handler_out() {
+    $table = $(this).closest("table.attributes")
+    //Unset background color:
+    $("tr td:nth-child(" + index + ")",$table).add("thead tr th:nth-child(" + index + ")",$table).css("background-color","");
+  }
+  $("table.attributes td").hover(handler_in,handler_out)
+
+
+  //This next block is for the search box at the top of each page.
   $search_btn = $(".search-btn");
   $search_input = $(".search");
 
