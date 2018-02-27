@@ -35,7 +35,8 @@ class SequencingResult < ActiveRecord::Base
   end
 
   def params_for_url_for
-    #See https://github.com/nathankw/pulsar_lims/wiki/search.
+    #Returns the argument that can be used for the url_for helper (see use in the welcome controller).
+    #See https://github.com/nathankw/pulsar_lims/wiki/search. 
     return [self.sequencing_run.sequencing_request,self.sequencing_run,self]
   end
 
