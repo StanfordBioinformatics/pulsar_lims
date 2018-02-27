@@ -7,7 +7,7 @@
   </ul> 	
 </header>
 
-<table class="attributes">
+<table class="attributes index">
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
@@ -17,7 +17,7 @@
 			<th>Concentration</th>
 			<th>Paired-end</th>
       <th>Shipped</th>
-			<th>Sequencing Result</th>
+			<th>Sequencing runs</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -38,14 +38,8 @@
         <td><%= rec.shipped %></td>
 				<% if rec.sequencing_runs.present? %>
 					<td>
-						<ul>
-							<% rec.sequencing_runs.each do |run| %>
-			     	   <li><%= link_to run.name, [rec,run] %></li>
-							<% end %>
-						</ul>
+            <%= render partial: "sequencing_runs/link_to_sequencing_runs", locals: {sequencing_runs: rec.sequencing_runs} %>
 					</td>
-				<% else %>
-					<td></td>
 				<% end %>
         <td>
 					<%= link_to fa_icon("pencil"), edit_sequencing_request_path(rec) %>

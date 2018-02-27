@@ -1,3 +1,7 @@
+<ul>
 <% libraries.each do |lib| %>
-	<%= link_to lib.name, library_path(lib) %></br>
+  <li>
+    <%= link_to lib.name, library_path(lib) %></br>
+  </li>
 <% end %>
+</ul>

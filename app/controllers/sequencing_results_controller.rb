@@ -31,7 +31,8 @@ class SequencingResultsController < ApplicationController
 	end
 
   def index
-    @sequencing_results = policy_scope(SequencingResult)
+    @sequencing_results = @sequencing_run.sequencing_results
+    policy_scope(SequencingResult)
   end
 
   def show

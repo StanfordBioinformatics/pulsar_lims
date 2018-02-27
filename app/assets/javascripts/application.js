@@ -44,17 +44,17 @@ $(function() {
   // bootstrap's .table-hover class.
   function handler_in() {
     index = $(this).index() + 1; //+1 since the first column is the row header.
-    $table = $(this).closest("table.attributes")
+    $table = $(this).closest("table.index")
     //Set background color of column to same color used in the bootstrap .table-hover class:
     $("tr td:nth-child(" + index + ")",$table).add("thead tr th:nth-child(" + index + ")",$table).css("background-color","#f5f5f5")
   }
 
   function handler_out() {
-    $table = $(this).closest("table.attributes")
+    $table = $(this).closest("table.index")
     //Unset background color:
     $("tr td:nth-child(" + index + ")",$table).add("thead tr th:nth-child(" + index + ")",$table).css("background-color","");
   }
-  $("table.attributes td").hover(handler_in,handler_out)
+  $("table.index td").add("table.index th").hover(handler_in,handler_out)
 
 
   //This next block is for the search box at the top of each page.
