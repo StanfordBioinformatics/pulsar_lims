@@ -10,9 +10,7 @@
 <table class="attributes">
   <thead>
     <tr>
-			<th>ID</th>
-      <th>Creator</th>
-      <th>Date created</th>
+      <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Description</th>
       <th>Pcr master mix</th>
       <th>Forward primer</th>
@@ -30,9 +28,7 @@
   <tbody>
     <% @pcrs.each do |rec| %>
       <tr>
-				<td><%= link_to rec.id, rec %></td>
-        <td><%= rec.user.display() %></td>
-        <td><%= time_ago_in_words(rec.created_at) %> ago </td>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.description %></td>
         <td><%= link_to rec.pcr_master_mix.name, rec.pcr_master_mix %></td>
         <td><%= rec.forward_primer %></td>

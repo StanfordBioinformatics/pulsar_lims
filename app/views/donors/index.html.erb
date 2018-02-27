@@ -10,8 +10,7 @@
 <table class="attributes">
   <thead>
     <tr>
-			<th>Creator</th>
-			<th>Date created</th>
+      <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Encode</th>
       <th>Encode alias</th>
       <th>Actions</th>
@@ -21,8 +20,7 @@
   <tbody>
     <% @donors.each do |rec| %>
       <tr>
-				<td><%= rec.user.display() %></td>
-				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= link_to rec.encode_identifier, rec %></td>
         <td><%= rec.name %></td>
         <td>

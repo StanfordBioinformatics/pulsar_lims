@@ -15,6 +15,16 @@
 		<th><strong>Name:</strong></th>
 		<td><%= @organism.name %></td>
 	</tr>
+
+	<tr>
+		<th><strong>Scientific name:</strong></th>
+		<td><%= @organism.scientific_name %></td>
+	</tr>
+
+	<tr>
+		<th><strong>NCBI Taxon:</strong></th>
+		<td><%= @organism.ncbi_taxon %></td>
+	</tr>
 </table>
 
 <%= link_to 'Back', organisms_path %>

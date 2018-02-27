@@ -10,21 +10,19 @@
 <table class="attributes">
   <thead>
     <tr>
-			<th>Name</th>
-			<th>Creator</th>
-			<th>Date created</th>
+      <%= render partial: "application_partials/index_common_table_headers" %>
 			<th>Sequencing Library Prep Kit</th>
-			<th>Paired End</th>
-      <th>Nucleic acid term</th>
+			<th>Paired End?</th>
+      <th>Nucleic acid type</th>
       <th>Biosample</th>
       <th>Vendor</th>
-      <th>Lot identifier</th>
+      <th>Lot</th>
       <th>Barcode</th>
 			<th>Paired Barcode</th>
-      <th>Library fragmentation method</th>
+      <th>Fragmentation method</th>
 			<th>Concentration</th>
       <th>Size range</th>
-      <th>Strand specificity</th>
+      <th>Strand specific?</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -32,9 +30,7 @@
   <tbody>
     <% @libraries.each do |rec| %>
       <tr>
-				<td><%= link_to rec.name, rec %></td>
-				<td><%= rec.user.display() %></td>
-				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
 				<td><%= link_to rec.sequencing_library_prep_kit.name, rec.sequencing_library_prep_kit %></td>
 				<td><%= rec.paired_end %></td>
         <td><%= rec.nucleic_acid_term.name %></td>

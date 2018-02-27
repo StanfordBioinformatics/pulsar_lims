@@ -49,7 +49,7 @@ class DocumentsController < ApplicationController
   end
 
 	def document
-		#called by the 'show' view.
+		#called by the index and show views.
 		@document = Document.find(params[:id])
 		authorize @document, :show?
 		send_data(data=@document.data,options={

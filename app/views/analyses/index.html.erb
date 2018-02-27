@@ -10,7 +10,7 @@
 <table class="attributes">
   <thead>
     <tr>
-			<th>ID</th>
+      <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Description</th>
 			<th>Single cell sorting</th>
       <th>Actions</th>
@@ -20,7 +20,7 @@
   <tbody>
     <% @analyses.each do |rec| %>
       <tr>
-				<td><%= link_to rec.id, rec %></td>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.description %></td>
 				<% if rec.single_cell_sorting_id.present? %>
 					<td><%= link_to rec.single_cell_sorting.name, rec.single_cell_sorting %></td>

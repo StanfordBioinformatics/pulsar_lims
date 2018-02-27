@@ -10,7 +10,7 @@
 <table class="attributes">
   <thead>
     <tr>
-      <th>Name</th>
+      <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Description</th>
       <th colspan="3"></th>
     </tr>
@@ -19,7 +19,7 @@
   <tbody>
     <% @data_file_types.each do |rec| %>
       <tr>
-        <td><%= rec.name %></td>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.description %></td>
         <td><%= link_to fa_icon("fa-pencil"), edit_data_file_type_path(rec) %></td>
         <td><%= link_to fa_icon("fa-trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %></td>

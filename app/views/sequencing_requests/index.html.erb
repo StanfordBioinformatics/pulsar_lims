@@ -10,9 +10,7 @@
 <table class="attributes">
   <thead>
     <tr>
-      <th>Name</th>
-			<th>Creator</th>
-			<th>Date created</th>
+      <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Comment</th>
       <th>Sequencing platform</th>
       <th>Sequencing center</th>
@@ -27,9 +25,7 @@
   <tbody>
     <% @sequencing_requests.each do |rec| %>
       <tr>
-        <td><%= link_to rec.name, rec %></td>
-				<td><%= rec.user.display() %></td>
-				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.comment %></td>
         <td><%= link_to rec.sequencing_platform.name, rec.sequencing_platform %></td>
         <td><%= link_to rec.sequencing_center.name, rec.sequencing_center %></td>

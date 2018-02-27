@@ -1,7 +1,12 @@
 <%= simple_form_for(@organism) do |f| %>
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @organism } %>
 
-  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique organism name"} %>
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique, common name of the organism."} %>
+
+  <%= f.input :scientific_name, label_html: {"data-toggle": "tooltip", "title": "The genus species for the organism (i.e. 'Mus musculus')."} %>
+
+  <%= f.input :ncbi_taxon, label_html: {"data-toggle": "tooltip", "title": "The NCBI taxon ID for the organism (i.e. 10090)."} %>
+
   <div class="actions">
     <%= f.button :submit, class: "btn-primary" %>
   </div></br>

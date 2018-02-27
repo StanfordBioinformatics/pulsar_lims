@@ -17,7 +17,7 @@ module ApplicationHelper
 
   def link_to_record_id(record)
     record_id = get_record_id(record)
-    param = record_id
+    param = record
     if record.respond_to?(:params_for_url_for)
       param = record.params_for_url_for()
     end

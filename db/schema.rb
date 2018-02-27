@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171204231317) do
+ActiveRecord::Schema.define(version: 20180226235222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -475,6 +475,7 @@ ActiveRecord::Schema.define(version: 20171204231317) do
     t.boolean  "prototype",                                   default: false
     t.integer  "from_prototype_id"
     t.integer  "concentration_unit_id"
+    t.boolean  "plated",                                      default: false
   end
 
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree
@@ -528,10 +529,12 @@ ActiveRecord::Schema.define(version: 20171204231317) do
   add_index "nucleic_acid_terms", ["user_id"], name: "index_nucleic_acid_terms_on_user_id", using: :btree
 
   create_table "organisms", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",            limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "ncbi_taxon"
+    t.string   "scientific_name"
   end
 
   add_index "organisms", ["user_id"], name: "index_organisms_on_user_id", using: :btree

@@ -11,9 +11,7 @@
 
   <thead>
     <tr>
-      <th>Name</th>
-			<th>Creator</th>
-			<th>Date created</th>
+      <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Vendor</th>
 			<th>Vendor product ID</th>
 			<th>Supports paired end</th>
@@ -25,9 +23,7 @@
   <tbody>
     <% @sequencing_library_prep_kits.each do | rec | %>
       <tr>
-        <td><%= link_to rec.name, rec %></td>
-				<td><%= rec.user.display() %></td>
-				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
         <td><%= rec.vendor_product_identifier %></td>
 				<td><%= rec.supports_paired_end %></td>

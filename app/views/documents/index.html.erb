@@ -10,9 +10,7 @@
 <table class="attributes">
   <thead>
     <tr>
-      <th>Name</th>
-			<th>Creator</th>
-			<th>Date created</th>
+      <%= render partial: "application_partials/index_common_table_headers" %>
 			<th>Is Protocol?</th>
       <th>Content type</th>
       <th>File Link</th>
@@ -24,9 +22,7 @@
   <tbody>
     <% @documents.each do |rec| %>
       <tr>
-        <td><%= link_to rec.name, rec %></td>
-				<td><%= rec.user.display() %></td>
-				<td><%= time_ago_in_words(rec.created_at) %> ago </td>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
 				<td><%= rec.is_protocol %></td>
         <td><%= rec.content_type %></td>
         <td><%= link_to(rec.name,:action => "document", :id => rec.id) %></td>

@@ -10,8 +10,7 @@
 <table class="attributes">
   <thead>
     <tr>
-      <th>Name</th>
-			<th>Creator</th>
+      <%= render partial: "application_partials/index_common_table_headers" %>
 			<th>Data storage provider</th>
       <th>Bucket</th>
       <th>Project identifier</th>
@@ -23,8 +22,7 @@
   <tbody>
     <% @data_storages.each do |rec| %>
       <tr>
-        <td><%= link_to rec.name, rec %></td>
-				<td><%= rec.user.display() %></td>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
 				<td><%= link_to rec.data_storage_provider.name, rec.data_storage_provider %></td>
         <td><%= rec.bucket %></td>
         <td><%= rec.project_identifier %></td>
