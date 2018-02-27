@@ -36,11 +36,11 @@
 				<% end %>
         <td><%= rec.paired_end%></td>
         <td><%= rec.shipped %></td>
-				<% if rec.sequencing_runs.present? %>
-					<td>
-            <%= render partial: "sequencing_runs/link_to_sequencing_runs", locals: {sequencing_runs: rec.sequencing_runs} %>
-					</td>
-				<% end %>
+        <td>
+		  		<% if rec.sequencing_runs.present? %>
+              <%= render partial: "sequencing_runs/link_to_sequencing_runs", locals: {sequencing_runs: rec.sequencing_runs} %>
+  				<% end %>
+        </td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_sequencing_request_path(rec) %>
         	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
