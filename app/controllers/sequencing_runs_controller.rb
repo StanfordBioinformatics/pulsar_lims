@@ -14,7 +14,14 @@ class SequencingRunsController < ApplicationController
 		render layout: "fieldset_sequencing_result", partial: "add_sequencing_result"
 	end
 
+  def all
+    #This action stands in for a non-scoped index view. See the "index" action below for the 
+    # scoped index view.
+  end
+
   def index
+    #This index method is only for scoped index views through the sequencing_request object.
+    #See the "all" action above for the non-scoped form of the index view.
     @sequencing_runs = policy_scope(SequencingRun).order("lower(name)")
   end
 

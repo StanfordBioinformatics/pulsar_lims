@@ -11,9 +11,12 @@ class ApplicationController < ActionController::Base
   after_action :verify_policy_scoped, only: :index, 
 		unless: :devise_controller?
 
-
 	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 	rescue_from ActiveRecord::DeleteRestrictionError, with: :destroy_not_allowed
+
+  ###Constants
+  #The max number of results to return in an index view:
+  MAX_RESULTS = 100
 
 	def ddestroy(record,redirect_path_success)
 		#Named somewhat strangely as ddestroy instead of destroy in order to 

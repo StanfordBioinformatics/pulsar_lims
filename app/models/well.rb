@@ -1,5 +1,6 @@
 class Well < ActiveRecord::Base
 	ABBR = "WELL"
+  DEFINITION = "A well of a plate, such as a PCR plate or any other plate that holds individual samples in the lab."
 	#has_one :biosample, dependent: :destroy #i.e. in single cell experiments. Each sorted cell is a biosample in a well.
 	has_one :biosample, dependent: :destroy, validate: true
   belongs_to :user

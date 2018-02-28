@@ -92,6 +92,9 @@ Pulsar::Application.routes.draw do
 		end
 	end
 
+  #Add non-nested index view for sequencing_runs:
+  #get sequencing_runs: "sequencing_runs#all", as: :sequencing_runs
+
   devise_for :users, controllers: {
 		registrations: 'registrations'
 	}

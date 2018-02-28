@@ -1,5 +1,6 @@
 class Vendor < ActiveRecord::Base
 	ABBR = "V"
+  DEFINITION = "A source, such as a person, lab, or industry, from where a product was procured."
 	has_many :biosample
 	has_many :antibodies
 	has_many :crispr_constructs
