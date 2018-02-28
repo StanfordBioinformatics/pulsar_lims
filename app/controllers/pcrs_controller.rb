@@ -2,7 +2,7 @@ class PcrsController < ApplicationController
   before_action :set_pcr, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pcrs = policy_scope(Pcr).page params[:page]
+    @records = policy_scope(Pcr).page params[:page]
   end
 
   def show

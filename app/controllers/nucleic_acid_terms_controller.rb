@@ -2,7 +2,7 @@ class NucleicAcidTermsController < ApplicationController
   before_action :set_nucleic_acid_term, only: [:show, :edit, :update, :destroy]
 
   def index
-    @nucleic_acid_terms = policy_scope(NucleicAcidTerm).order("lower(name)").page params[:page]
+    @records = policy_scope(NucleicAcidTerm).order("lower(name)").page params[:page]
   end
 
   def show

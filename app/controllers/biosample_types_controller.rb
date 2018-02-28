@@ -2,7 +2,7 @@ class BiosampleTypesController < ApplicationController
   before_action :set_biosample_type, only: [:show, :edit, :update, :destroy]
 
   def index
-    @biosample_types = policy_scope(BiosampleType).order("lower(name)").page params[:page]
+    @records = policy_scope(BiosampleType).order("lower(name)").page params[:page]
   end
 
   def show

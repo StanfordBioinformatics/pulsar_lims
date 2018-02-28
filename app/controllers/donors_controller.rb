@@ -2,7 +2,7 @@ class DonorsController < ApplicationController
   before_action :set_donor, only: [:show, :edit, :update, :destroy]
 
   def index
-    @donors = policy_scope(Donor).order("lower(name)").page params[:page]
+    @records = policy_scope(Donor).order("lower(name)").page params[:page]
   end
 
   def show

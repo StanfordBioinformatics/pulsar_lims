@@ -2,7 +2,7 @@ class AddressesController < ApplicationController
   before_action :set_address, only: [:show, :edit, :update, :destroy]
 
   def index
-    @addresses = policy_scope(Address).order("lower(city)").page params[:page]
+    @records = policy_scope(Address).order("lower(city)").page params[:page]
   end
 
   def show

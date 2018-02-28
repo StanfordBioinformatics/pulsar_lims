@@ -2,7 +2,7 @@ class ExperimentTypesController < ApplicationController
   before_action :set_experiment_type, only: [:show, :edit, :update, :destroy]
 
   def index
-    @experiment_types = policy_scope(ExperimentType).order("lower(name)").page params[:page]
+    @records = policy_scope(ExperimentType).order("lower(name)").page params[:page]
   end
 
   def show

@@ -2,7 +2,7 @@ class LibraryFragmentationMethodsController < ApplicationController
   before_action :set_library_fragmentation_method, only: [:show, :edit, :update, :destroy]
 
   def index
-    @library_fragmentation_methods = policy_scope(LibraryFragmentationMethod).order("lower(name)").page params[:page]
+    @records = policy_scope(LibraryFragmentationMethod).order("lower(name)").page params[:page]
   end
 
   def show

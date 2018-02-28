@@ -18,7 +18,7 @@ class AnalysesController < ApplicationController
 	end
 
   def index
-    @analyses = policy_scope(Analysis).page params[:page]
+    @records = policy_scope(Analysis).page params[:page]
   end
 
   def show

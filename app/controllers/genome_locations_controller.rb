@@ -2,7 +2,7 @@ class GenomeLocationsController < ApplicationController
   before_action :set_genome_location, only: [:show, :edit, :update, :destroy]
 
   def index
-    @genome_locations = policy_scope(GenomeLocation).page params[:page]
+    @records = policy_scope(GenomeLocation).page params[:page]
   end
 
   def show

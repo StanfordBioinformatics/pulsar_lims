@@ -2,7 +2,7 @@ class IsotypesController < ApplicationController
   before_action :set_isotype, only: [:show, :edit, :update, :destroy]
 
   def index
-    @isotypes = policy_scope(Isotype).order("lower(name)").page params[:page]
+    @records = policy_scope(Isotype).order("lower(name)").page params[:page]
   end
 
   def show
