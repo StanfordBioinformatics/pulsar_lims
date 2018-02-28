@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 ruby "2.2.2"
 
+#Kaminari for pagination
+gem 'kaminari'
+
 gem 'country_select'
 
 #Add production webserver gem for Puma

@@ -27,7 +27,7 @@
   </thead>
 
   <tbody>
-    <% @sequencing_results.each do |rec| %>
+    <% @records.each do |rec| %>
       <tr> 
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec, no_name: true} %>
         <td><%= link_to @sequencing_run.name, [@sequencing_request,@sequencing_run] %></td>

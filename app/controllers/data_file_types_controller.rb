@@ -2,7 +2,7 @@ class DataFileTypesController < ApplicationController
   before_action :set_data_file_type, only: [:show, :edit, :update, :destroy]
 
   def index
-    @data_file_types = policy_scope(DataFileType).order("lower(name)")
+    @data_file_types = policy_scope(DataFileType).order("lower(name)").page params[:page]
   end
 
   def show

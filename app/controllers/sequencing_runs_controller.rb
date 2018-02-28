@@ -22,7 +22,7 @@ class SequencingRunsController < ApplicationController
   def index
     #This index method is only for scoped index views through the sequencing_request object.
     #See the "all" action above for the non-scoped form of the index view.
-    @sequencing_runs = policy_scope(SequencingRun).order("lower(name)")
+    @sequencing_runs = policy_scope(SequencingRun).order("lower(name)").page params[:page]
   end
 
   def show

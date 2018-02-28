@@ -2,7 +2,8 @@ class TargetsController < ApplicationController
   before_action :set_target, only: [:show, :edit, :update, :destroy]
 
   def index
-    @targets = policy_scope(Target).limit(ApplicationController::MAX_RESULTS).order("lower(name)")
+    #@targets = policy_scope(Target).limit(ApplicationController::MAX_RESULTS).order("lower(name)")
+    @targets = policy_scope(Target).order("lower(name)").page params[:page]
   end
 
   def show

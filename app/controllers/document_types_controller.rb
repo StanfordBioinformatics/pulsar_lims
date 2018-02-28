@@ -2,7 +2,7 @@ class DocumentTypesController < ApplicationController
   before_action :set_document_type, only: [:show, :edit, :update, :destroy]
 
   def index
-    @document_types = policy_scope(DocumentType).order("lower(name)")
+    @document_types = policy_scope(DocumentType).order("lower(name)").page params[:page]
   end
 
   def show

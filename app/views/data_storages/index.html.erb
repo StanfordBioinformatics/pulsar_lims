@@ -20,7 +20,7 @@
   </thead>
 
   <tbody>
-    <% @data_storages.each do |rec| %>
+    <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
 				<td><%= link_to rec.data_storage_provider.name, rec.data_storage_provider %></td>

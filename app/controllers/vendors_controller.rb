@@ -2,7 +2,7 @@ class VendorsController < ApplicationController
   before_action :set_vendor, only: [:show, :edit, :update, :destroy]
 
   def index
-    @vendors = policy_scope(Vendor).order("lower(name)")
+    @vendors = policy_scope(Vendor).order("lower(name)").page params[:page]
   end
 
   def show

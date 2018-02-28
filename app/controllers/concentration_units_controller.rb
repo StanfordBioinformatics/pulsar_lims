@@ -2,7 +2,7 @@ class ConcentrationUnitsController < ApplicationController
   before_action :set_concentration_unit, only: [:show, :edit, :update, :destroy]
 
   def index
-    @concentration_units = policy_scope(ConcentrationUnit).order("lower(name)")
+    @concentration_units = policy_scope(ConcentrationUnit).order("lower(name)").page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb

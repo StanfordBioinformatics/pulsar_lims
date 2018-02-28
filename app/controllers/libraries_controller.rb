@@ -24,7 +24,7 @@ class LibrariesController < ApplicationController
   end
 
   def index
-    @libraries = policy_scope(Library).non_plated_non_prototype.order("lower(name)")
+    @libraries = policy_scope(Library).non_plated_non_prototype.order("lower(name)").page params[:page]
   end
 
   def show

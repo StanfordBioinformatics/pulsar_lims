@@ -2,7 +2,7 @@ class ConstructTagsController < ApplicationController
   before_action :set_construct_tag, only: [:show, :edit, :update, :destroy]
 
   def index
-    @construct_tags = policy_scope(ConstructTag).order("lower(name)")
+    @construct_tags = policy_scope(ConstructTag).order("lower(name)").page params[:page]
   end
 
   def show

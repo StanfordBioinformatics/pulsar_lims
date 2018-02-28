@@ -2,7 +2,7 @@ class DataStorageProvidersController < ApplicationController
   before_action :set_data_storage_provider, only: [:show, :edit, :update, :destroy]
 
   def index
-    @data_storage_providers = policy_scope(DataStorageProvider).order("lower(name)")
+    @data_storage_providers = policy_scope(DataStorageProvider).order("lower(name)").page params[:page]
   end
 
   def show

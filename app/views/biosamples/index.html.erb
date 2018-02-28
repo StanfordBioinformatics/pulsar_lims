@@ -26,7 +26,7 @@
   </thead>
 
   <tbody>
-    <% @biosamples.each do |rec| %>
+    <% @records.each do |rec| %>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
 				<td>
 					<% if rec.owner.present? %>

@@ -2,7 +2,7 @@ class PcrMasterMixesController < ApplicationController
   before_action :set_pcr_master_mix, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pcr_master_mixes = policy_scope(PcrMasterMix).order("lower(name)")
+    @pcr_master_mixes = policy_scope(PcrMasterMix).order("lower(name)").page params[:page]
   end
 
   def show

@@ -19,7 +19,7 @@
   </thead>
 
   <tbody>
-    <% @paired_barcodes.each do |rec| %>
+    <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= link_to rec.sequencing_library_prep_kit.name, rec.sequencing_library_prep_kit %></td>

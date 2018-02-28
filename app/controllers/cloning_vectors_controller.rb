@@ -3,7 +3,7 @@ class CloningVectorsController < ApplicationController
 	before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def index
-    @cloning_vectors = policy_scope(CloningVector).order("lower(name)")
+    @cloning_vectors = policy_scope(CloningVector).order("lower(name)").page params[:page]
   end
 
   def show

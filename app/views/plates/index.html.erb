@@ -23,7 +23,7 @@
   </thead>
 
   <tbody>
-    <% @plates.each do |rec| %>
+    <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
 				<td><%= link_to rec.single_cell_sorting.name, rec.single_cell_sorting %></td>

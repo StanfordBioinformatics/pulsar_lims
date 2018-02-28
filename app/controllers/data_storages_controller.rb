@@ -17,7 +17,7 @@ class DataStoragesController < ApplicationController
 	end
 
   def index
-		@data_storages = policy_scope(DataStorage).order("lower(name)")
+		@data_storages = policy_scope(DataStorage).order("lower(name)").page params[:page]
   end
 
   def show

@@ -11,7 +11,7 @@ class SequencingLibraryPrepKitsController < ApplicationController
 	end
 
   def index
-    @sequencing_library_prep_kits = policy_scope(SequencingLibraryPrepKit.order("lower(name)"))
+    @sequencing_library_prep_kits = policy_scope(SequencingLibraryPrepKit.order("lower(name)")).page params[:page]
   end
 
   def show
