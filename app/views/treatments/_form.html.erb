@@ -1,0 +1,17 @@
+<%= simple_form_for(@treatment) do |f| %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @treatment} %>
+
+  <%= f.association :treatment_term_name %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :treatment_type, collection: Enums::TREATMENT_TYPES %>
+  <%= f.input :concentration %>
+  <%= f.association :concentration_unit %>
+  <%= f.input :duration %>
+  <%= f.input :duration_units %>
+  <%= f.input :temperature %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div>
+<% end %></br>

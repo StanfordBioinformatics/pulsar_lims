@@ -66,7 +66,7 @@
 	<%= f.input :passage_number,
 			label_html: {"data-toggle" => "tooltip", "title" => "In calculating passage number, include passages from the source."} %>
 
-	<%= f.input :culture_harvest_date,
+	<%= f.input :culture_harvest_date, html5: true,
 			label_html: {"data-toggle" => "tooltip", "title" => "For cultured samples, the date the biosample was taken."} %>
 
 	<%= f.input :submitter_comments,

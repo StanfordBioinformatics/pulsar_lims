@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180226235222) do
+ActiveRecord::Schema.define(version: 20180301231343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -744,6 +744,36 @@ ActiveRecord::Schema.define(version: 20180226235222) do
   add_index "targets", ["name"], name: "index_targets_on_name", unique: true, using: :btree
   add_index "targets", ["user_id"], name: "index_targets_on_user_id", using: :btree
 
+  create_table "treatment_term_names", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "accession"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "treatment_term_names", ["user_id"], name: "index_treatment_term_names_on_user_id", using: :btree
+
+  create_table "treatments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "treatment_term_name_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "treatment_type"
+    t.float    "concentration"
+    t.integer  "concentration_unit_id"
+    t.float    "duration"
+    t.string   "duration_units"
+    t.float    "temperature"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "treatments", ["concentration_unit_id"], name: "index_treatments_on_concentration_unit_id", using: :btree
+  add_index "treatments", ["treatment_term_name_id"], name: "index_treatments_on_treatment_term_name_id", using: :btree
+  add_index "treatments", ["user_id"], name: "index_treatments_on_user_id", using: :btree
+
   create_table "uberons", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "accession",  limit: 255
@@ -921,6 +951,10 @@ ActiveRecord::Schema.define(version: 20180226235222) do
   add_foreign_key "single_cell_sortings", "libraries", column: "library_prototype_id"
   add_foreign_key "single_cell_sortings", "users"
   add_foreign_key "targets", "users"
+  add_foreign_key "treatment_term_names", "users"
+  add_foreign_key "treatments", "concentration_units"
+  add_foreign_key "treatments", "treatment_term_names"
+  add_foreign_key "treatments", "users"
   add_foreign_key "uberons", "users"
   add_foreign_key "vendors", "users"
   add_foreign_key "wells", "plates"

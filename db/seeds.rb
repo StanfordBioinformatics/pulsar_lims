@@ -719,6 +719,13 @@ Target.create!([
 {user_id: admin, name: "CTCF-human", encode_identifier: "CTCF-human"}
 ])
 
+TreatmentTermName.delete_all
+TreatmentTermName.create!([
+  {user_id: admin, name: "17β-hydroxy-5α-androstan-3-one", accession: "CHEBI:16330", 
+   description: "A 17β-hydroxy steroid that is testosterone in which the 4,5 double bond has been reduced to a single bond with α-configuration at position 5."}
+])
+  
+
 Antibody.delete_all
 Antibody.create!([
 {user_id: admin, name: "ENCAB140SNC", organism_id: Organism.find_by!(name: "human").id, vendor_product_identifier: "A302-183A", vendor_id: Vendor.find_by!(encode_identifier: "bethyl-labs").id, clonality: "polyclonal", target_id: Target.find_by!(encode_identifier: "RELB-human").id, antibody_purifications: [AntibodyPurification.find_by!(name: "affinity")], lot_identifier: 1},

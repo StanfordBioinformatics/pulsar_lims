@@ -1,0 +1,30 @@
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @treatment_term_name } %>
+<header>
+  <h1><%= @treatment_term_name.name %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @treatment_term_name} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @treatment_term_name} %>
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @treatment_term_name } %>
+
+<table class="attributes">
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @treatment_term_name.name %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Accession:</strong></th>
+    <td><%= @treatment_term_name.accession %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @treatment_term_name.description %></td>
+  </tr>
+</table>
+
+<%= link_to 'Back', treatment_term_names_path %>

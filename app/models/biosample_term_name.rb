@@ -30,7 +30,7 @@ class BiosampleTermName < ActiveRecord::Base
 	has_many   :biosamples
 
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
-	validates :accession, format: { with: /\A(CL:|UBERON:|EFO_)[0-9]{2,8}\z/, message: "must begin with CL, UBERON, or EFO, followed by two to eight numbers." }
+	validates :accession, format: { with: /\A(CL:|UBERON:|EFO_)[0-9]{2,8}\z/, message: "Must begin with CL:, UBERON:, or EFO:, followed by two to eight numbers." }
 	validates :description, presence: true
 	validates :biosample_ontology_id, presence: true
 

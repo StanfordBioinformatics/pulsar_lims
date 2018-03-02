@@ -1,5 +1,7 @@
 Pulsar::Application.routes.draw do
 
+  resources :treatments
+  resources :treatment_term_names
   resources :pcrs
   resources :pcr_master_mixes
   resources :analyses do

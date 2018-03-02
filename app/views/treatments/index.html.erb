@@ -1,0 +1,49 @@
+<header>                                                                                               
+  <h1 class="index-page-header">Treatments</h1>                                              
+  <p class="model-definition"><%= Treatment::DEFINITION %></p>                                 
+                                                                                                       
+  <ul class="actions">                                                                                 
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: Treatment} %>
+  </ul>                                                                                                
+</header>
+
+<table class="attributes index">
+  <thead>
+    <tr>
+      <%= render partial: "application_partials/index_common_table_headers" %>
+      <th>Treatment term name</th>
+      <th>Description</th>
+      <th>Treatment type</th>
+      <th>Concentration</th>
+      <th>Concentration unit</th>
+      <th>Duration</th>
+      <th>Duration units</th>
+      <th>Temperature</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @records.each do |rec| %>
+      <tr>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= rec.treatment_term_name %></td>
+        <td><%= rec.description %></td>
+        <td><%= rec.treatment_type %></td>
+        <td><%= rec.concentration %></td>
+        <td><%= rec.concentration_unit %></td>
+        <td><%= rec.duration %></td>
+        <td><%= rec.duration_units %></td>
+        <td><%= rec.temperature %></td>
+        <td>
+          <%= link_to fa_icon("pencil"), edit_treatment_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= paginate @records %>

@@ -3,7 +3,7 @@
 
   <%= f.association :biosample_ontology, label_html: {"data-toggle" => "tooltip", "title" => "Name of the ontology system"} %>
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique ontology term name"} %>
-  <%= f.input :accession, label_html: {"data-toggle" => "tooltip", "title" => "Unique ontology accession"} %>
+  <%= f.input :accession, label_html: {"data-toggle" => "tooltip", "title" => "Unique ontology accession. Must begin with CL:, UBERON:, or EFO:, followed by two to eight numbers."} %>
   <%= f.input :description, label_html: {"data-toggle" => "tooltip", "title" => "The description of the ontology term"} %>
 
   <div class="form-actions">

@@ -10,7 +10,7 @@
 <table class="attributes index">
   <thead>
     <tr>
-      <%= render partial: "application_partials/index_common_table_headers" %>
+      <%= render partial: "application_partials/index_common_table_headers", locals: {no_name: true} %>
       <th>Description</th>
       <th>Pcr master mix</th>
       <th>Forward primer</th>
@@ -28,7 +28,7 @@
   <tbody>
     <% @records.each do |rec| %>
       <tr>
-        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec,no_name: true} %>
         <td><%= rec.description %></td>
         <td><%= link_to rec.pcr_master_mix.name, rec.pcr_master_mix %></td>
         <td><%= rec.forward_primer %></td>

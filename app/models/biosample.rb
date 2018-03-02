@@ -1,73 +1,74 @@
 class Biosample < ActiveRecord::Base
-	ABBR = "B"
+  ABBR = "B"
   DEFINITION = "The source material (cell line, tissue sample) that one either begins an experiment with; also, any derivites of this source material that have been modified by the experimenter. Model abbreviation: #{ABBR}"
-	###
-	#Add self reference so that a part_of biosample can be modelled:
-	#Has a 'prototype' boolean column that defaults to false. When true, means that it's a virtual biosample.
-	# Virtual biosamples are used currently in the single_cell_sorting model via the sorting_biosample_id foreign key.
-	# This biosample is a prototype used as a reference for creating the biosamples in the wells of the plates on
-	# the single_cell_sorting experiment. 
-	belongs_to :well
-	has_many :child_biosamples, class_name: "Biosample", foreign_key: "parent_biosample_id", dependent: :destroy
-	belongs_to :parent_biosample, class_name: "Biosample"
-	belongs_to :from_prototype, class_name: "Biosample"
-	###
-	has_and_belongs_to_many :documents
-	has_one :crispr_modification, validate: true, dependent: :restrict_with_error
-	has_one :starting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id #the starting biosample used for sorting. Not required.
-	has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :nullify #the starting biosample used for sorting. Not required.
-	belongs_to  :user
-	belongs_to  :owner, class_name: "User"
-	belongs_to  :biosample_term_name
-	belongs_to  :biosample_type
-	belongs_to  :donor
+  ###
+  #Add self reference so that a part_of biosample can be modelled:
+  #Has a 'prototype' boolean column that defaults to false. When true, means that it's a virtual biosample.
+  # Virtual biosamples are used currently in the single_cell_sorting model via the sorting_biosample_id foreign key.
+  # This biosample is a prototype used as a reference for creating the biosamples in the wells of the plates on
+  # the single_cell_sorting experiment. 
+  belongs_to :well
+  has_many :child_biosamples, class_name: "Biosample", foreign_key: "parent_biosample_id", dependent: :destroy
+  belongs_to :parent_biosample, class_name: "Biosample"
+  belongs_to :from_prototype, class_name: "Biosample"
+  ###
+  has_and_belongs_to_many :documents
+  has_one :crispr_modification, validate: true, dependent: :restrict_with_error
+  has_one :starting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id #the starting biosample used for sorting. Not required.
+  has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :nullify #the starting biosample used for sorting. Not required.
+  belongs_to  :user
+  belongs_to  :owner, class_name: "User"
+  belongs_to  :biosample_term_name
+  belongs_to  :biosample_type
+  belongs_to  :treatment
+  belongs_to  :donor
   belongs_to  :vendor
-	has_many    :libraries, dependent: :destroy
-	
-	#validates :name, uniqueness: true, length: { minimum: 2, maximum: 40 }, presence: true
-	validates :name, uniqueness: true, presence: true
-	#validates :documents, presence: true
-	validates :biosample_type_id, presence: true
-	validates :biosample_term_name_id, presence: true
-	validates :vendor_id, presence: true
-	validates :donor_id, presence: true
+  has_many    :libraries, dependent: :destroy
+  
+  #validates :name, uniqueness: true, length: { minimum: 2, maximum: 40 }, presence: true
+  validates :name, uniqueness: true, presence: true
+  #validates :documents, presence: true
+  validates :biosample_type_id, presence: true
+  validates :biosample_term_name_id, presence: true
+  validates :vendor_id, presence: true
+  validates :donor_id, presence: true
 
-	accepts_nested_attributes_for :documents, allow_destroy: true
-	accepts_nested_attributes_for :crispr_modification, allow_destroy: true
+  accepts_nested_attributes_for :documents, allow_destroy: true
+  accepts_nested_attributes_for :crispr_modification, allow_destroy: true
 
-	scope :non_plated, lambda { where(plated: false, prototype: false) }
-	scope :non_prototypes, lambda { where(prototype: false) }
-	scope :persisted, lambda { where.not(id: nil) }
+  scope :non_plated, lambda { where(plated: false, prototype: false) }
+  scope :non_prototypes, lambda { where(prototype: false) }
+  scope :persisted, lambda { where.not(id: nil) }
 
-	before_validation :set_name, on: :create
-	before_save :validate_prototype
-	after_update :propagate_update_if_prototype
-	after_validation :check_plated #true if it belongs to a well.
-	#after_validation :propagate_update_if_prototype, on: :update
+  before_validation :set_name, on: :create
+  before_save :validate_prototype
+  after_update :propagate_update_if_prototype
+  after_validation :check_plated #true if it belongs to a well.
+  #after_validation :propagate_update_if_prototype, on: :update
 
-	def self.policy_class
-		ApplicationPolicy
-	end 
+  def self.policy_class
+    ApplicationPolicy
+  end 
 
-	def self.possible_biosample_terms(biosample_type)
-		BiosampleTermName.all
-	end
+  def self.possible_biosample_terms(biosample_type)
+    BiosampleTermName.all
+  end
 
-	def document_ids=(ids)
-		""" 
-		Function : Adds associations to Documents that are stored in self.documents.
-		Args     : ids - array of Document IDs.
-		"""
-		ids.each do |i|
-			if i.blank?
-				next
-			end
-			doc = Document.find(i)
-			if not self.documents.include? doc
-				self.documents << doc
-			end 
-		end
-	end
+  def document_ids=(ids)
+    """ 
+    Function : Adds associations to Documents that are stored in self.documents.
+    Args     : ids - array of Document IDs.
+    """
+    ids.each do |i|
+      if i.blank?
+        next
+      end
+      doc = Document.find(i)
+      if not self.documents.include? doc
+        self.documents << doc
+      end 
+    end
+  end
 
   def self.instantiate_prototype(prototype_biosample)
     #A helper used for updating or creating a well biosample.
@@ -80,9 +81,9 @@ class Biosample < ActiveRecord::Base
     well_biosample = prototype_biosample.dup
     #well_biosample.documents = prototype_biosample.documents
     attrs = well_biosample.attributes
-		#attrs["id"] is currently nil:
-		attrs["from_prototype_id"] = prototype_biosample.id
-		attrs["document_ids"] = prototype_biosample.document_ids
+    #attrs["id"] is currently nil:
+    attrs["from_prototype_id"] = prototype_biosample.id
+    attrs["document_ids"] = prototype_biosample.document_ids
     attrs["prototype"] = false #this should always be false for a well biosample
     #Remove attributes that shouldn't be explicitely set for the well biosample
     attrs.delete("name") #the name is expicitely set in the biosample model when it has a well associated.
@@ -96,12 +97,12 @@ class Biosample < ActiveRecord::Base
   def update_biosample_from_prototype(biosample_prototype)
     biosample_attrs = Biosample.instantiate_prototype(biosample_prototype)
     success = self.update(biosample_attrs)
-		if not success
-			raise "Unable to update biosample '#{self.name}': #{self.errors.full_messages}"
-		end
+    if not success
+      raise "Unable to update biosample '#{self.name}': #{self.errors.full_messages}"
+    end
   end 
 
-	private 
+  private 
 
   def check_plated
     #See the Pulsar wiki page "Rails Tips", specificially the section called "Callback gotchas".
@@ -114,40 +115,40 @@ class Biosample < ActiveRecord::Base
     return true
   end
 
-	def validate_prototype
-		#A biosample can either be a prototype (virtual biosample) or an actuated biosample created based on a biosample prototype, not both.
-		if self.prototype and self.from_prototype.present?
-			self.errors[:base] << "Invalid: can't set both the 'prototype' and 'from_prototype' attributes."
-			return false
-		end
-	end
+  def validate_prototype
+    #A biosample can either be a prototype (virtual biosample) or an actuated biosample created based on a biosample prototype, not both.
+    if self.prototype and self.from_prototype.present?
+      self.errors[:base] << "Invalid: can't set both the 'prototype' and 'from_prototype' attributes."
+      return false
+    end
+  end
 
-	def propagate_update_if_prototype
-		#An after_update callback.
-		#If this is a prototype biosample, then we need to propagate the update to dependent biosamples.
-		# In the case of single_cell_sorting, dependent biosamples are those sorted into the wells of each plate on the experiment
-		# (each well has a single biosample and such a biosample has a single library).
-		# This makes updating all of the biosample objects with regard to all the plates on a single_cell_sorting 
-		# easy to do just by changing the biosample prototype (starting biosample) assocated with the single_cell_sorting.
-		if self.prototype?
-			biosamples = Biosample.where({from_prototype_id: self.id})
-			biosamples.each do |b|
-				b.update_biosample_from_prototype(self)
-			end
-		end	
-#		if self.sorting_biosample_single_cell_sorting.present? 
-#			sorting_biosample_single_cell_sorting.plates.each do |plate|
-#				plate.wells.each do |well|
-#					well.biosample.update_biosample_from_prototype(self)
-#				end
-#			end
-#		end
-	end
+  def propagate_update_if_prototype
+    #An after_update callback.
+    #If this is a prototype biosample, then we need to propagate the update to dependent biosamples.
+    # In the case of single_cell_sorting, dependent biosamples are those sorted into the wells of each plate on the experiment
+    # (each well has a single biosample and such a biosample has a single library).
+    # This makes updating all of the biosample objects with regard to all the plates on a single_cell_sorting 
+    # easy to do just by changing the biosample prototype (starting biosample) assocated with the single_cell_sorting.
+    if self.prototype?
+      biosamples = Biosample.where({from_prototype_id: self.id})
+      biosamples.each do |b|
+        b.update_biosample_from_prototype(self)
+      end
+    end  
+#    if self.sorting_biosample_single_cell_sorting.present? 
+#      sorting_biosample_single_cell_sorting.plates.each do |plate|
+#        plate.wells.each do |well|
+#          well.biosample.update_biosample_from_prototype(self)
+#        end
+#      end
+#    end
+  end
 
-	def set_name
-		if self.well.present?
-			#A well biosample has it's own naming format
-			self.name = self.well.plate.single_cell_sorting.name + " " + self.well.plate.name + " " +  self.well.get_name #(sorting exp name) + (plate name) + (well name)
-		end
-	end
+  def set_name
+    if self.well.present?
+      #A well biosample has it's own naming format
+      self.name = self.well.plate.single_cell_sorting.name + " " + self.well.plate.name + " " +  self.well.get_name #(sorting exp name) + (plate name) + (well name)
+    end
+  end
 end

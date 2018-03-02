@@ -1,0 +1,11 @@
+<%= simple_form_for(@treatment_term_name) do |f| %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @treatment_term_name} %>
+
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique ontology term name"} %>
+  <%= f.input :accession, label_html: {"data-toggle": "tooltip", "title": "Must begin with CHEBI:, UniProtKB:, Taxon:, or CL:, followed by a number."} %>
+  <%= f.input :description, label_html: {"data-toggle": "tooltip", "title": "The description of the ontology term"} %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div>
+<% end %></br>
