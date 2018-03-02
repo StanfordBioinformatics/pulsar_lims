@@ -722,7 +722,9 @@ Target.create!([
 TreatmentTermName.delete_all
 TreatmentTermName.create!([
   {user_id: admin, name: "17β-hydroxy-5α-androstan-3-one", accession: "CHEBI:16330", 
-   description: "A 17β-hydroxy steroid that is testosterone in which the 4,5 double bond has been reduced to a single bond with α-configuration at position 5."}
+   description: "A 17β-hydroxy steroid that is testosterone in which the 4,5 double bond has been reduced to a single bond with α-configuration at position 5."},
+  {user_id: admin, name: "tumor necrosis factor", accession: "UniProtKB:P01375",
+   description: "Cytokine that binds to TNFRSF1A/TNFR1 and TNFRSF1B/TNFBR. It is mainly secreted by macrophages and can induce cell death of certain tumor cell lines. It is potent pyrogen causing fever by direct action or by stimulation of interleukin-1 secretion and is implicated in the induction of cachexia, Under certain conditions it can stimulate cell proliferation and induce cell differentiation. Impairs regulatory T-cells (Treg) function in individuals with rheumatoid arthritis via FOXP3 dephosphorylation. Upregulates the expression of protein phosphatase 1 (PP1), which dephosphorylates the key 'Ser-418' residue of FOXP3, thereby inactivating FOXP3 and rendering Treg cells functionally defective (PubMed:23396208). Key mediator of cell death in the anticancer action of BCG-stimulated neutrophils in combination with DIABLO/SMAC mimetic in the RT4v6 bladder cancer cell line (PubMed:22517918)."}
 ])
   
 

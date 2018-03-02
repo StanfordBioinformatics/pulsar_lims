@@ -5,7 +5,7 @@ class Treatment < ActiveRecord::Base
   belongs_to :user
   belongs_to :treatment_term_name
   belongs_to :concentration_unit
-  has_many :biosamples
+  has_and_belongs_to_many :biosamples
 
   validates :name, presence: true, uniqueness: true, length: { minimum: 2, maximum: 40 }
   validates :treatment_term_name_id, presence: true

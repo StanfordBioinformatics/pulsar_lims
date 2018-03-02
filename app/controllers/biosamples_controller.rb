@@ -54,6 +54,8 @@ class BiosamplesController < ApplicationController
 		@biosample.user = current_user
 		#@biosample = add_documents(@biosample,params[:biosample][:document_ids])
 		
+    #render json: biosample_params
+    #return
     respond_to do |format|
       if @biosample.save
         format.html { redirect_to @biosample, notice: 'Biosample was successfully created.' }
@@ -104,6 +106,6 @@ class BiosamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_params
-      params.require(:biosample).permit(:owner_id, :prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], :crispr_modification_attributes => [:user_id,:_destroy, :name, :donor_construct_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy]])
+      params.require(:biosample).permit(:owner_id, :prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], :treatment_ids => [], :crispr_modification_attributes => [:user_id,:_destroy, :name, :donor_construct_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy]])
     end
 end

@@ -12,6 +12,8 @@
 
 	<%= f.association :parent_biosample, as: :hidden, label_html: {"data-toggle" => "tooltip", "title" => "If this is a part of another biosample, specify which one."} %>
 
+  <%= f.association :treatments, include_blank: true %>
+
 	<%= f.input :control, label_html: {"data-toggle" => "tooltip", "title" => "Select if this biosample will be used as a control in an experiment."} %>
 
 	<% if @biosample.documents.persisted.any? %>
