@@ -1,6 +1,6 @@
 class DonorConstruct < ActiveRecord::Base
 	ABBR = "DONC"
-	DEFINITION = "A DNA construct (i.e. plasmid) that you or a third party created using a Cloning Vector for a CRISPR experiment, or some other type of genetic modification experiment, which contains the sequence to insert into the genome for editing. Model abbreviation: #{ABBR}"
+	DEFINITION = "A DNA construct (i.e. plasmid) that you or a third party created using a Cloning Vector for a CRISPR experiment, or some other type of genetic modification experiment, which contains the sequence to insert into the genome for editing.  Model abbreviation: #{ABBR}"
 	attr_accessor :construct_tag_ids
 
 	has_and_belongs_to_many :construct_tags

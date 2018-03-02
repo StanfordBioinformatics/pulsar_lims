@@ -1,6 +1,6 @@
 class Target < ActiveRecord::Base
 	ABBR = "TRG"
-  DEFINITION = "The gene that is the target of an antibody or genetic modication."
+  DEFINITION = "The gene that is the target of an antibody or genetic modication.  Model abbreviation: #{ABBR}"
 	has_many :antibodies
 	has_many :crispr_constructs
 	has_many :donor_constructs

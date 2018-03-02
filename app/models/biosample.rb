@@ -1,6 +1,6 @@
 class Biosample < ActiveRecord::Base
   ABBR = "B"
-  DEFINITION = "The source material (cell line, tissue sample) that one either begins an experiment with; also, any derivites of this source material that have been modified by the experimenter. Model abbreviation: #{ABBR}"
+  DEFINITION = "The source material (cell line, tissue sample) that one either begins an experiment with; also, any derivites of this source material that have been modified by the experimenter.  Model abbreviation: #{ABBR}"
   ###
   #Add self reference so that a part_of biosample can be modelled:
   #Has a 'prototype' boolean column that defaults to false. When true, means that it's a virtual biosample.

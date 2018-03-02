@@ -207,7 +207,7 @@ $(function() {
 //Also see wiki page https://github.com/blueimp/jQuery-File-Upload/wiki/Options.
 $(function() {
   $('.directUpload').find("input:file").each(function(i, elem) {
-    var $fileInput    = $(elem); //The file input field jQuery object, that is listened for change events.
+    var $fileInput    = $(elem); //The file input field jQuery object, that is listening for change events.
     var $form         = $($fileInput.closest('form'));
     var $submitButton = $form.find('input[type="submit"]');
     var $progressBar  = $("<div class='bar'></div>");
@@ -215,13 +215,14 @@ $(function() {
     $fileInput.after($barContainer);
     $fileInput.fileupload({
       fileInput:       $fileInput,
-      url:             $form.data('url'),
+      url:             $form.data('url'), //The url is set in the form view.
       type:            'POST',
       autoUpload:       true, //upload starts autom. when file is selected.
       formData:         $form.data('form-data'), //includes things like AWS Access Keys.
       paramName:        'file', // S3 does not like nested name fields i.e. name="user[avatar_url]"
-      dataType:         'XML',  // The type of data that is expected back from the server. S3 returns XML if success_action_status is set to 201
+      dataType:         'XML',  // The type of data that is expected back from the server. S3 returns XML if success_action_status (set in controller set_s3_direct_post method) is set to 201
       replaceFileInput: false,
+
       progressall: function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
         $progressBar.css('width', progress + '%')

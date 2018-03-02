@@ -1,6 +1,6 @@
 class DataStorage < ActiveRecord::Base
 	ABBR = "DS"
-	DEFINITION = "A reference to a storage unit of a particular Data Storage Provider. For example, this could be a particular AWS S3 bucket, or even a particular file tree within an AWS bucket for finer grained management. Model abbreviation: #{ABBR}"
+	DEFINITION = "A reference to a storage unit of a particular Data Storage Provider. For example, this could be a particular AWS S3 bucket, or even a particular file tree within an AWS bucket for finer grained management.  Model abbreviation: #{ABBR}"
   belongs_to :user
 	belongs_to :data_storage_provider
 	has_many :sequencing_runs

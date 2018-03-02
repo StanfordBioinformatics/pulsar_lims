@@ -22,10 +22,10 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'json'
 gem 'rails', '~> 4.2.1'
 
-# Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 #Use PostgreSQL
-gem 'pg'
+# Don't use version 1.0.0 as this has a major bug that won't let the application start. 
+gem 'pg', '~> 0.19.0' 
 
 # Use SCSS for stylesheets
 gem 'sass-rails'

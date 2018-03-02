@@ -10,7 +10,7 @@
     <% sample_sheet_upload_hint="You previously uploaded #{@sequencing_request.sample_sheet}." %>
   <% end %>
 
-	<%= f.input :sample_sheet, as: :file, hint: sample_sheet_upload_hint, label_html: {"data-toggle": "tooltip", "title": "The sample sheet that you submit to the sequencing center. Must be in the Illumina-specified format, containing at least the 'Data Section' (See 'Data Section') in the Illumina bcl2fastq guide."} %>
+	<%= f.input :sample_sheet, as: :file, hint: sample_sheet_upload_hint, label_html: {"data-toggle": "tooltip", "title": "The sample sheet that you submit to the sequencing center. Must be in the Illumina-specified format, containing at least the 'Data Section' (See 'Data Section' in the Illumina bcl2fastq guide)."} %>
 
   <% if @sequencing_request.libraries.persisted.any? %>
 		<table class="min-table" id="libraries">

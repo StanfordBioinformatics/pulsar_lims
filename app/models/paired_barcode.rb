@@ -1,6 +1,6 @@
 class PairedBarcode < ActiveRecord::Base
 	ABBR = "PBC"
-	DEFINITION = "A representation of a duel-index barcode. There are two references to the Barcode model - one for index1 and another for index2. Model abbreviation: #{ABBR}"
+	DEFINITION = "A representation of a duel-index barcode. There are two references to the Barcode model - one for index1 and another for index2.  Model abbreviation: #{ABBR}"
 	attr_accessor :add_paired_barcodes #used in the form partial so the user can input multiple pairs to add. 
 	has_many :libraries
   belongs_to :user

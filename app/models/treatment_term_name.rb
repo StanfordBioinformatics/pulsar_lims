@@ -1,6 +1,6 @@
 class TreatmentTermName < ActiveRecord::Base
   ABBR = "TTN"
-  DEFINITION = "Models the agent used in a biosample treatment. This is linked to the Treatment model."
+  DEFINITION = "Models the agent used in a biosample treatment. This is linked to the Treatment model.  Model abbreviation: #{ABBR}"
   belongs_to :user
   has_many :biosamples
 

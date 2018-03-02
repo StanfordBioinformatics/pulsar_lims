@@ -3,7 +3,7 @@ end
 
 class Library < ActiveRecord::Base
 	ABBR = "L"
-	DEFINITION = "A sequencing library that is prepared for sequencing. Model abbreviation: #{ABBR}"
+	DEFINITION = "A sequencing library that is prepared for sequencing.  Model abbreviation: #{ABBR}"
 	#The is_control bool column has a default of false.
 	#has_many :sequencing_results, dependent: :destroy
 	has_and_belongs_to_many :documents
