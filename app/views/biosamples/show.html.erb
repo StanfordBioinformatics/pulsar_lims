@@ -113,7 +113,7 @@
 
 	<tr>
 		<th><strong>Donor:</strong></th>
-		<td><%= link_to @biosample.donor.name, encode_url(@biosample.donor.encode_identifier)%></td>
+		<td><%= link_to @biosample.donor.name, @biosample.donor %></td>
 	</tr>
 
 	<tr>
