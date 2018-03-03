@@ -1,14 +1,14 @@
 <%= simple_form_for(@vendor) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @vendor } %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {model_obj: @vendor } %>
 
-  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique vendor name"} %>
+  <%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "A user-friendly name that you prefer to call this as"} %>
 
-	<%= f.input :url, label_html: {"data-toggle" => "tooltip", "title" => "Web URL if applicable."} %>
+	<%= f.input :url, label_html: {"data-toggle": "tooltip", "title": "Web URL if applicable."} %>
 
-	<%= f.input :encode_identifier %>
+	<%= f.input :encode_identifier, label_html: {"data-toggle": "tooltip", "title": "The alias or accession of an existing vendor on the ENCODE Portal (leave blank if this is a new vendor that hasn't been registered there yet). For a list of available vendors on the ENCODE Portal, see https://www.encodeproject.org/sources."} %>
 
 
-  <%= f.input :description, label_html: {"data-toggle" => "tooltip", "title" => "Vendor description"} %>
+  <%= f.input :description, label_html: {"data-toggle": "tooltip", "title": "Vendor description"} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary" %>
