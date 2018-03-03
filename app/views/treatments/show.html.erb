@@ -11,14 +11,14 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @treatment } %>               
                                                                                                        
 <table class="attributes">                                                                             
-  <tr>
-    <th><strong>Treatment term name:</strong></th>
-    <td><%= link_to @treatment.treatment_term_name.name, @treatment.treatment_term_name %></td>
-	</tr>
-	
 	<tr>
 	  <th><strong>Name:</strong></th>
 	  <td><%= @treatment.name %></td>
+	</tr>
+
+  <tr>
+    <th><strong>Treatment term name:</strong></th>
+    <td><%= link_to @treatment.treatment_term_name.name, @treatment.treatment_term_name %></td>
 	</tr>
 	
 	<tr>
@@ -55,6 +55,13 @@
 	  <th><strong>Temperature:</strong></th>
 	  <td><%= @treatment.temperature %></td>
 	</tr>
+
+  <tr>                                                                                                 
+    <th><strong>Documents:</strong></th>                                                               
+    <td>                                                                                               
+      <%= render partial: "documents/link_to_documents", locals: {documents: @treatment.documents} %>
+    </td>                                                                                              
+  </tr>
 </table>
 
 <%= link_to 'Edit', edit_treatment_path(@treatment) %> |

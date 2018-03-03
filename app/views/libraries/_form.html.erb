@@ -41,8 +41,8 @@
 	  </table>
 	<% end %>
 
-	<%= f.association :documents, label: "Add documents", collection: sorted_document_name_id(), prompt: "Select documents", 
-			label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not data file)."} %>
+	<%= f.association :documents, collection: sorted_document_name_id(), include_blank: true,
+			label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not a data file)."} %>
 
   <table>
   <tr><th>Sequencing Requests:</th></tr>

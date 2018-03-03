@@ -6,6 +6,7 @@ class Treatment < ActiveRecord::Base
   belongs_to :treatment_term_name
   belongs_to :concentration_unit
   has_and_belongs_to_many :biosamples
+  has_and_belongs_to_many :documents
 
   validates :concentration_unit, presence: {message: "must be specified when 'concentration' is set."}, if: "concentration.present?"
   validates :duration_units, presence: {message: "must be specified when 'duration' is set."}, if: "duration.present?"

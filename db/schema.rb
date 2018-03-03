@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180302004034) do
+ActiveRecord::Schema.define(version: 20180303003048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -380,6 +380,14 @@ ActiveRecord::Schema.define(version: 20180302004034) do
     t.integer "document_id",                    null: false
     t.integer "sequencing_library_prep_kit_id", null: false
   end
+
+  create_table "documents_treatments", id: false, force: :cascade do |t|
+    t.integer "document_id",  null: false
+    t.integer "treatment_id", null: false
+  end
+
+  add_index "documents_treatments", ["document_id", "treatment_id"], name: "index_documents_treatments_on_document_id_and_treatment_id", using: :btree
+  add_index "documents_treatments", ["treatment_id", "document_id"], name: "index_documents_treatments_on_treatment_id_and_document_id", using: :btree
 
   create_table "donor_constructs", force: :cascade do |t|
     t.string   "name"
