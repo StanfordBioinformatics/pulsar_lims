@@ -44,9 +44,9 @@
 	</tr>
 </table>
 
-<div class="barcodes bg-info">
+<div class="barcodes table-responsive bg-info">
   <h4> Barcodes</h4>
-	<table class="table table-bordered" id="bobba" style="width: 25%;margin: auto;"> 
+	<table class="table table-bordered" id="bobba" style="margin-right: 50%; width: auto;"> 
 		<thead>
 			<tr>
 				<th>Index</th>
@@ -63,28 +63,28 @@
 		</tbody>
 	</table></br>
 
-  <table class="attributes" style="font-family: Courier, monospace;" >
+  <table class="attributes index" style="font-family: Courier, monospace;" >
     <thead>
       <tr>
 				<th>Row</th>
-        <th>Name</th>
 				<th>Sequence</th>
 				<th>Index Number</th>
+        <%= render partial: "application_partials/index_common_table_headers" %>
         <th class="actions">Actions</th>
       </tr>
     </thead>
 		<tbody>
 			<% row_num = 0 %>
-	    <% @sequencing_library_prep_kit.barcodes.order("index_number").each do |bc| %>
+	    <% @sequencing_library_prep_kit.barcodes.order("index_number").each do |rec| %>
 				<% row_num += 1 %>
 	      <tr>
 					<td><%= row_num %></td>
-	        <td><%= link_to bc.name, [@sequencing_library_prep_kit,bc] %></td>
-	        <td><%= bc.sequence %></td>
-					<td><%= bc.index_number %></td>
+	        <td><%= rec.sequence %></td>
+					<td><%= rec.index_number %></td>
+          <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
 	        <td>
-	          <%= link_to fa_icon("pencil"), [:edit,@sequencing_library_prep_kit,bc] %>
-	          <%= link_to fa_icon("trash"), [@sequencing_library_prep_kit,bc], method: :delete, data: { confirm: 'Are you sure?' } %>
+	          <%= link_to fa_icon("pencil"), [:edit,@sequencing_library_prep_kit,rec] %>
+	          <%= link_to fa_icon("trash"), [@sequencing_library_prep_kit,rec], method: :delete, data: { confirm: 'Are you sure?' } %>
 	        </td>
 	      </tr>
 	    <% end %>
