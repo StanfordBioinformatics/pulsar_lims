@@ -4,15 +4,16 @@ Adds the table data fields that are common to each table in the index views.
 This partial should mirror the one that has the th values in _index_common_table_headers.html.erb.
 -->
 
-<% no_name = false %>
-<% if not local_assigns[:no_name].nil? %>
-  <% no_name = true %>
+<td><%= link_to_record_id(record) %></td>
+
+<% if record.respond_to?(:upstream) %>
+  <td><%= record.upstream %></td>
 <% end %>
 
-<td><%= link_to_record_id(record) %></td>
-<% unless no_name %>
+<% if record.respond_to?(:name) %>
   <td><%= record.name %></td>
 <% end %>
+
 <td><%= record.user.display() %></td>
 <td><%= time_ago_in_words(record.created_at) %> ago </td>
 <td><%= time_ago_in_words(record.updated_at) %> ago </td>

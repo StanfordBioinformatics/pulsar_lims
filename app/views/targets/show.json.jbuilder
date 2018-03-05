@@ -1,1 +1,1 @@
-json.extract! @target, :id, :encode_identifier, :name, :created_at, :updated_at
+json.extract! @target, :id, :upstream, :name, :created_at, :updated_at

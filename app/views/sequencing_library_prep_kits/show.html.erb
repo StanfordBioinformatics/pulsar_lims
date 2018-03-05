@@ -69,6 +69,7 @@
 				<th>Row</th>
 				<th>Sequence</th>
 				<th>Index Number</th>
+        <% @model_class = Barcode %><!-- Set for partial below -->
         <%= render partial: "application_partials/index_common_table_headers" %>
         <th class="actions">Actions</th>
       </tr>

@@ -6,7 +6,7 @@
 	#Dont include lines below since we don't want users to be able to create a sequencing_result
   # from it's own page, rather, only through a sequencing_run object.
 	<ul class="actions">
-	<\%= render partial: "application_partials/auth_new_record", locals: {model_class: BarcodeSequencingResult} %>
+	<\%= render partial: "application_partials/auth_new_record" %>
 	</ul> 
 -->
 </header>
@@ -14,7 +14,7 @@
 <table class="attributes index">
   <thead>
     <tr>
-      <%= render partial: "application_partials/index_common_table_headers", locals: {no_name: true} %>
+      <%= render partial: "application_partials/index_common_table_headers", locals: {model: SequencingResult} %>
       <th>Sequencing run</th>
       <th>Library</th>
       <th>Comment</th>
@@ -29,7 +29,7 @@
   <tbody>
     <% @records.each do |rec| %>
       <tr> 
-        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec, no_name: true} %>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= link_to @sequencing_run.name, [@sequencing_request,@sequencing_run] %></td>
         <td><%= link_to rec.library.name, rec.library %></td>
         <td><%= rec.comment %></td>

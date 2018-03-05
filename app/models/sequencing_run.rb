@@ -1,5 +1,5 @@
 class SequencingRun< ActiveRecord::Base
-	ABBR = "SR"
+	ABBR = "SRUN"
 	DEFINITION = "Represents the realization of a Sequencing Request. The details of the actual sequencing run are provided here. A Sequencing Run belongs to a Sequencing Request, and has a Sequencing Result for each Libary on the Sequencing Request.  Model abbreviation: #{ABBR}"
   belongs_to :user
   belongs_to :sequencing_request

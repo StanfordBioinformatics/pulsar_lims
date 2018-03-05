@@ -8,16 +8,11 @@
 	<% uppercase = "" %>
 <% end %>
 
-<% model_class_hr = model_class.model_name.human.titleize %>
-<% if uppercase.present? %>
-	<% model_class_hr.upcase! %>
-<% end %>
-
-<% model_route_path = model_class.model_name.singular_route_key %>
-<% if policy(model_class).new? %>
+<% model_route_path = @model_class.model_name.singular_route_key %>
+<% if policy(@model_class).new? %>
 	<% if nested.present? %>
-		<li><%= link_to "New #{model_class_hr}", [:new,nested,model_route_path].flatten,  class: "new" %></li>
+		<li><%= link_to "New #{@model_class_hr}", [:new,nested,model_route_path].flatten,  class: "new" %></li>
 	<% else %>
-		<li><%= link_to "New #{model_class_hr}", [:new,model_route_path],  class: "new" %></li>
+		<li><%= link_to "New #{@model_class_hr}", [:new,model_route_path],  class: "new" %></li>
 	<% end %>
 <% end %>

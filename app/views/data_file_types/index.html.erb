@@ -3,14 +3,14 @@
 	<p class="model-definition"><%= DataFileType::DEFINITION %></p>
   
   <ul class="actions">
-    <%= render partial: "application_partials/auth_new_record", locals: {model_class: DataFileType} %>
+    <%= render partial: "application_partials/auth_new_record" %>
   </ul> 
 </header>
 
 <table class="attributes index">
   <thead>
     <tr>
-      <%= render partial: "application_partials/index_common_table_headers" %>
+      <%= render partial: "application_partials/index_common_table_headers", locals: {model_class: DataFileType} %>
       <th>Description</th>
       <th colspan="3"></th>
     </tr>

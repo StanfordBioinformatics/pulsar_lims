@@ -2,12 +2,12 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr_construct } %>
 
   <%= f.input :name %>
+  <%= f.input :description %>
 	<%= f.input :addgene_id, label_html: {"data-toggle": "tooltip", "title": "The catalog number (i.e. 50661) of the plasmid in www.addgene.org if deposited there. Note - this could be the same as the 'Vender product identifier' if you procured this from Addene."} %>
   <%= f.association :cloning_vector %>
   <%= f.association :target, label: "Gene target" %>
 	<%= f.input :ensembl_transcript, label_html: {"data-toggle": "tooltip", "title": "Ensembl transcript accession that the crispr construct is designed for, if applicable." } %>
 	<%= f.input :refseq_transcript, label_html: {"data-toggle": "tooltip", "title": "RefSeq transcript accession that the crispr construct is designed for, if applicable." } %>
-  <%= f.input :description %>
   <%= f.input :guide_sequence %>
   <%= f.association :vendor %>
   <%= f.input :vendor_product_identifier %>

@@ -4,15 +4,17 @@ Adds the table header fields that are common to each table in the index views.
 This partial should mirror the one that has the td values in _index_common_table_cells.html.erb.
 -->
 
-<% no_name = false %>
-<% if not local_assigns[:no_name].nil? %>
-  <% no_name = true %>
+<th>Record ID</th>
+
+<!-- @model_class is set in the controller's index action. -->
+<% if @model_class.column_names.include?("upstream") %> 
+  <th>Upstream ID</th>
 <% end %>
 
-<th>Record ID</th>
-<% unless no_name %>
+<% if @model_class.column_names.include?("name") %> 
  <th>Name</th>
 <% end %>
+
 <th>Creator</th>
 <th>Date created</th>
 <th>Last updated</th>

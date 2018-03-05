@@ -3,7 +3,7 @@
 	<p class="model-definition"><%= Donor::DEFINITION %></p>
 	
   <ul class="actions">
-		<%= render partial: "application_partials/auth_new_record", locals: {model_class: Donor} %>
+		<%= render partial: "application_partials/auth_new_record" %>
   </ul> 
 </header>
 
@@ -11,7 +11,7 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
-      <th>Encode</th>
+      <th>Upstream ID</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -20,7 +20,7 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
-        <td><%= link_to rec.encode_identifier, rec %></td>
+        <td><%= rec.upstream %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_donor_path(rec) %>
         	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>

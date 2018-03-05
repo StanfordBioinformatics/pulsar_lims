@@ -3,13 +3,14 @@
 	<p class="model-definition"><%= DataStorageProvider::DEFINITION %></p>
 
   <ul class="actions">
-    <%= render partial: "application_partials/auth_new_record", locals: {model_class: DataStorageProvider} %>
+    <%= render partial: "application_partials/auth_new_record" %>
   </ul> 
 </header>
 
 <table class="attributes index">
   <thead>
     <tr>
+      <% @model_class = DataStorageProvider %>
       <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Bucket storage?</th>
       <th>Actions</th>

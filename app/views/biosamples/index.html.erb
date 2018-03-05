@@ -3,7 +3,7 @@
 	<p class="model-definition"><%= Biosample::DEFINITION %></p>
 
   <ul class="actions">
-		<%= render partial: "application_partials/auth_new_record", locals: {model_class: Biosample} %>
+		<%= render partial: "application_partials/auth_new_record" %>
   </ul> 
 </header>	
 	
@@ -20,7 +20,7 @@
 			<th>Biosample Type</th>
       <th>Biosample Term Name</th>
 			<th>CRISPR</th>
-      <th>ENCID</th>
+      <th>Upstream ID</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -52,7 +52,7 @@
 				<% else %>
 					<td></td>
 				<% end %>
-        <td><%= rec.encid %></td>
+        <td><%= rec.upstream %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_biosample_path(rec) %>
         	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>

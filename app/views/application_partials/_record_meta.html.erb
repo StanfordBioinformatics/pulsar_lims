@@ -21,4 +21,11 @@
 		<th>Last Updated:</th>
 		<td><%= time_ago_in_words(record.updated_at) %> ago </td>
 	</tr>
+
+  <% if record.respond_to?(:upstream) %>
+    <tr>
+      <th>Upstream ID</th>
+      <td><%= record.upstream %></td>
+    </tr>
+  <% end %>
 </table>

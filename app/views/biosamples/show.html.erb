@@ -18,6 +18,11 @@
 		<td><%= @biosample.name %></td>
 	</tr>
 
+	<tr>
+	  <th><strong>Description:</strong></th>
+	  <td><%= @biosample.description %></td>
+	</tr>
+
 	<% if @biosample.owner.present? %>
 		<tr>
 			<th><strong>Owner</strong></th>
@@ -129,16 +134,6 @@
 	<tr>
 	  <th><strong>Submitter comments:</strong></th>
 	  <td><%= @biosample.submitter_comments %></td>
-	</tr>
-
-	<tr>
-	  <th><strong>Description:</strong></th>
-	  <td><%= @biosample.description %></td>
-	</tr>
-
-	<tr>
-	  <th><strong>Encid:</strong></th>
-	  <td><%= @biosample.encid %></td>
 	</tr>
 
   <tr>

@@ -2,12 +2,12 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_library_prep_kit } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library prep kit name"} %>
+  <%= f.input :description %>
   <%= f.association :vendor,
   		label_html: {"data-toggle" => "tooltip", "title" => "Select the vendor of the library prep kit."} %>
 	<%= f.input :vendor_product_identifier %>
 	<%= f.input :supports_paired_end, 
 			label_html: {"data-toggle" => "tooltip", "title" => "Select if this kit can support paired-end sequencing (contains index2 barcodes)."}  %>
-  <%= f.input :description %>
 
   <% if @sequencing_library_prep_kit.documents.persisted.any? %>
     <table class="min-table">

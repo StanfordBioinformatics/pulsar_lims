@@ -78,18 +78,18 @@ DocumentType.create!([
 
 Vendor.delete_all
 Vendor.create!([
-	{user_id: admin, name: "Abcam", encode_identifier: "abcam", url: "http://www.abcam.com"},
-	{user_id: admin, name: "Active Motif", encode_identifier: "active-motif", url: "http://www.activemotif.com"},
-	{user_id: admin, name: "Agilent", encode_identifier: "agilent", url: "http://www.home.agilent.com"},
-	{user_id: admin, name: "Bethyl Labs", encode_identifier: "bethyl-labs", url: "http://www.bethyl.com"},
-	{user_id: admin, name: "Coriell", encode_identifier: "coriell", url: "http://www.coriell.org"},
-	{user_id: admin, name: "Illumina", encode_identifier: "illumina", url: "http://www.illumina.com"},
-	{user_id: admin, name: "New England BioLabs", encode_identifier: "", url: "https://www.neb.com"},
-	{user_id: admin, name: "Sigma", encode_identifier: "sigma", url: "http://www.sigmaaldrich.com"},
-	{user_id: admin, name: "Thermo Fisher", encode_identifier: "thermo-fisher", url: "http://www.thermofisher.com/global/en/home.asp"},
-	{user_id: admin, name: "Millipore", encode_identifier: "millipore", url: "http://www.emdmillipore.com"},
-	{user_id: admin, name: "genomics-online", encode_identifier: "", url: "https://www.genomics-online.com"},
-	{user_id: admin, name: "Greenleaf Lab", encode_identifier: "", url: "http://greenleaf.stanford.edu"}
+	{user_id: admin, name: "Abcam", upstream: "abcam", url: "http://www.abcam.com"},
+	{user_id: admin, name: "Active Motif", upstream: "active-motif", url: "http://www.activemotif.com"},
+	{user_id: admin, name: "Agilent", upstream: "agilent", url: "http://www.home.agilent.com"},
+	{user_id: admin, name: "Bethyl Labs", upstream: "bethyl-labs", url: "http://www.bethyl.com"},
+	{user_id: admin, name: "Coriell", upstream: "coriell", url: "http://www.coriell.org"},
+	{user_id: admin, name: "Illumina", upstream: "illumina", url: "http://www.illumina.com"},
+	{user_id: admin, name: "New England BioLabs", upstream: "", url: "https://www.neb.com"},
+	{user_id: admin, name: "Sigma", upstream: "sigma", url: "http://www.sigmaaldrich.com"},
+	{user_id: admin, name: "Thermo Fisher", upstream: "thermo-fisher", url: "http://www.thermofisher.com/global/en/home.asp"},
+	{user_id: admin, name: "Millipore", upstream: "millipore", url: "http://www.emdmillipore.com"},
+	{user_id: admin, name: "genomics-online", upstream: "", url: "https://www.genomics-online.com"},
+	{user_id: admin, name: "Greenleaf Lab", upstream: "", url: "http://greenleaf.stanford.edu"}
 ])
 
 CloningVector.delete_all
@@ -498,10 +498,10 @@ BiosampleType.create!([
 
 Donor.delete_all
 Donor.create!([
-	{user_id: admin, encode_identifier: "ENCDO268AAA", name:"bernstein:donor of NHEK cells"},
-	{user_id: admin, encode_identifier: "ENCDO000ABE", name:"encode:donor of HCT-116"},
-	{user_id: admin, encode_identifier: "ENCDO000ABF", name: "encode:donor of HEK293"},
-	{user_id: admin, encode_identifier: "ENCDO000AAK", name: "encode:donor of GM12878"}
+	{user_id: admin, upstream: "ENCDO268AAA", name:"bernstein:donor of NHEK cells"},
+	{user_id: admin, upstream: "ENCDO000ABE", name:"encode:donor of HCT-116"},
+	{user_id: admin, upstream: "ENCDO000ABF", name: "encode:donor of HEK293"},
+	{user_id: admin, upstream: "ENCDO000AAK", name: "encode:donor of GM12878"}
 ])
 
 Isotype.delete_all
@@ -715,8 +715,8 @@ Chromosome.create!([
 
 Target.delete_all
 Target.create!([
-{user_id: admin, name: "RELB-human", encode_identifier: "RELB-human"},
-{user_id: admin, name: "CTCF-human", encode_identifier: "CTCF-human"}
+{user_id: admin, name: "RELB-human", upstream: "RELB-human"},
+{user_id: admin, name: "CTCF-human", upstream: "CTCF-human"}
 ])
 
 TreatmentTermName.delete_all
@@ -730,19 +730,19 @@ TreatmentTermName.create!([
 
 Antibody.delete_all
 Antibody.create!([
-{user_id: admin, name: "ENCAB140SNC", organism_id: Organism.find_by!(name: "human").id, vendor_product_identifier: "A302-183A", vendor_id: Vendor.find_by!(encode_identifier: "bethyl-labs").id, clonality: "polyclonal", target_id: Target.find_by!(encode_identifier: "RELB-human").id, antibody_purifications: [AntibodyPurification.find_by!(name: "affinity")], lot_identifier: 1},
-{user_id: admin, name: "ENCAB830JLB", organism_id: Organism.find_by!(name: "human").id, vendor_product_identifier: "07-729", vendor_id: Vendor.find_by!(encode_identifier: "millipore").id, clonality: "polyclonal", target_id: Target.find_by!(encode_identifier: "CTCF-human").id, antibody_purifications: [], lot_identifier: 2599305}
+{user_id: admin, name: "ENCAB140SNC", organism_id: Organism.find_by!(name: "human").id, vendor_product_identifier: "A302-183A", vendor_id: Vendor.find_by!(upstream: "bethyl-labs").id, clonality: "polyclonal", target_id: Target.find_by!(upstream: "RELB-human").id, antibody_purifications: [AntibodyPurification.find_by!(name: "affinity")], lot_identifier: 1},
+{user_id: admin, name: "ENCAB830JLB", organism_id: Organism.find_by!(name: "human").id, vendor_product_identifier: "07-729", vendor_id: Vendor.find_by!(upstream: "millipore").id, clonality: "polyclonal", target_id: Target.find_by!(upstream: "CTCF-human").id, antibody_purifications: [], lot_identifier: 2599305}
 ])
 
 Biosample.delete_all
 Biosample.create!([
-	{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS826GBM", encid: "ENCBS826GBM", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(encode_identifier: "coriell").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+	{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS826GBM", upstream: "ENCBS826GBM", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(upstream: "coriell").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
-{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS758JEW", encid: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(encode_identifier: "coriell").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS758JEW", upstream: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(upstream: "coriell").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
-{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS389LEA", encid: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
+{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS389LEA", upstream: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(upstream: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
 
-{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS488GLI", encid: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(encode_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],culture_harvest_date: "2014-06-05"}
+{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS488GLI", upstream: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by!(name: "immortalized cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(upstream: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],culture_harvest_date: "2014-06-05"}
 ])
 
 Library.delete_all

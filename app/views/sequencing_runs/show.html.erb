@@ -35,12 +35,14 @@
   	<td><%= @sequencing_run.lane %></td>
 	</tr>
 
-	<% if @sequencing_run.storage_location.present? %>
-		<tr>
-			<th><strong>Storage location:</strong></th>
-			<td><%= link_to @sequencing_run.storage_location.display, @sequencing_run.storage_location %>
-		</tr>
-	<% end %>
+	<tr>
+		<th><strong>Storage location:</strong></th>
+    <td>
+      <% if @sequencing_run.storage_location.present? %>
+	  	  <%= link_to @sequencing_run.storage_location.display, @sequencing_run.storage_location %>
+	  <% end %>
+    </td>
+	</tr>
 </table>
 
 <% if not @sequencing_run.storage_location.present? %>

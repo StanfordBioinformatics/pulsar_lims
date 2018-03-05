@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180303003048) do
+ActiveRecord::Schema.define(version: 20180305210814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 20180303003048) do
     t.string   "description",               limit: 255
     t.integer  "passage_number"
     t.date     "culture_harvest_date"
-    t.string   "encid",                     limit: 255
+    t.string   "upstream",                  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "vendor_id"
@@ -417,8 +417,8 @@ ActiveRecord::Schema.define(version: 20180303003048) do
   add_index "donor_constructs", ["vendor_id"], name: "index_donor_constructs_on_vendor_id", using: :btree
 
   create_table "donors", force: :cascade do |t|
-    t.string   "encode_identifier", limit: 255
-    t.string   "name",              limit: 255
+    t.string   "upstream",   limit: 255
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
@@ -747,8 +747,8 @@ ActiveRecord::Schema.define(version: 20180303003048) do
   add_index "single_cell_sortings", ["user_id"], name: "index_single_cell_sortings_on_user_id", using: :btree
 
   create_table "targets", force: :cascade do |t|
-    t.string   "encode_identifier", limit: 255
-    t.string   "name",              limit: 255
+    t.string   "upstream",   limit: 255
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
@@ -756,8 +756,8 @@ ActiveRecord::Schema.define(version: 20180303003048) do
     t.string   "refseq"
   end
 
-  add_index "targets", ["encode_identifier"], name: "index_targets_on_encode_identifier", unique: true, using: :btree
   add_index "targets", ["name"], name: "index_targets_on_name", unique: true, using: :btree
+  add_index "targets", ["upstream"], name: "index_targets_on_upstream", unique: true, using: :btree
   add_index "targets", ["user_id"], name: "index_targets_on_user_id", using: :btree
 
   create_table "treatment_term_names", force: :cascade do |t|
@@ -830,13 +830,13 @@ ActiveRecord::Schema.define(version: 20180303003048) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "vendors", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.string   "description",       limit: 255
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "url",               limit: 255
+    t.string   "url",         limit: 255
     t.integer  "user_id"
-    t.string   "encode_identifier"
+    t.string   "upstream"
   end
 
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree

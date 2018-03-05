@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_action :set_model_class, only: [:index, :new]
 	#before_action :check_signed_in
   after_action :verify_authorized, except: :index,
 		unless: :devise_controller?
@@ -32,6 +33,13 @@ class ApplicationController < ActionController::Base
 	end
 
 	private
+
+  def set_model_class
+    #@model_class is used particularly in the views/application_partials/_index_common_table_headers.html
+    @model_class = controller_path.classify.constantize
+    logger.debug("HOWDY")
+    logger.debug(@model_class)
+  end
 
 	def set_record(model_name, id_prop)
 		# Function : Call this method in individual controllers to set the instance variable. 

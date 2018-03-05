@@ -3,7 +3,7 @@
 	<p class="model-definition"><%= SequencingRun::DEFINITION %></p>
 
   <ul class="actions">
-    <%= render partial: "application_partials/auth_new_record", locals: {model_class: SequencingRun} %>
+    <%= render partial: "application_partials/auth_new_record", locals: {model_class: SequencingRun, nested: [@sequencing_request]} %>
   </ul>   
 </header>
 
@@ -12,9 +12,9 @@
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Comment</th>
-      <th>User</th>
       <th>Sequencing request</th>
       <th>Lane</th>
+      <th>Storage Location</th>
       <th>Comment</th>
       <th>Actions</th>
     </tr>
@@ -27,9 +27,15 @@
         <td><%= rec.comment %></td>
         <td><%= link_to rec.sequencing_request.name, rec.sequencing_request %></td>
         <td><%= rec.lane %></td>
+        <td>
+          <% if rec.storage_location.present? %>
+            <%= link_to rec.storage_location.display, rec.storage_location %>
+          <% end %>
+        </td>
+        <td><%= rec.comment %></td>
 				<td>
-					<%= link_to fa_icon("pencil"), edit_sequencing_run(library) %>
-        	<%= link_to 'Destroy', rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to fa_icon("pencil"), [:edit, rec.sequencing_request, rec] %>
+        	<%= link_to fa_icon("trash"),  [rec.sequencing_request,rec], method: :delete, data: { confirm: 'Are you sure?' } %>
 				</td>
       </tr>
     <% end %>

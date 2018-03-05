@@ -7,6 +7,9 @@
 	<%= f.association :user, as: :hidden %>
 
 	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique biosample name"} %> 
+
+  <%= f.input :description, label_html: {"data-toggle" => "tooltip", "title" => "A plain text description of the biosample. Do not include experiment details, constructs or treatments."} %>
+
 	<%= f.association :owner, collection: User.all.map { |x| [x.display,x.id]},
 			label_html: {"data-toggle" => "tooltip", "title" => "Set the user who owns the biosample if needed for tracking."} %>
 
@@ -51,8 +54,6 @@
   <%= f.association :biosample_term_name, input_html: {class: "biosample_term_name_selector"} %>
   <!-- When the user changes the value in the biosample_type selector, jQuery will update the biosample_term_name list. -->
 
-  <%= f.input :description, label_html: {"data-toggle" => "tooltip", "title" => "A plain text description of the biosample. Do not include experiment details, constructs or treatments."} %>
-
 	<%= f.association :vendor, collection: Vendor.order(:name), prompt: "Select the Vendor",
 			label_html: {"data-toggle" => "tooltip", "title" => "The originating lab or vendor."} %>
 
@@ -74,5 +75,5 @@
 	<%= f.input :submitter_comments,
 			label_html: {"data-toggle" => "tooltip", "title" => "Additional information specified by the submitter to be displayed as a comment on the portal."} %>
 
-	<%= f.input :encid, label_html: {"data-toggle" => "tooltip", "title" => "The corresponding ID for this biosample on the ENCODE Portal"} %>
+	<%= f.input :upstream, label_html: {"data-toggle" => "tooltip", "title" => "The corresponding ID for this biosample on the ENCODE Portal"} %>
 	</br>

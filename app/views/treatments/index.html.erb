@@ -3,7 +3,7 @@
   <p class="model-definition"><%= Treatment::DEFINITION %></p>                                 
                                                                                                        
   <ul class="actions">                                                                                 
-    <%= render partial: "application_partials/auth_new_record", locals: {model_class: Treatment} %>
+    <%= render partial: "application_partials/auth_new_record" %>
   </ul>                                                                                                
 </header>
 
@@ -27,7 +27,7 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
-        <td><%= rec.treatment_term_name %></td>
+        <td><%= link_to rec.treatment_term_name.name, rec.treatment_term_name %></td>
         <td><%= rec.description %></td>
         <td><%= rec.treatment_type %></td>
         <td><%= rec.concentration %></td>

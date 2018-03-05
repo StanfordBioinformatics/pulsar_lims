@@ -3,14 +3,14 @@
 	<p class="model-definition"><%= FileReference::DEFINITION %></p>
   
   <ul class="actions">
-    <%= render partial: "application_partials/auth_new_record", locals: {model_class: FileReference} %>
+    <%= render partial: "application_partials/auth_new_record" %>
   </ul> 
 </header>
 
 <table class="attributes index">
   <thead>
     <tr>
-      <%= render partial: "application_partials/index_common_table_headers", locals: {no_name: true} %>
+      <%= render partial: "application_partials/index_common_table_headers", locals: {model: FileReference} %>
       <th>File path</th>
       <th>Data storage</th>
 			<th>Data file type</th>
@@ -22,7 +22,7 @@
   <tbody>
     <% @records.each do |rec| %>
       <tr>
-        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec, no_name: true} %>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= link_to rec.file_path, rec %></td>
         <td><%= link_to rec.data_storage.name, rec.data_storage %></td>
 				<td><%= link_to rec.data_file_type.name, rec.data_file_type %></td>

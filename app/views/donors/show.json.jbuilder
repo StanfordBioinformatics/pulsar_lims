@@ -1,1 +1,1 @@
-json.extract! @donor, :id, :encode_identifier, :name, :created_at, :updated_at
+json.extract! @donor, :id, :upstream, :name, :created_at, :updated_at
