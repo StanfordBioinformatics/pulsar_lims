@@ -36,7 +36,7 @@ class BarcodesController < ApplicationController
 
     respond_to do |format|
       if @barcode.update(barcode_params)
-        format.html { redirect_to @barcode, notice: 'Barcode was successfully updated.' }
+        format.html { redirect_to [@sequencing_library_prep_kit, @barcode], notice: 'Barcode was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
