@@ -1,6 +1,6 @@
 <%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @barcode } %>
 <header>
-  <h1><%= @barcode.name %>on <%= @sequencing_library_prep_kit.name%></h1>
+  <h1><%= "#{@barcode.name} on #{@sequencing_library_prep_kit.name}" %></h1>
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_edit_record", locals: {record: @barcode, nested: @sequencing_library_prep_kit } %>
