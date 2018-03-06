@@ -36,9 +36,10 @@ class ApplicationController < ActionController::Base
 
   def set_model_class
     #@model_class is used particularly in the views/application_partials/_index_common_table_headers.html
-    @model_class = controller_path.classify.constantize
-    logger.debug("HOWDY")
-    logger.debug(@model_class)
+    begin
+      @model_class = controller_path.classify.constantize
+    rescue NameError #i.e. NameError (uninitialized constant Welcome)
+    end
   end
 
 	def set_record(model_name, id_prop)
