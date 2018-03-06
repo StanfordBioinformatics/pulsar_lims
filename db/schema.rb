@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305210814) do
+ActiveRecord::Schema.define(version: 20180306014716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,12 +64,14 @@ ActiveRecord::Schema.define(version: 20180305210814) do
     t.string   "name",                      limit: 255
     t.integer  "user_id"
     t.integer  "target_id"
+    t.string   "upstream"
   end
 
   add_index "antibodies", ["isotype_id"], name: "index_antibodies_on_isotype_id", using: :btree
   add_index "antibodies", ["name"], name: "index_antibodies_on_name", unique: true, using: :btree
   add_index "antibodies", ["organism_id"], name: "index_antibodies_on_organism_id", using: :btree
   add_index "antibodies", ["target_id"], name: "index_antibodies_on_target_id", using: :btree
+  add_index "antibodies", ["upstream"], name: "index_antibodies_on_upstream", unique: true, using: :btree
   add_index "antibodies", ["user_id"], name: "index_antibodies_on_user_id", using: :btree
   add_index "antibodies", ["vendor_id"], name: "index_antibodies_on_vendor_id", using: :btree
 
@@ -159,7 +161,6 @@ ActiveRecord::Schema.define(version: 20180305210814) do
     t.string   "description",               limit: 255
     t.integer  "passage_number"
     t.date     "culture_harvest_date"
-    t.string   "upstream",                  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "vendor_id"
@@ -175,6 +176,7 @@ ActiveRecord::Schema.define(version: 20180305210814) do
     t.integer  "from_prototype_id"
     t.boolean  "plated",                                default: false
     t.integer  "owner_id"
+    t.string   "upstream"
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
@@ -184,6 +186,7 @@ ActiveRecord::Schema.define(version: 20180305210814) do
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
   add_index "biosamples", ["owner_id"], name: "index_biosamples_on_owner_id", using: :btree
   add_index "biosamples", ["parent_biosample_id"], name: "index_biosamples_on_parent_biosample_id", using: :btree
+  add_index "biosamples", ["upstream"], name: "index_biosamples_on_upstream", unique: true, using: :btree
   add_index "biosamples", ["user_id"], name: "index_biosamples_on_user_id", using: :btree
   add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id", using: :btree
   add_index "biosamples", ["well_id"], name: "index_biosamples_on_well_id", using: :btree
@@ -304,12 +307,14 @@ ActiveRecord::Schema.define(version: 20180305210814) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "genomic_integration_site_id"
+    t.string   "upstream"
   end
 
   add_index "crispr_modifications", ["biosample_id"], name: "index_crispr_modifications_on_biosample_id", using: :btree
   add_index "crispr_modifications", ["donor_construct_id"], name: "index_crispr_modifications_on_donor_construct_id", using: :btree
   add_index "crispr_modifications", ["genomic_integration_site_id"], name: "index_crispr_modifications_on_genomic_integration_site_id", using: :btree
   add_index "crispr_modifications", ["name"], name: "index_crispr_modifications_on_name", unique: true, using: :btree
+  add_index "crispr_modifications", ["upstream"], name: "index_crispr_modifications_on_upstream", unique: true, using: :btree
   add_index "crispr_modifications", ["user_id"], name: "index_crispr_modifications_on_user_id", using: :btree
 
   create_table "data_file_types", force: :cascade do |t|
@@ -365,10 +370,12 @@ ActiveRecord::Schema.define(version: 20180305210814) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.boolean  "is_protocol"
+    t.string   "upstream"
   end
 
   add_index "documents", ["document_type_id"], name: "index_documents_on_document_type_id", using: :btree
   add_index "documents", ["name"], name: "index_documents_on_name", unique: true, using: :btree
+  add_index "documents", ["upstream"], name: "index_documents_on_upstream", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
   create_table "documents_libraries", id: false, force: :cascade do |t|
@@ -424,6 +431,7 @@ ActiveRecord::Schema.define(version: 20180305210814) do
     t.integer  "user_id"
   end
 
+  add_index "donors", ["upstream"], name: "index_donors_on_upstream", unique: true, using: :btree
   add_index "donors", ["user_id"], name: "index_donors_on_user_id", using: :btree
 
   create_table "experiment_types", force: :cascade do |t|
@@ -492,6 +500,7 @@ ActiveRecord::Schema.define(version: 20180305210814) do
     t.integer  "from_prototype_id"
     t.integer  "concentration_unit_id"
     t.boolean  "plated",                                      default: false
+    t.string   "upstream"
   end
 
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree
@@ -503,6 +512,7 @@ ActiveRecord::Schema.define(version: 20180305210814) do
   add_index "libraries", ["nucleic_acid_term_id"], name: "index_libraries_on_nucleic_acid_term_id", using: :btree
   add_index "libraries", ["paired_barcode_id"], name: "index_libraries_on_paired_barcode_id", using: :btree
   add_index "libraries", ["sequencing_library_prep_kit_id"], name: "index_libraries_on_sequencing_library_prep_kit_id", using: :btree
+  add_index "libraries", ["upstream"], name: "index_libraries_on_upstream", unique: true, using: :btree
   add_index "libraries", ["user_id"], name: "index_libraries_on_user_id", using: :btree
   add_index "libraries", ["vendor_id"], name: "index_libraries_on_vendor_id", using: :btree
 
@@ -669,8 +679,10 @@ ActiveRecord::Schema.define(version: 20180305210814) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "upstream"
   end
 
+  add_index "sequencing_platforms", ["upstream"], name: "index_sequencing_platforms_on_upstream", unique: true, using: :btree
   add_index "sequencing_platforms", ["user_id"], name: "index_sequencing_platforms_on_user_id", using: :btree
 
   create_table "sequencing_requests", force: :cascade do |t|
@@ -739,11 +751,13 @@ ActiveRecord::Schema.define(version: 20180305210814) do
     t.integer  "starting_biosample_id"
     t.integer  "library_prototype_id"
     t.string   "fluorescence_intensity_file"
+    t.string   "upstream"
   end
 
   add_index "single_cell_sortings", ["library_prototype_id"], name: "index_single_cell_sortings_on_library_prototype_id", using: :btree
   add_index "single_cell_sortings", ["sorting_biosample_id"], name: "index_single_cell_sortings_on_sorting_biosample_id", using: :btree
   add_index "single_cell_sortings", ["starting_biosample_id"], name: "index_single_cell_sortings_on_starting_biosample_id", using: :btree
+  add_index "single_cell_sortings", ["upstream"], name: "index_single_cell_sortings_on_upstream", unique: true, using: :btree
   add_index "single_cell_sortings", ["user_id"], name: "index_single_cell_sortings_on_user_id", using: :btree
 
   create_table "targets", force: :cascade do |t|
@@ -784,10 +798,12 @@ ActiveRecord::Schema.define(version: 20180305210814) do
     t.float    "temperature"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "upstream"
   end
 
   add_index "treatments", ["concentration_unit_id"], name: "index_treatments_on_concentration_unit_id", using: :btree
   add_index "treatments", ["treatment_term_name_id"], name: "index_treatments_on_treatment_term_name_id", using: :btree
+  add_index "treatments", ["upstream"], name: "index_treatments_on_upstream", unique: true, using: :btree
   add_index "treatments", ["user_id"], name: "index_treatments_on_user_id", using: :btree
 
   create_table "uberons", force: :cascade do |t|
@@ -840,6 +856,7 @@ ActiveRecord::Schema.define(version: 20180305210814) do
   end
 
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree
+  add_index "vendors", ["upstream"], name: "index_vendors_on_upstream", unique: true, using: :btree
   add_index "vendors", ["user_id"], name: "index_vendors_on_user_id", using: :btree
 
   create_table "wells", force: :cascade do |t|

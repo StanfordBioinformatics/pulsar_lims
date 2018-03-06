@@ -9,6 +9,7 @@ class SingleCellSorting < ActiveRecord::Base
 	has_many :analyses, dependent: :destroy
 	has_many :plates, dependent: :destroy
 
+  validates  :upstream, uniqueness: true, allow_nil: true 
 	validates :name, presence: true, uniqueness: true
 	validates :starting_biosample, presence: true #single cell sorting exp. must start with a biosample having cells to sort.
 

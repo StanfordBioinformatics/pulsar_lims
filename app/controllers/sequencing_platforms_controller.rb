@@ -60,6 +60,6 @@ class SequencingPlatformsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_platform_params
-      params.require(:sequencing_platform).permit(:name)
+      params.require(:sequencing_platform).permit(:upstream, :name)
     end
 end

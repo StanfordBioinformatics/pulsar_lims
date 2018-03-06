@@ -3,6 +3,7 @@ class SequencingPlatform < ActiveRecord::Base
 	DEFINITION = "The type of sequencing machine, i.e. Illumina MiSeq, Illumina HiSeq 4000.  Model abbreviation: #{ABBR}"
 	belongs_to :user
 
+  validates  :upstream, uniqueness: true, allow_nil: true 
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
 
 	scope :persisted, lambda { where.not(id: nil) }

@@ -11,8 +11,8 @@ class Vendor < ActiveRecord::Base
 	has_many :sequencing_library_prep_kits
 	belongs_to :user
 	
+  validates  :upstream, uniqueness: true, allow_nil: true 
 	validates :name, presence: true, uniqueness: true
-	validates :upstream, uniqueness: true, allow_blank: true
 
 	scope :persisted, lambda { where.not(id: nil) }
 
