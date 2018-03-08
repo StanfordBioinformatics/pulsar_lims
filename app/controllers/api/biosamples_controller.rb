@@ -51,6 +51,6 @@ class Api::BiosamplesController < Api::ApplicationController
 	end
 
 	def biosample_params
-		params.require(:biosample).permit(:owner_id, :prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :culture_harvest_date, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], crispr_construct_ids: [])
+		params.require(:biosample).permit(:owner_id, :prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :date_biosample_taken, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], crispr_construct_ids: [])
 	end
 end

@@ -742,7 +742,7 @@ Biosample.create!([
 
 {user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS389LEA", upstream: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by!(name: "cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(upstream: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
 
-{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS488GLI", upstream: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by!(name: "cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(upstream: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],culture_harvest_date: "2014-06-05"}
+{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS488GLI", upstream: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by!(name: "cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(upstream: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],:date_biosample_taken "2014-06-05"}
 ])
 
 Library.delete_all

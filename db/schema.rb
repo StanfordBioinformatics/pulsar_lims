@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180306014716) do
+ActiveRecord::Schema.define(version: 20180308080106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 20180306014716) do
     t.string   "vendor_product_identifier", limit: 255
     t.string   "description",               limit: 255
     t.integer  "passage_number"
-    t.date     "culture_harvest_date"
+    t.date     "date_biosample_taken"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "vendor_id"
