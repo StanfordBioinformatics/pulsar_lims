@@ -17,7 +17,7 @@ class BiosampleTermName < ActiveRecord::Base
 	# 2) whole organism (Uberon),
 	# 3) primary cell (CL),
 	# 4) stem cell (CL),
-	# 5) immortalized cell line (EFO),
+	# 5) cell line (EFO),
 	# 6) in vitro differentiated cell (CL or EFO),
 	# 7) induced pluripotent stem cell (EFO)
 	#
