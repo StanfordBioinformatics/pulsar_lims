@@ -32,7 +32,7 @@ class BiosamplesController < ApplicationController
   end
 
   def index
-    @records = policy_scope(Biosample).order("lower(name)").page params[:page]
+    @records = policy_scope(Biosample.where({well: nil})).order("lower(name)").page params[:page]
   end
 
   def show
