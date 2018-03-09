@@ -11,6 +11,7 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
+      <th>Tissue?</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= rec.tissue %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_biosample_type_path(rec) %>
         	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>

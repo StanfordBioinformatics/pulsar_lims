@@ -2,7 +2,7 @@ class ReferenceGenomesController < ApplicationController
   before_action :set_reference_genome, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(ReferenceGenome).order("lower(name)").page params[:page]
+    @records = policy_scope(ReferenceGenome).page params[:page]
   end
 
   def show

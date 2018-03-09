@@ -2,7 +2,7 @@ class BiosampleTypesController < ApplicationController
   before_action :set_biosample_type, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(BiosampleType).order("lower(name)").page params[:page]
+    @records = policy_scope(BiosampleType).page params[:page]
   end
 
   def show
@@ -60,6 +60,6 @@ class BiosampleTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_type_params
-      params.require(:biosample_type).permit(:name)
+      params.require(:biosample_type).permit(:tissue,:name)
     end
 end

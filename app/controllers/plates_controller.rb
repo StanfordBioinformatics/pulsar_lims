@@ -11,7 +11,7 @@ class PlatesController < ApplicationController
 	end	
 
   def index
-    @records = policy_scope(Plate).order("lower(name)").page params[:page]
+    @records = policy_scope(Plate).page params[:page]
   end
 
   def show

@@ -2,7 +2,7 @@ class BiosampleTermNamesController < ApplicationController
   before_action :set_biosample_term_name, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(BiosampleTermName).order("lower(name)").page params[:page]
+    @records = policy_scope(BiosampleTermName).page params[:page]
   end
 
   def show

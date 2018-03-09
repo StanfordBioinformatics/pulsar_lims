@@ -2,7 +2,7 @@ class SequencingPlatformsController < ApplicationController
   before_action :set_sequencing_platform, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(SequencingPlatform).order("lower(name)").page params[:page]
+    @records = policy_scope(SequencingPlatform).page params[:page]
   end
 
   def show

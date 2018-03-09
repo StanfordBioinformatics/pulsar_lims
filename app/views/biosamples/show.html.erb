@@ -126,6 +126,13 @@
 	  <td><%= @biosample.passage_number %></td>
 	</tr>
 
+  <% if @biosample.biosample_type.tissue? %>
+	  <tr>
+	    <th><strong>Tissue preservation method:</strong></th>
+	    <td><%= @biosample.tissue_preservation_method %></td>
+	  </tr>
+  <% end %>
+
 	<tr>
 	  <th><strong>Date biosample taken:</strong></th>
 	  <td><%= @biosample.date_biosample_taken %></td>

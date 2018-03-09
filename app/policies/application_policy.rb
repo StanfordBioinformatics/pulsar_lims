@@ -55,7 +55,11 @@ class ApplicationPolicy
 
     def resolve
 			if user.role >= User::VIEWER_ROLE
-				return scope.all
+        if scope.column_names.include?(:name)
+  				return scope.all.order(updated_at: :desc).order(name: :asc)
+        else
+  				return scope.all.order(updated_at: :desc)
+        end
 			else
 				return scope.none
 			end

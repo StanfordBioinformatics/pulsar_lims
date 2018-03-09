@@ -2,7 +2,7 @@ class PairedBarcodesController < ApplicationController
   before_action :set_paired_barcode, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(PairedBarcode).order("lower(name)").page params[:page]
+    @records = policy_scope(PairedBarcode).page params[:page]
   end
 
   def show

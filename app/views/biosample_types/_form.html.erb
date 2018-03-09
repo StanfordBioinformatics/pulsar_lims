@@ -1,7 +1,9 @@
 <%= simple_form_for(@biosample_type) do |f| %>
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @biosample_type } %>
 
-  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique biosample type name"} %>
+  <%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique biosample type name"} %>
+
+  <%= f.input :tissue, label: "Tissue?", label_html: {"data-toggle": "tooltip", "title": "Check this box if this is a tissue-based biosample (i.e. an excision from an organ)."} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary" %>

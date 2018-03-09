@@ -25,7 +25,7 @@ class CrisprModificationsController < ApplicationController
   end
 
   def index
-    @records = policy_scope(CrisprModification).order("lower(name)").page params[:page]
+    @records = policy_scope(CrisprModification).page params[:page]
   end
 
   def show

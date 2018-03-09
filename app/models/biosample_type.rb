@@ -12,6 +12,13 @@ class BiosampleType < ActiveRecord::Base
 		ApplicationPolicy
 	end 
 
+  def cultured?
+    if tissue?
+      return false
+    end
+    return true
+  end
+
 	def self.get_biosample_term_names(biosample_type_id)
 		#Given a biosample_type, retrieves all possible biosample_term_names that can be used to indicate the term.
     biosample_type = BiosampleType.find(biosample_type_id)
@@ -37,4 +44,5 @@ class BiosampleType < ActiveRecord::Base
     end 
 		return biosample_term_name_selection
 	end
+
 end

@@ -2,7 +2,7 @@ class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(Document).order("lower(name)").page params[:page]
+    @records = policy_scope(Document).page params[:page]
   end
 
   def show

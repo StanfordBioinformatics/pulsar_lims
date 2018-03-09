@@ -35,7 +35,7 @@ class SequencingRequestsController < ApplicationController
 	end
 		
   def index
-    @records = policy_scope(SequencingRequest).order("lower(name)").page params[:page]
+    @records = policy_scope(SequencingRequest).page params[:page]
   end
 
   def show

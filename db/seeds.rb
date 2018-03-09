@@ -44,6 +44,7 @@ ConcentrationUnit.create!([
 	{user_id: admin, name: "cells" },
 	{user_id: admin, name: "cell-equivalent" },
 	{user_id: admin, name: "µg" },
+	{user_id: admin, name: "μM" },
 	{user_id: admin, name: "ng" },
 	{user_id: admin, name: "pg" },
 	{user_id: admin, name: "mg" },

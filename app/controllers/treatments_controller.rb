@@ -2,7 +2,7 @@ class TreatmentsController < ApplicationController
   before_action :set_treatment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(Treatment).order("lower(name)").page params[:page]
+    @records = policy_scope(Treatment).page params[:page]
   end
 
   def show

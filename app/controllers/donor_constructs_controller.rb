@@ -18,7 +18,7 @@ class DonorConstructsController < ApplicationController
   end	
 
   def index
-    @records = policy_scope(DonorConstruct).order("lower(name)").page params[:page]
+    @records = policy_scope(DonorConstruct).page params[:page]
   end
 
   def show

@@ -2,7 +2,7 @@ class TargetsController < ApplicationController
   before_action :set_target, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(Target).order("lower(name)").page params[:page]
+    @records = policy_scope(Target).page params[:page]
   end
 
   def show

@@ -2,7 +2,7 @@ class AntibodyPurificationsController < ApplicationController
   before_action :set_antibody_purification, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(AntibodyPurification).order("lower(name)").page params[:page]
+    @records = policy_scope(AntibodyPurification).page params[:page]
   end
 
   def show
