@@ -11,7 +11,7 @@ class SequencingLibraryPrepKitsController < ApplicationController
 	end
 
   def index
-    @records = policy_scope(SequencingLibraryPrepKit.page params[:page]
+    @records = policy_scope(SequencingLibraryPrepKit).page params[:page]
   end
 
   def show
