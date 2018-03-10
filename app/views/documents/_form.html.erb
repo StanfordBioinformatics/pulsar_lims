@@ -8,6 +8,8 @@
 	<%= f.input :uploaded_document, as: :file, label: false %><br/>
 	<%= f.association :document_type %>
 
+  <%= f.input :upstream, label_html: {"data-toggle": "tooltip", "title": "An identifier for the target on the ENCODE Portal, such as the value of the 'uuid' or 'name' property of the Portal's record entry."} %>
+
 	<div class="actions">
 		<%= f.button :submit, class: "btn-primary" %>
 	</div></br>
