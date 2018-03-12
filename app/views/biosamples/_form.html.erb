@@ -64,7 +64,7 @@
 			label_html: {"data-toggle" => "tooltip", "title" => "The lot identifier provided by the originating lab or vendor."} %>
 
 	<%= f.association :donor, collection: Donor.order(:name), label_method: :name, prompt: "Choose The Donor",
-			label_html: {"data-toggle" => "tooltip", "title" => "The donor of the biosample"} %>
+			label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The donor of the biosample"} %>
 
 	<%= f.input :passage_number,
 			label_html: {"data-toggle" => "tooltip", "title" => "In calculating passage number, include passages from the source."} %>

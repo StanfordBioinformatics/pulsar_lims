@@ -3,6 +3,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+  #Refresh the donors list in the form when the refresh fa-icon is clicked:
+  $(document).on "click", "i.refresh", (event) -> 
+    $.get "/donors/select_options", (responseText,status,jqXHR) ->
+      $(".biosample_donor select").html(responseText)
 
   load_biosample_term_name_selection = -> 
     if $(".biosample_type_selector").val()

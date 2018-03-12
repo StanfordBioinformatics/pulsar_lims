@@ -142,7 +142,9 @@ Pulsar::Application.routes.draw do
 		get :add_crispr_modification, on: :member
 	end
 
-  resources :donors
+  resources :donors do
+    get :select_options, on: :collection
+  end
 
   resources :vendors
 

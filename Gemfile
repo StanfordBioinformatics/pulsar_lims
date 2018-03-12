@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 ruby "2.2.2"
 
+#Vue.js
+gem 'vuejs-rails'
+
 #Kaminari for pagination
 gem 'kaminari'
 
