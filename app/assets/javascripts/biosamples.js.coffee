@@ -3,10 +3,35 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+  #Refresh the biosample_types list in the form when the refresh fa-icon is clicked:
+  $(document).on "click", ".biosample_biosample_type i.refresh", (event) -> 
+    $.get "/biosample_types/select_options", (responseText,status,jqXHR) ->
+      $(".biosample_type_selector").html(responseText)
+
+  #Refresh the biosample_term_names list in the form when the refresh fa-icon is clicked:
+  $(document).on "click", ".biosample_biosample_term_name i.refresh", (event) -> 
+    $.get "/biosample_term_names/select_options", (responseText,status,jqXHR) ->
+      $(".biosample_term_name_selector").html(responseText)
+
+  #Refresh the documents list in the form when the refresh fa-icon is clicked:
+  $(document).on "click", ".biosample_documents i.refresh", (event) -> 
+    $.get "/documents/select_options", (responseText,status,jqXHR) ->
+      $(".biosample_documents_selector").html(responseText)
+
   #Refresh the donors list in the form when the refresh fa-icon is clicked:
-  $(document).on "click", "i.refresh", (event) -> 
+  $(document).on "click", ".biosample_donor i.refresh", (event) -> 
     $.get "/donors/select_options", (responseText,status,jqXHR) ->
       $(".biosample_donor select").html(responseText)
+
+  #Refresh the treatmentslist in the form when the refresh fa-icon is clicked:
+  $(document).on "click", ".biosample_treatments i.refresh", (event) -> 
+    $.get "/treatments/select_options", (responseText,status,jqXHR) ->
+      $(".biosample_treatments_selector").html(responseText)
+
+  #Refresh the vendors list in the form when the refresh fa-icon is clicked:
+  $(document).on "click", ".biosample_vendor i.refresh", (event) -> 
+    $.get "/vendors/select_options", (responseText,status,jqXHR) ->
+      $(".biosample_vendor select").html(responseText)
 
   load_biosample_term_name_selection = -> 
     if $(".biosample_type_selector").val()

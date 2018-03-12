@@ -1,12 +1,11 @@
 class DonorsController < ApplicationController
   before_action :set_donor, only: [:show, :edit, :update, :destroy]
-  skip_after_action :verify_authorized, only: :select_options
 
   def select_options
     #Called via ajax. 
     #Typically called when the user selects the refresh icon in any form that has a donors input.
     @records = Donor.all
-    render layout: false
+    render "application_partials/select_options", layout: false
   end
 
   def index

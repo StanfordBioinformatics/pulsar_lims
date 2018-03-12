@@ -1,6 +1,13 @@
 class TreatmentsController < ApplicationController
   before_action :set_treatment, only: [:show, :edit, :update, :destroy]
 
+  def select_options                                                                                   
+    #Called via ajax.                                        
+    #Typically called when the user selects the refresh icon in any form that has a treatments selection.
+    @records = Treatment.all
+    render "application_partials/select_options", layout: false
+  end 
+
   def index
     @records = policy_scope(Treatment).page params[:page]
   end

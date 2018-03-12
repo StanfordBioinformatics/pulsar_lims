@@ -40,7 +40,7 @@
 
 $(function() {
   //Add refresh FontsAwesome icon too all labels with class 'refresh':
-  $("label.refresh").after('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="refresh fa fa-refresh" data-toggle="tooltip" title="Refresh list"></i>')
+  $("label.refresh").after('<i class="refresh fa fa-refresh"></i>')
   //Highlight table columns in the index views when user mouses over a table cell.
   // Note that highlighting the table rows is already taken care of in application.css thanks to
   // bootstrap's .table-hover class.

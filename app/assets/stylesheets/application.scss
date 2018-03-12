@@ -44,6 +44,11 @@
 	}
 }
 
+//Add some left margin to the refresh icons added after selection inputs (after the label)
+i.refresh {
+  margin-left: 2em;
+}
+
 .celsius {
 	&:after {
 		content: " \2103";

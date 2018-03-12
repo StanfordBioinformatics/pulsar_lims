@@ -1,6 +1,13 @@
 class BiosampleTermNamesController < ApplicationController
   before_action :set_biosample_term_name, only: [:show, :edit, :update, :destroy]
 
+  def select_options
+    #Called via ajax.
+    #Typically called when the user selects the refresh icon in any form that has a vendors selection
+    @records = BiosampleTermName.all                                         
+    render "application_partials/select_options", layout: false
+  end
+
   def index
     @records = policy_scope(BiosampleTermName).page params[:page]
   end

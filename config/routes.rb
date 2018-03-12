@@ -1,6 +1,8 @@
 Pulsar::Application.routes.draw do
 
-  resources :treatments
+  resources :treatments do
+    get :select_options, on: :collection
+  end
   resources :treatment_term_names
   resources :pcrs
   resources :pcr_master_mixes
@@ -51,8 +53,9 @@ Pulsar::Application.routes.draw do
   	resources :barcodes, except: [:index]
 	end
   resources :library_fragmentation_methods
-  resources :biosample_term_names
-
+  resources :biosample_term_names do
+    get :select_options, on: :collection
+  end
 
   resources :sequencing_centers
 
@@ -146,16 +149,21 @@ Pulsar::Application.routes.draw do
     get :select_options, on: :collection
   end
 
-  resources :vendors
+  resources :vendors do
+    get :select_options, on: :collection
+  end
 
   resources :documents do
+    get :select_options, on: :collection
 		post :save, on: :collection
 		get  :document, on: :member
 	end
 
   resources :document_types
 
-  resources :biosample_types
+  resources :biosample_types do
+    get :select_options, on: :collection
+  end
 
   resources :nucleic_acid_terms
 

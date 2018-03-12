@@ -1,0 +1,5 @@
+<% options = @records.order(:name).map {|rec| [rec.name, rec.id]} %>
+<% if not defined?(@no_blank) %>
+  <% options.unshift(["",""]) %>
+<% end %>
+<%= options_for_select(options) %>

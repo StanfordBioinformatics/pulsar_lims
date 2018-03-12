@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
   after_action :verify_policy_scoped, only: :index, 
 		unless: :devise_controller?
 
+  skip_after_action :verify_authorized, only: :select_options
+
 	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 	rescue_from ActiveRecord::DeleteRestrictionError, with: :destroy_not_allowed
 
