@@ -2,7 +2,10 @@
 
 	<%= f.association :user, as: :hidden %>
 
-	<%= f.association :data_storage, input_html: {class: "file-reference-data-storage"}, label_html: {"data-toggle": "tooltip", "title": "The bucket or project in which this file is stored."} %>
+	<%= f.association :data_storage, 
+      input_html: {class: "file-reference-data-storage"}, 
+      label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The bucket or project in which this file is stored."}
+  %>
 
 	<%= f.input :file_path, input_html: {class: "file-reference-file-path"}, label_html: {"data-toggle": "tooltip", "title": "The path to a file (or folder, depending on the context) within the bucket or project. If the referenced data storage object has a base folder path specified, then this path must be given as a relative (subpath) of the base path."}  %>
 

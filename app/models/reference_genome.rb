@@ -1,4 +1,5 @@
 class ReferenceGenome < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "RG"
 	DEFINITION = "A reference genome build for a particular organism, i.e. hg38.  Model abbreviation: #{ABBR}"
 	has_many :chromosomes, dependent: :destroy

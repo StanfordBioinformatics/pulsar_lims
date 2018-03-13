@@ -1,4 +1,5 @@
 class Address < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "AD"
 	DEFINITION = "A postal address.  Model abbreviation: #{ABBR}"
 	belongs_to :user

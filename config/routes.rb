@@ -3,7 +3,11 @@ Pulsar::Application.routes.draw do
   resources :treatments do
     get :select_options, on: :collection
   end
-  resources :treatment_term_names
+
+  resources :treatment_term_names do
+    get :select_options, on: :collection
+  end
+
   resources :pcrs
   resources :pcr_master_mixes
   resources :analyses do
@@ -13,6 +17,7 @@ Pulsar::Application.routes.draw do
   resources :file_references
   resources :data_storage_providers
   resources :data_storages do
+    get :select_options, on: :collection
 		get :get_base_path, on: :member
 		get :customize_for_data_storage_provider, on: :collection
 	end
@@ -37,16 +42,18 @@ Pulsar::Application.routes.draw do
 		# since the crispr won't have an id yet when being created, we can't use :member.
 		get :select_chromosome_on_reference_genome, on: :collection
 	end
-  resources :crispr_constructs do
-		get :select_construct_tag, on: :collection
-	end
+  resources :crispr_constructs
 
   resources :donor_constructs do
 		get :select_construct_tag, on: :collection
 	end
 
   resources :construct_tags
-  resources :cloning_vectors
+
+  resources :cloning_vectors do
+    get :select_options, on: :collection
+  end
+
   resources :genome_locations
   resources :sequencing_library_prep_kits do
 		get :paired_end_kits, on: :collection
@@ -136,7 +143,9 @@ Pulsar::Application.routes.draw do
 
   resources :organisms
 
-  resources :targets
+  resources :targets do
+    get :select_options, on: :collection
+  end
 
   resources :isotypes
 

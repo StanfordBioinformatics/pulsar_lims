@@ -1,5 +1,6 @@
 require 'enums'
 class Treatment < ActiveRecord::Base
+  include ModelConcerns
   ABBR = "TRT"
   DEFINITION = "A treatment applied to a biosample.  Model abbreviation: #{ABBR}"
   belongs_to :user

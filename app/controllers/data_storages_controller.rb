@@ -2,6 +2,13 @@ class DataStoragesController < ApplicationController
   before_action :set_data_storage, only: [:show, :edit, :update, :destroy, :get_base_path]
 	skip_after_action :verify_authorized, only: [:customize_for_data_storage_provider, :get_base_path]
 
+  def select_options                                                                                   
+    #Called via ajax.                                                                                  
+    #Typically called when the user selects the refresh icon in any form that has a data_storage input.   
+    @records = DataStorage.all                                                                               
+    render "application_partials/select_options", layout: false                                        
+  end
+
 	def get_base_path
     render text: @data_storage.folder_base_path
 	end

@@ -3,7 +3,8 @@
 
   <%= f.input :name, {"data-toggle" => "tooltip", "title" => "Unique name"} %>
   <%= f.input :description %>
-  <%= f.association :vendor, label_html: {"data-toggle" => "tooltip", "title" => "The originating lab or vendor."} %>
+  <%= f.association :vendor, 
+      label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The originating lab or vendor."} %>
   <%= f.input :product_url, label_html: {"data-toggle" => "tooltip", "title" => "Link to the vendor product."} %>
 
 	<% file_upload_hint="" %>

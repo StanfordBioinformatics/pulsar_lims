@@ -1,4 +1,5 @@
 class NucleicAcidTerm < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "NAT"
 	DEFINITION = "The type of nucleic acid, i.e. DNA, RNA, polyadenylated mRNA.  Model abbreviation: #{ABBR}"
 	has_many :libraries

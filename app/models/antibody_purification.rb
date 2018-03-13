@@ -1,4 +1,5 @@
 class AntibodyPurification < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "AP"
 	DEFINITION = "A purification method used to isolate an Antibody, i.e. affinity, IMAC. An Antibody can have many purification methods applied.  Model abbreviation: #{ABBR}"
 

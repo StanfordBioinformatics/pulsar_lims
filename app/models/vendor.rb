@@ -1,4 +1,5 @@
 class Vendor < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "V"
   DEFINITION = "A source, such as a person, lab, or industry, from where a product was procured.  Model abbreviation: #{ABBR}"
 	has_many :biosample
@@ -12,7 +13,7 @@ class Vendor < ActiveRecord::Base
 	belongs_to :user
 	
   validates  :upstream, uniqueness: true, allow_nil: true 
-	validates :name, presence: true, uniqueness: true
+	validates :name, uniqueness: true, presence: true
 
 	scope :persisted, lambda { where.not(id: nil) }
 

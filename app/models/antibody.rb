@@ -1,4 +1,5 @@
 class Antibody < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "AB"
 	DEFINITION = "An antibody that was either purchased from a third party, or created from within the lab.  Model abbreviation: #{ABBR}"
 	CLONALITY_TYPES = ["monoclonal", "polyclonal"]

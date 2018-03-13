@@ -1,4 +1,5 @@
 class ExperimentType < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "ETY"
 	DEFINITION = "The type of experiment, such as ATAC-Seq, ChIP-Seq, ... Model abbreviation: #{ABBR}"
 	belongs_to :user

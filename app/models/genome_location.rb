@@ -1,4 +1,5 @@
 class GenomeLocation < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "GL"
 	DEFINITION = "The coordinates of a genome feature on a chromosome of a particular Reference Genome.  Model abbreviation: #{ABBR}"
 	has_many :crispr_modifications

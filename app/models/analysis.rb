@@ -1,4 +1,5 @@
 class Analysis < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "AN"
 	DEFINITION = "An analysis object, which currenlty is only configured to be added to a Single Cell Sorting experiment.  Model abbreviation: #{ABBR}"
   belongs_to :protocol, class_name: "Document"

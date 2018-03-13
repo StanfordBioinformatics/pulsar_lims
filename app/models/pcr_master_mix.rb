@@ -1,4 +1,5 @@
 class PcrMasterMix < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "PCRM"
 	DEFINITION = "The master mix used in a PCR assay.  Model abbreviation: #{ABBR}"
   belongs_to :user

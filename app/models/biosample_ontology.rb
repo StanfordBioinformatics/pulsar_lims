@@ -1,4 +1,5 @@
 class BiosampleOntology < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "BO"
 	DEFINITION = "An ontology providing biosample term names and accessions. The Biosample Term Name model links to this.  Model abbreviation: #{ABBR}"
   belongs_to :user

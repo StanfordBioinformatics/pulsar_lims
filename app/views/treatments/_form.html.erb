@@ -2,7 +2,9 @@
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @treatment} %>
 
   <%= f.input :name %>
-  <%= f.association :treatment_term_name %>
+  <%= f.association :treatment_term_name,
+      label_html: {class: "refresh"}
+  %>
   <%= f.input :description %>
   <%= f.input :treatment_type, collection: Enums::TREATMENT_TYPES %>
 
@@ -31,7 +33,7 @@
   <%= f.input :temperature %>
 
   <%= f.association :documents, collection: sorted_document_name_id(), include_blank: true,            
-      label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not a data file)."} %>
+      label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not a data file)."} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

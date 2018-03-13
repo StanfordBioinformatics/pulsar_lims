@@ -1,4 +1,5 @@
 class Plate < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "PLATE"
 	DEFINITION = "A plate containing wells, each of which in turn contain a library. For example, a Single Cell Sorting experiment sorts many plates, where each well has a single cell, and is then prepared for sequencing.  Model abbreviation: #{ABBR}"
   attr_accessor :add_barcodes #used only in the show view in the form at the bottom.

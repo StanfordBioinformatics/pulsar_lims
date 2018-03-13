@@ -2,6 +2,13 @@ class CloningVectorsController < ApplicationController
   before_action :set_cloning_vector, only: [:show, :edit, :update, :destroy]
 	before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
+  def select_options                                                                                   
+    #Called via ajax.
+    #Typically called when the user selects the refresh icon in any form that has a cloning_vectors input
+    @records = CloningVector.all
+    render "application_partials/select_options", layout: false
+  end
+
   def index
     @records = policy_scope(CloningVector).page params[:page]
   end

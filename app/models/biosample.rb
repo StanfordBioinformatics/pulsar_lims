@@ -1,4 +1,5 @@
 class Biosample < ActiveRecord::Base
+  include ModelConcerns
   ABBR = "B"
   DEFINITION = "The source material (cell line, tissue sample) that one either begins an experiment with; also, any derivites of this source material that have been modified by the experimenter.  Model abbreviation: #{ABBR}"
   ###
@@ -124,6 +125,7 @@ class Biosample < ActiveRecord::Base
       return false
     end
   end
+
 
   def propagate_update_if_prototype
     #An after_update callback.

@@ -1,4 +1,5 @@
 class LibraryFragmentationMethod < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "LFM"
 	DEFINITION = "The method used to shear the DNA during Library preparation.  Model abbreviation: #{ABBR}"
   belongs_to :user

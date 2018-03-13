@@ -1,4 +1,5 @@
 class SequencingResult < ActiveRecord::Base
+  include ModelConcerns
   ABBR = "SRES"
   DEFINITION = "Represents the sequencing results for a given Library.  Model abbreviation: #{ABBR}"
   attr_accessor :barcode_id

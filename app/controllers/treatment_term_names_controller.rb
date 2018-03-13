@@ -1,6 +1,13 @@
 class TreatmentTermNamesController < ApplicationController
   before_action :set_treatment_term_name, only: [:show, :edit, :update, :destroy]
 
+  def select_options                                                                                   
+    #Called via ajax.                                                                                  
+    #Typically called when the user selects the refresh icon in any form that has a treatment_term_names input.   
+    @records = TreatmentTermName.all                                                                               
+    render "application_partials/select_options", layout: false                                        
+  end
+
   def index
     @records = policy_scope(TreatmentTermName).page params[:page]
   end

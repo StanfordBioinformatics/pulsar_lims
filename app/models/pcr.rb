@@ -1,4 +1,5 @@
 class Pcr < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "PCR"
 	DEFINITION = "A PCR assay.  Model abbreviation: #{ABBR}"
   belongs_to :user

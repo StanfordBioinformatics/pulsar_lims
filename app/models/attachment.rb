@@ -1,4 +1,5 @@
 class Attachment < ActiveRecord::Base
+  include ModelConcerns
 	DEFINITION = "DEPRECATED! Will soon be removed."
 	#mount_uploader :file, AttachmentUploader
 	belongs_to :user

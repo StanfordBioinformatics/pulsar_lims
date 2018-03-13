@@ -1,4 +1,5 @@
 class Well < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "WELL"
   DEFINITION = "A well of a plate, such as a PCR plate or any other plate that holds individual samples in the lab.  Model abbreviation: #{ABBR}"
 	#has_one :biosample, dependent: :destroy #i.e. in single cell experiments. Each sorted cell is a biosample in a well.

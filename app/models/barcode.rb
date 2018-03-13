@@ -1,4 +1,5 @@
 class Barcode < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "BC"
 	DEFINITION = "A single, contiguous barcode sequence that belongs to a Sequencing Library Prep Kit. Can be either an index1 barcode or an index2 barcode in the case of paired-end sequencing.  Model abbreviation: #{ABBR}"
 	has_many :libraries

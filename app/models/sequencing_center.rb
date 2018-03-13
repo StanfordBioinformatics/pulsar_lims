@@ -1,4 +1,5 @@
 class SequencingCenter < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "SC"
 	DEFINITION = "A facility that sequences your libraries.  Model abbreviation: #{ABBR}"
 	belongs_to :user

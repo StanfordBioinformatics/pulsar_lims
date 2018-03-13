@@ -1,4 +1,5 @@
 class ConcentrationUnit < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "CU"
 	DEFINITION = "The concentration of a substance in a mixture, i.e. DNA concentration in a library preparation.  Model abbreviation: #{ABBR}"
   belongs_to :user

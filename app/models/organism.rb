@@ -1,4 +1,5 @@
 class Organism < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "ORG"
   DEFINITION = "Scientific name for a species.  Model abbreviation: #{ABBR}"
 	has_many :antibodies

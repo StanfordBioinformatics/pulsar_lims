@@ -1,4 +1,5 @@
 class Chromosome < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "CHR"
 	DEFINITION = "A chromosome identifier of a particular reference genome build.  Model abbreviation: #{ABBR}"
 	has_many :genome_locations

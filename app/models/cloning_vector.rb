@@ -1,4 +1,5 @@
 class CloningVector < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "CV"
 	DEFINITION = "The vector backbone that you use to insert DNA of interest for cloning.  Model abbreviation: #{ABBR}"
 	has_many :crispr_constructs
@@ -6,7 +7,7 @@ class CloningVector < ActiveRecord::Base
   belongs_to :user
 	belongs_to :vendor
 
-	validates :name, uniqueness: true
+	validates :name, uniqueness: true, presence: true
 	validates :vendor_id, presence: true
 	validates :product_url, uniqueness: {message: "must be unique"}, allow_blank: true
 

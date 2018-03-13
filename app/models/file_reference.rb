@@ -1,4 +1,5 @@
 class FileReference < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "FR"
 	DEFINITION = "Refers to a file or folder within a specific Data Storage object.  Model abbreviation: #{ABBR}"
   belongs_to :user

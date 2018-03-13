@@ -1,4 +1,5 @@
 class Document < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "DOC"
 	DEFINITION = "A general purpose document that may be referenced across different objects, and that is uploaded directly to the database. These are typically protocol documents, which are often reused. For a document that is more specific (i.e. one-time-use), it's better to upload it to a specific Data Storage location and then refernce this using a File Reference on the dependent object.  Model abbreviation: #{ABBR}"
 	#The is_protocol bool column has a default of false.

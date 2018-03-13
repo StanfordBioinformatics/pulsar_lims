@@ -2,6 +2,7 @@ class BarcodeNotFoundError < StandardError
 end
 
 class Library < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "L"
 	DEFINITION = "A sequencing library that is prepared for sequencing.  Model abbreviation: #{ABBR}"
 	#The is_control bool column has a default of false.

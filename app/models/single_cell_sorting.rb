@@ -1,4 +1,5 @@
 class SingleCellSorting < ActiveRecord::Base
+  include ModelConcerns
 	ABBR = "SCS"
 	DEFINITION = "Any single cell sorting type of experiment that results in one or more Plates, where each well on a plate contains a single cell. This can be used in the context of scATAC-Seq, or scRNA-Seq, for example.  Model abbreviation: #{ABBR}"
 	belongs_to :library_prototype, class_name: "Library", dependent: :destroy
