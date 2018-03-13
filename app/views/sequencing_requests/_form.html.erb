@@ -64,8 +64,16 @@
   <%= f.input_field :concentration_unit_id, collection: ConcentrationUnit.all %>
   </br></br>
 					
-  <%= f.association :sequencing_platform, collection: SequencingPlatform.order(:name), label_method: :name, prompt: "Select the Sequencing Platform" %>
-  <%= f.association :sequencing_center, collection: SequencingCenter.order(:name), label_method: :name, prompt: "Select the Sequencing Center" %>
+  <%= f.association :sequencing_platform, 
+      collection: SequencingPlatform.order(:name), 
+      label_html: {class: "refresh"},
+      label_method: :name %>
+
+  <%= f.association :sequencing_center, 
+      collection: SequencingCenter.order(:name), 
+      label_html: {class: "refresh"},
+      label_method: :name %>
+
 	<%= f.input :paired_end %>
   <%= f.input :shipped, label_html: {"data-toggle" => "tooltip", "title" => "Whether the material to be sequenced was already delivered to the sequencing center"} %>
 

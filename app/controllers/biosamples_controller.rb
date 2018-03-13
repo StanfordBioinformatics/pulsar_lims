@@ -3,6 +3,12 @@ class BiosamplesController < ApplicationController
   before_action :set_biosample, only: [:show, :edit, :update, :destroy, :delete_biosample_document,:add_crispr_modification]
 	skip_after_action :verify_authorized, only: [:select_biosample_term_name,:add_crispr_modification]
 
+  def select_options
+    #Called via ajax.
+    #Typically called when the user selects the refresh icon in any form that has a biosamples selection.
+    @records = Biosample.where({well: nil})
+    render "application_partials/select_options", layout: false
+  end
 
 	def add_crispr_modification
 		@biosample.build_crispr_modification({user: current_user})
@@ -13,10 +19,10 @@ class BiosamplesController < ApplicationController
   def select_biosample_term_name
     biosample_type = BiosampleType.find(params[:biosample_type_selector])
 		biosample_term_name_id = params[:biosample_term_name_selector]
-		#here I pass in param biosample_term_name_selector in biosamples.js.coffee in order to save the 
+		#here I pass in param biosample_term_name_selector in biosamples.js.coffee in order to save the
 		# selected biosample_term_name, if there is one selected. That way, if there is a validation error
-		# when the user submits the form (perhaps regarding some other field), I can set the biosample_term_name 
-    # to what the user had already set it to.  Normally, it would be reset to what it was since on a page re-render, 
+		# when the user submits the form (perhaps regarding some other field), I can set the biosample_term_name
+    # to what the user had already set it to.  Normally, it would be reset to what it was since on a page re-render,
 		# the AJAX request goes through again to repopulate the list of possible values for the biosample_term_name, based on teh
 		# biosample_type selection.
     biosample_term_name = nil
@@ -53,7 +59,7 @@ class BiosamplesController < ApplicationController
     @biosample = Biosample.new(biosample_params)
 		@biosample.user = current_user
 		#@biosample = add_documents(@biosample,params[:biosample][:document_ids])
-		
+
     #render json: biosample_params
     #return
     respond_to do |format|
@@ -85,8 +91,8 @@ class BiosamplesController < ApplicationController
         if action.present?
           #set again for next request.
           flash[:action] = action
-        end 
-        format.html { render flash[:action] || 'edit' } 
+        end
+        format.html { render flash[:action] || 'edit' }
         format.json { render json: @biosample.errors, status: :unprocessable_entity }
       end
     end

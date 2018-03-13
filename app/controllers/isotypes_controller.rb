@@ -1,6 +1,13 @@
 class IsotypesController < ApplicationController
   before_action :set_isotype, only: [:show, :edit, :update, :destroy]
 
+  def select_options
+    #Called via ajax.
+    #Typically called when the user selects the refresh icon in any form that has a isotypes selection.
+    @records = Isotype.all
+    render "application_partials/select_options", layout: false
+  end
+
   def index
     @records = policy_scope(Isotype).page params[:page]
   end

@@ -32,11 +32,15 @@
        user will have been presented with this form again to correct it, 
        and I set the default selectioned to what the user had originally, 
        if any. -->
-	<%= f.association :antibody_purifications, label: "Add antibody purifications", collection: sorted_antibody_purification_name_id(), prompt: "Select antibody purifications",
-			label_html: {"data-toggle" => "tooltip", "title" => "Purification protocol(s) used to isolate the antibody."} %>
+	<%= f.association :antibody_purifications, 
+      label: "Add antibody purifications", 
+      include_blank: true,
+      collection: sorted_antibody_purification_name_id(), 
+			label_html: {class: "refresh", "data-toggle": "tooltip", "title": "Purification protocol(s) used to isolate the antibody."} %>
 
-  <%= f.association :vendor, collection: Vendor.order(:name), label_method: :name, prompt: "Select the Vendor",
-			label_html: {"data-toggle" => "tooltip", "title" => "The originating lab or vendor."} %>
+  <%= f.association :vendor, collection: Vendor.order(:name),
+      label_method: :name, 
+			label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The originating lab or vendor."} %>
 
   <%= f.input :vendor_product_identifier,
 			label_html: {"data-toggle" => "tooltip", "title" => "The product identifier provided by the originating lab or vendor."} %>
@@ -44,11 +48,13 @@
   <%= f.input :vendor_product_url,
 			label_html: {"data-toggle" => "tooltip", "title" => "An external resource with additional information about the antibody."} %>
 
-  <%= f.association :isotype, collection: Isotype.order(:name), label_method: :name, prompt: "Select the Isotype",
-			label_html: {"data-toggle" => "tooltip", "title" => "The class of antibody ( e.g. IgA, IgD, IgE, IgG or IgM)"} %>
+  <%= f.association :isotype, collection: Isotype.order(:name),
+      label_method: :name,
+			label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The class of antibody ( e.g. IgA, IgD, IgE, IgG or IgM)"} %>
 
-  <%= f.association :target, collection: Target.order(:name), label_method: :name, prompt: "Select the Target",
-			label_html: {"data-toggle" => "tooltip", "title" => "The name of the gene whose expression or product is the intended goal of the antibody."} %>
+  <%= f.association :target, collection: Target.order(:name), 
+      label_method: :name,
+			label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The name of the gene whose expression or product is the intended goal of the antibody."} %>
 
   <%= f.input :lot_identifier,
 			label_html: {"data-toggle" => "tooltip", "title" => "The lot identifier provided by the originating lab or vendor."} %>

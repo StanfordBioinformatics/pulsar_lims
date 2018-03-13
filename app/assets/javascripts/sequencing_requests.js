@@ -1,3 +1,21 @@
+
+
+$(function() {
+  //Refresh the sequencing_platforms list in the form when the refresh fa-icon is clicked:                           
+  $(document).on("click", ".sequencing_request_sequencing_platform i.refresh", function(event){
+    $.get("/sequencing_platforms/select_options", function (responseText,status,jqXHR){
+      $(".sequencing_request_sequencing_platform select").html(responseText);
+    })
+  })
+
+  //Refresh the sequencing_centers list in the form when the refresh fa-icon is clicked:                           
+  $(document).on("click", ".sequencing_request_sequencing_center i.refresh", function(event){
+    $.get("/sequencing_centers/select_options", function (responseText,status,jqXHR){
+      $(".sequencing_request_sequencing_center select").html(responseText);
+    })
+  })
+});
+
 //Set up handler for when the user wants to remove a library on the edit page.
 $(document).on("click",".remove_library", function(event) {
   $parentSelector = $(this).closest(".sequencing_request_libraries");

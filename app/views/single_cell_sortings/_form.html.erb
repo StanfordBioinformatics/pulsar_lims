@@ -3,7 +3,7 @@
   <%= f.input :name %>
   <%= f.input :description %>
 	<%= f.association :starting_biosample, collection: Biosample.non_plated,
-			label_html: { "data-toggle": "tooltip", "title": "The biosample that is used as input sorting material." } %>
+			label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The biosample that is used as input sorting material." } %>
 
 	<% file_upload_hint="" %>
 	<% if @single_cell_sorting.fluorescence_intensity_file.present? %>

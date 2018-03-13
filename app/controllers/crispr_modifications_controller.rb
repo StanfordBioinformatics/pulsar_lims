@@ -2,6 +2,12 @@ class CrisprModificationsController < ApplicationController
   before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy, :new_pcr_validation]
   skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct, :new_pcr_validation]
 
+  def select_options                                                                                   
+    #Called via ajax.
+    #Typically called when the user selects the refresh icon in any form that has a crispr_modifications selection.
+    @records = CrisprModification.all
+    render "application_partials/select_options", layout: false             
+  end
 
 	def new_pcr_validation
 		@pcr = @crispr.pcr_validations.build

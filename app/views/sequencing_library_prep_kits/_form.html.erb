@@ -4,7 +4,8 @@
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library prep kit name"} %>
   <%= f.input :description %>
   <%= f.association :vendor,
-  		label_html: {"data-toggle" => "tooltip", "title" => "Select the vendor of the library prep kit."} %>
+  		label_html: {class: "refresh", "data-toggle": "tooltip", "title": "Select the vendor of the library prep kit."} %>
+
 	<%= f.input :vendor_product_identifier %>
 	<%= f.input :supports_paired_end, 
 			label_html: {"data-toggle" => "tooltip", "title" => "Select if this kit can support paired-end sequencing (contains index2 barcodes)."}  %>
@@ -30,7 +31,7 @@
   <% end %>
 
   <%= f.association :documents, collection: sorted_document_name_id(), include_blank: true, 
-      label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not a data file)."} %>
+      label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not a data file)."} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

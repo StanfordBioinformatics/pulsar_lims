@@ -1,10 +1,10 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @data_file_type.user } %>
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @data_file_type } %>
 <header>
   <h1><%= @data_file_type.name %></h1>
 
   <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @data_file_type.user} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @data_file_type.user} %>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @data_file_type} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @data_file_type} %>
   </ul>
 </header>
 

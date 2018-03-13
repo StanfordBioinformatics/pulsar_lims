@@ -2,6 +2,13 @@ class SequencingLibraryPrepKitsController < ApplicationController
   before_action :set_sequencing_library_prep_kit, only: [:show, :edit, :update, :destroy]
 	skip_after_action :verify_authorized, only: [:paired_end_kits]
 
+  def select_options
+    #Called via ajax.
+    #Typically called when the user selects the refresh icon in any form that has a sequencing_library_prep_kits selection.
+    @records = SequencingLibraryPrepKit.all                                                                        
+    render "application_partials/select_options", layout: false
+  end 
+
 	def paired_end_kits
 		@pe_kits = SequencingLibraryPrepKit.paired_end_kits() #returns the entire objects in a list
 		ids = @pe_kits.map do |x|

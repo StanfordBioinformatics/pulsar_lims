@@ -1,6 +1,13 @@
 class DataFileTypesController < ApplicationController
   before_action :set_data_file_type, only: [:show, :edit, :update, :destroy]
 
+  def select_options                                                                                   
+    #Called via ajax.                                                                                  
+    #Typically called when the user selects the refresh icon in any form that has a data_file_types selection.
+    @records = DataFileType.all
+    render "application_partials/select_options", layout: false                                        
+  end
+
   def index
     @records = policy_scope(DataFileType).page params[:page]
   end

@@ -1,8 +1,8 @@
 <%= simple_form_for(@pcr_master_mix) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @pcr_master_mix} %>
+	<%= render partial:  "application_partials/show_form_error_messages", locals: {model_obj: @pcr_master_mix} %>
 
 	<%= f.input :name %>
-	<%= f.association :vendor %>
+	<%= f.association :vendor, label_html: {class: "refresh"} %>
 	<%= f.input :vendor_product_identifier %>
 	<%= f.input :vendor_product_url %>
 	<%= f.input :lot_identifier %>

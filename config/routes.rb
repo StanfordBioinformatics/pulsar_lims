@@ -9,11 +9,15 @@ Pulsar::Application.routes.draw do
   end
 
   resources :pcrs
-  resources :pcr_master_mixes
+  resources :pcr_master_mixes do
+    get :select_options, on: :collection
+  end
   resources :analyses do
 		get :add_merged_file, on: :collection
 	end
-  resources :data_file_types
+  resources :data_file_types do
+    get :select_options, on: :collection
+  end
   resources :file_references
   resources :data_storage_providers
   resources :data_storages do
@@ -35,6 +39,7 @@ Pulsar::Application.routes.draw do
 	end
   resources :paired_barcodes
   resources :crispr_modifications do
+    get :select_options, on: :collection
 		#crisprs only belong to biosamples.
 		get :new_pcr_validation, on: :member
 		get :select_crispr_construct, on: :collection
@@ -56,6 +61,7 @@ Pulsar::Application.routes.draw do
 
   resources :genome_locations
   resources :sequencing_library_prep_kits do
+    get :select_options, on: :collection
 		get :paired_end_kits, on: :collection
   	resources :barcodes, except: [:index]
 	end
@@ -64,7 +70,9 @@ Pulsar::Application.routes.draw do
     get :select_options, on: :collection
   end
 
-  resources :sequencing_centers
+  resources :sequencing_centers do
+    get :select_options, on: :collection
+  end
 
 	namespace :api do
 		resources :biosamples
@@ -130,7 +138,9 @@ Pulsar::Application.routes.draw do
 
   resources :experiment_types
 
-  resources :sequencing_platforms
+  resources :sequencing_platforms do
+    get :select_options, on: :collection
+  end
 
   resources :libraries do
 		get :select_paired_barcode, on: :collection
@@ -139,7 +149,9 @@ Pulsar::Application.routes.draw do
 
   resources :antibodies
 
-	resources :antibody_purifications
+	resources :antibody_purifications do
+    get :select_options, on: :collection
+  end 
 
   resources :organisms
 
@@ -147,9 +159,12 @@ Pulsar::Application.routes.draw do
     get :select_options, on: :collection
   end
 
-  resources :isotypes
+  resources :isotypes do
+    get :select_options, on: :collection
+  end
 
   resources :biosamples do
+    get :select_options, on: :collection
 		get :select_biosample_term_name, on: :collection
 		get :add_crispr_modification, on: :member
 	end

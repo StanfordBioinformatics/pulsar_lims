@@ -1,6 +1,13 @@
 class PcrMasterMixesController < ApplicationController
   before_action :set_pcr_master_mix, only: [:show, :edit, :update, :destroy]
 
+  def select_options
+    #Called via ajax.
+    #Typically called when the user selects the refresh icon in any form that has a pcr_master_mixes selection.
+    @records = PcrMasterMix.all
+    render "application_partials/select_options", layout: false
+  end
+
   def index
     @records = policy_scope(PcrMasterMix).page params[:page]
   end
@@ -48,11 +55,8 @@ class PcrMasterMixesController < ApplicationController
   end
 
   def destroy
-    @pcr_master_mix.destroy
-    respond_to do |format|
-      format.html { redirect_to pcr_master_mixes_url }
-      format.json { head :no_content }
-    end
+    authorize @pcr_master_mix
+    ddestroy(@pcr_master_mix, pcr_master_mixes_path)
   end
 
   private

@@ -3,6 +3,12 @@ class SequencingRequestsController < ApplicationController
 	before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 	skip_after_action :verify_authorized, only: [:select_library,:select_scs, :select_scs_plates]
 
+  def select_options                                                                                   
+    #Called via ajax.                                                                                  
+    #Typically called when the user selects the refresh icon in any form that has a sequencing_library_prep_kits selection.
+    @records = SequencingLibraryPrepKit.all                                                             
+    render "application_partials/select_options", layout: false                                        
+  end 
 
 	def select_scs
 		render layout: false

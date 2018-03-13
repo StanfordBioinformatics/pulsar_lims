@@ -4,6 +4,11 @@
 
 
 $ -> 
+  #Refresh the starting_biosample list in the form when the refresh fa-icon is clicked:
+  $(document).on "click", ".single_cell_sorting_starting_biosample i.refresh", (event) ->                
+    $.get "/biosamples/select_options", (responseText,status,jqXHR) ->
+      $(".single_cell_sorting_starting_biosample select").html(responseText)
+
   #When the user clicks on the "Add Sorting Biosample" button, append the response from the action (SingleCellSortingController.add_sorting_biosamples) to the show view at the end of the div element with id "sorting_biosample".
   $("#scs_add_sorting_biosample").on "ajax:success", (event,data) ->  
     $("#scs_add_sorting_biosample").after(data)

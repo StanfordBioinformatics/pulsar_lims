@@ -1,12 +1,12 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @pcr} %>
 
   <%= f.input :description %>
-  <%= f.association :pcr_master_mix %>
+  <%= f.association :pcr_master_mix, label_html: {class: "refresh"} %>
   <%= f.input :forward_primer %>
   <%= f.input :reverse_primer %>
   <%= f.input :amplicon_size, label: "Amplicon size (bp)" %>
   <%= f.input :annealing_temperature, label: "Annealing temp.", label_html: {class: "celsius"} %>
   <%= f.input :extension_time %>
   <%= f.input :num_cycles, label_html: {"data-toggle": "tooltip", "title": "The number of PCR cycles."} %>
-  <%= f.association :crispr_modification %>
+  <%= f.association :crispr_modification, label_html: {class: "refresh"} %>
   <%= f.input :success, label_html: {"data-toggle": "tooltip", "title": "True if the PCR worked (gave us a product), False otherwise."}  %>
