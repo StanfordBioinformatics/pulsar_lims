@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
 
   skip_after_action :verify_authorized, only: :select_options
 
+  rescue_from ActiveRecord::InvalidForeignKey, with: :foreign_key_constraint
+  rescue_from ActiveRecord::RecordNotDestroyed, with: :record_not_destroyed
 	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 	rescue_from ActiveRecord::DeleteRestrictionError, with: :destroy_not_allowed
 
@@ -58,6 +60,16 @@ class ApplicationController < ActionController::Base
 		end
 		return rec
 	end
+
+  def record_not_destroyed(err)
+    flash[:alert] = err.record.errors.full_messages
+    redirect_to(request.referrer || root_path) 
+  end
+  
+  def foreign_key_constraint(err)
+    flash[:alert] = err.message
+		redirect_to(request.referrer || root_path)
+  end
 
 	def user_not_authorized
 		flash[:alert] = "You are not authorized to perform this action."

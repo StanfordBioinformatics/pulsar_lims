@@ -32,7 +32,7 @@ class SingleCellSortingsController < ApplicationController
   def add_sorting_biosample
 		#called via AJAX
     sorting_biosample = @single_cell_sorting.starting_biosample.dup
-		sorting_biosample.encid = nil
+		sorting_biosample.upstream = nil
     sorting_biosample.parent_biosample =  @single_cell_sorting.starting_biosample
 		sorting_biosample.prototype = true
     sorting_biosample.name =  @single_cell_sorting.name + " " + "biosample prototype"
@@ -137,7 +137,7 @@ class SingleCellSortingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def single_cell_sorting_params
-			params.require(:single_cell_sorting).permit(:upstream, :fluorescence_intensity_file, :starting_biosample_id, :sorting_biosample_id, :name, :description, :library_prototype_id, library_prototype_attributes: [:prototype, :paired_end, :sequencing_library_prep_kit_id, :library_fragmentation_method_id, :concentration, :concentration_unit_id, :is_control, :nucleic_acid_term_id, :biosample_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, :document_ids => []], sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :date_biosample_taken, :encid, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], documents_attributes: [:id,:_destroy]], plates_attributes: [:starting_biosample_id, :dimensions, :name, :vendor_id, :vendor_product_identifier, antibody_ids: []], analyses_ids: [])
+			params.require(:single_cell_sorting).permit(:upstream, :fluorescence_intensity_file, :starting_biosample_id, :sorting_biosample_id, :name, :description, :library_prototype_id, library_prototype_attributes: [:prototype, :paired_end, :sequencing_library_prep_kit_id, :library_fragmentation_method_id, :concentration, :concentration_unit_id, :is_control, :nucleic_acid_term_id, :biosample_id, :vendor_id, :lot_identifier, :vendor_product_identifier, :size_range, :strand_specific, :name, :document_ids => []], sorting_biosample_attributes: [:prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :date_biosample_taken, :upstream, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], documents_attributes: [:id,:_destroy]], plates_attributes: [:starting_biosample_id, :dimensions, :name, :vendor_id, :vendor_product_identifier, antibody_ids: []], analyses_ids: [])
     end
 
     def set_s3_direct_post
