@@ -1,4 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @analysis } %>
+<%= render partial:  "application_partials/show_form_error_messages", locals: {model_obj: @analysis } %>
 <header>
   <h1><%= @analysis.id %></h1>
 
@@ -16,10 +16,12 @@
 		<td><%= @analysis.description %></td>
 	</tr>
 
-	<tr>
-		<th><strong>Protocol:</strong></th>
-		<td><%= render partial: "documents/link_to_documents", locals: {documents: [@analysis.protocol]} %></td>
-	</tr>
+  <% if @analysis.protocol.present? %>
+  	<tr>
+  		<th><strong>Protocol:</strong></th>
+  		<td><%= link_to @analysis.protocol.name, @analysis.protocol %></td>
+  	</tr>
+  <% end %>
 		
 	<tr>
 		<th><strong>Merged BAM file:</strong></th>
