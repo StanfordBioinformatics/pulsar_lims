@@ -1,61 +1,64 @@
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @analysis } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @analysis } %>
 
-	<%= f.input :description %>
-	<%= f.association :single_cell_sorting, as: :hidden %>
-	<%= f.association :protocol, label_html: {"data-toggle": "tooltip", "title": "Document detailing the analysis procedure. If you haven't already uploaded the protocol to the database, you must first go to the 'Documents' page to add it."} %>
-	
-	<table class="td-spacing-2 min-table">
-		<tr>
-			<th><strong>Merged FASTQ file:</strong></th>
-			<% if @analysis.merged_fastq_file.present? %>
-				<%= f.simple_fields_for :merged_fastq_file, @analysis.merged_fastq_file do |ff| %>
-					<td>
-							<%= link_to @analysis.merged_fastq_file.display(), @analysis.merged_fastq_file %>&nbsp&nbsp
-							<%= ff.input_field :_destroy, as: :boolean %> Remove
-					</td>
-				<% end %>
-			<% else %>
-				<td style="padding-left: 1em;"><%= link_to "Add", add_merged_file_analyses_path({attr: :merged_fastq_file}), remote: true, class: "reg-btn analysis-add-merged-file" %></td>
-			<% end %>
-		</tr></br>
+  <%= f.input :description %>
+  <%= f.association :single_cell_sorting, as: :hidden %>
+  <%= f.association :protocol, label_html: {"data-toggle": "tooltip", "title": "Document detailing the analysis procedure. If you haven't already uploaded the protocol to the database, you must first go to the 'Documents' page to add it."} %>
+  
+  <div class="responseive-table">
+    <table class="table table-hover table-condensed" style="max-width: 50%;">
+      <tr>
+        <th><strong>Merged FASTQ file:</strong></th>
+        <% if @analysis.merged_fastq_file.present? %>
+          <%= f.simple_fields_for :merged_fastq_file, @analysis.merged_fastq_file do |ff| %>
+            <td>
+              <%= link_to @analysis.merged_fastq_file.display(), @analysis.merged_fastq_file %>&nbsp&nbsp
+              <%= ff.input_field :_destroy, as: :boolean %> Remove
+            </td>
+          <% end %>
+        <% else %>
+          <td><%= link_to "Add", add_merged_file_analyses_path({attr: :merged_fastq_file}), remote: true, class: "reg-btn analysis-add-merged-file" %></td>
+        <% end %>
+      </tr>
 
-		<tr>
-			<th><strong>Merged BAM file:</strong></th>
-			<% if @analysis.merged_bam_file.present? %>
-				<%= f.simple_fields_for :merged_bam_file, @analysis.merged_bam_file do |ff| %>
-					<td>
-							<%= link_to @analysis.merged_bam_file.display(), @analysis.merged_bam_file %>&nbsp&nbsp
-							<%= ff.input_field :_destroy, as: :boolean %> Remove
-					</td>
-				<% end %>
-			<% else %>
-				<td style="padding-left: 1em;"><%= link_to "Add", add_merged_file_analyses_path({attr: :merged_bam_file}), remote: true, class: "reg-btn analysis-add-merged-file" %></td>
-			<% end %>
-		</tr></br>
-		<tr>
-			<th><strong>Merged Peaksfile:</strong></th>
-			<% if @analysis.merged_peaks_file.present? %>
-				<%= f.simple_fields_for :merged_peaks_file, @analysis.merged_peaks_file do |ff| %>
-					<td>
-						<%= link_to @analysis.merged_peaks_file.display(), @analysis.merged_peaks_file %>&nbsp&nbsp
-						<%= ff.input_field :_destroy, as: :boolean %> Remove
-					</td>
-				<% end %>
-			<% else %>
-				<td style="padding-left: 1em;"><%= link_to "Add", add_merged_file_analyses_path({attr: :merged_peaks_file}), remote: true, class: "reg-btn analysis-add-merged-file" %></td>
-			<% end %>
-		</tr></br>
-		<tr>
-			<th><strong>Merged QC file:</strong></th>
-  		<% if @analysis.merged_qc_file.present? %>
-				<%= f.simple_fields_for :merged_qc_file, @analysis.merged_qc_file do |ff| %>
-					<td>
-						<%= link_to @analysis.merged_qc_file.display(), @analysis.merged_qc_file %>&nbsp&nbsp
-						<%= ff.input_field :_destroy, as: :boolean %> Remove
-					</td>
-				<% end %>
-			<% else %>
-				<td style="padding-left: 1em;"><%= link_to "Add", add_merged_file_analyses_path({attr: :merged_qc_file}), remote: true, class: "reg-btn analysis-add-merged-file" %></td>
-			<% end %>
-		</tr>
-	</table></br>
+    <tr>
+      <th><strong>Merged BAM file:</strong></th>
+      <% if @analysis.merged_bam_file.present? %>
+        <%= f.simple_fields_for :merged_bam_file, @analysis.merged_bam_file do |ff| %>
+          <td>
+              <%= link_to @analysis.merged_bam_file.display(), @analysis.merged_bam_file %>&nbsp&nbsp
+              <%= ff.input_field :_destroy, as: :boolean %> Remove
+          </td>
+        <% end %>
+      <% else %>
+        <td><%= link_to "Add", add_merged_file_analyses_path({attr: :merged_bam_file}), remote: true, class: "reg-btn analysis-add-merged-file" %></td>
+      <% end %>
+    </tr>
+
+    <tr>
+      <th><strong>Merged Peaksfile:</strong></th>
+      <% if @analysis.merged_peaks_file.present? %>
+        <%= f.simple_fields_for :merged_peaks_file, @analysis.merged_peaks_file do |ff| %>
+          <td>
+            <%= link_to @analysis.merged_peaks_file.display(), @analysis.merged_peaks_file %>&nbsp&nbsp
+            <%= ff.input_field :_destroy, as: :boolean %> Remove
+          </td>
+        <% end %>
+      <% else %>
+        <td><%= link_to "Add", add_merged_file_analyses_path({attr: :merged_peaks_file}), remote: true, class: "reg-btn analysis-add-merged-file" %></td>
+      <% end %>
+    </tr>
+
+    <tr>
+      <th><strong>Merged QC file:</strong></th>
+      <% if @analysis.merged_qc_file.present? %>
+        <%= f.simple_fields_for :merged_qc_file, @analysis.merged_qc_file do |ff| %>
+          <td>
+            <%= link_to @analysis.merged_qc_file.display(), @analysis.merged_qc_file %>&nbsp&nbsp
+            <%= ff.input_field :_destroy, as: :boolean %> Remove
+          </td>
+        <% end %>
+      <% else %>
+        <td><%= link_to "Add", add_merged_file_analyses_path({attr: :merged_qc_file}), remote: true, class: "reg-btn analysis-add-merged-file" %></td>
+      <% end %>
+    </tr>
+</table>

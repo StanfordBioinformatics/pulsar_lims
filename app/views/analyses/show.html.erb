@@ -22,6 +22,15 @@
   		<td><%= link_to @analysis.protocol.name, @analysis.protocol %></td>
   	</tr>
   <% end %>
+
+	<tr>
+		<th><strong>Merged FASTQ file:</strong></th>
+		<% if @analysis.merged_fastq_file.blank? %>
+			<td></td>
+		<% else %>
+			<td><%= link_to @analysis.merged_fastq_file.display(), @analysis.merged_fastq_file %></td>
+		<% end %>
+	</tr>
 		
 	<tr>
 		<th><strong>Merged BAM file:</strong></th>
