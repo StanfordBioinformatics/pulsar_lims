@@ -1,0 +1,7 @@
+<ul>
+	<% analyses.each do |a| %>
+    <li>
+  		<%= link_to a.id, analysis_path(a) %></br>
+    </li>
+	<% end %>
+</ul>

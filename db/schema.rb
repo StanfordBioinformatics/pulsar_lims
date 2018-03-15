@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315202108) do
+ActiveRecord::Schema.define(version: 20180315221927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,9 +40,11 @@ ActiveRecord::Schema.define(version: 20180315202108) do
     t.integer  "merged_qc_file_id"
     t.integer  "single_cell_sorting_id"
     t.integer  "protocol_id"
+    t.integer  "merged_fastq_file_id"
   end
 
   add_index "analyses", ["merged_bam_file_id"], name: "index_analyses_on_merged_bam_file_id", using: :btree
+  add_index "analyses", ["merged_fastq_file_id"], name: "index_analyses_on_merged_fastq_file_id", using: :btree
   add_index "analyses", ["merged_peaks_file_id"], name: "index_analyses_on_merged_peaks_file_id", using: :btree
   add_index "analyses", ["merged_qc_file_id"], name: "index_analyses_on_merged_qc_file_id", using: :btree
   add_index "analyses", ["protocol_id"], name: "index_analyses_on_protocol_id", using: :btree
@@ -889,6 +891,7 @@ ActiveRecord::Schema.define(version: 20180315202108) do
   add_foreign_key "addresses", "users"
   add_foreign_key "analyses", "documents", column: "protocol_id"
   add_foreign_key "analyses", "file_references", column: "merged_bam_file_id"
+  add_foreign_key "analyses", "file_references", column: "merged_fastq_file_id"
   add_foreign_key "analyses", "file_references", column: "merged_peaks_file_id"
   add_foreign_key "analyses", "file_references", column: "merged_qc_file_id"
   add_foreign_key "analyses", "single_cell_sortings"

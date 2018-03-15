@@ -6,7 +6,9 @@ class AnalysesController < ApplicationController
 	def add_merged_file
 		@analysis = Analysis.new
 		@file_attr = params[:attr].to_sym
-    logger.info(@file_attr == :merged_peaks_file)
+    if @file_attr == :merged_fastq_file
+      @file_reference = @analysis.build_merged_fastq_file({user_id: current_user.id, data_file_type_id: DataFileType.find_by(name: "FASTQ").id})
+    end
 		if @file_attr == :merged_bam_file
 			@file_reference = @analysis.build_merged_bam_file({user_id: current_user.id,data_file_type_id: DataFileType.find_by(name: "BAM").id})
 		elsif @file_attr == :merged_peaks_file
@@ -52,6 +54,8 @@ class AnalysesController < ApplicationController
 
   def update
 		authorize @analysis
+    #render json: params
+    #return
     respond_to do |format|
       if @analysis.update(analysis_params)
         format.html { redirect_to @analysis, notice: 'Analysis was successfully updated.' }
@@ -78,6 +82,6 @@ class AnalysesController < ApplicationController
     end
 
     def analysis_params
-      params.require(:analysis).permit(:protocol_id, :single_cell_sorting_id, :merged_bam_file_id, :merged_peaks_file_id, :merged_qc_file_id, :description, merged_bam_file_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_peaks_file_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_qc_file_attributes: [:user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id])
+      params.require(:analysis).permit(:protocol_id, :single_cell_sorting_id, :merged_fastq_file_id, :merged_bam_file_id, :merged_peaks_file_id, :merged_qc_file_id, :description, merged_fastq_file_attributes: [:id, :_destroy, :user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_bam_file_attributes: [:id, :_destroy, :user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_peaks_file_attributes: [:id, :_destroy, :user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_qc_file_attributes: [:id, :_destroy, :user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id])
     end
 end

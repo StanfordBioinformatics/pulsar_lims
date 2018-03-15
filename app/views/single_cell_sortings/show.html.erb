@@ -66,12 +66,8 @@
 	<tr>
 		<th><strong>Analyses:</strong></th>
 		<td>
-			<ul class="list-unstyled">
-				<% @single_cell_sorting.analyses.each do |a| %>
-					<li><%= link_to a.id, a %></li>
-				<% end %>
-				<li style="padding-top: 0.5em"><%= link_to "Add",new_analysis_single_cell_sorting_path, class: "reg-btn btn-sm", id: "scs-add-analysis" %></li>
-			</ul>
+      <%= render partial: "analyses/link_to_analysis", locals: {analyses: @single_cell_sorting.analyses} %>
+			<span style="padding-top: 0.5em"><%= link_to "Add",new_analysis_single_cell_sorting_path, class: "reg-btn btn-sm", id: "scs-add-analysis" %></span>
 		</td>
 	</tr>
 </table>
