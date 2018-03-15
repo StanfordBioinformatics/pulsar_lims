@@ -26,9 +26,9 @@ class FileReference < ActiveRecord::Base
 		dsp = ds.data_storage_provider
 		txt = "#{dsp.name}"
 		if bucket.present?
-			txt += " #{bucket}"
+			txt = txt +  " #{bucket}"
 		else
-			txt += " #{ds.project_identifier}:#{self.file_path}" 
+			txt = txt +  " #{ds.project_identifier}:#{self.file_path}" 
 		end
 		return txt
 	end
