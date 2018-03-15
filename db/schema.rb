@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180308221445) do
+ActiveRecord::Schema.define(version: 20180315202108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -389,6 +389,14 @@ ActiveRecord::Schema.define(version: 20180308221445) do
     t.integer "document_id",                    null: false
     t.integer "sequencing_library_prep_kit_id", null: false
   end
+
+  create_table "documents_single_cell_sortings", id: false, force: :cascade do |t|
+    t.integer "document_id",            null: false
+    t.integer "single_cell_sorting_id", null: false
+  end
+
+  add_index "documents_single_cell_sortings", ["document_id", "single_cell_sorting_id"], name: "document_scs_idx", using: :btree
+  add_index "documents_single_cell_sortings", ["single_cell_sorting_id", "document_id"], name: "scs_document_idx", using: :btree
 
   create_table "documents_treatments", id: false, force: :cascade do |t|
     t.integer "document_id",  null: false

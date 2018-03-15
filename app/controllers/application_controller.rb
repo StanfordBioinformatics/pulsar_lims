@@ -65,9 +65,9 @@ class ApplicationController < ActionController::Base
 	end
 
   def record_not_destroyed(err)
-    flash[:alert] = err.record.errors.full_messages
     respond_to do |format|
       format.html { 
+        flash[:alert] = err.record.errors.full_messages
         redirect_to(request.referrer || root_path)
       }
       format.json {
@@ -77,9 +77,9 @@ class ApplicationController < ActionController::Base
   end
   
   def foreign_key_constraint(err)
-   flash[:alert] = err.message
     respond_to do |format|
       format.html {
+        flash[:alert] = err.message
     		redirect_to(request.referrer || root_path)
       }
       format.json  {

@@ -8,6 +8,7 @@ class Document < ActiveRecord::Base
 	has_and_belongs_to_many :treatments
 	has_and_belongs_to_many :libraries
 	has_and_belongs_to_many :sequencing_library_prep_kits
+	has_and_belongs_to_many :single_cell_sortings
 	belongs_to :user
 	###
 	##Columns:

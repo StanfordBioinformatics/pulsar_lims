@@ -21,6 +21,11 @@
 	  <td><%= @single_cell_sorting.description %></td>
 	</tr>
 
+  <tr>
+    <th><strong>Documents:</strong></th>
+    <td><%= render partial: "documents/link_to_documents", locals: {documents: @single_cell_sorting.documents} %></td>
+  </tr>
+
 	<tr>
 		<th><strong>Library Prototype:</strong></th>
 		<% library_prototype = @single_cell_sorting.library_prototype %>

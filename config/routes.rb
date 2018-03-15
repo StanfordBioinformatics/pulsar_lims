@@ -47,7 +47,9 @@ Pulsar::Application.routes.draw do
 		# since the crispr won't have an id yet when being created, we can't use :member.
 		get :select_chromosome_on_reference_genome, on: :collection
 	end
-  resources :crispr_constructs
+  resources :crispr_constructs do
+		get :select_construct_tag, on: :collection
+  end
 
   resources :donor_constructs do
 		get :select_construct_tag, on: :collection

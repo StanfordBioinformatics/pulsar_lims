@@ -11,6 +11,13 @@
 	<% end %>
 		
 	<%= f.input :fluorescence_intensity_file, as: :file, hint: file_upload_hint %>
+  
+  <%= f.association :documents %>
+
+  <% if @single_cell_sorting.documents.persisted.any? %>                                             
+    <%= render partial: "application_partials/simple_fields_for",                                    
+        locals: {f: f, record: @single_cell_sorting, attribute: :documents, title: "Documents"} %>
+  <% end %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

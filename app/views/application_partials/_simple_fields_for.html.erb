@@ -1,0 +1,41 @@
+<!-- This partial is used to list linked records with a checkbox next to each one that allows
+the user to remove the link. For example, a Biosample can have many documents. If the user has
+selected two documents, but later wants to remove one of the linked documents such that only a single
+document is now linked to the biosample record, this partial allows fulfuills that capability. 
+
+The partial renders the linked records in a small table with two fields:
+  1. The record name
+  2. The checkbox to delete the link if desired. 
+  
+This partial uses simple_fields_for (https://github.com/plataformatec/simple_form), so you must
+call accepts_nested_attributes_for in the model that has the has_many association. In our example above, that
+means the Biosample model should call accepts_nested_attributes_for and it does indeed do this as 
+follows:
+
+  accepts_nested_attributes_for :construct_tags, allow_destroy: true
+
+-->
+
+<div class="responsive-table">                                                                     
+  <div class="row">                                                                                
+    <div class="col-xs-4">                                                                         
+      <table class="table table-hover table-condensed">                                            
+        <thead>                                                                                    
+          <tr>                                                                                     
+            <th><strong><%= title %></strong></th>                                              
+            <th></th>                                                                              
+          </tr>                                                                                    
+        </thead>                                                                                   
+        <tbody>                                                                                    
+          <%= f.simple_fields_for attribute do |ff| %>                                       
+            <% related_record = record.send(attribute)[ff.index] %>                                 
+           <tr>                                                                                    
+             <td><%= related_record.name %></td>                                                              
+             <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>                         
+           </tr>                                                                                   
+          <% end %>                                                                                
+        </tbody>                                                                                   
+      </table></br>                                                                                
+    </div>                                                                                         
+</div>                                                                                             
+</div> 

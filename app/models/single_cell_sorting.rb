@@ -9,11 +9,13 @@ class SingleCellSorting < ActiveRecord::Base
   belongs_to :user
 	has_many :analyses, dependent: :destroy
 	has_many :plates, dependent: :destroy
+  has_and_belongs_to_many :documents
 
   validates  :upstream, uniqueness: true, allow_nil: true 
 	validates :name, presence: true, uniqueness: true
 	validates :starting_biosample, presence: true #single cell sorting exp. must start with a biosample having cells to sort.
 
+  accepts_nested_attributes_for :documents, allow_destroy: true
 	accepts_nested_attributes_for :sorting_biosample, allow_destroy: true
 	accepts_nested_attributes_for :plates, allow_destroy: true
 	accepts_nested_attributes_for :library_prototype, allow_destroy: true

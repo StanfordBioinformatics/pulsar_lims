@@ -18,23 +18,8 @@
   <%= f.input :vendor_product_identifier %>
 
   <% if @crispr_construct.construct_tags.persisted.any? %>
-    <table class="min-table" id="construct_tags">
-			<thead>
-	      <tr>
-					<th><strong>Construct tags:</strong></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-	      <%= f.simple_fields_for :construct_tags do |ff| %>
-  	      <% tag = @crispr_construct.construct_tags[ff.index] %>
-   	     <tr>
-   	       <td><%= tag.name %></td>
-   	       <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
-   	     </tr>
-    	  <% end %>  
-			</tbody>
-    </table></br>
+    <%= render partial: "application_partials/simple_fields_for", 
+        locals: {f: f, record: @crispr_construct, attribute: :construct_tags, title: "Construct Tags"} %>
   <% end %>
 
   <div id="added_construct_tags"></div>
