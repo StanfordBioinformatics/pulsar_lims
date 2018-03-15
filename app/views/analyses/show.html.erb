@@ -44,7 +44,7 @@
 		<% if @analysis.merged_qc_file.blank? %>
 			<td></td>
 		<% else %>
-			<td><%= link_to @analysis.merged_qc_file.display(), @analysis.merged_peaks_file %></td>
+			<td><%= link_to @analysis.merged_qc_file.display(), @analysis.merged_qc_file %></td>
 		<% end %>
 	</tr>
 </table>
