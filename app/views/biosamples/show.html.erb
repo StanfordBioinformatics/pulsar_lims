@@ -35,17 +35,10 @@
 		<td><%= @biosample.prototype? %></th>
 	</tr>
 
-	<% if @biosample.starting_biosample_single_cell_sorting.present? %>
+	<% if @biosample.starting_biosample_single_cell_sortings.any? %>
 		<tr>
-			<th><strong>Starting biosample for Single Cell Sorting</strong></th>
-			<td><span>Single Cell Sorting: </span><%= link_to "#{@biosample.starting_biosample_single_cell_sorting.name}", @biosample.starting_biosample_single_cell_sorting %></td>
-		</tr>
-	<% end %>
-
-	<% if @biosample.sorting_biosample_single_cell_sorting.present? %>
-		<tr>
-			<th><strong>Sorting biosample for Single Cell Sorting</strong></th>
-			<td><span>Single Cell Sorting: </span><%= link_to "#{@biosample.sorting_biosample_single_cell_sorting.name}", @biosample.sorting_biosample_single_cell_sorting %></td>
+			<th><strong>Single Cell Sortings</strong></th>
+			<td><%= render partial: "single_cell_sortings/link_to_single_cell_sorting", locals: {single_cell_sortings: @biosample.starting_biosample_single_cell_sortings} %></td>
 		</tr>
 	<% end %>
 
@@ -185,4 +178,4 @@
   <!-- #biosample_crispr_modification_form will serve as the container for the result of the AJAX request above. See relevant jQuery in biosamples.js.coffee. -->
 </br></br>
 
-<%= render partial: "back" %>
+<%= link_to "Back", biosamples_path %>

@@ -60,7 +60,7 @@ class PairedBarcodesController < ApplicationController
 				next
 			end
 			PairedBarcode.create!({name: name, user_id: user.id, sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1.id, index2_id: index2.id})
-			create_count += 1
+			create_count = create_count += 1
 		end
 
 

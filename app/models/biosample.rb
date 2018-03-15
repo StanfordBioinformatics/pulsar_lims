@@ -12,13 +12,14 @@ class Biosample < ActiveRecord::Base
   has_many :child_biosamples, class_name: "Biosample", foreign_key: "parent_biosample_id", dependent: :destroy
   belongs_to :parent_biosample, class_name: "Biosample"
   belongs_to :from_prototype, class_name: "Biosample"
+  has_many :prototype_instances, class_name: "Biosample", foreign_key: "from_prototype_id", dependent: :destroy
   ###
   has_and_belongs_to_many :documents
   has_and_belongs_to_many :treatments
   has_one :crispr_modification, validate: true, dependent: :nullify
   #Note that specifying "dependent: :restrict_with_exception" when triggered will raise ActiveRecord::DeleteRestrictionError
-  has_one :starting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id, dependent: :restrict_with_exception #the starting biosample used for sorting. Not required.
-  has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :restrict_with_exception #the starting biosample used for sorting. Not required.
+  has_many :starting_biosample_single_cell_sortings, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id, dependent: :restrict_with_exception #the starting biosample used for sorting. Not required.
+  has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :nullify #the starting biosample used for sorting. Not required.
   belongs_to  :user
   belongs_to  :owner, class_name: "User"
   belongs_to  :biosample_term_name

@@ -1,0 +1,7 @@
+<ul>
+<% single_cell_sortings.each do |ssc| %>
+  <li>
+    <%= link_to ssc.name, single_cell_sorting_path(ssc) %></br>
+  </li>
+<% end %>
+</ul>
