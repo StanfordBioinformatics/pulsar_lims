@@ -19,7 +19,7 @@ class Api::ApplicationController < ApplicationController
 			@current_user = User.find_by(api_key: token)
 			if @current_user.nil?
         response.headers["WWW-Authenticate"] = "Token realm=Application"
-				render json: { error: "hiUnauthorized" }, status: 401
+				render json: { error: "Unauthorized" }, status: 401
 				return
 			end
 		end

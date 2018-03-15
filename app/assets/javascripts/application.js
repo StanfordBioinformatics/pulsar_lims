@@ -152,13 +152,22 @@ $(function() {
         method: "DELETE", 
         dataType: "json",
         error: function(xhr,errmsg,err) {
-          alert(xhr.responseText) //i.e.
+          msg = JSON.parse(xhr.responseText)
+          alert_msg = msg.exception;
+          if (typeof msg.error !== "undefined") {
+            alert_msg += ": " + msg.error;
+          }
+          alert(alert_msg);
           //alert(errmsg) //i.e. error
-          //alert(err)    //i.e. Internal Server Error
           //alert(xhr.status) //i.e. 55
           //alert(xhr.statusText) //i.e  Internal Server Error
         },
         success: function(data,status,xhr) {
+          status_code = xhr.status;
+          if (status_code == 403) {
+            alert(data);
+            return;
+          }
           $tr.fadeOut(function(){
             $tr.remove()
           })

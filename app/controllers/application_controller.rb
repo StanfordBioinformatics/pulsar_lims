@@ -17,6 +17,9 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::InvalidForeignKey, with: :foreign_key_constraint
   rescue_from ActiveRecord::RecordNotDestroyed, with: :record_not_destroyed
 	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  #ActiveRecord::DeleteRestrictionError is raised when there is a model dependency that sets
+  # "dependent: :restrict_with_exception" and deleting the model would result in a foreign key error. 
+  # For an example of this, see the biosample model.
 	rescue_from ActiveRecord::DeleteRestrictionError, with: :destroy_not_allowed
 
 	def ddestroy(record,redirect_path_success)
@@ -63,22 +66,56 @@ class ApplicationController < ActionController::Base
 
   def record_not_destroyed(err)
     flash[:alert] = err.record.errors.full_messages
-    redirect_to(request.referrer || root_path) 
+    respond_to do |format|
+      format.html { 
+        redirect_to(request.referrer || root_path)
+      }
+      format.json {
+        render json: {exception: "ActiveRecord::RecordNotDestroyed"}, status: 403
+      }
+    end
   end
   
   def foreign_key_constraint(err)
-    flash[:alert] = err.message
-		redirect_to(request.referrer || root_path)
+   flash[:alert] = err.message
+    respond_to do |format|
+      format.html {
+    		redirect_to(request.referrer || root_path)
+      }
+      format.json  {
+        render json: {exception: "ActiveRecord::InvalidForeignKey"}, status: 403
+      }
+    end
   end
 
 	def user_not_authorized
-		flash[:alert] = "You are not authorized to perform this action."
-		redirect_to(request.referrer || root_path)
+    respond_to do |format|
+      format.html {
+    		flash[:alert] = "You are not authorized to perform this action."
+    		redirect_to(request.referrer || root_path)
+      }
+      #Why json here and not in API? Because the app internally makes some AJAX calls to 
+      # non API-end points. These should later be migrated to API endpoint calls, however.
+      format.json {
+        response.headers["WWW-Authenticate"] = "Token realm=Application"                               
+        render json: { error: "Unauthorized" }, status: 401 
+      }
+    end
+    
 	end
 	
 	def destroy_not_allowed(err)
-		flash[:alert] = err.message
-		redirect_to(request.referrer || root_path)
+    respond_to do |format|
+      format.html {
+    		flash[:alert] = err.message
+    		redirect_to(request.referrer || root_path)
+      }
+      #Why json here and not in API? Because the app internally makes some AJAX calls to 
+      # non API-end points. These should later be migrated to API endpoint calls, however.
+      format.json {
+        render json: {exception: err.class.name, error: err.message},  status: 403
+      }
+    end
 	end
 
 	def check_signed_in
