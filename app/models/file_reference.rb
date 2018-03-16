@@ -24,12 +24,18 @@ class FileReference < ActiveRecord::Base
 		ds = self.data_storage
 		bucket = ds.bucket
 		dsp = ds.data_storage_provider
-		txt = "#{dsp.name}"
+		txt = "#{dsp.name} "
 		if bucket.present?
-			txt = txt +  " #{bucket}"
+			txt +=  "#{bucket}: "
 		else
-			txt = txt +  " #{ds.project_identifier}:#{self.file_path}" 
-		end
+			txt +=  " #{ds.project_identifier}: "
+    end
+
+    if self.file_path.present?
+      txt += " #{self.file_path}"
+    else
+      txt += " #{self.fileid}"
+    end
 		return txt
 	end
 
