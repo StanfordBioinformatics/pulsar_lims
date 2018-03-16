@@ -49,6 +49,9 @@
 				 and I set the default selectioned to what the user had originally, 
 				 if any. -->
 
+  <%= f.association :nih_institutional_certification, label: "NIH Institutional Certification",
+      label_html: {class: "refresh", "data-toggle": "tooltip", title: " See https://osp.od.nih.gov/scientific-sharing/researchers-institutional-certifications"} %>
+
 	<%= f.association :documents, label: "Add documents", collection: sorted_document_name_id(),
       include_blank: true,
       input_html: {class: "biosample_documents_selector"},
