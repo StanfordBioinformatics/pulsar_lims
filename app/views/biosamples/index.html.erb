@@ -29,9 +29,7 @@
     <% @records.each do |rec| %>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td>
-          <% if rec.nih_institutional_certification.present? %>
-            <%= link_to rec.nih_institutional_certification.name, rec.nih_institutional_certification %>
-          <% end %>
+          <%= rec.nih_institutional_certification.name %>
         </td>
 				<td>
 					<% if rec.owner.present? %>

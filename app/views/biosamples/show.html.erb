@@ -73,8 +73,7 @@
   <tr>
     <th><strong>NIH Institutional Certification</strong></th>
     <td>
-      <% if @biosample.nih_institutional_certification.present? %>
-        <%= link_to @biosample.nih_institutional_certification.name, @biosample.nih_institutional_certification %>
+        <%= @biosample.nih_institutional_certification %>
       <% end %>
     </td>
   </tr>

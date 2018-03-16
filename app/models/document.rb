@@ -4,7 +4,6 @@ class Document < ActiveRecord::Base
 	DEFINITION = "A general purpose document that may be referenced across different objects, and that is uploaded directly to the database. These are typically protocol documents, which are often reused. For a document that is more specific (i.e. one-time-use), it's better to upload it to a specific Data Storage location and then refernce this using a File Reference on the dependent object.  Model abbreviation: #{ABBR}"
 	#The is_protocol bool column has a default of false.
 	has_many :analyses, foreign_key: :protocol_id, dependent: :nullify
-  has_many :biosamples_with_a_nih_inst_cert, class_name: "Biosample", foreign_key: :nih_institutional_certification_id, dependent: :nullify
 	has_and_belongs_to_many :biosamples
 	has_and_belongs_to_many :treatments
 	has_and_belongs_to_many :libraries
