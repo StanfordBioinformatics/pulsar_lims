@@ -7,7 +7,7 @@ class Target < ActiveRecord::Base
 	has_many :donor_constructs
 	belongs_to :user
 
-  validates  :upstream, uniqueness: true, allow_nil: true
+  validates  :upstream_identifier, uniqueness: true, allow_nil: true
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
 
 	scope :persisted, lambda { where.not(id: nil) }

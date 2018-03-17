@@ -25,7 +25,7 @@ class Library < ActiveRecord::Base
 	belongs_to :vendor
 	belongs_to :well
 
-  validates  :upstream, uniqueness: true, allow_nil: true 
+  validates  :upstream_identifier, uniqueness: true, allow_nil: true 
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true, presence: true
 #	validates :barcode, format: { with: /\A[acgtnACGTN]+-?[acgtnACGTN]+\z/ }, allow_blank: true
 	validates  :size_range, format: {with: /\A\d+-\d+\Z/}, presence: true

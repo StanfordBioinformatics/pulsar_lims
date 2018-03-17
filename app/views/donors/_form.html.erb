@@ -1,7 +1,7 @@
 <%= simple_form_for(@donor) do |f| %>
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @donor } %>
 
-	<%= f.input :upstream, label_html: {"data-toggle": "tooltip", "title": "The alias or accession of an existing donor on the ENCODE Portal. For a list of available human donors, see https://www.encodeproject.org/human-donors."}  %>
+	<%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The alias or accession of an existing donor on the ENCODE Portal. For a list of available human donors, see https://www.encodeproject.org/human-donors."}  %>
 
   <%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "A user-friendly name that you prefer to call this as."} %>
 

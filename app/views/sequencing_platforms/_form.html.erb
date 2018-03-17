@@ -2,6 +2,7 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_platform } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing platform name"} %>
+  <%= f.input :upstream_identifier %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary"%>

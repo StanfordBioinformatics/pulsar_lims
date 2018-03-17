@@ -3,7 +3,7 @@
 
   <%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique target (i.e. gene) name. This should be equal to the value of either the 'label' field or the 'name' field in a target entry on the ENCODE Portal (i.e. see https://www.encodeproject.org/targets/eGFP-ARID3B-human/?format=json)."} %>
 
-  <%= f.input :upstream, label_html: {"data-toggle": "tooltip", "title": "An identifier for the target on the ENCODE Portal, such as the value of the 'uuid' or 'name' property of the Portal's record entry."} %>
+  <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "An identifier for the target on the ENCODE Portal, such as the value of the 'uuid' or 'name' property of the Portal's record entry."} %>
 
 	<%= f.input :ensembl, label_html: {"data-toggle": "tooltip", "title": "The Ensembl accession."} %>
 	<%= f.input :refseq, label_html: {"data-toggle": "tooltip", "title": "The RefSeq accession."} %>

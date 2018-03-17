@@ -67,6 +67,6 @@ class DonorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def donor_params
-      params.require(:donor).permit(:upstream, :name, :string)
+      params.require(:donor).permit(:upstream_identifier, :name, :string)
     end
 end

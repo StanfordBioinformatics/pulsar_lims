@@ -32,7 +32,7 @@ class SingleCellSortingsController < ApplicationController
   def add_sorting_biosample
 		#called via AJAX
     sorting_biosample = @single_cell_sorting.starting_biosample.dup
-		sorting_biosample.upstream = nil
+		sorting_biosample.upstream_identifier = nil
     sorting_biosample.parent_biosample =  @single_cell_sorting.starting_biosample
 		sorting_biosample.prototype = true
     sorting_biosample.name =  @single_cell_sorting.name + " " + "biosample prototype"

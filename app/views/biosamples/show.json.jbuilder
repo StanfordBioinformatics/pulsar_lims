@@ -1,1 +1,1 @@
-json.extract! @biosample, :id, :submitter_comments, :lot_identifier, :source_product_identifier, :biosample_term_name, :description, :passage_number, :date_biosample_taken, :upstream, :created_at, :updated_at
+json.extract! @biosample, :id, :submitter_comments, :lot_identifier, :source_product_identifier, :biosample_term_name, :description, :passage_number, :date_biosample_taken, :upstream_identifier, :created_at, :updated_at

@@ -20,7 +20,7 @@ class Document < ActiveRecord::Base
 	###
   belongs_to :document_type
 
-  validates  :upstream, uniqueness: true, allow_nil: true 
+  validates  :upstream_identifier, uniqueness: true, allow_nil: true 
 	validates :name, length: { maximum: 100 }, presence: true, uniqueness: true
 	validates :description, presence: true
 	validates :content_type, presence: true

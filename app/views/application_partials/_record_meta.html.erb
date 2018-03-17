@@ -22,10 +22,10 @@
 		<td><%= time_ago_in_words(record.updated_at) %> ago </td>
 	</tr>
 
-  <% if record.respond_to?(:upstream) %>
+  <% if record.respond_to?(:upstream_identifier) %>
     <tr>
       <th>Upstream ID</th>
-      <td><%= record.upstream %></td>
+      <td><%= record.upstream_identifier %></td>
     </tr>
   <% end %>
 </table>

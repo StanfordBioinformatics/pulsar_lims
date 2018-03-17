@@ -11,7 +11,7 @@ class Antibody < ActiveRecord::Base
   belongs_to :isotype
   belongs_to :target
 
-  validates  :upstream, uniqueness: true, allow_nil: true
+  validates  :upstream_identifier, uniqueness: true, allow_nil: true
 	validates  :name, length: { maximum: 40 }, presence: true, uniqueness: true
 	validates  :organism, presence: true
 	#validates  :antibody_purifications, presence: true

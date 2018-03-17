@@ -6,8 +6,8 @@ This partial should mirror the one that has the th values in _index_common_table
 
 <td><%= link_to_record_id(record) %></td>
 
-<% if record.respond_to?(:upstream) %>
-  <td><%= record.upstream %></td>
+<% if record.respond_to?(:upstream_identifier) %>
+  <td><%= record.upstream_identifier %></td>
 <% end %>
 
 <% if record.respond_to?(:name) %>

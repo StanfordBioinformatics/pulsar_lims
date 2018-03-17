@@ -67,6 +67,6 @@ class TargetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def target_params
-      params.require(:target).permit(:refseq, :ensembl, :upstream, :name)
+      params.require(:target).permit(:refseq, :ensembl, :upstream_identifier, :name)
     end
 end
