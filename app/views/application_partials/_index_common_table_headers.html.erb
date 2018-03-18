@@ -7,7 +7,7 @@ This partial should mirror the one that has the td values in _index_common_table
 <th>Record ID</th>
 
 <!-- @model_class is set in the controller's index action. -->
-<% if @model_class.column_names.include?("upstream") %> 
+<% if @model_class.column_names.include?("upstream_identifier") %> 
   <th>Upstream ID</th>
 <% end %>
 
