@@ -28,7 +28,7 @@ class Biosample < ActiveRecord::Base
   belongs_to  :vendor
   has_many    :libraries, dependent: :destroy
   
-  validates :upstream_identifier, uniqueness: true, allow_nil: true
+  validates :upstream_identifier, uniqueness: true, allow_blank: true
   #validates :name, uniqueness: true, length: { minimum: 2, maximum: 40 }, presence: true
   validates :name, uniqueness: true, presence: true
   #validates :documents, presence: true
