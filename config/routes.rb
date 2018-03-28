@@ -166,6 +166,7 @@ Pulsar::Application.routes.draw do
   end
 
   resources :biosamples do
+    get :child_biosamples, on: :member
     get :select_options, on: :collection
 		get :select_biosample_term_name, on: :collection
 		get :add_crispr_modification, on: :member

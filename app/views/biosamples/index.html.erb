@@ -2,9 +2,11 @@
 	<h1 class="index-page-header">Biosamples</h1>
 	<p class="model-definition"><%= Biosample::DEFINITION %></p>
 
-  <ul class="actions">
-		<%= render partial: "application_partials/auth_new_record" %>
-  </ul> 
+  <% if not defined?(@no_new_btn) %>
+    <ul class="actions">
+      <%= render partial: "application_partials/auth_new_record" %>
+    </ul> 
+  <% end %>
 </header>	
 	
 
