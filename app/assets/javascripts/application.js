@@ -38,6 +38,15 @@
 //    });
 
 
+//Close flash messages with a fade out when the 'x' is clicked:
+$(function() {
+  $("a.close").on("click", function(event){
+    event.stopPropagation();
+    event.preventDefault();
+    $(this).closest("div").fadeOut();
+  })
+})
+
 $(function() {
   //Add refresh FontsAwesome icon too all labels with class 'refresh':
   $("label.refresh").after('<i class="refresh fa fa-refresh"></i>')
