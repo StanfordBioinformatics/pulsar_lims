@@ -80,7 +80,7 @@
 	<%= f.input :passage_number,
 			label_html: {"data-toggle" => "tooltip", "title" => "In calculating passage number, include passages from the source."} %>
 
-  <%= f.input :tissue_preservation_method, label_html: {"data-toggle": "tooltip", "title": "The method by which the sample was preserved"} %>
+  <%= f.input :tissue_preservation_method, collection: Enums::TISSUE_PRESERVATION_METHODS, label_html: {"data-toggle": "tooltip", "title": "The method by which the sample was preserved"} %>
 
 	<%= f.input :date_biosample_taken, html5: true,
 			label_html: {"data-toggle" => "tooltip", "title" => "For cultured samples, the date the biosample was taken. For tissue samples, the date the biosample was taken."} %>
