@@ -92,7 +92,7 @@ class Biosample < ActiveRecord::Base
         next
       end
       b = Biosample.find(i)
-      next if i.to_i == b.id
+      next if i.to_i == self.id
       if not self.pooled_from_biosamples.include? b
         self.pooled_from_biosamples << b
       end 
