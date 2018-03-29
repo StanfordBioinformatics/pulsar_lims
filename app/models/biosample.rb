@@ -9,8 +9,8 @@ class Biosample < ActiveRecord::Base
   # This biosample is a prototype used as a reference for creating the biosamples in the wells of the plates on
   # the single_cell_sorting experiment. 
   belongs_to :well
-  has_many :child_biosamples, class_name: "Biosample", foreign_key: "parent_biosample_id", dependent: :destroy
-  belongs_to :parent_biosample, class_name: "Biosample"
+  has_many :biosample_parts, class_name: "Biosample", foreign_key: "part_of_biosample_id", dependent: :destroy
+  belongs_to :part_of_biosample, class_name: "Biosample"
   belongs_to :from_prototype, class_name: "Biosample"
   has_many :prototype_instances, class_name: "Biosample", foreign_key: "from_prototype_id", dependent: :destroy
   ###

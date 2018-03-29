@@ -14,7 +14,7 @@
 	<%= f.association :owner, collection: User.all.map { |x| [x.display,x.id]},
 			label_html: {"data-toggle" => "tooltip", "title" => "Set the user who owns the biosample if needed for tracking."} %>
 
-	<%= f.association :parent_biosample, as: :hidden, label_html: {"data-toggle" => "tooltip", "title" => "If this is a part of another biosample, specify which one."} %>
+	<%= f.association :part_of_biosample, as: :hidden, label: "Parent biosample", label_html: {"data-toggle" => "tooltip", "title" => "If this is a part of another biosample, specify which one."} %>
 
   <%= f.association :treatments, include_blank: true,
       input_html: {class: "biosample_treatments_selector"},

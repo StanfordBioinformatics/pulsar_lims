@@ -1,12 +1,12 @@
 class BiosamplesController < ApplicationController
 #	include DocumentsConcern #gives me add_documents(), remove_documents()
-  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :child_biosamples, :delete_biosample_document,:add_crispr_modification]
-	skip_after_action :verify_authorized, only: [:child_biosamples, :select_biosample_term_name,:add_crispr_modification]
+  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :biosample_parts, :delete_biosample_document,:add_crispr_modification]
+	skip_after_action :verify_authorized, only: [:biosample_parts, :select_biosample_term_name,:add_crispr_modification]
 
-  def child_biosamples
+  def biosample_parts 
     #Called via ajax
     set_model_class()
-    @records = policy_scope(Biosample.where({parent_biosample: @biosample})).page params[:page]
+    @records = policy_scope(Biosample.where({part_of_biosample: @biosample})).page params[:page]
     @no_new_btn = true
     render action: "index" 
   end
@@ -121,6 +121,6 @@ class BiosamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_params
-      params.require(:biosample).permit(:nih_institutional_certification,:tissue_preservation_method, :owner_id, :prototype, :parent_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :date_biosample_taken, :upstream_identifier, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], :treatment_ids => [], :crispr_modification_attributes => [:user_id,:_destroy, :name, :donor_construct_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy]])
+      params.require(:biosample).permit(:nih_institutional_certification,:tissue_preservation_method, :owner_id, :prototype, :part_of_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :date_biosample_taken, :upstream_identifier, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], :treatment_ids => [], :crispr_modification_attributes => [:user_id,:_destroy, :name, :donor_construct_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy]])
     end
 end

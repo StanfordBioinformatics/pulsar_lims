@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180317004559) do
+ActiveRecord::Schema.define(version: 20180329040129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,7 +172,7 @@ ActiveRecord::Schema.define(version: 20180317004559) do
     t.integer  "user_id"
     t.integer  "biosample_term_name_id"
     t.boolean  "control"
-    t.integer  "parent_biosample_id"
+    t.integer  "part_of_biosample_id"
     t.integer  "well_id"
     t.boolean  "prototype",                                   default: false
     t.integer  "from_prototype_id"
@@ -189,7 +189,7 @@ ActiveRecord::Schema.define(version: 20180317004559) do
   add_index "biosamples", ["from_prototype_id"], name: "index_biosamples_on_from_prototype_id", using: :btree
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
   add_index "biosamples", ["owner_id"], name: "index_biosamples_on_owner_id", using: :btree
-  add_index "biosamples", ["parent_biosample_id"], name: "index_biosamples_on_parent_biosample_id", using: :btree
+  add_index "biosamples", ["part_of_biosample_id"], name: "index_biosamples_on_part_of_biosample_id", using: :btree
   add_index "biosamples", ["user_id"], name: "index_biosamples_on_user_id", using: :btree
   add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id", using: :btree
   add_index "biosamples", ["well_id"], name: "index_biosamples_on_well_id", using: :btree
@@ -901,7 +901,7 @@ ActiveRecord::Schema.define(version: 20180317004559) do
   add_foreign_key "biosamples", "biosample_term_names"
   add_foreign_key "biosamples", "biosample_types"
   add_foreign_key "biosamples", "biosamples", column: "from_prototype_id"
-  add_foreign_key "biosamples", "biosamples", column: "parent_biosample_id"
+  add_foreign_key "biosamples", "biosamples", column: "part_of_biosample_id"
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"
   add_foreign_key "biosamples", "users", column: "owner_id"

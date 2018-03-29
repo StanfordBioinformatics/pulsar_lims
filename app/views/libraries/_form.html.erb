@@ -22,40 +22,15 @@
 	</div>
 
 	<% if @library.documents.persisted.any? %>
-	  <table class="min-table">
-			<thead>
-			  <tr>
-					<th><strong>Protocol documents:</strong></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-			  <%= f.simple_fields_for :documents do |ff| %>
-			   <% doc = @library.documents[ff.index] %>
-			   <tr>
-			    <td><%= doc.name %></td>
-			    <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
-			   </tr>
-			   <% end %>  
-			</tbody>
-	  </table>
+    <%= render partial: "application_partials/simple_fields_for", locals: {title: "Protocol documents:", record: @library, f: f, attribute: :documents} %>
 	<% end %>
 
 	<%= f.association :documents, collection: sorted_document_name_id(), include_blank: true,
 			label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not a data file)."} %>
 
-  <table>
-  <tr><th>Sequencing Requests:</th></tr>
   <% if @library.sequencing_requests.present? %>
-    <%= f.simple_fields_for :sequencing_requests do |ff| %>
-      <% seqreq = @library.sequencing_requests[ff.index] %>
-      <tr>
-       <td><%= seqreq.name %></td>
-       <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
-      </tr>
-      <% end %>  
+    <%= render partial: "application_partials/simple_fields_for", locals: {title: "Sequencing Requests:", record: @library, f: f, attribute: :sequencing_requests} %>
   <% end %>
-  </table></br>
 
   <%= f.association :nucleic_acid_term, label: "Nucleic Acid Term Name", collection: NucleicAcidTerm.order(:name), 
 			label_method: :name, prompt: "Select the Term Name",

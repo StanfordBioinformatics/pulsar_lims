@@ -42,10 +42,10 @@
 		</tr>
 	<% end %>
 
-	<% if @biosample.parent_biosample.present? %>
+	<% if @biosample.part_of_biosample.present? %>
 		<tr>
 			<th><strong>Parent Biosample</strong></th>
-			<td><%= link_to @biosample.parent_biosample.name, @biosample.parent_biosample %></td>
+			<td><%= link_to @biosample.part_of_biosample.name, @biosample.part_of_biosample %></td>
 		</tr>
 	<% end %>
 
@@ -57,11 +57,11 @@
 		</tr>
 	<% end %>
 
-	<% if @biosample.child_biosamples.any? %>
+	<% if @biosample.biosample_parts.any? %>
 		<tr>
 			<th><strong>Child Biosamples</strong></th>
 			<td>
-        <%= link_to "#{@biosample.child_biosamples.length} total", [:child_biosamples,@biosample] %>
+        <%= link_to "#{@biosample.biosample_parts.length} total", [:biosample_parts,@biosample] %>
 			</td>
 		</tr>
 	<% end %>

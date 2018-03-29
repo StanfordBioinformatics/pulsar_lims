@@ -18,7 +18,7 @@ follows:
 
 <div class="responsive-table">                                                                     
   <div class="row">                                                                                
-    <div class="col-xs-4">                                                                         
+    <div class="col-xs-6">                                                                         
       <table class="table table-hover table-condensed">                                            
         <thead>                                                                                    
           <tr>                                                                                     
@@ -30,12 +30,17 @@ follows:
           <%= f.simple_fields_for attribute do |ff| %>                                       
             <% related_record = record.send(attribute)[ff.index] %>                                 
            <tr>                                                                                    
-             <td><%= related_record.name %></td>                                                              
+             <% if related_record.respond_to?(:params_for_url_for) %>
+               <% link_to_value = related_record.params_for_url_for() %>
+             <% else %>
+               <% link_to_value = related_record %>
+             <% end %>
+             <td><%= link_to related_record.name, link_to_value %></td>                                                              
              <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>                         
            </tr>                                                                                   
           <% end %>                                                                                
         </tbody>                                                                                   
-      </table></br>                                                                                
+      </table>                                                                           
     </div>                                                                                         
 </div>                                                                                             
 </div> 
