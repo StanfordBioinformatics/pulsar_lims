@@ -15,7 +15,7 @@ class BiosamplesController < ApplicationController
   def select_options
     #Called via ajax.
     #Typically called when the user selects the refresh icon in any form that has a biosamples selection.
-    @records = Biosample.where({well: nil})
+    @records = Biosample.non_plated
     render "application_partials/select_options", layout: false
   end
 
@@ -121,6 +121,6 @@ class BiosamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_params
-      params.require(:biosample).permit(:nih_institutional_certification,:tissue_preservation_method, :owner_id, :prototype, :part_of_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :date_biosample_taken, :upstream_identifier, :donor_id,:vendor_id,:biosample_type_id,:name, :document_ids => [], :treatment_ids => [], :crispr_modification_attributes => [:user_id,:_destroy, :name, :donor_construct_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy]])
+      params.require(:biosample).permit(:nih_institutional_certification,:tissue_preservation_method, :owner_id, :prototype, :part_of_biosample_id, :control, :biosample_term_name_id, :submitter_comments, :lot_identifier, :vendor_product_identifier, :description, :passage_number, :date_biosample_taken, :upstream_identifier, :donor_id,:vendor_id,:biosample_type_id,:name, :pooled_from_biosample_ids => [], :document_ids => [], :treatment_ids => [], :crispr_modification_attributes => [:user_id,:_destroy, :name, :donor_construct_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy]])
     end
 end

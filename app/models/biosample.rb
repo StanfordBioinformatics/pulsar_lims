@@ -3,11 +3,16 @@ class Biosample < ActiveRecord::Base
   ABBR = "B"
   DEFINITION = "The source material (cell line, tissue sample) that one either begins an experiment with; also, any derivites of this source material that have been modified by the experimenter.  Model abbreviation: #{ABBR}"
   ###
+  # Support pooled from
+  ###
+  has_and_belongs_to_many :pooled_from_biosamples, class_name: "Biosample", join_table: "biosamples_pooled_from_biosamples", foreign_key: "biosample_id", association_foreign_key: "pooled_from_biosample_id"
+
+  ###
   #Add self reference so that a part_of biosample can be modelled:
   #Has a 'prototype' boolean column that defaults to false. When true, means that it's a virtual biosample.
   # Virtual biosamples are used currently in the single_cell_sorting model via the sorting_biosample_id foreign key.
   # This biosample is a prototype used as a reference for creating the biosamples in the wells of the plates on
-  # the single_cell_sorting experiment. 
+  # the single_cell_sorting experiment. kk
   belongs_to :well
   has_many :biosample_parts, class_name: "Biosample", foreign_key: "part_of_biosample_id", dependent: :destroy
   belongs_to :part_of_biosample, class_name: "Biosample"

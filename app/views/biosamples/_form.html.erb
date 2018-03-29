@@ -6,22 +6,32 @@
 	<%= f.input :prototype, as: :hidden %>
 	<%= f.association :user, as: :hidden %>
 
-	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique biosample name"} %> 
+	<%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique biosample name"} %> 
 
   <%= f.input :description, 
     label_html: {"data-toggle": "tooltip", "title": "A plain text description of the biosample. Do not include experiment details, constructs or treatments."} %>
 
 	<%= f.association :owner, collection: User.all.map { |x| [x.display,x.id]},
-			label_html: {"data-toggle" => "tooltip", "title" => "Set the user who owns the biosample if needed for tracking."} %>
+			label_html: {"data-toggle": "tooltip", "title": "Set the user who owns the biosample if needed for tracking."} %>
 
-	<%= f.association :part_of_biosample, as: :hidden, label: "Parent biosample", label_html: {"data-toggle" => "tooltip", "title" => "If this is a part of another biosample, specify which one."} %>
+	<%= f.association :part_of_biosample, as: :hidden, label: "Parent biosample", label_html: {"data-toggle": "tooltip", "title": "If this is a part of another biosample, specify which one."} %>
+
+	<%= f.association :pooled_from_biosamples, 
+      collection: Biosample.non_plated,
+      include_blank: true,
+      label_html: {
+        "class": "refresh",
+        "data-toggle": "tooltip", 
+        "title": "If this is a pooled biosample created by taking aliquots of other biosamples, list the others here."
+      }
+  %>
 
   <%= f.association :treatments, include_blank: true,
       input_html: {class: "biosample_treatments_selector"},
       label_html: {class: "refresh"}
   %>
 
-	<%= f.input :control, label_html: {"data-toggle" => "tooltip", "title" => "Select if this biosample will be used as a control in an experiment."} %>
+	<%= f.input :control, label_html: {"data-toggle": "tooltip", "title": "Select if this biosample will be used as a control in an experiment."} %>
 
 	<% if @biosample.documents.persisted.any? %>
 		<table class="min-table">
@@ -69,24 +79,24 @@
 			label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The originating lab or vendor."} %>
 
 	<%= f.input:vendor_product_identifier, 
-			label_html: {"data-toggle" => "tooltip", "title" => "The product identifier provided by the originating lab or vendor."} %>
+			label_html: {"data-toggle": "tooltip", "title": "The product identifier provided by the originating lab or vendor."} %>
 
 	<%= f.input :lot_identifier,
-			label_html: {"data-toggle" => "tooltip", "title" => "The lot identifier provided by the originating lab or vendor."} %>
+			label_html: {"data-toggle": "tooltip", "title": "The lot identifier provided by the originating lab or vendor."} %>
 
 	<%= f.association :donor, collection: Donor.order(:name), label_method: :name,
 			label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The donor of the biosample"} %>
 
 	<%= f.input :passage_number,
-			label_html: {"data-toggle" => "tooltip", "title" => "In calculating passage number, include passages from the source."} %>
+			label_html: {"data-toggle": "tooltip", "title": "In calculating passage number, include passages from the source."} %>
 
   <%= f.input :tissue_preservation_method, collection: Enums::TISSUE_PRESERVATION_METHODS, label_html: {"data-toggle": "tooltip", "title": "The method by which the sample was preserved.  If you need to be able to select an option that is not in this list, please email the admin."} %>
 
 	<%= f.input :date_biosample_taken, html5: true,
-			label_html: {"data-toggle" => "tooltip", "title" => "For cultured samples, the date the biosample was taken. For tissue samples, the date the biosample was taken."} %>
+			label_html: {"data-toggle": "tooltip", "title": "For cultured samples, the date the biosample was taken. For tissue samples, the date the biosample was taken."} %>
 
 	<%= f.input :submitter_comments,
-			label_html: {"data-toggle" => "tooltip", "title" => "Additional information specified by the submitter to be displayed as a comment on the upstream portal."} %>
+			label_html: {"data-toggle": "tooltip", "title": "Additional information specified by the submitter to be displayed as a comment on the upstream portal."} %>
 
-	<%= f.input :upstream_identifier, label_html: {"data-toggle" => "tooltip", "title" => "The corresponding ID for this biosample on the ENCODE Portal"} %>
+	<%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The corresponding ID for this biosample on the ENCODE Portal"} %>
 	</br>

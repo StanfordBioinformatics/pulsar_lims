@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180329040129) do
+ActiveRecord::Schema.define(version: 20180329043640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,6 +197,11 @@ ActiveRecord::Schema.define(version: 20180329040129) do
   create_table "biosamples_documents", id: false, force: :cascade do |t|
     t.integer "biosample_id"
     t.integer "document_id"
+  end
+
+  create_table "biosamples_pooled_from_biosamples", id: false, force: :cascade do |t|
+    t.integer "biosample_id"
+    t.integer "pooled_from_biosample_id"
   end
 
   create_table "biosamples_treatments", id: false, force: :cascade do |t|

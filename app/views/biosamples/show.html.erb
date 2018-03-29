@@ -49,6 +49,13 @@
 		</tr>
 	<% end %>
 
+  <% if @biosample.pooled_from_biosamples.any? %>
+    <tr>
+      <th><strong>Pooled from biosamples</strong></th>
+      <td><%= render partial: "link_to_biosamples", locals: {biosamples: @biosample.pooled_from_biosamples} %></td>
+    </tr>
+  <% end %>
+
 	<% if @biosample.well.present? %>
 		<tr>
 			<th><strong>Well</strong></th>

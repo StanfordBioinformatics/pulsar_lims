@@ -3,6 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+  #Refresh the pooled_from_biosamples list in the form when the refresh fa-icon is clicked:
+  $(document).on "click", ".biosample_pooled_from_biosamples i.refresh", (event) -> 
+    $.get "/biosamples/select_options", (responseText,status,jqXHR) ->
+      $(".biosample_pooled_from_biosamples select").html(responseText)
+
   #Refresh the nih_institutional_certification (Document) list in the form when the refresh fa-icon is clicked:
   $(document).on "click", ".biosample_nih_institutional_certification i.refresh", (event) -> 
     $.get "/documents/select_options", (responseText,status,jqXHR) ->
