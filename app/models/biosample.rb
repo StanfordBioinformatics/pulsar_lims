@@ -43,8 +43,10 @@ class Biosample < ActiveRecord::Base
   validates :donor_id, presence: true
   validates :tissue_preservation_method, inclusion: {in: Enums::TISSUE_PRESERVATION_METHODS, message: "must be an element in the list #{Enums::TISSUE_PRESERVATION_METHODS}."}, allow_blank: true
 
-  accepts_nested_attributes_for :documents, allow_destroy: true
   accepts_nested_attributes_for :crispr_modification, allow_destroy: true
+  accepts_nested_attributes_for :documents, allow_destroy: true
+  accepts_nested_attributes_for :pooled_from_biosamples, allow_destroy: true
+  accepts_nested_attributes_for :treatments, allow_destroy: true
 
   scope :non_plated, lambda { where(plated: false, prototype: false) }
   scope :non_prototypes, lambda { where(prototype: false) }
@@ -76,6 +78,39 @@ class Biosample < ActiveRecord::Base
       doc = Document.find(i)
       if not self.documents.include? doc
         self.documents << doc
+      end 
+    end
+  end
+
+  def pooled_from_biosample_ids=(ids)
+    """ 
+    Function : Adds pooled from biosamples to self.pooled_from_biosamples.
+    Args     : ids - array of Biosample IDs.
+    """
+    ids.each do |i|
+      if i.blank?
+        next
+      end
+      b = Biosample.find(i)
+      next if i.to_i == b.id
+      if not self.pooled_from_biosamples.include? b
+        self.pooled_from_biosamples << b
+      end 
+    end
+  end
+
+  def treatment_ids=(ids)
+    """ 
+    Function : Adds associations to Treatments that are stored in self.treatments.
+    Args     : ids - array of Treatment IDs.
+    """
+    ids.each do |i|
+      if i.blank?
+        next
+      end
+      treat = Treatment.find(i)
+      if not self.treatments.include? treat
+        self.treatments << treat
       end 
     end
   end

@@ -38,6 +38,11 @@
 //    });
 
 
+//Set select inputs to show 6 rows:
+$(function() {
+  $("select",document).attr("size","8");
+})
+
 //Close flash messages with a fade out when the 'x' is clicked:
 $(function() {
   $("a.close").on("click", function(event){

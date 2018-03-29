@@ -15,6 +15,7 @@ class Treatment < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true, length: { minimum: 2, maximum: 40 }
   validates :treatment_term_name_id, presence: true
   validates :treatment_type, presence: true, inclusion: {in: Enums::TREATMENT_TYPES, message: "Must be an element from the list #{Enums::TREATMENT_TYPES}"}
+  scope :persisted, lambda { where.not(id: nil) }
 
   def self.policy_class 
     ApplicationPolicy
