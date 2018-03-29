@@ -8,6 +8,7 @@ class BiosamplesController < ApplicationController
     set_model_class()
     @records = policy_scope(Biosample.where({part_of_biosample: @biosample})).page params[:page]
     @no_new_btn = true
+    @title = "Child biosamples of #{@biosample.name}"
     render action: "index" 
   end
     

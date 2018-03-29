@@ -68,7 +68,7 @@
 			input_html: {class: "biosample_type_selector"}, label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The categorization of the biosample. See 'Biosample Types' in the Object Store."} %>
 
   <%= f.association :biosample_term_name, input_html: {class: "biosample_term_name_selector"},
-      label_html: {class: "refresh"}
+      label_html: {class: "refresh", "data-toggle": "tooltip", "title": "An ontology term for the biosamaple. The selection choices change depending on the value chosen for \"Biosample type\"."}
   %>
   <!-- When the user changes the value in the biosample_type selector, jQuery will update the biosample_term_name list. -->
 
