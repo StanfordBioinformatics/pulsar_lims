@@ -2,7 +2,7 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_platform } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing platform name"} %>
-  <%= f.input :upstream_identifier %>
+  <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The corresponding ID for this platform on the ENCODE Portal."} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary"%>

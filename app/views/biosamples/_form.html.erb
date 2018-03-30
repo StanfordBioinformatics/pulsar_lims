@@ -8,6 +8,8 @@
 
 	<%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique biosample name"} %> 
 
+	<%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The corresponding ID for this biosample on the ENCODE Portal"} %>
+
   <%= f.input :description, 
     label_html: {"data-toggle": "tooltip", "title": "A plain text description of the biosample. Do not include experiment details, constructs or treatments."} %>
 
@@ -95,5 +97,4 @@
 	<%= f.input :submitter_comments,
 			label_html: {"data-toggle": "tooltip", "title": "Additional information specified by the submitter to be displayed as a comment on the upstream portal."} %>
 
-	<%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The corresponding ID for this biosample on the ENCODE Portal"} %>
 	</br>

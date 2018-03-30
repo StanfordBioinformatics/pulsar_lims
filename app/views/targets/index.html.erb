@@ -11,7 +11,6 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
-      <th>Upstream ID</th>
 			<th>Ensembl accession</th>
 			<th>RefSeq accession</th>
       <th>Actions</th>
@@ -22,7 +21,6 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
-        <td><%= rec.upstream_identifier %></td>
         <td><%= rec.ensembl %></td>
         <td><%= rec.refseq %></td>
         <td>
