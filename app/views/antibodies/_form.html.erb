@@ -3,7 +3,13 @@
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique antibody name"} %>
 
-  <%= f.association :organism, collection: Organism.order(:name), label_method: :name, prompt: "Select the Organism",
+  <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The corresponding ID for this antibody on the ENCODE Portal"} %>
+  </br> 
+
+  <%= f.association :organism, 
+      include_blank: true,
+      collection: Organism.order(:name), 
+      label_method: :name,
 			label_html: {"data-toggle" => "tooltip", "title" => "The organism the antibody was grown in."} %>
 
 	<% if @antibody.antibody_purifications.present? %>
@@ -59,7 +65,9 @@
   <%= f.input :lot_identifier,
 			label_html: {"data-toggle" => "tooltip", "title" => "The lot identifier provided by the originating lab or vendor."} %>
 
-  <%= f.input :clonality, collection: Antibody::CLONALITY_TYPES, prompt:  "Select the Clonality",
+  <%= f.input :clonality, 
+      include_blank: true,
+      collection: Antibody::CLONALITY_TYPES, 
 			label_html: {"data-toggle" => "tooltip", "title" => "The diversification of the immune cell lineage to make the antibody."} %>
 
   <%= f.input :antigen_description,
