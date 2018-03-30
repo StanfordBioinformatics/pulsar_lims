@@ -13,6 +13,7 @@
       <%= render partial: "application_partials/index_common_table_headers" %>
 			<th>Ensembl accession</th>
 			<th>RefSeq accession</th>
+			<th>UniProtKB accession</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -23,6 +24,7 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.ensembl %></td>
         <td><%= rec.refseq %></td>
+        <td><%= rec.uniprotkb %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_target_path(rec) %>
         	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>

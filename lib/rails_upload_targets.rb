@@ -6,8 +6,6 @@ require "json"
 
 SPECIES="Homo sapiens"
 
-Target.destroy_all
-
 options = {}
 OptionParser.new do |opts|
 	opts.on("--infile [INFILE]",help="Full path to input file containing JSON to import into the human genes portion from ENCODE's targets table. The JSON targets can be retrieved via the URL https://www.encodeproject.org/targets/?format=json&limit=all.") do |infile|
@@ -19,23 +17,42 @@ admin = User.find_by(email: "admin@enc.com")
 
 fh = File.read(options[:infile])
 json_data = JSON.parse(fh)
+
 #if json_data.has_key?("@graph")
 #	json_data = json_data["@graph"]
 #end
 
 count = 0
-json_data.each do |x|
-	organism = x["organism"]["scientific_name"]
+json_data.each do |rec|
+  count += 1
+	organism = rec["organism"]["scientific_name"]
 	if organism != SPECIES
 		next
 	end
+  label = rec["label"]
+  upstream = rec["@id"].split("/").last
 	params = {}
 	params[:user_id] = admin.id
-	params[:encode_identifier] = x["@id"].split("/").last
-	params[:name] = x["label"]
-	#Using the label since it's unique and all entries have it. The 
-	
-	Target.create!(params)
+	params[:name] = label
+  params[:upstream_identifier] = upstream 
+  xrefs = rec["dbxref"]                                                                                
+  xrefs.each do |ref|                                                                                  
+    prefix, ref = ref.split(":")                                                                       
+    if prefix == "ENSEMBL"                                                                             
+      params[:ensembl] = ref                                                                           
+    elsif prefix == "UniProtKB"                                                                        
+      params[:uniprotkb] = ref                                                                         
+    elsif prefix == "RefSeq"                                                                           
+      params[:refseq] = ref                                                                            
+    end                                                                                                
+  end
+  target = Target.find_by(name: label)
+  if target.present?                                                                                   
+    target.update(params)                                                                              
+  #else
+    #Using the label since it's unique and all entries have it. The                                 
+    #Target.create!(params)                                                                          
+  end 
 end
 puts count
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180329043640) do
+ActiveRecord::Schema.define(version: 20180330052658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -777,6 +777,7 @@ ActiveRecord::Schema.define(version: 20180329043640) do
     t.string   "ensembl"
     t.string   "refseq"
     t.string   "upstream_identifier"
+    t.string   "uniprotkb"
   end
 
   add_index "targets", ["name"], name: "index_targets_on_name", unique: true, using: :btree
