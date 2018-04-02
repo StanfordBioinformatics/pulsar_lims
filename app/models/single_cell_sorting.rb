@@ -11,7 +11,7 @@ class SingleCellSorting < ActiveRecord::Base
 	has_many :plates, dependent: :destroy
   has_and_belongs_to_many :documents
 
-  validates  :upstream_identifier, uniqueness: true, allow_nil: true 
+  validates  :upstream_identifier, uniqueness: true, allow_blank: true
 	validates :name, presence: true, uniqueness: true
 	validates :starting_biosample, presence: true #single cell sorting exp. must start with a biosample having cells to sort.
 

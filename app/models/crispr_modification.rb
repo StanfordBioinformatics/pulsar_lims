@@ -10,7 +10,7 @@ class CrisprModification < ActiveRecord::Base
 
 	has_many :pcr_validations, class_name: "Pcr", dependent: :nullify
   has_and_belongs_to_many :crispr_constructs
-  validates  :upstream_identifier, uniqueness: true, allow_nil: true 
+  validates  :upstream_identifier, uniqueness: true, allow_blank: true
 	validates :name, presence: true, uniqueness: true
 	validates :biosample, presence: true
 	validates :crispr_constructs, presence: true
