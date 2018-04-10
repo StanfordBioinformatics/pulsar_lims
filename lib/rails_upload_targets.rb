@@ -8,7 +8,7 @@ SPECIES="Homo sapiens"
 
 options = {}
 OptionParser.new do |opts|
-	opts.on("--infile [INFILE]",help="Full path to input file containing JSON to import into the human genes portion from ENCODE's targets table. The JSON targets can be retrieved via the URL https://www.encodeproject.org/targets/?format=json&limit=all.") do |infile|
+	opts.on("--infile [INFILE]",help="A search URL to indicate which biosamples to import, i.e. 'https://www.encodeproject.org/search/?type=Biosample&lab.title=Michael+Snyder%2C+Stanford&award.rfa=ENCODE4&biosample_type=tissue'.") do |infile|
 		options[:infile] = infile
 	end
 end.parse!

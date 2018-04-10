@@ -17,3 +17,4 @@
 .env
 .byebug_history
 lib/DataFiles
+**/EU_Logs
