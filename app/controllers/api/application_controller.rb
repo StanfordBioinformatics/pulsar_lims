@@ -11,7 +11,9 @@ class Api::ApplicationController < ApplicationController
 	end
 
 	def authenticate_user
-    #The RAILS method authenticate_with_http_token checks the Authorization request header for a token and passes it
+    # Because requests aren't going through the browser (hence no session), current_user from Devies will always
+    # be nil.  See p. 484 in Rails 4 in Action. Thus, we'll authenticate the user via Rails method
+    # authentiate_with_http_token, which checks the Authorization request header for a token and passes it
     # as an argument to the given block.
     # See (https://www.codeschool.com/blog/2014/02/03/token-based-authentication-rails/)
 

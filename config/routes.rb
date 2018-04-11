@@ -80,6 +80,9 @@ Pulsar::Application.routes.draw do
 		resources :biosamples
 		resources :construct_tags
 		resources :crispr_constructs
+    resources :documents do
+      post :find_by, on: :collection
+    end
 		resources :sequencing_requests do
 			get :find_by_name, on: :collection
 			post :add_crispr_modification, on: :member
