@@ -118,7 +118,21 @@ class SequencingRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_request_params
-      params.require(:sequencing_request).permit(:sample_sheet, :concentration, :concentration_unit_id, :name,:paired_end,:comment, :sequencing_platform_id, :sequencing_center_id, :shipped, :plate_ids => [], plates_attributes: [:id,:_destroy], :library_ids => [], libraries_attributes: [:id,:_destroy])
+      params.require(:sequencing_request).permit(
+        :comment,
+        :concentration,
+        :concentration_unit_id,
+        :name,
+        :paired_end,
+        :sample_sheet,
+        :sequencing_center_id, 
+        :sequencing_platform_id, 
+        :shipped, 
+        :plate_ids => [], 
+        plates_attributes: [:id,:_destroy], 
+        :library_ids => [], 
+        libraries_attributes: [:id,:_destroy]
+      )
     end
 
     def set_s3_direct_post

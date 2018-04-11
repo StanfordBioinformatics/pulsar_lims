@@ -77,11 +77,17 @@ Pulsar::Application.routes.draw do
   end
 
 	namespace :api do
-		resources :biosamples
-		resources :construct_tags
-		resources :crispr_constructs
+		resources :biosamples do
+      get :find_by, on: :collection
+    end
+		resources :construct_tags do
+      get :find_by, on: :collection
+    end
+		resources :crispr_constructs do
+      get :find_by, on: :collection
+    end
     resources :documents do
-      post :find_by, on: :collection
+      get :find_by, on: :collection
     end
 		resources :sequencing_requests do
 			get :find_by_name, on: :collection

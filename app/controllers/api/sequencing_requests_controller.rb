@@ -4,6 +4,11 @@ class Api::SequencingRequestsController < Api::ApplicationController
 	before_action :set_biosample, only: [:show]
 	skip_after_action :verify_authorized, only: [:find_by_name]
 
+  def find_by
+    #find_by defined in ApplicationController#find_by.
+    super(sequencing_request_params)
+  end
+
 	def show
 		authorize @sequencing_request
 		render json: @sequencing_request
@@ -14,11 +19,30 @@ class Api::SequencingRequestsController < Api::ApplicationController
 		res = SequencingRequest.find_by(name: name)
 		render json:  res
 	end
-	
+
 
 	private
 
 	def set_sequencing_request
 		@sequencing_request = SequencingRequest.find(params[:id])
 	end
+
+  def sequencing_request_params                                                                      
+    params.require(:sequencing_request).permit(
+      :comment,
+      :concentration,
+      :concentration_unit_id,
+      :name,
+      :paired_end,
+      :sample_sheet,
+      :sequencing_center_id, 
+      :sequencing_platform_id, 
+      :shipped, 
+      :plate_ids => [], 
+      plates_attributes: [:id,:_destroy], 
+      :library_ids => [], 
+      libraries_attributes: [:id,:_destroy]
+    )
+  end   
+
 end

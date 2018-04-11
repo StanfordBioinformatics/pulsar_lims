@@ -104,6 +104,15 @@ class SequencingResultsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_result_params
-      params.require(:sequencing_result).permit(:user_id, :is_control, :library_id, :comment, :read1_uri, :read2_uri, :read1_count, :read2_count)
+      params.require(:sequencing_result).permit(
+        :comment, 
+        :is_control, 
+        :library_id, 
+        :read1_uri, 
+        :read1_count, 
+        :read2_uri, 
+        :read2_count,
+        :user_id
+      )
     end
 end

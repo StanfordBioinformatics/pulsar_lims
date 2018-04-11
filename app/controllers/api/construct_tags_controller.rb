@@ -3,6 +3,11 @@ class Api::ConstructTagsController < Api::ApplicationController
 	# curl -H "Authorization: Token token=${token}" http://localhost:3000/api/construct_tags/3
 	before_action :set_construct_tag, only: [:show]
 
+  def find_by
+    #find_by defined in ApplicationController#find_by.
+    super(construct_tag_params)
+  end
+
 	def index
 		@construct_tags = policy_scope(ConstructTag).order("lower(name)")
 		render json: @construct_tags
@@ -31,6 +36,9 @@ class Api::ConstructTagsController < Api::ApplicationController
 	end
 
 	def construct_tag_params
-		params.require(:construct_tag).permit(:name,:description)
+		params.require(:construct_tag).permit(
+      :name,
+      :description
+    )
 	end
 end

@@ -61,6 +61,9 @@ class ConstructTagsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def construct_tag_params
-      params.require(:construct_tag).permit(:name, :description)
+      params.require(:construct_tag).permit(
+        :name,  
+        :description
+      )
     end
 end

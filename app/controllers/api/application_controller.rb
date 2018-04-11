@@ -3,10 +3,11 @@ class Api::ApplicationController < ApplicationController
 	attr_reader :current_user
 	before_action :authenticate_user
 
+
 	private
 
 	def user_not_authorized
-		#overwrites the method defined in controllers/application_controller. This is a rescue-from callback. 
+		#overwrites the method defined in controllers/application_controller. This is a rescue-from callback.
 		render json: { error: "Forbidden" }, status: 403
 	end
 

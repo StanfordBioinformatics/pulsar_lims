@@ -3,6 +3,11 @@ class Api::CrisprConstructsController < Api::ApplicationController
 	# curl -H "Authorization: Token token=${token}" http://localhost:3000/api/crispr_constructs/3
 	before_action :set_crispr_construct, only: [:show]
 
+  def find_by
+    #find_by defined in ApplicationController#find_by.
+    super(crispr_construct_params)
+  end
+
 	def show
 		authorize @crispr_construct
 		render json: @crispr_construct
@@ -25,6 +30,19 @@ class Api::CrisprConstructsController < Api::ApplicationController
 	end
 
 	def crispr_construct_params
-		params.require(:crispr_construct).permit(:name, :target_id, :guide_sequence, :cloning_vector_id, :description, :vendor_id, :vendor_product_identifier, crispr_tag_ids: [])
+    params.require(:crispr_construct).permit(                                                        
+      :addgene_id,                                                                                   
+      :cloning_vector_id,                                                                            
+      :description,                                                                                  
+      :ensembl_transcript,                                                                           
+      :guide_sequence,                                                                               
+      :name,                                                                                         
+      :refseq_transcript,                                                                            
+      :target_id,                                                                                    
+      :vendor_id,                                                                                    
+      :vendor_product_identifier,                                                                    
+      construct_tags_attributes: [:id,:_destroy],                                                    
+      :construct_tag_ids => [],                                                                      
+    )
 	end
 end

@@ -4,11 +4,8 @@ class Api::DocumentsController < Api::ApplicationController
 	before_action :set_document, only: [:show]
 
   def find_by
-    authorize Document, :show?
-    logger.debug("#!#!")
-    logger.debug(document_params)
-    res = Document.find_by(document_params)
-    render json: res
+    # find_by defined in ApplicationController#find_by.
+    super(document_params)
   end
 
 	def index
