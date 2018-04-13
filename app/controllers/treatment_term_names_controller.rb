@@ -67,6 +67,10 @@ class TreatmentTermNamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def treatment_term_name_params
-      params.require(:treatment_term_name).permit(:name, :accession, :description)
+      params.require(:treatment_term_name).permit(
+        :accession, 
+        :description,
+        :name
+      )
     end
 end

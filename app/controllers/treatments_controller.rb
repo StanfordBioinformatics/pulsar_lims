@@ -67,6 +67,19 @@ class TreatmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def treatment_params
-      params.require(:treatment).permit(:upstream_identifier, :treatment_term_name_id, :name, :description, :treatment_type, :concentration, :concentration_unit_id, :duration, :duration_units, :temperature, :document_ids => [], :treatment_ids => [])
+      params.require(:treatment).permit(
+        :concentration, 
+        :concentration_unit_id, 
+        :description, 
+        :duration, 
+        :duration_units, 
+        :name, 
+        :temperature, 
+        :treatment_term_name_id, 
+        :treatment_type, 
+        :upstream_identifier, 
+        :document_ids => [], 
+        :treatment_ids => []
+      )
     end
 end
