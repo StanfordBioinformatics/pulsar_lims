@@ -7,6 +7,7 @@ class Donor < ActiveRecord::Base
 
 	validates :upstream_identifier, uniqueness: true, presence: true
 	validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
+  validates :gender, inclusion: {in: Enums::GENDERS, message: "Must be an element from the list #{Enums::GENDERS}"}
 
 	scope :persisted, lambda { where.not(id: nil) }
 

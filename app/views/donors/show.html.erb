@@ -18,6 +18,16 @@
 	</tr>
 
   <tr>
+    <th><strong>Age:</strong></th>
+    <td><%= @donor.age %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Gender:</strong></th>
+    <td><%= @donor.gender %></td>
+  </tr>
+
+  <tr>
     <th><strong>Associated biosamples:</strong></th>
     <td>
       <% if @donor.biosamples.any? %>

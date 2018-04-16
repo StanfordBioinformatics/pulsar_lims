@@ -5,6 +5,10 @@
 
   <%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "A user-friendly name that you prefer to call this as."} %>
 
+  <%= f.input :age, label_html: {"data-toggle": "tooltip", "title": "The donor's age. You should include the units, i.e. days, weeks, months, years"} %>
+
+  <%= f.input :gender, collection: Enums::GENDERS %>
+
   <div class="actions">
     <%= f.button :submit, class: "btn-primary" %>
   </div></br>
