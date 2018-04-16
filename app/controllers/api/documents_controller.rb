@@ -5,6 +5,13 @@ class Api::DocumentsController < Api::ApplicationController
 
   def find_by
     # find_by defined in ApplicationController#find_by.
+    # Use this method when you want to AND all of your query parameters.
+    super(document_params)
+  end
+
+  def find_by_or
+    # find_by_or defined in ApplicationController#find_by_or.
+    # Use this method when you want to OR all of your query parameters.
     super(document_params)
   end
 

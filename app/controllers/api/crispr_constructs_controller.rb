@@ -5,6 +5,13 @@ class Api::CrisprConstructsController < Api::ApplicationController
 
   def find_by
     #find_by defined in ApplicationController#find_by.
+    # Use this method when you want to AND all of your query parameters.
+    super(crispr_construct_params)
+  end
+
+  def find_by_or
+    # find_by_or defined in ApplicationController#find_by_or.
+    # Use this method when you want to OR all of your query parameters.
     super(crispr_construct_params)
   end
 
@@ -30,19 +37,19 @@ class Api::CrisprConstructsController < Api::ApplicationController
 	end
 
 	def crispr_construct_params
-    params.require(:crispr_construct).permit(                                                        
-      :addgene_id,                                                                                   
-      :cloning_vector_id,                                                                            
-      :description,                                                                                  
-      :ensembl_transcript,                                                                           
-      :guide_sequence,                                                                               
-      :name,                                                                                         
-      :refseq_transcript,                                                                            
-      :target_id,                                                                                    
-      :vendor_id,                                                                                    
-      :vendor_product_identifier,                                                                    
-      construct_tags_attributes: [:id,:_destroy],                                                    
-      :construct_tag_ids => [],                                                                      
+    params.require(:crispr_construct).permit(
+      :addgene_id,
+      :cloning_vector_id,
+      :description,
+      :ensembl_transcript,
+      :guide_sequence,
+      :name,
+      :refseq_transcript,
+      :target_id,
+      :vendor_id,
+      :vendor_product_identifier,
+      construct_tags_attributes: [:id,:_destroy],
+      :construct_tag_ids => [],
     )
 	end
 end

@@ -79,18 +79,23 @@ Pulsar::Application.routes.draw do
 	namespace :api do
 		resources :biosamples do
       post :find_by, on: :collection
+      post :find_by_or, on: :collection
     end
     resources :concentration_units do
       post :find_by, on: :collection
+      post :find_by_or, on: :collection
     end
 		resources :construct_tags do
       post :find_by, on: :collection
+      post :find_by_or, on: :collection
     end
 		resources :crispr_constructs do
       post :find_by, on: :collection
+      post :find_by_or, on: :collection
     end
     resources :documents do
       post :find_by, on: :collection
+      post :find_by_or, on: :collection
     end
 		resources :sequencing_requests do
 			post :find_by_name, on: :collection
@@ -98,9 +103,11 @@ Pulsar::Application.routes.draw do
 		end
     resources :treatments do
       post :find_by, on: :collection
+      post :find_by_or, on: :collection
     end
     resources :treatment_term_names do
       post :find_by, on: :collection
+      post :find_by_or, on: :collection
     end
 
 	end

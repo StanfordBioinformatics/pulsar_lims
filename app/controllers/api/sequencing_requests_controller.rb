@@ -6,6 +6,13 @@ class Api::SequencingRequestsController < Api::ApplicationController
 
   def find_by
     #find_by defined in ApplicationController#find_by.
+    # Use this method when you want to AND all of your query parameters.
+    super(sequencing_request_params)
+  end
+
+  def find_by_or
+    # find_by_or defined in ApplicationController#find_by_or.
+    # Use this method when you want to OR all of your query parameters.
     super(sequencing_request_params)
   end
 
@@ -27,7 +34,7 @@ class Api::SequencingRequestsController < Api::ApplicationController
 		@sequencing_request = SequencingRequest.find(params[:id])
 	end
 
-  def sequencing_request_params                                                                      
+  def sequencing_request_params
     params.require(:sequencing_request).permit(
       :comment,
       :concentration,
@@ -35,14 +42,14 @@ class Api::SequencingRequestsController < Api::ApplicationController
       :name,
       :paired_end,
       :sample_sheet,
-      :sequencing_center_id, 
-      :sequencing_platform_id, 
-      :shipped, 
-      :plate_ids => [], 
-      plates_attributes: [:id,:_destroy], 
-      :library_ids => [], 
+      :sequencing_center_id,
+      :sequencing_platform_id,
+      :shipped,
+      :plate_ids => [],
+      plates_attributes: [:id,:_destroy],
+      :library_ids => [],
       libraries_attributes: [:id,:_destroy]
     )
-  end   
+  end
 
 end

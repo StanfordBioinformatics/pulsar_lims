@@ -5,6 +5,13 @@ class Api::TreatmentsController < Api::ApplicationController
 
   def find_by
     # find_by defined in ApplicationController#find_by.
+    # Use this method when you want to AND all of your query parameters.
+    super(treatment_params)
+  end
+
+  def find_by_or
+    # find_by_or defined in ApplicationController#find_by_or.
+    # Use this method when you want to OR all of your query parameters.
     super(treatment_params)
   end
 
@@ -36,19 +43,19 @@ class Api::TreatmentsController < Api::ApplicationController
   end
 
   def treatment_params
-    params.require(:treatment).permit(                                                               
-      :concentration,                                                                                
-      :concentration_unit_id,                                                                        
-      :description,                                                                                  
-      :duration,                                                                                     
-      :duration_units,                                                                               
-      :name,                                                                                         
-      :temperature,                                                                                  
-      :treatment_term_name_id,                                                                       
-      :treatment_type,                                                                               
-      :upstream_identifier,                                                                          
-      :document_ids => [],                                                                           
-      :treatment_ids => []                                                                           
-    )  
+    params.require(:treatment).permit(
+      :concentration,
+      :concentration_unit_id,
+      :description,
+      :duration,
+      :duration_units,
+      :name,
+      :temperature,
+      :treatment_term_name_id,
+      :treatment_type,
+      :upstream_identifier,
+      :document_ids => [],
+      :treatment_ids => []
+    )
   end
 end

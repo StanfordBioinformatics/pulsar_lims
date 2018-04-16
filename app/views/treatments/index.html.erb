@@ -30,8 +30,13 @@
         <td><%= link_to rec.treatment_term_name.name, rec.treatment_term_name %></td>
         <td><%= rec.description %></td>
         <td><%= rec.treatment_type %></td>
-        <td><%= rec.concentration %></td>
-        <td><%= link_to rec.concentration_unit.name, rec.concentration_unit %></td>
+        <% if rec.concentration.present? %>
+          <td><%= rec.concentration %></td>
+          <td><%= link_to rec.concentration_unit.name, rec.concentration_unit %></td>
+        <% else %>
+          <td></td>
+          <td></td>
+        <% end %>
         <td><%= rec.duration %></td>
         <td><%= rec.duration_units %></td>
         <td><%= rec.temperature %></td>

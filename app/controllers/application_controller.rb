@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :set_model_class, only: [:index, :new, :find_by]
+  before_action :set_model_class, only: [:index, :new, :find_by, :find_by_or]
   # Note that :find_by is defined as an action in controller subclasses, which are expected to
   # call the prviate :find_by method defined here (not as an action), particularly the aip
   # controllers. 
@@ -45,9 +45,33 @@ class ApplicationController < ActionController::Base
 	private
 
   def find_by(params)
+    # Used in API calls to invoke find_by from ActiveRecord::FinderMethods by passing in the params 
+    # argument, which is a dict. Thus, all query parameters in the dict are joined implicitly via 
+    # the AND database operator (since that is the behavior of Rails's find_by when given a dict). 
+    # For OR operator joining, see the mothod find_by_or defined below. 
+    #
     # Uses @model_class from ApplicationController#set_model_class.
     authorize @model_class, :show?
     res = @model_class.find_by(params)
+    render json: res
+  end
+
+  def find_by_or(params)
+    # Used in API calls to invoke find_by from ActiveRecord::FinderMethods. 
+    # The 'params' argument is a dict, however, to allow OR operator joining, this method
+    # creates a string query out of params' that includes calls to the OR operator for each 
+    # query parameter in params. For AND operator joining, see find_by method defined above.
+    #
+    # Uses @model_class from ApplicationController#set_model_class.
+    authorize @model_class, :show?
+    search_str = ""
+    replacement_args = []
+    params.each do |key,val|
+      replacement_args << val
+      search_str += "#{key} = ? OR "
+    end
+    search_str = search_str.chomp(" OR ")
+    res = @model_class.find_by(search_str, *replacement_args)
     render json: res
   end
 
