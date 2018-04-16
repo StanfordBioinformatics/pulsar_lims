@@ -97,6 +97,12 @@ Pulsar::Application.routes.draw do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
+
+		resources :donors do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
 		resources :sequencing_requests do
 			post :find_by_name, on: :collection
 			post :add_crispr_modification, on: :member
