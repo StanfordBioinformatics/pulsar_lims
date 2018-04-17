@@ -145,7 +145,9 @@ class BiosamplesController < ApplicationController
         crispr_modification_attributes: [
           :user_id, 
           :_destroy, 
+          :category,
           :name, 
+          :purpose,
           :donor_construct_id, 
           crispr_constructs_attributes: [:id, :_destroy],
           crispr_construct_ids: [], 

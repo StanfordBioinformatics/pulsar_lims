@@ -93,6 +93,15 @@ class CrisprModificationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def crispr_modification_params
-      params.require(:crispr_modification).permit(:upstream_identifier, :name, :donor_construct_id, genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end], crispr_construct_ids: [], crispr_constructs_attributes: [:id, :_destroy] )
+      params.require(:crispr_modification).permit(
+        :category,
+        :donor_construct_id, 
+        :name, 
+        :purpose,
+        :upstream_identifier,
+        crispr_construct_ids: [], 
+        crispr_constructs_attributes: [:id, :_destroy],
+        genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end]
+      )
     end
 end

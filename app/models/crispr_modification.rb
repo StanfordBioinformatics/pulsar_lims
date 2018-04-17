@@ -10,7 +10,9 @@ class CrisprModification < ActiveRecord::Base
 
 	has_many :pcr_validations, class_name: "Pcr", dependent: :nullify
   has_and_belongs_to_many :crispr_constructs
-  validates  :upstream_identifier, uniqueness: true, allow_blank: true
+  validates :category, presence: true, inclusion: {in: Enums::CRISPR_MOD_CATEGORIES, message: "Must be an element from the list #{Enums::CRISPR_MOD_CATEGORIES}"}
+  validates :purpose, presence: true, inclusion: {in: Enums::CRISPR_MOD_PURPOSE, message: "Must be an element from the list #{Enums::CRISPR_MOD_PURPOSE}"}
+  validates :upstream_identifier, uniqueness: true, allow_blank: true
 	validates :name, presence: true, uniqueness: true
 	validates :biosample, presence: true
 	validates :crispr_constructs, presence: true

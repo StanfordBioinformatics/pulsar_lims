@@ -3,7 +3,11 @@
 	<%# is_crispr_modification_path = request.fullpath.start_with?(crispr_modifications_path) %>
 
 
-	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique name"} %>
+	<%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique name"} %>
+
+  <%= f.input :category, collection: Enums::CRISPR_MOD_CATEGORIES, label_html: {"data-toggle": "tooltip", "title":  "The category/type of the genetic modification performed."} %>
+
+  <%= f.input :purpose, collection: Enums::CRISPR_MOD_PURPOSE, label_html: {"data-toggle": "tooltip", "title":  "The purpose of the genetic modification."} %>
 
 	<!-- If crispr is being updated, show any existing associated crispr_constructs and allow user to be able to delete them. -->
 	<% pers_crispr_constructs = @crispr.crispr_constructs.persisted %>

@@ -12,6 +12,8 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
+      <th>Category</th>
+      <th>Purpose</th>
       <th>Crispr constructs</th>
       <th>Donor construct</th>
       <th>Biosample</th>
@@ -24,6 +26,8 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <%= rec.category %>
+        <%= rec.purpose %>
 				<td>
 					<% rec.crispr_constructs.each do |cc| %>
 		        <%= link_to cc.name, cc %>
