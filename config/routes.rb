@@ -81,6 +81,12 @@ Pulsar::Application.routes.draw do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
+
+		resources :biosample_types do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :concentration_units do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
@@ -112,6 +118,11 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
     resources :treatment_term_names do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
+    resources :vendors do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end

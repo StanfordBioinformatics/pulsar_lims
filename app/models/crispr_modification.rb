@@ -1,4 +1,6 @@
 class CrisprModification < ActiveRecord::Base
+  #Submit to the ENCODE Portal as a genetic_modification:
+  # https://www.encodeproject.org/profiles/genetic_modification.json
   include ModelConcerns
 	#crisprs only belong to biosamples.
 	ABBR = "CRISPR"
@@ -8,6 +10,10 @@ class CrisprModification < ActiveRecord::Base
   belongs_to :donor_construct
 	belongs_to :genomic_integration_site, class_name: "GenomeLocation"
 
+  # Each pcr_validation should be submitted to the ENCODE profile 
+  # https://www.encodeproject.org/profiles/genetic_modification_characterization.json.
+  # This should be done after creation of the corresponding genetic_modification so that the
+  # genetic_modification_characterization.characterizes property points to it. 
 	has_many :pcr_validations, class_name: "Pcr", dependent: :nullify
   has_and_belongs_to_many :crispr_constructs
   validates :category, presence: true, inclusion: {in: Enums::CRISPR_MOD_CATEGORIES, message: "Must be an element from the list #{Enums::CRISPR_MOD_CATEGORIES}"}

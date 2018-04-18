@@ -68,6 +68,9 @@ class BiosampleTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_type_params
-      params.require(:biosample_type).permit(:tissue,:name)
+      params.require(:biosample_type).permit(
+        :name,
+        :tissue
+      )
     end
 end
