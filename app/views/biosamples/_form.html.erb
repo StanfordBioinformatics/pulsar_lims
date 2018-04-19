@@ -8,6 +8,8 @@
 
 	<%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique biosample name"} %> 
 
+	<%= f.input :tube_label, label_html: {"data-toggle": "tooltip", "title": "How the stored biosample is labeled (i.e. what is written on the tube)."} %> 
+
 	<%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The corresponding ID for this biosample on the ENCODE Portal"} %>
 
   <%= f.input :description, 
@@ -88,6 +90,12 @@
 
 	<%= f.input :passage_number,
 			label_html: {"data-toggle": "tooltip", "title": "In calculating passage number, include passages from the source."} %>
+
+  <label for="starting_amount" data-toggle="tooltip" title="The initial quantity of cells or tissue."><span>Starting amount</span></label>
+  <%= f.input_field :starting_amount %>                                                                  
+  <label for="starting_amount_units"><span>Units</span></label>
+  <%= f.input_field :starting_amount_units, collection: Enums::STARTING_AMOUNT_UNITS %>              
+  </br></br> 
 
   <%= f.input :tissue_preservation_method, collection: Enums::TISSUE_PRESERVATION_METHODS, label_html: {"data-toggle": "tooltip", "title": "The method by which the sample was preserved.  If you need to be able to select an option that is not in this list, please email the admin."} %>
 

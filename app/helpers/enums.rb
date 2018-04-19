@@ -10,6 +10,8 @@ module Enums
 
   GENDERS = ["female", "male", "mixed", "unknown"]
 
+  STARTING_AMOUNT_UNITS = ["cells", "cells/ml", "g", "items", "mg", "whole animals", "whole embryos", "μg"]
+
   TISSUE_PRESERVATION_METHODS = ["cryopreservation", "flash-freezing", "fresh"]
 
   TREATMENT_TYPES = ["antibody","chemical","exposure","infection","injection","irradiation","protein","transplantation"]

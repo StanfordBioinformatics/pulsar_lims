@@ -41,6 +41,9 @@ class Biosample < ActiveRecord::Base
   validates :biosample_term_name_id, presence: true
   validates :vendor_id, presence: true
   validates :donor_id, presence: true
+  validates :starting_amount_units, inclusion: {in: Enums::STARTING_AMOUNT_UNITS, message: "must be an element in the list #{Enums::STARTING_AMOUNT_UNITS}."}, allow_blank: true
+  validates :starting_amount, presence: {message: "must be specified when the starting_amount_units is specified."}, if: "starting_amount_units.present?"
+  validates :starting_amount_units, presence: {message: "must be specified when the starting_amount is specified."}, if: "starting_amount.present?"
   validates :tissue_preservation_method, inclusion: {in: Enums::TISSUE_PRESERVATION_METHODS, message: "must be an element in the list #{Enums::TISSUE_PRESERVATION_METHODS}."}, allow_blank: true
 
   accepts_nested_attributes_for :crispr_modification, allow_destroy: true

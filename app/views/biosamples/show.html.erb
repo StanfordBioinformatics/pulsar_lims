@@ -18,6 +18,18 @@
 		<td><%= @biosample.name %></td>
 	</tr>
 
+  <tr>
+    <th><strong>Tube label</strong></th>
+    <td><%= @biosample.tube_label %></td>
+  </tr>
+
+  <tr>
+    <th><strong>NIH Institutional Certification</strong></th>
+    <td>
+        <%= @biosample.nih_institutional_certification %>
+    </td>
+  </tr>
+
 	<tr>
 	  <th><strong>Description:</strong></th>
 	  <td><%= @biosample.description %></td>
@@ -73,13 +85,6 @@
 		</tr>
 	<% end %>
   
-  <tr>
-    <th><strong>NIH Institutional Certification</strong></th>
-    <td>
-        <%= @biosample.nih_institutional_certification %>
-    </td>
-  </tr>
-
 	<tr>
 		<th><strong>Protocol documents:</strong></th>
 		<td>
@@ -123,6 +128,15 @@
 		<th><strong>Donor:</strong></th>
 		<td><%= link_to @biosample.donor.name, @biosample.donor %></td>
 	</tr>
+
+  <tr>
+    <th><strong>Starting amount:</strong></th>
+    <td>
+      <% if @biosample.starting_amount.present? %>
+        <%= @biosample.starting_amount %>&nbsp;<%= @biosample.starting_amount_units %>
+      <% end %>
+    </td>
+  </tr>
 
 	<tr>
 	  <th><strong>Passage number:</strong></th>

@@ -56,7 +56,7 @@
 	<label for="library_concentration" data-toggle="tooltip" title="The concentration of nucleic acids in the library."><span>Concentration</span></label>
 	<%= f.input_field :concentration %>
 	<label for="library_concentration_unit" data-toggle="tooltip" title="The concentration units."><span>Units</span></label>
-	<%= f.input_field :concentration_unit_id, collection: ConcentrationUnit.all %>
+	<%= f.input_field :concentration_unit_id, collection: ConcentrationUnit.all, size: 2 %>
 	</br></br>
 
   <%= f.input :size_range, as: :string,
