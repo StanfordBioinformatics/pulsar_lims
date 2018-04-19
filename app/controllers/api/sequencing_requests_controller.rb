@@ -7,13 +7,13 @@ class Api::SequencingRequestsController < Api::ApplicationController
   def find_by
     #find_by defined in ApplicationController#find_by.
     # Use this method when you want to AND all of your query parameters.
-    super(sequencing_request_params)
+    super
   end
 
   def find_by_or
     # find_by_or defined in ApplicationController#find_by_or.
     # Use this method when you want to OR all of your query parameters.
-    super(sequencing_request_params)
+    super
   end
 
 	def show
@@ -36,6 +36,7 @@ class Api::SequencingRequestsController < Api::ApplicationController
 
   def sequencing_request_params
     params.require(:sequencing_request).permit(
+      :user_id,
       :comment,
       :concentration,
       :concentration_unit_id,

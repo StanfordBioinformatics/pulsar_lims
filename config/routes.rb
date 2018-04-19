@@ -82,7 +82,17 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
+		resources :biosample_ontologies do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
 		resources :biosample_types do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
+		resources :biosample_term_names do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end

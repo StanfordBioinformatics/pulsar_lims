@@ -6,13 +6,13 @@ class Api::TreatmentsController < Api::ApplicationController
   def find_by
     # find_by defined in ApplicationController#find_by.
     # Use this method when you want to AND all of your query parameters.
-    super(treatment_params)
+    super
   end
 
   def find_by_or
     # find_by_or defined in ApplicationController#find_by_or.
     # Use this method when you want to OR all of your query parameters.
-    super(treatment_params)
+    super
   end
 
   def index
@@ -44,6 +44,7 @@ class Api::TreatmentsController < Api::ApplicationController
 
   def treatment_params
     params.require(:treatment).permit(
+      :user_id,
       :concentration,
       :concentration_unit_id,
       :description,

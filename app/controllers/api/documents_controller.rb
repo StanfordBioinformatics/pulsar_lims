@@ -6,13 +6,13 @@ class Api::DocumentsController < Api::ApplicationController
   def find_by
     # find_by defined in ApplicationController#find_by.
     # Use this method when you want to AND all of your query parameters.
-    super(document_params)
+    super
   end
 
   def find_by_or
     # find_by_or defined in ApplicationController#find_by_or.
     # Use this method when you want to OR all of your query parameters.
-    super(document_params)
+    super
   end
 
 	def index
@@ -43,6 +43,10 @@ class Api::DocumentsController < Api::ApplicationController
 	end
 
 	def document_params
-		params.require(:document).permit(:name,:description)
+		params.require(:document).permit(
+      :user_id,
+      :name,
+      :description
+    )
 	end
 end

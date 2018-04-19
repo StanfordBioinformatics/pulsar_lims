@@ -31,6 +31,10 @@ class UsersController < ApplicationController
 	end
 
 	def show
+    respond_to do |format|
+    	format.html { redirect_to root_path, notice: "User account was successfully removed." }
+      format.json { render json: @show }
+    end
 	end
 
 	def edit

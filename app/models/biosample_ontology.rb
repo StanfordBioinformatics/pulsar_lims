@@ -7,4 +7,8 @@ class BiosampleOntology < ActiveRecord::Base
 
 	scope :persisted, lambda { where.not(id: nil) }
 
+  def self.policy_class                                                                                
+    ApplicationPolicy                                                                                  
+  end  
+
 end

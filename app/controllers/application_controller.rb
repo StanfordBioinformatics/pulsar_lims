@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
 
 	private
 
-  def find_by(params)
+  def find_by
     # Used in API calls to invoke find_by from ActiveRecord::FinderMethods by passing in the params 
     # argument, which is a dict. Thus, all query parameters in the dict are joined implicitly via 
     # the AND database operator (since that is the behavior of Rails's find_by when given a dict). 
@@ -52,11 +52,21 @@ class ApplicationController < ActionController::Base
     #
     # Uses @model_class from ApplicationController#set_model_class.
     authorize @model_class, :show?
-    res = @model_class.find_by(params)
+    # Check if params is empty and if so, return an empty JSON object. 
+    # Need to make this check because the Rails find_by method will return the first record by
+    # default when given an empty search criterion. 
+    if params.empty?
+        render json: {}
+        return
+    end
+    res = @model_class.find_by(params[:find_by].to_hash)
+    # NOTE ON ABOVE: I have to add the call to to_hash() since w/o it, we'll get the RAILS error
+    # ActiveModel::ForbiddenAttributesError. That is becuase were using the raw params, and not
+    # parsing them out in a controller specific method that calls params.required(). 
     render json: res
   end
 
-  def find_by_or(params)
+  def find_by_or
     # Used in API calls to invoke find_by from ActiveRecord::FinderMethods. 
     # The 'params' argument is a dict, however, to allow OR operator joining, this method
     # creates a string query out of params' that includes calls to the OR operator for each 
@@ -64,9 +74,16 @@ class ApplicationController < ActionController::Base
     #
     # Uses @model_class from ApplicationController#set_model_class.
     authorize @model_class, :show?
+    # Check if params is empty and if so, return an empty JSON object. 
+    # Need to make this check because the Rails find_by method will return the first record by
+    # default when given an empty search criterion. 
+    if params.empty?
+        render json: {}
+        return
+    end
     search_str = ""
     replacement_args = []
-    params.each do |key,val|
+    params[:find_by_or].to_hash.each do |key, val|
       replacement_args << val
       search_str += "#{key} = ? OR "
     end

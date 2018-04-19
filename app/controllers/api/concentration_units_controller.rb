@@ -6,13 +6,13 @@ class Api::ConcentrationUnitsController < Api::ApplicationController
   def find_by
     # find_by defined in ApplicationController#find_by.
     # Use this method when you want to AND all of your query parameters.
-    super(concentration_unit_params)
+    super
   end
 
   def find_by_or
     # find_by_or defined in ApplicationController#find_by_or.
     # Use this method when you want to OR all of your query parameters.
-    super(concentration_unit_params)
+    super
   end
 
 	def index
@@ -43,6 +43,9 @@ class Api::ConcentrationUnitsController < Api::ApplicationController
 	end
 
 	def concentration_unit_params
-		params.require(:concentration_unit).permit(:name)
+		params.require(:concentration_unit).permit(
+      :user_id,
+      :name
+    )
 	end
 end

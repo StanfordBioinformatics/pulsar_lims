@@ -6,13 +6,13 @@ class Api::BiosampleTypesController < Api::ApplicationController
   def find_by
     # find_by defined in ApplicationController#find_by.
     # Use this method when you want to AND all of your query parameters. 
-    super(biosample_type_params)
+    super
   end
 
   def find_by_or
     # find_by_or defined in ApplicationController#find_by_or.
     # Use this method when you want to OR all of your query parameters. 
-    super(biosample_type_params)
+    super
   end
 
 	def index
@@ -44,6 +44,7 @@ class Api::BiosampleTypesController < Api::ApplicationController
 
 	def biosample_type_params
 		params.require(:biosample_type).permit(
+      :user_id,
       :name,
       :tissue
     )
