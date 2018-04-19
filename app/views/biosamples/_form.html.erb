@@ -24,7 +24,7 @@
 
 	<%= f.association :pooled_from_biosamples, 
       label: "Add pooled from biosamples",
-      collection: Biosample.non_plated,
+      collection: Biosample.non_plated.order(:name),
       include_blank: true,
       selected: nil,
       label_html: {
