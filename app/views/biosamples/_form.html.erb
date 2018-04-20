@@ -18,7 +18,15 @@
 	<%= f.association :owner, collection: User.all.map { |x| [x.display,x.id]},
 			label_html: {"data-toggle": "tooltip", "title": "Set the user who owns the biosample if needed for tracking."} %>
 
-	<%= f.association :part_of_biosample, collection: Biosample.non_plated.order(:name), label: "Parent biosample", label_html: {"data-toggle": "tooltip", "title": "If this is a part of another biosample, specify which one."} %>
+	<%= f.association :part_of_biosample, 
+      collection: Biosample.non_plated.order(:name), 
+      label: "Parent biosample", 
+      label_html: {
+        "class": "refresh",
+        "data-toggle": "tooltip", 
+        "title": "If this is a part of another biosample, specify which one."
+      }
+  %>
 
 	<% if @biosample.pooled_from_biosamples.persisted.any? %>
     <%= render partial: "application_partials/simple_fields_for", locals: {title: "Pooled-from biosamples", record: @biosample, f: f, attribute: :pooled_from_biosamples} %>
