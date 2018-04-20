@@ -78,7 +78,7 @@
 
 	<% if @biosample.biosample_parts.any? %>
 		<tr>
-			<th><strong>Child Biosamples</strong></th>
+			<th><strong>Child biosamples:</strong></th>
 			<td>
         <%= link_to "#{@biosample.biosample_parts.length} total", [:biosample_parts,@biosample] %>
 			</td>

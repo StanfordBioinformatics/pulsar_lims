@@ -45,6 +45,8 @@ class Biosample < ActiveRecord::Base
   validates :starting_amount, presence: {message: "must be specified when the starting_amount_units is specified."}, if: "starting_amount_units.present?"
   validates :starting_amount_units, presence: {message: "must be specified when the starting_amount is specified."}, if: "starting_amount.present?"
   validates :tissue_preservation_method, inclusion: {in: Enums::TISSUE_PRESERVATION_METHODS, message: "must be an element in the list #{Enums::TISSUE_PRESERVATION_METHODS}."}, allow_blank: true
+  validate :not_pooled_and_part_of
+  validate :validate_part_of_biosample, on: :update
 
   accepts_nested_attributes_for :crispr_modification, allow_destroy: true
   accepts_nested_attributes_for :documents, allow_destroy: true
@@ -151,6 +153,21 @@ class Biosample < ActiveRecord::Base
   end 
 
   private 
+
+  def validate_part_of_biosample
+    # Make sure user didn't set parent to be itself.
+    if self.part_of_biosample_id  == self.id
+      self.errors.add(:part_of_biosample, "can't be the same as this record.")
+      return false
+    end
+  end
+
+  def not_pooled_and_part_of
+    if self.part_of_biosample.present? and self.pooled_from_biosamples.present?
+      self.errors.add(:base, "'Parent biosample' and 'Pooled from biosamples' can't both be specified.")
+      return false
+    end
+  end
 
   def check_plated
     #See the Pulsar wiki page "Rails Tips", specificially the section called "Callback gotchas".
