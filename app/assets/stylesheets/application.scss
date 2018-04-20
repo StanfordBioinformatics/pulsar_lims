@@ -46,6 +46,7 @@
 
 //Add some left margin to the refresh icons added after selection inputs (after the label)
 i.refresh {
+  @extend .btn;
   margin-left: 1.5em;
 }
 
