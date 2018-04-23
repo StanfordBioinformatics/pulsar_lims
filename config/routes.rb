@@ -218,6 +218,8 @@ Pulsar::Application.routes.draw do
   end
 
   resources :biosamples do
+    get :clone, on: :member
+    post :create_clones, on: :member
     get :biosample_parts, on: :member
     get :select_options, on: :collection
 		get :select_biosample_term_name, on: :collection

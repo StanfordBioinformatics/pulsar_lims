@@ -1,7 +1,33 @@
 class BiosamplesController < ApplicationController
 #	include DocumentsConcern #gives me add_documents(), remove_documents()
-  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :biosample_parts, :delete_biosample_document,:add_crispr_modification]
+  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :biosample_parts, :clone, :create_clones, :delete_biosample_document,:add_crispr_modification]
 	skip_after_action :verify_authorized, only: [:biosample_parts, :select_biosample_term_name,:add_crispr_modification]
+
+  def clone
+    authorize @biosample, :create?
+  end
+
+  def create_clones
+    authorize @biosample, :create?
+    num_clones = params[:copies].to_i
+    name_suffix = params[:name_suffix]
+    if name_suffix.blank?
+      name_suffix = "clone"
+    end
+    clone_name = "#{@biosample.name} #{name_suffix}"
+    (1..num_clones).each do |num|
+      clone_number = @biosample.times_cloned + 1
+      biosample_clone_attrs = Biosample.instantiate_prototype(@biosample.id)
+      biosample_clone_attrs[:name] = clone_name + " #{clone_number}"
+      clone = Biosample.create(biosample_clone_attrs)
+      if not clone.valid?                                                                            
+        raise "Unable to create cloned biosample #{clone_name}: #{clone.errors.full_messages}"   
+        #throws a RuntimeError 
+      end  
+      @biosample.update({times_cloned: clone_number})
+    end
+    redirect_to biosamples_url, notice: "Your #{num_clones} clones have been created!"
+  end
 
   def biosample_parts 
     #Called via ajax

@@ -386,6 +386,18 @@ a.edit {
   }
 }
 
+a.clone {
+  @extend .btn;
+  color: white;
+  background-color: #a16bc2;
+  &:before {
+    @extend .fa-clone;
+    font-family: "FontAwesome";
+    padding-right: 0.5em;
+  }
+}
+  
+
 a.delete {
   @extend .btn-danger;
 

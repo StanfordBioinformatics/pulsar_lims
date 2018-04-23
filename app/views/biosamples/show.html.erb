@@ -6,6 +6,13 @@
   <ul class="actions">
     <%= render partial: "application_partials/auth_edit_record", locals: {record: @biosample} %>
     <%= render partial: "application_partials/auth_destroy_record", locals: {record: @biosample} %>
+    <!-- Add button for cloning the biosample X times, but only if it isn't a biosample prototype
+         on a single_cell_sorting since this functionality doesn't make sense there. -->
+    <% unless @biosample.sorting_biosample_single_cell_sorting.present? %>
+      <li>
+        <%= link_to "Clone", [:clone, @biosample], class: "clone" %>
+      </li>
+    <% end %>
   </ul>
 </header>	
 

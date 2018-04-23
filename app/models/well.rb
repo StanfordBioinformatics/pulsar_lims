@@ -70,7 +70,7 @@ class Well < ActiveRecord::Base
 	end
 
 	def add_biosample
-		biosample_attrs = Biosample.instantiate_prototype(self.plate.single_cell_sorting.sorting_biosample)
+		biosample_attrs = Biosample.instantiate_prototype(self.plate.single_cell_sorting.sorting_biosample.id)
 		biosample = self.create_biosample(biosample_attrs)
 		#I first tried using create_biosample!, which did raise ActiveRecord:RecordInvalid. However,
 		# while that does issue a Rollback as expected as any exception would in a callback, the form errors appear to be gone

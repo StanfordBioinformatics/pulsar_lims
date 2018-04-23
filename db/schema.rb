@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419232956) do
+ActiveRecord::Schema.define(version: 20180423215729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,6 +184,7 @@ ActiveRecord::Schema.define(version: 20180419232956) do
     t.string   "starting_amount"
     t.string   "starting_amount_units"
     t.string   "tube_label"
+    t.integer  "times_cloned",                                default: 0
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree

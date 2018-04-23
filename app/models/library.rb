@@ -103,15 +103,25 @@ class Library < ActiveRecord::Base
   end
 
   def self.instantiate_prototype(prototype_library)
-		# Args: prototype_library - A Library record with the 'prototype' attribute set to true.
+    # Given a prototype library (one whose 'prototype' attribute is set to True), duplicates the
+    # attributes and stores them into a hash that can be used for creating a new library record
+    # that looks just like the prototype. It is expected that the caller will make the specific changes
+    # to distinguish this copy from the prototype, such as changing the name, for example. 
+    # Some attributes don't make sense to duplicate, and hence aren't. Such attributes include 
+    # the record id, name, created_at, updated_at, and foreign keys for the biosample, any barcodes,
+    # and single_cell_sorting models.
+    #
+		# Args:
+    #     prototype_library - A Library record with the 'prototype' attribute set to true.
+    #
+    # Returns:
+    #     Hash containing the attributes for creating a new library based on the passed in 
+    #     prototype library. 
 		#
-    #A helper used for updating or creating a library.
-    #Since the single_cell_sorting.sorting_biosample is duplicated as a 
-    #starting point for creating or updating a new well biosample, several fields need to be filtered out,
-    #such as the original id and well id, to name a few. When the user updates the sorting biosample,
-    #all well biosamples need to be updated based on what the updated sorting biosample looks like.
-    #In this case, we'll again need to call this method to filter out properties that we shouldn't explicitly
-    #set.
+    # Example: 
+    #     This is called in /controllers/concerns/plates_concern.rb/create_library_for_well() when
+    #     creating a library for an individual well, which updates the hash for things like setting
+    #     the user and barcodes, then creates a library by passing in this hash as the library attributes.  
 		if not prototype_library.prototype?
 			return false
 		end

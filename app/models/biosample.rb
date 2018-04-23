@@ -32,7 +32,7 @@ class Biosample < ActiveRecord::Base
   belongs_to  :donor
   belongs_to  :vendor
   has_many    :libraries, dependent: :destroy
-  
+
   validates :upstream_identifier, uniqueness: true, allow_blank: true
   #validates :name, uniqueness: true, length: { minimum: 2, maximum: 40 }, presence: true
   validates :name, uniqueness: true, presence: true
@@ -65,14 +65,14 @@ class Biosample < ActiveRecord::Base
 
   def self.policy_class
     ApplicationPolicy
-  end 
+  end
 
   def self.possible_biosample_terms(biosample_type)
     BiosampleTermName.all
   end
 
   def document_ids=(ids)
-    """ 
+    """
     Function : Adds associations to Documents that are stored in self.documents.
     Args     : ids - array of Document IDs.
     """
@@ -83,12 +83,12 @@ class Biosample < ActiveRecord::Base
       doc = Document.find(i)
       if not self.documents.include? doc
         self.documents << doc
-      end 
+      end
     end
   end
 
   def pooled_from_biosample_ids=(ids)
-    """ 
+    """
     Function : Adds pooled from biosamples to self.pooled_from_biosamples.
     Args     : ids - array of Biosample IDs.
     """
@@ -100,12 +100,12 @@ class Biosample < ActiveRecord::Base
       next if i.to_i == self.id
       if not self.pooled_from_biosamples.include? b
         self.pooled_from_biosamples << b
-      end 
+      end
     end
   end
 
   def treatment_ids=(ids)
-    """ 
+    """
     Function : Adds associations to Treatments that are stored in self.treatments.
     Args     : ids - array of Treatment IDs.
     """
@@ -116,18 +116,31 @@ class Biosample < ActiveRecord::Base
       treat = Treatment.find(i)
       if not self.treatments.include? treat
         self.treatments << treat
-      end 
+      end
     end
   end
 
-  def self.instantiate_prototype(prototype_biosample)
-    #A helper used for updating or creating a well biosample.
-    #Since the single_cell_sorting.sorting_biosample is duplicated as a 
-    #starting point for creating or updating a new well biosample, several fields need to be filtered out,
-    #such as the original id and well id, to name a few. When the user updates the sorting biosample,
-    #all well biosamples need to be updated based on what the updated sorting biosample looks like.
-    #In this case, we'll again need to call this method to filter out properties that we shouldn't explicitly
-    #set.
+  def self.instantiate_prototype(prototype_biosample_id)
+    # Given a prototype biosample (one whose 'prototype' attribute is set to True), duplicates the
+    # attributes and stores them into a hash that can be used for creating a new biosample record
+    # that looks just like the prototype. It is expected that the caller will make the specific changes
+    # to distinguish this copy from the prototype, such as changing the name, for example.
+    # Some attributes don't make sense to duplicate, and hence aren't. Such attributes include
+    # the record id, name, created_at, updated_at, and some foreign keys, such as well_id if present.
+    #
+    # Args:
+    #     prototype_biosample_id - A Biosample ID of a biosample record whose 'prototype' attribute is set to True.
+    #
+    # Returns:
+    #     Hash containing the attributes for creating a new biosample based on the passed in
+    #     prototype biosample .
+    #
+    # Example:
+    #     This is called in the well model in the method add_biosample() to link a biosample
+    #     to the well. It directly uses the hash that this method returns to create the new biosamle
+    #     (whose name will be set automatically in the biosample model when it sees that a well_id
+    #     is set.
+    prototype_biosample = Biosample.find(prototype_biosample_id)
     well_biosample = prototype_biosample.dup
     #well_biosample.documents = prototype_biosample.documents
     attrs = well_biosample.attributes
@@ -142,7 +155,7 @@ class Biosample < ActiveRecord::Base
     attrs.delete("created_at")
     attrs.delete("updated_at")
     return attrs
-  end 
+  end
 
   def update_biosample_from_prototype(biosample_prototype)
     biosample_attrs = Biosample.instantiate_prototype(biosample_prototype)
@@ -150,9 +163,9 @@ class Biosample < ActiveRecord::Base
     if not success
       raise "Unable to update biosample '#{self.name}': #{self.errors.full_messages}"
     end
-  end 
+  end
 
-  private 
+  private
 
   def validate_part_of_biosample
     # Make sure user didn't set parent to be itself.
@@ -176,7 +189,7 @@ class Biosample < ActiveRecord::Base
       self.plated = true
     else
       self.plated = false
-    end 
+    end
     return true
   end
 
@@ -194,15 +207,15 @@ class Biosample < ActiveRecord::Base
     #If this is a prototype biosample, then we need to propagate the update to dependent biosamples.
     # In the case of single_cell_sorting, dependent biosamples are those sorted into the wells of each plate on the experiment
     # (each well has a single biosample and such a biosample has a single library).
-    # This makes updating all of the biosample objects with regard to all the plates on a single_cell_sorting 
+    # This makes updating all of the biosample objects with regard to all the plates on a single_cell_sorting
     # easy to do just by changing the biosample prototype (starting biosample) assocated with the single_cell_sorting.
     if self.prototype?
       biosamples = Biosample.where({from_prototype_id: self.id})
       biosamples.each do |b|
         b.update_biosample_from_prototype(self)
       end
-    end  
-#    if self.sorting_biosample_single_cell_sorting.present? 
+    end
+#    if self.sorting_biosample_single_cell_sorting.present?
 #      sorting_biosample_single_cell_sorting.plates.each do |plate|
 #        plate.wells.each do |well|
 #          well.biosample.update_biosample_from_prototype(self)
