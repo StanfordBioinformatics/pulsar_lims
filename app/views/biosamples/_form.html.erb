@@ -1,9 +1,11 @@
 	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @biosample } %>
 
-	<!-- Add hidden fields here. :prototype is hidden b/c that is only set on a single_cell_sorting experiment and done so behind the
-	     scenes when adding the biosample prototype for sorting.
-	-->
-	<%= f.input :prototype, as: :hidden %>
+  <div class="form-group" %>
+  	<%= f.input_field :prototype %>
+    <%= label_tag :prototype, "Prototype?", "data-toggle": "tooltip", 
+        "title": "Check this box if you plan to clone this biosample and you want the clones to be updated whenever you update this biosample." %>
+  </div>
+      
 	<%= f.association :user, as: :hidden %>
 
 	<%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique biosample name"} %> 

@@ -81,7 +81,7 @@ module PlatesConcern
 			# to the plate and needs to redo this step.
 		end
 		library_prototype = plate.single_cell_sorting.library_prototype
-		well_lib_attrs = Library.instantiate_prototype(library_prototype)
+		well_lib_attrs = Library.clone(library_prototype)
 		well_lib_attrs["user_id"] = user.id
 		#the name is set to the biosample name (see code in the library.rb model file).
 		barcode.upcase!

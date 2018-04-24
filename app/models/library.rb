@@ -102,13 +102,13 @@ class Library < ActiveRecord::Base
     end 
   end
 
-  def self.instantiate_prototype(prototype_library)
+  def self.clone(prototype_library)
     # Given a prototype library (one whose 'prototype' attribute is set to True), duplicates the
     # attributes and stores them into a hash that can be used for creating a new library record
     # that looks just like the prototype. It is expected that the caller will make the specific changes
     # to distinguish this copy from the prototype, such as changing the name, for example. 
     # Some attributes don't make sense to duplicate, and hence aren't. Such attributes include 
-    # the record id, name, created_at, updated_at, and foreign keys for the biosample, any barcodes,
+    # the record id, name, created_at, updated_at, upstream_identifier, and foreign keys for the biosample, any barcodes,
     # and single_cell_sorting models.
     #
 		# Args:
@@ -140,11 +140,12 @@ class Library < ActiveRecord::Base
     attrs.delete("single_cell_sorting_id")
     attrs.delete("created_at")
     attrs.delete("updated_at")
+    attrs.delete("upstream_identifier")
     return attrs
 	end
 
   def update_library_from_prototype(library_prototype)
-    library_attrs = Library.instantiate_prototype(library_prototype)
+    library_attrs = Library.clone(library_prototype)
     success = self.update(library_attrs)
 		if not success
 			raise "Unable to update library '#{self.name}': #{self.errors.full_messages}"

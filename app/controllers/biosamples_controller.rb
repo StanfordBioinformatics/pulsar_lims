@@ -16,15 +16,15 @@ class BiosamplesController < ApplicationController
     end
     clone_name = "#{@biosample.name} #{name_suffix}"
     (1..num_clones).each do |num|
-      clone_number = @biosample.times_cloned + 1
-      biosample_clone_attrs = Biosample.instantiate_prototype(@biosample.id)
+      clone_number = @biosample._times_cloned + 1
+      biosample_clone_attrs = Biosample.clone(@biosample.id)
       biosample_clone_attrs[:name] = clone_name + " #{clone_number}"
       clone = Biosample.create(biosample_clone_attrs)
       if not clone.valid?                                                                            
         raise "Unable to create cloned biosample #{clone_name}: #{clone.errors.full_messages}"   
         #throws a RuntimeError 
       end  
-      @biosample.update({times_cloned: clone_number})
+      @biosample.update({_times_cloned: clone_number})
     end
     redirect_to biosamples_url, notice: "Your #{num_clones} clones have been created!"
   end

@@ -17,7 +17,7 @@ class Biosample < ActiveRecord::Base
   has_many :biosample_parts, class_name: "Biosample", foreign_key: "part_of_biosample_id", dependent: :destroy
   belongs_to :part_of_biosample, class_name: "Biosample"
   belongs_to :from_prototype, class_name: "Biosample"
-  has_many :prototype_instances, class_name: "Biosample", foreign_key: "from_prototype_id", dependent: :destroy
+  has_many :prototype_instances, class_name: "Biosample", foreign_key: "from_prototype_id", dependent: :restrict_with_exception
   ###
   has_and_belongs_to_many :documents
   has_and_belongs_to_many :treatments
@@ -120,13 +120,13 @@ class Biosample < ActiveRecord::Base
     end
   end
 
-  def self.instantiate_prototype(prototype_biosample_id)
+  def self.clone(prototype_biosample_id)
     # Given a prototype biosample (one whose 'prototype' attribute is set to True), duplicates the
     # attributes and stores them into a hash that can be used for creating a new biosample record
     # that looks just like the prototype. It is expected that the caller will make the specific changes
     # to distinguish this copy from the prototype, such as changing the name, for example.
     # Some attributes don't make sense to duplicate, and hence aren't. Such attributes include
-    # the record id, name, created_at, updated_at, and some foreign keys, such as well_id if present.
+    # the record id, name, created_at, updated_at, upstream_identifier, and some foreign keys, such as well_id if present.
     #
     # Args:
     #     prototype_biosample_id - A Biosample ID of a biosample record whose 'prototype' attribute is set to True.
@@ -146,7 +146,9 @@ class Biosample < ActiveRecord::Base
     attrs = well_biosample.attributes
     #attrs["id"] is currently nil:
     attrs["from_prototype_id"] = prototype_biosample.id
+    attrs["crispr_modification"] = prototype_biosample.crispr_modification
     attrs["document_ids"] = prototype_biosample.document_ids
+    attrs["treatment_ids"] = prototype_biosample.treatment_ids
     attrs["prototype"] = false #this should always be false for a well biosample
     #Remove attributes that shouldn't be explicitely set for the well biosample
     attrs.delete("name") #the name is expicitely set in the biosample model when it has a well associated.
@@ -154,11 +156,13 @@ class Biosample < ActiveRecord::Base
     attrs.delete("well_id")
     attrs.delete("created_at")
     attrs.delete("updated_at")
+    attrs.delete("upstream_identifier")
     return attrs
   end
 
-  def update_biosample_from_prototype(biosample_prototype)
-    biosample_attrs = Biosample.instantiate_prototype(biosample_prototype)
+  def update_biosample_from_prototype(biosample_prototype_id)
+    biosample_attrs = Biosample.clone(biosample_prototype_id)
+    biosample_attrs["name"] = self.name # Use whatever name it already had. 
     success = self.update(biosample_attrs)
     if not success
       raise "Unable to update biosample '#{self.name}': #{self.errors.full_messages}"
@@ -212,7 +216,7 @@ class Biosample < ActiveRecord::Base
     if self.prototype?
       biosamples = Biosample.where({from_prototype_id: self.id})
       biosamples.each do |b|
-        b.update_biosample_from_prototype(self)
+        b.update_biosample_from_prototype(self.id)
       end
     end
 #    if self.sorting_biosample_single_cell_sorting.present?
