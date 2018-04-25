@@ -19,6 +19,7 @@ class BiosamplesController < ApplicationController
       clone_number = @biosample._times_cloned + 1
       biosample_clone_attrs = Biosample.clone(@biosample.id)
       biosample_clone_attrs[:name] = clone_name + " #{clone_number}"
+      biosample_clone_attrs[:user] = current_user
       clone = Biosample.create(biosample_clone_attrs)
       if not clone.valid?                                                                            
         raise "Unable to create cloned biosample #{clone_name}: #{clone.errors.full_messages}"   

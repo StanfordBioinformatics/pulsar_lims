@@ -1,6 +1,5 @@
-
 <%= form_tag [:create_clones, @biosample] do %>
-  <div class="form-group">
+  <div class="form-group" %>
     <%= label_tag :copies, "How many clones?" %>
     <%= select_tag :copies, options_for_select(1..50), class: "form-control", style: "width: 20%;" %>
   </div>

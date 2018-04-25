@@ -108,6 +108,7 @@ class Library < ActiveRecord::Base
     # that looks just like the prototype. It is expected that the caller will make the specific changes
     # to distinguish this copy from the prototype, such as changing the name, for example. 
     # Some attributes don't make sense to duplicate, and hence aren't. Such attributes include 
+    # the user_id (could be a different user cloning than the one that created the original), 
     # the record id, name, created_at, updated_at, upstream_identifier, and foreign keys for the biosample, any barcodes,
     # and single_cell_sorting models.
     #
@@ -141,6 +142,7 @@ class Library < ActiveRecord::Base
     attrs.delete("created_at")
     attrs.delete("updated_at")
     attrs.delete("upstream_identifier")
+    attrs.delete("user_id")
     return attrs
 	end
 
