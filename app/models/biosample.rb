@@ -126,7 +126,8 @@ class Biosample < ActiveRecord::Base
     # that looks just like the prototype. It is expected that the caller will make the specific changes
     # to distinguish this copy from the prototype, such as changing the name, for example.
     # Some attributes don't make sense to duplicate, and hence aren't. Such attributes include
-    # the record id, name, created_at, updated_at, upstream_identifier, and some foreign keys, such as well_id if present.
+    # the user_id (could be a different user cloning than the one that created the original), 
+    # record id, name, created_at, updated_at, upstream_identifier, and some foreign keys, such as well_id if present.
     #
     # Args:
     #     prototype_biosample_id - A Biosample ID of a biosample record whose 'prototype' attribute is set to True.
@@ -145,6 +146,7 @@ class Biosample < ActiveRecord::Base
     #well_biosample.documents = prototype_biosample.documents
     attrs = well_biosample.attributes
     #attrs["id"] is currently nil:
+    attrs["part_of_biosample_id"] = prototype_biosample.id  
     attrs["from_prototype_id"] = prototype_biosample.id
     attrs["crispr_modification"] = prototype_biosample.crispr_modification
     attrs["document_ids"] = prototype_biosample.document_ids
@@ -157,6 +159,7 @@ class Biosample < ActiveRecord::Base
     attrs.delete("created_at")
     attrs.delete("updated_at")
     attrs.delete("upstream_identifier")
+    attrs.delete("user_id")
     return attrs
   end
 
