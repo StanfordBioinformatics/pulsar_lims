@@ -45,8 +45,7 @@ class Api::DocumentsController < Api::ApplicationController
 	def document_params
 		params.require(:document).permit(
       :user_id,
-      :name,
-      :description
+      :name
     )
 	end
 end
