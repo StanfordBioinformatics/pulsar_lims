@@ -17,7 +17,8 @@ class Api::DocumentsController < Api::ApplicationController
 
   def download
     authorize @document, :show?
-    render text: @document.data
+    # Base64 encode binary stream. Client will need to base64 decode it.
+    render json: {"data": Base64.encode64(@document.data)}
   end
 
 	def index
