@@ -1,5 +1,6 @@
 class BiosampleSerializer < ActiveModel::Serializer
-  attributes :id, :passage_number, :starting_amount, :starting_amount_units, :submitter_comments, :tissue_preservation_method, :vendor_product_identifier
+  self.root = false
+  attributes :id, :passage_number, :starting_amount, :starting_amount_units, :submitter_comments, :tissue_preservation_method, :vendor_product_identifier, :created_at, :updated_at
 
   has_one :biosample_term_name
   has_one :biosample_type
@@ -10,5 +11,4 @@ class BiosampleSerializer < ActiveModel::Serializer
   has_many :documents
   has_many :pooled_from_biosamples
 
-  self.root = false
 end

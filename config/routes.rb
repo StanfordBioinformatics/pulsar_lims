@@ -110,6 +110,7 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
     resources :documents do
+      get :download, on: :member
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end

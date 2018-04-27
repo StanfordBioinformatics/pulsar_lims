@@ -1,7 +1,7 @@
 class Api::DocumentsController < Api::ApplicationController
 	#example with curl:
 	# curl -H "Authorization: Token token=${token}" http://localhost:3000/api/documents/3
-	before_action :set_document, only: [:show]
+	before_action :set_document, only: [:show, :update, :download]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
@@ -13,6 +13,11 @@ class Api::DocumentsController < Api::ApplicationController
     # find_by_or defined in ApplicationController#find_by_or.
     # Use this method when you want to OR all of your query parameters.
     super
+  end
+
+  def download
+    authorize @document, :show?
+    render text: @document.data
   end
 
 	def index
@@ -36,6 +41,15 @@ class Api::DocumentsController < Api::ApplicationController
 		end
 	end
 
+  def update
+    authorize @document
+    if @document.update(document_params)
+      render json: @document, status: 200
+    else
+      render json: { errors: @document.errors.full_messages }, status: 422
+    end
+  end
+
 	private
 
 	def set_document
@@ -45,7 +59,8 @@ class Api::DocumentsController < Api::ApplicationController
 	def document_params
 		params.require(:document).permit(
       :user_id,
-      :name
+      :name,
+      :upstream_identifier
     )
 	end
 end
