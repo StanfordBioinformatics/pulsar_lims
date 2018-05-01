@@ -2,6 +2,9 @@
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @treatment} %>
 
   <%= f.input :name %>
+
+  <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The alias or accession of an existing treatment on the ENCODE Portal (leave blank if this is a new treatment that hasn't been registered there yet). For a list of available treatments on the ENCODE Portal, see https://www.encodeproject.org/treatments."} %>
+
   <%= f.association :treatment_term_name,
       label_html: {class: "refresh"}
   %>
@@ -30,7 +33,7 @@
   <%= f.input_field :duration_units, collection: Enums::DURATION_UNITS %>                       
   </br></br> 
 
-  <%= f.input :temperature %>
+  <%= f.input :temperature_celsius, label_html: {"data-toggle": "tooltip", "title": "Temperature in Celsius at which the treatment was applied."} %>
 
   <%= f.association :documents, collection: sorted_document_name_id(), include_blank: true,            
       label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not a data file)."} %>

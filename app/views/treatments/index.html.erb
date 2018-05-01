@@ -18,7 +18,7 @@
       <th>Concentration unit</th>
       <th>Duration</th>
       <th>Duration units</th>
-      <th>Temperature</th>
+      <th>Temperature Celsius</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -39,7 +39,7 @@
         <% end %>
         <td><%= rec.duration %></td>
         <td><%= rec.duration_units %></td>
-        <td><%= rec.temperature %></td>
+        <td><%= rec.temperature_celsius %></td>
         <td>
           <%= link_to fa_icon("pencil"), edit_treatment_path(rec) %>
           <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>

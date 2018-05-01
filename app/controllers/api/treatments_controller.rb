@@ -51,7 +51,7 @@ class Api::TreatmentsController < Api::ApplicationController
       :duration,
       :duration_units,
       :name,
-      :temperature,
+      :temperature_celsius,
       :treatment_term_name_id,
       :treatment_type,
       :upstream_identifier,

@@ -5,6 +5,8 @@
 
 	<%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique name"} %>
 
+  <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The alias or accession of an existing genetic_modification on the ENCODE Portal (leave blank if this is a new genetic_modification that hasn't been registered there yet). For a list of available genetic_modifications on the ENCODE Portal, see https://www.encodeproject.org/genetic-modifications."} %>
+
   <%= f.input :category, collection: Enums::CRISPR_MOD_CATEGORIES, label_html: {"data-toggle": "tooltip", "title":  "The category/type of the genetic modification performed."} %>
 
   <%= f.input :purpose, collection: Enums::CRISPR_MOD_PURPOSE, label_html: {"data-toggle": "tooltip", "title":  "The purpose of the genetic modification."} %>

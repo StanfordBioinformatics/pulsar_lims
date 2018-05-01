@@ -1,3 +1,4 @@
 class DocumentTypeSerializer < ActiveModel::Serializer
-  attributes :id, :name, :user_id, :updated_at, :created_at, :updated_at
+  self.root = false
+  attributes :id, :name, :user_id, :upstream_identifier, :updated_at, :created_at
 end

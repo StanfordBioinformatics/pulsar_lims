@@ -38,7 +38,11 @@
 	
 	<tr>
 	  <th><strong>Concentration unit:</strong></th>
-	  <td><%= @treatment.concentration_unit %></td>
+    <td>
+      <% if @treatment.concentration.present? %>
+  	    <%= @treatment.concentration_unit.name %>
+      <% end %>
+    </td>
 	</tr>
 	
 	<tr>
@@ -52,8 +56,8 @@
 	</tr>
 	
 	<tr>
-	  <th><strong>Temperature:</strong></th>
-	  <td><%= @treatment.temperature %></td>
+	  <th><strong>Temperature Celsius:</strong></th>
+	  <td><%= @treatment.temperature_celsius %> &#8451;</td>
 	</tr>
 
   <tr>                                                                                                 

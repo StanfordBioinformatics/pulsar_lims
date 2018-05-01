@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180424001154) do
+ActiveRecord::Schema.define(version: 20180501024458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -812,7 +812,7 @@ ActiveRecord::Schema.define(version: 20180424001154) do
     t.integer  "concentration_unit_id"
     t.float    "duration"
     t.string   "duration_units"
-    t.float    "temperature"
+    t.float    "temperature_celsius"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "upstream_identifier"

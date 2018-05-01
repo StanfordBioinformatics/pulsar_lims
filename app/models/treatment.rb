@@ -11,10 +11,10 @@ class Treatment < ActiveRecord::Base
 
   validates  :upstream_identifier, uniqueness: true, allow_blank: true
   validates :concentration_unit, presence: {message: "must be specified when 'concentration' is set."}, if: "concentration.present?"
-  validates :duration_units, presence: {message: "must be specified when 'duration' is set."}, if: "duration.present?"
-  validates :name, uniqueness: true, length: { minimum: 2, maximum: 40 }, allow_blank: true
+  validates :duration_units, presence: true, inclusion: {in: Enums::DURATION_UNITS, message: "must be specified when 'duration' is set, and must be an element from the list #{Enums::DURATION_UNITS}"}, if: "duration.present?"
+  validates :name, uniqueness: true, presence: true, length: { minimum: 2, maximum: 40 }, allow_blank: true
   validates :treatment_term_name_id, presence: true
-  validates :treatment_type, presence: true, inclusion: {in: Enums::TREATMENT_TYPES, message: "Must be an element from the list #{Enums::TREATMENT_TYPES}"}
+  validates :treatment_type, presence: true, inclusion: {in: Enums::TREATMENT_TYPES, message: "must be an element from the list #{Enums::TREATMENT_TYPES}"}
   scope :persisted, lambda { where.not(id: nil) }
 
   def self.policy_class 
