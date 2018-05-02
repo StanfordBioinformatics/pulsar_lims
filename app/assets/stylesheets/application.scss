@@ -1,5 +1,9 @@
 /* Import all of Bootstrap's Css Components */
 
+:root {
+  box-sizing: border-box; 
+}
+
 @import "reset";
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -247,8 +251,26 @@ html {
 }
 
 body { 
-  padding-right: 10%;
-  //padding-top: $navbar-height;
+  background-color: #ddd;
+  padding: 0;
+}
+
+.everything {
+  // Center
+  max-width: 1350px;
+  margin: 0 auto;
+}
+
+.main {
+  border-radius: 0.2em; 
+	margin-top: 100px;
+  padding-top: 2em;
+	//margin-top: calc(3 * $navbar-height); //doesn't work with variables.
+  background-color: white;
+}
+
+.main-body {
+  padding-left: 3em;
 }
 
 #footer {
@@ -264,12 +286,8 @@ body {
   }
 }
 
-#main {
-	//height: 100%;
-	padding-top: $navbar-height;
-}
-
-#sidebar {
+.sidebar {
+  padding-left: 0;
   margin: 0;
   .navbar-fixed-side {
     padding: 0;

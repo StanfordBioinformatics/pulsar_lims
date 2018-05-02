@@ -64,7 +64,6 @@ class AddressesController < ApplicationController
         :city,
         :country
         :name,
-        :notes,
         :postal_code,
         :state,
         :street,

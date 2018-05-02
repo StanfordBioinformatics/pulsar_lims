@@ -73,7 +73,7 @@ class AntibodiesController < ApplicationController
         :isotype_id,
         :lot_identifier,
         :name,
-        :notes
+        :notes,
         :organism_id,
         :target_id,
         :upstream_identifier,
@@ -82,7 +82,7 @@ class AntibodiesController < ApplicationController
         :vendor_product_url,
         antibody_purifications_attributes: [
           :id,
-          :_destroy,
+          :_destroy
         ]
       )
     end

@@ -80,6 +80,12 @@
 		<td><%= @antibody.antigen_sequence %></td>
 	</tr>
 
+  <tr>
+    <th><strong>Notes</strong></th>
+    <td><%= simple_format(@antibody.notes) %></td>
+  </tr>
+    
+
 </table>
 
 <%= link_to 'Back', antibodies_path %>
