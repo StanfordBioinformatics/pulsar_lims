@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501024458) do
+ActiveRecord::Schema.define(version: 20180501230446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.integer  "user_id"
     t.string   "street"
     t.string   "name"
+    t.text     "notes"
   end
 
   add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.integer  "single_cell_sorting_id"
     t.integer  "protocol_id"
     t.integer  "merged_fastq_file_id"
+    t.text     "notes"
   end
 
   add_index "analyses", ["merged_bam_file_id"], name: "index_analyses_on_merged_bam_file_id", using: :btree
@@ -67,6 +69,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.integer  "user_id"
     t.integer  "target_id"
     t.string   "upstream_identifier"
+    t.text     "notes"
   end
 
   add_index "antibodies", ["isotype_id"], name: "index_antibodies_on_isotype_id", using: :btree
@@ -94,6 +97,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.text     "notes"
   end
 
   add_index "antibody_purifications", ["user_id"], name: "index_antibody_purifications_on_user_id", using: :btree
@@ -115,6 +119,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "index_number"
+    t.text     "notes"
   end
 
   add_index "barcodes", ["sequencing_library_prep_kit_id"], name: "index_barcodes_on_sequencing_library_prep_kit_id", using: :btree
@@ -126,6 +131,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.string   "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text     "notes"
   end
 
   add_index "biosample_ontologies", ["name"], name: "index_biosample_ontologies_on_name", unique: true, using: :btree
@@ -185,6 +191,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.string   "starting_amount_units"
     t.string   "tube_label"
     t.integer  "_times_cloned",                               default: 0
+    t.text     "notes"
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
@@ -237,6 +244,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.integer  "vendor_id"
     t.string   "vendor_product_identifier"
     t.string   "map"
+    t.text     "notes"
   end
 
   add_index "cloning_vectors", ["name"], name: "index_cloning_vectors_on_name", unique: true, using: :btree
@@ -258,6 +266,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.text     "notes"
   end
 
   add_index "construct_tags", ["name"], name: "index_construct_tags_on_name", unique: true, using: :btree
@@ -293,6 +302,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.string   "addgene_id"
     t.string   "ensembl_transcript"
     t.string   "refseq_transcript"
+    t.text     "notes"
   end
 
   add_index "crispr_constructs", ["addgene_id"], name: "index_crispr_constructs_on_addgene_id", using: :btree
@@ -322,6 +332,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.string   "upstream_identifier"
     t.string   "category"
     t.string   "purpose"
+    t.text     "notes"
   end
 
   add_index "crispr_modifications", ["biosample_id"], name: "index_crispr_modifications_on_biosample_id", using: :btree
@@ -346,6 +357,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.boolean  "bucket_storage", default: false
+    t.text     "notes"
   end
 
   add_index "data_storage_providers", ["user_id"], name: "index_data_storage_providers_on_user_id", using: :btree
@@ -359,6 +371,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.integer  "data_storage_provider_id"
+    t.text     "notes"
   end
 
   add_index "data_storages", ["data_storage_provider_id"], name: "index_data_storages_on_data_storage_provider_id", using: :btree
@@ -384,6 +397,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.integer  "user_id"
     t.boolean  "is_protocol"
     t.string   "upstream_identifier"
+    t.text     "notes"
   end
 
   add_index "documents", ["document_type_id"], name: "index_documents_on_document_type_id", using: :btree
@@ -434,6 +448,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.string   "primer_right_reverse"
     t.string   "ensembl_transcript"
     t.string   "refseq_transcript"
+    t.text     "notes"
   end
 
   add_index "donor_constructs", ["addgene_id"], name: "index_donor_constructs_on_addgene_id", using: :btree
@@ -451,6 +466,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.string   "upstream_identifier"
     t.string   "age"
     t.string   "gender"
+    t.text     "notes"
   end
 
   add_index "donors", ["user_id"], name: "index_donors_on_user_id", using: :btree
@@ -472,6 +488,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "data_file_type_id"
+    t.text     "notes"
   end
 
   add_index "file_references", ["data_file_type_id"], name: "index_file_references_on_data_file_type_id", using: :btree
@@ -485,6 +502,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.integer  "end"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.text     "notes"
   end
 
   add_index "genome_locations", ["chromosome_id"], name: "index_genome_locations_on_chromosome_id", using: :btree
@@ -495,6 +513,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.text     "notes"
   end
 
   add_index "isotypes", ["user_id"], name: "index_isotypes_on_user_id", using: :btree
@@ -522,6 +541,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.integer  "concentration_unit_id"
     t.boolean  "plated",                                      default: false
     t.string   "upstream_identifier"
+    t.text     "notes"
   end
 
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree
@@ -559,6 +579,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.text     "notes"
   end
 
   add_index "library_fragmentation_methods", ["user_id"], name: "index_library_fragmentation_methods_on_user_id", using: :btree
@@ -570,6 +591,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.text     "notes"
   end
 
   add_index "nucleic_acid_terms", ["user_id"], name: "index_nucleic_acid_terms_on_user_id", using: :btree
@@ -581,6 +603,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.integer  "user_id"
     t.string   "ncbi_taxon"
     t.string   "scientific_name"
+    t.text     "notes"
   end
 
   add_index "organisms", ["user_id"], name: "index_organisms_on_user_id", using: :btree
@@ -593,6 +616,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.integer  "sequencing_library_prep_kit_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.text     "notes"
   end
 
   add_index "paired_barcodes", ["index1_id"], name: "index_paired_barcodes_on_index1_id", using: :btree
@@ -610,6 +634,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.string   "lot_identifier"
+    t.text     "notes"
   end
 
   add_index "pcr_master_mixes", ["user_id"], name: "index_pcr_master_mixes_on_user_id", using: :btree
@@ -629,6 +654,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.boolean  "success"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.text     "notes"
   end
 
   add_index "pcrs", ["crispr_modification_id"], name: "index_pcrs_on_crispr_modification_id", using: :btree
@@ -644,6 +670,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "updated_at",                null: false
     t.string   "dimensions"
     t.integer  "single_cell_sorting_id"
+    t.text     "notes"
   end
 
   add_index "plates", ["single_cell_sorting_id"], name: "index_plates_on_single_cell_sorting_id", using: :btree
@@ -664,6 +691,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.text     "notes"
   end
 
   add_index "reference_genomes", ["user_id"], name: "index_reference_genomes_on_user_id", using: :btree
@@ -675,6 +703,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "updated_at", null: false
     t.integer  "user_id"
     t.string   "url"
+    t.text     "notes"
   end
 
   add_index "sequencing_centers", ["user_id"], name: "index_sequencing_centers_on_user_id", using: :btree
@@ -688,6 +717,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "updated_at",                null: false
     t.string   "vendor_product_identifier"
     t.boolean  "supports_paired_end"
+    t.text     "notes"
   end
 
   add_index "sequencing_library_prep_kits", ["user_id"], name: "index_sequencing_library_prep_kits_on_user_id", using: :btree
@@ -699,6 +729,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.text     "notes"
   end
 
   add_index "sequencing_platforms", ["user_id"], name: "index_sequencing_platforms_on_user_id", using: :btree
@@ -716,6 +747,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.integer  "concentration_unit_id"
     t.float    "concentration"
     t.string   "sample_sheet"
+    t.text     "notes"
   end
 
   add_index "sequencing_requests", ["concentration_unit_id"], name: "index_sequencing_requests_on_concentration_unit_id", using: :btree
@@ -735,6 +767,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "updated_at",        null: false
     t.integer  "user_id"
     t.integer  "sequencing_run_id"
+    t.text     "notes"
   end
 
   add_index "sequencing_results", ["library_id"], name: "index_sequencing_results_on_library_id", using: :btree
@@ -751,6 +784,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "updated_at",            null: false
     t.string   "name"
     t.integer  "storage_location_id"
+    t.text     "notes"
   end
 
   add_index "sequencing_runs", ["name"], name: "index_sequencing_runs_on_name", unique: true, using: :btree
@@ -770,6 +804,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.integer  "library_prototype_id"
     t.string   "fluorescence_intensity_file"
     t.string   "upstream_identifier"
+    t.text     "notes"
   end
 
   add_index "single_cell_sortings", ["library_prototype_id"], name: "index_single_cell_sortings_on_library_prototype_id", using: :btree
@@ -786,6 +821,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.string   "refseq"
     t.string   "upstream_identifier"
     t.string   "uniprotkb"
+    t.text     "notes"
   end
 
   add_index "targets", ["name"], name: "index_targets_on_name", unique: true, using: :btree
@@ -816,6 +852,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "upstream_identifier"
+    t.text     "notes"
   end
 
   add_index "treatments", ["concentration_unit_id"], name: "index_treatments_on_concentration_unit_id", using: :btree
@@ -869,6 +906,7 @@ ActiveRecord::Schema.define(version: 20180501024458) do
     t.string   "url",                 limit: 255
     t.integer  "user_id"
     t.string   "upstream_identifier"
+    t.text     "notes"
   end
 
   add_index "vendors", ["name"], name: "index_vendors_on_name", unique: true, using: :btree

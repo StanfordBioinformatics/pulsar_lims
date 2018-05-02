@@ -66,7 +66,25 @@ class AntibodiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def antibody_params
-      params.require(:antibody).permit(:upstream_identifier, :organism_id, :vendor_id, :isotype_id, :target_id, :vendor_product_identifier, :vendor_product_url, :lot_identifier, :clonality, :antigen_description, :antigen_sequence, :name, antibody_purifications_attributes: [:id,:_destroy])
+      params.require(:antibody).permit(
+        :antigen_description,
+        :antigen_sequence,
+        :clonality,
+        :isotype_id,
+        :lot_identifier,
+        :name,
+        :notes
+        :organism_id,
+        :target_id,
+        :upstream_identifier,
+        :vendor_id,
+        :vendor_product_identifier,
+        :vendor_product_url,
+        antibody_purifications_attributes: [
+          :id,
+          :_destroy,
+        ]
+      )
     end
 
 end

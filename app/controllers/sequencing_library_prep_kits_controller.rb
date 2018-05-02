@@ -77,6 +77,14 @@ class SequencingLibraryPrepKitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_library_prep_kit_params
-      params.require(:sequencing_library_prep_kit).permit(:supports_paired_end, :vendor_product_identifier, :name, :vendor_id, :description, documents_attributes: [:id,:_destroy])
+      params.require(:sequencing_library_prep_kit).permit(
+        :description,
+        :name,
+        :notes,
+        :supports_paired_end,
+        :vendor_id,
+        :vendor_product_identifier,
+        documents_attributes: [:id, :_destroy]
+      )
     end
 end

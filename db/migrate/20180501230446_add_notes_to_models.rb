@@ -1,0 +1,42 @@
+class AddNotesToModels < ActiveRecord::Migration
+  def change
+    add_column :addresses, :notes, :text
+    add_column :analyses, :notes, :text
+    add_column :antibodies, :notes, :text
+    add_column :antibody_purifications, :notes, :text
+    add_column :barcodes, :notes, :text
+    add_column :biosamples, :notes, :text
+    add_column :biosample_ontologies, :notes, :text
+    add_column :cloning_vectors, :notes, :text
+    add_column :construct_tags, :notes, :text
+    add_column :crispr_constructs, :notes, :text
+    add_column :crispr_modifications, :notes, :text
+    add_column :data_storages, :notes, :text
+    add_column :data_storage_providers, :notes, :text
+    add_column :documents, :notes, :text
+    add_column :donors, :notes, :text
+    add_column :donor_constructs, :notes, :text
+    add_column :file_references, :notes, :text
+    add_column :genome_locations, :notes, :text
+    add_column :isotypes, :notes, :text
+    add_column :libraries, :notes, :text
+    add_column :library_fragmentation_methods, :notes, :text
+    add_column :nucleic_acid_terms, :notes, :text
+    add_column :organisms, :notes, :text
+    add_column :paired_barcodes, :notes, :text
+    add_column :pcrs, :notes, :text
+    add_column :pcr_master_mixes, :notes, :text
+    add_column :plates, :notes, :text
+    add_column :reference_genomes, :notes, :text
+    add_column :sequencing_centers, :notes, :text
+    add_column :sequencing_library_prep_kits, :notes, :text
+    add_column :sequencing_platforms, :notes, :text
+    add_column :sequencing_requests, :notes, :text
+    add_column :sequencing_results, :notes, :text
+    add_column :sequencing_runs, :notes, :text
+    add_column :single_cell_sortings, :notes, :text
+    add_column :targets, :notes, :text
+    add_column :treatments, :notes, :text
+    add_column :vendors, :notes, :text
+  end
+end

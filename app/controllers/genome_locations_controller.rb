@@ -60,6 +60,11 @@ class GenomeLocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def genome_location_params
-      params.require(:genome_location).permit(:chromosome_id, :start, :end)
+      params.require(:genome_location).permit(
+        :chromosome_id, 
+        :end,
+        :notes,
+        :start
+      )
     end
 end

@@ -158,6 +158,7 @@ class BiosamplesController < ApplicationController
         :donor_id,
         :lot_identifier, 
         :name, 
+        :notes,
         :nih_institutional_certification,
         :owner_id, 
         :part_of_biosample_id, 

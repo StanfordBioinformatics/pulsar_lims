@@ -108,6 +108,7 @@ class SequencingResultsController < ApplicationController
         :comment, 
         :is_control, 
         :library_id, 
+        :notes,
         :read1_uri, 
         :read1_count, 
         :read2_uri, 

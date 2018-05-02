@@ -63,6 +63,7 @@ class ConstructTagsController < ApplicationController
     def construct_tag_params
       params.require(:construct_tag).permit(
         :name,  
+        :notes, 
         :description
       )
     end

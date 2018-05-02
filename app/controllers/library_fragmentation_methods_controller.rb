@@ -58,6 +58,10 @@ class LibraryFragmentationMethodsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_fragmentation_method_params
-      params.require(:library_fragmentation_method).permit(:name, :description)
+      params.require(:library_fragmentation_method).permit(
+        :name, 
+        :notes, 
+       :description
+      )
     end
 end

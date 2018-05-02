@@ -79,6 +79,7 @@ class DocumentsController < ApplicationController
         :description,
         :document_type_id,
         :is_protocol, 
+        :notes,
         :uploaded_document,
         :upstream_identifier
       )

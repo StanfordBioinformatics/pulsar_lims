@@ -60,6 +60,11 @@ class NucleicAcidTermsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def nucleic_acid_term_params
-      params.require(:nucleic_acid_term).permit(:name, :accession, :definition)
+      params.require(:nucleic_acid_term).permit(
+        :accession, 
+        :definition,
+        :name, 
+        :notes
+      )
     end
 end

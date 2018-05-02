@@ -123,6 +123,7 @@ class SequencingRequestsController < ApplicationController
         :concentration,
         :concentration_unit_id,
         :name,
+        :notes,
         :paired_end,
         :sample_sheet,
         :sequencing_center_id, 

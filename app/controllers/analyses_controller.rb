@@ -82,6 +82,51 @@ class AnalysesController < ApplicationController
     end
 
     def analysis_params
-      params.require(:analysis).permit(:protocol_id, :single_cell_sorting_id, :merged_fastq_file_id, :merged_bam_file_id, :merged_peaks_file_id, :merged_qc_file_id, :description, merged_fastq_file_attributes: [:id, :_destroy, :user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_bam_file_attributes: [:id, :_destroy, :user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_peaks_file_attributes: [:id, :_destroy, :user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id], merged_qc_file_attributes: [:id, :_destroy, :user_id, :data_storage_id, :file_path, :fileid, :data_file_type_id])
+      params.require(:analysis).permit(
+        :description,
+        :merged_fastq_file_id,
+        :merged_bam_file_id,
+        :merged_peaks_file_id,
+        :merged_qc_file_id,
+        :notes,
+        :protocol_id,
+        :single_cell_sorting_id,
+        merged_fastq_file_attributes: [
+          :id,
+          :_destroy,
+          :user_id,
+          :data_file_type_id
+          :data_storage_id,
+          :fileid,
+          :file_path,
+        ],
+        merged_bam_file_attributes: [
+          :id,
+          :_destroy,
+          :user_id,
+          :data_file_type_id
+          :data_storage_id,
+          :fileid,
+          :file_path,
+        ],
+        merged_peaks_file_attributes: [
+          :id,
+          :_destroy,
+          :user_id,
+          :data_file_type_id
+          :data_storage_id,
+          :fileid,
+          :file_path,
+        ],
+        merged_qc_file_attributes: [
+          :id,
+          :_destroy,
+          :user_id,
+          :data_file_type_id
+          :data_storage_id,
+          :fileid,
+          :file_path,
+        ]
+      )
     end
 end

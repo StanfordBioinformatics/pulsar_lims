@@ -64,6 +64,17 @@ class PcrsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pcr_params
-      params.require(:pcr).permit(:description, :pcr_master_mix_id, :forward_primer, :reverse_primer, :amplicon_size, :annealing_temperature, :extension_time, :num_cycles, :crispr_modification_id, :success)
+      params.require(:pcr).permit(
+          :amplicon_size,
+          :annealing_temperature,
+          :crispr_modification_id,
+          :description,
+          :extension_time,
+          :forward_primer,
+          :notes,
+          :num_cycles,
+          :pcr_master_mix_id,
+          :reverse_primer,
+          :success)
     end
 end

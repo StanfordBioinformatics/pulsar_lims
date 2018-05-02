@@ -84,12 +84,13 @@ class CrisprConstructsController < ApplicationController
         :ensembl_transcript, 
         :guide_sequence, 
         :name, 
+        :notes,
         :refseq_transcript, 
         :target_id, 
         :vendor_id, 
         :vendor_product_identifier, 
         construct_tags_attributes: [:id,:_destroy],
-        :construct_tag_ids => [], 
+        :construct_tag_ids => []
       )
     end
 end

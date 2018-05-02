@@ -63,6 +63,10 @@ class DataStorageProvidersController < ApplicationController
     end
 
     def data_storage_provider_params
-      params.require(:data_storage_provider).permit(:bucket_storage, :name)
+      params.require(:data_storage_provider).permit(
+        :bucket_storage, 
+        :name, 
+        :notes
+      )
     end
 end

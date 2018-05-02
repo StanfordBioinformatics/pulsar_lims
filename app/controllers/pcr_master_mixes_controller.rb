@@ -67,6 +67,13 @@ class PcrMasterMixesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pcr_master_mix_params
-      params.require(:pcr_master_mix).permit(:lot_identifier, :name, :vendor_id, :vendor_product_identifier, :vendor_product_url)
+      params.require(:pcr_master_mix).permit(
+        :lot_identifier, 
+        :name, 
+        :notes, 
+        :vendor_id, 
+        :vendor_product_identifier, 
+        :vendor_product_url
+      )
     end
 end

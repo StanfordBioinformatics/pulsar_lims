@@ -67,6 +67,6 @@ class IsotypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def isotype_params
-      params.require(:isotype).permit(:name)
+      params.require(:isotype).permit(:name, :notes)
     end
 end

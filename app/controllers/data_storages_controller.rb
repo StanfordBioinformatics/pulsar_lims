@@ -86,6 +86,13 @@ class DataStoragesController < ApplicationController
     end
 
     def data_storage_params
-      params.require(:data_storage).permit(:data_storage_provider_id,:name, :bucket, :project_identifier, :folder_base_path)
+      params.require(:data_storage).permit(
+        :bucket, 
+        :data_storage_provider_id,
+        :folder_base_path,
+        :name, 
+        :notes,
+        :project_identifier
+      )
     end
 end

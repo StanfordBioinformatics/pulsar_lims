@@ -69,6 +69,10 @@ class DataFileTypesController < ApplicationController
     end
 
     def data_file_type_params
-      params.require(:data_file_type).permit(:name, :description)
+      params.require(:data_file_type).permit(
+        :name, 
+        :notes,
+        :description
+      )
     end
 end

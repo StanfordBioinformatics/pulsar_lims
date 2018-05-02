@@ -71,6 +71,7 @@ class DonorsController < ApplicationController
         :age,
         :gender,
         :name,
+        :notes,
         :upstream_identifier
       )
     end

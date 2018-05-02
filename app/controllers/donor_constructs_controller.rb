@@ -77,6 +77,24 @@ class DonorConstructsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def donor_construct_params
-      params.require(:donor_construct).permit(:refseq_transcript, :ensembl_transcript, :primer_left_forward, :primer_left_reverse, :primer_right_forward, :primer_right_reverse, :addgene_id, :name, :cloning_vector_id, :vendor_id, :vendor_product_identifier, :target_id, :description, :insert_sequence, :construct_tag_ids => [], construct_tags_attributes: [:id,:_destroy] )
+      params.require(:donor_construct).permit(
+        :addgene_id,
+        :cloning_vector_id,
+        :description,
+        :ensembl_transcript,
+        :insert_sequence,
+        :name,
+        :notes,
+        :primer_left_forward,
+        :primer_left_reverse,
+        :primer_right_forward,
+        :primer_right_reverse,
+        :refseq_transcript,
+        :target_id,
+        :vendor_id,
+        :vendor_product_identifier,
+        :construct_tag_ids => [],
+        construct_tags_attributes: [:id, :_destroy]
+      )
     end
 end

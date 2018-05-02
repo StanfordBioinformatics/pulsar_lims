@@ -60,6 +60,10 @@ class ReferenceGenomesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reference_genome_params
-      params.require(:reference_genome).permit(:name, :url)
+      params.require(:reference_genome).permit(
+        :name, 
+        :notes,
+        :url
+      )
     end
 end

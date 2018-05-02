@@ -67,6 +67,11 @@ class BiosampleTermNamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_term_name_params
-      params.require(:biosample_term_name).permit(:name, :accession, :biosample_ontology_id, :description)
+      params.require(:biosample_term_name).permit(
+        :accession, 
+        :description,
+        :biosample_ontology_id, 
+        :name,
+      )
     end
 end

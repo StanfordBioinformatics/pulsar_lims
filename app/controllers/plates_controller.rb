@@ -83,6 +83,15 @@ class PlatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plate_params
-      params.require(:plate).permit(:single_cell_sorting_id, :starting_biosample_id, :add_barcodes,:dimensions, :name, :vendor_id, :vendor_product_identifier, antibody_ids: [])
+      params.require(:plate).permit(
+        :add_barcodes,
+        :dimensions,
+        :name,
+        :notes,
+        :single_cell_sorting_id, 
+        :starting_biosample_id,
+        :vendor_id,
+        :vendor_product_identifier,
+        antibody_ids: [])
     end
 end

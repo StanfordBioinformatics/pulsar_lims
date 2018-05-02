@@ -67,6 +67,9 @@ class AntibodyPurificationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def antibody_purification_params
-      params.require(:antibody_purification).permit(:name)
+      params.require(:antibody_purification).permit(
+        :name,
+        :notes
+      )
     end
 end

@@ -69,7 +69,15 @@ class CloningVectorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cloning_vector_params
-      params.require(:cloning_vector).permit(:map, :vendor_id, :vendor_product_identifier, :name, :description, :product_url)
+      params.require(:cloning_vector).permit(
+        :description, 
+        :map, 
+        :name, 
+        :notes, 
+        :product_url,
+        :vendor_id, 
+        :vendor_product_identifier
+      )
     end
 
     def set_s3_direct_post

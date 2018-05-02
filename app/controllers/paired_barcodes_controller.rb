@@ -102,6 +102,12 @@ class PairedBarcodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def paired_barcode_params
-      params.require(:paired_barcode).permit(:add_paired_barcodes, :index1_id, :index2_id, :sequencing_library_prep_kit_id)
+      params.require(:paired_barcode).permit(
+        :add_paired_barcodes, 
+        :index1_id, 
+        :index2_id, 
+        :notes,
+        :sequencing_library_prep_kit_id
+      )
     end
 end

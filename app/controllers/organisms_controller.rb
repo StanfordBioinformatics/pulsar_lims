@@ -60,6 +60,11 @@ class OrganismsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organism_params
-      params.require(:organism).permit(:name, :ncbi_taxon, :scientific_name)
+      params.require(:organism).permit(
+        :name, 
+        :ncbi_taxon,
+        :notes,
+        :scientific_name
+      )
     end
 end
