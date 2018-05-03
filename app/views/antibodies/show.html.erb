@@ -16,7 +16,7 @@
 		<th><strong>Name</strong></th>
 		<td><%= @antibody.name %></td>
 	</tr>
-		
+
 	<tr>
 		<th><strong>Organism</strong></th>
 		<td><%= @antibody.organism.name %></td>
@@ -80,12 +80,10 @@
 		<td><%= @antibody.antigen_sequence %></td>
 	</tr>
 
-  <tr>
+  <tr class="notes-row">
     <th><strong>Notes</strong></th>
     <td><%= simple_format(@antibody.notes) %></td>
   </tr>
-    
-
 </table>
 
-<%= link_to 'Back', antibodies_path %>
+<%= render partial: "application_partials/edit_notes", locals: {rec: @antibody} %>

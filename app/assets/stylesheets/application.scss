@@ -189,9 +189,9 @@ label.radio_buttons {
 }
 
 /* the .form-group is the class rails/simple-form gives to inputs. */
-.form-group {
-	max-width: 50%;
-}
+//.form-group {
+//	max-width: 50%;
+//}
 
 
 select:focus, input:focus, textarea:focus {
@@ -432,9 +432,9 @@ a.delete {
   @extend .alert-danger;
 }
 
-form {
-  max-width: 85%;
-}
+//form {
+ // max-width: 85%;
+//}
 
 #error_explanation {
   width: 450px;
@@ -457,4 +457,8 @@ form {
     font-size: 12px;
     list-style: square;
   }
+}
+
+.edit-notes-pencil {
+  cursor: pointer;
 }

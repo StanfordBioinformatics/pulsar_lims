@@ -53,6 +53,22 @@ $(function() {
 })
 
 $(function() {
+  //Add edit fa icon after each <tr class="edit-notes"> element. 
+  $(".notes-row strong").after('<i style="padding-left: 0.6em;" class="edit-notes-pencil fa fa-pencil"></i>')
+  $(document).on("click", ".edit-notes-pencil", function(event) {
+    orig = $(".notes-row td").html();
+    $(".notes-row td").html($(".notes-to-edit").clone().css("display", "block")); 
+    $(".cancel-edit-notes").on("click", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      $(".notes-row td").html(orig);
+    })
+  })
+})
+
+
+
+$(function() {
   //Add refresh FontsAwesome icon too all labels with class 'refresh':
   $("label.refresh").after('<i class="refresh fa fa-refresh"></i>')
   //Highlight table columns in the index views when user mouses over a table cell.
