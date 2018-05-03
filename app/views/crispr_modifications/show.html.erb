@@ -53,6 +53,11 @@
 		<td><%= link_to target.name, target %></td>
 	</tr>
 
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@crispr.notes) %></td>                                                     
+  </tr> 
+
 </table>
 
 </br>
@@ -94,4 +99,7 @@
 
 <%= link_to "New PCR Validation", new_pcr_validation_crispr_modification_path(@crispr), class: "reg-btn" %>
 </br></br>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<%= render partial: "application_partials/edit_notes", locals: {rec: @crispr} %>
 <%= link_to 'Back', crispr_modifications_path %>

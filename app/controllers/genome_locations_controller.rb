@@ -63,7 +63,6 @@ class GenomeLocationsController < ApplicationController
       params.require(:genome_location).permit(
         :chromosome_id, 
         :end,
-        :notes,
         :start
       )
     end

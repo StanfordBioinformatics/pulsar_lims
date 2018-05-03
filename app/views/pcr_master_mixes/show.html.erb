@@ -38,6 +38,14 @@
 			<td></td>
 		<% end %>
 	</tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@pcr_master_mix.notes) %></td>                                                     
+  </tr> 
 </table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<%= render partial: "application_partials/edit_notes", locals: {rec: @pcr_master_mix} %>
 
 <%= link_to 'Back', pcr_master_mixes_path %>

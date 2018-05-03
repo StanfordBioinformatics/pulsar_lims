@@ -31,6 +31,13 @@
 	  <td><%= link_to "#{@paired_barcode.index2.name} #{@paired_barcode.index2.sequence}", [@paired_barcode.sequencing_library_prep_kit,@paired_barcode.index2] %></td>
 	</tr>
 	
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@paired_barcode.notes) %></td>                                                     
+  </tr> 
 </table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<%= render partial: "application_partials/edit_notes", locals: {rec: @paired_barcode} %>
 
 <%= link_to 'Back', paired_barcodes_path %>

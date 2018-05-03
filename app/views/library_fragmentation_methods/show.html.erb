@@ -20,6 +20,14 @@
   	<th><strong>Description:</strong></th>
   	<td><%= @library_fragmentation_method.description %></td>
 	</tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@library_fragmentation_method.notes) %></td>                                                     
+  </tr> 
 </table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<%= render partial: "application_partials/edit_notes", locals: {rec: @library_fragmentation_method} %>
 
 <%= link_to 'Back', library_fragmentation_methods_path %>

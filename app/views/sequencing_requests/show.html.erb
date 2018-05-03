@@ -90,6 +90,11 @@
       <td>None</td>
     <% end %>
   </tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@sequencing_request.notes) %></td>                                                     
+  </tr> 
 </table>
 
 <div class="added_libraries"></div>
@@ -124,4 +129,8 @@
 </ul>
 <div class="sreq_lib_or_scs_selector"></div> <!-- Used in sequencing_requests.js to add the library or scs selector. -->
 <div class="sreq_plate_selector"></div> <!-- Used in sequencing_requests.js to add the plates selector. -->
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<%= render partial: "application_partials/edit_notes", locals: {rec: @sequencing_request} %>
+
 <%= link_to 'Back', sequencing_requests_path, class: "back-btn" %>

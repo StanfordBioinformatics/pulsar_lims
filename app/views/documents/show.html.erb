@@ -42,6 +42,13 @@
 	 	<td><%= link_to @document.document_type.name, @document.document_type %></td>
 	</tr>
 
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@document.notes) %></td>                                                     
+  </tr> 
 </table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<%= render partial: "application_partials/edit_notes", locals: {rec: @document} %>
 
 <%= link_to 'Back', documents_path %>

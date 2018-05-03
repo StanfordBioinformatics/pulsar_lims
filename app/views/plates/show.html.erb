@@ -58,6 +58,11 @@
 			</ul></td>
 		<% end %>	
 	</tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@plate.notes) %></td>                                                     
+  </tr> 
 				
 </table>
 
@@ -90,5 +95,8 @@
   <% end %>
 </div>
 </br>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<%= render partial: "application_partials/edit_notes", locals: {rec: @plate} %>
 
 <%= link_to 'Back', @plate.single_cell_sorting %>

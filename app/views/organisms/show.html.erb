@@ -25,6 +25,14 @@
 		<th><strong>NCBI Taxon:</strong></th>
 		<td><%= @organism.ncbi_taxon %></td>
 	</tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@organism.notes) %></td>                                                     
+  </tr> 
 </table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<%= render partial: "application_partials/edit_notes", locals: {rec: @organism} %>
 
 <%= link_to 'Back', organisms_path %>

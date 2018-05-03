@@ -63,8 +63,7 @@ class NucleicAcidTermsController < ApplicationController
       params.require(:nucleic_acid_term).permit(
         :accession, 
         :definition,
-        :name, 
-        :notes
+        :name
       )
     end
 end

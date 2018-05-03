@@ -43,6 +43,11 @@
 	  <% end %>
     </td>
 	</tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@sequencing_run.notes) %></td>                                                     
+  </tr> 
 </table>
 
 <% if not @sequencing_run.storage_location.present? %>
@@ -103,4 +108,8 @@
 	<% end %>
 <% end %>
 </br></br>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<%= render partial: "application_partials/edit_notes", locals: {rec: @sequencing_run} %>
+
 <%# render partial: "back" %>

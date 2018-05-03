@@ -70,6 +70,11 @@
 			<span style="padding-top: 0.5em"><%= link_to "Add",new_analysis_single_cell_sorting_path, class: "reg-btn btn-sm", id: "scs-add-analysis" %></span>
 		</td>
 	</tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@single_cell_sorting.notes) %></td>                                                     
+  </tr> 
 </table>
 
 
@@ -149,5 +154,9 @@
 		</div>
 	<% end %>
 <% end %>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<%= render partial: "application_partials/edit_notes", locals: {rec: @single_cell_sorting} %>
+
 	
 <%= link_to 'Back', single_cell_sortings_path %>

@@ -16,6 +16,14 @@
 		<th><strong>Name:</strong></th>
 		<td><%= @antibody_purification.name %></td>
 	</tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@antibody_purification.notes) %></td>                                                     
+  </tr> 
 </table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<%= render partial: "application_partials/edit_notes", locals: {rec: @antibody_purification} %>
 
 <%= link_to 'Back', antibody_purifications_path %>

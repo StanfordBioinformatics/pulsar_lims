@@ -21,6 +21,10 @@
 		<td><%= link_to @reference_genome.url, @reference_genome.url %></td>
 	</tr>
 
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@reference_genome.notes) %></td>                                                     
+  </tr> 
 </table>
 
 <div class="chromosomes bg-info">
@@ -49,4 +53,8 @@
 </div>
 
 </br>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<%= render partial: "application_partials/edit_notes", locals: {rec: @reference_genome} %>
+
 <%= link_to 'Back', reference_genomes_path %>

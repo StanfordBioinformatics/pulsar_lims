@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180502183636) do
+ActiveRecord::Schema.define(version: 20180503004409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -501,7 +501,6 @@ ActiveRecord::Schema.define(version: 20180502183636) do
     t.integer  "end"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.text     "notes"
   end
 
   add_index "genome_locations", ["chromosome_id"], name: "index_genome_locations_on_chromosome_id", using: :btree
@@ -590,7 +589,6 @@ ActiveRecord::Schema.define(version: 20180502183636) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.text     "notes"
   end
 
   add_index "nucleic_acid_terms", ["user_id"], name: "index_nucleic_acid_terms_on_user_id", using: :btree

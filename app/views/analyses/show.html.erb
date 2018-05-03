@@ -56,9 +56,18 @@
 			<td><%= link_to @analysis.merged_qc_file.display(), @analysis.merged_qc_file %></td>
 		<% end %>
 	</tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@analysis.notes) %></td>                                                     
+  </tr> 
 </table>
 
-<%= link_to 'Back', analyses_path %>
 <% if @analysis.single_cell_sorting_id.present? %>
 	</br><%= link_to "Single cell sorting", @analysis.single_cell_sorting %>
 <% end %>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->
+<%= render partial: "application_partials/edit_notes", locals: {rec: @analysis} %>
+
+<%= link_to 'Back', analyses_path %>

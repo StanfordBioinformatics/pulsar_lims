@@ -66,6 +66,14 @@
       <%= render partial: "documents/link_to_documents", locals: {documents: @treatment.documents} %>
     </td>                                                                                              
   </tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@treatment.notes) %></td>                                                     
+  </tr> 
 </table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<%= render partial: "application_partials/edit_notes", locals: {rec: @treatment} %>
 
 <%= link_to 'Back', treatments_path %>

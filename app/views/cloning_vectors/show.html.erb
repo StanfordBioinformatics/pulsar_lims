@@ -47,6 +47,14 @@
 		<td></td>
 	<% end %>
 </tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@cloning_vector.notes) %></td>                                                     
+  </tr> 
 </table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<%= render partial: "application_partials/edit_notes", locals: {rec: @cloning_vector} %>
 
 <%= link_to 'Back', cloning_vectors_path %>

@@ -37,5 +37,14 @@
 	  <th><strong>Folder base path:</strong></th>
 	  <td><%= @data_storage.folder_base_path %></td>
 	</tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@data_storage.notes) %></td>                                                     
+  </tr> 
 </table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<%= render partial: "application_partials/edit_notes", locals: {rec: @data_storage} %>
+
 <%= link_to 'Back', data_storages_path %>

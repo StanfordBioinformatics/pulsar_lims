@@ -45,4 +45,12 @@
 	  	<th><strong>Read2 count:</strong></th>
 	  	<td><%= @sequencing_result.read2_count %></td>
 		</tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@sequencing_result.notes) %></td>                                                     
+  </tr> 
 </table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<%= render partial: "application_partials/edit_notes", locals: {rec: @sequencing_result} %>
