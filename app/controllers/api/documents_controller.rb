@@ -61,6 +61,7 @@ class Api::DocumentsController < Api::ApplicationController
 		params.require(:document).permit(
       :user_id,
       :name,
+      :notes,
       :upstream_identifier
     )
 	end

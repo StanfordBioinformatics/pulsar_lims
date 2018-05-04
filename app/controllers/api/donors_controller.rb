@@ -48,6 +48,7 @@ class Api::DonorsController < Api::ApplicationController
         :age,
         :gender,
         :name,
+        :notes,
         :upstream_identifier
       )
 	end

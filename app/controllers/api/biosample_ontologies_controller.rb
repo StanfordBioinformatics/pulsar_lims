@@ -46,6 +46,7 @@ class Api::BiosampleOntologiesController < Api::ApplicationController
 		params.require(:biosample_ontology).permit(
       :user_id,
       :name,
+      :notes,
       :url
     )
 	end

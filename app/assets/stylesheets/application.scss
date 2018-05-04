@@ -342,11 +342,17 @@ ul.actions {
   }
 }
 
-.attributes,.table-data {
+.attributes, .table-data {
 	@extend .table;
   @extend .table-hover;
   @extend .table-condensed;
   @extend .table-responsive;
+  //Set 'display: block' below, otherwise the table cells can extend past the container in the index views.
+  display: block;
+  padding-left: 1em;
+  padding-right: 1em;
+  
+  
 
   thead tr:first-of-type {
     th {
@@ -359,11 +365,11 @@ ul.actions {
   }
 }
 
-.attributes tbody th {
+//.attributes tbody th {
 	//The <th> tags in the show views (not the index views) can take up way too much space, with the header value all the way on the left and the <td> value all the way on the right.
 	// This fixes that for the show views. Not sure why 'max-width' property doesn't have any effect here; only the 'width' property appears to. 
-	width: 15%;
-}
+//	width: 15%;
+//}
 
 .plate-table {
 	/* see additional styles selecting elements in this table in plates.js.coffee */

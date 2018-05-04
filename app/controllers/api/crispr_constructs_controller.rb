@@ -45,6 +45,7 @@ class Api::CrisprConstructsController < Api::ApplicationController
       :ensembl_transcript,
       :guide_sequence,
       :name,
+      :notes,
       :refseq_transcript,
       :target_id,
       :vendor_id,

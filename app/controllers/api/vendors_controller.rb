@@ -47,6 +47,7 @@ class Api::VendorsController < Api::ApplicationController
       :user_id,
       :upstream_identifier,                                                                          
       :name,                                                                                         
+      :notes,
       :description,                                                                                  
       :url 
     )

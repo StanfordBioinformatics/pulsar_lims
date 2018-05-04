@@ -53,15 +53,17 @@ $(function() {
 })
 
 $(function() {
-  //Add edit fa icon after each <tr class="edit-notes"> element. 
+  //Add edit fa-icon for editing the notes attribute of a record in the show view  
   $(".notes-row strong").after('<i style="padding-left: 0.6em;" class="edit-notes-pencil fa fa-pencil"></i>')
   $(document).on("click", ".edit-notes-pencil", function(event) {
+    $(".edit-notes-pencil").hide();
     orig = $(".notes-row td").html();
     $(".notes-row td").html($(".notes-to-edit").clone().show()); 
     $(".cancel-edit-notes").on("click", function(event) {
       event.preventDefault();
       event.stopPropagation();
       $(".notes-row td").html(orig);
+      $(".edit-notes-pencil").show();
     })
   })
 })

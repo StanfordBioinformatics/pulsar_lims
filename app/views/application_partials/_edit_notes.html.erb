@@ -1,6 +1,10 @@
-<div style="display: none"; class="notes-to-edit">                                                                                     
+<!-- Set initial display to hidden since it is already present in the show view of any model that
+     includes the 'notes' attribute. The display will toggle to block when the user clicks on the 
+     pencil icon
+-->
+<div style="display: none;" class="notes-to-edit">                                                                                     
   <%= simple_form_for rec do |f| %>                                                              
-    <%= f.input_field :notes, "style": "display: block; width: 100%; height: 300px; padding: 1em; margin-bottom: 1em" %>
+    <%= f.input_field :notes, class: "notes-input", style: "width: 40vw; height: 300px; padding: 1em; margin-bottom: 1em;" %>
     <div class="actions">                                                                              
       <%= f.button :submit, "Update notes", class: "btn-primary "%>                                    
       <%= link_to "Cancel", "#", style: "margin-left: 1em;", class: "cancel-edit-notes" %>             

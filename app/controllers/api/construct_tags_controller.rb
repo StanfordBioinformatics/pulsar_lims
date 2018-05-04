@@ -46,6 +46,7 @@ class Api::ConstructTagsController < Api::ApplicationController
 		params.require(:construct_tag).permit(
       :user_id,
       :name,
+      :notes,
       :description
     )
 	end
