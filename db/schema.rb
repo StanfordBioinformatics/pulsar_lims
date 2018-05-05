@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180503004409) do
+ActiveRecord::Schema.define(version: 20180505045011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -302,6 +302,8 @@ ActiveRecord::Schema.define(version: 20180503004409) do
     t.string   "ensembl_transcript"
     t.string   "refseq_transcript"
     t.text     "notes"
+    t.integer  "sent_to_id"
+    t.date     "date_sent"
   end
 
   add_index "crispr_constructs", ["addgene_id"], name: "index_crispr_constructs_on_addgene_id", using: :btree
@@ -448,6 +450,8 @@ ActiveRecord::Schema.define(version: 20180503004409) do
     t.string   "ensembl_transcript"
     t.string   "refseq_transcript"
     t.text     "notes"
+    t.integer  "sent_to_id"
+    t.date     "date_sent"
   end
 
   add_index "donor_constructs", ["addgene_id"], name: "index_donor_constructs_on_addgene_id", using: :btree
@@ -962,6 +966,7 @@ ActiveRecord::Schema.define(version: 20180503004409) do
   add_foreign_key "cloning_vectors", "vendors"
   add_foreign_key "concentration_units", "users"
   add_foreign_key "construct_tags", "users"
+  add_foreign_key "crispr_constructs", "addresses", column: "sent_to_id"
   add_foreign_key "crispr_constructs", "cloning_vectors"
   add_foreign_key "crispr_constructs", "targets"
   add_foreign_key "crispr_constructs", "users"
@@ -977,6 +982,7 @@ ActiveRecord::Schema.define(version: 20180503004409) do
   add_foreign_key "document_types", "users"
   add_foreign_key "documents", "document_types"
   add_foreign_key "documents", "users"
+  add_foreign_key "donor_constructs", "addresses", column: "sent_to_id"
   add_foreign_key "donor_constructs", "cloning_vectors"
   add_foreign_key "donor_constructs", "targets"
   add_foreign_key "donor_constructs", "users"

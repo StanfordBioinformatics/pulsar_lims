@@ -80,6 +80,7 @@ class DonorConstructsController < ApplicationController
       params.require(:donor_construct).permit(
         :addgene_id,
         :cloning_vector_id,
+        :date_sent,
         :description,
         :ensembl_transcript,
         :insert_sequence,
@@ -90,6 +91,7 @@ class DonorConstructsController < ApplicationController
         :primer_right_forward,
         :primer_right_reverse,
         :refseq_transcript,
+        :sent_to_id,
         :target_id,
         :vendor_id,
         :vendor_product_identifier,

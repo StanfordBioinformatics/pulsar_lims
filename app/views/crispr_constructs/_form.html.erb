@@ -17,6 +17,10 @@
   <%= f.association :vendor, label_html: {class: "refresh"} %>
   <%= f.input :vendor_product_identifier %>
 
+  <%= f.association :sent_to, label_html: {"data-toggle": "tooltip", "title": "The address that the crispr construct was sent to, if any."} %>
+  <%= f.input :date_sent, include_blank: true, label_html: {"data-toggle": "tooltip", title: "To be used in conjuction with 'Sent to'."} %>
+ 
+
   <% if @crispr_construct.construct_tags.persisted.any? %>
     <%= render partial: "application_partials/simple_fields_for", 
         locals: {f: f, record: @crispr_construct, attribute: :construct_tags, title: "Construct Tags"} %>

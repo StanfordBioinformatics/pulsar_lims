@@ -75,6 +75,20 @@
     </td>
   </tr>
 
+  <tr>                                                                                                 
+    <th><strong>Sent to:</strong></th>                                                                 
+    <td>                                                                                               
+      <% if @crispr_construct.sent_to.present? %>                                                       
+        <%= link_to @crispr_construct.sent_to.name, @crispr_construct.sent_to %>                                 
+      <% end %>                                                                                        
+    </td>                                                                                              
+  </tr>                                                                                                
+                                                                                                       
+  <tr>                                                                                                 
+    <th><strong>Date sent:</strong></th>                                                               
+    <td><%= @crispr_construct.date_sent %></td>                                                         
+  </tr>
+
 	<tr>
 	  <th><strong>Description:</strong></th>
 	  <td><%= @crispr_construct.description %></td>

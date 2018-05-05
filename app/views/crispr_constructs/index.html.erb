@@ -4,13 +4,15 @@
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
-  </ul> 
-</header> 
+  </ul>
+</header>
 
 <table class="attributes index">
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
+      <th>Sent to</th>
+      <th>Date sent</th>
 			<th>Addgene ID</th>
       <th>Target</th>
 			<th>Ensembl transcript</th>
@@ -28,6 +30,12 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td>
+          <% if rec.sent_to.present? %>
+            <%= link_to rec.sent_to.name, rec.sent_to %>
+          <% end %>
+        </td>
+        <td><%= rec.date_sent %></td>
         <td>
           <% if rec.addgene_id %>
             <%= link_to rec.addgene_id, ENV["ADDGENE_WEBSITE"] + rec.addgene_id %>

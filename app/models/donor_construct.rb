@@ -6,6 +6,7 @@ class DonorConstruct < ActiveRecord::Base
 
 	has_and_belongs_to_many :construct_tags
 	has_many :crispr_modifications
+  belongs_to :sent_to, class_name: "Address"
   belongs_to :user
   belongs_to :cloning_vector
   belongs_to :vendor

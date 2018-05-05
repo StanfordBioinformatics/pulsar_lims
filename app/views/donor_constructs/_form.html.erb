@@ -19,6 +19,9 @@
   <%= f.association :vendor, label_html: {class: "refresh"} %>
   <%= f.input :vendor_product_identifier %>
 
+  <%= f.association :sent_to, label_html: {"data-toggle": "tooltip", "title": "The address that the donor construct was sent to, if any."} %>
+  <%= f.input :date_sent, include_blank: true, label_html: {"data-toggle": "tooltip", title: "To be used in conjuction with 'Sent to'."} %>
+
 	<% if @donor_construct.construct_tags.persisted.any? %>
     <table class="min-table" id="construct_tags">
 			<thead>

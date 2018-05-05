@@ -189,9 +189,9 @@ class SingleCellSortingsController < ApplicationController
           :dimensions, 
           :name, 
           :starting_biosample_id, 
-          antibody_ids: []
           :vendor_id, 
           :vendor_product_identifier,
+          antibody_ids: []
         ],
         analyses_ids: []
       )
