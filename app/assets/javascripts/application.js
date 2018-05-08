@@ -39,9 +39,9 @@
 
 
 //Set select inputs to show 6 rows:
-$(function() {
-  $("select",document).attr("size","8");
-})
+//$(function() {
+//  $("select",document).attr("size","8");
+//})
 
 //Close flash messages with a fade out when the 'x' is clicked:
 $(function() {
@@ -73,6 +73,8 @@ $(function() {
 $(function() {
   //Add refresh FontsAwesome icon too all labels with class 'refresh':
   $("label.refresh").after('<i class="refresh fa fa-refresh"></i>')
+
+
   //Highlight table columns in the index views when user mouses over a table cell.
   // Note that highlighting the table rows is already taken care of in application.css thanks to
   // bootstrap's .table-hover class.

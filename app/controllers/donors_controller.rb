@@ -9,7 +9,7 @@ class DonorsController < ApplicationController
   end
 
   def index
-    @records = policy_scope(Donor).page params[:page]
+    super(Donor)
   end
 
   def show

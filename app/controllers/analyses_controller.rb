@@ -20,7 +20,7 @@ class AnalysesController < ApplicationController
 	end
 
   def index
-    @records = policy_scope(Analysis).page params[:page]
+    super(Analysis)
   end
 
   def show

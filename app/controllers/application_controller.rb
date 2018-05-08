@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :set_model_class, only: [:index, :new, :find_by, :find_by_or]
   # Note that :find_by is defined as an action in controller subclasses, which are expected to
   # call the prviate :find_by method defined here (not as an action), particularly the aip
-  # controllers. 
+  # controllers.
 	#before_action :check_signed_in
   after_action :verify_authorized, except: :index,
 		unless: :devise_controller?
@@ -44,17 +44,28 @@ class ApplicationController < ActionController::Base
 
 	private
 
+  def index(model_class, scope: nil, where: {})
+    @records = policy_scope(model_class).where(where)
+    if scope.present?
+      @records = @records.send(scope)
+    end
+    unless params[:all].present?
+      @records = @records.page params[:page]
+      @page = true
+    end
+  end
+
   def find_by
-    # Used in API calls to invoke find_by from ActiveRecord::FinderMethods by passing in the params 
-    # argument, which is a dict. Thus, all query parameters in the dict are joined implicitly via 
-    # the AND database operator (since that is the behavior of Rails's find_by when given a dict). 
-    # For OR operator joining, see the mothod find_by_or defined below. 
+    # Used in API calls to invoke find_by from ActiveRecord::FinderMethods by passing in the params
+    # argument, which is a dict. Thus, all query parameters in the dict are joined implicitly via
+    # the AND database operator (since that is the behavior of Rails's find_by when given a dict).
+    # For OR operator joining, see the mothod find_by_or defined below.
     #
     # Uses @model_class from ApplicationController#set_model_class.
     authorize @model_class, :show?
-    # Check if params is empty and if so, return an empty JSON object. 
+    # Check if params is empty and if so, return an empty JSON object.
     # Need to make this check because the Rails find_by method will return the first record by
-    # default when given an empty search criterion. 
+    # default when given an empty search criterion.
     if params.empty?
         render json: {}
         return
@@ -62,21 +73,21 @@ class ApplicationController < ActionController::Base
     res = @model_class.find_by(params[:find_by].to_hash)
     # NOTE ON ABOVE: I have to add the call to to_hash() since w/o it, we'll get the RAILS error
     # ActiveModel::ForbiddenAttributesError. That is becuase were using the raw params, and not
-    # parsing them out in a controller specific method that calls params.required(). 
+    # parsing them out in a controller specific method that calls params.required().
     render json: res
   end
 
   def find_by_or
-    # Used in API calls to invoke find_by from ActiveRecord::FinderMethods. 
+    # Used in API calls to invoke find_by from ActiveRecord::FinderMethods.
     # The 'params' argument is a dict, however, to allow OR operator joining, this method
-    # creates a string query out of params' that includes calls to the OR operator for each 
+    # creates a string query out of params' that includes calls to the OR operator for each
     # query parameter in params. For AND operator joining, see find_by method defined above.
     #
     # Uses @model_class from ApplicationController#set_model_class.
     authorize @model_class, :show?
-    # Check if params is empty and if so, return an empty JSON object. 
+    # Check if params is empty and if so, return an empty JSON object.
     # Need to make this check because the Rails find_by method will return the first record by
-    # default when given an empty search criterion. 
+    # default when given an empty search criterion.
     if params.empty?
         render json: {}
         return
@@ -96,7 +107,7 @@ class ApplicationController < ActionController::Base
     # @model_class is used particularly in the views/application_partials/_index_common_table_headers.html
     # Need to be careful if the caller is a controller in the api namespace, for example, the find_by()
     # method in api/documents_controller.rb makes a call to 'super', thereby calling the private method
-    # by the same name that exists in this present class, which in turn calls this present method. 
+    # by the same name that exists in this present class, which in turn calls this present method.
     # In this case, we have the following assertions that can be made:
     #
     #  1. controller_path == "api/documents"
@@ -106,7 +117,7 @@ class ApplicationController < ActionController::Base
     # controller_path.classify.constantize is made, which can be done by splitting on ":".
     # Of course, care must be taken when calling this set_model_class method when the caller represents
     # a controller that doesn't pair to any model, i.e. the welcome controller, as this method won't work
-    # and a NameError will be raised and caught. 
+    # and a NameError will be raised and caught.
     begin
       @model_class = controller_path.classify.split(":")[-1].constantize
     rescue NameError #i.e. NameError (uninitialized constant Welcome)

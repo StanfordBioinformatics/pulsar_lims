@@ -6,21 +6,31 @@
   <%= f.input :addgene_id, label_html: {"data-toggle": "tooltip", "title": "The catalog number (i.e. 50661) of the plasmid in www.addgene.org if deposited there. Note - this could be the same as the 'Vender product identifier' if you procured this from Addene."} %>
   <%= f.association :cloning_vector, label_html: {class: "refresh"} %>
 
-  <%= f.association :target, label: "Gene target", label_html: {class: "refresh"} %>
+  <%= f.input :donor_cell_line, label_html: {"data-toggle": "tooltip", title: "The cell line (i.e. k562) used for cloning the donor insert."} %>
+  <%= f.input :known_snps, label_html: {"data-toggle": "tooltip", title: "One or more known SNPS (i.e. in dbSNP) that are present in the donor sequence. Meaningful when the cell line of the donor sequence is a different type than the recipient cell line in transfections."} %>
 
+  <fieldset>
+    <legend>Gene and transcript target details</legend>
+  <%= f.association :target, label: "Gene target", label_html: {class: "refresh"} %>
 	<%= f.input :ensembl_transcript, label_html: {"data-toggle": "tooltip", "title": "Ensembl transcript accession that the donor construct is designed for, if applicable."} %>
 	<%= f.input :refseq_transcript, label_html: {"data-toggle": "tooltip", "title": "RefSeq transcript accession that the donor construct is designed for, if applicable."} %>
+  </fieldset>
+
   <%= f.input :insert_sequence %>
-	<%= f.input :primer_left_forward, label_html: {"data-toggle": "tooltip", "title": "The forward primer in the sense of the gene, on the left homology arm"} %>
-	<%= f.input :primer_left_reverse, label_html: {"data-toggle": "tooltip", "title": "The reverse primer in the opposite sense of the gene, on the left homology arm."} %>
-	<%= f.input :primer_right_forward, label_html: {"data-toggle": "tooltip", "title": "The forward primer in the sense of the gene, on the right homology arm"} %>
-	<%= f.input :primer_right_reverse, label_html: {"data-toggle": "tooltip", "title": "The reverse primer in the opposite sense of the gene, on the right homology arm"} %>
 
-  <%= f.association :vendor, label_html: {class: "refresh"} %>
-  <%= f.input :vendor_product_identifier %>
+  <fieldset>
+    <legend>Primers</legend>
+  	<%= f.input :primer_left_forward, label_html: {"data-toggle": "tooltip", "title": "The forward primer in the sense of the gene, on the left homology arm"} %>
+  	<%= f.input :primer_left_reverse, label_html: {"data-toggle": "tooltip", "title": "The reverse primer in the opposite sense of the gene, on the left homology arm."} %>
+  	<%= f.input :primer_right_forward, label_html: {"data-toggle": "tooltip", "title": "The forward primer in the sense of the gene, on the right homology arm"} %>
+  	<%= f.input :primer_right_reverse, label_html: {"data-toggle": "tooltip", "title": "The reverse primer in the opposite sense of the gene, on the right homology arm"} %>
+  </fieldset>
 
-  <%= f.association :sent_to, label_html: {"data-toggle": "tooltip", "title": "The address that the donor construct was sent to, if any."} %>
-  <%= f.input :date_sent, include_blank: true, label_html: {"data-toggle": "tooltip", title: "To be used in conjuction with 'Sent to'."} %>
+
+  <%= render partial: "vendors/fieldset_input", locals: {f: f} %>
+
+  <!-- Add inputs for sent_to and date_sent -->
+  <%= render partial: "addresses/fieldset_input", locals: {f: f} %>
 
 	<% if @donor_construct.construct_tags.persisted.any? %>
     <table class="min-table" id="construct_tags">

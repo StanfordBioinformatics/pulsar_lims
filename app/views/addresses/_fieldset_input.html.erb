@@ -1,0 +1,4 @@
+<fieldset>                                                                                           
+  <legend>Shipping</legend>                                                                          
+  <%= f.association :sent_to, label_html: {"data-toggle": "tooltip", "title": "The address that the construct was sent to, if any."} %>    <%= f.input :date_sent, include_blank: true, label_html: {"data-toggle": "tooltip", title: "To be used in conjuction with 'Sent to'."} %>
+</fieldset>

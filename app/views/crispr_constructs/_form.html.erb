@@ -8,18 +8,22 @@
   <%= f.association :cloning_vector,
       label_html: {class: "refresh"} %>
 
-  <%= f.association :target, label: "Gene target",
-      label_html: {class: "refresh"}
-  %>
-	<%= f.input :ensembl_transcript, label_html: {"data-toggle": "tooltip", "title": "Ensembl transcript accession that the crispr construct is designed for, if applicable." } %>
-	<%= f.input :refseq_transcript, label_html: {"data-toggle": "tooltip", "title": "RefSeq transcript accession that the crispr construct is designed for, if applicable." } %>
-  <%= f.input :guide_sequence %>
-  <%= f.association :vendor, label_html: {class: "refresh"} %>
-  <%= f.input :vendor_product_identifier %>
+  <fieldset>
+    <legend>Gene and transcript target details</legend>
+    <%= f.association :target, label: "Gene target",
+        label_html: {class: "refresh"}
+    %>
+  	<%= f.input :ensembl_transcript, label_html: {"data-toggle": "tooltip", "title": "Ensembl transcript accession that the crispr construct is designed for, if applicable." } %>
+  	<%= f.input :refseq_transcript, label_html: {"data-toggle": "tooltip", "title": "RefSeq transcript accession that the crispr construct is designed for, if applicable." } %>
+  </fieldset>
 
-  <%= f.association :sent_to, label_html: {"data-toggle": "tooltip", "title": "The address that the crispr construct was sent to, if any."} %>
-  <%= f.input :date_sent, include_blank: true, label_html: {"data-toggle": "tooltip", title: "To be used in conjuction with 'Sent to'."} %>
- 
+  <%= f.input :guide_sequence %>
+
+  <%= render partial: "vendors/fieldset_input", locals: {f: f} %> 
+
+  <!-- Add inputs for sent_to and date_sent -->                                                        
+  <%= render partial: "addresses/fieldset_input", locals: {f: f} %>
+
 
   <% if @crispr_construct.construct_tags.persisted.any? %>
     <%= render partial: "application_partials/simple_fields_for", 

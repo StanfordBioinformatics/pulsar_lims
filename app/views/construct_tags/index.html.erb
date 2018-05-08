@@ -30,4 +30,7 @@
   </tbody>
 </table>
 
-<%= paginate @records %>
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+  <%= link_to "All", construct_tags_path(all: true) %>                                                        
+<% end %>

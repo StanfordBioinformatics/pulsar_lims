@@ -9,7 +9,7 @@ class TargetsController < ApplicationController
   end 
 
   def index
-    @records = policy_scope(Target).page params[:page]
+    super(Target)
   end
 
   def show

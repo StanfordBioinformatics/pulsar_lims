@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180505045011) do
+ActiveRecord::Schema.define(version: 20180508030026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -452,6 +452,8 @@ ActiveRecord::Schema.define(version: 20180505045011) do
     t.text     "notes"
     t.integer  "sent_to_id"
     t.date     "date_sent"
+    t.string   "donor_cell_line"
+    t.string   "known_snps"
   end
 
   add_index "donor_constructs", ["addgene_id"], name: "index_donor_constructs_on_addgene_id", using: :btree

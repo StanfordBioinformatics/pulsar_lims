@@ -50,4 +50,7 @@
   </tbody>
 </table>
 
-<%= paginate @records %>
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+  <%= link_to "All", sequencing_requests_path(all: true) %>                                                        
+<% end %>

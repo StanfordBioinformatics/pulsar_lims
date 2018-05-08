@@ -58,4 +58,7 @@
   </tbody>
 </table>
 
-<%= paginate @records %>
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+  <%= link_to "All", crispr_constructs_path(all: true) %>                                                        
+<% end %>

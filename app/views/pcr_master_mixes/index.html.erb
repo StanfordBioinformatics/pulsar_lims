@@ -40,4 +40,7 @@
   </tbody>
 </table>
 
-<%= paginate @records %>
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+  <%= link_to "All", pcr_master_mixes_path(all: true) %>                                                        
+<% end %>

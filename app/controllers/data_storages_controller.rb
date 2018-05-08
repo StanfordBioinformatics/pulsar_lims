@@ -24,7 +24,7 @@ class DataStoragesController < ApplicationController
 	end
 
   def index
-		@records = policy_scope(DataStorage).page params[:page]
+		super(DataStorage)
   end
 
   def show

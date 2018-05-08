@@ -9,7 +9,7 @@ class IsotypesController < ApplicationController
   end
 
   def index
-    @records = policy_scope(Isotype).page params[:page]
+    super(Isotype)
   end
 
   def show

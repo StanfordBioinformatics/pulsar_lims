@@ -18,7 +18,7 @@ class DonorConstructsController < ApplicationController
   end	
 
   def index
-    @records = policy_scope(DonorConstruct).page params[:page]
+    super(DonorConstruct)
   end
 
   def show
@@ -82,8 +82,10 @@ class DonorConstructsController < ApplicationController
         :cloning_vector_id,
         :date_sent,
         :description,
+        :donor_cell_line,
         :ensembl_transcript,
         :insert_sequence,
+        :known_snps,
         :name,
         :notes,
         :primer_left_forward,

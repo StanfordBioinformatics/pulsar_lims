@@ -10,7 +10,7 @@ class BiosampleTypesController < ApplicationController
   end 
 
   def index
-    @records = policy_scope(BiosampleType).page params[:page]
+    super(BiosampleType)
   end
 
   def show

@@ -32,4 +32,7 @@
 
 <br>
 
-<%= paginate @records %>
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+  <%= link_to "All", biosample_types_path(all: true) %>                                                        
+<% end %>

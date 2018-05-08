@@ -13,6 +13,11 @@
 # In the Library form, however, a user can only specify one barcode or pair of indices. 
 $ ->
 
+  #Refresh the biosamples list in the form when the refresh fa-icon is clicked:                   
+  $(document).on "click", ".library_biosample i.refresh", (event) ->                      
+    $.get "/biosamples/select_options", (responseText,status,jqXHR) ->                            
+      $(".library_biosample select").html(responseText)  
+
   ###
   #The following code is used with the Library form partial:
   ###
@@ -23,6 +28,11 @@ $ ->
   $kit_selector = $("#library_sequencing_library_prep_kit_id")
   $paired_end_checkbox = $("#library_paired_end")
   $paired_end_checkbox.closest("div").hide()
+  pe_kit_ids = [];
+  $.get "/sequencing_library_prep_kits/paired_end_kits", (responseText,status,jqXHR) ->
+    #responseText is JSON, i.e { "sequencing_library_prep_kits": [ 5 ] }
+    pe_kit_ids = responseText.sequencing_library_prep_kits
+    #alert($.type(pe_kit_ids)) #array
 
   $barcode_selector = $("#barcode_selector")
 
@@ -32,30 +42,26 @@ $ ->
     
   load_barcode_selection = -> 
     hide_barcode_selector()
+    kit_id = parseInt($kit_selector.val())
+    if $.inArray(parseInt($kit_selector.val()),pe_kit_ids) >= 0
+      $paired_end_checkbox.closest("div").show()
+    else
+      $paired_end_checkbox.attr("checked",false)
+      $paired_end_checkbox.closest("div").hide()
+    if isNaN(kit_id)
+      return
     if ( $paired_end_checkbox.is(":checked") )
-      $barcode_selector.contents().fadeOut()
       $.get "/libraries/select_paired_barcode", $kit_selector.serialize(), (responseText,status,jqXHR) ->
         $barcode_selector.html(responseText)
-        $barcode_selector.contents().fadeIn()
+        $barcode_selector.fadeIn()
     else if ( ! $paired_end_checkbox.is(":checked") )
-      $barcode_selector.contents().fadeOut()
       $.get "/libraries/select_barcode", $kit_selector.serialize(), (responseText,status,jqXHR) ->
         $barcode_selector.html(responseText)
-        $barcode_selector.contents().fadeIn()
+        $barcode_selector.fadeIn()
 
   $kit_selector.change (event) -> 
-    kit_id = parseInt($kit_selector.val())
-    $.get "/sequencing_library_prep_kits/paired_end_kits", (responseText,status,jqXHR) ->
-      #responseText is JSON, i.e { "sequencing_library_prep_kits": [ 5 ] }
-      pe_kit_ids = responseText.sequencing_library_prep_kits
-      #alert($.type(pe_kit_ids)) #array
-      if $.inArray(parseInt($kit_selector.val()),pe_kit_ids) >= 0
-        $paired_end_checkbox.closest("div").show()
-      else
-        $paired_end_checkbox.attr("checked",false)
-        $paired_end_checkbox.closest("div").hide()
-      load_barcode_selection()
+    load_barcode_selection()
 
   $paired_end_checkbox.click (event) ->
     load_barcode_selection()
-  $kit_selector.change()
+  #$kit_selector.change()

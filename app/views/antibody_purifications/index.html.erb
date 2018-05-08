@@ -29,3 +29,7 @@
 </table>
 
 <%= paginate @records %>
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+  <%= link_to "All", antibody_purifications_path(all: true) %>                                                        
+<% end %>

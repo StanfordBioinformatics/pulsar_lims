@@ -30,4 +30,7 @@
   </tbody>
 </table>
 
-<%= paginate @records %>
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+  <%= link_to "All", reference_genomes_path(all: true) %>                                                        
+<% end %>

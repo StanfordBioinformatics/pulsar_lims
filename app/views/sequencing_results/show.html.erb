@@ -53,4 +53,4 @@
 </table>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
-<%= render partial: "application_partials/edit_notes", locals: {rec: @sequencing_result} %>
+<%= render partial: "application_partials/edit_notes", locals: {rec: [@sequencing_request, @sequencing_run, @sequencing_result]} %>

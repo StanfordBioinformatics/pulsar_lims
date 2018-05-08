@@ -2,12 +2,7 @@ class ConcentrationUnitsController < ApplicationController
   before_action :set_concentration_unit, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(ConcentrationUnit).page params[:page]
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @records}
-    end
+    super(ConcentrationUnit)
   end
 
   def show

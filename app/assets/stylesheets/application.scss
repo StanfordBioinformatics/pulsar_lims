@@ -51,7 +51,7 @@
 //Add some left margin to the refresh icons added after selection inputs (after the label)
 i.refresh {
   @extend .btn;
-  margin-left: 1.5em;
+  margin-left: 1em;
 }
 
 .celsius {
@@ -189,9 +189,21 @@ label.radio_buttons {
 }
 
 /* the .form-group is the class rails/simple-form gives to inputs. */
-//.form-group {
-//	max-width: 50%;
-//}
+.form-group {
+	max-width: 60%;
+}
+
+
+fieldset {
+  padding: 1em;
+  max-width: 60%;
+  margin-bottom: 2.0em;
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,0.40);
+}
+
+fieldset div.form-group {
+  max-width: 100%;
+}
 
 
 select:focus, input:focus, textarea:focus {

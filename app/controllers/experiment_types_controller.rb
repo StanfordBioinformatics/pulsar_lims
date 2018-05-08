@@ -2,7 +2,7 @@ class ExperimentTypesController < ApplicationController
   before_action :set_experiment_type, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(ExperimentType).page params[:page]
+    super(ExperimentType)
   end
 
   def show

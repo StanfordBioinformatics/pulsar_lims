@@ -9,7 +9,7 @@ class SequencingCentersController < ApplicationController
   end
 
   def index
-    @records = policy_scope(SequencingCenter).page params[:page]
+    super(SequencingCenter)
   end
 
   def show

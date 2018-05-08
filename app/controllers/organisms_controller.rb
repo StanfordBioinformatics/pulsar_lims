@@ -2,7 +2,7 @@ class OrganismsController < ApplicationController
   before_action :set_organism, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(Organism).page params[:page]
+    super(Organism)
   end
 
   def show

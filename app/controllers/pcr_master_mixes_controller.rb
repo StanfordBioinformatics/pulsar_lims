@@ -9,7 +9,7 @@ class PcrMasterMixesController < ApplicationController
   end
 
   def index
-    @records = policy_scope(PcrMasterMix).page params[:page]
+    super(PcrMasterMix)
   end
 
   def show

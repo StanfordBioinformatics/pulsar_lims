@@ -33,4 +33,7 @@
 
 <br>
 
-<%= paginate @records %>
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+  <%= link_to "All", genome_locations_path(all: true) %>                                                        
+<% end %>

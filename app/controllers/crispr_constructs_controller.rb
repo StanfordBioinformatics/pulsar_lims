@@ -18,7 +18,7 @@ class CrisprConstructsController < ApplicationController
   end 
 
   def index
-    @records = policy_scope(CrisprConstruct).page params[:page]
+    super(CrisprConstruct)
   end
 
   def show

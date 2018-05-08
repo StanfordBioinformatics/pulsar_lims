@@ -9,7 +9,7 @@ class DataFileTypesController < ApplicationController
   end
 
   def index
-    @records = policy_scope(DataFileType).page params[:page]
+    super(DataFileType)
   end
 
   def show

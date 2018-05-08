@@ -9,7 +9,7 @@ class BiosampleTermNamesController < ApplicationController
   end
 
   def index
-    @records = policy_scope(BiosampleTermName).page params[:page]
+    super(BiosampleTermName)
   end
 
   def show

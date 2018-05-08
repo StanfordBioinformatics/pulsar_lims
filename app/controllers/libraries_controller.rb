@@ -24,7 +24,8 @@ class LibrariesController < ApplicationController
   end
 
   def index
-    @records = policy_scope(Library).non_plated_non_prototype.page params[:page]
+    super(Library, scope: :non_plated_non_prototype)
+    #policy_scope(Library).non_plated_non_prototype
   end
 
   def show

@@ -75,7 +75,7 @@ class BiosamplesController < ApplicationController
   end
 
   def index
-    @records = policy_scope(Biosample.where({well: nil})).page params[:page]
+    super(Biosample, where: {well: nil})
   end
 
   def show

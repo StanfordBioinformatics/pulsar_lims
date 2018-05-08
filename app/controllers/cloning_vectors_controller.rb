@@ -10,7 +10,7 @@ class CloningVectorsController < ApplicationController
   end
 
   def index
-    @records = policy_scope(CloningVector).page params[:page]
+    super(CloningVector)
   end
 
   def show

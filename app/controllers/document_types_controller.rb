@@ -2,7 +2,7 @@ class DocumentTypesController < ApplicationController
   before_action :set_document_type, only: [:show, :edit, :update, :destroy]
 
   def index
-    @records = policy_scope(DocumentType).page params[:page]
+    super(DocumentType)
   end
 
   def show

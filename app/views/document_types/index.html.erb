@@ -28,4 +28,7 @@
   </tbody>
 </table>
 
-<%= paginate @records %>
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+  <%= link_to "All", document_types_path(all: true) %>                                                        
+<% end %>

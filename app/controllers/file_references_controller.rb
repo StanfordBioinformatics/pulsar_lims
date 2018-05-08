@@ -2,7 +2,7 @@ class FileReferencesController < ApplicationController
   before_action :set_file_reference, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@records = policy_scope(FileReference).page params[:page]
+		super(FileReference)
 	end
 
   def show

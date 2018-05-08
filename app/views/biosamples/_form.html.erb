@@ -78,19 +78,17 @@
       input_html: {class: "biosample_documents_selector"},
 			label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>
 
-	<%= f.association :biosample_type, collection: BiosampleType.order(:name), 
-			input_html: {class: "biosample_type_selector"}, label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The categorization of the biosample. See 'Biosample Types' in the Object Store."} %>
-
-  <%= f.association :biosample_term_name, input_html: {class: "biosample_term_name_selector"},
-      label_html: {class: "refresh", "data-toggle": "tooltip", "title": "An ontology term for the biosamaple. The selection choices change depending on the value chosen for \"Biosample type\"."}
+  <fieldset>
+    <legend>Classification</legend>
+  	<%= f.association :biosample_type, collection: BiosampleType.order(:name), 
+  			input_html: {class: "biosample_type_selector"}, label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The categorization of the biosample. See 'Biosample Types' in the Object Store."} %>
+    <%= f.association :biosample_term_name, input_html: {class: "biosample_term_name_selector"},
+        label_html: {class: "refresh", "data-toggle": "tooltip", "title": "An ontology term for the biosamaple. The selection choices change depending on the value chosen for \"Biosample type\"."}
   %>
   <!-- When the user changes the value in the biosample_type selector, jQuery will update the biosample_term_name list. -->
+  </fieldset>
 
-	<%= f.association :vendor, collection: Vendor.order(:name),
-			label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The originating lab or vendor."} %>
-
-	<%= f.input:vendor_product_identifier, 
-			label_html: {"data-toggle": "tooltip", "title": "The product identifier provided by the originating lab or vendor."} %>
+  <%= render partial: "vendors/fieldset_input", locals: {f: f} %>
 
 	<%= f.input :lot_identifier,
 			label_html: {"data-toggle": "tooltip", "title": "The lot identifier provided by the originating lab or vendor."} %>

@@ -9,7 +9,7 @@ class AntibodyPurificationsController < ApplicationController
   end 
 
   def index
-    @records = policy_scope(AntibodyPurification).page params[:page]
+    super(AntibodyPurification)
   end
 
   def show

@@ -189,8 +189,10 @@ class Library < ActiveRecord::Base
 	end
 
 	def set_name
-		if self.biosample.well.present?
-			self.name = self.biosample.name
+    if self.biosample.present? #won't be if prototype library.
+  		if self.biosample.well.present?
+	  		self.name = self.biosample.name
+      end
 		end
 	end
 
@@ -217,7 +219,7 @@ class Library < ActiveRecord::Base
 	def validate_plate_consistency
 		#If the library is barcoded, and the biosample is in the well of a plate, then we need to make sure that no
 		# other library on the plate has the same barcode.
-		return unless self.biosample.well.present? and self.barcoded?
+		return unless self.biosample.present? and self.biosample.well.present? and self.barcoded?
 		if self.persisted?
 			action_term = "update"
 		else
