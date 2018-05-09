@@ -3,12 +3,8 @@ class UsersController < ApplicationController
 	skip_after_action :verify_authorized
 
   def archive
-    unless @user == current_user
-			raise Pundit::NotAuthorizedError	
-      return
-    end 
-
 		@user.archive
+    # Issue a new session identifier (http://guides.rubyonrails.org/v3.2/security.html)
 		reset_session
 
 		respond_to do |format|

@@ -18,6 +18,11 @@ $ ->
     $.get "/biosamples/select_options", (responseText,status,jqXHR) ->                            
       $(".library_biosample select").html(responseText)  
 
+  #Refresh the documents list in the form when the refresh fa-icon is clicked:                         
+  $(document).on "click", ".library_documents i.refresh", (event) ->                                 
+    $.get "/documents/select_options", (responseText,status,jqXHR) ->                                  
+      $(".library_documents select").html(responseText) 
+
   ###
   #The following code is used with the Library form partial:
   ###

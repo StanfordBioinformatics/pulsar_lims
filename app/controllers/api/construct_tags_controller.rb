@@ -30,9 +30,9 @@ class Api::ConstructTagsController < Api::ApplicationController
 		@construct_tag.user = @current_user
 		authorize @construct_tag
 		if @construct_tag.save
-			render json: @construct_tag, status: 201
+			render json: @construct_tag, status: :created
 		else
-			render json: { errors: @construct_tag.errors.full_messages }, status: 422
+			render json: { errors: @construct_tag.errors.full_messages }, status: :unprocessable_entity
 		end
 	end
 

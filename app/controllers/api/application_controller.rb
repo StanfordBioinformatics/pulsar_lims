@@ -3,6 +3,9 @@ class Api::ApplicationController < ApplicationController
 	attr_reader :current_user
 	before_action :authenticate_user
 
+  rescue_from ActiveRecord::RecordNotFound do |err|
+    render json: {error: "Not found"}, status: :not_found
+  end
 
 	private
 

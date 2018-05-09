@@ -26,7 +26,7 @@ class Document < ActiveRecord::Base
 	validates :content_type, presence: true
 	validates :data, presence: true
 	validates :document_type, presence: true
-	validates :is_protocol, inclusion: { in: [true, false] }
+	validates :is_protocol, presence: true,  inclusion: { in: [true, false] }
 
 	scope :persisted, lambda { where.not(id: nil) }
 	scope :protocols, lambda { where(is_protocol: true) }

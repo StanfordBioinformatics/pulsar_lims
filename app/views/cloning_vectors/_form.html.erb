@@ -3,10 +3,7 @@
 
   <%= f.input :name, {"data-toggle" => "tooltip", "title" => "Unique name"} %>
   <%= f.input :description %>
-  <%= f.association :vendor, 
-      label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The originating lab or vendor."} %>
-  <%= f.input :product_url, label_html: {"data-toggle" => "tooltip", "title" => "Link to the vendor product."} %>
-
+  <%= render partial: "vendors/fieldset_input", locals: {f: f, url: true} %> 
 	<% file_upload_hint="" %>
 	<% if @cloning_vector.map.present? %>
 		<% file_upload_hint="You previously uploaded #{@cloning_vector.map}." %>

@@ -138,6 +138,15 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
+    resources :users, only: [:show, :edit] do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+      patch :generate_api_key, on: :member                                                                
+      patch :remove_api_key, on: :member                                                                  
+      patch :archive, on: :member  
+      patch :unarchive, on: :member  
+    end
+
 	end
 
   namespace :admin do
@@ -148,7 +157,7 @@ Pulsar::Application.routes.draw do
 				patch :archive
 				patch :unarchive
     		get  :show_api_key
-    		get  :remove_api_key
+    		post  :remove_api_key
 			end
 		end
   end
@@ -176,7 +185,7 @@ Pulsar::Application.routes.draw do
   resources :users, only: [:show, :edit] do
     post :generate_api_key, on: :member
     get  :show_api_key, on: :member
-    get  :remove_api_key, on: :member
+    post  :remove_api_key, on: :member
 		patch :archive, on: :member
   end 
 		

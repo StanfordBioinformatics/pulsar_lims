@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_model_class, only: [:index, :new, :find_by, :find_by_or]
   # Note that :find_by is defined as an action in controller subclasses, which are expected to
-  # call the prviate :find_by method defined here (not as an action), particularly the aip
+  # call the prviate :find_by method defined here (not as an action), particularly the api
   # controllers.
 	#before_action :check_signed_in
   after_action :verify_authorized, except: :index,

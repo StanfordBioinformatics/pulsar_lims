@@ -2,4 +2,10 @@
   <legend>Source details</legend>                                                                    
   <%= f.association :vendor, label_html: {class: "refresh"} %>                                       
   <%= f.input :vendor_product_identifier %>                                                          
+  <% if defined?(url) %>
+    <!-- The CloningVector has a product_url whereas most other models that reference a vendor just
+         need the addition of vendor_product_identifier, which CloningVector also has. 
+    -->
+    <%= f.input :product_url %>
+  <% end %>
 </fieldset>

@@ -29,7 +29,7 @@
 	<% end %>
 
 	<%= f.association :documents, collection: sorted_document_name_id(), include_blank: true,
-			label_html: {"data-toggle" => "tooltip","title" => "Documents that provide additional information (not a data file)."} %>
+			label_html: {class: "refresh", "data-toggle" => "tooltip","title" => "Documents that provide additional information (not a data file)."} %>
 
   <% if @library.sequencing_requests.present? %>
     <%= render partial: "application_partials/simple_fields_for", locals: {title: "Sequencing Requests:", record: @library, f: f, attribute: :sequencing_requests} %>
