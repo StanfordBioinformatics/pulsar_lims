@@ -367,7 +367,7 @@ table.index {
   max-width: var(--index-table-cell-width);
   }
 
-  tbody {
+  & tbody {
     display: inline-block;
     height: 80vh;
     overflow: auto;
