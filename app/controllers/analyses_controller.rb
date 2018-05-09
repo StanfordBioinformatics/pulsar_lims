@@ -98,34 +98,34 @@ class AnalysesController < ApplicationController
           :data_file_type_id,
           :data_storage_id,
           :fileid,
-          :file_path,
+          :file_path
         ],
         merged_bam_file_attributes: [
           :id,
           :_destroy,
           :user_id,
-          :data_file_type_id
+          :data_file_type_id,
           :data_storage_id,
           :fileid,
-          :file_path,
+          :file_path
         ],
         merged_peaks_file_attributes: [
           :id,
           :_destroy,
           :user_id,
-          :data_file_type_id
+          :data_file_type_id,
           :data_storage_id,
           :fileid,
-          :file_path,
+          :file_path
         ],
         merged_qc_file_attributes: [
           :id,
           :_destroy,
           :user_id,
-          :data_file_type_id
+          :data_file_type_id,
           :data_storage_id,
           :fileid,
-          :file_path,
+          :file_path
         ]
       )
     end
