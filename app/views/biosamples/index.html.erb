@@ -29,7 +29,6 @@
       <th>Actions</th>
     </tr>
   </thead>
-
   <tbody>
     <% @records.each do |rec| %>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
