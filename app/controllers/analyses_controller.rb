@@ -95,7 +95,7 @@ class AnalysesController < ApplicationController
           :id,
           :_destroy,
           :user_id,
-          :data_file_type_id
+          :data_file_type_id,
           :data_storage_id,
           :fileid,
           :file_path,
