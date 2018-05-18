@@ -14,7 +14,6 @@ class SingleCellSortingsController < ApplicationController
 		#non AJAX
 		custom_lib_params = {
 			name: "#{@single_cell_sorting.name} library prototype",
-			prototype: true, 
 			biosample_id: @single_cell_sorting.sorting_biosample_id
 		}
 		@library = @single_cell_sorting.build_library_prototype(custom_lib_params)
@@ -31,11 +30,9 @@ class SingleCellSortingsController < ApplicationController
 
   def add_sorting_biosample
 		#called via AJAX
-    sorting_biosample = @single_cell_sorting.starting_biosample.dup
-		sorting_biosample.upstream_identifier = nil
-    sorting_biosample.part_of_biosample =  @single_cell_sorting.starting_biosample
-		sorting_biosample.prototype = true
+    sorting_biosample = Biosample.new(@single_cell_sorting.starting_biosample.clone())
     sorting_biosample.name =  @single_cell_sorting.name + " " + "biosample prototype"
+    sorting_biosample.user = current_user
     @biosample = sorting_biosample
 		#Needed to set @biosample above since that is used in the partial single_cell_sortings/_add_sorting_biosample.html.erb that renders a Biosample form. -->
     render partial: "add_sorting_biosample", layout: false
@@ -157,7 +154,6 @@ class SingleCellSortingsController < ApplicationController
           :lot_identifier, 
           :name, 
           :nucleic_acid_term_id, 
-          :prototype, 
           :paired_end,
           :sequencing_library_prep_kit_id, 
           :size_range, 
@@ -177,7 +173,6 @@ class SingleCellSortingsController < ApplicationController
           :name, 
           :part_of_biosample_id, 
           :passage_number, 
-          :prototype, 
           :submitter_comments, 
           :upstream, 
           :vendor_id,

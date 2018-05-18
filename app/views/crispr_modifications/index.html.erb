@@ -26,8 +26,8 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
-        <%= rec.category %>
-        <%= rec.purpose %>
+        <td><%= rec.category %></td>
+        <td><%= rec.purpose %></td>
 				<td>
 					<% rec.crispr_constructs.each do |cc| %>
 		        <%= link_to cc.name, cc %>

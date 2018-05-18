@@ -51,7 +51,12 @@
 
 	<tr>
 		<th><strong>Prototype?</strong></th>
-		<td><%= @biosample.prototype? %></th>
+		<td>
+      <% if @biosample.prototype_instances.any? %>
+        True 
+      <% else %>
+        False
+      <% end %>
 	</tr>
 
 	<% if @biosample.starting_biosample_single_cell_sortings.any? %>

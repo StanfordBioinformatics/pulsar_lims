@@ -11,6 +11,13 @@ gem 'country_select'
 
 #Add production webserver gem for Puma
 gem "puma", group: :production
+
+#rails12factor: According to https://devcenter.heroku.com/articles/rails-4-asset-pipeline:
+# By default Rails 4 will not serve your assets. To enable this functionality you need to 
+# go into config/application.rb and add this line:
+#   config.serve_static_assets = true
+# Alternatively you can achieve the same result by including the rails_12factor gem in your Gemfile:
+#   gem 'rails_12factor', group: :production
 gem 'rails_12factor', group: :production
 gem 'aws-sdk', '~> 2'
 

@@ -4,6 +4,7 @@ class BiosamplesController < ApplicationController
 	skip_after_action :verify_authorized, only: [:biosample_parts, :select_biosample_term_name,:add_crispr_modification]
 
   def clone
+    # Renders the view that submits a form to the create_clones action below.
     authorize @biosample, :create?
   end
 
@@ -17,7 +18,7 @@ class BiosamplesController < ApplicationController
     clone_name = "#{@biosample.name} #{name_suffix}"
     (1..num_clones).each do |num|
       clone_number = @biosample._times_cloned + 1
-      biosample_clone_attrs = Biosample.clone(@biosample.id)
+      biosample_clone_attrs = @biosample.clone()
       biosample_clone_attrs[:name] = clone_name + " #{clone_number}"
       biosample_clone_attrs[:user] = current_user
       clone = Biosample.create(biosample_clone_attrs)
@@ -163,7 +164,6 @@ class BiosamplesController < ApplicationController
         :owner_id, 
         :part_of_biosample_id, 
         :passage_number, 
-        :prototype, 
         :starting_amount,
         :starting_amount_units,
         :submitter_comments, 

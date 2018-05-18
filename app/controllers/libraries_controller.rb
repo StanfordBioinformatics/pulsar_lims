@@ -24,8 +24,8 @@ class LibrariesController < ApplicationController
   end
 
   def index
-    super(Library, scope: :non_plated_non_prototype)
-    #policy_scope(Library).non_plated_non_prototype
+    super(Library, scope: :non_plated)
+    #policy_scope(Library).non_plated
   end
 
   def show
@@ -108,7 +108,6 @@ class LibrariesController < ApplicationController
         :nucleic_acid_term_id,
         :upstream_identifier,
         :paired_barcode_id,
-        :prototype,
         :paired_end,
         :sequencing_library_prep_kit_id,
         :size_range,

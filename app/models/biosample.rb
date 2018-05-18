@@ -9,7 +9,6 @@ class Biosample < ActiveRecord::Base
 
   ###
   #Add self reference so that a part_of biosample can be modelled:
-  #Has a 'prototype' boolean column that defaults to false. When true, means that it's a virtual biosample.
   # Virtual biosamples are used currently in the single_cell_sorting model via the sorting_biosample_id foreign key.
   # This biosample is a prototype used as a reference for creating the biosamples in the wells of the plates on
   # the single_cell_sorting experiment. kk
@@ -53,8 +52,7 @@ class Biosample < ActiveRecord::Base
   accepts_nested_attributes_for :pooled_from_biosamples, allow_destroy: true
   accepts_nested_attributes_for :treatments, allow_destroy: true
 
-  scope :non_plated, lambda { where(plated: false, prototype: false) }
-  scope :non_prototypes, lambda { where(prototype: false) }
+  scope :non_plated, lambda { where(plated: false) }
   scope :persisted, lambda { where.not(id: nil) }
 
   before_validation :set_name, on: :create
@@ -120,38 +118,29 @@ class Biosample < ActiveRecord::Base
     end
   end
 
-  def self.clone(prototype_biosample_id)
-    # Given a prototype biosample (one whose 'prototype' attribute is set to True), duplicates the
-    # attributes and stores them into a hash that can be used for creating a new biosample record
-    # that looks just like the prototype. It is expected that the caller will make the specific changes
-    # to distinguish this copy from the prototype, such as changing the name, for example.
+  def clone
+    # Generates a hash of attributes that can be used to duplicate the biosample. In the generated
+    # attributes, the biosample property part_of_biosample_id will be set to the current biosample, 
+    # and the property form_prototype_id will as well. 
     # Some attributes don't make sense to duplicate, and hence aren't. Such attributes include
     # the user_id (could be a different user cloning than the one that created the original), 
     # record id, name, created_at, updated_at, upstream_identifier, and some foreign keys, such as well_id if present.
-    #
-    # Args:
-    #     prototype_biosample_id - A Biosample ID of a biosample record whose 'prototype' attribute is set to True.
+    # The calling code should set the user and name attributes. 
     #
     # Returns:
-    #     Hash containing the attributes for creating a new biosample based on the passed in
-    #     prototype biosample .
+    #     Hash containing the attributes for creating a new biosample.
     #
     # Example:
     #     This is called in the well model in the method add_biosample() to link a biosample
-    #     to the well. It directly uses the hash that this method returns to create the new biosamle
+    #     to the well. It directly uses the hash that this method returns to create the new biosample
     #     (whose name will be set automatically in the biosample model when it sees that a well_id
     #     is set.
-    prototype_biosample = Biosample.find(prototype_biosample_id)
-    well_biosample = prototype_biosample.dup
-    #well_biosample.documents = prototype_biosample.documents
+    well_biosample = self.dup
+    #well_biosample.documents = self.documents
     attrs = well_biosample.attributes
     #attrs["id"] is currently nil:
-    attrs["part_of_biosample_id"] = prototype_biosample.id  
-    attrs["from_prototype_id"] = prototype_biosample.id
-    attrs["crispr_modification"] = prototype_biosample.crispr_modification
-    attrs["document_ids"] = prototype_biosample.document_ids
-    attrs["treatment_ids"] = prototype_biosample.treatment_ids
-    attrs["prototype"] = false #this should always be false for a well biosample
+    attrs["part_of_biosample_id"] = self.id  
+    #attrs["crispr_modification"] = self.crispr_modification.attributes
     #Remove attributes that shouldn't be explicitely set for the well biosample
     attrs.delete("name") #the name is expicitely set in the biosample model when it has a well associated.
     attrs.delete("id")
@@ -164,7 +153,8 @@ class Biosample < ActiveRecord::Base
   end
 
   def update_biosample_from_prototype(biosample_prototype_id)
-    biosample_attrs = Biosample.clone(biosample_prototype_id)
+    biosample_prototype = Biosample.find(biosample_prototype_id)
+    biosample_attrs = biosample_prototype.clone
     biosample_attrs["name"] = self.name # Use whatever name it already had. 
     success = self.update(biosample_attrs)
     if not success
@@ -202,7 +192,7 @@ class Biosample < ActiveRecord::Base
 
   def validate_prototype
     #A biosample can either be a prototype (virtual biosample) or an actuated biosample created based on a biosample prototype, not both.
-    if self.prototype and self.from_prototype.present?
+    if self.prototype_instances.any? and self.from_prototype.present?
       self.errors[:base] << "Invalid: can't set both the 'prototype' and 'from_prototype' attributes."
       return false
     end
@@ -216,10 +206,9 @@ class Biosample < ActiveRecord::Base
     # (each well has a single biosample and such a biosample has a single library).
     # This makes updating all of the biosample objects with regard to all the plates on a single_cell_sorting
     # easy to do just by changing the biosample prototype (starting biosample) assocated with the single_cell_sorting.
-    if self.prototype?
-      biosamples = Biosample.where({from_prototype_id: self.id})
-      biosamples.each do |b|
-        b.update_biosample_from_prototype(self.id)
+    if self.prototype_instances.any?
+      self.prototype_instances.each do |p|
+        p.update_biosample_from_prototype(self.id)
       end
     end
 #    if self.sorting_biosample_single_cell_sorting.present?

@@ -354,7 +354,7 @@ ul.actions {
 :root {
   // Define variable for setting equal td and th widths in the index view table so that the columns can all be
   // aligned properly. This is needed since I modified the tbody element to be "display: inline-block"
-  // so that I could set a height and enablescrolling in the div (rather than the viewport). The
+  // so that I could set a height and enable scrolling in the div (rather than the viewport). The
   // ultimate purpose of all of this is to set the table headers to be in place when scrolling. 
   --index-table-cell-width: 128px;
 }
@@ -390,8 +390,6 @@ table.index {
   display: block;
   padding-left: 1em;
   padding-right: 1em;
-  
-  
 
   thead tr:first-of-type {
     th {

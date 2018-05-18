@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508030026) do
+ActiveRecord::Schema.define(version: 20180518211542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,7 +179,6 @@ ActiveRecord::Schema.define(version: 20180508030026) do
     t.boolean  "control"
     t.integer  "part_of_biosample_id"
     t.integer  "well_id"
-    t.boolean  "prototype",                                   default: false
     t.integer  "from_prototype_id"
     t.boolean  "plated",                                      default: false
     t.integer  "owner_id"
@@ -334,6 +333,7 @@ ActiveRecord::Schema.define(version: 20180508030026) do
     t.string   "category"
     t.string   "purpose"
     t.text     "notes"
+    t.boolean  "prototype"
   end
 
   add_index "crispr_modifications", ["biosample_id"], name: "index_crispr_modifications_on_biosample_id", using: :btree
@@ -540,7 +540,6 @@ ActiveRecord::Schema.define(version: 20180508030026) do
     t.boolean  "paired_end"
     t.integer  "barcode_id"
     t.integer  "paired_barcode_id"
-    t.boolean  "prototype",                                   default: false
     t.integer  "from_prototype_id"
     t.integer  "concentration_unit_id"
     t.boolean  "plated",                                      default: false

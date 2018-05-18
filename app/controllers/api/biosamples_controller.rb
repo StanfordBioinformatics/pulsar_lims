@@ -77,7 +77,6 @@ class Api::BiosamplesController < Api::ApplicationController
         :owner_id,
         :part_of_biosample_id,
         :passage_number,
-        :prototype,
         :starting_amount,
         :starting_amount_units,
         :submitter_comments,

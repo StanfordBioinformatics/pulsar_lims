@@ -98,6 +98,7 @@ class CrisprModificationsController < ApplicationController
         :donor_construct_id, 
         :name, 
         :notes,
+        :prototype,
         :purpose,
         :upstream_identifier,
         crispr_construct_ids: [], 

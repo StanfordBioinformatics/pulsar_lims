@@ -34,7 +34,12 @@
 				<td><%= link_to rec.sequencing_library_prep_kit.name, rec.sequencing_library_prep_kit %></td>
 				<td><%= rec.paired_end %></td>
         <td><%= rec.nucleic_acid_term.name %></td>
-        <td><%= link_to rec.biosample.name, rec.biosample %></td>
+        <td>
+          <% unless rec.prototype_instances.any? %>
+            <%= logger.debug rec.id %>
+            <%= link_to rec.biosample.name, rec.biosample %></td>
+          <% end %>
+        </td>
 
         <% if rec.vendor.present? %>
           <td><%= rec.vendor.name %></td>

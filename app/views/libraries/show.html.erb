@@ -19,7 +19,13 @@
 
 	<tr>
 		<th><strong>Prototype?</strong></th>
-		<td><%= @library.prototype %></td>
+		<td>
+      <% if @library.prototype_instances.any? %>
+        True
+      <% else %>
+        False
+      <% end %>
+    </td>
 	</tr>
 
 	<tr>
@@ -55,7 +61,7 @@
 	  <td><%= link_to @library.nucleic_acid_term.name, @library.nucleic_acid_term %></td>
 	</tr>
 
-	<% unless @library.prototype? %>
+	<% unless @library.prototype_instances.any? %>
 		<!-- library prototypes don't have a biosample -->
 		<tr>
 			<th><strong>Biosample:</strong></th>

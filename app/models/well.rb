@@ -33,7 +33,7 @@ class Well < ActiveRecord::Base
 		if not biosample.well.plate.id == self.plate.id
 			raise "Invalid biosample #{biosample.name} does not exist on the same Plate as does this Well #{well.name}."
 		end
-    library_attrs = Library.clone(self.plate.single_cell_sorting.library_prototype)
+    library_attrs = self.plate.single_cell_sorting.library_prototype.clone()
     library = biosample.libraries.create(library_attrs)
     #I first tried using create_biosample!, which did raise ActiveRecord:RecordInvalid. However,
     # while that does issue a Rollback as expected as any exception would in a callback, the form errors appear to be gone
@@ -70,7 +70,10 @@ class Well < ActiveRecord::Base
 	end
 
 	def add_biosample
-		biosample_attrs = Biosample.clone(self.plate.single_cell_sorting.sorting_biosample.id)
+		biosample_attrs = self.plate.single_cell_sorting.sorting_biosample.clone()
+    biosample_attrs[:user_id] = self.user_id
+    biosample_attrs[:from_prototype_id] = self.plate.single_cell_sorting.sorting_biosample.id
+    biosample_attrs[:part_of_biosample_id] = self.plate.single_cell_sorting.starting_biosample.id
 		biosample = self.create_biosample(biosample_attrs)
 		#I first tried using create_biosample!, which did raise ActiveRecord:RecordInvalid. However,
 		# while that does issue a Rollback as expected as any exception would in a callback, the form errors appear to be gone

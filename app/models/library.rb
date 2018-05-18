@@ -17,6 +17,7 @@ class Library < ActiveRecord::Base
 	belongs_to :concentration_unit
 	belongs_to :from_prototype, class_name: "Library"
 	has_many   :libraries, foreign_key: :from_prototype_id, dependent: :destroy
+  has_many   :prototype_instances, class_name: "Library", foreign_key: "from_prototype_id", dependent: :restrict_with_exception
 	belongs_to :library_fragmentation_method
 	belongs_to :nucleic_acid_term
 	belongs_to :paired_barcode
@@ -32,7 +33,7 @@ class Library < ActiveRecord::Base
 	validates :nucleic_acid_term_id, presence: true
 	validates :documents, presence: true
 	#validates :vendor_id, presence: true
-	validates :biosample_id, presence: true, unless: Proc.new {|lib| lib.prototype? }
+	validates :biosample_id, presence: true, unless: Proc.new {|lib| lib.single_cell_sorting.present?}
 	validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"
 	validates :concentration, presence: {message: "must be specified when the units are set."}, if: "concentration_unit.present?"
 	validates :sequencing_library_prep_kit_id, presence: true
@@ -43,12 +44,13 @@ class Library < ActiveRecord::Base
 	accepts_nested_attributes_for :paired_barcode, allow_destroy: true
 
 	scope :persisted, lambda { where.not(id: nil) }
-	scope :non_plated_non_prototype, lambda { where(plated: false, prototype: false) }
+	scope :non_plated, lambda { where(plated: false) }
 
-	before_validation :set_name, on: :create, unless: Proc.new {|lib| lib.prototype? }
+  # Only call self.set_name() if this is a library on a well.
+	before_validation :set_name, on: :create #, unless: Proc.new {|lib| lib.prototype? }
 	after_validation :check_plated
-	validate :validate_barcode, unless: Proc.new {|lib| lib.prototype? } #verifies self.barcode/self.paired_barcode
-	validate :validate_plate_consistency, unless: "self.prototype?" #if biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
+	validate :validate_barcode, unless: Proc.new {|lib| lib.single_cell_sorting.present? } #verifies self.barcode/self.paired_barcode
+	validate :validate_plate_consistency # If biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
 	validate :validate_prototype
 	after_update :propagate_update_if_prototype
 
@@ -102,18 +104,14 @@ class Library < ActiveRecord::Base
     end 
   end
 
-  def self.clone(prototype_library)
-    # Given a prototype library (one whose 'prototype' attribute is set to True), duplicates the
-    # attributes and stores them into a hash that can be used for creating a new library record
+  def clone
+    # Duplicates the attributes of the current library and stores them into a hash that can be used for creating a new library record
     # that looks just like the prototype. It is expected that the caller will make the specific changes
-    # to distinguish this copy from the prototype, such as changing the name, for example. 
+    # to distinguish this copy from the prototype, such as changing the name and user_id, for example. 
     # Some attributes don't make sense to duplicate, and hence aren't. Such attributes include 
     # the user_id (could be a different user cloning than the one that created the original), 
     # the record id, name, created_at, updated_at, upstream_identifier, and foreign keys for the biosample, any barcodes,
     # and single_cell_sorting models.
-    #
-		# Args:
-    #     prototype_library - A Library record with the 'prototype' attribute set to true.
     #
     # Returns:
     #     Hash containing the attributes for creating a new library based on the passed in 
@@ -123,15 +121,10 @@ class Library < ActiveRecord::Base
     #     This is called in /controllers/concerns/plates_concern.rb/create_library_for_well() when
     #     creating a library for an individual well, which updates the hash for things like setting
     #     the user and barcodes, then creates a library by passing in this hash as the library attributes.  
-		if not prototype_library.prototype?
-			return false
-		end
-    library_dup = prototype_library.dup
+    library_dup = self.dup
     attrs = library_dup.attributes
 		#attrs["id"] is currently nil:
-		attrs["from_prototype_id"] = prototype_library.id
-		attrs["document_ids"] = prototype_library.document_ids
-    attrs["prototype"] = false
+		attrs["from_prototype_id"] = self.id
     #Remove attributes that shouldn't be explicitely set for the new library
     attrs.delete("name") #the name is explicitly set in the library model when it has a well associated.
     attrs.delete("id")
@@ -147,7 +140,7 @@ class Library < ActiveRecord::Base
 	end
 
   def update_library_from_prototype(library_prototype)
-    library_attrs = Library.clone(library_prototype)
+    library_attrs = library_prototype.clone()
     success = self.update(library_attrs)
 		if not success
 			raise "Unable to update library '#{self.name}': #{self.errors.full_messages}"
@@ -167,7 +160,7 @@ class Library < ActiveRecord::Base
 
   def validate_prototype
     #A library can either be a prototype (virtual library) or an actuated library created based on a library prototype, not both.
-    if self.prototype and self.from_prototype.present?
+    if self.prototype_instances.any? and self.from_prototype.present?
       self.errors[:base] << "Invalid: can't set both the 'prototype' and 'from_prototype' attributes."
       return false
     end 
@@ -180,9 +173,8 @@ class Library < ActiveRecord::Base
 		# This makes updating all of the library objects with regard to all the plates on a single_cell_sorting 
 		# easy to do just by changing the library prototype assocated with the single_cell_sorting.
 		##if single_cell_sorting.present?
-    if self.prototype?
-      libraries = Library.where({from_prototype_id: self.id})
-      libraries.each do |l| 
+    if self.prototype_instances.any?
+      self.prototype_instances.each do |l| 
         l.update_library_from_prototype(self)
       end 
     end
