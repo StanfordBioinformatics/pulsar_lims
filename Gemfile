@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.2.2"
+ruby "2.3.7"
 
 #Vue.js
 gem 'vuejs-rails'
@@ -34,8 +34,9 @@ gem 'rails', '~> 4.2.1'
 
 #gem 'sqlite3'
 #Use PostgreSQL
-# Don't use version 1.0.0 as this has a major bug that won't let the application start. 
-gem 'pg', '~> 0.19.0' 
+# Don't use version 1.0.0 as this has a major bug that won't let the application start
+# and isn't supported perhaps by the current version of ActiveRecord
+gem 'pg', '~> 0.19.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'

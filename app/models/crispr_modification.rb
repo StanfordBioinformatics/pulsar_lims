@@ -6,6 +6,8 @@ class CrisprModification < ActiveRecord::Base
 	ABBR = "CRISPR"
 	DEFINITION = "A genetic modification carried out using CRISPR technology.  This object links together one or more CRISPR Construct objects (each containing an individual guide sequence), and a Donor Construct object (containing the donor sequence). A new CRISPR Modificition is created at the Biosample level.  Model abbreviation: #{ABBR}"
   belongs_to :user
+  belongs_to :from_prototype, class_name: "CrisprModification"
+  has_many :prototype_instances, class_name: "CrisprModification", foreign_key: "from_prototype_id", dependent: :restrict_with_exception
   belongs_to :biosample
   belongs_to :donor_construct
 	belongs_to :genomic_integration_site, class_name: "GenomeLocation"
@@ -50,7 +52,7 @@ class CrisprModification < ActiveRecord::Base
   def clone
     # Generates a hash of attributes that can be used to duplicate the current genetic_modification (GM). In the generated
     # attributes, the attribute part_of_genetic_modification_id will be set to the current GM,
-    # and the property form_prototype_id will as well.
+    # and the property from_prototype_id will as well.
     # Some attributes don't make sense to duplicate, and hence aren't. Such attributes include
     # the user_id (could be a different user cloning than the one that created the original),
     # record id, name, created_at, updated_at, upstream_identifier, and some foreign keys, such as if present.
@@ -64,7 +66,6 @@ class CrisprModification < ActiveRecord::Base
     attrs = clone.attributes
     #attrs["id"] is currently nil:
     attrs["from_prototype_id"] = self.id
-    attrs["prototype"] = false #this should always be false for a well biosample
     #Remove attributes that shouldn't be explicitely set for the well biosample
     attrs.delete("name") #the name is expicitely set in the biosample model when it has a well associated.
     attrs.delete("id")

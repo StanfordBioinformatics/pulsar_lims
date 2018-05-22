@@ -164,6 +164,46 @@ class Biosample < ActiveRecord::Base
 
   private
 
+  def parents
+    parents = []
+    # Add parents from any part-of relationships in this single-parent ancestor chain. 
+    parent = self.part_of_biosample
+    while parent
+      parents << parent
+      parent = parent.part_of_biosample            
+    end 
+
+    # Add parents from any prototoype in this single-parent ancestor chain. 
+    # I can't imagine a scenario where it would be useful to have more than one ancestor that is
+    # a prototype, but it's possible to do so should check for it. 
+    parent = self.from_prototype
+    while parent
+      parents << parent
+      parent = parent.from_prototype
+    end
+    return parents
+  end
+
+  def all_documents
+    documents = self.documents
+    self.parents.each do |p|
+      if p.documents.any?
+        documents <<  p.documents
+      end
+    end
+    return documents
+  end
+
+  def all_treatments
+    treatments = self.treatments
+    self.parents.each do |p|
+      if p.treatments.any?
+        treatments <<  p.treatments
+      end
+    end
+    return treatments
+  end
+
   def validate_part_of_biosample
     # Make sure user didn't set parent to be itself.
     if self.part_of_biosample_id  == self.id

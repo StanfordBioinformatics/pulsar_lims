@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180518211542) do
+ActiveRecord::Schema.define(version: 20180522050701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -334,10 +334,12 @@ ActiveRecord::Schema.define(version: 20180518211542) do
     t.string   "purpose"
     t.text     "notes"
     t.boolean  "prototype"
+    t.integer  "from_prototype_id"
   end
 
   add_index "crispr_modifications", ["biosample_id"], name: "index_crispr_modifications_on_biosample_id", using: :btree
   add_index "crispr_modifications", ["donor_construct_id"], name: "index_crispr_modifications_on_donor_construct_id", using: :btree
+  add_index "crispr_modifications", ["from_prototype_id"], name: "index_crispr_modifications_on_from_prototype_id", using: :btree
   add_index "crispr_modifications", ["genomic_integration_site_id"], name: "index_crispr_modifications_on_genomic_integration_site_id", using: :btree
   add_index "crispr_modifications", ["name"], name: "index_crispr_modifications_on_name", unique: true, using: :btree
   add_index "crispr_modifications", ["user_id"], name: "index_crispr_modifications_on_user_id", using: :btree
@@ -727,11 +729,12 @@ ActiveRecord::Schema.define(version: 20180518211542) do
   add_index "sequencing_library_prep_kits", ["vendor_id"], name: "index_sequencing_library_prep_kits_on_vendor_id", using: :btree
 
   create_table "sequencing_platforms", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",                limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.text     "notes"
+    t.string   "upstream_identifier"
   end
 
   add_index "sequencing_platforms", ["user_id"], name: "index_sequencing_platforms_on_user_id", using: :btree
@@ -973,6 +976,7 @@ ActiveRecord::Schema.define(version: 20180518211542) do
   add_foreign_key "crispr_constructs", "users"
   add_foreign_key "crispr_constructs", "vendors"
   add_foreign_key "crispr_modifications", "biosamples"
+  add_foreign_key "crispr_modifications", "crispr_modifications", column: "from_prototype_id"
   add_foreign_key "crispr_modifications", "donor_constructs"
   add_foreign_key "crispr_modifications", "genome_locations", column: "genomic_integration_site_id"
   add_foreign_key "crispr_modifications", "users"

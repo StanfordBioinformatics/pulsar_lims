@@ -7,129 +7,134 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.delete_all
-User.create!(email: "admin@enc.com", password: "password", role: User::ADMIN_ROLE)
-User.create!(email: "viewer@enc.com",password: "password")
+u = User.create!(first_name: "Admin", last_name: "Watson", email: "admin@enc.com", password: "password", role: User::ADMIN_ROLE)
+u.confirmed_at = Time.now
+u.save!
+u = User.create!(first_name: "Viewer", last_name: "Watson", email: "viewer@enc.com",password: "password")
+u.confirmed_at = Time.now
+u.save!
 
 admin = User.find_by!(email: "admin@enc.com").id
 
+Vendor.delete_all
+Vendor.create!([
+  {user_id: admin, name: "Abcam", upstream_identifier: "abcam", url: "http://www.abcam.com"},
+  {user_id: admin, name: "Active Motif", upstream_identifier: "active-motif", url: "http://www.activemotif.com"},
+  {user_id: admin, name: "Agilent", upstream_identifier: "agilent", url: "http://www.home.agilent.com"},
+  {user_id: admin, name: "Bethyl Labs", upstream_identifier: "bethyl-labs", url: "http://www.bethyl.com"},
+  {user_id: admin, name: "Coriell", upstream_identifier: "coriell", url: "http://www.coriell.org"},
+  {user_id: admin, name: "Illumina", upstream_identifier: "illumina", url: "http://www.illumina.com"},
+  {user_id: admin, name: "New England BioLabs", upstream_identifier: "", url: "https://www.neb.com"},
+  {user_id: admin, name: "Sigma", upstream_identifier: "sigma", url: "http://www.sigmaaldrich.com"},
+  {user_id: admin, name: "Thermo Fisher", upstream_identifier: "thermo-fisher", url: "http://www.thermofisher.com/global/en/home.asp"},
+  {user_id: admin, name: "Millipore", upstream_identifier: "millipore", url: "http://www.emdmillipore.com"},
+  {user_id: admin, name: "genomics-online", upstream_identifier: "", url: "https://www.genomics-online.com"},
+  {user_id: admin, name: "Greenleaf Lab", upstream_identifier: "", url: "http://greenleaf.stanford.edu"},
+  {user_id: admin, name: "Genomics Online", url: "https://www.genomics-online.com"},
+])
+
 DataFileType.delete_all
 DataFileType.create!([
-	{user_id: admin, name: "BAM"},
-	{user_id: admin, name: "CSV", description: "Comma-separated values"},
-	{user_id: admin, name: "BED"},
-	{user_id: admin, name: "FASTQ"},
-	{user_id: admin, name: "TSV", description: "Tab-separated values"}
+  {user_id: admin, name: "BAM"},
+  {user_id: admin, name: "CSV", description: "Comma-separated values"},
+  {user_id: admin, name: "BED"},
+  {user_id: admin, name: "FASTQ"},
+  {user_id: admin, name: "TSV", description: "Tab-separated values"}
 ])
 
 DataStorageProvider.delete_all
 DataStorageProvider.create!([
-	{user_id: admin, name: "AWS S3 Bucket", bucket_storage: true},
-	{user_id: admin, name: "Azure Storage Account", bucket_storage: true},
-	{user_id: admin, name: "DNAnexus", bucket_storage: false},
-	{user_id: admin, name: "Google Storage Bucket", bucket_storage: true}
+  {user_id: admin, name: "AWS S3 Bucket", bucket_storage: true},
+  {user_id: admin, name: "Azure Storage Account", bucket_storage: true},
+  {user_id: admin, name: "DNAnexus", bucket_storage: false},
+  {user_id: admin, name: "Google Storage Bucket", bucket_storage: true}
 ])
 
 PcrMasterMix.delete_all
 PcrMasterMix.create!([
-	{user_id: admin, name: "LongAMp Taq 2X Master Mix", vendor_id: Vendor.find_by(name: "New England BioLabs").id, vendor_product_identifier: "M0782S", lot_identifier: "0321708", vendor_product_url: "https://www.neb.com/products/m0287-longamp-taq-2x-master-mix#Product%20Information"}
+  {user_id: admin, name: "LongAMp Taq 2X Master Mix", vendor_id: Vendor.find_by(name: "New England BioLabs").id, vendor_product_identifier: "M0782S", lot_identifier: "0321708", vendor_product_url: "https://www.neb.com/products/m0287-longamp-taq-2x-master-mix#Product%20Information"}
 ])
 
 SequencingCenter.delete_all
 SequencingCenter.create!([
-	{user_id: admin, name: "Stanford Genome Sequencing Service Center", url: "http://med.stanford.edu/gssc.html", address: "3155 Porter Dr; Palo Alto, CA 94304"}
+  {user_id: admin, name: "Stanford Genome Sequencing Service Center", url: "http://med.stanford.edu/gssc.html", address: "3155 Porter Dr; Palo Alto, CA 94304"}
 ])
 
 ConcentrationUnit.delete_all
 ConcentrationUnit.create!([
-	{user_id: admin, name: "cells" },
-	{user_id: admin, name: "cell-equivalent" },
-	{user_id: admin, name: "µg" },
-	{user_id: admin, name: "μM" },
-	{user_id: admin, name: "ng" },
-	{user_id: admin, name: "pg" },
-	{user_id: admin, name: "mg" },
-	{user_id: admin, name: "nM" }
+  {user_id: admin, name: "cells" },
+  {user_id: admin, name: "cell-equivalent" },
+  {user_id: admin, name: "µg" },
+  {user_id: admin, name: "μM" },
+  {user_id: admin, name: "ng" },
+  {user_id: admin, name: "pg" },
+  {user_id: admin, name: "mg" },
+  {user_id: admin, name: "nM" }
 ])
-	
+  
 
 DocumentType.delete_all
 DocumentType.create!([
-	{user_id: admin, name: "growth protocol"},
-	{user_id: admin, name: "extraction protocol"},
-	{user_id: admin, name: "certificate of analysis"},
-	{user_id: admin, name: "data QA"},
-	{user_id: admin, name: "differentiation protocol"},
-	{user_id: admin, name: "dedifferentiation protocol"},
-	{user_id: admin, name: "data sheet"},
-	{user_id: admin, name: "treatment protocol"},
-	{user_id: admin, name: "general protocol"},
-	{user_id: admin, name: "excision protocol"},
-	{user_id: admin, name: "transfection protocol"},
-	{user_id: admin, name: "construct image"},
-	{user_id: admin, name: "cell isolation protocol"},
-	{user_id: admin, name: "iPS reprogramming protocol"},
-	{user_id: admin, name: "standards document"},
-	{user_id: admin, name: "strain generation protocol"},
-	{user_id: admin, name: "spike-in concentrations"},
-	{user_id: admin, name: "pipeline protocol"},
-	{user_id: admin, name: "file format specification"},
-	{user_id: admin, name: "high resolution pathology slide image"},
-	{user_id: admin, name: "other"}
-])
-
-Vendor.delete_all
-Vendor.create!([
-	{user_id: admin, name: "Abcam", upstream: "abcam", url: "http://www.abcam.com"},
-	{user_id: admin, name: "Active Motif", upstream: "active-motif", url: "http://www.activemotif.com"},
-	{user_id: admin, name: "Agilent", upstream: "agilent", url: "http://www.home.agilent.com"},
-	{user_id: admin, name: "Bethyl Labs", upstream: "bethyl-labs", url: "http://www.bethyl.com"},
-	{user_id: admin, name: "Coriell", upstream: "coriell", url: "http://www.coriell.org"},
-	{user_id: admin, name: "Illumina", upstream: "illumina", url: "http://www.illumina.com"},
-	{user_id: admin, name: "New England BioLabs", upstream: "", url: "https://www.neb.com"},
-	{user_id: admin, name: "Sigma", upstream: "sigma", url: "http://www.sigmaaldrich.com"},
-	{user_id: admin, name: "Thermo Fisher", upstream: "thermo-fisher", url: "http://www.thermofisher.com/global/en/home.asp"},
-	{user_id: admin, name: "Millipore", upstream: "millipore", url: "http://www.emdmillipore.com"},
-	{user_id: admin, name: "genomics-online", upstream: "", url: "https://www.genomics-online.com"},
-	{user_id: admin, name: "Greenleaf Lab", upstream: "", url: "http://greenleaf.stanford.edu"}
+  {user_id: admin, name: "growth protocol"},
+  {user_id: admin, name: "extraction protocol"},
+  {user_id: admin, name: "certificate of analysis"},
+  {user_id: admin, name: "data QA"},
+  {user_id: admin, name: "differentiation protocol"},
+  {user_id: admin, name: "dedifferentiation protocol"},
+  {user_id: admin, name: "data sheet"},
+  {user_id: admin, name: "treatment protocol"},
+  {user_id: admin, name: "general protocol"},
+  {user_id: admin, name: "excision protocol"},
+  {user_id: admin, name: "transfection protocol"},
+  {user_id: admin, name: "construct image"},
+  {user_id: admin, name: "cell isolation protocol"},
+  {user_id: admin, name: "iPS reprogramming protocol"},
+  {user_id: admin, name: "standards document"},
+  {user_id: admin, name: "strain generation protocol"},
+  {user_id: admin, name: "spike-in concentrations"},
+  {user_id: admin, name: "pipeline protocol"},
+  {user_id: admin, name: "file format specification"},
+  {user_id: admin, name: "high resolution pathology slide image"},
+  {user_id: admin, name: "other"}
 ])
 
 CloningVector.delete_all
 CloningVector.create!([
-	{user_id: admin, name: "pMD18-T Simple", product_url: "https://www.genomics-online.com/vector-backbone/37/pmd18-t-simple/"}
+  {user_id: admin, name: "pMD18-T Simple", vendor_id: Vendor.find_by(name: "Genomics Online").id, product_url: "https://www.genomics-online.com/vector-backbone/37/pmd18-t-simple/"}
 ])
-	
+  
 
 BiosampleOntology.delete_all
 BiosampleOntology.create!([
-	{user_id: admin, name: "CL", url: "http://www.obofoundry.org/ontology/cl.html"},
-	{user_id: admin, name: "Uberon", url: "http://uberon.github.io/"},
-	{user_id: admin, name: "EFO", url: "http://www.ebi.ac.uk/efo/"}
+  {user_id: admin, name: "CL", url: "http://www.obofoundry.org/ontology/cl.html"},
+  {user_id: admin, name: "Uberon", url: "http://uberon.github.io/"},
+  {user_id: admin, name: "EFO", url: "http://www.ebi.ac.uk/efo/"}
 ])
 
 BiosampleTermName.delete_all
 BiosampleTermName.create!([
-	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "GM12878", accession: "EFO_0002784", description: "None provided"},
-	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "CL").id, name: "hepatic stellate cell", accession: "CL:0000632", description: "A cell that is found in the perisinusoidal space of the liver that is capable of multiple roles including storage of retinol, presentation of antigen to T cells (including CD1d-restricted NKT cells), and upon activation, production of extracellular matrix components that can contribute to liver fibrosis."},
-	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "CL").id, name: "mesenchymal stem cell of the bone marrow", accession: "CL:0002540", description: "A mesenchymal stem cell that is part of the bone marrow. [database_cross_reference: GOC:tfm]"},
-	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "Uberon").id, name: "liver", accession: "UBERON:0002107", description: "Liver"},
-	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "Uberon").id, name: "heart left ventricle", accession: "UBERON:0002084", description: "A cardiac ventricle that is in the left side of the heart. [database_cross_reference: http://orcid.org/0000-0002-6601-2165]"},
-	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "K562", accession: "EFO_0002067", description: "Human chronic myeloid leukemia in blast crisis established from the pleural effusion of a 53-year-old woman with chronic myeloid leukemia (CML) in blast crisis in 1970; cells can be used as highly sensitive targets in in-vitro natural killer assays; cells produce hemoglobin; cells carry the Philadelphia chromosome with a b3-a2 fusion gene."},
-	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "HEK293", accession: "EFO_0001182", description: "human embryonic kidney cell"},
-	{user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "H1-hESC", accession: "EFO_0003042", description: "H1 human embryonic stem cell line, usually called H1-hESC and on occasion just H1"}
+  {user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "GM12878", accession: "EFO:0002784", description: "None provided"},
+  {user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "CL").id, name: "hepatic stellate cell", accession: "CL:0000632", description: "A cell that is found in the perisinusoidal space of the liver that is capable of multiple roles including storage of retinol, presentation of antigen to T cells (including CD1d-restricted NKT cells), and upon activation, production of extracellular matrix components that can contribute to liver fibrosis."},
+  {user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "CL").id, name: "mesenchymal stem cell of the bone marrow", accession: "CL:0002540", description: "A mesenchymal stem cell that is part of the bone marrow. [database_cross_reference: GOC:tfm]"},
+  {user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "Uberon").id, name: "liver", accession: "UBERON:0002107", description: "Liver"},
+  {user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "Uberon").id, name: "heart left ventricle", accession: "UBERON:0002084", description: "A cardiac ventricle that is in the left side of the heart. [database_cross_reference: http://orcid.org/0000-0002-6601-2165]"},
+  {user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "K562", accession: "EFO:0002067", description: "Human chronic myeloid leukemia in blast crisis established from the pleural effusion of a 53-year-old woman with chronic myeloid leukemia (CML) in blast crisis in 1970; cells can be used as highly sensitive targets in in-vitro natural killer assays; cells produce hemoglobin; cells carry the Philadelphia chromosome with a b3-a2 fusion gene."},
+  {user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "HEK293", accession: "EFO:0001182", description: "human embryonic kidney cell"},
+  {user_id: admin, biosample_ontology_id: BiosampleOntology.find_by!(name: "EFO").id, name: "H1-hESC", accession: "EFO:0003042", description: "H1 human embryonic stem cell line, usually called H1-hESC and on occasion just H1"}
 ])
 
 ConstructTag.delete_all
 ConstructTag.create!([
-	{user_id: admin, name: "eGFP"},
-	{user_id: admin, name: "V5"},
-	{user_id: admin, name: "HA"},
-	{user_id: admin, name: "ER"},
-	{user_id: admin, name: "3xFLAG"},
-	{user_id: admin, name: "DsRed"},
-	{user_id: admin, name: "TRE"},
-	{user_id: admin, name: "T2A"},
-	{user_id: admin, name: "YFP"},
-	{user_id: admin, name: "FLAG"},
+  {user_id: admin, name: "eGFP"},
+  {user_id: admin, name: "V5"},
+  {user_id: admin, name: "HA"},
+  {user_id: admin, name: "ER"},
+  {user_id: admin, name: "3xFLAG"},
+  {user_id: admin, name: "DsRed"},
+  {user_id: admin, name: "TRE"},
+  {user_id: admin, name: "T2A"},
+  {user_id: admin, name: "YFP"},
+  {user_id: admin, name: "FLAG"},
 ])
 
 illumina_truseq_dna_pcr_free = Rails.root.join("lib","seeds","truseq-dna-pcr-free-library-prep-guide-15036187-d.pdf")
@@ -137,28 +142,28 @@ illumina_adapter_letter = Rails.root.join("lib","seeds","illumina-adapter-sequen
 nebnext_oligos_E7600 = Rails.root.join("lib","seeds","nebnext_oligos_E7600.pdf")
 Document.delete_all
 Document.create!([
-	{user_id: admin, name: File.basename(illumina_truseq_dna_pcr_free), content_type: "application/pdf", 
-		data: File.open(illumina_truseq_dna_pcr_free,"rb").read(), is_protocol: false, 
-		description: "Illumina reference guide.",
-		document_type_id: DocumentType.find_by(name: "general protocol").id},
+  {user_id: admin, name: File.basename(illumina_truseq_dna_pcr_free), content_type: "application/pdf", 
+    data: File.open(illumina_truseq_dna_pcr_free,"rb").read(), is_protocol: false, 
+    description: "Illumina reference guide.",
+    document_type_id: DocumentType.find_by(name: "general protocol").id},
 
-	{user_id: admin, name: File.basename(illumina_adapter_letter), content_type: "application/pdf", 
-		data: File.open(illumina_adapter_letter,"rb").read(), is_protocol: false, 
-		description: "Illumina barcodes for various library prep kits.",
-		document_type_id: DocumentType.find_by(name: "general protocol").id},
-	{user_id: admin, name: File.basename(nebnext_oligos_E7600), content_type: "application/pdf", 
-		data: File.open(nebnext_oligos_E7600,"rb").read(), is_protocol: false, 
-		description: "The NEBNext Multiplex Oligos for Illumina (Dual Index Primers Set 1) contains the adaptor and index primers that are ideally suited for multiplex sample preparation for next-generation sequencing on the Illumina platform.",
-		document_type_id: DocumentType.find_by(name: "general protocol").id}
+  {user_id: admin, name: File.basename(illumina_adapter_letter), content_type: "application/pdf", 
+    data: File.open(illumina_adapter_letter,"rb").read(), is_protocol: false, 
+    description: "Illumina barcodes for various library prep kits.",
+    document_type_id: DocumentType.find_by(name: "general protocol").id},
+  {user_id: admin, name: File.basename(nebnext_oligos_E7600), content_type: "application/pdf", 
+    data: File.open(nebnext_oligos_E7600,"rb").read(), is_protocol: false, 
+    description: "The NEBNext Multiplex Oligos for Illumina (Dual Index Primers Set 1) contains the adaptor and index primers that are ideally suited for multiplex sample preparation for next-generation sequencing on the Illumina platform.",
+    document_type_id: DocumentType.find_by(name: "general protocol").id}
 ])
 
 SequencingLibraryPrepKit.delete_all
 SequencingLibraryPrepKit.create!([
-	{user_id: admin, name: "Illumina TruSeq HT Kits", supports_paired_end: true, documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")], vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes TruSeq DNA PCR-Free HT, TruSeq Nano HT, TruSeq Stranded mRNA HT, and TruSeq Total RNA HT"},
-	{user_id: admin, name: "Illumina TruSeq LT Kits", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes TruSeq DNA PCR-Free LT, TruSeq Nano DNA LT, TruSeq DNA v1/v2/LT (obsolete), TruSeq RNA v1/v2/LT, TruSeq Stranded mRNA LT, TruSeq Stranded Total RNA LT, TruSeq RNA Access, and TruSeq ChIP"},
-	{user_id: admin, name: "Illumina Nextera Kits", supports_paired_end: true, documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes Nextera DNA, Nextera XT, Nextera Enrichment (obsolete), and Nextera Rapid Capture. Does not include Nextera XT Index Kit v2."},
-	{user_id: admin, name: "NEBNext Multiplex Oligos for Illumina (Dual Index Primers Set 1)", supports_paired_end: true, documents: [Document.find_by(name: "nebnext_oligos_E7600.pdf")] ,vendor_id: Vendor.find_by(name: "New England BioLabs").id, vendor_product_identifier: "E7600S", description: "Contains the adaptor and index primers that are ideally suited for multiplex sample preparation for next-generation sequencing on the Illumina platform. Designed for use with specific NEBNext Kits, see https://www.neb.com/~/media/Catalog/All-Products/E7CFA11A57424D299FAA2AF513787BBE/Datacards%20or%20Manuals/manualE7600.pdf."},
-	{user_id: admin, name: "Custom nextera Greenleaf lab", supports_paired_end: true, vendor_id: Vendor.find_by(name: "Greenleaf Lab").id, description: "Contains custom barcodes based off of Nextera, designed in the Greenleaf lab."}
+  {user_id: admin, name: "Illumina TruSeq HT Kits", supports_paired_end: true, documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")], vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes TruSeq DNA PCR-Free HT, TruSeq Nano HT, TruSeq Stranded mRNA HT, and TruSeq Total RNA HT"},
+  {user_id: admin, name: "Illumina TruSeq LT Kits", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes TruSeq DNA PCR-Free LT, TruSeq Nano DNA LT, TruSeq DNA v1/v2/LT (obsolete), TruSeq RNA v1/v2/LT, TruSeq Stranded mRNA LT, TruSeq Stranded Total RNA LT, TruSeq RNA Access, and TruSeq ChIP"},
+  {user_id: admin, name: "Illumina Nextera Kits", supports_paired_end: true, documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes Nextera DNA, Nextera XT, Nextera Enrichment (obsolete), and Nextera Rapid Capture. Does not include Nextera XT Index Kit v2."},
+  {user_id: admin, name: "NEBNext Multiplex Oligos for Illumina (Dual Index Primers Set 1)", supports_paired_end: true, documents: [Document.find_by(name: "nebnext_oligos_E7600.pdf")] ,vendor_id: Vendor.find_by(name: "New England BioLabs").id, vendor_product_identifier: "E7600S", description: "Contains the adaptor and index primers that are ideally suited for multiplex sample preparation for next-generation sequencing on the Illumina platform. Designed for use with specific NEBNext Kits, see https://www.neb.com/~/media/Catalog/All-Products/E7CFA11A57424D299FAA2AF513787BBE/Datacards%20or%20Manuals/manualE7600.pdf."},
+  {user_id: admin, name: "Custom nextera Greenleaf lab", supports_paired_end: true, vendor_id: Vendor.find_by(name: "Greenleaf Lab").id, description: "Contains custom barcodes based off of Nextera, designed in the Greenleaf lab."}
 ])
 
 truseq_ht_kits_id = SequencingLibraryPrepKit.find_by!(name: "Illumina TruSeq HT Kits").id
@@ -450,88 +455,88 @@ Barcode.create!([
 
 LibraryFragmentationMethod.delete_all
 LibraryFragmentationMethod.create!([
-	{user_id: admin, name: "chemical (generic)", description: ""},
-	{user_id: admin, name: "chemical (DNaseI)",  description: ""},
-	{user_id: admin, name: "chemical (RNase III)", description: ""},
-	{user_id: admin, name: "chemical (HindIII/DpnII restriction)", description: ""},
-	{user_id: admin, name: "chemical (Tn5 transposase)", description: ""},
-	{user_id: admin, name: "chemical (micrococcal nuclease)", description: ""},
-	{user_id: admin, name: "chemical (Illumina TruSeq)", description: ""},
-	{user_id: admin, name: "chemical (Nextera tagmentation)", description: ""},
-	{user_id: admin, name: "shearing (generic)", description: ""},
-	{user_id: admin, name: "shearing (Covaris generic)", description: ""},
-	{user_id: admin, name: "shearing (Covaris S2)", description: ""},
-	{user_id: admin, name: "sonication (generic)", description: ""},
-	{user_id: admin, name: "sonication (Bioruptor generic)", description: ""},
-	{user_id: admin, name: "sonication (Bioruptor Pico)", description: ""},
-	{user_id: admin, name: "sonication (Bioruptor Plus)", description: ""},
-	{user_id: admin, name: "sonication (Bioruptor Twin)", description: ""},
-	{user_id: admin, name: "sonication (generic microtip)", description: ""},
-	{user_id: admin, name: "sonication (Branson Sonifier 250)", description: ""},
-	{user_id: admin, name: "sonication (Branson Sonifier 450)", description: ""},
-	{user_id: admin, name: "shearing (Covaris LE Series)", description: ""},
-	{user_id: admin, name: "see document", description: ""},
-	{user_id: admin, name: "none", description: ""}
+  {user_id: admin, name: "chemical (generic)", description: ""},
+  {user_id: admin, name: "chemical (DNaseI)",  description: ""},
+  {user_id: admin, name: "chemical (RNase III)", description: ""},
+  {user_id: admin, name: "chemical (HindIII/DpnII restriction)", description: ""},
+  {user_id: admin, name: "chemical (Tn5 transposase)", description: ""},
+  {user_id: admin, name: "chemical (micrococcal nuclease)", description: ""},
+  {user_id: admin, name: "chemical (Illumina TruSeq)", description: ""},
+  {user_id: admin, name: "chemical (Nextera tagmentation)", description: ""},
+  {user_id: admin, name: "shearing (generic)", description: ""},
+  {user_id: admin, name: "shearing (Covaris generic)", description: ""},
+  {user_id: admin, name: "shearing (Covaris S2)", description: ""},
+  {user_id: admin, name: "sonication (generic)", description: ""},
+  {user_id: admin, name: "sonication (Bioruptor generic)", description: ""},
+  {user_id: admin, name: "sonication (Bioruptor Pico)", description: ""},
+  {user_id: admin, name: "sonication (Bioruptor Plus)", description: ""},
+  {user_id: admin, name: "sonication (Bioruptor Twin)", description: ""},
+  {user_id: admin, name: "sonication (generic microtip)", description: ""},
+  {user_id: admin, name: "sonication (Branson Sonifier 250)", description: ""},
+  {user_id: admin, name: "sonication (Branson Sonifier 450)", description: ""},
+  {user_id: admin, name: "shearing (Covaris LE Series)", description: ""},
+  {user_id: admin, name: "see document", description: ""},
+  {user_id: admin, name: "none", description: ""}
 ])
 
 NucleicAcidTerm.delete_all
 NucleicAcidTerm.create!([
-	{user_id: admin, name: "DNA", accession: "SO:0000352", definition: "An attribute describing a sequence consisting of nucleobases bound to a repeating unit made of a 2-deoxy-D-ribose ring connected to a phosphate backbone."},
-	{user_id: admin, name: "RNA", accession: "SO:0000356", definition: "An attribute describing a sequence consisting of nucleobases bound to a repeating unit made of a D-ribose ring connected to a phosphate backbone."},
-	{user_id: admin, name: "polyadenylated mRNA", accession: "SO:0000871", definition: "An mRNA that is polyadenylated."},
-	{user_id: admin, name: "miRNA", accession: "SO:0000276", definition: "micro RNA"},
-	{user_id: admin, name: "protein", accession: "SO:0000104", definition: "sequence of amino acids linked by peptide bonds which may lack appreciable tertiary structure and may not be liable to irreversible denaturation."}
+  {user_id: admin, name: "DNA", accession: "SO:0000352", definition: "An attribute describing a sequence consisting of nucleobases bound to a repeating unit made of a 2-deoxy-D-ribose ring connected to a phosphate backbone."},
+  {user_id: admin, name: "RNA", accession: "SO:0000356", definition: "An attribute describing a sequence consisting of nucleobases bound to a repeating unit made of a D-ribose ring connected to a phosphate backbone."},
+  {user_id: admin, name: "polyadenylated mRNA", accession: "SO:0000871", definition: "An mRNA that is polyadenylated."},
+  {user_id: admin, name: "miRNA", accession: "SO:0000276", definition: "micro RNA"},
+  {user_id: admin, name: "protein", accession: "SO:0000104", definition: "sequence of amino acids linked by peptide bonds which may lack appreciable tertiary structure and may not be liable to irreversible denaturation."}
 ])
 
 BiosampleType.delete_all
 BiosampleType.create!([
-	{user_id: admin, name: "primary cell"},
-	{user_id: admin, name: "cell line"},
-	{user_id: admin, name: "tissue"},
-	{user_id: admin, name: "in vitro differentiated cells"},
-	{user_id: admin, name: "induced pluripotent stem cell line"},
-	{user_id: admin, name: "whole organisms"},
-	{user_id: admin, name: "stem cell"}
-	])
+  {user_id: admin, name: "primary cell"},
+  {user_id: admin, name: "cell line"},
+  {user_id: admin, name: "tissue"},
+  {user_id: admin, name: "in vitro differentiated cells"},
+  {user_id: admin, name: "induced pluripotent stem cell line"},
+  {user_id: admin, name: "whole organisms"},
+  {user_id: admin, name: "stem cell"}
+  ])
 
 #Vendor
 #see script in lib called upload_vendors.rb.
 
 Donor.delete_all
 Donor.create!([
-	{user_id: admin, upstream: "ENCDO268AAA", name:"bernstein:donor of NHEK cells"},
-	{user_id: admin, upstream: "ENCDO000ABE", name:"encode:donor of HCT-116"},
-	{user_id: admin, upstream: "ENCDO000ABF", name: "encode:donor of HEK293"},
-	{user_id: admin, upstream: "ENCDO000AAK", name: "encode:donor of GM12878"}
+  {user_id: admin, upstream_identifier: "ENCDO268AAA", name:"bernstein:donor of NHEK cells"},
+  {user_id: admin, upstream_identifier: "ENCDO000ABE", name:"encode:donor of HCT-116"},
+  {user_id: admin, upstream_identifier: "ENCDO000ABF", name: "encode:donor of HEK293"},
+  {user_id: admin, upstream_identifier: "ENCDO000AAK", name: "encode:donor of GM12878"}
 ])
 
 Isotype.delete_all
 Isotype.create!([
-	{user_id: admin, name: "IgA1"},
-	{user_id: admin, name: "IgA2"},
-	{user_id: admin, name: "IgD"},
-	{user_id: admin, name: "IgG"},
-	{user_id: admin, name: "IgGκ"},
-	{user_id: admin, name: "IgG1"},
-	{user_id: admin, name: "IgG1κ"},
-	{user_id: admin, name: "IgG1λ"},
-	{user_id: admin, name: "IgG2"},
-	{user_id: admin, name: "IgG2κ"},
-	{user_id: admin, name: "IgG2λ"},
-	{user_id: admin, name: "IgG2a"},
-	{user_id: admin, name: "IgG2aκ"},
-	{user_id: admin, name: "IgG2aλ"},
-	{user_id: admin, name: "IgG2b"},
-	{user_id: admin, name: "IgG2bκ"},
-	{user_id: admin, name: "IgG2bλ"},
-	{user_id: admin, name: "IgG3"},
-	{user_id: admin, name: "IgG3κ"},
-	{user_id: admin, name: "IgG4"},
-	{user_id: admin, name: "IgA"},
-	{user_id: admin, name: "IgM"},
-	{user_id: admin, name: "IgMκ"},
-	{user_id: admin, name: "IgE"},
-	{user_id: admin, name: "serum"}
+  {user_id: admin, name: "IgA1"},
+  {user_id: admin, name: "IgA2"},
+  {user_id: admin, name: "IgD"},
+  {user_id: admin, name: "IgG"},
+  {user_id: admin, name: "IgGκ"},
+  {user_id: admin, name: "IgG1"},
+  {user_id: admin, name: "IgG1κ"},
+  {user_id: admin, name: "IgG1λ"},
+  {user_id: admin, name: "IgG2"},
+  {user_id: admin, name: "IgG2κ"},
+  {user_id: admin, name: "IgG2λ"},
+  {user_id: admin, name: "IgG2a"},
+  {user_id: admin, name: "IgG2aκ"},
+  {user_id: admin, name: "IgG2aλ"},
+  {user_id: admin, name: "IgG2b"},
+  {user_id: admin, name: "IgG2bκ"},
+  {user_id: admin, name: "IgG2bλ"},
+  {user_id: admin, name: "IgG3"},
+  {user_id: admin, name: "IgG3κ"},
+  {user_id: admin, name: "IgG4"},
+  {user_id: admin, name: "IgA"},
+  {user_id: admin, name: "IgM"},
+  {user_id: admin, name: "IgMκ"},
+  {user_id: admin, name: "IgE"},
+  {user_id: admin, name: "serum"}
 ])
 
 #HumanGenes
@@ -539,68 +544,43 @@ Isotype.create!([
 
 AntibodyPurification.delete_all
 AntibodyPurification.create!([
-	{user_id: admin, name: "Protein A/G"},
-	{user_id: admin, name: "affinity" },
-	{user_id: admin, name: "Protein A"},
-	{user_id: admin, name: "Protein G"},
-	{user_id: admin, name: "crude"},
-	{user_id: admin, name: "other"},
-	{user_id: admin, name: "IEC"},
-	{user_id: admin, name: "IMAC"},
-	{user_id: admin, name: "tissue culture supernatant"},
-	{user_id: admin, name: "antiserum"},
-	{user_id: admin, name: "IgG fraction"}
+  {user_id: admin, name: "Protein A/G"},
+  {user_id: admin, name: "affinity" },
+  {user_id: admin, name: "Protein A"},
+  {user_id: admin, name: "Protein G"},
+  {user_id: admin, name: "crude"},
+  {user_id: admin, name: "other"},
+  {user_id: admin, name: "IEC"},
+  {user_id: admin, name: "IMAC"},
+  {user_id: admin, name: "tissue culture supernatant"},
+  {user_id: admin, name: "antiserum"},
+  {user_id: admin, name: "IgG fraction"}
 ])
 
 Organism.delete_all
 Organism.create!([
-	{user_id: admin, name: "avictoria"},
-	{user_id: admin, name: "bacteriophage-phi-x174"},
-	{user_id: admin, name: "bacteriophage-t7"},
-	{user_id: admin, name: "cbrenneri"},
-	{user_id: admin, name: "cbriggsae"},
-	{user_id: admin, name: "celegans"},
-	{user_id: admin, name: "chicken"},
-	{user_id: admin, name: "cjaponica"},
-	{user_id: admin, name: "cremanei"},
-	{user_id: admin, name: "dananassae"},
-	{user_id: admin, name: "dmelanogaster"},
-	{user_id: admin, name: "dmojavensis"},
-	{user_id: admin, name: "dpseudoobscura"},
-	{user_id: admin, name: "dsimulans"},
-	{user_id: admin, name: "dvirilis"},
-	{user_id: admin, name: "dyakuba"},
-	{user_id: admin, name: "goat" },
-	{user_id: admin, name: "guineapig" },
-	{user_id: admin, name: "human" },
-	{user_id: admin, name: "influenza" },
-	{user_id: admin, name: "mouse" },
-	{user_id: admin, name: "rabbit"},
-	{user_id: admin, name: "rat"   },
-	{user_id: admin, name: "savidinii" },
-	{user_id: admin, name: "sheep" },
-	{user_id: admin, name: "synthetic" }
+  {user_id: admin, name: "human", ncbi_taxon: 9606, scientific_name: "Homo sapiens"},
 ])
 
 SequencingPlatform.delete_all
 SequencingPlatform.create!([
-	{user_id: admin, name: "Illumina MiSeq"},
-	{user_id: admin, name: "Illumina HiSeq 2000"},
-	{user_id: admin, name: "Illumina HiSeq 4000"}
+  {user_id: admin, name: "Illumina MiSeq"},
+  {user_id: admin, name: "Illumina HiSeq 2000"},
+  {user_id: admin, name: "Illumina HiSeq 4000"}
 ])
 
 ExperimentType.delete_all
 ExperimentType.create!([
-	{user_id: admin, name: "ChIP-Seq"},
-	{user_id: admin, name: "ATAC-Seq"}
+  {user_id: admin, name: "ChIP-Seq"},
+  {user_id: admin, name: "ATAC-Seq"}
 ])
 
 ReferenceGenome.delete_all
 ReferenceGenome.create!([
-	{user_id: admin, name: "UCSC hg19", url: "http://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/"},
-	{user_id: admin, name: "NCBI GRCh37",url: "http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human"},
-	{user_id: admin, name: "UCSC hg38", url: "http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/"},
-	{user_id: admin, name: "NCBI GRCh38", url: "http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human"}
+  {user_id: admin, name: "UCSC hg19", url: "http://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/"},
+  {user_id: admin, name: "NCBI GRCh37",url: "http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human"},
+  {user_id: admin, name: "UCSC hg38", url: "http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/"},
+  {user_id: admin, name: "NCBI GRCh38", url: "http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human"}
 ])
 
 Chromosome.delete_all
@@ -609,115 +589,115 @@ grch38 = ReferenceGenome.find_by(name: "NCBI GRCh38").id
 hg19 = ReferenceGenome.find_by(name: "UCSC hg19").id
 hg38 = ReferenceGenome.find_by(name: "UCSC hg38").id
 Chromosome.create!([
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000001"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000002"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000003"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000004"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000005"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000006"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000007"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000008"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000009"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000010"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000011"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000012"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000013"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000014"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000015"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000016"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000017"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000018"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000019"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000020"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000021"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000022"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000023"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_000024"},
-	{user_id: admin, reference_genome_id: grch37, name: "NC_012920"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000001"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000002"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000003"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000004"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000005"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000006"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000007"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000008"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000009"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000010"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000011"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000012"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000013"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000014"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000015"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000016"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000017"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000018"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000019"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000020"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000021"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000022"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000023"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_000024"},
+  {user_id: admin, reference_genome_id: grch37, name: "NC_012920"},
 
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000001"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000002"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000003"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000004"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000005"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000006"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000007"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000008"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000009"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000010"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000011"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000012"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000013"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000014"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000015"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000016"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000017"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000018"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000019"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000020"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000021"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000022"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000023"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_000024"},
-	{user_id: admin, reference_genome_id: grch38, name: "NC_012920"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000001"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000002"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000003"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000004"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000005"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000006"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000007"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000008"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000009"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000010"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000011"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000012"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000013"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000014"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000015"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000016"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000017"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000018"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000019"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000020"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000021"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000022"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000023"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_000024"},
+  {user_id: admin, reference_genome_id: grch38, name: "NC_012920"},
 
-	{user_id: admin, reference_genome_id: hg19, name: "chr1" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr2" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr3" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr4" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr5" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr6" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr7" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr8" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr9" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr10" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr11" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr12" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr13" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr14" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr15" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr16" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr17" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr18" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr19" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr20" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr21" },
-	{user_id: admin, reference_genome_id: hg19, name: "chr22" },
-	{user_id: admin, reference_genome_id: hg19, name: "chrM" },
-	{user_id: admin, reference_genome_id: hg19, name: "chrX" },
-	{user_id: admin, reference_genome_id: hg19, name: "chrY" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr1" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr2" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr3" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr4" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr5" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr6" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr7" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr8" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr9" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr10" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr11" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr12" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr13" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr14" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr15" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr16" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr17" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr18" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr19" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr20" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr21" },
+  {user_id: admin, reference_genome_id: hg19, name: "chr22" },
+  {user_id: admin, reference_genome_id: hg19, name: "chrM" },
+  {user_id: admin, reference_genome_id: hg19, name: "chrX" },
+  {user_id: admin, reference_genome_id: hg19, name: "chrY" },
 
-	{user_id: admin, reference_genome_id: hg38, name: "chr1" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr2" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr3" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr4" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr5" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr6" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr7" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr8" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr9" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr10" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr11" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr12" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr13" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr14" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr15" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr16" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr17" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr18" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr19" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr20" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr21" },
-	{user_id: admin, reference_genome_id: hg38, name: "chr22" },
-	{user_id: admin, reference_genome_id: hg38, name: "chrM" },
-	{user_id: admin, reference_genome_id: hg38, name: "chrX" },
-	{user_id: admin, reference_genome_id: hg38, name: "chrY" }
+  {user_id: admin, reference_genome_id: hg38, name: "chr1" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr2" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr3" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr4" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr5" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr6" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr7" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr8" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr9" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr10" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr11" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr12" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr13" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr14" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr15" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr16" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr17" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr18" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr19" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr20" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr21" },
+  {user_id: admin, reference_genome_id: hg38, name: "chr22" },
+  {user_id: admin, reference_genome_id: hg38, name: "chrM" },
+  {user_id: admin, reference_genome_id: hg38, name: "chrX" },
+  {user_id: admin, reference_genome_id: hg38, name: "chrY" }
 ])
 
 Target.delete_all
 Target.create!([
-{user_id: admin, name: "RELB-human", upstream: "RELB-human"},
-{user_id: admin, name: "CTCF-human", upstream: "CTCF-human"}
+{user_id: admin, name: "RELB-human", upstream_identifier: "RELB-human"},
+{user_id: admin, name: "CTCF-human", upstream_identifier: "CTCF-human"}
 ])
 
 TreatmentTermName.delete_all
@@ -731,25 +711,25 @@ TreatmentTermName.create!([
 
 Antibody.delete_all
 Antibody.create!([
-{user_id: admin, name: "ENCAB140SNC", organism_id: Organism.find_by!(name: "human").id, vendor_product_identifier: "A302-183A", vendor_id: Vendor.find_by!(upstream: "bethyl-labs").id, clonality: "polyclonal", target_id: Target.find_by!(upstream: "RELB-human").id, antibody_purifications: [AntibodyPurification.find_by!(name: "affinity")], lot_identifier: 1},
-{user_id: admin, name: "ENCAB830JLB", organism_id: Organism.find_by!(name: "human").id, vendor_product_identifier: "07-729", vendor_id: Vendor.find_by!(upstream: "millipore").id, clonality: "polyclonal", target_id: Target.find_by!(upstream: "CTCF-human").id, antibody_purifications: [], lot_identifier: 2599305}
+{user_id: admin, name: "ENCAB140SNC", organism_id: Organism.find_by!(name: "human").id, vendor_product_identifier: "A302-183A", vendor_id: Vendor.find_by!(upstream_identifier: "bethyl-labs").id, clonality: "polyclonal", target_id: Target.find_by!(upstream_identifier: "RELB-human").id, antibody_purifications: [AntibodyPurification.find_by!(name: "affinity")], lot_identifier: 1},
+{user_id: admin, name: "ENCAB830JLB", organism_id: Organism.find_by!(name: "human").id, vendor_product_identifier: "07-729", vendor_id: Vendor.find_by!(upstream_identifier: "millipore").id, clonality: "polyclonal", target_id: Target.find_by!(upstream_identifier: "CTCF-human").id, antibody_purifications: [], lot_identifier: 2599305}
 ])
 
 Biosample.delete_all
 Biosample.create!([
-	{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS826GBM", upstream: "ENCBS826GBM", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(upstream: "coriell").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+  {user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS826GBM", upstream_identifier: "ENCBS826GBM", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(upstream_identifier: "coriell").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
-{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS758JEW", upstream: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(upstream: "coriell").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
+{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "HEK293").id, name: "ENCBS758JEW", upstream_identifier: "ENCBS758JEW", description: "HEK293 cell line stably expressing N-terminal tagged eGFP-RBAK under the control of a CMV promoter.", biosample_type_id: BiosampleType.find_by!(name: "cell line").id, donor_id: Donor.find_by!(name: "encode:donor of HEK293").id, lot_identifier: "GR158277-1", vendor_id: Vendor.find_by!(upstream_identifier: "coriell").id, vendor_product_identifier: "WH0008531M2", documents: [Document.first]},
 
-{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS389LEA", upstream: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by!(name: "cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(upstream: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
+{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS389LEA", upstream_identifier: "ENCBS389LEA", biosample_type_id: BiosampleType.find_by!(name: "cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(upstream_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second]},
 
-{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS488GLI", upstream: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by!(name: "cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(upstream: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],:date_biosample_taken "2014-06-05"}
+{user_id: admin, biosample_term_name_id: BiosampleTermName.find_by!(name: "GM12878").id, name: "ENCBS488GLI", upstream_identifier: "ENCBS488GLI", biosample_type_id: BiosampleType.find_by!(name: "cell line").id, donor_id: Donor.find_by!(name: "encode:donor of GM12878").id, vendor_id: Vendor.find_by!(upstream_identifier: "coriell").id, vendor_product_identifier: "GM12878", documents: [Document.second],date_biosample_taken: "2014-06-05"}
 ])
 
 Library.delete_all
 Library.create!([
-	{user_id: admin, name: "lib1", sequencing_library_prep_kit_id: truseq_ht_kits_id, nucleic_acid_term_id: NucleicAcidTerm.find_by!(name: "DNA").id, biosample_id: Biosample.find_by!(name: "ENCBS488GLI").id, size_range: "450-650", documents: [Document.second],strand_specific: false},
+  {user_id: admin, name: "lib1", sequencing_library_prep_kit_id: truseq_ht_kits_id, nucleic_acid_term_id: NucleicAcidTerm.find_by!(name: "DNA").id, biosample_id: Biosample.find_by!(name: "ENCBS488GLI").id, size_range: "450-650", documents: [Document.second],strand_specific: false},
 #
-	{user_id: admin, name: "lib2", sequencing_library_prep_kit_id: truseq_ht_kits_id, nucleic_acid_term_id: NucleicAcidTerm.find_by!(name: "DNA").id, biosample_id: Biosample.find_by!(name: "ENCBS389LEA").id, size_range: "450-650", documents: [Document.second],strand_specific: false}
+  {user_id: admin, name: "lib2", sequencing_library_prep_kit_id: truseq_ht_kits_id, nucleic_acid_term_id: NucleicAcidTerm.find_by!(name: "DNA").id, biosample_id: Biosample.find_by!(name: "ENCBS389LEA").id, size_range: "450-650", documents: [Document.second],strand_specific: false}
 ])
-	
+  
