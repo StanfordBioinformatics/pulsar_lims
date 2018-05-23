@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180522050701) do
+ActiveRecord::Schema.define(version: 20180522231139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -326,15 +326,15 @@ ActiveRecord::Schema.define(version: 20180522050701) do
     t.integer  "donor_construct_id"
     t.integer  "biosample_id"
     t.text     "description"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.integer  "genomic_integration_site_id"
     t.string   "upstream_identifier"
     t.string   "category"
     t.string   "purpose"
     t.text     "notes"
-    t.boolean  "prototype"
     t.integer  "from_prototype_id"
+    t.integer  "_times_cloned",               default: 0
   end
 
   add_index "crispr_modifications", ["biosample_id"], name: "index_crispr_modifications_on_biosample_id", using: :btree

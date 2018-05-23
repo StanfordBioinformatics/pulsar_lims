@@ -1,7 +1,7 @@
 <% title(@biosample.name,"Biosamples") %> 
 <%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @biosample } %>
 <header>
-	<h1><%= @biosample.name %></h1>
+  <h1><%= @biosample.name %></h1>
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_edit_record", locals: {record: @biosample} %>
@@ -14,16 +14,16 @@
       </li>
     <% end %>
   </ul>
-</header>	
+</header>  
 
 <%= render partial: "application_partials/record_meta", locals: { record: @biosample } %>
 
 <table class="attributes">
 
   <tr>
-		<th><strong>Name</strong></th>
-		<td><%= @biosample.name %></td>
-	</tr>
+    <th><strong>Name</strong></th>
+    <td><%= @biosample.name %></td>
+  </tr>
 
   <tr>
     <th><strong>Tube label</strong></th>
@@ -37,41 +37,41 @@
     </td>
   </tr>
 
-	<tr>
-	  <th><strong>Description:</strong></th>
-	  <td><%= @biosample.description %></td>
-	</tr>
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @biosample.description %></td>
+  </tr>
 
-	<% if @biosample.owner.present? %>
-		<tr>
-			<th><strong>Owner</strong></th>
-			<td><%= @biosample.owner.display %></td>
-		</tr>
-	<% end %>
+  <% if @biosample.owner.present? %>
+    <tr>
+      <th><strong>Owner</strong></th>
+      <td><%= @biosample.owner.display %></td>
+    </tr>
+  <% end %>
 
-	<tr>
-		<th><strong>Prototype?</strong></th>
-		<td>
+  <tr>
+    <th><strong>Prototype?</strong></th>
+    <td>
       <% if @biosample.prototype_instances.any? %>
         True 
       <% else %>
         False
       <% end %>
-	</tr>
+  </tr>
 
-	<% if @biosample.starting_biosample_single_cell_sortings.any? %>
-		<tr>
-			<th><strong>Single Cell Sortings</strong></th>
-			<td><%= render partial: "single_cell_sortings/link_to_single_cell_sorting", locals: {single_cell_sortings: @biosample.starting_biosample_single_cell_sortings} %></td>
-		</tr>
-	<% end %>
+  <% if @biosample.starting_biosample_single_cell_sortings.any? %>
+    <tr>
+      <th><strong>Single Cell Sortings</strong></th>
+      <td><%= render partial: "single_cell_sortings/link_to_single_cell_sorting", locals: {single_cell_sortings: @biosample.starting_biosample_single_cell_sortings} %></td>
+    </tr>
+  <% end %>
 
-	<% if @biosample.part_of_biosample.present? %>
-		<tr>
-			<th><strong>Parent Biosample</strong></th>
-			<td><%= link_to @biosample.part_of_biosample.name, @biosample.part_of_biosample %></td>
-		</tr>
-	<% end %>
+  <% if @biosample.part_of_biosample.present? %>
+    <tr>
+      <th><strong>Parent Biosample</strong></th>
+      <td><%= link_to @biosample.part_of_biosample.name, @biosample.part_of_biosample %></td>
+    </tr>
+  <% end %>
 
   <% if @biosample.pooled_from_biosamples.any? %>
     <tr>
@@ -80,29 +80,29 @@
     </tr>
   <% end %>
 
-	<% if @biosample.well.present? %>
-		<tr>
-			<th><strong>Well</strong></th>
-			<% plate = @biosample.well.plate %>
-			<td>Plate: <%= link_to plate.name, plate %>, Well: <%= link_to @biosample.well.name, [plate, @biosample.well] %></td>
-		</tr>
-	<% end %>
+  <% if @biosample.well.present? %>
+    <tr>
+      <th><strong>Well</strong></th>
+      <% plate = @biosample.well.plate %>
+      <td>Plate: <%= link_to plate.name, plate %>, Well: <%= link_to @biosample.well.name, [plate, @biosample.well] %></td>
+    </tr>
+  <% end %>
 
-	<% if @biosample.biosample_parts.any? %>
-		<tr>
-			<th><strong>Child biosamples:</strong></th>
-			<td>
+  <% if @biosample.biosample_parts.any? %>
+    <tr>
+      <th><strong>Child biosamples:</strong></th>
+      <td>
         <%= link_to "#{@biosample.biosample_parts.length} total", [:biosample_parts, @biosample] %>
-			</td>
-		</tr>
-	<% end %>
+      </td>
+    </tr>
+  <% end %>
   
-	<tr>
-		<th><strong>Protocol documents:</strong></th>
-		<td>
-			<%= render partial: "documents/link_to_documents", locals: {documents: @biosample.documents} %>
-		</td>
-	</tr>
+  <tr>
+    <th><strong>Protocol documents:</strong></th>
+    <td>
+      <%= render partial: "documents/link_to_documents", locals: {documents: @biosample.documents} %>
+    </td>
+  </tr>
 
   <tr>
     <th><strong>Treatments:</strong></th>
@@ -111,35 +111,35 @@
     </td>
   </tr>
 
-	<tr>
-		<th><strong>Biosample Type:</strong></th>
-		<td><%= @biosample.biosample_type.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Biosample Type:</strong></th>
+    <td><%= @biosample.biosample_type.name %></td>
+  </tr>
 
-	<tr>
-  	<th><strong>Biosample Term Name:</strong></th>
-  	<td><%= link_to @biosample.biosample_term_name.name, @biosample.biosample_term_name %></td>
-	</tr>
+  <tr>
+    <th><strong>Biosample Term Name:</strong></th>
+    <td><%= link_to @biosample.biosample_term_name.name, @biosample.biosample_term_name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Vendor:</strong></th>
-		<td><%= link_to @biosample.vendor.name, @biosample.vendor %></td>
-	</tr>
+  <tr>
+    <th><strong>Vendor:</strong></th>
+    <td><%= link_to @biosample.vendor.name, @biosample.vendor %></td>
+  </tr>
 
-	<tr>
-  	<th><strong>Vendor product identifier:</strong></th>
-  	<td><%= @biosample.vendor_product_identifier %></td>
-	</tr>
+  <tr>
+    <th><strong>Vendor product identifier:</strong></th>
+    <td><%= @biosample.vendor_product_identifier %></td>
+  </tr>
 
-	<tr>
-	  <th><strong>Lot identifier:</strong></th>
-  	<td><%= @biosample.lot_identifier %></td>
-	</tr>
+  <tr>
+    <th><strong>Lot identifier:</strong></th>
+    <td><%= @biosample.lot_identifier %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Donor:</strong></th>
-		<td><%= link_to @biosample.donor.name, @biosample.donor %></td>
-	</tr>
+  <tr>
+    <th><strong>Donor:</strong></th>
+    <td><%= link_to @biosample.donor.name, @biosample.donor %></td>
+  </tr>
 
   <tr>
     <th><strong>Starting amount:</strong></th>
@@ -150,27 +150,27 @@
     </td>
   </tr>
 
-	<tr>
-	  <th><strong>Passage number:</strong></th>
-	  <td><%= @biosample.passage_number %></td>
-	</tr>
+  <tr>
+    <th><strong>Passage number:</strong></th>
+    <td><%= @biosample.passage_number %></td>
+  </tr>
 
   <% if @biosample.tissue_preservation_method.present? %>
-	  <tr>
-	    <th><strong>Tissue preservation method:</strong></th>
-	    <td><%= @biosample.tissue_preservation_method %></td>
-	  </tr>
+    <tr>
+      <th><strong>Tissue preservation method:</strong></th>
+      <td><%= @biosample.tissue_preservation_method %></td>
+    </tr>
   <% end %>
 
-	<tr>
-	  <th><strong>Date biosample taken:</strong></th>
-	  <td><%= @biosample.date_biosample_taken %></td>
-	</tr>
+  <tr>
+    <th><strong>Date biosample taken:</strong></th>
+    <td><%= @biosample.date_biosample_taken %></td>
+  </tr>
 
-	<tr>
-	  <th><strong>Submitter comments:</strong></th>
-	  <td><%= @biosample.submitter_comments %></td>
-	</tr>
+  <tr>
+    <th><strong>Submitter comments:</strong></th>
+    <td><%= @biosample.submitter_comments %></td>
+  </tr>
 
   <tr>
     <th><strong>Treatments:</strong></th>
@@ -178,25 +178,30 @@
   </tr>
  
 
-	<tr>
-		<th><strong>CRISPR</strong></th>
-		<% if @biosample.crispr_modification.present? and @biosample.crispr_modification.persisted?%>
-			<td><%= link_to @biosample.crispr_modification.name, @biosample.crispr_modification %></td>
-		<% else %>
-			<td></td>
-		<% end %>
-	</tr>
+  <tr>
+    <th><strong>CRISPR</strong></th>
+    <% if @biosample.crispr_modification.present? and @biosample.crispr_modification.persisted?%>
+      <td><%= link_to @biosample.crispr_modification.name, @biosample.crispr_modification %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+  </tr>
 
-	<tr>
-    <th><strong>Associated Libraries:</strong></th>
+  <tr>
+    <th><strong>Associated libraries:</strong></th>
     <% if @biosample.libraries.present? %>
-			<td>
-				<%= render partial: "libraries/link_to_library", locals: {libraries: @biosample.libraries} %>
-			</td>
+      <td>
+        <%= render partial: "libraries/link_to_library", locals: {libraries: @biosample.libraries} %>
+      </td>
     <% else %>
       <td>None</td>
     <% end %>
-	</tr>
+  </tr>
+
+  <tr>
+    <th><strong>Times cloned:</strong></th>
+    <td><%= @biosample._times_cloned %></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    
@@ -205,14 +210,14 @@
 </table>
 
 <% if @biosample.crispr_modification.blank? %>
-	<%= link_to "Add CRISPR modification", add_crispr_modification_biosample_path(@biosample), class: "new", 
-			remote: true, 
-			id: "biosample_add_crispr_modification" %>
+  <%= link_to "Add CRISPR modification", add_crispr_modification_biosample_path(@biosample), class: "new", 
+      remote: true, 
+      id: "biosample_add_crispr_modification" %>
 <% else %>
-	<% if not @biosample.crispr_modification.persisted? %>
-		<!-- The an attempt to create one was made, but there was a validation issue -->
-		<%= render partial: "add_crispr_modification" %>
-	<% end %>
+  <% if not @biosample.crispr_modification.persisted? %>
+    <!-- The an attempt to create one was made, but there was a validation issue -->
+    <%= render partial: "add_crispr_modification" %>
+  <% end %>
 <% end %>
 <div id="biosample_crispr_modification_form" ></div>
   <!-- #biosample_crispr_modification_form will serve as the container for the result of the AJAX request above. See relevant jQuery in biosamples.js.coffee. -->

@@ -4,12 +4,6 @@
     <%= select_tag :copies, options_for_select(1..50), class: "form-control", style: "width: 20%;" %>
   </div>
 
-  <div class="form-group">
-    <%= label_tag :name_suffix, "Name suffix", "data-toggle": "tooltip", 
-       "title": "Each clone will have the same name as the parent, plus any additional suffix specified here, plus a unique clone number." %>
-    <%= text_field_tag :name_suffix, "clone", class: "form-control" %>
-  </div>
-
   <div class="form-actions">
     <%= submit_tag "Clone", class: "btn btn-primary" %>
   </div>

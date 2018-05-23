@@ -9,23 +9,23 @@ class CrisprModificationsController < ApplicationController
     render "application_partials/select_options", layout: false             
   end
 
-	def new_pcr_validation
-		@pcr = @crispr.pcr_validations.build
-	end
+  def new_pcr_validation
+    @pcr = @crispr.pcr_validations.build
+  end
 
-	def select_crispr_construct
-		#Function: Called via AJAX in the crispr form when the user clicks the "Add Crispr Construct" button. 
-		#Parsed params : exclude_ids - Array of CrisprConstruct IDs to exclude from the selection.
-		exclude_ids = params[:exclude_ids]
-		@biosample = Biosample.new
-		@crispr = CrisprModification.new
-		@crispr_constructs = CrisprConstruct.where.not(id: exclude_ids)
-		render layout: false
-	end
-	
+  def select_crispr_construct
+    #Function: Called via AJAX in the crispr form when the user clicks the "Add Crispr Construct" button. 
+    #Parsed params : exclude_ids - Array of CrisprConstruct IDs to exclude from the selection.
+    exclude_ids = params[:exclude_ids]
+    @biosample = Biosample.new
+    @crispr = CrisprModification.new
+    @crispr_constructs = CrisprConstruct.where.not(id: exclude_ids)
+    render layout: false
+  end
+  
   def select_chromosome_on_reference_genome
     @crispr = CrisprModification.new
-		@crispr.build_genomic_integration_site
+    @crispr.build_genomic_integration_site
     @chromosomes = Chromosome.where(reference_genome_id: params["reference_genome_id"])
     render layout: false
   end
@@ -35,26 +35,26 @@ class CrisprModificationsController < ApplicationController
   end
 
   def show
-		authorize @crispr
+    authorize @crispr
   end
 
   def new
-		authorize CrisprModification
+    authorize CrisprModification
     @crispr = CrisprModification.new
-		@crispr.build_genomic_integration_site
+    @crispr.build_genomic_integration_site
   end
 
   def edit
-		authorize @crispr
+    authorize @crispr
   end
 
   def create
-		authorize CrisprModification
-		#render json: params
-		#return 
+    authorize CrisprModification
+    #render json: params
+    #return 
     @crispr = CrisprModification.new(crispr_modification_params)
 
-		@crispr.user = current_user
+    @crispr.user = current_user
 
     respond_to do |format|
       if @crispr.save
@@ -68,7 +68,7 @@ class CrisprModificationsController < ApplicationController
   end
 
   def update
-		authorize @crispr
+    authorize @crispr
     respond_to do |format|
       if @crispr.update(crispr_modification_params)
         format.html { redirect_to @crispr, notice: 'CRISPR Modification was successfully updated.' }
@@ -81,8 +81,8 @@ class CrisprModificationsController < ApplicationController
   end
 
   def destroy
-		authorize @crispr
-		ddestroy(@crispr,crispr_modifications_path)
+    authorize @crispr
+    ddestroy(@crispr,crispr_modifications_path)
   end
 
   private
@@ -100,6 +100,7 @@ class CrisprModificationsController < ApplicationController
         :notes,
         :prototype,
         :purpose,
+        :_times_cloned,
         :upstream_identifier,
         crispr_construct_ids: [], 
         crispr_constructs_attributes: [:id, :_destroy],

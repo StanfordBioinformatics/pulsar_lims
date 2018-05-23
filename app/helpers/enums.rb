@@ -4,7 +4,7 @@ module Enums
 
   CRISPR_MOD_CATEGORIES = ["deletion", "interference", "insertion", "mutagenesis", "replacement"]
 
-  CRISPR_MOD_PURPOSE = ["activation", "activation", "analysis", "overexpression", "repression", "tagging", "validation"]
+  CRISPR_MOD_PURPOSE = ["activation", "analysis", "overexpression", "repression", "tagging", "validation"]
 
   DURATION_UNITS = ["second", "minute", "hour", "day"]
 

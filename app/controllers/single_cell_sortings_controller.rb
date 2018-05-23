@@ -1,42 +1,41 @@
 class SingleCellSortingsController < ApplicationController
   before_action :set_single_cell_sorting, only: [:show, :edit, :update, :destroy, :add_sorting_biosample, :add_plate, :add_library_prototype, :new_analysis]
-	before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
-	skip_after_action :verify_authorized, only: [:add_sorting_biosample, :add_plate, :add_library_prototype, :new_analysis]
+  before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
+  skip_after_action :verify_authorized, only: [:add_sorting_biosample, :add_plate, :add_library_prototype, :new_analysis]
 
-
-	def new_analysis
+  def new_analysis
     #non AJAX
     @analysis = @single_cell_sorting.analyses.build
     flash[:action] = :new_analysis
   end 
 
-	def add_library_prototype
-		#non AJAX
-		custom_lib_params = {
-			name: "#{@single_cell_sorting.name} library prototype",
-			biosample_id: @single_cell_sorting.sorting_biosample_id
-		}
-		@library = @single_cell_sorting.build_library_prototype(custom_lib_params)
-		flash[:action] = :add_library_prototype
-	end
+  def add_library_prototype
+    #non AJAX
+    custom_lib_params = {
+      name: "#{@single_cell_sorting.name} library prototype",
+      biosample_id: @single_cell_sorting.sorting_biosample_id
+    }
+    @library = @single_cell_sorting.build_library_prototype(custom_lib_params)
+    flash[:action] = :add_library_prototype
+  end
 
-	def add_plate
-		#called via AJAX
-		@plate = @single_cell_sorting.plates.build
-		#Needed to set @plate above since that is used in the partial single_cell_sortings/_add_plate.html.erb that renders a Plate form. -->
-		render partial: "add_plate", layout: false
-		flash[:action] = "show"
-	end
+  def add_plate
+    #called via AJAX
+    @plate = @single_cell_sorting.plates.build
+    #Needed to set @plate above since that is used in the partial single_cell_sortings/_add_plate.html.erb that renders a Plate form. -->
+    render partial: "add_plate", layout: false
+    flash[:action] = "show"
+  end
 
   def add_sorting_biosample
-		#called via AJAX
+    #called via AJAX
     sorting_biosample = Biosample.new(@single_cell_sorting.starting_biosample.clone())
     sorting_biosample.name =  @single_cell_sorting.name + " " + "biosample prototype"
     sorting_biosample.user = current_user
     @biosample = sorting_biosample
-		#Needed to set @biosample above since that is used in the partial single_cell_sortings/_add_sorting_biosample.html.erb that renders a Biosample form. -->
+    #Needed to set @biosample above since that is used in the partial single_cell_sortings/_add_sorting_biosample.html.erb that renders a Biosample form. -->
     render partial: "add_sorting_biosample", layout: false
-		flash[:action] = "show"
+    flash[:action] = "show"
   end 
 
   def index
@@ -44,7 +43,7 @@ class SingleCellSortingsController < ApplicationController
   end
 
   def show
-		authorize @single_cell_sorting
+    authorize @single_cell_sorting
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @single_cell_sorting }
@@ -52,18 +51,18 @@ class SingleCellSortingsController < ApplicationController
   end
 
   def new
-		authorize SingleCellSorting
+    authorize SingleCellSorting
     @single_cell_sorting = SingleCellSorting.new
   end
 
   def edit
-		authorize @single_cell_sorting
+    authorize @single_cell_sorting
   end
 
   def create
-		authorize SingleCellSorting
+    authorize SingleCellSorting
     @single_cell_sorting = SingleCellSorting.new(single_cell_sorting_params)
-		@single_cell_sorting.user = current_user
+    @single_cell_sorting.user = current_user
 
     respond_to do |format|
       if @single_cell_sorting.save
@@ -77,42 +76,42 @@ class SingleCellSortingsController < ApplicationController
   end
 
   def update
-		authorize @single_cell_sorting
-		#render json: params
-		#return
-		scs_params = single_cell_sorting_params
+    authorize @single_cell_sorting
+    #render json: params
+    #return
+    scs_params = single_cell_sorting_params
 
-		if scs_params[:library_prototype_attributes].present? and scs_params[:library_prototype_attributes][:id].blank?
-			#Then user is adding the library_prototype.
-			scs_params[:library_prototype_attributes][:user_id] = current_user.id
-		end
+    if scs_params[:library_prototype_attributes].present? and scs_params[:library_prototype_attributes][:id].blank?
+      #Then user is adding the library_prototype.
+      scs_params[:library_prototype_attributes][:user_id] = current_user.id
+    end
 
-		if scs_params[:sorting_biosample_attributes].present? and scs_params[:sorting_biosample_attributes][:id].blank?
-			#Then user is adding the sorting biosample. 
-			scs_params[:sorting_biosample_attributes][:user_id] = current_user.id
-		end
-		if scs_params[:plates_attributes].present?
-			scs_params[:plates_attributes].each do |pos,plate_params| #keys are integers, like indices in a list.
-				next if plate_params.include?(:id) #Because the user is updating a plate
-				scs_params[:plates_attributes][pos][:user_id] = current_user.id
-			end
-		end
+    if scs_params[:sorting_biosample_attributes].present? and scs_params[:sorting_biosample_attributes][:id].blank?
+      #Then user is adding the sorting biosample. 
+      scs_params[:sorting_biosample_attributes][:user_id] = current_user.id
+    end
+    if scs_params[:plates_attributes].present?
+      scs_params[:plates_attributes].each do |pos,plate_params| #keys are integers, like indices in a list.
+        next if plate_params.include?(:id) #Because the user is updating a plate
+        scs_params[:plates_attributes][pos][:user_id] = current_user.id
+      end
+    end
     respond_to do |format|
-			begin
-				res = @single_cell_sorting.update(scs_params)
-			rescue RuntimeError => e
-				res = false
-				flash[:alert] = e.message
-			end
+      begin
+        res = @single_cell_sorting.update(scs_params)
+      rescue RuntimeError => e
+        res = false
+        flash[:alert] = e.message
+      end
       if res
         format.html { redirect_to @single_cell_sorting, notice: 'Single cell sorting was successfully updated.' }
         format.json { head :no_content }
       else
-				action = flash[:action]
-				if action.present?
-					#set again for next request.
-					flash[:action] = action
-				end
+        action = flash[:action]
+        if action.present?
+          #set again for next request.
+          flash[:action] = action
+        end
         format.html { render flash[:action] || 'edit' } 
         #format.html { render json: @single_cell_sorting.errors }
         #format.html { render json: @single_cell_sorting.errors }
@@ -122,8 +121,8 @@ class SingleCellSortingsController < ApplicationController
   end
 
   def destroy
-		authorize @single_cell_sorting
-		ddestroy(@single_cell_sorting,single_cell_sortings_path)
+    authorize @single_cell_sorting
+    ddestroy(@single_cell_sorting,single_cell_sortings_path)
   end
 
   private
@@ -134,7 +133,7 @@ class SingleCellSortingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def single_cell_sorting_params
-			params.require(:single_cell_sorting).permit(
+      params.require(:single_cell_sorting).permit(
         :description, 
         :fluorescence_intensity_file, 
         :library_prototype_id, 

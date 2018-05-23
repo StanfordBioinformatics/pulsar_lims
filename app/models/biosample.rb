@@ -1,5 +1,6 @@
 class Biosample < ActiveRecord::Base
-  include ModelConcerns
+  include ModelConcerns #a Concern
+  include Prototype #a Concern
   ABBR = "B"
   DEFINITION = "The source material (cell line, tissue sample) that one either begins an experiment with; also, any derivites of this source material that have been modified by the experimenter.  Model abbreviation: #{ABBR}"
   ###
@@ -55,11 +56,9 @@ class Biosample < ActiveRecord::Base
   scope :non_plated, lambda { where(plated: false) }
   scope :persisted, lambda { where.not(id: nil) }
 
-  before_validation :set_name, on: :create
-  before_save :validate_prototype
-  after_update :propagate_update_if_prototype
+  before_validation :set_name, on: [:create, :update]
   after_validation :check_plated #true if it belongs to a well.
-  #after_validation :propagate_update_if_prototype, on: :update
+  after_update :propagate_update_if_has_biosample_parts
 
   def self.policy_class
     ApplicationPolicy
@@ -118,7 +117,7 @@ class Biosample < ActiveRecord::Base
     end
   end
 
-  def clone
+  def clone(associated_user_id:, custom_attrs: nil)
     # Generates a hash of attributes that can be used to duplicate the biosample. In the generated
     # attributes, the biosample property part_of_biosample_id will be set to the current biosample, 
     # and the property form_prototype_id will as well. 
@@ -135,34 +134,70 @@ class Biosample < ActiveRecord::Base
     #     to the well. It directly uses the hash that this method returns to create the new biosample
     #     (whose name will be set automatically in the biosample model when it sees that a well_id
     #     is set.
-    well_biosample = self.dup
-    #well_biosample.documents = self.documents
-    attrs = well_biosample.attributes
+    times_cloned = self._times_cloned + 1
+    attrs = self.attributes_for_cloning()
+    # Don't add "attrs["from_prototype_id"] = self.id" line that is present in the clone method of 
+    # other models, such as Library and CrisprModification, since cloning a Biosample can be useful
+    # for other purpose than making a prototype_instance (i.e. a Biosample can be part_of another 
+    # Biosample, and that is the use of cloning in the case of Biosamples. Adding this attribute
+    # is needed, however, in the case of cloning a sorting_biosample in a single_cell_sorting experiment,
+    # thus the caller does set this attribute. 
+
     #attrs["id"] is currently nil:
     attrs["part_of_biosample_id"] = self.id  
-    #attrs["crispr_modification"] = self.crispr_modification.attributes
-    #Remove attributes that shouldn't be explicitely set for the well biosample
-    attrs.delete("name") #the name is expicitely set in the biosample model when it has a well associated.
-    attrs.delete("id")
-    attrs.delete("well_id")
-    attrs.delete("created_at")
-    attrs.delete("updated_at")
-    attrs.delete("upstream_identifier")
-    attrs.delete("user_id")
+    attrs["user_id"] = associated_user_id
+    attrs["name"] = "#{self.name} clone #{times_cloned}"
+    if custom_attrs.present?
+      attrs.update(custom_attrs)
+    end
+    new_record = Biosample.create!(attrs)
+    self.update!({_times_cloned: times_cloned }) 
+    return new_record
+  end
+
+  def attributes_for_cloning
+    # Whitelist of attributes used for cloning or updating child biosamples.
+    attrs = {}
+    attrs["biosample_term_name_id"] = self.biosample_term_name_id
+    attrs["biosample_type_id"] = self.biosample_type_id
+    attrs["control"] = self.control
+    attrs["description"] = self.description
+    attrs["date_biosample_taken"] = self.date_biosample_taken
+    attrs["donor_id"] = self.donor_id
+    attrs["lot_identifier"] = self.lot_identifier
+    attrs["notes"] = self.notes
+    attrs["tissue_preservation_method"] = self.tissue_preservation_method
+    attrs["vendor_id"] = self.vendor_id
+    attrs["vendor_product_identifier"] = self.vendor_product_identifier
     return attrs
   end
 
-  def update_biosample_from_prototype(biosample_prototype_id)
-    biosample_prototype = Biosample.find(biosample_prototype_id)
-    biosample_attrs = biosample_prototype.clone
-    biosample_attrs["name"] = self.name # Use whatever name it already had. 
-    success = self.update(biosample_attrs)
-    if not success
-      raise "Unable to update biosample '#{self.name}': #{self.errors.full_messages}"
+  def clone_crispr_modification
+    # Returns the attributes of the cloned crispr_modification if one is present on the current biosample.
+    # The caller will need to set the name attribute. 
+    if self.crispr_modification.present?
+      return self.crispr_modification.clone()
     end
   end
 
   private
+
+  def propagate_update_if_has_biosample_parts
+    if self.biosample_parts.any?
+      self.biosample_parts.each do |p|
+        # Skip children that are also present in the prototype_instances attribute collection
+        # since they should only be updated through changes in the referenced prototype. In the case of
+        # single_cell_sortings, the sorting_biosample is linked to the starting_biosample via the
+        # part_of_biosample property. Thus, the sorting_biosample will be present in the starting_biosample's
+        # biosample_parts attribute collection and will be updated. When it is updated, it will in turn cause
+        # an update in any plated biosamples through its prototype_instances attribute collection.
+        next if p.from_prototype.present?
+        p.update_from_sibling(sibling_id=self.id)
+        # If p.prototype_instances.any? (as in the case of a sorting_biosample on a single_cell_sorting)
+        # then the biosample on each well of each plate in the experiment will now be updated.
+      end
+    end
+  end
 
   def parents
     parents = []
@@ -228,36 +263,6 @@ class Biosample < ActiveRecord::Base
       self.plated = false
     end
     return true
-  end
-
-  def validate_prototype
-    #A biosample can either be a prototype (virtual biosample) or an actuated biosample created based on a biosample prototype, not both.
-    if self.prototype_instances.any? and self.from_prototype.present?
-      self.errors[:base] << "Invalid: can't set both the 'prototype' and 'from_prototype' attributes."
-      return false
-    end
-  end
-
-
-  def propagate_update_if_prototype
-    #An after_update callback.
-    #If this is a prototype biosample, then we need to propagate the update to dependent biosamples.
-    # In the case of single_cell_sorting, dependent biosamples are those sorted into the wells of each plate on the experiment
-    # (each well has a single biosample and such a biosample has a single library).
-    # This makes updating all of the biosample objects with regard to all the plates on a single_cell_sorting
-    # easy to do just by changing the biosample prototype (starting biosample) assocated with the single_cell_sorting.
-    if self.prototype_instances.any?
-      self.prototype_instances.each do |p|
-        p.update_biosample_from_prototype(self.id)
-      end
-    end
-#    if self.sorting_biosample_single_cell_sorting.present?
-#      sorting_biosample_single_cell_sorting.plates.each do |plate|
-#        plate.wells.each do |well|
-#          well.biosample.update_biosample_from_prototype(self)
-#        end
-#      end
-#    end
   end
 
   def set_name

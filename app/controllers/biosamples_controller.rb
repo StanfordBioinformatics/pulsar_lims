@@ -1,7 +1,7 @@
 class BiosamplesController < ApplicationController
-#	include DocumentsConcern #gives me add_documents(), remove_documents()
+#  include DocumentsConcern #gives me add_documents(), remove_documents()
   before_action :set_biosample, only: [:show, :edit, :update, :destroy, :biosample_parts, :clone, :create_clones, :delete_biosample_document,:add_crispr_modification]
-	skip_after_action :verify_authorized, only: [:biosample_parts, :select_biosample_term_name,:add_crispr_modification]
+  skip_after_action :verify_authorized, only: [:biosample_parts, :select_biosample_term_name,:add_crispr_modification]
 
   def clone
     # Renders the view that submits a form to the create_clones action below.
@@ -11,22 +11,10 @@ class BiosamplesController < ApplicationController
   def create_clones
     authorize @biosample, :create?
     num_clones = params[:copies].to_i
-    name_suffix = params[:name_suffix]
-    if name_suffix.blank?
-      name_suffix = "clone"
-    end
-    clone_name = "#{@biosample.name} #{name_suffix}"
     (1..num_clones).each do |num|
-      clone_number = @biosample._times_cloned + 1
-      biosample_clone_attrs = @biosample.clone()
-      biosample_clone_attrs[:name] = clone_name + " #{clone_number}"
-      biosample_clone_attrs[:user] = current_user
-      clone = Biosample.create(biosample_clone_attrs)
-      if not clone.valid?                                                                            
-        raise "Unable to create cloned biosample #{clone_name}: #{clone.errors.full_messages}"   
-        #throws a RuntimeError 
-      end  
-      @biosample.update({_times_cloned: clone_number})
+      biosample_clone = @biosample.clone(associated_user_id: current_user.id)
+      # Add any has_one relationships to clone
+      #@biosample.clone_crispr_modification(associated_biosample_id: biosample_clone.id, associated_user_id: current_user.id)
     end
     redirect_to biosamples_url, notice: "Your #{num_clones} clones have been created!"
   end
@@ -48,30 +36,30 @@ class BiosamplesController < ApplicationController
     render "application_partials/select_options", layout: false
   end
 
-	def add_crispr_modification
-		@biosample.build_crispr_modification({user: current_user})
-		flash[:action] = :show
-		render partial: "add_crispr_modification", layout: false
-	end
+  def add_crispr_modification
+    @biosample.build_crispr_modification({user: current_user})
+    flash[:action] = :show
+    render partial: "add_crispr_modification", layout: false
+  end
 
   def select_biosample_term_name
     biosample_type = BiosampleType.find(params[:biosample_type_selector])
-		biosample_term_name_id = params[:biosample_term_name_selector]
-		#here I pass in param biosample_term_name_selector in biosamples.js.coffee in order to save the
-		# selected biosample_term_name, if there is one selected. That way, if there is a validation error
-		# when the user submits the form (perhaps regarding some other field), I can set the biosample_term_name
+    biosample_term_name_id = params[:biosample_term_name_selector]
+    #here I pass in param biosample_term_name_selector in biosamples.js.coffee in order to save the
+    # selected biosample_term_name, if there is one selected. That way, if there is a validation error
+    # when the user submits the form (perhaps regarding some other field), I can set the biosample_term_name
     # to what the user had already set it to.  Normally, it would be reset to what it was since on a page re-render,
-		# the AJAX request goes through again to repopulate the list of possible values for the biosample_term_name, based on teh
-		# biosample_type selection.
+    # the AJAX request goes through again to repopulate the list of possible values for the biosample_term_name, based on teh
+    # biosample_type selection.
     biosample_term_name = nil
-		if biosample_term_name_id.present?
-			biosample_term_name = BiosampleTermName.find(biosample_term_name_id)
-		end
-		@biosample_term_name_selection = BiosampleType.get_biosample_term_names(biosample_type.id)
-		@selected = nil
-		if biosample_term_name.present?
-			@selected = biosample_term_name.id
-		end
+    if biosample_term_name_id.present?
+      biosample_term_name = BiosampleTermName.find(biosample_term_name_id)
+    end
+    @biosample_term_name_selection = BiosampleType.get_biosample_term_names(biosample_type.id)
+    @selected = nil
+    if biosample_term_name.present?
+      @selected = biosample_term_name.id
+    end
     render layout: false
   end
 
@@ -80,23 +68,23 @@ class BiosamplesController < ApplicationController
   end
 
   def show
-		authorize @biosample
+    authorize @biosample
   end
 
   def new
-		authorize Biosample
+    authorize Biosample
     @biosample = Biosample.new
   end
 
   def edit
-		authorize @biosample
+    authorize @biosample
   end
 
   def create
-		authorize Biosample
+    authorize Biosample
     @biosample = Biosample.new(biosample_params)
-		@biosample.user = current_user
-		#@biosample = add_documents(@biosample,params[:biosample][:document_ids])
+    @biosample.user = current_user
+    #@biosample = add_documents(@biosample,params[:biosample][:document_ids])
 
     #render json: biosample_params
     #return
@@ -112,14 +100,14 @@ class BiosamplesController < ApplicationController
   end
 
   def update
-		#@biosample = add_documents(@biosample,params[:biosample][:documents])
+    #@biosample = add_documents(@biosample,params[:biosample][:documents])
     authorize @biosample
     #render json: params
     #return
-		crispr_attrs = biosample_params()[:crispr_modification_attributes]
-		if crispr_attrs.present?
-			params[:biosample][:crispr_modification_attributes].update({user_id: current_user.id})
-		end
+    crispr_attrs = biosample_params()[:crispr_modification_attributes]
+    if crispr_attrs.present?
+      params[:biosample][:crispr_modification_attributes].update({user_id: current_user.id})
+    end
     respond_to do |format|
       if @biosample.update(biosample_params)
         format.html { redirect_to @biosample, notice: 'Biosample was successfully updated.' }
@@ -137,8 +125,8 @@ class BiosamplesController < ApplicationController
   end
 
   def destroy
-		authorize @biosample
-		ddestroy(@biosample,biosamples_path)
+    authorize @biosample
+    ddestroy(@biosample,biosamples_path)
   end
 
 
