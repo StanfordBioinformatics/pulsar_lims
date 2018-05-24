@@ -1,7 +1,8 @@
 class CrisprModification < ActiveRecord::Base
   #Submit to the ENCODE Portal as a genetic_modification:
   # https://www.encodeproject.org/profiles/genetic_modification.json
-  include ModelConcerns
+  include ModelConcerns # A Concern.
+  include Prototype # A Concern that includes the clone() instance method as related ones.
   #crisprs only belong to biosamples.
   ABBR = "CRISPR"
   DEFINITION = "A genetic modification carried out using CRISPR technology.  This object links together one or more CRISPR Construct objects (each containing an individual guide sequence), and a Donor Construct object (containing the donor sequence). A new CRISPR Modificition is created at the Biosample level.  Model abbreviation: #{ABBR}"
@@ -18,7 +19,7 @@ class CrisprModification < ActiveRecord::Base
   # genetic_modification_characterization.characterizes property points to it.
   has_many :pcr_validations, class_name: "Pcr", dependent: :nullify
   has_and_belongs_to_many :crispr_constructs
-  validates :crispr_constructs, presence: true, unless: Proc.new { |cm| cm.parents.any? }
+  #validates :crispr_constructs, presence: true, unless: Proc.new { |cm| cm.parents.any? }
   validates :category, presence: true, inclusion: {in: Enums::CRISPR_MOD_CATEGORIES, message: "Must be an element from the list #{Enums::CRISPR_MOD_CATEGORIES}"}
   validates :purpose, presence: true, inclusion: {in: Enums::CRISPR_MOD_PURPOSE, message: "Must be an element from the list #{Enums::CRISPR_MOD_PURPOSE}"}
   validates :upstream_identifier, uniqueness: true, allow_blank: true
@@ -49,7 +50,7 @@ class CrisprModification < ActiveRecord::Base
     end
   end
 
-  def clone(associated_biosample_id:, associated_user_id:)
+  def clone_crispr_modification(associated_biosample_id:, associated_user_id:, custom_attrs: nil)
     # Generates a hash of attributes that can be used to duplicate the current genetic_modification (GM). In the generated
     # attributes, the attribute part_of_genetic_modification_id will be set to the current GM,
     # and the property from_prototype_id will as well.
@@ -62,42 +63,48 @@ class CrisprModification < ActiveRecord::Base
     #     Hash containing the attributes for creating a new GM.
     #
     # Example:
-    times_cloned = self._times_cloned + 1
-    clone = self.dup
-    attrs = clone.attributes
-    #attrs["id"] is currently nil:
+    attrs = {}
     attrs["from_prototype_id"] = self.id
     attrs["biosample_id"] = associated_biosample_id
-    attrs["user_id"] = associated_user_id
-    attrs["name"] = "#{self.name} clone #{times_cloned}"
-    attrs = CrisprModification.filter_clone_attributes(attrs)
-    new_record = CrisprModification.create!(attrs)
-    self.update!({_times_cloned: times_cloned })
-    return new_record
+    if custom_attrs.present?                                                                        
+      attrs.update(custom_attrs)                                                                    
+    end                                                                                             
+    return clone(associated_user_id: associated_user_id, custom_attrs: attrs) 
   end
 
-  def self.filter_clone_attributes(attrs)                                                              
-    #Remove attributes that shouldn't be explicitely set for a clone  
-    attrs.delete("created_at")
-    attrs.delete("updated_at")
-    attrs.delete("_times_cloned")
-    attrs.delete("upstream_identifier")
+  def attributes_for_cloning
+    # Whitelist of attributes used for cloning or updating child biosamples.
+    attrs = {}
+    attrs["donor_construct_id"] = self.donor_construct_id
+    attrs["description"] = self.description
+    attrs["genomic_integration_site_id"] = self.genomic_integration_site_id 
+    attrs["category"] = self.category
+    attrs["purpose"] = self.purpose
+    attrs["notes"] = self.notes
+    return attrs
   end
 
   def parents
     parents = []
-    parent = self.from_prototype
+    if self.from_prototype.present?
+      parents << self.from_prototype
+    end
     return parents
   end
 
   def all_crispr_constructs
-    ccs = self.crispr_constructs
+    ccs = self.crispr_constructs.dup # Must use dup() method here so as not to create a reference.
     self.parents.each do |p|
       if p.crispr_constructs.any?
-        ccs << p.crispr_constructs
+        ccs = ccs.merge(p.crispr_constructs) 
+        #The merge() method doesn't convert its argument to an array so we can still use ActiveRecord methods on it. 
       end
     end
     return ccs
+  end
+
+  def parent_crispr_constructs
+    return self.all_crispr_constructs.where.not(id: [self.crispr_construct_ids])
   end
 
   protected

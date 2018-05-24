@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-	include Pundit
-	require 'exceptions'
+  include Pundit
+  require 'exceptions'
   require 'application_logic'
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -9,27 +9,28 @@ class ApplicationController < ActionController::Base
   # Note that :find_by is defined as an action in controller subclasses, which are expected to
   # call the prviate :find_by method defined here (not as an action), particularly the api
   # controllers.
-	#before_action :check_signed_in
+  #before_action :check_signed_in
   after_action :verify_authorized, except: :index,
-		unless: :devise_controller?
+    unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index,
-		unless: :devise_controller?
+    unless: :devise_controller?
 
   skip_after_action :verify_authorized, only: [:select_options]
 
+  rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
   rescue_from ActiveRecord::InvalidForeignKey, with: :foreign_key_constraint
   rescue_from ActiveRecord::RecordNotDestroyed, with: :record_not_destroyed
-	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   #ActiveRecord::DeleteRestrictionError is raised when there is a model dependency that sets
   # "dependent: :restrict_with_exception" and deleting the model would result in a foreign key error.
   # For an example of this, see the biosample model.
-	rescue_from ActiveRecord::DeleteRestrictionError, with: :destroy_not_allowed
+  rescue_from ActiveRecord::DeleteRestrictionError, with: :destroy_not_allowed
 
-	def ddestroy(record,redirect_path_success)
-		#Named somewhat strangely as ddestroy instead of destroy in order to
-		# not overwrite the destroy() method in the controllers that inherit from here.
-		# The idea is that each individual controller's destroy() method will call this one
-		# in order to avoid duplicating logic and make updates a breeze.
+  def ddestroy(record,redirect_path_success)
+    #Named somewhat strangely as ddestroy instead of destroy in order to
+    # not overwrite the destroy() method in the controllers that inherit from here.
+    # The idea is that each individual controller's destroy() method will call this one
+    # in order to avoid duplicating logic and make updates a breeze.
     respond_to do |format|
       if record.destroy
         format.html { redirect_to redirect_path_success }
@@ -40,9 +41,9 @@ class ApplicationController < ActionController::Base
         format.json { render json: @record.errors.full_messages,status: :unprocessable_entity }
       end
     end
-	end
+  end
 
-	private
+  private
 
   def index(model_class, scope: nil, where: {})
     @records = policy_scope(model_class).where(where)
@@ -124,20 +125,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
-	def set_record(model_name, id_prop)
-		# Function : Call this method in individual controllers to set the instance variable.
-		# Args     : model_name - The value of controller_name(), which the caller supplies in the controller.
-		#              See https://apidock.com/rails/ActionController/Metal/controller_name/class.
+  def set_record(model_name, id_prop)
+    # Function : Call this method in individual controllers to set the instance variable.
+    # Args     : model_name - The value of controller_name(), which the caller supplies in the controller.
+    #              See https://apidock.com/rails/ActionController/Metal/controller_name/class.
     #          : id_prop - The value of a record's "id" property.
-		# Returns  : An instance of the model that is represented by the model_name argument.
-		model = model_name.classify.constantize
-		begin
-			rec = model.find(id_prop)
-		rescue ActiveRecord::RecordNotFound
-			return
-		end
-		return rec
-	end
+    # Returns  : An instance of the model that is represented by the model_name argument.
+    model = model_name.classify.constantize
+    begin
+      rec = model.find(id_prop)
+    rescue ActiveRecord::RecordNotFound
+      return
+    end
+    return rec
+  end
 
   def record_not_destroyed(err)
     respond_to do |format|
@@ -151,11 +152,23 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def invalid_record(err)
+    respond_to do |format|
+      format.html {
+        flash[:alert] = err.message
+        redirect_to(request.referrer || root_path)
+      }
+      format.json  {
+        render json: {exception: "ActiveRecord::RecordInvalid"}, status: 403
+      }
+    end
+  end
+
   def foreign_key_constraint(err)
     respond_to do |format|
       format.html {
         flash[:alert] = err.message
-    		redirect_to(request.referrer || root_path)
+        redirect_to(request.referrer || root_path)
       }
       format.json  {
         render json: {exception: "ActiveRecord::InvalidForeignKey"}, status: 403
@@ -163,11 +176,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-	def user_not_authorized
+  def user_not_authorized
     respond_to do |format|
       format.html {
-    		flash[:alert] = "You are not authorized to perform this action."
-    		redirect_to(request.referrer || root_path)
+        flash[:alert] = "You are not authorized to perform this action."
+        redirect_to(request.referrer || root_path)
       }
       #Why json here and not in API? Because the app internally makes some AJAX calls to
       # non API-end points. These should later be migrated to API endpoint calls, however.
@@ -177,13 +190,13 @@ class ApplicationController < ActionController::Base
       }
     end
 
-	end
+  end
 
-	def destroy_not_allowed(err)
+  def destroy_not_allowed(err)
     respond_to do |format|
       format.html {
-    		flash[:alert] = err.message
-    		redirect_to(request.referrer || root_path)
+        flash[:alert] = err.message
+        redirect_to(request.referrer || root_path)
       }
       #Why json here and not in API? Because the app internally makes some AJAX calls to
       # non API-end points. These should later be migrated to API endpoint calls, however.
@@ -191,13 +204,13 @@ class ApplicationController < ActionController::Base
         render json: {exception: err.class.name, error: err.message},  status: 403
       }
     end
-	end
+  end
 
-	def check_signed_in
-		unless user_signed_in?
-			flash[:alert] = "You must be singed in in order to use this web application."
-			redirect_to root_path
-		end
-	end
+  def check_signed_in
+    unless user_signed_in?
+      flash[:alert] = "You must be singed in in order to use this web application."
+      redirect_to root_path
+    end
+  end
 
 end

@@ -7,6 +7,22 @@ module Prototype
     after_update :propagate_update_if_prototype
   end
 
+
+  def clone(associated_user_id:, custom_attrs:)
+    times_cloned = self._times_cloned + 1                                                              
+    attrs = self.attributes_for_cloning()                                                              
+    attrs["user_id"] = associated_user_id                                                              
+    attrs["name"] = "#{self.name} clone #{times_cloned}"                                               
+    if custom_attrs.present?                                                                           
+      attrs.update(custom_attrs)                                                                       
+    end                                                                                                
+    new_record = self.class.create!(attrs)                                                              
+    #The above create! class method raises ActiveRecord::RecordInvalid if there is any validation error, and
+    # this is caught in application_controller.rb.                                                  
+    self.update!({_times_cloned: times_cloned })                                                    
+    return new_record                                                                               
+  end
+
   def update_from_sibling(sibling_id)
     """
     Args:
@@ -32,7 +48,7 @@ module Prototype
     # easy to do just by changing the biosample prototype (starting biosample) assocated with the single_cell_sorting.
     if self.prototype_instances.any?
       self.prototype_instances.each do |pi|
-        p.update_from_sibling(self.id)
+        pi.update_from_sibling(self.id)
       end
     end
 #    if self.sorting_biosample_single_cell_sorting.present?

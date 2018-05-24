@@ -29,13 +29,13 @@
         <td><%= rec.category %></td>
         <td><%= rec.purpose %></td>
 				<td>
-					<% rec.crispr_constructs.each do |cc| %>
+					<% rec.all_crispr_constructs.each do |cc| %>
 		        <%= link_to cc.name, cc %>
 					<% end %>
 				</td>
         <td><%= link_to rec.donor_construct.name, rec.donor_construct %></td>
         <td><%= link_to rec.biosample.name, rec.biosample %></td>
-				<% target = rec.crispr_constructs.first.target %>
+				<% target = rec.all_crispr_constructs.first.target %>
 				<td><%= link_to target.name, target %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_crispr_modification_path(rec) %>

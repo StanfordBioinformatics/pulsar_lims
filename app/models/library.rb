@@ -3,6 +3,7 @@ end
 
 class Library < ActiveRecord::Base
   include ModelConcerns
+  include Prototype #A Concern that includes the clone() instance method as related ones.
   ABBR = "L"
   DEFINITION = "A sequencing library that is prepared for sequencing.  Model abbreviation: #{ABBR}"
   #The is_control bool column has a default of false.
@@ -102,7 +103,7 @@ class Library < ActiveRecord::Base
     end 
   end
 
-  def clone
+  def clone_library(associated_biosample_id:, associated_user_id:, custom_attrs: nil)
     # Duplicates the attributes of the current library and stores them into a hash that can be used for creating a new library record
     # that looks just like the prototype. It is expected that the caller will make the specific changes
     # to distinguish this copy from the prototype, such as changing the name and user_id, for example. 
@@ -119,20 +120,31 @@ class Library < ActiveRecord::Base
     #     This is called in /controllers/concerns/plates_concern.rb/create_library_for_well() when
     #     creating a library for an individual well, which updates the hash for things like setting
     #     the user and barcodes, then creates a library by passing in this hash as the library attributes.  
-    library_dup = self.dup
-    attrs = library_dup.attributes
-    #attrs["id"] is currently nil:
+    attrs = {}
+    attrs["biosample_id"] = associated_biosample_id
     attrs["from_prototype_id"] = self.id
-    #Remove attributes that shouldn't be explicitely set for the new library
-    attrs.delete("name") #the name is explicitly set in the library model when it has a well associated.
-    attrs.delete("barcode_id")
-    attrs.delete("paired_barcode_id")
-    attrs.delete("biosample_id")
-    attrs.delete("single_cell_sorting_id")
-    attrs.delete("created_at")
-    attrs.delete("updated_at")
-    attrs.delete("upstream_identifier")
-    attrs.delete("user_id")
+    if custom_attrs.present?
+      attrs.update(custom_attrs)
+    end
+    return clone(associated_user_id: associated_user_id, custom_attrs: attrs)
+  end
+
+  def attributes_for_cloning
+    # Whitelist of attributes used for cloning or updating child biosamples.
+    attrs = {}
+    attrs["concentration"] = self.concentration
+    attrs["concentration_unit_id"] = self.concentration_unit_id
+    attrs["nucleic_acid_term_id"] = self.nucleic_acid_term_id
+    attrs["library_fragmentation_method_id"] = self.library_fragmentation_method_id
+    attrs["lot_identifier"] = self.lot_identifier
+    attrs["notes"] = self.notes
+    attrs["paired_end"] = self.paired_end
+    attrs["plated"] = self.plated
+    attrs["sequencing_library_prep_kit_id"] = self.sequencing_library_prep_kit_id
+    attrs["size_range"] = self.size_range
+    attrs["strand_specific"] = self.strand_specific
+    attrs["vendor_id"] = self.vendor_id
+    attrs["vendor_product_identifier"] = self.vendor_product_identifier
     return attrs
   end
 

@@ -12,7 +12,7 @@ class BiosamplesController < ApplicationController
     authorize @biosample, :create?
     num_clones = params[:copies].to_i
     (1..num_clones).each do |num|
-      biosample_clone = @biosample.clone(associated_user_id: current_user.id)
+      biosample_clone = @biosample.clone_biosample(associated_user_id: current_user.id)
       # Add any has_one relationships to clone
       #@biosample.clone_crispr_modification(associated_biosample_id: biosample_clone.id, associated_user_id: current_user.id)
     end

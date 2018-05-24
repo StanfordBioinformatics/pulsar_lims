@@ -1,6 +1,6 @@
 class Biosample < ActiveRecord::Base
-  include ModelConcerns #a Concern
-  include Prototype #a Concern
+  include ModelConcerns #A Concern
+  include Prototype #A Concern that includes the clone() instance method as related ones.
   ABBR = "B"
   DEFINITION = "The source material (cell line, tissue sample) that one either begins an experiment with; also, any derivites of this source material that have been modified by the experimenter.  Model abbreviation: #{ABBR}"
   ###
@@ -21,7 +21,7 @@ class Biosample < ActiveRecord::Base
   ###
   has_and_belongs_to_many :documents
   has_and_belongs_to_many :treatments
-  has_one :crispr_modification, validate: true, dependent: :nullify
+  has_one :crispr_modification, validate: true, dependent: :destroy
   #Note that specifying "dependent: :restrict_with_exception" when triggered will raise ActiveRecord::DeleteRestrictionError
   has_many :starting_biosample_single_cell_sortings, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id, dependent: :restrict_with_exception #the starting biosample used for sorting. Not required.
   has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :restrict_with_error #the starting biosample used for sorting. Not required.
@@ -117,14 +117,14 @@ class Biosample < ActiveRecord::Base
     end
   end
 
-  def clone(associated_user_id:, custom_attrs: nil)
+  def clone_biosample(associated_user_id:, custom_attrs: nil)
     # Generates a hash of attributes that can be used to duplicate the biosample. In the generated
-    # attributes, the biosample property part_of_biosample_id will be set to the current biosample, 
-    # and the property form_prototype_id will as well. 
+    # attributes, the biosample property part_of_biosample_id will be set to the current biosample,
+    # and the property form_prototype_id will as well.
     # Some attributes don't make sense to duplicate, and hence aren't. Such attributes include
-    # the user_id (could be a different user cloning than the one that created the original), 
+    # the user_id (could be a different user cloning than the one that created the original),
     # record id, name, created_at, updated_at, upstream_identifier, and some foreign keys, such as well_id if present.
-    # The calling code should set the user and name attributes. 
+    # The calling code should set the user and name attributes.
     #
     # Returns:
     #     Hash containing the attributes for creating a new biosample.
@@ -134,25 +134,23 @@ class Biosample < ActiveRecord::Base
     #     to the well. It directly uses the hash that this method returns to create the new biosample
     #     (whose name will be set automatically in the biosample model when it sees that a well_id
     #     is set.
-    times_cloned = self._times_cloned + 1
-    attrs = self.attributes_for_cloning()
-    # Don't add "attrs["from_prototype_id"] = self.id" line that is present in the clone method of 
+
+    # Don't add "attrs["from_prototype_id"] = self.id" line that is present in the clone method of
     # other models, such as Library and CrisprModification, since cloning a Biosample can be useful
-    # for other purpose than making a prototype_instance (i.e. a Biosample can be part_of another 
+    # for other purpose than making a prototype_instance (i.e. a Biosample can be part_of another
     # Biosample, and that is the use of cloning in the case of Biosamples. Adding this attribute
     # is needed, however, in the case of cloning a sorting_biosample in a single_cell_sorting experiment,
-    # thus the caller does set this attribute. 
+    # thus the caller does set this attribute.
 
-    #attrs["id"] is currently nil:
-    attrs["part_of_biosample_id"] = self.id  
-    attrs["user_id"] = associated_user_id
-    attrs["name"] = "#{self.name} clone #{times_cloned}"
+    attrs = {}
+    attrs["part_of_biosample_id"] = self.id
     if custom_attrs.present?
       attrs.update(custom_attrs)
     end
-    new_record = Biosample.create!(attrs)
-    self.update!({_times_cloned: times_cloned }) 
-    return new_record
+    new_clone = clone(associated_user_id: associated_user_id, custom_attrs: attrs)
+    if self.crispr_modification.present?   
+      self.crispr_modification.clone_crispr_modification(associated_biosample_id: new_clone.id, associated_user_id: self.user.id)
+    end
   end
 
   def attributes_for_cloning
@@ -170,14 +168,6 @@ class Biosample < ActiveRecord::Base
     attrs["vendor_id"] = self.vendor_id
     attrs["vendor_product_identifier"] = self.vendor_product_identifier
     return attrs
-  end
-
-  def clone_crispr_modification
-    # Returns the attributes of the cloned crispr_modification if one is present on the current biosample.
-    # The caller will need to set the name attribute. 
-    if self.crispr_modification.present?
-      return self.crispr_modification.clone()
-    end
   end
 
   private
@@ -201,16 +191,16 @@ class Biosample < ActiveRecord::Base
 
   def parents
     parents = []
-    # Add parents from any part-of relationships in this single-parent ancestor chain. 
+    # Add parents from any part-of relationships in this single-parent ancestor chain.
     parent = self.part_of_biosample
     while parent
       parents << parent
-      parent = parent.part_of_biosample            
-    end 
+      parent = parent.part_of_biosample
+    end
 
-    # Add parents from any prototoype in this single-parent ancestor chain. 
+    # Add parents from any prototoype in this single-parent ancestor chain.
     # I can't imagine a scenario where it would be useful to have more than one ancestor that is
-    # a prototype, but it's possible to do so should check for it. 
+    # a prototype, but it's possible to do so should check for it.
     parent = self.from_prototype
     while parent
       parents << parent
@@ -220,20 +210,22 @@ class Biosample < ActiveRecord::Base
   end
 
   def all_documents
-    documents = self.documents
+    documents = self.documents.dup # Must use dup() method here so as not to create a reference. 
     self.parents.each do |p|
       if p.documents.any?
-        documents <<  p.documents
+        documents = documents.merge(p.documents)
+        #The merge() method doesn't convert its argument to an array so we can still use ActiveRecord methods on it.
       end
     end
     return documents
   end
 
   def all_treatments
-    treatments = self.treatments
+    treatments = self.treatments.dup # Must use dup() method here so as not to create a reference. 
     self.parents.each do |p|
       if p.treatments.any?
-        treatments <<  p.treatments
+        treatments = treatments.merge(p.treatments)
+        #The merge() method doesn't convert its argument to an array so we can still use ActiveRecord methods on it.
       end
     end
     return treatments

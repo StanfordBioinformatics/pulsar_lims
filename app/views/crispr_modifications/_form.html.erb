@@ -1,9 +1,9 @@
 
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr } %>
-	<%# is_crispr_modification_path = request.fullpath.start_with?(crispr_modifications_path) %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr } %>
+  <%# is_crispr_modification_path = request.fullpath.start_with?(crispr_modifications_path) %>
 
 
-	<%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique name"} %>
+  <%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique name"} %>
 
   <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The alias or accession of an existing genetic_modification on the ENCODE Portal (leave blank if this is a new genetic_modification that hasn't been registered there yet). For a list of available genetic_modifications on the ENCODE Portal, see https://www.encodeproject.org/genetic-modifications."} %>
 
@@ -11,54 +11,64 @@
 
   <%= f.input :purpose, collection: Enums::CRISPR_MOD_PURPOSE, label_html: {"data-toggle": "tooltip", "title":  "The purpose of the genetic modification."} %>
 
-	<!-- If crispr is being updated, show any existing associated crispr_constructs and allow user to be able to delete them. -->
-	<% pers_crispr_constructs = @crispr.crispr_constructs.persisted %>
-	<% if @crispr.persisted? and pers_crispr_constructs.any? %>
-		<table class="min-table">
-			<thead>
-				<tr>
-					<th><strong>Crispr constructs:</strong></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<%= f.simple_fields_for :crispr_constructs, pers_crispr_constructs do |ff| %>
-					<% cc = pers_crispr_constructs[ff.index] %>
-					<tr>
-						<td><%= cc.name %></td>
-						<td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
-					</tr>
-				<% end %>
-			</tbody>
-		</table></br>
-	<% end %>
-				
-	<div id="added_crispr_constructs"></div>
-	<!-- .added_crispr_constructs will serve as the container for new crispr_construct selections added by jQuery. -->
+  <!-- If crispr is being updated, show any existing associated crispr_constructs and allow user to be able to delete them. -->
+  <strong>Crispr constructs:</strong>
+  <% parent_ccs = @crispr.parent_crispr_constructs %>
+  <% if parent_ccs.any? %>
+    <ul>
+      <% parent_ccs.each do |pcc| %>
+        <li><%= pcc.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
-	<% if not @crispr.persisted? and @crispr.crispr_constructs.any? %>
-		<!-- Then the form was rerendered (perhaps due to input error on submission), and 
+  <% if @crispr.id.present? and @crispr.crispr_constructs.persisted.any? %>
+    <% pers_crispr_constructs = @crispr.crispr_constructs.persisted %>
+    <table class="min-table">
+      <thead>
+        <tr>
+          <th><strong>Crispr constructs:</strong></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.simple_fields_for :crispr_constructs, pers_crispr_constructs do |ff| %>
+          <% cc = pers_crispr_constructs[ff.index] %>
+          <tr>
+            <td><%= cc.name %></td>
+            <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table></br>
+  <% end %>
+        
+  <div id="added_crispr_constructs"></div>
+  <!-- .added_crispr_constructs will serve as the container for new crispr_construct selections added by jQuery. -->
+
+  <% if not @crispr.persisted? and @crispr.crispr_constructs.any? %>
+    <!-- Then the form was rerendered (perhaps due to input error on submission), and 
          we want to show what the user originally selected.
-		-->
-		<%= render partial: "crispr_constructs/select_crispr_construct", 
-				locals: {f: f, crispr_constructs: CrisprConstruct.all} %>
-	<% end %>
+    -->
+    <%= render partial: "crispr_constructs/select_crispr_construct", 
+        locals: {f: f, crispr_constructs: CrisprConstruct.all} %>
+  <% end %>
 
-	<%= link_to "Add Crispr Construct", select_crispr_construct_crispr_modifications_path(exclude_ids: @crispr.crispr_constructs.ids), 
-			remote: true, 
-			class: "select_crispr_construct reg-btn" %>
-	</br></br>	
+  <%= link_to "Add Crispr Construct", select_crispr_construct_crispr_modifications_path(exclude_ids: @crispr.all_crispr_constructs.ids), 
+      remote: true, 
+      class: "select_crispr_construct reg-btn" %>
+  </br></br>  
 
   <%= f.association :donor_construct, label_html: {"data-toggle" => "tooltip", "title" => "The Donor Construct that contains the donor sequence to integrate at the genomic site of the genetic modification."} %>
 
   <%# f.association :biosample, collection: Biosample.non_plated, label_html: {"data-toggle" => "tooltip", "title" => "The biosample on which the CRISPR was performed."} %>
 
-	<%= label_tag(:reference_genome_id, "Reference Genome  ", {"data-toggle" => "tooltip", "title" => "Select reference genome you will use to describe the location of the genetic modification."}) %>
-	<%= select_tag(:reference_genome_id, options_for_select( ReferenceGenome.order("lower(name)").map {|x| [x.name, x.id]}),
-			prompt: "Select reference")  %>
-	</br>
+  <%= label_tag(:reference_genome_id, "Reference Genome  ", {"data-toggle" => "tooltip", "title" => "Select reference genome you will use to describe the location of the genetic modification."}) %>
+  <%= select_tag(:reference_genome_id, options_for_select( ReferenceGenome.order("lower(name)").map {|x| [x.name, x.id]}),
+      prompt: "Select reference")  %>
+  </br>
 
-	<div class="container genomic_integration_site"></div>
-	<!-- Jquery will fill in the div above when a reference_genome is selected -->
+  <div class="container genomic_integration_site"></div>
+  <!-- Jquery will fill in the div above when a reference_genome is selected -->
 
-	</br>
+  </br>

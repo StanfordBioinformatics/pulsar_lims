@@ -17,7 +17,6 @@ class CrisprModificationsController < ApplicationController
     #Function: Called via AJAX in the crispr form when the user clicks the "Add Crispr Construct" button. 
     #Parsed params : exclude_ids - Array of CrisprConstruct IDs to exclude from the selection.
     exclude_ids = params[:exclude_ids]
-    @biosample = Biosample.new
     @crispr = CrisprModification.new
     @crispr_constructs = CrisprConstruct.where.not(id: exclude_ids)
     render layout: false
