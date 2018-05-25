@@ -11,7 +11,7 @@ class PlatesController < ApplicationController
 	end	
 
   def index
-    super(Plate)
+    super
   end
 
   def show

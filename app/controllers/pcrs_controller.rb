@@ -2,7 +2,7 @@ class PcrsController < ApplicationController
   before_action :set_pcr, only: [:show, :edit, :update, :destroy]
 
   def index
-    super(Pcr)
+    super
   end
 
   def show

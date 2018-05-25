@@ -9,7 +9,7 @@ class BiosampleTermNamesController < ApplicationController
   end
 
   def index
-    super(BiosampleTermName)
+    super
   end
 
   def show

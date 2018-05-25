@@ -25,7 +25,7 @@ class Biosample < ActiveRecord::Base
   has_one :crispr_modification, validate: true, dependent: :destroy
   #Note that specifying "dependent: :restrict_with_exception" when triggered will raise ActiveRecord::DeleteRestrictionError
   has_many :starting_biosample_single_cell_sortings, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id, dependent: :restrict_with_exception #the starting biosample used for sorting. Not required.
-  has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :restrict_with_error #the starting biosample used for sorting. Not required.
+  has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :nullify #, dependent: :restrict_with_error #the starting biosample used for sorting. Not required.
   belongs_to  :user
   belongs_to  :owner, class_name: "User"
   belongs_to  :biosample_term_name
@@ -171,6 +171,22 @@ class Biosample < ActiveRecord::Base
     return attrs
   end
 
+  def all_treatments
+    """
+    Returns:
+        Treatment::ActiveRecord_Relation.
+    """
+    treatment_ids = self.treatment_ids 
+    self.parents.each do |p|
+      treatment_ids.concat(p.treatment_ids)
+    end
+    return Treatment.where(id: treatment_ids)
+  end
+
+  def parent_treatments
+    return all_treatments.where.not(id: self.treatment_ids)
+  end
+
   private
 
   def propagate_update_if_has_biosample_parts
@@ -188,22 +204,6 @@ class Biosample < ActiveRecord::Base
         # then the biosample on each well of each plate in the experiment will now be updated.
       end
     end
-  end
-
-  def all_treatments
-    """
-    Returns:
-        Treatment::ActiveRecord_Relation.
-    """
-    treatment_ids = self.treatment_ids 
-    self.parents.each do |p|
-      treatment_ids.concat(p.treatment_ids)
-    end
-    return Treatment.where(id: treatment_ids)
-  end
-
-  def parent_treatments
-    return all_treatments.where.not(id: self.treatment_ids)
   end
 
   def validate_part_of

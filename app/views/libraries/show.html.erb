@@ -1,112 +1,112 @@
 <% title(@library.name, "Libraries") %>
 <%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @library } %>
 <header>
-	<h1><%= @library.name %></h1>
+  <h1><%= @library.name %></h1>
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_edit_record", locals: {record: @library} %>
     <%= render partial: "application_partials/auth_destroy_record", locals: {record: @library} %>
-	</ul>
+  </ul>
 </header>
 
 <%= render partial: "application_partials/record_meta", locals: { record: @library } %>
 
 <table class="attributes">
-	<tr>
-	  <th><strong>Name:</strong></th>
-		<td><%= @library.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @library.name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Prototype?</strong></th>
-		<td>
+  <tr>
+    <th><strong>Prototype?</strong></th>
+    <td>
       <% if @library.prototype_instances.any? %>
         True
       <% else %>
         False
       <% end %>
     </td>
-	</tr>
-
-	<tr>
-	  <th><strong>Sequencing Library Prep Kit:</strong></th>
-		<td><%= link_to @library.sequencing_library_prep_kit.name, @library.sequencing_library_prep_kit %></td>
-	</tr>
-
-	<tr>
-		<th><strong>Paired End</strong></th>
-		<td><%= @library.paired_end? %></td>
-	</tr>
-
-	<tr>
-		<th><strong>Documents:</strong></th>
-		<td>
-      <%= render partial: "documents/link_to_documents", locals: {documents: @library.documents} %>
-		</td>
-	</tr>
-
-	<tr>
-		<th><strong>Sequencing Requests</strong></th>
-		<% if @library.sequencing_requests.present? %>
-			<td>
-				<%= render partial: "sequencing_requests/link_to_sequencing_request", locals: {sequencing_requests: @library.sequencing_requests} %>
-			</td>
-		<% else %>
-			<td></td>
-		<% end %>
   </tr>
 
   <tr>
-		<th><strong>Sequence Ontology Term:</strong></th>
-	  <td><%= link_to @library.nucleic_acid_term.name, @library.nucleic_acid_term %></td>
-	</tr>
+    <th><strong>Sequencing Library Prep Kit:</strong></th>
+    <td><%= link_to @library.sequencing_library_prep_kit.name, @library.sequencing_library_prep_kit %></td>
+  </tr>
 
-	<% unless @library.prototype_instances.any? %>
-		<!-- library prototypes don't have a biosample -->
-		<tr>
-			<th><strong>Biosample:</strong></th>
-			<td><%= link_to @library.biosample.name, @library.biosample %></td>
-  	<tr>
-	<% end %>
+  <tr>
+    <th><strong>Paired End</strong></th>
+    <td><%= @library.paired_end? %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Documents:</strong></th>
+    <td>
+      <%= render partial: "documents/link_to_documents", locals: {documents: @library.documents} %>
+    </td>
+  </tr>
+
+  <tr>
+    <th><strong>Sequencing Requests</strong></th>
+    <% if @library.sequencing_requests.present? %>
+      <td>
+        <%= render partial: "sequencing_requests/link_to_sequencing_request", locals: {sequencing_requests: @library.sequencing_requests} %>
+      </td>
+    <% else %>
+      <td></td>
+    <% end %>
+  </tr>
+
+  <tr>
+    <th><strong>Sequence Ontology Term:</strong></th>
+    <td><%= link_to @library.nucleic_acid_term.name, @library.nucleic_acid_term %></td>
+  </tr>
+
+  <% unless @library.prototype? %>
+    <!-- library prototypes don't have a biosample -->
+    <tr>
+      <th><strong>Biosample:</strong></th>
+      <td><%= link_to @library.biosample.name, @library.biosample %></td>
+    <tr>
+  <% end %>
 
     <th><strong>Vendor:</strong></th>
     <% if @library.vendor.present? %>
       <td><%= link_to @library.vendor.name, @library.vendor %></td>
     <% else %>
-			<td></td>
+      <td></td>
     <% end %>
   </tr>
 
   <!-- Either a barcode or a paired_barcode can be present, not both -->
-	<tr>
-		<% if not @library.paired_end?%>
-			<th><strong>Barcode:</strong></th>
-			<% if @library.barcode.present? %>
-					<td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: [@library.barcode]} %></td>
-			<% else %>
-				<td></td>
-			<% end %>
-		<% else %>
-			<th><strong>Paired Barcode:</strong></th>
-			<% if  @library.paired_barcode.present? %>
-				<td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: [@library.paired_barcode]} %></td>
-			<% else %>
-				<td></td>
-			<% end %>
-		<% end %>
-	</tr>
-
-	<tr>
-		<th><strong>Library Fragmentation Method:</strong></th>
-		<% if @library.library_fragmentation_method.present? %>
-			<td><%= link_to @library.library_fragmentation_method.name, @library.library_fragmentation_method %></td>
-		<% else %>
-			<td></td>
-		<% end %>
-	</tr>
+  <tr>
+    <% if not @library.paired_end?%>
+      <th><strong>Barcode:</strong></th>
+      <% if @library.barcode.present? %>
+          <td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: [@library.barcode]} %></td>
+      <% else %>
+        <td></td>
+      <% end %>
+    <% else %>
+      <th><strong>Paired Barcode:</strong></th>
+      <% if  @library.paired_barcode.present? %>
+        <td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: [@library.paired_barcode]} %></td>
+      <% else %>
+        <td></td>
+      <% end %>
+    <% end %>
+  </tr>
 
   <tr>
-  	<th><strong>Lot Identifier:</strong></th>
+    <th><strong>Library Fragmentation Method:</strong></th>
+    <% if @library.library_fragmentation_method.present? %>
+      <td><%= link_to @library.library_fragmentation_method.name, @library.library_fragmentation_method %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+  </tr>
+
+  <tr>
+    <th><strong>Lot Identifier:</strong></th>
     <td><%= @library.lot_identifier %></td>
  </tr>
 
@@ -115,24 +115,24 @@
     <td><%= @library.vendor_product_identifier %></td>
   </tr>
 
-	<tr>
-		<th><strong>Concentration:</strong></th>
-		<% if @library.concentration.present? %>
-			<td><%= @library.concentration %>&nbsp;<%= @library.concentration_unit.name %></td>
-		<% else %>
-			<td></td>
-		<% end %>
-	</tr>
+  <tr>
+    <th><strong>Concentration:</strong></th>
+    <% if @library.concentration.present? %>
+      <td><%= @library.concentration %>&nbsp;<%= @library.concentration_unit.name %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+  </tr>
 
-	<tr>	
-  	<th><strong>Size range:</strong></th>
-	  <td><%= @library.size_range %></td>
-	</tr>
+  <tr>  
+    <th><strong>Size range:</strong></th>
+    <td><%= @library.size_range %></td>
+  </tr>
 
- 	<tr>
-   	<th><strong>Strand Specific?</strong></th>
+   <tr>
+     <th><strong>Strand Specific?</strong></th>
     <td><%= @library.strand_specific %></td>
- 	</tr>
+   </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    

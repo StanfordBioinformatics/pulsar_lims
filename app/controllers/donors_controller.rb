@@ -9,26 +9,26 @@ class DonorsController < ApplicationController
   end
 
   def index
-    super(Donor)
+    super
   end
 
   def show
-		authorize @donor
+    authorize @donor
   end
 
   def new
-		authorize Donor
+    authorize Donor
     @donor = Donor.new
   end
 
   def edit
-		authorize @donor
+    authorize @donor
   end
 
   def create
     @donor = Donor.new(donor_params)
-		authorize @donor
-		@donor.user = current_user
+    authorize @donor
+    @donor.user = current_user
 
     respond_to do |format|
       if @donor.save
@@ -42,7 +42,7 @@ class DonorsController < ApplicationController
   end
 
   def update
-		authorize @donor
+    authorize @donor
     respond_to do |format|
       if @donor.update(donor_params)
         format.html { redirect_to @donor, notice: 'Donor was successfully updated.' }
@@ -55,8 +55,8 @@ class DonorsController < ApplicationController
   end
 
   def destroy
-		authorize @donor
-		ddestroy(@donor,donors_path)
+    authorize @donor
+    ddestroy(@donor,donors_path)
   end
 
   private

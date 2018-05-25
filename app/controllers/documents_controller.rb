@@ -9,36 +9,36 @@ class DocumentsController < ApplicationController
   end 
 
   def index
-    super(Document)
+    super
   end
 
   def show
-		authorize @document
+    authorize @document
   end
 
   def new
-		authorize Document
+    authorize Document
     @document = Document.new
   end
 
   def edit
-		authorize @document
+    authorize @document
   end
 
   def create
-		authorize Document
-		@document = Document.new(document_params)
-		@document.user = current_user
+    authorize Document
+    @document = Document.new(document_params)
+    @document.user = current_user
 
-		if @document.save
-			redirect_to(@document, notice: "Document was successfully created.")
-		else
-			render "new"
-		end
-	end
+    if @document.save
+      redirect_to(@document, notice: "Document was successfully created.")
+    else
+      render "new"
+    end
+  end
 
   def update
-		authorize @document
+    authorize @document
     respond_to do |format|
       if @document.update(document_params)
         format.html { redirect_to @document, notice: 'Document was successfully updated.' }
@@ -51,20 +51,20 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
-		authorize @document
-		ddestroy(@document,documents_path)
+    authorize @document
+    ddestroy(@document,documents_path)
   end
 
-	def document
-		#called by the index and show views.
-		@document = Document.find(params[:id])
-		authorize @document, :show?
-		send_data(data=@document.data,options={
-							filename: @document.name,
-							type: @document.content_type,
-							disposition: 'attachment'}
-		)
-	end
+  def document
+    #called by the index and show views.
+    @document = Document.find(params[:id])
+    authorize @document, :show?
+    send_data(data=@document.data,options={
+              filename: @document.name,
+              type: @document.content_type,
+              disposition: 'attachment'}
+    )
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

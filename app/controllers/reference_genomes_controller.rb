@@ -2,7 +2,7 @@ class ReferenceGenomesController < ApplicationController
   before_action :set_reference_genome, only: [:show, :edit, :update, :destroy]
 
   def index
-    super(ReferenceGenome)
+    super
   end
 
   def show

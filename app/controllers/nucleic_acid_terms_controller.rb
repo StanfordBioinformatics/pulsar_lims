@@ -2,7 +2,7 @@ class NucleicAcidTermsController < ApplicationController
   before_action :set_nucleic_acid_term, only: [:show, :edit, :update, :destroy]
 
   def index
-    super(NucleicAcidTerm)
+    super
   end
 
   def show

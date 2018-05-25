@@ -1,0 +1,16 @@
+<!-- 
+  Args:
+      1. links: An array of the foreign key associations of a particular attribute.
+-->
+<ul>
+  <% links.each do |l| %>
+    <% if l.respond_to?(:params_for_url_for) %>
+      <% link_dest = l.params_for_url_for %>
+    <% else %>
+      <% link_dest = l %>
+    <% end %>
+    <li>
+      <%= link_to l.name, link_dest %>
+    </li>
+  <% end %>
+</ul>

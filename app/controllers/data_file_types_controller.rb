@@ -9,7 +9,7 @@ class DataFileTypesController < ApplicationController
   end
 
   def index
-    super(DataFileType)
+    super
   end
 
   def show

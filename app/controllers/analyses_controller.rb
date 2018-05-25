@@ -20,7 +20,7 @@ class AnalysesController < ApplicationController
 	end
 
   def index
-    super(Analysis)
+    super
   end
 
   def show

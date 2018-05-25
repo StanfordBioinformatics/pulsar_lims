@@ -13,8 +13,8 @@ Pulsar::Application.routes.draw do
     get :select_options, on: :collection
   end
   resources :analyses do
-		get :add_merged_file, on: :collection
-	end
+    get :add_merged_file, on: :collection
+  end
   resources :data_file_types do
     get :select_options, on: :collection
   end
@@ -22,38 +22,38 @@ Pulsar::Application.routes.draw do
   resources :data_storage_providers
   resources :data_storages do
     get :select_options, on: :collection
-		get :get_base_path, on: :member
-		get :customize_for_data_storage_provider, on: :collection
-	end
+    get :get_base_path, on: :member
+    get :customize_for_data_storage_provider, on: :collection
+  end
   resources :concentration_units
   resources :single_cell_sortings do
-		get :add_plate, on: :member
-		get :add_sorting_biosample, on: :member	
-		get :add_library_prototype, on: :member
-		get :new_analysis, on: :member
-	end
+    get :add_plate, on: :member
+    get :add_sorting_biosample, on: :member  
+    get :add_library_prototype, on: :member
+    get :new_analysis, on: :member
+  end
   resources :addresses
   resources :plates do
-		get :show_barcodes, on: :member
-		resources :wells, except: [:index, :new, :destroy]
-	end
+    get :show_barcodes, on: :member
+    resources :wells, except: [:index, :new, :destroy]
+  end
   resources :paired_barcodes
   resources :crispr_modifications do
     get :select_options, on: :collection
-		#crisprs only belong to biosamples.
-		get :new_pcr_validation, on: :member
-		get :select_crispr_construct, on: :collection
-		#select_crispr_construct on collection instead of member b/c the user selects this when creating or editing the crispr object, and
-		# since the crispr won't have an id yet when being created, we can't use :member.
-		get :select_chromosome_on_reference_genome, on: :collection
-	end
+    #crisprs only belong to biosamples.
+    get :new_pcr_validation, on: :member
+    get :select_crispr_construct, on: :collection
+    #select_crispr_construct on collection instead of member b/c the user selects this when creating or editing the crispr object, and
+    # since the crispr won't have an id yet when being created, we can't use :member.
+    get :select_chromosome_on_reference_genome, on: :collection
+  end
   resources :crispr_constructs do
-		get :select_construct_tag, on: :collection
+    get :select_construct_tag, on: :collection
   end
 
   resources :donor_constructs do
-		get :select_construct_tag, on: :collection
-	end
+    get :select_construct_tag, on: :collection
+  end
 
   resources :construct_tags
 
@@ -64,9 +64,9 @@ Pulsar::Application.routes.draw do
   resources :genome_locations
   resources :sequencing_library_prep_kits do
     get :select_options, on: :collection
-		get :paired_end_kits, on: :collection
-  	resources :barcodes, except: [:index]
-	end
+    get :paired_end_kits, on: :collection
+    resources :barcodes, except: [:index]
+  end
   resources :library_fragmentation_methods
   resources :biosample_term_names do
     get :select_options, on: :collection
@@ -76,23 +76,23 @@ Pulsar::Application.routes.draw do
     get :select_options, on: :collection
   end
 
-	namespace :api do
-		resources :biosamples do
+  namespace :api do
+    resources :biosamples do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
 
-		resources :biosample_ontologies do
+    resources :biosample_ontologies do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
 
-		resources :biosample_types do
+    resources :biosample_types do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
 
-		resources :biosample_term_names do
+    resources :biosample_term_names do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
@@ -101,11 +101,11 @@ Pulsar::Application.routes.draw do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
-		resources :construct_tags do
+    resources :construct_tags do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
-		resources :crispr_constructs do
+    resources :crispr_constructs do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
@@ -115,15 +115,15 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
-		resources :donors do
+    resources :donors do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
 
-		resources :sequencing_requests do
-			post :find_by_name, on: :collection
-			post :add_crispr_modification, on: :member
-		end
+    resources :sequencing_requests do
+      post :find_by_name, on: :collection
+      post :add_crispr_modification, on: :member
+    end
 
     resources :targets do
       post :find_by, on: :collection
@@ -153,58 +153,58 @@ Pulsar::Application.routes.draw do
       patch :unarchive, on: :member  
     end
 
-	end
-
-  namespace :admin do
-  	root "application#index"
-
-		resources :users do
-			member do
-				patch :archive
-				patch :unarchive
-    		get  :show_api_key
-    		post  :remove_api_key
-			end
-		end
   end
 
-	resources :sequencing_requests do
-		get :select_scs, on: :member
-		get :select_scs_plates, on: :member
-		get :select_library, on: :member
-  	resources :sequencing_runs do
-			get :add_storage_location, on: :member
-			get :new_sequencing_result, on: :member
-			resources :sequencing_results do
-				get :get_barcode_selector, on: :collection
-				get :get_library_selector, on: :collection
-			end
-		end
-	end
+  namespace :admin do
+    root "application#index"
+
+    resources :users do
+      member do
+        patch :archive
+        patch :unarchive
+        get  :show_api_key
+        post  :remove_api_key
+      end
+    end
+  end
+
+  resources :sequencing_requests do
+    get :select_scs, on: :member
+    get :select_scs_plates, on: :member
+    get :select_library, on: :member
+    resources :sequencing_runs do
+      get :add_storage_location, on: :member
+      get :new_sequencing_result, on: :member
+      resources :sequencing_results do
+        get :get_barcode_selector, on: :collection
+        get :get_library_selector, on: :collection
+      end
+    end
+  end
 
   #Add non-nested index view for sequencing_runs:
   #get sequencing_runs: "sequencing_runs#all", as: :sequencing_runs
 
   devise_for :users, controllers: {
-		registrations: 'registrations'
-	}
+    registrations: 'registrations'
+  }
   resources :users, only: [:show, :edit] do
     post :generate_api_key, on: :member
     get  :show_api_key, on: :member
     post  :remove_api_key, on: :member
-		patch :archive, on: :member
+    patch :archive, on: :member
   end 
-		
+    
 
-	resources :attachments, only: [:show,:new]
+  resources :attachments, only: [:show,:new]
 
-	resources :welcome, only: [:index] do
-		get :search, on: :collection
-	end
+  resources :welcome, only: [:index] do
+    get :search, on: :collection
+  end
 
   resources :reference_genomes do
-	  resources :chromosomes, except: [:index]
-	end
+    resources :chromosomes, except: [:index]
+  end
 
   resources :experiment_types
 
@@ -213,13 +213,13 @@ Pulsar::Application.routes.draw do
   end
 
   resources :libraries do
-		get :select_paired_barcode, on: :collection
-		get :select_barcode, on: :collection
-	end
+    get :select_paired_barcode, on: :collection
+    get :select_barcode, on: :collection
+  end
 
   resources :antibodies
 
-	resources :antibody_purifications do
+  resources :antibody_purifications do
     get :select_options, on: :collection
   end 
 
@@ -237,10 +237,11 @@ Pulsar::Application.routes.draw do
     get :clone, on: :member
     post :create_clones, on: :member
     get :biosample_parts, on: :member
+    get :prototype_instances, on: :member
     get :select_options, on: :collection
-		get :select_biosample_term_name, on: :collection
-		get :add_crispr_modification, on: :member
-	end
+    get :select_biosample_term_name, on: :collection
+    get :add_crispr_modification, on: :member
+  end
 
   resources :donors do
     get :select_options, on: :collection
@@ -252,9 +253,9 @@ Pulsar::Application.routes.draw do
 
   resources :documents do
     get :select_options, on: :collection
-		post :save, on: :collection
-		get  :document, on: :member
-	end
+    post :save, on: :collection
+    get  :document, on: :member
+  end
 
   resources :document_types
 

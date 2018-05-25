@@ -9,7 +9,7 @@ class AntibodyPurificationsController < ApplicationController
   end 
 
   def index
-    super(AntibodyPurification)
+    super
   end
 
   def show

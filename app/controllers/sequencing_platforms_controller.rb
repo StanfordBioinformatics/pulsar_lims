@@ -9,7 +9,7 @@ class SequencingPlatformsController < ApplicationController
   end 
 
   def index
-    super(SequencingPlatform)
+    super
   end
 
   def show

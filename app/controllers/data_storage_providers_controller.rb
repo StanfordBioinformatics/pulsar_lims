@@ -2,7 +2,7 @@ class DataStorageProvidersController < ApplicationController
   before_action :set_data_storage_provider, only: [:show, :edit, :update, :destroy]
 
   def index
-    super(DataStorageProvider)
+    super
   end
 
   def show

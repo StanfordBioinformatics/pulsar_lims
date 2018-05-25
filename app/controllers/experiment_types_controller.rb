@@ -2,7 +2,7 @@ class ExperimentTypesController < ApplicationController
   before_action :set_experiment_type, only: [:show, :edit, :update, :destroy]
 
   def index
-    super(ExperimentType)
+    super
   end
 
   def show

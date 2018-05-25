@@ -18,7 +18,7 @@ class CrisprConstructsController < ApplicationController
   end 
 
   def index
-    super(CrisprConstruct)
+    super
   end
 
   def show

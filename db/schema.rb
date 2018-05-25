@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180524230636) do
+ActiveRecord::Schema.define(version: 20180525192046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -547,6 +547,7 @@ ActiveRecord::Schema.define(version: 20180524230636) do
     t.boolean  "plated",                                      default: false
     t.string   "upstream_identifier"
     t.text     "notes"
+    t.boolean  "prototype",                                   default: false
   end
 
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree

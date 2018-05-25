@@ -10,7 +10,7 @@ class CloningVectorsController < ApplicationController
   end
 
   def index
-    super(CloningVector)
+    super
   end
 
   def show

@@ -18,7 +18,7 @@ class SequencingLibraryPrepKitsController < ApplicationController
 	end
 
   def index
-    super(SequencingLibraryPrepKit)
+    super
   end
 
   def show

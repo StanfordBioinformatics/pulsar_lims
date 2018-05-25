@@ -3,7 +3,7 @@ class AntibodiesController < ApplicationController
   before_action :set_antibody, only: [:show, :edit, :update, :destroy]
 
   def index
-    super(Antibody)
+    super
   end
 
   def show

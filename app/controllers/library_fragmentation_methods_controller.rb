@@ -2,7 +2,7 @@ class LibraryFragmentationMethodsController < ApplicationController
   before_action :set_library_fragmentation_method, only: [:show, :edit, :update, :destroy]
 
   def index
-    super(LibraryFragmentationMethod)
+    super
   end
 
   def show

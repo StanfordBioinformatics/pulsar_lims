@@ -2,7 +2,7 @@ class FileReferencesController < ApplicationController
   before_action :set_file_reference, only: [:show, :edit, :update, :destroy]
 
 	def index
-		super(FileReference)
+		super
 	end
 
   def show

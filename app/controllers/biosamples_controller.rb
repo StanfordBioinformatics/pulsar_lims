@@ -1,7 +1,7 @@
 class BiosamplesController < ApplicationController
 #  include DocumentsConcern #gives me add_documents(), remove_documents()
-  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :biosample_parts, :clone, :create_clones, :delete_biosample_document,:add_crispr_modification]
-  skip_after_action :verify_authorized, only: [:biosample_parts, :select_biosample_term_name,:add_crispr_modification]
+  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :biosample_parts, :prototype_instances, :clone, :create_clones, :delete_biosample_document,:add_crispr_modification]
+  skip_after_action :verify_authorized, only: [:biosample_parts, :prototype_instances, :select_biosample_term_name,:add_crispr_modification]
 
   def clone
     # Renders the view that submits a form to the create_clones action below.
@@ -28,6 +28,14 @@ class BiosamplesController < ApplicationController
     render action: "index" 
   end
     
+  def prototype_instances
+    #Called via ajax
+    set_model_class()
+    @records = policy_scope(Biosample.where({from_prototype: @biosample})).page params[:page]
+    @no_new_btn = true
+    @title = "Prototype instances of Biosample #{@biosample.name}"
+    render action: "index" 
+  end
 
   def select_options
     #Called via ajax.
@@ -64,7 +72,7 @@ class BiosamplesController < ApplicationController
   end
 
   def index
-    super(Biosample, where: {well: nil})
+    super(where: {well: nil})
   end
 
   def show

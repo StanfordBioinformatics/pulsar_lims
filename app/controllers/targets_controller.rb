@@ -9,7 +9,7 @@ class TargetsController < ApplicationController
   end 
 
   def index
-    super(Target)
+    super
   end
 
   def show

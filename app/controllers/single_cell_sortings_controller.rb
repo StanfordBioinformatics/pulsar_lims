@@ -12,8 +12,8 @@ class SingleCellSortingsController < ApplicationController
   def add_library_prototype
     #non AJAX
     custom_lib_params = {
-      name: "#{@single_cell_sorting.name} library prototype",
-      biosample_id: @single_cell_sorting.sorting_biosample_id
+      prototype: true,
+      name: "#{@single_cell_sorting.name} library prototype"
     }
     @library = @single_cell_sorting.build_library_prototype(custom_lib_params)
     flash[:action] = :add_library_prototype
@@ -29,9 +29,13 @@ class SingleCellSortingsController < ApplicationController
 
   def add_sorting_biosample
     #called via AJAX
-    sorting_biosample = Biosample.new(@single_cell_sorting.starting_biosample.clone())
-    sorting_biosample.name =  @single_cell_sorting.name + " " + "biosample prototype"
-    sorting_biosample.user = current_user
+    sorting_biosample_attrs = @single_cell_sorting.starting_biosample.attributes_for_cloning()
+    sorting_biosample_attrs.update({
+      name: @single_cell_sorting.name + " " + "biosample prototype",
+      user_id: current_user.id,
+      part_of_id: @single_cell_sorting.starting_biosample.id
+    })
+    sorting_biosample = Biosample.new(sorting_biosample_attrs)
     @biosample = sorting_biosample
     #Needed to set @biosample above since that is used in the partial single_cell_sortings/_add_sorting_biosample.html.erb that renders a Biosample form. -->
     render partial: "add_sorting_biosample", layout: false
@@ -154,6 +158,7 @@ class SingleCellSortingsController < ApplicationController
           :name, 
           :nucleic_acid_term_id, 
           :paired_end,
+          :prototype,
           :sequencing_library_prep_kit_id, 
           :size_range, 
           :strand_specific, 

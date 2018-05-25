@@ -45,8 +45,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def index(model_class, scope: nil, where: {})
-    @records = policy_scope(model_class).where(where)
+  def index(scope: nil, where: {})
+    @records = policy_scope(@model_class).where(where)
     if scope.present?
       @records = @records.send(scope)
     end

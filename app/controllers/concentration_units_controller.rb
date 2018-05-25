@@ -2,7 +2,7 @@ class ConcentrationUnitsController < ApplicationController
   before_action :set_concentration_unit, only: [:show, :edit, :update, :destroy]
 
   def index
-    super(ConcentrationUnit)
+    super
   end
 
   def show

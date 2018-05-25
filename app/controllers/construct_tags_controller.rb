@@ -2,7 +2,7 @@ class ConstructTagsController < ApplicationController
   before_action :set_construct_tag, only: [:show, :edit, :update, :destroy]
 
   def index
-    super(ConstructTag)
+    super
   end
 
   def show

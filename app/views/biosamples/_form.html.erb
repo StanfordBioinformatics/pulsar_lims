@@ -1,20 +1,20 @@
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @biosample } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @biosample } %>
 
-	<%= f.association :user, as: :hidden %>
+  <%= f.association :user, as: :hidden %>
 
-	<%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique biosample name"} %> 
+  <%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique biosample name"} %> 
 
-	<%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The corresponding ID for this biosample on the ENCODE Portal"} %>
-	<%= f.input :tube_label, label_html: {"data-toggle": "tooltip", "title": "How the stored biosample is labeled (i.e. what is written on the tube)."} %> 
+  <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The corresponding ID for this biosample on the ENCODE Portal"} %>
+  <%= f.input :tube_label, label_html: {"data-toggle": "tooltip", "title": "How the stored biosample is labeled (i.e. what is written on the tube)."} %> 
 
 
   <%= f.input :description, 
     label_html: {"data-toggle": "tooltip", "title": "A plain text description of the biosample. Do not include experiment details, constructs or treatments."} %>
 
-	<%= f.association :owner, collection: User.all.map { |x| [x.display,x.id]},
-			label_html: {"data-toggle": "tooltip", "title": "Set the user who owns the biosample if needed for tracking."} %>
+  <%= f.association :owner, collection: User.all.map { |x| [x.display,x.id]},
+      label_html: {"data-toggle": "tooltip", "title": "Set the user who owns the biosample if needed for tracking."} %>
 
-	<%= f.association :part_of, 
+  <%= f.association :part_of, 
       collection: Biosample.non_plated.order(:name), 
       label: "Parent biosample", 
       label_html: {
@@ -24,11 +24,22 @@
       }
   %>
 
-	<% if @biosample.pooled_from_biosamples.persisted.any? %>
-    <%= render partial: "application_partials/simple_fields_for", locals: {title: "Pooled-from biosamples", record: @biosample, f: f, attribute: :pooled_from_biosamples} %>
-	<% end %>
+  <%= f.input :control, label_html: {"data-toggle": "tooltip", "title": "Select if this biosample will be used as a control in an experiment."} %>
 
-	<%= f.association :pooled_from_biosamples, 
+  <!-- Show select for Documents. Mutliple documents can be selected.
+         If the form was rejected due to a validation error, then the
+         user will have been presented with this form again to correct it, 
+         and I set the default selectioned to what the user had originally, 
+         if any. -->
+
+  <%= f.input :nih_institutional_certification, label: "NIH Institutional Certification number",
+      label_html: {class: "refresh", "data-toggle": "tooltip", title: " See https://osp.od.nih.gov/scientific-sharing/researchers-institutional-certifications"} %>
+
+  <% if @biosample.pooled_from_biosamples.persisted.any? %>
+    <%= render partial: "application_partials/simple_fields_for", locals: {title: "Pooled-from biosamples", record: @biosample, f: f, attribute: :pooled_from_biosamples} %>
+  <% end %>
+
+  <%= f.association :pooled_from_biosamples, 
       label: "Add pooled-from biosamples",
       collection: Biosample.non_plated.order(:name),
       include_blank: true,
@@ -40,42 +51,37 @@
       }
   %>
 
-	<% if @biosample.treatments.persisted.any? %>
-    <%= render partial: "application_partials/simple_fields_for", locals: {title: "Treatments", record: @biosample, f: f, attribute: :treatments} %>
-	<% end %>
+  <fieldset>
+    <legend>Treatments</legend>
+    <strong>Linked treatments:</strong>
+    <% parent_links = @biosample.parent_treatments %>  
+    <%= render partial: "application_partials/parental_and_self_fklinks", locals: {f: f, rec: @biosample, link_name: :treatments, parent_links: parent_links} %>
 
-  <%= f.association :treatments, 
-      label: "Add treatments",
-      include_blank: true,
-      selected: nil,
-      input_html: {class: "biosample_treatments_selector"},
-      label_html: {class: "refresh"}
-  %>
+    <%= f.association :treatments, 
+        label: "Add treatments",
+        include_blank: true,
+        selected: nil,
+        input_html: {class: "biosample_treatments_selector"},
+        label_html: {class: "refresh"}
+    %>
+  </fieldset>
 
-	<%= f.input :control, label_html: {"data-toggle": "tooltip", "title": "Select if this biosample will be used as a control in an experiment."} %>
+  <fieldset>
+    <legend>Documents</legend>
+    <strong>Linked documents:</strong>
+    <% parent_links = @biosample.parent_documents %>  
+    <%= render partial: "application_partials/parental_and_self_fklinks", locals: {f: f, rec: @biosample, link_name: :documents, parent_links: parent_links} %>
 
-	<!-- Show select for Documents. Mutliple documents can be selected.
-				 If the form was rejected due to a validation error, then the
-				 user will have been presented with this form again to correct it, 
-				 and I set the default selectioned to what the user had originally, 
-				 if any. -->
-
-  <%= f.input :nih_institutional_certification, label: "NIH Institutional Certification number",
-      label_html: {class: "refresh", "data-toggle": "tooltip", title: " See https://osp.od.nih.gov/scientific-sharing/researchers-institutional-certifications"} %>
-
-	<% if @biosample.documents.persisted.any? %>
-    <%= render partial: "application_partials/simple_fields_for", locals: {title: "Protocols", record: @biosample, f: f, attribute: :documents } %>
-	<% end %>
-
-	<%= f.association :documents, label: "Add protocols", selected: nil, collection: sorted_document_name_id(),
-      include_blank: true,
-      input_html: {class: "biosample_documents_selector"},
-			label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>
+    <%= f.association :documents, label: "Add documents", selected: nil, collection: sorted_document_name_id(),
+        include_blank: true,
+        input_html: {class: "biosample_documents_selector"},
+        label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>
+  </fieldset>
 
   <fieldset>
     <legend>Classification</legend>
-  	<%= f.association :biosample_type, collection: BiosampleType.order(:name), 
-  			input_html: {class: "biosample_type_selector"}, label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The categorization of the biosample. See 'Biosample Types' in the Object Store."} %>
+    <%= f.association :biosample_type, collection: BiosampleType.order(:name), 
+        input_html: {class: "biosample_type_selector"}, label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The categorization of the biosample. See 'Biosample Types' in the Object Store."} %>
     <%= f.association :biosample_term_name, input_html: {class: "biosample_term_name_selector"},
         label_html: {class: "refresh", "data-toggle": "tooltip", "title": "An ontology term for the biosamaple. The selection choices change depending on the value chosen for \"Biosample type\"."}
   %>
@@ -84,14 +90,14 @@
 
   <%= render partial: "vendors/fieldset_input", locals: {f: f} %>
 
-	<%= f.input :lot_identifier,
-			label_html: {"data-toggle": "tooltip", "title": "The lot identifier provided by the originating lab or vendor."} %>
+  <%= f.input :lot_identifier,
+      label_html: {"data-toggle": "tooltip", "title": "The lot identifier provided by the originating lab or vendor."} %>
 
-	<%= f.association :donor, collection: Donor.order(:name), label_method: :name,
-			label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The donor of the biosample"} %>
+  <%= f.association :donor, collection: Donor.order(:name), label_method: :name,
+      label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The donor of the biosample"} %>
 
-	<%= f.input :passage_number,
-			label_html: {"data-toggle": "tooltip", "title": "In calculating passage number, include passages from the source."} %>
+  <%= f.input :passage_number,
+      label_html: {"data-toggle": "tooltip", "title": "In calculating passage number, include passages from the source."} %>
 
   <label for="starting_amount" data-toggle="tooltip" title="The initial quantity of cells or tissue."><span>Starting amount</span></label>
   <%= f.input_field :starting_amount %>                                                                  
@@ -101,10 +107,10 @@
 
   <%= f.input :tissue_preservation_method, collection: Enums::TISSUE_PRESERVATION_METHODS, label_html: {"data-toggle": "tooltip", "title": "The method by which the sample was preserved.  If you need to be able to select an option that is not in this list, please email the admin."} %>
 
-	<%= f.input :date_biosample_taken, html5: true,
-			label_html: {"data-toggle": "tooltip", "title": "For cultured samples, the date the biosample was taken. For tissue samples, the date the biosample was taken."} %>
+  <%= f.input :date_biosample_taken, html5: true,
+      label_html: {"data-toggle": "tooltip", "title": "For cultured samples, the date the biosample was taken. For tissue samples, the date the biosample was taken."} %>
 
-	<%= f.input :submitter_comments,
-			label_html: {"data-toggle": "tooltip", "title": "Additional information specified by the submitter to be displayed as a comment on the upstream portal."} %>
+  <%= f.input :submitter_comments,
+      label_html: {"data-toggle": "tooltip", "title": "Additional information specified by the submitter to be displayed as a comment on the upstream portal."} %>
 
-	</br>
+  </br>

@@ -1,44 +1,44 @@
 class DonorConstructsController < ApplicationController
   before_action :set_donor_construct, only: [:show, :edit, :update, :destroy]
-	skip_after_action :verify_authorized, only: [:select_construct_tag]
+  skip_after_action :verify_authorized, only: [:select_construct_tag]
 
-	def select_construct_tag
+  def select_construct_tag
     @donor_construct = DonorConstruct.new
     exclude_construct_tags = params[:exclude_construct_tags]
     if exclude_construct_tags.present?
       if exclude_construct_tags.is_a?(String)
         exclude_construct_tags = Array(exclude_construct_tags)
       end 
-			@construct_tags = ConstructTag.where.not(id: [exclude_construct_tags])	
-		else
-			@construct_tags = ConstructTag.all
+      @construct_tags = ConstructTag.where.not(id: [exclude_construct_tags])  
+    else
+      @construct_tags = ConstructTag.all
     end 
     
     render layout: false
-  end	
+  end  
 
   def index
-    super(DonorConstruct)
+    super
   end
 
   def show
-		authorize @donor_construct
+    authorize @donor_construct
   end
 
   def new
-		authorize DonorConstruct
+    authorize DonorConstruct
     @donor_construct = DonorConstruct.new
   end
 
   def edit
-		authorize @donor_construct
+    authorize @donor_construct
   end
 
   def create
-		authorize DonorConstruct
+    authorize DonorConstruct
     @donor_construct = DonorConstruct.new(donor_construct_params)
 
-		@donor_construct.user = current_user
+    @donor_construct.user = current_user
 
     respond_to do |format|
       if @donor_construct.save
@@ -52,7 +52,7 @@ class DonorConstructsController < ApplicationController
   end
 
   def update
-		authorize @donor_construct
+    authorize @donor_construct
     respond_to do |format|
       if @donor_construct.update(donor_construct_params)
         format.html { redirect_to @donor_construct, notice: 'Donor construct was successfully updated.' }
@@ -65,8 +65,8 @@ class DonorConstructsController < ApplicationController
   end
 
   def destroy
-		authorize @donor_construct
-		ddestroy(@donor_construct,donor_constructs_path)
+    authorize @donor_construct
+    ddestroy(@donor_construct,donor_constructs_path)
   end
 
   private

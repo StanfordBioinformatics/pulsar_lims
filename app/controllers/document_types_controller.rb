@@ -2,7 +2,7 @@ class DocumentTypesController < ApplicationController
   before_action :set_document_type, only: [:show, :edit, :update, :destroy]
 
   def index
-    super(DocumentType)
+    super
   end
 
   def show

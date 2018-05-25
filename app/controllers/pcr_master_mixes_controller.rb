@@ -9,7 +9,7 @@ class PcrMasterMixesController < ApplicationController
   end
 
   def index
-    super(PcrMasterMix)
+    super
   end
 
   def show

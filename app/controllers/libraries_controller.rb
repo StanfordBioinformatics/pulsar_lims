@@ -1,55 +1,55 @@
 class LibrariesController < ApplicationController
-	#include DocumentsConcern #gives me add_documents()
+  #include DocumentsConcern #gives me add_documents()
   before_action :set_library, only: [:show, :edit, :update, :destroy]
-	skip_after_action :verify_authorized, only: [:select_barcode,:select_paired_barcode]
+  skip_after_action :verify_authorized, only: [:select_barcode,:select_paired_barcode]
 
   def select_barcode
     #barcodes on a sequencing_library_prep_kit
-		#used in the Library _form with ajax
-		@library = Library.new
-		kit_id = library_params()[:sequencing_library_prep_kit_id]
-		kit = SequencingLibraryPrepKit.find(kit_id)
-		@index1_barcodes = Barcode.where({sequencing_library_prep_kit_id: kit.id, index_number: 1})
+    #used in the Library _form with ajax
+    @library = Library.new
+    kit_id = library_params()[:sequencing_library_prep_kit_id]
+    kit = SequencingLibraryPrepKit.find(kit_id)
+    @index1_barcodes = Barcode.where({sequencing_library_prep_kit_id: kit.id, index_number: 1})
     render layout: false
   end
 
   def select_paired_barcode
     #barcodes on a sequencing_library_prep_kit
-		#used in the Library _form with ajax
-		@library = Library.new
-		kit_id = library_params()[:sequencing_library_prep_kit_id]
-		kit = SequencingLibraryPrepKit.find(kit_id)
-		@paired_barcodes = PairedBarcode.where({sequencing_library_prep_kit_id: kit.id})
+    #used in the Library _form with ajax
+    @library = Library.new
+    kit_id = library_params()[:sequencing_library_prep_kit_id]
+    kit = SequencingLibraryPrepKit.find(kit_id)
+    @paired_barcodes = PairedBarcode.where({sequencing_library_prep_kit_id: kit.id})
     render layout: false
   end
 
   def index
-    super(Library, scope: :non_plated)
+    super(scope: :non_plated)
     #policy_scope(Library).non_plated
   end
 
   def show
-		authorize @library
+    authorize @library
   end
 
   def new
-		authorize Library
+    authorize Library
     @library = Library.new
   end
 
   def edit
-		authorize @library	
+    authorize @library  
   end
 
   def create
-		authorize Library
-#		render json: params
-#		return
+    authorize Library
+#    render json: params
+#    return
     @library = Library.new(library_params)
 
-		@library.user = current_user
+    @library.user = current_user
 
-		#@library = add_documents(@library,params[:library][:document_ids])
+    #@library = add_documents(@library,params[:library][:document_ids])
 
     respond_to do |format|
       if @library.save
@@ -63,12 +63,12 @@ class LibrariesController < ApplicationController
   end
 
   def update
-		authorize @library
-#		render json: params[:library]
-#		return
+    authorize @library
+#    render json: params[:library]
+#    return
 
-		#@library = remove_documents(@library,params[:remove_documents])
-		#@library = add_documents(@library,params[:library][:document_ids])
+    #@library = remove_documents(@library,params[:remove_documents])
+    #@library = add_documents(@library,params[:library][:document_ids])
 
     respond_to do |format|
       if @library.update(library_params)
@@ -82,8 +82,8 @@ class LibrariesController < ApplicationController
   end
 
   def destroy
-		authorize @library
-		ddestroy(@library,libraries_path)
+    authorize @library
+    ddestroy(@library,libraries_path)
   end
 
   private
@@ -109,6 +109,7 @@ class LibrariesController < ApplicationController
         :upstream_identifier,
         :paired_barcode_id,
         :paired_end,
+        :prototype,
         :sequencing_library_prep_kit_id,
         :size_range,
         :strand_specific,

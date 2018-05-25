@@ -2,7 +2,7 @@ class OrganismsController < ApplicationController
   before_action :set_organism, only: [:show, :edit, :update, :destroy]
 
   def index
-    super(Organism)
+    super
   end
 
   def show

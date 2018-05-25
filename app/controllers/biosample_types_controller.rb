@@ -10,7 +10,7 @@ class BiosampleTypesController < ApplicationController
   end 
 
   def index
-    super(BiosampleType)
+    super
   end
 
   def show

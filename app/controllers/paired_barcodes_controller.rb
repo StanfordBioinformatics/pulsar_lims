@@ -2,7 +2,7 @@ class PairedBarcodesController < ApplicationController
   before_action :set_paired_barcode, only: [:show, :edit, :update, :destroy]
 
   def index
-    super(PairedBarcode)
+    super
   end
 
   def show

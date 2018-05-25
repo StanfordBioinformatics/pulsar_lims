@@ -30,7 +30,7 @@ class CrisprModificationsController < ApplicationController
   end
 
   def index
-    super(CrisprModification)
+    super
   end
 
   def show

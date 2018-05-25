@@ -9,7 +9,7 @@ class SequencingCentersController < ApplicationController
   end
 
   def index
-    super(SequencingCenter)
+    super
   end
 
   def show

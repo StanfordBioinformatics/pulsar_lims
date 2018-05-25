@@ -9,7 +9,7 @@ class IsotypesController < ApplicationController
   end
 
   def index
-    super(Isotype)
+    super
   end
 
   def show

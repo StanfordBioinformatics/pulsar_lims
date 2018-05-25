@@ -49,20 +49,18 @@
     </tr>
   <% end %>
 
-  <tr>
-    <th><strong>Prototype?</strong></th>
-    <td>
-      <% if @biosample.prototype_instances.any? %>
-        True 
-      <% else %>
-        False
-      <% end %>
-  </tr>
+  <% if @biosample.well.present? %>
+    <tr>
+      <th><strong>Well</strong></th>
+      <% plate = @biosample.well.plate %>
+      <td>Plate: <%= link_to plate.name, plate %>, Well: <%= link_to @biosample.well.name, [plate, @biosample.well] %></td>
+    </tr>
+  <% end %>
 
   <% if @biosample.starting_biosample_single_cell_sortings.any? %>
     <tr>
       <th><strong>Single Cell Sortings</strong></th>
-      <td><%= render partial: "single_cell_sortings/link_to_single_cell_sorting", locals: {single_cell_sortings: @biosample.starting_biosample_single_cell_sortings} %></td>
+      <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.starting_biosample_single_cell_sortings} %></td>
     </tr>
   <% end %>
 
@@ -76,15 +74,7 @@
   <% if @biosample.pooled_from_biosamples.any? %>
     <tr>
       <th><strong>Pooled from biosamples</strong></th>
-      <td><%= render partial: "link_to_biosamples", locals: {biosamples: @biosample.pooled_from_biosamples} %></td>
-    </tr>
-  <% end %>
-
-  <% if @biosample.well.present? %>
-    <tr>
-      <th><strong>Well</strong></th>
-      <% plate = @biosample.well.plate %>
-      <td>Plate: <%= link_to plate.name, plate %>, Well: <%= link_to @biosample.well.name, [plate, @biosample.well] %></td>
+      <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.pooled_from_biosamples} %></td>
     </tr>
   <% end %>
 
@@ -96,18 +86,31 @@
       </td>
     </tr>
   <% end %>
+
+  <% prototype_instances = @biosample.prototype_instances %>
+  <tr>
+    <% if prototype_instances.any? %>
+      <th><strong>Prototype instances</strong></th>
+      <td>
+        <%= link_to "#{@biosample.prototype_instances.length} total", [:prototype_instances, @biosample] %>
+      </td>
+    <% else %>
+      <th><strong>Prototype?</strong></th>
+      <td>False</td>
+    <% end %>
+  </tr>
   
   <tr>
     <th><strong>Protocol documents:</strong></th>
     <td>
-      <%= render partial: "documents/link_to_documents", locals: {documents: @biosample.documents} %>
+      <%= render partial: "documents/link_to_documents", locals: {documents: @biosample.all_documents} %>
     </td>
   </tr>
 
   <tr>
     <th><strong>Treatments:</strong></th>
     <td>
-      <%= render partial: "treatments/link_to_treatments", locals: {treatments: @biosample.treatments} %>
+      <%= render partial: "treatments/link_to_treatments", locals: {treatments: @biosample.all_treatments} %>
     </td>
   </tr>
 
