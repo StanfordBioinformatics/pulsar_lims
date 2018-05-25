@@ -1,14 +1,14 @@
 <%= simple_form_for(@paired_barcode) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @paired_barcode } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @paired_barcode } %>
 
   <%= f.association :sequencing_library_prep_kit, 
       label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The name of the sequencing library preparation kit used that contains the barcode."} %>
 
   <%= f.input :add_paired_barcodes, 
-			as: :text, 
-			placeholder: "TAAGGCGA-TAGATCGC\nCGTACTAG-CTCTCTAT\n...",
-			hint: "Copy and paste paired barcodes. If any have errors, you'll need fix them and paste back back in.",
-			label_html: {"data-toggle" => "tooltip", "title" => "Enter 1 or more paired barcodes in uppercase in the form index1-index2. Both indices must be from the selected sequencing library prep kit. There should be one pair per row, and any pair that already exists in the table will be skipped."} %>
+      as: :text, 
+      placeholder: "TAAGGCGA-TAGATCGC\nCGTACTAG-CTCTCTAT\n...",
+      hint: "Copy and paste paired barcodes. If any have errors, you'll need fix them and paste back back in.",
+      label_html: {"data-toggle" => "tooltip", "title" => "Enter 1 or more paired barcodes in uppercase in the form index1-index2. Both indices must be from the selected sequencing library prep kit. There should be one pair per row, and any pair that already exists in the table will be skipped."} %>
 
 
   <div class="form-actions">

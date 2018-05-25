@@ -33,7 +33,7 @@
     <th><strong>Plates:</strong></th>
     <% if @sequencing_request.plates.present?%>
       <td>
-        <%= render partial: "plates/link_to_plate", locals: {plates: @sequencing_request.plates.persisted} %>
+        <%= render partial: "application_partials/link_to_has_many", locals: {links: @sequencing_request.plates.persisted} %>
       </td>
     <% else %>
       <td>None</td>
@@ -73,7 +73,7 @@
     <th><strong>Sequencing runs:</strong></th>
     <td>
     <% if @sequencing_request.sequencing_runs.present? %>
-      <%= render partial: "sequencing_runs/link_to_sequencing_runs", locals: {sequencing_runs: @sequencing_request.sequencing_runs} %>
+      <%= render partial: "application_partials/link_to_has_many", locals: {links: @sequencing_request.sequencing_runs} %>
     <% else %>
       None
     <% end %>
@@ -84,7 +84,7 @@
     <th><strong>Libraries:</strong></th>
     <% if @sequencing_request.libraries.present? %>
       <td>
-        <%= render partial: "libraries/link_to_library", locals: {libraries: @sequencing_request.libraries.persisted} %>
+        <%= render partial: "application_partials/link_to_has_many", locals: {links: @sequencing_request.libraries.persisted} %>
       </td>
     <% else %>
       <td>None</td>

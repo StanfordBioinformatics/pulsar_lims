@@ -23,7 +23,7 @@
 
   <tr>
     <th><strong>Documents:</strong></th>
-    <td><%= render partial: "documents/link_to_documents", locals: {documents: @single_cell_sorting.documents} %></td>
+    <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @single_cell_sorting.documents} %></td>
   </tr>
 
 	<tr>
@@ -66,7 +66,7 @@
 	<tr>
 		<th><strong>Analyses:</strong></th>
 		<td>
-      <%= render partial: "analyses/link_to_analysis", locals: {analyses: @single_cell_sorting.analyses} %>
+      <%= render partial: "application_partials/link_to_has_many", locals: {links: @single_cell_sorting.analyses} %>
 			<span style="padding-top: 0.5em"><%= link_to "Add",new_analysis_single_cell_sorting_path, class: "reg-btn btn-sm", id: "scs-add-analysis" %></span>
 		</td>
 	</tr>

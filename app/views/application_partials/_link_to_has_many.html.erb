@@ -1,16 +1,23 @@
 <!-- 
+  This partial is usually used in show views. Looks similar to the _parental_and_self_fklinks partial,
+  but that is meant to be used in form views as it allows for editing. 
+
   Args:
       1. links: An array of the foreign key associations of a particular attribute.
 -->
 <ul>
-  <% links.each do |l| %>
-    <% if l.respond_to?(:params_for_url_for) %>
-      <% link_dest = l.params_for_url_for %>
-    <% else %>
-      <% link_dest = l %>
+  <% unless links.blank? %>
+    <% links.each do |l| %>
+      <% if l.respond_to?(:params_for_url_for) %>
+        <% link_dest = l.params_for_url_for %>
+      <% else %>
+        <% link_dest = l %>
+      <% end %>
+      <li>
+        <%= link_to l.name, link_dest %>
+      </li>
     <% end %>
-    <li>
-      <%= link_to l.name, link_dest %>
-    </li>
+  <% else %>
+    <li>None</li>
   <% end %>
 </ul>

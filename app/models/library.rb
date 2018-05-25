@@ -18,7 +18,6 @@ class Library < ActiveRecord::Base
   belongs_to :biosample
   belongs_to :concentration_unit
   belongs_to :from_prototype, class_name: "Library"
-  has_many   :libraries, foreign_key: :from_prototype_id, dependent: :destroy
   has_many   :prototype_instances, class_name: "Library", foreign_key: "from_prototype_id", dependent: :restrict_with_exception
   belongs_to :library_fragmentation_method
   belongs_to :nucleic_acid_term

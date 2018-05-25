@@ -1,11 +1,11 @@
 <%= simple_form_for(@nucleic_acid_term) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @nucleic_acid_term } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @nucleic_acid_term } %>
 
-	<%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique nucleic acid term name"} %>
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique nucleic acid term name"} %>
     
-	<%= f.input :accession, label_html: {"data-toggle" => "tooltip", "title" => "SO (Sequence Ontology) identifier"} %>
+  <%= f.input :accession, label_html: {"data-toggle" => "tooltip", "title" => "SO (Sequence Ontology) identifier"} %>
     
-	<%= f.input :definition, label_html: {"data-toggle" => "tooltip", "title" => "Definition of the SO identifier"} %>
+  <%= f.input :definition, label_html: {"data-toggle" => "tooltip", "title" => "Definition of the SO identifier"} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary" %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180525192046) do
+ActiveRecord::Schema.define(version: 20180525222022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -660,6 +660,7 @@ ActiveRecord::Schema.define(version: 20180525192046) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.text     "notes"
+    t.string   "name"
   end
 
   add_index "pcrs", ["crispr_modification_id"], name: "index_pcrs_on_crispr_modification_id", using: :btree

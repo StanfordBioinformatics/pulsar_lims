@@ -19,7 +19,7 @@
   <tr>
     <th><strong>Documents:</strong></th>
     <td>
-      <%= render partial: "documents/link_to_documents", locals: {documents: @sequencing_library_prep_kit.documents} %>
+      <%= render partial: "application_partials/link_to_has_many", locals: {links: @sequencing_library_prep_kit.documents} %>
     </td>
   </tr>
 

@@ -63,7 +63,7 @@
   <tr>                                                                                                 
     <th><strong>Documents:</strong></th>                                                               
     <td>                                                                                               
-      <%= render partial: "documents/link_to_documents", locals: {documents: @treatment.documents} %>
+      <%= render partial: "application_partials/link_to_has_many", locals: {links: @treatment.documents} %>
     </td>                                                                                              
   </tr>
 

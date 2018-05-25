@@ -109,7 +109,7 @@ class CrisprModification < ActiveRecord::Base
     self.parents.each do |p|
       ids.concat(p.pcr_validation_ids)
     end
-    return PcrValidation.where(id: ids)
+    return Pcr.where(id: ids)
   end
 
   def parent_pcr_validations

@@ -18,34 +18,34 @@
 @import "sequencing_library_prep_kits";
 
 @media (max-width: $screen-xs-min) {
-	body {
-		font-size: 1.0em;
-	}
+  body {
+    font-size: 1.0em;
+  }
 }
 
 @media (min-width: $screen-xs-min) and (max-width: $screen-xs-max) {
-	body {
-		font-size: 1.4em;
-	}
+  body {
+    font-size: 1.4em;
+  }
 }
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-	body {
-		font-size: 1.4em;
-	}
+  body {
+    font-size: 1.4em;
+  }
 }
 
 
 @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-	body {
-		font-size: 1.4em;
-	}
+  body {
+    font-size: 1.4em;
+  }
 }
 
 @media (min-width: $screen-lg-min) {
-	body {
-		font-size: 1.6em;
-	}
+  body {
+    font-size: 1.6em;
+  }
 }
 
 .hbtm--remove {
@@ -59,38 +59,38 @@ i.refresh {
 }
 
 .celsius {
-	&:after {
-		content: " \2103";
+  &:after {
+    content: " \2103";
     //2103 is the hexadecimal value of the UTF code point for the Celsius symbol.
     // See https://www.w3schools.com/charsets/ref_utf_letterlike.asp
-	}
+  }
 }
 
 //Set class="td-spacing-2" to 'table' elements to set 1em padding top and bottom:
 .td-spacing-2 tr td,th {
-		padding-bottom: 2em;
+    padding-bottom: 2em;
 }
 
 // See defaults for tooltip in .rvm/gems/ruby-2.2.2/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap
 .tooltip.in {
-	opacity: 1.0;
+  opacity: 1.0;
 }
 
 .tooltip-inner  {
-	font-size: 1.3em;
-	color: black;
-	//aquamarine
-	background-color: rgb(127,255,212);
-	max-width: 400px;
-	text-align: left;
+  font-size: 1.3em;
+  color: black;
+  //aquamarine
+  background-color: rgb(127,255,212);
+  max-width: 400px;
+  text-align: left;
 }
 
 .fa-info-circle:hover {
-	cursor: help;
+  cursor: help;
 }
 
 .waiting * {
-	cursor: progress;
+  cursor: progress;
 }
 
 
@@ -100,17 +100,17 @@ Styles for the search
 .search, .search-btn {
   // Consists of search input field and search icon.
   // Want to make them look as one continuous element with icon at the right end.
-	background-color: #fff;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	height: 34px;
-	line-height: 1.5em;
-	vertical-align: middle;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 34px;
+  line-height: 1.5em;
+  vertical-align: middle;
 }
 
 .search-btn {
-	border: none;
-	height: 30px;
+  border: none;
+  height: 30px;
   //Give height just enough so that the search icon doesn't touch the borders of the input.
 }
 /* 
@@ -119,7 +119,7 @@ End search box styles
 
 
 .modal {
-		// Code from example at https://www.w3schools.com/howto/howto_css_modals.asp.
+    // Code from example at https://www.w3schools.com/howto/howto_css_modals.asp.
     display: none; // Hidden by default.
     position: fixed; // Stay in place.
     z-index: 10; // Sit on top. I found out that the active element in the left-hand navbar has a z-index of 2.
@@ -130,10 +130,10 @@ End search box styles
     overflow: auto; // Enable scroll if needed
     background-color: rgb(0,0,0); // Fallback color
     background-color: rgba(0,0,0,0.4); // Black w/ opacity
-}	
+}  
 
 .modal-content {
-		// Code from example at https://www.w3schools.com/howto/howto_css_modals.asp.
+    // Code from example at https://www.w3schools.com/howto/howto_css_modals.asp.
     background-color: #fefefe;
     width: 80%; // Could be more or less, depending on screen size.
     margin: 15% auto; // 15% from the top and centered.
@@ -142,34 +142,34 @@ End search box styles
 }
 
 .close-modal {
-		// Code from example at https://www.w3schools.com/howto/howto_css_modals.asp.
-		// class of span tag I often use in a model.
-		color: #aaa;
+    // Code from example at https://www.w3schools.com/howto/howto_css_modals.asp.
+    // class of span tag I often use in a model.
+    color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-		&:hover, &:focus {
-			color: black;
-			cursor: pointer;
-		}
+    &:hover, &:focus {
+      color: black;
+      cursor: pointer;
+    }
 }
 
 .back-btn {
-	display: inline-block;
-	margin-top: 2em;
+  display: inline-block;
+  margin-top: 2em;
 }
 
 .jumbotron {
-	padding-top: 1em;
-	padding-bottom: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .bg-info.jumbotron {
-	@extend .bg-info;
+  @extend .bg-info;
 }
 
 .map-img {
-	width: 100%;
+  width: 100%;
 }
 
 .progress {
@@ -185,16 +185,16 @@ End search box styles
 }
 
 table.attributes i.fa-pencil {
-	margin-right: 1em;
+  margin-right: 1em;
 }
 
 label.radio_buttons {
-	margin-right: 15px;
+  margin-right: 15px;
 }
 
 /* the .form-group is the class rails/simple-form gives to inputs. */
 .form-group {
-	max-width: 70%;
+  max-width: 70%;
 }
 
 
@@ -219,7 +219,7 @@ select:focus, input:focus, textarea:focus {
 input.search:focus + .search-btn {
     //Set background color of main search icon (search form on all pages) to same color as input's new background color (above style) when in focus.
     // Otherwise, it'll stay white on yellow background. 
-	  background-color: #FFFFCC;
+    background-color: #FFFFCC;
 }
 
 #app-title {
@@ -227,26 +227,26 @@ input.search:focus + .search-btn {
 }
 
 #mytogglelist {
-	li.encode-logo a {
-		margin: 0;
-		padding: 0;
-		img {
-			background-color: white;
-			height: $navbar-height;
-		}
-	}
+  li.encode-logo a {
+    margin: 0;
+    padding: 0;
+    img {
+      background-color: white;
+      height: $navbar-height;
+    }
+  }
  .active a {
-		background-color: #8C1515;
-	} 
-	a:hover {
-		background-color: rgba(0,0,0,0.2);
-	}
+    background-color: #8C1515;
+  } 
+  a:hover {
+    background-color: rgba(0,0,0,0.2);
+  }
 }
 
 #sign-out-btn {
-	a:hover {
-		background-color: rgba(0,0,0,0.2);
-	}
+  a:hover {
+    background-color: rgba(0,0,0,0.2);
+  }
 }
 
 .navbar-fixed-top {
@@ -281,9 +281,9 @@ body {
 
 .main {
   border-radius: 0.2em; 
-	margin-top: 100px;
+  margin-top: 100px;
   padding-top: 2em;
-	//margin-top: calc(3 * $navbar-height); //doesn't work with variables.
+  //margin-top: calc(3 * $navbar-height); //doesn't work with variables.
   background-color: white;
 }
 
@@ -313,15 +313,15 @@ body {
   }
 
   ul {
-		width: 100%;
-		padding-left: 1em;
-		padding-right: 1em;
-		margin-top: 0.6em;
+    width: 100%;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-top: 0.6em;
     margin-bottom: 0;
     padding-bottom: 0; 
-		&:last-child {
-			padding-bottom: 1.0em;
-		}
+    &:last-child {
+      padding-bottom: 1.0em;
+    }
     a { 
       font-size: 0.8em;
     }
@@ -333,12 +333,12 @@ body {
 }
 
 ul.actions {
-	//in the header of each show view
-	@extend .list-unstyled;
-	@extend .list-inline;
-	margin-bottom: 2em;
+  //in the header of each show view
+  @extend .list-unstyled;
+  @extend .list-inline;
+  margin-bottom: 2em;
 }
-		
+    
 #meta_attributes {
   border: 1px solid grey;
   @extend .table;
@@ -387,39 +387,38 @@ table.index {
 }
 
 .attributes, .table-data {
-	@extend .table;
+  @extend .table;
   @extend .table-hover;
   @extend .table-condensed;
   @extend .table-responsive;
   //Set 'display: block' below, otherwise the table cells can extend past the container in the index views.
   display: block;
-  padding-left: 1em;
   padding-right: 1em;
 
   thead tr:first-of-type {
     th {
       border-top: 0px;
     }
-	}
+  }
 
-	td, th {
+  td, th {
     line-height: 24px !important;
   }
 }
 
 //.attributes tbody th {
-	//The <th> tags in the show views (not the index views) can take up way too much space, with the header value all the way on the left and the <td> value all the way on the right.
-	// This fixes that for the show views. Not sure why 'max-width' property doesn't have any effect here; only the 'width' property appears to. 
-//	width: 15%;
+  //The <th> tags in the show views (not the index views) can take up way too much space, with the header value all the way on the left and the <td> value all the way on the right.
+  // This fixes that for the show views. Not sure why 'max-width' property doesn't have any effect here; only the 'width' property appears to. 
+//  width: 15%;
 //}
 
 .plate-table {
-	/* see additional styles selecting elements in this table in plates.js.coffee */
-	@extend .table-data;
-	@extend .table-bordered;
-	th {
-		font-size: larger;
-	}
+  /* see additional styles selecting elements in this table in plates.js.coffee */
+  @extend .table-data;
+  @extend .table-bordered;
+  th {
+    font-size: larger;
+  }
 }
 
 a.new, a.edit, a.delete {
@@ -431,9 +430,9 @@ a.new, a.edit, a.delete {
 }
 
 .reg-btn {
-	@extend .btn;
-	@extend .btn-default;
-	background-color: #DCDCDC;
+  @extend .btn;
+  @extend .btn-default;
+  background-color: #DCDCDC;
 }
 
 a.new {

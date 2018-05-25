@@ -11,55 +11,62 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @pcr } %>
 
 <table class="attributes">
-	<tr>
-	  <th><strong>Description:</strong></th>
-	  <td><%= @pcr.description %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Pcr master mix:</strong></th>
-	  <td><%= link_to @pcr.pcr_master_mix.name, @pcr.pcr_master_mix %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Forward primer:</strong></th>
-	  <td><%= @pcr.forward_primer %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Reverse primer:</strong></th>
-	  <td><%= @pcr.reverse_primer %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Amplicon size:</strong></th>
-	  <td><%= @pcr.amplicon_size %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Annealing temperature:</strong></th>
-	  <td><%= @pcr.annealing_temperature %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Extension time:</strong></th>
-	  <td><%= @pcr.extension_time %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Num cycles:</strong></th>
-	  <td><%= @pcr.num_cycles %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Crispr modification:</strong></th>
-	  <td><%= link_to @pcr.crispr_modification.name, @pcr.crispr_modification %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Success:</strong></th>
-	  <td><%= @pcr.success %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @pcr.name %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @pcr.description %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Pcr master mix:</strong></th>
+    <td><%= link_to @pcr.pcr_master_mix.name, @pcr.pcr_master_mix %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Forward primer:</strong></th>
+    <td><%= @pcr.forward_primer %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Reverse primer:</strong></th>
+    <td><%= @pcr.reverse_primer %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Amplicon size:</strong></th>
+    <td><%= @pcr.amplicon_size %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Annealing temperature:</strong></th>
+    <td><%= @pcr.annealing_temperature %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Extension time:</strong></th>
+    <td><%= @pcr.extension_time %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Num cycles:</strong></th>
+    <td><%= @pcr.num_cycles %></td>
+  </tr>
+  
+  <% if @pcr.crispr_modification.present? %>
+    <tr>
+      <th><strong>Crispr modification:</strong></th>
+      <td><%= link_to @pcr.crispr_modification.name, @pcr.crispr_modification %></td>
+    </tr>
+  <% end %>
+  
+  <tr>
+    <th><strong>Success:</strong></th>
+    <td><%= @pcr.success %></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    

@@ -6,22 +6,22 @@ class PcrsController < ApplicationController
   end
 
   def show
-		authorize @pcr
+    authorize @pcr
   end
 
   def new
-		authorize Pcr
+    authorize Pcr
     @pcr = Pcr.new
   end
 
   def edit
-		authorize @pcr
+    authorize @pcr
   end
 
   def create
-		authorize Pcr
+    authorize Pcr
     @pcr = Pcr.new(pcr_params)
-		@pcr.user = current_user
+    @pcr.user = current_user
 
     respond_to do |format|
       if @pcr.save
@@ -35,7 +35,7 @@ class PcrsController < ApplicationController
   end
 
   def update
-		authorize @pcr
+    authorize @pcr
     respond_to do |format|
       if @pcr.update(pcr_params)
         format.html { redirect_to @pcr, notice: 'Pcr was successfully updated.' }
@@ -48,7 +48,7 @@ class PcrsController < ApplicationController
   end
 
   def destroy
-		authorize @pcr
+    authorize @pcr
     @pcr.destroy
     respond_to do |format|
       format.html { redirect_to pcrs_url }
@@ -71,6 +71,7 @@ class PcrsController < ApplicationController
           :description,
           :extension_time,
           :forward_primer,
+          :name,
           :notes,
           :num_cycles,
           :pcr_master_mix_id,

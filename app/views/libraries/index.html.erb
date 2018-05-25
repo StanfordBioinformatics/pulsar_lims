@@ -35,8 +35,7 @@
 				<td><%= rec.paired_end %></td>
         <td><%= rec.nucleic_acid_term.name %></td>
         <td>
-          <% unless rec.prototype_instances.any? %>
-            <%= logger.debug rec.id %>
+          <% unless rec.prototype? %>
             <%= link_to rec.biosample.name, rec.biosample %></td>
           <% end %>
         </td>

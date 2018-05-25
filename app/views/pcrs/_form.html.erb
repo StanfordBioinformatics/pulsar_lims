@@ -1,5 +1,6 @@
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @pcr} %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @pcr} %>
 
+  <%= f.input :name %>
   <%= f.input :description %>
   <%= f.association :pcr_master_mix, label_html: {class: "refresh"} %>
   <%= f.input :forward_primer %>

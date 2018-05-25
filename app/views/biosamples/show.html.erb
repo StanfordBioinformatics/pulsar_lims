@@ -103,14 +103,14 @@
   <tr>
     <th><strong>Protocol documents:</strong></th>
     <td>
-      <%= render partial: "documents/link_to_documents", locals: {documents: @biosample.all_documents} %>
+      <%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.all_documents} %>
     </td>
   </tr>
 
   <tr>
     <th><strong>Treatments:</strong></th>
     <td>
-      <%= render partial: "treatments/link_to_treatments", locals: {treatments: @biosample.all_treatments} %>
+      <%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.all_treatments} %>
     </td>
   </tr>
 
@@ -176,12 +176,6 @@
   </tr>
 
   <tr>
-    <th><strong>Treatments:</strong></th>
-    <td><%= render partial: "treatments/link_to_treatments", locals: {treatments: @biosample.treatments } %></td>
-  </tr>
- 
-
-  <tr>
     <th><strong>CRISPR</strong></th>
     <% if @biosample.crispr_modification.present? and @biosample.crispr_modification.persisted?%>
       <td><%= link_to @biosample.crispr_modification.name, @biosample.crispr_modification %></td>
@@ -194,7 +188,7 @@
     <th><strong>Associated libraries:</strong></th>
     <% if @biosample.libraries.present? %>
       <td>
-        <%= render partial: "libraries/link_to_library", locals: {libraries: @biosample.libraries} %>
+        <%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.libraries} %>
       </td>
     <% else %>
       <td>None</td>

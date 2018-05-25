@@ -1,5 +1,5 @@
 <%= simple_form_for(@organism) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @organism } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @organism } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique, common name of the organism."} %>
 

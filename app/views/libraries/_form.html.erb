@@ -7,11 +7,11 @@
   <fieldset>
     <legend>Prep kit and barcoding</legend>
     <%= f.association :sequencing_library_prep_kit, label_html: {"data-toggle" => "tooltip", "title" => "The library prep kit used for creating the library."} %>
-  
+
     <%= f.input :paired_end, label_html: {"data-toggle": "tooltip", title: "Check the box if this library is duel-indexed."} %>
     <%= f.input :strand_specific, label_html: {"data-toggle" => "tooltip", "title" => "Check the box if this is a strand-specific library."} %>
-  
-    <!-- Note that I'm using jQuery to fill the choices of the selection boxes below for barcodes and paired_barcodes. 
+
+    <!-- Note that I'm using jQuery to fill the choices of the selection boxes below for barcodes and paired_barcodes.
          If the paired_end input is checked, then the barcodes input will be hidden. If not checked, then the
          paired_barcodes input will be hidden. Both select inputs will be disabled until the sequencing_library_prep_kit
          input has a value that is selected. -->
@@ -25,18 +25,22 @@
     </div>
   </fieldset>
 
-  <% if @library.documents.persisted.any? %>
-    <%= render partial: "application_partials/simple_fields_for", locals: {title: "Protocol documents:", record: @library, f: f, attribute: :documents} %>
-  <% end %>
-
-  <%= f.association :documents, collection: sorted_document_name_id(), include_blank: true,
-      label_html: {class: "refresh", "data-toggle" => "tooltip","title" => "Documents that provide additional information (not a data file)."} %>
+  <fieldset>
+    <legend>Documents</legend>
+    <strong>Linked documents:</strong>
+    <% parent_links = @library.parent_documents %>
+    <%= render partial: "application_partials/parental_and_self_fklinks", locals: {f: f, rec: @library, link_name: :documents, parent_links: parent_links} %>
+    <%= f.association :documents, label: "Add documents", selected: nil, collection: sorted_document_name_id(),
+        include_blank: true,
+        input_html: {class: "biosample_documents_selector"},
+        label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>
+  </fieldset>
 
   <% if @library.sequencing_requests.present? %>
     <%= render partial: "application_partials/simple_fields_for", locals: {title: "Sequencing Requests:", record: @library, f: f, attribute: :sequencing_requests} %>
   <% end %>
 
-  <%= f.association :nucleic_acid_term, label: "Nucleic Acid Term Name", collection: NucleicAcidTerm.order(:name), 
+  <%= f.association :nucleic_acid_term, label: "Nucleic Acid Term Name", collection: NucleicAcidTerm.order(:name),
       label_method: :name, prompt: "Select the Term Name",
       label_html: {"data-toggle" => "tooltip","title" => "SO (Sequence Ontology) term best matching the molecule isolated to generate the library (e.g. 'RNA' for a total RNA library, even if that library is subsequently reverse transcribed for DNA sequencing.)"} %>
 
