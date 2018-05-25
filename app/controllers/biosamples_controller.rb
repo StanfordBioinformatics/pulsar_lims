@@ -22,7 +22,7 @@ class BiosamplesController < ApplicationController
   def biosample_parts 
     #Called via ajax
     set_model_class()
-    @records = policy_scope(Biosample.where({part_of_biosample: @biosample})).page params[:page]
+    @records = policy_scope(Biosample.where({part_of: @biosample})).page params[:page]
     @no_new_btn = true
     @title = "Child biosamples of #{@biosample.name}"
     render action: "index" 
@@ -150,7 +150,7 @@ class BiosamplesController < ApplicationController
         :notes,
         :nih_institutional_certification,
         :owner_id, 
-        :part_of_biosample_id, 
+        :part_of_id, 
         :passage_number, 
         :starting_amount,
         :starting_amount_units,

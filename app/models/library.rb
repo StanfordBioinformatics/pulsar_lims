@@ -3,7 +3,8 @@ end
 
 class Library < ActiveRecord::Base
   include ModelConcerns
-  include Prototype #A Concern that includes the clone() instance method as related ones.
+  include Cloning # A Concern that includes the clone() and parent() instance methods and related ones.
+  include CloningForDocuments # A Concern that includes instance methods all_documents() and parent_documents().
   ABBR = "L"
   DEFINITION = "A sequencing library that is prepared for sequencing.  Model abbreviation: #{ABBR}"
   #The is_control bool column has a default of false.

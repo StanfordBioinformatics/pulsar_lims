@@ -2,7 +2,7 @@ class CrisprModification < ActiveRecord::Base
   #Submit to the ENCODE Portal as a genetic_modification:
   # https://www.encodeproject.org/profiles/genetic_modification.json
   include ModelConcerns # A Concern.
-  include Prototype # A Concern that includes the clone() instance method as related ones.
+  include Cloning # A Concern that includes the clone() and parent() instance methods and related ones.
   #crisprs only belong to biosamples.
   ABBR = "CRISPR"
   DEFINITION = "A genetic modification carried out using CRISPR technology.  This object links together one or more CRISPR Construct objects (each containing an individual guide sequence), and a Donor Construct object (containing the donor sequence). A new CRISPR Modificition is created at the Biosample level.  Model abbreviation: #{ABBR}"
@@ -84,27 +84,36 @@ class CrisprModification < ActiveRecord::Base
     return attrs
   end
 
-  def parents
-    parents = []
-    if self.from_prototype.present?
-      parents << self.from_prototype
-    end
-    return parents
-  end
-
   def all_crispr_constructs
-    ccs = self.crispr_constructs.dup # Must use dup() method here so as not to create a reference.
+    """
+    Returns:
+        CrisprConstruct::ActiveRecord_Relation.
+    """
+    cc_ids = self.crispr_construct_ids
     self.parents.each do |p|
-      if p.crispr_constructs.any?
-        ccs = ccs.merge(p.crispr_constructs) 
-        #The merge() method doesn't convert its argument to an array so we can still use ActiveRecord methods on it. 
-      end
+      cc_ids.concat(p.crispr_construct_ids)
     end
-    return ccs
+    return CrisprConstruct.where(id: cc_ids)
   end
 
   def parent_crispr_constructs
-    return self.all_crispr_constructs.where.not(id: [self.crispr_construct_ids])
+    return self.all_crispr_constructs.where.not(id: self.crispr_construct_ids)
+  end
+
+  def all_pcr_validations
+    """
+    Returns:
+        PcrValidation::ActiveRecord_Relation.
+    """
+    ids = self.pcr_validation_ids
+    self.parents.each do |p|
+      ids.concat(p.pcr_validation_ids)
+    end
+    return PcrValidation.where(id: ids)
+  end
+
+  def parent_pcr_validations
+    return self.all_pcr_validations.where.not(id: self.pcr_validation_ids)
   end
 
   protected

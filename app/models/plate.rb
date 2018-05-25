@@ -89,7 +89,7 @@ class Plate < ActiveRecord::Base
     cols = self.ncol
     (1..rows).each do |r| 
       (1..cols).each do |c| 
-        #name format is ${part_of_biosample_name}_${plate_name}_${row_num}-${col_num}
+        #name format is ${part_of}_${plate_name}_${row_num}-${col_num}
         well = wells.create({user: self.user, row: r, col: c}) 
         if not well.valid?
           raise "Unable to create well #{well.name}: #{well.errors.full_messages}"

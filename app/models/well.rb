@@ -73,7 +73,7 @@ class Well < ActiveRecord::Base
     # Create Biosample
     custom_attrs = {}
     custom_attrs[:from_prototype_id] = self.plate.single_cell_sorting.sorting_biosample.id
-    custom_attrs[:part_of_biosample_id] = self.plate.single_cell_sorting.starting_biosample.id
+    custom_attrs[:part_of_id] = self.plate.single_cell_sorting.starting_biosample.id
     biosample = self.plate.single_cell_sorting.sorting_biosample.clone(associated_user_id: self.user.id, custom_attrs: custom_attrs)
     # Update Biosample to link to this well
     biosample.update!(well_id: self.id)

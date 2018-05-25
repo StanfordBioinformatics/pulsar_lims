@@ -66,10 +66,10 @@
     </tr>
   <% end %>
 
-  <% if @biosample.part_of_biosample.present? %>
+  <% if @biosample.part_of.present? %>
     <tr>
       <th><strong>Parent Biosample</strong></th>
-      <td><%= link_to @biosample.part_of_biosample.name, @biosample.part_of_biosample %></td>
+      <td><%= link_to @biosample.part_of.name, @biosample.part_of %></td>
     </tr>
   <% end %>
 

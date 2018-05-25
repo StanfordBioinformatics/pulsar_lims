@@ -11,47 +11,47 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @crispr } %>
 
 <table class="attributes">
-	<tr>
-	  <th><strong>Name:</strong></th>
-	  <td><%= @crispr.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @crispr.name %></td>
+  </tr>
 
-	<tr>
-	  <th><strong>Category:</strong></th>
-	  <td><%= @crispr.category %></td>
-	</tr>
+  <tr>
+    <th><strong>Category:</strong></th>
+    <td><%= @crispr.category %></td>
+  </tr>
 
-	<tr>
-	  <th><strong>Purpose:</strong></th>
-	  <td><%= @crispr.purpose %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Crispr constructs:</strong></th>
-	  <td>
-			<ul class="list-unstyled">
-				<% @crispr.all_crispr_constructs.each do |cc| %>
-					<li><%= link_to cc.name, cc %></li>
-				<% end %>
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Donor construct:</strong></th>
-	  <td><%= link_to @crispr.donor_construct.name, @crispr.donor_construct %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Biosample:</strong></th>
-	  <td><%= link_to @crispr.biosample.name, @crispr.biosample %></td>
-	</tr>
+  <tr>
+    <th><strong>Purpose:</strong></th>
+    <td><%= @crispr.purpose %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Crispr constructs:</strong></th>
+    <td>
+      <ul class="list-unstyled">
+        <% @crispr.all_crispr_constructs.each do |cc| %>
+          <li><%= link_to cc.name, cc %></li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+  
+  <tr>
+    <th><strong>Donor construct:</strong></th>
+    <td><%= link_to @crispr.donor_construct.name, @crispr.donor_construct %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Biosample:</strong></th>
+    <td><%= link_to @crispr.biosample.name, @crispr.biosample %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Target</strong</th>
-		<% target = @crispr.all_crispr_constructs.first.target %>
-		<td><%= link_to target.name, target %></td>
-	</tr>
+  <tr>
+    <th><strong>Target</strong</th>
+    <% target = @crispr.all_crispr_constructs.first.target %>
+    <td><%= link_to target.name, target %></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    
@@ -64,37 +64,37 @@
 <div class="container">
 <h3>Genomic Integration Site</h3>
 <% if not @crispr.genomic_integration_site.present? %>
-	<span>Not provided</span></br></br>
+  <span>Not provided</span></br></br>
 <% else %>
-	<table class="attributes">
-		<tr>
-			<th><strong>Reference Genome:</strong></th>
-			<td><%= @crispr.genomic_integration_site.chromosome.reference_genome.name %></td>
-		</tr>
-		<tr>
-			<th><strong>Chromosome:</strong></th>
-			<td><%= @crispr.genomic_integration_site.chromosome.name %></td>
-		</tr>
-		<tr>
-			<th><strong>Start:</strong></th>
-			<td><%= @crispr.genomic_integration_site.start %></td>
-		</tr>
-		<tr>
-			<th><strong>End:</strong></th>
-			<td><%= @crispr.genomic_integration_site.end %></td>
-		</tr>
-	</table>
+  <table class="attributes">
+    <tr>
+      <th><strong>Reference Genome:</strong></th>
+      <td><%= @crispr.genomic_integration_site.chromosome.reference_genome.name %></td>
+    </tr>
+    <tr>
+      <th><strong>Chromosome:</strong></th>
+      <td><%= @crispr.genomic_integration_site.chromosome.name %></td>
+    </tr>
+    <tr>
+      <th><strong>Start:</strong></th>
+      <td><%= @crispr.genomic_integration_site.start %></td>
+    </tr>
+    <tr>
+      <th><strong>End:</strong></th>
+      <td><%= @crispr.genomic_integration_site.end %></td>
+    </tr>
+  </table>
 <% end %>
 </div>
 
 </br>
 <div class="container">
-	<h3>PCR Validations</h3>
-	<% @crispr.pcr_validations.each do |v| %>
-		<ul>
-			<li><%= link_to v.id, v %></li>
-		</ul>
-	<% end %>
+  <h3>PCR Validations</h3>
+  <% @crispr.pcr_validations.each do |v| %>
+    <ul>
+      <li><%= link_to v.id, v %></li>
+    </ul>
+  <% end %>
 </div></br>
 
 <%= link_to "New PCR Validation", new_pcr_validation_crispr_modification_path(@crispr), class: "reg-btn" %>

@@ -1,6 +1,7 @@
 class Biosample < ActiveRecord::Base
-  include ModelConcerns #A Concern
-  include Prototype #A Concern that includes the clone() instance method as related ones.
+  include ModelConcerns # A Concern
+  include Cloning # A Concern that includes the clone() and parent() instance methods and related ones.
+  include CloningForDocuments # A Concern that includes instance methods all_documents() and parent_documents().
   ABBR = "B"
   DEFINITION = "The source material (cell line, tissue sample) that one either begins an experiment with; also, any derivites of this source material that have been modified by the experimenter.  Model abbreviation: #{ABBR}"
   ###
@@ -14,8 +15,8 @@ class Biosample < ActiveRecord::Base
   # This biosample is a prototype used as a reference for creating the biosamples in the wells of the plates on
   # the single_cell_sorting experiment. kk
   belongs_to :well
-  has_many :biosample_parts, class_name: "Biosample", foreign_key: "part_of_biosample_id", dependent: :destroy
-  belongs_to :part_of_biosample, class_name: "Biosample"
+  has_many :biosample_parts, class_name: "Biosample", foreign_key: "part_of_id", dependent: :destroy
+  belongs_to :part_of, class_name: "Biosample"
   belongs_to :from_prototype, class_name: "Biosample"
   has_many :prototype_instances, class_name: "Biosample", foreign_key: "from_prototype_id", dependent: :restrict_with_exception
   ###
@@ -46,7 +47,7 @@ class Biosample < ActiveRecord::Base
   validates :starting_amount_units, presence: {message: "must be specified when the starting_amount is specified."}, if: "starting_amount.present?"
   validates :tissue_preservation_method, inclusion: {in: Enums::TISSUE_PRESERVATION_METHODS, message: "must be an element in the list #{Enums::TISSUE_PRESERVATION_METHODS}."}, allow_blank: true
   validate :not_pooled_and_part_of
-  validate :validate_part_of_biosample, on: :update
+  validate :validate_part_of, on: :update
 
   accepts_nested_attributes_for :crispr_modification, allow_destroy: true
   accepts_nested_attributes_for :documents, allow_destroy: true
@@ -119,7 +120,7 @@ class Biosample < ActiveRecord::Base
 
   def clone_biosample(associated_user_id:, custom_attrs: nil)
     # Generates a hash of attributes that can be used to duplicate the biosample. In the generated
-    # attributes, the biosample property part_of_biosample_id will be set to the current biosample,
+    # attributes, the biosample property part_of_id will be set to the current biosample,
     # and the property form_prototype_id will as well.
     # Some attributes don't make sense to duplicate, and hence aren't. Such attributes include
     # the user_id (could be a different user cloning than the one that created the original),
@@ -143,7 +144,7 @@ class Biosample < ActiveRecord::Base
     # thus the caller does set this attribute.
 
     attrs = {}
-    attrs["part_of_biosample_id"] = self.id
+    attrs["part_of_id"] = self.id
     if custom_attrs.present?
       attrs.update(custom_attrs)
     end
@@ -178,7 +179,7 @@ class Biosample < ActiveRecord::Base
         # Skip children that are also present in the prototype_instances attribute collection
         # since they should only be updated through changes in the referenced prototype. In the case of
         # single_cell_sortings, the sorting_biosample is linked to the starting_biosample via the
-        # part_of_biosample property. Thus, the sorting_biosample will be present in the starting_biosample's
+        # part_of property. Thus, the sorting_biosample will be present in the starting_biosample's
         # biosample_parts attribute collection and will be updated. When it is updated, it will in turn cause
         # an update in any plated biosamples through its prototype_instances attribute collection.
         next if p.from_prototype.present?
@@ -189,58 +190,32 @@ class Biosample < ActiveRecord::Base
     end
   end
 
-  def parents
-    parents = []
-    # Add parents from any part-of relationships in this single-parent ancestor chain.
-    parent = self.part_of_biosample
-    while parent
-      parents << parent
-      parent = parent.part_of_biosample
-    end
-
-    # Add parents from any prototoype in this single-parent ancestor chain.
-    # I can't imagine a scenario where it would be useful to have more than one ancestor that is
-    # a prototype, but it's possible to do so should check for it.
-    parent = self.from_prototype
-    while parent
-      parents << parent
-      parent = parent.from_prototype
-    end
-    return parents
-  end
-
-  def all_documents
-    documents = self.documents.dup # Must use dup() method here so as not to create a reference. 
-    self.parents.each do |p|
-      if p.documents.any?
-        documents = documents.merge(p.documents)
-        #The merge() method doesn't convert its argument to an array so we can still use ActiveRecord methods on it.
-      end
-    end
-    return documents
-  end
-
   def all_treatments
-    treatments = self.treatments.dup # Must use dup() method here so as not to create a reference. 
+    """
+    Returns:
+        Treatment::ActiveRecord_Relation.
+    """
+    treatment_ids = self.treatment_ids 
     self.parents.each do |p|
-      if p.treatments.any?
-        treatments = treatments.merge(p.treatments)
-        #The merge() method doesn't convert its argument to an array so we can still use ActiveRecord methods on it.
-      end
+      treatment_ids.concat(p.treatment_ids)
     end
-    return treatments
+    return Treatment.where(id: treatment_ids)
   end
 
-  def validate_part_of_biosample
+  def parent_treatments
+    return all_treatments.where.not(id: self.treatment_ids)
+  end
+
+  def validate_part_of
     # Make sure user didn't set parent to be itself.
-    if self.part_of_biosample_id  == self.id
-      self.errors.add(:part_of_biosample, "can't be the same as this record.")
+    if self.part_of_id  == self.id
+      self.errors.add(:part_of, "can't be the same as this record.")
       return false
     end
   end
 
   def not_pooled_and_part_of
-    if self.part_of_biosample.present? and self.pooled_from_biosamples.present?
+    if self.part_of.present? and self.pooled_from_biosamples.present?
       self.errors.add(:base, "'Parent biosample' and 'Pooled from biosamples' can't both be specified.")
       return false
     end

@@ -1,0 +1,31 @@
+<!-- 
+  Use this partial in a form view to render a record's links in a has_many or has_and_belongs_to_many 
+  relationship to display a <ul> with options to remove existing items from the collection. This partial
+  will also display any links in any parents for the same type of association (see https://github.com/nathankw/pulsar_lims/wiki/Application-Logic for details on the application logic concerning the terms "parents" and "cloning". 
+
+  Required params:
+    1. f: A form object created from form_for of simple_form_for. 
+    2. rec: The model record.
+    3. link_name: The association name on the record, i.e. 'documents' for a Model that 'has_many :documents'.
+    4. parent_links: All the parent (ancestral) values for the same type of links. 
+
+  See an example of this partial's use in /app/views/crispr_constructs/_form.html.erb.
+-->
+
+<ul class="hbtm">                                                                                    
+  <% if parent_links.any? %>                                                                           
+    <% parent_links.each do |link| %>                                                                   
+      <li><%= link.name %></li>                                                                       
+    <% end %>                                                                                        
+  <% end %>                                                                                          
+  <% if rec.id.present? and rec.send(link_name).persisted.any? %>                          
+    <% pers_links = rec.send(link_name).persisted %>                               
+    <%= f.simple_fields_for link_name, pers_links do |ff| %>                    
+      <% cc = pers_links[ff.index] %>                                                    
+      <li>                                                                                           
+        <%= cc.name %>                                                                               
+        <%= ff.input_field :_destroy, as: :boolean, class: "hbtm--remove" %> Remove                  
+      </li>                                                                                          
+    <% end %>                                                                                        
+  <% end %>                                                                                          
+</ul>

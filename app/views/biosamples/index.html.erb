@@ -41,8 +41,8 @@
 						<%= rec.owner.display %>
 					<% end %>
 				</td>
-				<% if rec.part_of_biosample.present? %>
-					<td><%= link_to rec.part_of_biosample.name, rec.part_of_biosample %></td>
+				<% if rec.part_of.present? %>
+					<td><%= link_to rec.part_of.name, rec.part_of %></td>
 				<% else %>
 					<td></td>
 				<% end %>

@@ -170,7 +170,7 @@ class SingleCellSortingsController < ApplicationController
           :donor_id,
           :lot_identifier, 
           :name, 
-          :part_of_biosample_id, 
+          :part_of_id, 
           :passage_number, 
           :submitter_comments, 
           :upstream, 

@@ -48,6 +48,10 @@
 	}
 }
 
+.hbtm--remove {
+  margin-left: 1em !important;
+}
+
 //Add some left margin to the refresh icons added after selection inputs (after the label)
 i.refresh {
   @extend .btn;
