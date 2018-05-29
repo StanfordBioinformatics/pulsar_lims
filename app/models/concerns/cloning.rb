@@ -73,6 +73,10 @@ module Cloning
 
   def update_from_sibling(sibling_id)
     """
+    Updates the current record with the attributes of the specified sibling record.
+    The record's class should provide an instance method called attributes_for_cloning() that 
+    determines which attributes can be used to udpate a sibling record. 
+
     Args:
         sibling: Another record of the same model class.
     """
@@ -88,10 +92,13 @@ module Cloning
   private
 
   def propagate_update_if_prototype
-    #An after_update callback.
-    #If this is a prototype biosample, then we need to propagate the update to dependent biosamples.
-    # In the case of single_cell_sorting, dependent biosamples are those sorted into the wells of each plate on the experiment
-    # (each well has a single biosample and such a biosample has a single library).
+    # An after_update callback.
+    # If this is a prototype record, then we need to propagate the update to dependent, sibling 
+    # records of the same model.
+    #
+    # For example, in the case of a SingleCellSorting, the sorting_biosample is a prototype since it
+    # is used to define what the sorted biosamples in each well should look like (each well has a 
+    # single biosample and such a biosample has a single library).
     # This makes updating all of the biosample objects with regard to all the plates on a single_cell_sorting
     # easy to do just by changing the biosample prototype (starting biosample) assocated with the single_cell_sorting.
     if self.prototype_instances.any?

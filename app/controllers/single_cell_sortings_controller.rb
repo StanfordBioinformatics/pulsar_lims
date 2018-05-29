@@ -32,8 +32,7 @@ class SingleCellSortingsController < ApplicationController
     sorting_biosample_attrs = @single_cell_sorting.starting_biosample.attributes_for_cloning()
     sorting_biosample_attrs.update({
       name: @single_cell_sorting.name + " " + "biosample prototype",
-      user_id: current_user.id,
-      part_of_id: @single_cell_sorting.starting_biosample.id
+      user_id: current_user.id
     })
     sorting_biosample = Biosample.new(sorting_biosample_attrs)
     @biosample = sorting_biosample

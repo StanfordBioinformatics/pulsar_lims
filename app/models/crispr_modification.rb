@@ -19,7 +19,7 @@ class CrisprModification < ActiveRecord::Base
   # genetic_modification_characterization.characterizes property points to it.
   has_many :pcr_validations, class_name: "Pcr", dependent: :nullify
   has_and_belongs_to_many :crispr_constructs
-  #validates :crispr_constructs, presence: true, unless: Proc.new { |cm| cm.parents.any? }
+  validates :crispr_constructs, presence: true
   validates :category, presence: true, inclusion: {in: Enums::CRISPR_MOD_CATEGORIES, message: "Must be an element from the list #{Enums::CRISPR_MOD_CATEGORIES}"}
   validates :purpose, presence: true, inclusion: {in: Enums::CRISPR_MOD_PURPOSE, message: "Must be an element from the list #{Enums::CRISPR_MOD_PURPOSE}"}
   validates :upstream_identifier, uniqueness: true, allow_blank: true
@@ -32,7 +32,7 @@ class CrisprModification < ActiveRecord::Base
 
   scope :persisted, lambda { where.not(id: nil) }
 
-  validate :verify_target
+  before_save :verify_target
 
   def self.policy_class
     ApplicationPolicy

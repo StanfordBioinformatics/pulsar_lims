@@ -35,7 +35,6 @@ class Biosample < ActiveRecord::Base
   has_many    :libraries, dependent: :destroy
 
   validates :upstream_identifier, uniqueness: true, allow_blank: true
-  #validates :name, uniqueness: true, length: { minimum: 2, maximum: 40 }, presence: true
   validates :name, uniqueness: true, presence: true
   #validates :documents, presence: true
   validates :biosample_type_id, presence: true
@@ -59,7 +58,6 @@ class Biosample < ActiveRecord::Base
 
   before_validation :set_name, on: [:create, :update]
   after_validation :check_plated #true if it belongs to a well.
-  after_update :propagate_update_if_has_biosample_parts
 
   def self.policy_class
     ApplicationPolicy
@@ -136,15 +134,9 @@ class Biosample < ActiveRecord::Base
     #     (whose name will be set automatically in the biosample model when it sees that a well_id
     #     is set.
 
-    # Don't add "attrs["from_prototype_id"] = self.id" line that is present in the clone method of
-    # other models, such as Library and CrisprModification, since cloning a Biosample can be useful
-    # for other purpose than making a prototype_instance (i.e. a Biosample can be part_of another
-    # Biosample, and that is the use of cloning in the case of Biosamples. Adding this attribute
-    # is needed, however, in the case of cloning a sorting_biosample in a single_cell_sorting experiment,
-    # thus the caller does set this attribute.
-
     attrs = {}
     attrs["part_of_id"] = self.id
+    attrs["from_prototype_id"] = self.id
     if custom_attrs.present?
       attrs.update(custom_attrs)
     end
@@ -188,23 +180,6 @@ class Biosample < ActiveRecord::Base
   end
 
   private
-
-  def propagate_update_if_has_biosample_parts
-    if self.biosample_parts.any?
-      self.biosample_parts.each do |p|
-        # Skip children that are also present in the prototype_instances attribute collection
-        # since they should only be updated through changes in the referenced prototype. In the case of
-        # single_cell_sortings, the sorting_biosample is linked to the starting_biosample via the
-        # part_of property. Thus, the sorting_biosample will be present in the starting_biosample's
-        # biosample_parts attribute collection and will be updated. When it is updated, it will in turn cause
-        # an update in any plated biosamples through its prototype_instances attribute collection.
-        next if p.from_prototype.present?
-        p.update_from_sibling(sibling_id=self.id)
-        # If p.prototype_instances.any? (as in the case of a sorting_biosample on a single_cell_sorting)
-        # then the biosample on each well of each plate in the experiment will now be updated.
-      end
-    end
-  end
 
   def validate_part_of
     # Make sure user didn't set parent to be itself.

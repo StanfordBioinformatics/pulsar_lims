@@ -76,6 +76,8 @@
   <%= f.input :antigen_sequence,
 			label_html: {"data-toggle" => "tooltip", "title" => "The amino acid sequence of the antigen."} %>
 
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
+
   <div class="actions">
     <%= f.button :submit, class: "btn-primary" %>
   </div></br>

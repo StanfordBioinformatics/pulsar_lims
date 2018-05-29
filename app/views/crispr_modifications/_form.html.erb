@@ -29,7 +29,11 @@
         locals: {f: f, crispr_constructs: CrisprConstruct.all} %>
   <% end %>
 
-  <%= link_to "Add Crispr Construct", select_crispr_construct_crispr_modifications_path(exclude_ids: @crispr.all_crispr_constructs.ids), 
+  <% params_for_adding_crispr_constructs = {exclude_ids: @crispr.all_crispr_constructs.ids} %>
+  <% if @biosample.present? %>
+    <% params_for_adding_crispr_constructs["biosample"] = true %>
+  <% end %>
+  <%= link_to "Add Crispr Construct", select_crispr_construct_crispr_modifications_path(params_for_adding_crispr_constructs), 
       remote: true, 
       class: "select_crispr_construct reg-btn" %>
   </br></br>  
@@ -45,5 +49,6 @@
 
   <div class="container genomic_integration_site"></div>
   <!-- Jquery will fill in the div above when a reference_genome is selected -->
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   </br>

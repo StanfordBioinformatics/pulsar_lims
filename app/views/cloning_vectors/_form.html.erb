@@ -9,6 +9,7 @@
 		<% file_upload_hint="You previously uploaded #{@cloning_vector.map}." %>
 	<% end %>
 	<%= f.input :map, as: :file, label: "Map image", hint: file_upload_hint, input_html: {class: "image"} %>
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

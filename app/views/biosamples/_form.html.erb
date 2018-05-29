@@ -111,6 +111,9 @@
       label_html: {"data-toggle": "tooltip", "title": "For cultured samples, the date the biosample was taken. For tissue samples, the date the biosample was taken."} %>
 
   <%= f.input :submitter_comments,
+      input_html: {rows: 5},
       label_html: {"data-toggle": "tooltip", "title": "Additional information specified by the submitter to be displayed as a comment on the upstream portal."} %>
+
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   </br>

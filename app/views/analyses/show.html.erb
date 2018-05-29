@@ -11,51 +11,51 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @analysis } %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Description:</strong></th>
-		<td><%= @analysis.description %></td>
-	</tr>
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @analysis.description %></td>
+  </tr>
 
   <% if @analysis.protocol.present? %>
-  	<tr>
-  		<th><strong>Protocol:</strong></th>
-  		<td><%= link_to @analysis.protocol.name, @analysis.protocol %></td>
-  	</tr>
+    <tr>
+      <th><strong>Protocol:</strong></th>
+      <td><%= link_to @analysis.protocol.name, @analysis.protocol %></td>
+    </tr>
   <% end %>
 
-	<tr>
-		<th><strong>Merged FASTQ file:</strong></th>
-		<% if @analysis.merged_fastq_file.blank? %>
-			<td></td>
-		<% else %>
-			<td><%= link_to @analysis.merged_fastq_file.display(), @analysis.merged_fastq_file %></td>
-		<% end %>
-	</tr>
-		
-	<tr>
-		<th><strong>Merged BAM file:</strong></th>
-		<% if @analysis.merged_bam_file.blank? %>
-			<td></td>
-		<% else %>
-			<td><%= link_to @analysis.merged_bam_file.display(), @analysis.merged_bam_file %></td>
-		<% end %>
-	</tr>
-	<tr>
-		<th><strong>Merged Peaks file:</strong></th>
-		<% if @analysis.merged_peaks_file.blank? %>
-			<td></td>
-		<% else %>
-			<td><%= link_to @analysis.merged_peaks_file.display(), @analysis.merged_peaks_file %></td>
-		<% end %>
-	</tr>
-	<tr>
-		<th><strong>Merged QC file:</strong></th>
-		<% if @analysis.merged_qc_file.blank? %>
-			<td></td>
-		<% else %>
-			<td><%= link_to @analysis.merged_qc_file.display(), @analysis.merged_qc_file %></td>
-		<% end %>
-	</tr>
+  <tr>
+    <th><strong>Merged FASTQ file:</strong></th>
+    <% if @analysis.merged_fastq_file.blank? %>
+      <td></td>
+    <% else %>
+      <td><%= link_to @analysis.merged_fastq_file.display(), @analysis.merged_fastq_file %></td>
+    <% end %>
+  </tr>
+    
+  <tr>
+    <th><strong>Merged BAM file:</strong></th>
+    <% if @analysis.merged_bam_file.blank? %>
+      <td></td>
+    <% else %>
+      <td><%= link_to @analysis.merged_bam_file.display(), @analysis.merged_bam_file %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <th><strong>Merged Peaks file:</strong></th>
+    <% if @analysis.merged_peaks_file.blank? %>
+      <td></td>
+    <% else %>
+      <td><%= link_to @analysis.merged_peaks_file.display(), @analysis.merged_peaks_file %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <th><strong>Merged QC file:</strong></th>
+    <% if @analysis.merged_qc_file.blank? %>
+      <td></td>
+    <% else %>
+      <td><%= link_to @analysis.merged_qc_file.display(), @analysis.merged_qc_file %></td>
+    <% end %>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    
@@ -64,7 +64,7 @@
 </table>
 
 <% if @analysis.single_cell_sorting_id.present? %>
-	</br><%= link_to "Single cell sorting", @analysis.single_cell_sorting %>
+  </br><%= link_to "Single cell sorting", @analysis.single_cell_sorting %>
 <% end %>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->

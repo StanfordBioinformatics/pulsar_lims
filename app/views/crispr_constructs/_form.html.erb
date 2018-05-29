@@ -1,9 +1,9 @@
 <%= simple_form_for(@crispr_construct) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr_construct } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr_construct } %>
 
   <%= f.input :name %>
   <%= f.input :description %>
-	<%= f.input :addgene_id, label_html: {"data-toggle": "tooltip", "title": "The catalog number (i.e. 50661) of the plasmid in www.addgene.org if deposited there. Note - this could be the same as the 'Vender product identifier' if you procured this from Addene."} %>
+  <%= f.input :addgene_id, label_html: {"data-toggle": "tooltip", "title": "The catalog number (i.e. 50661) of the plasmid in www.addgene.org if deposited there. Note - this could be the same as the 'Vender product identifier' if you procured this from Addene."} %>
 
   <%= f.association :cloning_vector,
       label_html: {class: "refresh"} %>
@@ -13,8 +13,8 @@
     <%= f.association :target, label: "Gene target",
         label_html: {class: "refresh"}
     %>
-  	<%= f.input :ensembl_transcript, label_html: {"data-toggle": "tooltip", "title": "Ensembl transcript accession that the crispr construct is designed for, if applicable." } %>
-  	<%= f.input :refseq_transcript, label_html: {"data-toggle": "tooltip", "title": "RefSeq transcript accession that the crispr construct is designed for, if applicable." } %>
+    <%= f.input :ensembl_transcript, label_html: {"data-toggle": "tooltip", "title": "Ensembl transcript accession that the crispr construct is designed for, if applicable." } %>
+    <%= f.input :refseq_transcript, label_html: {"data-toggle": "tooltip", "title": "RefSeq transcript accession that the crispr construct is designed for, if applicable." } %>
   </fieldset>
 
   <%= f.input :guide_sequence %>
@@ -30,9 +30,11 @@
         locals: {f: f, record: @crispr_construct, attribute: :construct_tags, title: "Construct Tags"} %>
   <% end %>
 
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
+
   <div id="added_construct_tags"></div>
   <!-- .added_construct_tags will serve as the container for new construct_tag selections added by jQuery. -->
-	<!-- Relevant jQuery in construct_tags.js.coffee. -->
+  <!-- Relevant jQuery in construct_tags.js.coffee. -->
 
   <p> 
     <% exclude_tags = [] %>
@@ -40,12 +42,12 @@
       <% exclude_tags = @crispr_construct.construct_tags.persisted.each { |x| x.id } %>
     <% end %>
     <%= link_to "Add construct tag", 
-				select_construct_tag_crispr_constructs_path(:exclude_construct_tags => exclude_tags),
-				remote: true,
-				class: "add_construct_tag reg-btn" %>
+        select_construct_tag_crispr_constructs_path(:exclude_construct_tags => exclude_tags),
+        remote: true,
+        class: "add_construct_tag reg-btn" %>
   </p>
 
-	</br>
+  </br>
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
   </div></br>

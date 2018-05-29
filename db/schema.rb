@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180525222022) do
+ActiveRecord::Schema.define(version: 20180529194724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 20180525222022) do
   add_index "biosample_types", ["user_id"], name: "index_biosample_types_on_user_id", using: :btree
 
   create_table "biosamples", force: :cascade do |t|
-    t.string   "submitter_comments",              limit: 255
+    t.text     "submitter_comments"
     t.string   "lot_identifier",                  limit: 255
     t.string   "vendor_product_identifier",       limit: 255
     t.string   "description",                     limit: 255

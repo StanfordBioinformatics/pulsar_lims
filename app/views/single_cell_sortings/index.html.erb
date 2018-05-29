@@ -24,7 +24,7 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.description %></td>
 				<td><%= link_to rec.starting_biosample.name, rec.starting_biosample %></td>
-        <td><%= render partial: "analyses/link_to_analysis", locals: {analyses: rec.analyses} %></td>
+        <td><%= render partial: "application_partials/link_to_has_many", locals: {links: rec.analyses} %></td>
         <td>
 					<%= link_to fa_icon("pencil"), edit_single_cell_sorting_path(rec) %>
         	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>

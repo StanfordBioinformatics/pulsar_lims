@@ -65,7 +65,6 @@ $ ->
   $("#biosample_add_crispr_modification",document).on "ajax:success", (event,data) -> 
     $("#biosample_add_crispr_modification").fadeOut "fast", () ->
       $("#biosample_crispr_modification_form").html(data).hide()
-      $(".select_crispr_construct",document).click()
       $("#biosample_crispr_modification_form").show()
 
   $(document).on "click", ".biosample-toggle-up_add_crispr_form", (event) ->  

@@ -108,8 +108,8 @@ class BiosamplesController < ApplicationController
   end
 
   def update
-    #@biosample = add_documents(@biosample,params[:biosample][:documents])
     authorize @biosample
+    #@biosample = add_documents(@biosample,params[:biosample][:documents])
     #render json: params
     #return
     crispr_attrs = biosample_params()[:crispr_modification_attributes]
@@ -176,8 +176,8 @@ class BiosamplesController < ApplicationController
           :name, 
           :purpose,
           :donor_construct_id, 
-          crispr_constructs_attributes: [:id, :_destroy],
           crispr_construct_ids: [], 
+          crispr_constructs_attributes: [:id, :_destroy],
           genomic_integration_site_attributes: [
             :id, 
             :chromosome_id, 

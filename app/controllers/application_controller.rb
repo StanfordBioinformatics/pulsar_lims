@@ -141,6 +141,7 @@ class ApplicationController < ActionController::Base
   end
 
   def record_not_destroyed(err)
+    # Error handler for ActiveRecord::RecordNotDestroyed.
     respond_to do |format|
       format.html {
         flash[:alert] = err.record.errors.full_messages
@@ -153,6 +154,7 @@ class ApplicationController < ActionController::Base
   end
 
   def invalid_record(err)
+    # Error handler for ActiveRecord::RecordInvalid.
     respond_to do |format|
       format.html {
         flash[:alert] = err.message
@@ -165,6 +167,7 @@ class ApplicationController < ActionController::Base
   end
 
   def foreign_key_constraint(err)
+    # Error handler for ActiveRecord::InvalidForeignKey.
     respond_to do |format|
       format.html {
         flash[:alert] = err.message
@@ -177,6 +180,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
+    # Error handler for Pundit::NotAuthorizedError.
     respond_to do |format|
       format.html {
         flash[:alert] = "You are not authorized to perform this action."
@@ -193,6 +197,7 @@ class ApplicationController < ActionController::Base
   end
 
   def destroy_not_allowed(err)
+    # Error handler for ActiveRecord::DeleteRestrictionError.
     respond_to do |format|
       format.html {
         flash[:alert] = err.message

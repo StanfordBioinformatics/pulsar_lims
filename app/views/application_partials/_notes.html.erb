@@ -1,0 +1,6 @@
+<!-- Used to show the 'notes' form field that almost all models share. 
+     
+     Required Args:
+       1. f: form object. 
+-->
+<%= f.input :notes, input_html: {rows: 5}, label_html: {"data-toggle": "tooltip", "title": "Internal notes that won't be submitted to the upstream Portal."} %>

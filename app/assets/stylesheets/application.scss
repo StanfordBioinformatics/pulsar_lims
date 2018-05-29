@@ -49,6 +49,10 @@
 }
 
 .hbtm--remove {
+  // hbtm stands for has_and_belongs_to_many. This class is used in the application partial 
+  // _parental_and_self_fklinks.html.erb. The hbtm--remove modifier class is targeted here to 
+  // set some left margin on the checkbox for removing an association. 
+  //  
   margin-left: 1em !important;
 }
 
