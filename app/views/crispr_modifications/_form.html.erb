@@ -2,8 +2,9 @@
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr } %>
   <%# is_crispr_modification_path = request.fullpath.start_with?(crispr_modifications_path) %>
 
-
   <%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique name"} %>
+
+  <%= f.association :biosample %>
 
   <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The alias or accession of an existing genetic_modification on the ENCODE Portal (leave blank if this is a new genetic_modification that hasn't been registered there yet). For a list of available genetic_modifications on the ENCODE Portal, see https://www.encodeproject.org/genetic-modifications."} %>
 
@@ -29,11 +30,7 @@
         locals: {f: f, crispr_constructs: CrisprConstruct.all} %>
   <% end %>
 
-  <% params_for_adding_crispr_constructs = {exclude_ids: @crispr.all_crispr_constructs.ids} %>
-  <% if @biosample.present? %>
-    <% params_for_adding_crispr_constructs["biosample"] = true %>
-  <% end %>
-  <%= link_to "Add Crispr Construct", select_crispr_construct_crispr_modifications_path(params_for_adding_crispr_constructs), 
+  <%= link_to "Add Crispr Construct", select_crispr_construct_crispr_modifications_path({exclude_ids: @crispr.all_crispr_constructs.ids}), 
       remote: true, 
       class: "select_crispr_construct reg-btn" %>
   </br></br>  

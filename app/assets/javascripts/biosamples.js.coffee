@@ -61,13 +61,3 @@ $ ->
     event.stopPropagation()
     load_biosample_term_name_selection()
   load_biosample_term_name_selection()
-
-  $("#biosample_add_crispr_modification",document).on "ajax:success", (event,data) -> 
-    $("#biosample_add_crispr_modification").fadeOut "fast", () ->
-      $("#biosample_crispr_modification_form").html(data).hide()
-      $("#biosample_crispr_modification_form").show()
-
-  $(document).on "click", ".biosample-toggle-up_add_crispr_form", (event) ->  
-    event.stopPropagation()
-    $(".jumbotron-select-crispr").slideUp "fast", () ->
-      $("#biosample_add_crispr_modification", document).show()

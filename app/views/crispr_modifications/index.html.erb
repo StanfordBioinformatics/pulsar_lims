@@ -1,11 +1,8 @@
 <header>
   <h1 class="index-page-header">Crisprs</h1>
-	<p class="model-definition"><%= CrisprModification::DEFINITION %></p>
+  <p class="model-definition"><%= CrisprModification::DEFINITION %></p>
 
-  <!-- <ul class="actions"> -->
-		<!-- Don't add 'New' btn here since a new object can only be created at the Biosample level now. -->
-    <%# render partial: "application_partials/auth_new_record" %>
-  <!-- </ul>  -->
+  <%= render partial: "application_partials/auth_new_record" %>
 </header> 
   
 <table class="attributes index">
@@ -17,7 +14,7 @@
       <th>Crispr constructs</th>
       <th>Donor construct</th>
       <th>Biosample</th>
-			<th>Target</th>
+      <th>Target</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -28,19 +25,19 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.category %></td>
         <td><%= rec.purpose %></td>
-				<td>
-					<% rec.all_crispr_constructs.each do |cc| %>
-		        <%= link_to cc.name, cc %>
-					<% end %>
-				</td>
+        <td>
+          <% rec.all_crispr_constructs.each do |cc| %>
+            <%= link_to cc.name, cc %>
+          <% end %>
+        </td>
         <td><%= link_to rec.donor_construct.name, rec.donor_construct %></td>
         <td><%= link_to rec.biosample.name, rec.biosample %></td>
-				<% target = rec.all_crispr_constructs.first.target %>
-				<td><%= link_to target.name, target %></td>
+        <% target = rec.all_crispr_constructs.first.target %>
+        <td><%= link_to target.name, target %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_crispr_modification_path(rec) %>
-	        <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_crispr_modification_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

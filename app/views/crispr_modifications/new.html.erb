@@ -1,8 +1,7 @@
-<!-- This view is not longer in use. A new object can now only be creted at the Biosample level. -->
 <h1>New Crispr</h1>
 
 <%= simple_form_for(@crispr) do |f| %>
-	<%= render partial: 'form', locals: {f: f} %>
-	<%= render partial: "application_partials/submit", locals: {f: f} %>
+  <%= render partial: 'form', locals: {f: f} %>
+  <%= render partial: "application_partials/submit", locals: {f: f} %>
 <% end %>
 <%= link_to 'Back', crispr_modifications_path %>

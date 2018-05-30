@@ -5,7 +5,7 @@ class CrisprModification < ActiveRecord::Base
   include Cloning # A Concern that includes the clone() and parent() instance methods and related ones.
   #crisprs only belong to biosamples.
   ABBR = "CRISPR"
-  DEFINITION = "A genetic modification carried out using CRISPR technology.  This object links together one or more CRISPR Construct objects (each containing an individual guide sequence), and a Donor Construct object (containing the donor sequence). A new CRISPR Modificition is created at the Biosample level.  Model abbreviation: #{ABBR}"
+  DEFINITION = "A genetic modification carried out using CRISPR technology.  This object links together one or more CRISPR Construct objects (each containing an individual guide sequence), and a Donor Construct object (containing the donor sequence). Model abbreviation: #{ABBR}"
   belongs_to :user
   belongs_to :from_prototype, class_name: "CrisprModification"
   has_many   :prototype_instances, class_name: "CrisprModification", foreign_key: "from_prototype_id", dependent: :restrict_with_exception

@@ -1,16 +1,16 @@
 <header>
-	<h1 class="index-page-header">
+  <h1 class="index-page-header">
     <%= @title || "Biosamples" %>
   </h1>
-	<p class="model-definition"><%= Biosample::DEFINITION %></p>
+  <p class="model-definition"><%= Biosample::DEFINITION %></p>
 
   <% if not defined?(@no_new_btn) %>
     <ul class="actions">
       <%= render partial: "application_partials/auth_new_record" %>
     </ul> 
   <% end %>
-</header>	
-	
+</header>  
+  
 
 <table class="attributes index">
   <thead>
@@ -18,14 +18,14 @@
       <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Tube label</th>
       <th>NIH Inst. Certification</th>
-			<th>Owner</th>
-			<th>Parent Biosample</th>
-			<th>Well</th>
+      <th>Owner</th>
+      <th>Parent Biosample</th>
+      <th>Well</th>
       <!-- <th>Description</th> -->
       <th>Vendor</th>
-			<th>Biosample Type</th>
+      <th>Biosample Type</th>
       <th>Biosample Term Name</th>
-			<th>CRISPR</th>
+      <th>CRISPR</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -36,34 +36,34 @@
         <td>
           <%= rec.nih_institutional_certification %>
         </td>
-				<td>
-					<% if rec.owner.present? %>
-						<%= rec.owner.display %>
-					<% end %>
-				</td>
-				<% if rec.part_of.present? %>
-					<td><%= link_to rec.part_of.name, rec.part_of %></td>
-				<% else %>
-					<td></td>
-				<% end %>
-				<% if rec.well.present? %>
-					<td><%= link_to rec.well.name, [rec.well.plate, rec.well] %></td>
-				<% else %>
-					<td></td>
-				<% end %>
+        <td>
+          <% if rec.owner.present? %>
+            <%= rec.owner.display %>
+          <% end %>
+        </td>
+        <% if rec.part_of.present? %>
+          <td><%= link_to rec.part_of.name, rec.part_of %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if rec.well.present? %>
+          <td><%= link_to rec.well.name, [rec.well.plate, rec.well] %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <!-- <td><%# rec.description %></td> -->
         <td><%= rec.vendor.name %></td>
-				<td><%= rec.biosample_type.name %></td>
+        <td><%= rec.biosample_type.name %></td>
         <td><%= link_to rec.biosample_term_name.name, rec.biosample_term_name %></td>
-				<% if rec.crispr_modification.present? %>	
-					<td><%= link_to rec.crispr_modification.name, rec.crispr_modification %></td>
-				<% else %>
-					<td></td>
-				<% end %>
+        <% if rec.crispr_modification.present? %>  
+          <td><%= link_to rec.crispr_modification.name, rec.crispr_modification %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td>
-					<%= link_to fa_icon("pencil"), edit_biosample_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_biosample_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

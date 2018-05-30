@@ -14,16 +14,12 @@ class CrisprModificationsController < ApplicationController
   end
 
   def select_crispr_construct
-    #Function: Called via AJAX in the crispr form when the user clicks the "Add Crispr Construct" button. 
-    #Parsed params : exclude_ids - Array of CrisprConstruct IDs to exclude from the selection.
+    # Called remotely in the crispr form when the user clicks the "Add Crispr Construct" button. 
+    # The rendered view is added to the HTML by Javascript.
+    #
+    # Expected params: 
+    #   1. exclude_ids - Array of CrisprConstruct IDs to exclude from the selection.
     exclude_ids = params[:exclude_ids]
-    # Set @biosample if this is being called in the context of a Biosample form object so that
-    # the crispr_constructs input can be created in light of a biosample form object nested with
-    # a crispr_modification form object. 
-    @biosample = false
-    if params[:biosample].present? 
-      @biosample = Biosample.new
-    end
     @crispr = CrisprModification.new
     @crispr_constructs = CrisprConstruct.where.not(id: exclude_ids)
     render layout: false
@@ -48,6 +44,7 @@ class CrisprModificationsController < ApplicationController
     authorize CrisprModification
     @crispr = CrisprModification.new
     @crispr.build_genomic_integration_site
+    render layout: "layouts/application", partial: "crispr_modifications/new"
   end
 
   def edit
@@ -75,6 +72,8 @@ class CrisprModificationsController < ApplicationController
 
   def update
     authorize @crispr
+    #render json: params
+    #return
     respond_to do |format|
       if @crispr.update(crispr_modification_params)
         format.html { redirect_to @crispr, notice: 'CRISPR Modification was successfully updated.' }
@@ -100,6 +99,7 @@ class CrisprModificationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def crispr_modification_params
       params.require(:crispr_modification).permit(
+        :biosample_id,
         :category,
         :donor_construct_id, 
         :name, 

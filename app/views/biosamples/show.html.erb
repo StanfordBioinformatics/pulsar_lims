@@ -208,7 +208,6 @@
 
 <% if @biosample.crispr_modification.blank? %>
   <%= link_to "Add CRISPR modification", add_crispr_modification_biosample_path(@biosample), class: "new", 
-      remote: true, 
       id: "biosample_add_crispr_modification" %>
 <% else %>
   <% if not @biosample.crispr_modification.persisted? %>

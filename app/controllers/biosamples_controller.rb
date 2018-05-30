@@ -45,9 +45,7 @@ class BiosamplesController < ApplicationController
   end
 
   def add_crispr_modification
-    @biosample.build_crispr_modification({user: current_user})
-    flash[:action] = :show
-    render partial: "add_crispr_modification", layout: false
+    @crispr = @biosample.build_crispr_modification({user: current_user})
   end
 
   def select_biosample_term_name
@@ -169,22 +167,6 @@ class BiosamplesController < ApplicationController
         :vendor_id,
         :vendor_product_identifier, 
         
-        crispr_modification_attributes: [
-          :user_id, 
-          :_destroy, 
-          :category,
-          :name, 
-          :purpose,
-          :donor_construct_id, 
-          crispr_construct_ids: [], 
-          crispr_constructs_attributes: [:id, :_destroy],
-          genomic_integration_site_attributes: [
-            :id, 
-            :chromosome_id, 
-            :end,
-            :start
-          ]
-        ],
         documents_attributes: [:id, :_destroy], 
         :document_ids => [], 
         pooled_from_biosamples_attributes: [:id, :_destroy], 
