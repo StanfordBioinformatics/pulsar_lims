@@ -5,7 +5,7 @@ module ModelConcerns
   end
 
   def display
-    if self.respond_to?(:name):
+    if self.respond_to?(:name)
       return self.name
     else
       return self.get_record_id()
