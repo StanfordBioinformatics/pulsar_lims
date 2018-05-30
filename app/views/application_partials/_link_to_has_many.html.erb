@@ -8,13 +8,8 @@
 <ul>
   <% unless links.blank? %>
     <% links.each do |l| %>
-      <% if l.respond_to?(:params_for_url_for) %>
-        <% link_dest = l.params_for_url_for %>
-      <% else %>
-        <% link_dest = l %>
-      <% end %>
       <li>
-        <%= link_to l.name, link_dest %>
+        <%= link_to_record_id(l) %>
       </li>
     <% end %>
   <% else %>

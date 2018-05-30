@@ -1,26 +1,26 @@
 <table id="meta_attributes">
   <% unless record.model_name.name == "User" %>
-		<tr>
-			<th>Record ID:</th>
-			<td><%= get_record_id(record) %></td> <!-- get_record_id() is a custom helper -->
-		</tr>
-		<tr>
-	<% end %>
-		<th>Created By:</th>
-		<% if record.model_name.name == "User" %>
-			<td><%= record.email %></td>
-		<% else %>
-			<td><%= record.user.email %></td>
-		<% end %>
-	</tr>
-	<tr>
-		<th>Date Created:</th>
-		<td><%= time_ago_in_words(record.created_at) %> ago </td>
-	</tr>
-	<tr>
-		<th>Last Updated:</th>
-		<td><%= time_ago_in_words(record.updated_at) %> ago </td>
-	</tr>
+    <tr>
+      <th>Record ID:</th>
+      <td><%= record.get_record_id() %></td> <!-- get_record_id() is defined in models/concerns/model_concerns.rb -->
+    </tr>
+    <tr>
+  <% end %>
+    <th>Created By:</th>
+    <% if record.model_name.name == "User" %>
+      <td><%= record.email %></td>
+    <% else %>
+      <td><%= record.user.email %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <th>Date Created:</th>
+    <td><%= time_ago_in_words(record.created_at) %> ago </td>
+  </tr>
+  <tr>
+    <th>Last Updated:</th>
+    <td><%= time_ago_in_words(record.updated_at) %> ago </td>
+  </tr>
 
   <% if record.respond_to?(:upstream_identifier) %>
     <tr>

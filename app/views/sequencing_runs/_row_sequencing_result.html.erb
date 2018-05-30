@@ -2,25 +2,25 @@
 <!-- A row in the table #sequencing_results in the show view. The column names are defined and ordered in
      ./new_sequencing_result.html.erb.
 -->
-	<tr>
-    <td><%= link_to_record_id(res) %></td>
-		<td><%= link_to res.library.name, res.library %></td>
-		<% barcode = res.library.get_indexseq %>
-		<% if barcode %>
-			<td><%= link_to barcode.display, [barcode.sequencing_library_prep_kit, barcode] %></td>
-		<% else %>
-			<td></td>
-		<% end %>
-		<td><%= res.read1_count %></td>
-		<td><%= res.read1_uri %></td>
-		<% if @sequencing_request.paired_end? %>
-			<td><%= res.read2_count %></td>
-			<td><%= res.read2_uri %></td>
-		<% end %>
-		<td><%= res.comment %></td>
-		<td>
-			<span><%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_run,res] %>&nbsp;&nbsp;&nbsp;
-			<%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_run,res], class: "sequencing_result", method: :delete %></span>
-		</td>
-	</tr>
+  <tr>
+    <td><%= link_to_record(res) %></td>
+    <td><%= link_to res.library.name, res.library %></td>
+    <% barcode = res.library.get_indexseq %>
+    <% if barcode %>
+      <td><%= link_to barcode.display, [barcode.sequencing_library_prep_kit, barcode] %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+    <td><%= res.read1_count %></td>
+    <td><%= res.read1_uri %></td>
+    <% if @sequencing_request.paired_end? %>
+      <td><%= res.read2_count %></td>
+      <td><%= res.read2_uri %></td>
+    <% end %>
+    <td><%= res.comment %></td>
+    <td>
+      <span><%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_run,res] %>&nbsp;&nbsp;&nbsp;
+      <%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_run,res], class: "sequencing_result", method: :delete %></span>
+    </td>
+  </tr>
 <% end %>
