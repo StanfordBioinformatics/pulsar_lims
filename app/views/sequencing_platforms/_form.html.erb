@@ -3,6 +3,7 @@
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing platform name"} %>
   <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The corresponding ID for this platform on the ENCODE Portal."} %>
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   <div class="actions">
     <%= f.button :submit, class: "btn-primary"%>

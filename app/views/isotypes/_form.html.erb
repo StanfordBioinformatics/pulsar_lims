@@ -3,6 +3,8 @@
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique isotype name"} %>
 
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
+
   <div class="actions">
     <%= f.button :submit, class: "btn-primary" %>
   </div></br>

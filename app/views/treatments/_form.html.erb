@@ -38,6 +38,8 @@
   <%= f.association :documents, collection: sorted_document_name_id(), include_blank: true,            
       label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not a data file)."} %>
 
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
+
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
   </div>

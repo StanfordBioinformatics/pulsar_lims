@@ -3,6 +3,7 @@
 
   <%= f.input :name %>
   <%= f.input :bucket_storage, label_html: {"data-toggle": "tooltip", "title": "Select if the provider uses storage in the sense of an AWS S3 bucket."} %>
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

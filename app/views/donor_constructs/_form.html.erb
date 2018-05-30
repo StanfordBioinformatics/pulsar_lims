@@ -1,5 +1,5 @@
 <%= simple_form_for(@donor_construct) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @donor_construct } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @donor_construct } %>
 
   <%= f.input :name %>
   <%= f.input :description %>
@@ -12,18 +12,18 @@
   <fieldset>
     <legend>Gene and transcript target details</legend>
   <%= f.association :target, label: "Gene target", label_html: {class: "refresh"} %>
-	<%= f.input :ensembl_transcript, label_html: {"data-toggle": "tooltip", "title": "Ensembl transcript accession that the donor construct is designed for, if applicable."} %>
-	<%= f.input :refseq_transcript, label_html: {"data-toggle": "tooltip", "title": "RefSeq transcript accession that the donor construct is designed for, if applicable."} %>
+  <%= f.input :ensembl_transcript, label_html: {"data-toggle": "tooltip", "title": "Ensembl transcript accession that the donor construct is designed for, if applicable."} %>
+  <%= f.input :refseq_transcript, label_html: {"data-toggle": "tooltip", "title": "RefSeq transcript accession that the donor construct is designed for, if applicable."} %>
   </fieldset>
 
   <%= f.input :insert_sequence %>
 
   <fieldset>
     <legend>Primers</legend>
-  	<%= f.input :primer_left_forward, label_html: {"data-toggle": "tooltip", "title": "The forward primer in the sense of the gene, on the left homology arm"} %>
-  	<%= f.input :primer_left_reverse, label_html: {"data-toggle": "tooltip", "title": "The reverse primer in the opposite sense of the gene, on the left homology arm."} %>
-  	<%= f.input :primer_right_forward, label_html: {"data-toggle": "tooltip", "title": "The forward primer in the sense of the gene, on the right homology arm"} %>
-  	<%= f.input :primer_right_reverse, label_html: {"data-toggle": "tooltip", "title": "The reverse primer in the opposite sense of the gene, on the right homology arm"} %>
+    <%= f.input :primer_left_forward, label_html: {"data-toggle": "tooltip", "title": "The forward primer in the sense of the gene, on the left homology arm"} %>
+    <%= f.input :primer_left_reverse, label_html: {"data-toggle": "tooltip", "title": "The reverse primer in the opposite sense of the gene, on the left homology arm."} %>
+    <%= f.input :primer_right_forward, label_html: {"data-toggle": "tooltip", "title": "The forward primer in the sense of the gene, on the right homology arm"} %>
+    <%= f.input :primer_right_reverse, label_html: {"data-toggle": "tooltip", "title": "The reverse primer in the opposite sense of the gene, on the right homology arm"} %>
   </fieldset>
 
 
@@ -32,29 +32,29 @@
   <!-- Add inputs for sent_to and date_sent -->
   <%= render partial: "addresses/fieldset_input", locals: {f: f} %>
 
-	<% if @donor_construct.construct_tags.persisted.any? %>
+  <% if @donor_construct.construct_tags.persisted.any? %>
     <table class="min-table" id="construct_tags">
-			<thead>
-	      <tr>
-					<th><strong>Construct tags:</strong></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-	      <%= f.simple_fields_for :construct_tags do |ff| %>
-  	      <% tag = @donor_construct.construct_tags[ff.index] %>
-    	    <tr>
-     	     <td><%= tag.name %></td>
-     	     <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
-     	   </tr>
-     	 <% end %>  
-			</tbody>
-		</table></br>
+      <thead>
+        <tr>
+          <th><strong>Construct tags:</strong></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.simple_fields_for :construct_tags do |ff| %>
+          <% tag = @donor_construct.construct_tags[ff.index] %>
+          <tr>
+            <td><%= tag.name %></td>
+            <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+          </tr>
+        <% end %>  
+      </tbody>
+    </table></br>
   <% end %>
 
   <div id="added_construct_tags"></div>
   <!-- .added_construct_tags will serve as the container for new construct_tag selections added by jQuery. -->
-	<!-- Relevant jQuery in construct_tags.js.coffee. -->
+  <!-- Relevant jQuery in construct_tags.js.coffee. -->
 
   <p> 
     <% exclude_tags = [] %>
@@ -62,12 +62,15 @@
       <% exclude_tags = @donor_construct.construct_tags.persisted.each { |x| x.id } %>
     <% end %>
     <%= link_to "Add construct tag", 
-				select_construct_tag_donor_constructs_path(:exclude_construct_tags => exclude_tags),
-				remote: true, 
-				class: "add_construct_tag reg-btn" %>
+        select_construct_tag_donor_constructs_path(:exclude_construct_tags => exclude_tags),
+        remote: true, 
+        class: "add_construct_tag reg-btn" %>
   </p>
 
-	</br>
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
+
+  </br>
+
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
   </div></br>

@@ -62,3 +62,5 @@
 
   <%= f.input :size_range, as: :string,
       label_html: {"data-toggle" => "tooltip", "title" => "The measured size range of the purified nucleic acid, in bp."} %>
+
+  <%= render partial: "application_partials/notes", locals: {f: f} %>

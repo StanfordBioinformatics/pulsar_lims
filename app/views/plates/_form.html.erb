@@ -1,41 +1,43 @@
-	<%= f.input :name %>
-	<% if not @plate.persisted? %>
-		<!-- Don't allow user to change dimensions of plate once it has been created. If they need to, they'll have to instead create another plate. -->
-		<%= f.input :dimensions, collection: Plate::DIMENSIONS, prompt: "Select the plate size" %>
-	<% end %>
-	<%= f.association :single_cell_sorting, as: :hidden %>
+  <%= f.input :name %>
+  <% if not @plate.persisted? %>
+    <!-- Don't allow user to change dimensions of plate once it has been created. If they need to, they'll have to instead create another plate. -->
+    <%= f.input :dimensions, collection: Plate::DIMENSIONS, prompt: "Select the plate size" %>
+  <% end %>
+  <%= f.association :single_cell_sorting, as: :hidden %>
   <%= f.association :vendor %>
   <%= f.input :vendor_product_identifier %>
 
-		<div style="padding: 0.5em;max-width: 40em;" class="jumbotron table-responsive bg-info">
-			<!-- I learned to use the .table-responsive class in a div that wraps a responsive table
-					 by looking at the example at https://getbootstrap.com/docs/3.3/css/#tables. Fortunately,
-					 I can also mix that with the .jumbotron class. On a side note, I learned from trial and error
-					 that using instead a div wrapper with a class of .container or .container-fluid does not work well
-					 as the content expands out of the div in smaller displays. 
-			-->
-			<span style="font-size: 1.2em;font-weight: bold;">Select fluorphore-conjugated antibodies used for sorting</span>
-			<table class="table plate_select_antibodies_container" >
-				<thead>
-					<tr>
-						<th style="padding-left: 0;width: 15em;" class="">Double-click items to add to the right.</th>
-						<th></th>
-						<th>Double-click items to remove.</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td style="padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0;">
-							<%= f.input_field :antibody_ids, collection: Antibody.all, multiple: true, style: "width: 15em;", class: "plate_select_antibodies", size: 15 %>
-						</td>
-						<td style="position: relative; top: 2em; text-align: center;">
-				       <div class="fa fa-arrow-right fa-lg"></div>
-						</td>
-						<td>
-							<%= select_tag "fluorophore_antibodies", nil, multiple: true, size: 10, class: "", style: "width: 10em;" %>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+  <div style="padding: 0.5em;max-width: 40em;" class="jumbotron table-responsive bg-info">
+    <!-- I learned to use the .table-responsive class in a div that wraps a responsive table
+         by looking at the example at https://getbootstrap.com/docs/3.3/css/#tables. Fortunately,
+         I can also mix that with the .jumbotron class. On a side note, I learned from trial and error
+         that using instead a div wrapper with a class of .container or .container-fluid does not work well
+         as the content expands out of the div in smaller displays. 
+    -->
+    <span style="font-size: 1.2em;font-weight: bold;">Select fluorphore-conjugated antibodies used for sorting</span>
+    <table class="table plate_select_antibodies_container" >
+      <thead>
+        <tr>
+          <th style="padding-left: 0;width: 15em;" class="">Double-click items to add to the right.</th>
+          <th></th>
+          <th>Double-click items to remove.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0;">
+            <%= f.input_field :antibody_ids, collection: Antibody.all, multiple: true, style: "width: 15em;", class: "plate_select_antibodies", size: 15 %>
+          </td>
+          <td style="position: relative; top: 2em; text-align: center;">
+             <div class="fa fa-arrow-right fa-lg"></div>
+          </td>
+          <td>
+            <%= select_tag "fluorophore_antibodies", nil, multiple: true, size: 10, class: "", style: "width: 10em;" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
 

@@ -1,16 +1,16 @@
 <%= simple_form_for(@single_cell_sorting, html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @single_cell_sorting } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @single_cell_sorting } %>
   <%= f.input :name %>
   <%= f.input :description %>
-	<%= f.association :starting_biosample, collection: Biosample.non_plated,
-			label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The biosample that is used as input sorting material." } %>
+  <%= f.association :starting_biosample, collection: Biosample.non_plated,
+      label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The biosample that is used as input sorting material." } %>
 
-	<% file_upload_hint="" %>
-	<% if @single_cell_sorting.fluorescence_intensity_file.present? %>
-		<% file_upload_hint="You previously uploaded #{@single_cell_sorting.fluorescence_intensity_file}." %>
-	<% end %>
-		
-	<%= f.input :fluorescence_intensity_file, as: :file, hint: file_upload_hint %>
+  <% file_upload_hint="" %>
+  <% if @single_cell_sorting.fluorescence_intensity_file.present? %>
+    <% file_upload_hint="You previously uploaded #{@single_cell_sorting.fluorescence_intensity_file}." %>
+  <% end %>
+    
+  <%= f.input :fluorescence_intensity_file, as: :file, hint: file_upload_hint %>
   
   <%= f.association :documents %>
 
@@ -18,6 +18,8 @@
     <%= render partial: "application_partials/simple_fields_for",                                    
         locals: {f: f, record: @single_cell_sorting, attribute: :documents, title: "Documents"} %>
   <% end %>
+
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

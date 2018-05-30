@@ -1,13 +1,14 @@
 <%= simple_form_for(@target) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @target } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @target } %>
 
   <%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique target (i.e. gene) name. This should be equal to the value of either the 'label' field or the 'name' field in a target entry on the ENCODE Portal (i.e. see https://www.encodeproject.org/targets/eGFP-ARID3B-human/?format=json)."} %>
 
   <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "An identifier for the target on the ENCODE Portal, such as the value of the 'uuid' or 'name' property of the Portal's record entry."} %>
 
-	<%= f.input :ensembl, label_html: {"data-toggle": "tooltip", "title": "The Ensembl accession."} %>
-	<%= f.input :refseq, label_html: {"data-toggle": "tooltip", "title": "The RefSeq accession."} %>
-	<%= f.input :uniprotkb, label_html: {"data-toggle": "tooltip", "title": "The UniProtKB identifier."} %>
+  <%= f.input :ensembl, label_html: {"data-toggle": "tooltip", "title": "The Ensembl accession."} %>
+  <%= f.input :refseq, label_html: {"data-toggle": "tooltip", "title": "The RefSeq accession."} %>
+  <%= f.input :uniprotkb, label_html: {"data-toggle": "tooltip", "title": "The UniProtKB identifier."} %>
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
 
 
   <div class="actions">

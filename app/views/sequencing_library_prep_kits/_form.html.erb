@@ -1,37 +1,39 @@
 <%= simple_form_for(@sequencing_library_prep_kit) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_library_prep_kit } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_library_prep_kit } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library prep kit name"} %>
   <%= f.input :description %>
   <%= f.association :vendor,
-  		label_html: {class: "refresh", "data-toggle": "tooltip", "title": "Select the vendor of the library prep kit."} %>
+      label_html: {class: "refresh", "data-toggle": "tooltip", "title": "Select the vendor of the library prep kit."} %>
 
-	<%= f.input :vendor_product_identifier %>
-	<%= f.input :supports_paired_end, 
-			label_html: {"data-toggle" => "tooltip", "title" => "Select if this kit can support paired-end sequencing (contains index2 barcodes)."}  %>
+  <%= f.input :vendor_product_identifier %>
+  <%= f.input :supports_paired_end, 
+      label_html: {"data-toggle" => "tooltip", "title" => "Select if this kit can support paired-end sequencing (contains index2 barcodes)."}  %>
 
   <% if @sequencing_library_prep_kit.documents.persisted.any? %>
     <table class="min-table">
-			<thead>
-	      <tr>
-					<th><strong>Documents:</strong></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-	      <%= f.simple_fields_for :documents do |ff| %>
- 	      <% doc = @sequencing_library_prep_kit.documents[ff.index] %>
- 	      <tr>
- 	       <td><%= doc.name %></td>
- 	       <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
- 	      </tr>
- 	      <% end %>  
-			</tbody>
+      <thead>
+        <tr>
+          <th><strong>Documents:</strong></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.simple_fields_for :documents do |ff| %>
+         <% doc = @sequencing_library_prep_kit.documents[ff.index] %>
+         <tr>
+          <td><%= doc.name %></td>
+          <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+         </tr>
+         <% end %>  
+      </tbody>
     </table></br>
   <% end %>
 
   <%= f.association :documents, collection: sorted_document_name_id(), include_blank: true, 
       label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not a data file)."} %>
+
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

@@ -1,6 +1,6 @@
 <%= simple_form_for(@sequencing_request, html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
 
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_request } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_request } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing request name"} %>
   <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Notes about the sequencing request"} %>
@@ -10,51 +10,51 @@
     <% sample_sheet_upload_hint="You previously uploaded #{@sequencing_request.sample_sheet}." %>
   <% end %>
 
-	<%= f.input :sample_sheet, as: :file, hint: sample_sheet_upload_hint, label_html: {"data-toggle": "tooltip", "title": "The sample sheet that you submit to the sequencing center. Must be in the Illumina-specified format, containing at least the 'Data Section' (See 'Data Section' in the Illumina bcl2fastq guide)."} %>
+  <%= f.input :sample_sheet, as: :file, hint: sample_sheet_upload_hint, label_html: {"data-toggle": "tooltip", "title": "The sample sheet that you submit to the sequencing center. Must be in the Illumina-specified format, containing at least the 'Data Section' (See 'Data Section' in the Illumina bcl2fastq guide)."} %>
 
   <% if @sequencing_request.libraries.persisted.any? %>
-		<table class="min-table" id="libraries">
-			<thead>
-				<tr>
-					<th data-toggle="tooltip" title="Libraries must all be using the same Sequencing Library Prep Kit, and no two can share the same barcode." ><strong>Associated Libraries:</strong></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<%= f.simple_fields_for(:libraries) do |ff| %>
-					<% lib = @sequencing_request.libraries[ff.index] %>
-					<% if not lib.persisted?%>
-						<% next %>
-					<% end %>
-					<tr>
-						<td><%= link_to lib.name, lib %></td>
-			      <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
-					</tr>
-		    <% end %>  
-			</tbody>
+    <table class="min-table" id="libraries">
+      <thead>
+        <tr>
+          <th data-toggle="tooltip" title="Libraries must all be using the same Sequencing Library Prep Kit, and no two can share the same barcode." ><strong>Associated Libraries:</strong></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.simple_fields_for(:libraries) do |ff| %>
+          <% lib = @sequencing_request.libraries[ff.index] %>
+          <% if not lib.persisted?%>
+            <% next %>
+          <% end %>
+          <tr>
+            <td><%= link_to lib.name, lib %></td>
+            <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
+          </tr>
+        <% end %>  
+      </tbody>
     </table></br>
   <% end %>
 
-	<% if @sequencing_request.plates.persisted.any? %>
-		<table class="min-table">
-			<thead>
-				<tr>
-					<th><strong>Associated Plates:</strong></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<%= f.simple_fields_for :plates do |ff| %>
+  <% if @sequencing_request.plates.persisted.any? %>
+    <table class="min-table">
+      <thead>
+        <tr>
+          <th><strong>Associated Plates:</strong></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.simple_fields_for :plates do |ff| %>
           <% plate = @sequencing_request.plates[ff.index] %>
-					<% if not plate.persisted? %>
-						<% next %>
-					<% end %>
+          <% if not plate.persisted? %>
+            <% next %>
+          <% end %>
           <tr>
             <td><%= link_to plate.name, plate %></td>
             <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
           </tr>
-		    <% end %>  
-			</tbody>
+        <% end %>  
+      </tbody>
     </table></br>
   <% end %>
 
@@ -63,7 +63,7 @@
   <label for="sequencing_request_concentration_unit" data-toggle="tooltip" title="The concentration units."><span>Units</span></label>
   <%= f.input_field :concentration_unit_id, collection: ConcentrationUnit.all %>
   </br></br>
-					
+          
   <%= f.association :sequencing_platform, 
       collection: SequencingPlatform.order(:name), 
       label_html: {class: "refresh"},
@@ -74,8 +74,9 @@
       label_html: {class: "refresh"},
       label_method: :name %>
 
-	<%= f.input :paired_end %>
+  <%= f.input :paired_end %>
   <%= f.input :shipped, label_html: {"data-toggle" => "tooltip", "title" => "Whether the material to be sequenced was already delivered to the sequencing center"} %>
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
 
 
   <div class="form-actions">

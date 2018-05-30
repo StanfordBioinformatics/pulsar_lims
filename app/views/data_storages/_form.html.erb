@@ -1,18 +1,20 @@
 <%= simple_form_for(@data_storage) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @data_storage } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @data_storage } %>
 
-    <%= f.input :name %>
-		<%= f.association :data_storage_provider %>
+  <%= f.input :name %>
+  <%= f.association :data_storage_provider %>
 
-		<div class="bucket-attrs">
-			<%= f.input :bucket, input_html: {class: "required"}, label_html: {"data-toggle" => "tooltip", "title" => "Name of the bucket" } %>
-		</div>
+  <div class="bucket-attrs">
+    <%= f.input :bucket, input_html: {class: "required"}, label_html: {"data-toggle" => "tooltip", "title" => "Name of the bucket" } %>
+  </div>
 
-		<div class="project-attrs">
-			<%= f.input :project_identifier, label_html: {"data-toggle": "tooltip", "title": "For project-based systems, such as DNAnexus, this is the project ID."} %>
-		</div>
+  <div class="project-attrs">
+    <%= f.input :project_identifier, label_html: {"data-toggle": "tooltip", "title": "For project-based systems, such as DNAnexus, this is the project ID."} %>
+  </div>
 
-    <%= f.input :folder_base_path, label_html: {"data-toggle" => "tooltip", "title" => "Folder path within your bucket or project that doesn't change. Use the '/' character to separate folders. Useful for when creating FileReferences so you don't have to retype this base path each time to get to a nested path." } %>
+  <%= f.input :folder_base_path, label_html: {"data-toggle" => "tooltip", "title" => "Folder path within your bucket or project that doesn't change. Use the '/' character to separate folders. Useful for when creating FileReferences so you don't have to retype this base path each time to get to a nested path." } %>
+
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

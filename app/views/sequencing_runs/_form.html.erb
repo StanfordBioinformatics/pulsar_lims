@@ -5,6 +5,7 @@
   <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Any particular remarks you may want to add."} %>
 
   <%= f.input :lane, label_html: {"data-toggle" => "tooltip", "title" => "The lane number on the flowcell."} %>
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
