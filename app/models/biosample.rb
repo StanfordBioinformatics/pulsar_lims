@@ -36,7 +36,7 @@ class Biosample < ActiveRecord::Base
 
   validates :upstream_identifier, uniqueness: true, allow_blank: true
   validates :name, uniqueness: true, presence: true
-  #validates :documents, presence: true
+  validates :documents, presence: true, unless: Proc.new {|bio| bio.parents.any? }
   validates :biosample_type_id, presence: true
   validates :biosample_term_name_id, presence: true
   validates :vendor_id, presence: true

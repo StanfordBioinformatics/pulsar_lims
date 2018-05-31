@@ -12,86 +12,86 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @plate } %>
 
 <table class="attributes">
-	<tr>
-  	<th><strong>Name:</strong></th>
-  	<td><%= @plate.name %>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @plate.name %>
+  </tr>
 
-	<tr>
-		<th><strong>Single Cell Sorting</strong></th>
-		<td><%= link_to @plate.single_cell_sorting.name, @plate.single_cell_sorting %></td>
-	</tr>
+  <tr>
+    <th><strong>Single Cell Sorting</strong></th>
+    <td><%= link_to @plate.single_cell_sorting.name, @plate.single_cell_sorting %></td>
+  </tr>
 
-	<tr>
-  	<th><strong>Dimensions:</strong></th>
-		<td><%= "#{@plate.nrow}x#{@plate.ncol}" %></td>
-	</tr>
+  <tr>
+    <th><strong>Dimensions:</strong></th>
+    <td><%= "#{@plate.nrow}x#{@plate.ncol}" %></td>
+  </tr>
 
-	<tr>
-  	<th><strong>Vendor:</strong></th>
-  	<td><%= link_to @plate.vendor.name, @plate.vendor %></td>
-	</tr>
+  <tr>
+    <th><strong>Vendor:</strong></th>
+    <td><%= link_to @plate.vendor.name, @plate.vendor %></td>
+  </tr>
 
-	<tr>
-  	<th><strong>Vendor product identifier:</strong></th>
-  	<td><%= @plate.vendor_product_identifier %></td>
-	</tr>
-	
-	<tr>
-		<th><strong>Fluorophore-conjugated antibodies:</strong></th>
-		<td>
+  <tr>
+    <th><strong>Vendor product identifier:</strong></th>
+    <td><%= @plate.vendor_product_identifier %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Fluorophore-conjugated antibodies:</strong></th>
+    <td>
       <ul class="list-unstyled">
-				<% @plate.antibodies.each do |ab| %>
- 	       <li><%= link_to ab.name, ab %></li>
-				<% end %>
-			</ul>
-		</td>
-	</tr>
+        <% @plate.antibodies.each do |ab| %>
+          <li><%= link_to ab.name, ab %></li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
 
-	<tr>
-		<th><strong>Sequencing Requests:</strong></th>
-		<% if @plate.sequencing_requests.any? %>
-			<td><ul class="list-unstyled">
-				<% @plate.sequencing_requests.each do |sreq| %>
-					<li><%= link_to sreq.name, sreq %></li>
-				<% end %>
-			</ul></td>
-		<% end %>	
-	</tr>
+  <tr>
+    <th><strong>Sequencing Requests:</strong></th>
+    <% if @plate.sequencing_requests.any? %>
+      <td><ul class="list-unstyled">
+        <% @plate.sequencing_requests.each do |sreq| %>
+          <li><%= link_to sreq.name, sreq %></li>
+        <% end %>
+      </ul></td>
+    <% end %>  
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    
     <td><%= simple_format(@plate.notes) %></td>                                                     
   </tr> 
-				
+        
 </table>
 
 <%= render partial: "plate" %>
 
 <div class="add_barcodes bg-info">
-	<% if @plate.single_cell_sorting.library_prototype.paired_end? %>
-		<% placeholder="TAAGGCGA-TAGATCGC   CGTACTAG-CTCTCTAT\nAGGCAGAA-TATCCTCT   TCCTGAGC-AGAGTAGA\n..." %>
-		<% submit_text="Add paired barcodes" %>
-		<% label_text="#{submit_text} to wells to create libraries." %>
-	<% else %>
-		<% placeholder="ATCCGA	TAGCGA\nCGAGTA	ACTGCG\n..." %>
-		<% submit_text="Add barcodes" %>
-		<% label_text="#{submit_text} to wells to create libraries." %>
-	<% end %>
-		
-	<% tooltip = "Enter barcodes in matrix format (same format as the plate), such that barcode in position [1,1] corresponds to well A1, and the barcode in position [2,2] corresponds to well B2 ... Use a space or tab to delimit values; for wells without barcodes just leave the corresponding field empty." %>
+  <% if @plate.single_cell_sorting.library_prototype.paired_end? %>
+    <% placeholder="TAAGGCGA-TAGATCGC   CGTACTAG-CTCTCTAT\nAGGCAGAA-TATCCTCT   TCCTGAGC-AGAGTAGA\n..." %>
+    <% submit_text="Add paired barcodes" %>
+    <% label_text="#{submit_text} to wells to create libraries." %>
+  <% else %>
+    <% placeholder="ATCCGA  TAGCGA\nCGAGTA  ACTGCG\n..." %>
+    <% submit_text="Add barcodes" %>
+    <% label_text="#{submit_text} to wells to create libraries." %>
+  <% end %>
+    
+  <% tooltip = "Enter barcodes in matrix format (same format as the plate), such that barcode in position [1,1] corresponds to well A1, and the barcode in position [2,2] corresponds to well B2 ... Use a space or tab to delimit values; for wells without barcodes just leave the corresponding field empty." %>
   <%= simple_form_for(@plate) do |f| %>
     <%= f.input :add_barcodes,
-				as: :text,
-				label: label_text,
-				placeholder: placeholder, 
-				label_html: {"data-toggle" => "tooltip", "title" => tooltip },
-				input_html: {rows: 10},
-        hint: "Copy and paste paired-barcodes in - if there are any validation errors, you'll have to paste them all back in with the corrections." %>
-	
-		<div class="actions">
-			<%= f.button :submit, submit_text, class: "btn-primary "%>
-		</div>
+        as: :text,
+        label: label_text,
+        placeholder: placeholder, 
+        label_html: {"data-toggle" => "tooltip", "title" => tooltip },
+        input_html: {rows: 10},
+        hint: "Copy and paste paired-barcodes in. %>
+  
+    <div class="actions">
+      <%= f.button :submit, submit_text, class: "btn-primary "%>
+    </div>
   <% end %>
 </div>
 </br>

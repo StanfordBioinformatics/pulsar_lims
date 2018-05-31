@@ -1,37 +1,37 @@
 class PlatesController < ApplicationController
-	include PlatesConcern #gives me add_barcodes_matrix_input()
+  include PlatesConcern #gives me add_barcodes_matrix_input()
   before_action :set_plate, only: [:show, :edit, :update, :destroy, :show_barcodes]
-	 skip_after_action :verify_authorized, only: [:show_barcodes]
+   skip_after_action :verify_authorized, only: [:show_barcodes]
 
-	def show_barcodes
-		if params[:checked] == "true"
-			@show_barcodes = 1
-		end
-		render partial: "plate", layout: false
-	end	
+  def show_barcodes
+    if params[:checked] == "true"
+      @show_barcodes = 1
+    end
+    render partial: "plate", layout: false
+  end  
 
   def index
     super
   end
 
   def show
-		authorize @plate
+    authorize @plate
   end
 
   #def new
-		#authorize Plate
+    #authorize Plate
     #@plate = Plate.new
   #end
 
   def edit
-		authorize @plate
+    authorize @plate
   end
 
   def create
-		authorize Plate
+    authorize Plate
     @plate = Plate.new(plate_params)
 
-		@plate.user = current_user
+    @plate.user = current_user
     respond_to do |format|
       if @plate.save
         format.html { redirect_to @plate, notice: 'Plate was successfully created.' }
@@ -44,17 +44,21 @@ class PlatesController < ApplicationController
   end
 
   def update
-		authorize @plate
+    authorize @plate
     barcode_ids_param = :add_barcodes
 
     begin 
       if plate_params[barcode_ids_param].present?
-        @plate = add_barcodes_matrix_input(plate=@plate,barcodes=plate_params[barcode_ids_param])
+        # Set fake add_barcodes attribute so that the user won't have to retype them all in the
+        # event of a validation error. 
+        @plate.add_barcodes = params[:plate][:add_barcodes]
+        add_barcodes_matrix_input(plate=@plate,barcodes=plate_params[barcode_ids_param])
       end 
     #rescue Exceptions::BarcodeNotFoundError, Exceptions::TooManyRowsError, Exceptions::TooManyColumnsError, Exceptions::WellNotFoundError, Exceptions::WellAndPlateMismatchError, Exceptions::WellNotSavedError => err #any of these could be raised when calling add_barcodes(). And they all inherit from StandardError.
     rescue StandardError => err #any of these could be raised when calling add_barcodes().
       respond_to do |format|
-        format.html { redirect_to @plate, alert: err.message }
+        flash[:alert] = err.message
+        format.html { render "show"}
       end 
       return
     end
@@ -71,8 +75,8 @@ class PlatesController < ApplicationController
   end
 
   def destroy
-		authorize @plate
-		ddestroy(@plate,plates_path)
+    authorize @plate
+    ddestroy(@plate,plates_path)
   end
 
   private

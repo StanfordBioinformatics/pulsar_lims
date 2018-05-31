@@ -32,7 +32,7 @@ class Library < ActiveRecord::Base
 #  validates :barcode, format: { with: /\A[acgtnACGTN]+-?[acgtnACGTN]+\z/ }, allow_blank: true
   validates  :size_range, format: {with: /\A\d+-\d+\Z/}, presence: true
   validates :nucleic_acid_term_id, presence: true
-  validates :documents, presence: true
+  validates :documents, presence: true, unless: Proc.new {|lib| lib.parents.any? }
   #validates :vendor_id, presence: true
   validates :biosample_id, presence: true, unless: Proc.new {|lib| lib.prototype?}
   validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"
@@ -48,7 +48,7 @@ class Library < ActiveRecord::Base
   scope :non_plated, lambda { where(plated: false) }
 
   # Only call self.set_name() if this is a library on a well.
-  before_validation :set_name, on: :create #, unless: Proc.new {|lib| lib.prototype? }
+  before_validation :set_name, on: :create #Somehow this gets called when updating too, despite saying "on: :create". So in that method, I make sure that the record isn't persisted before continuing. 
   after_validation :check_plated
   validate :validate_barcode, unless: Proc.new {|lib| lib.single_cell_sorting.present? } #verifies self.barcode/self.paired_barcode
   validate :validate_plate_consistency # If biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
@@ -160,6 +160,7 @@ class Library < ActiveRecord::Base
   end
 
   def set_name
+    return unless self.persisted? 
     if self.biosample.present? #won't be if prototype library.
       if self.biosample.well.present?
         self.name = self.biosample.name

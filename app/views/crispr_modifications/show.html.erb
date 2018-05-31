@@ -6,7 +6,7 @@
     <%= render partial: "application_partials/auth_edit_record", locals: {record: @crispr} %>
     <%= render partial: "application_partials/auth_destroy_record", locals: {record: @crispr} %>
   </ul>
-</header> 
+</header>
 
 <%= render partial: "application_partials/record_meta", locals: { record: @crispr } %>
 
@@ -14,6 +14,11 @@
   <tr>
     <th><strong>Name:</strong></th>
     <td><%= @crispr.name %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Times cloned:</strong></th>
+    <td><%= @crispr._times_cloned %></td>
   </tr>
 
   <tr>
@@ -25,19 +30,19 @@
     <th><strong>Purpose:</strong></th>
     <td><%= @crispr.purpose %></td>
   </tr>
-  
+
   <tr>
     <th><strong>Crispr constructs:</strong></th>
     <td>
       <%= render partial: "application_partials/link_to_has_many", locals: {links: @crispr.all_crispr_constructs} %>
     </td>
   </tr>
-  
+
   <tr>
     <th><strong>Donor construct:</strong></th>
     <td><%= link_to @crispr.donor_construct.name, @crispr.donor_construct %></td>
   </tr>
-  
+
   <tr>
     <th><strong>Biosample:</strong></th>
     <td><%= link_to @crispr.biosample.name, @crispr.biosample %></td>
@@ -49,10 +54,10 @@
     <td><%= link_to target.name, target %></td>
   </tr>
 
-  <tr class="notes-row">                                                                               
-    <th><strong>Notes</strong></th>                                                                    
-    <td><%= simple_format(@crispr.notes) %></td>                                                     
-  </tr> 
+  <tr class="notes-row">
+    <th><strong>Notes</strong></th>
+    <td><%= simple_format(@crispr.notes) %></td>
+  </tr>
 
 </table>
 
@@ -91,6 +96,6 @@
 <%= link_to "New PCR Validation", new_pcr_validation_crispr_modification_path(@crispr), class: "reg-btn" %>
 </br></br>
 
-<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->
 <%= render partial: "application_partials/edit_notes", locals: {rec: @crispr} %>
 <%= link_to 'Back', crispr_modifications_path %>

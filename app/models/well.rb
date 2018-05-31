@@ -74,9 +74,8 @@ class Well < ActiveRecord::Base
     custom_attrs = {}
     custom_attrs[:from_prototype_id] = self.plate.single_cell_sorting.sorting_biosample.id
     custom_attrs[:part_of_id] = self.plate.single_cell_sorting.starting_biosample.id
-    biosample = self.plate.single_cell_sorting.sorting_biosample.clone(associated_user_id: self.user.id, custom_attrs: custom_attrs)
-    # Update Biosample to link to this well
-    biosample.update!(well_id: self.id)
+    custom_attrs[:well_id] = self.id
+    biosample = self.plate.single_cell_sorting.sorting_biosample.clone_biosample(associated_user_id: self.user.id, custom_attrs: custom_attrs)
     #I first tried using create_biosample!, which did raise ActiveRecord:RecordInvalid. However,
     # while that does issue a Rollback as expected as any exception would in a callback, the form errors appear to be gone
     # and don't display on the form. Thus, the user is left with a re-rendered and populated form w/o any indication

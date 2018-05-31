@@ -62,7 +62,6 @@ module PlatesConcern
         end
       end
     end
-    return plate
   end
 
   def create_library_for_well(plate,well,barcode)
@@ -76,13 +75,12 @@ module PlatesConcern
     end
     user = current_user
     if well.biosample.libraries.any?
-      well.biosample.libraries.destroy_all
+      res = well.biosample.libraries.destroy_all
       #Could be that the user made a mistake when adding the libraries initially in matrix format (i.e. incorrect barcode layout)
       # to the plate and needs to redo this step.
     end
     library_prototype = plate.single_cell_sorting.library_prototype
-    well_lib_attrs = library_prototype.clone()
-    well_lib_attrs["user_id"] = user.id
+    well_lib = library_prototype.clone_library(associated_biosample_id: well.biosample.id, associated_user_id: current_user.id)
     #the name is set to the biosample name (see code in the library.rb model file).
     barcode.upcase!
     index1 = barcode
@@ -100,8 +98,7 @@ module PlatesConcern
       raise Exceptions::BarcodeNotFoundError, "Index 1 barcode #{index1} is not present in sequencing library prep kit '#{prep_kit.name}' Make sure you provided the correct orientation and didn't reverse complement it."
     end
     if not index2 #then single-end only
-      well_lib_attrs["barcode"] = index1_rec
-      new_library_record  = well.biosample.libraries.create(well_lib_attrs)
+      well_lib.barcode = index1_rec
     else #then paired-end
       index2_rec = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id,index_number: 2, sequence: index2})
       if index2_rec.blank?
@@ -112,12 +109,12 @@ module PlatesConcern
         name = PairedBarcode.make_name(index1_rec.name,index2_rec.name)
         paired_rec = PairedBarcode.create!({user: current_user, name: name,sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1_rec.id, index2_id: index2_rec.id})
       end 
-      well_lib_attrs["paired_barcode"] = paired_rec
-      new_library_record = well.biosample.libraries.create(well_lib_attrs)
+      well_lib.paired_barcode = paired_rec
     end
 
-    if new_library_record.errors.any?
-      raise Exceptions::WellNotSavedError, "Error saving library '#{new_library_record.name}' for well #{well.name}. Errors are: #{new_library_record.errors.full_messages.join('; ')}"
+    status = well_lib.save
+    if not status 
+      raise Exceptions::WellNotSavedError, "Error saving library '#{well_lib.name}' for well #{well.name}. Errors are: #{well_lib.errors.full_messages.join('; ')}"
     end
   end
 

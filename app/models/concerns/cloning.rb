@@ -7,22 +7,6 @@ module Cloning
     after_update :propagate_update_if_prototype
   end
 
-
-  def clone(associated_user_id:, custom_attrs:)
-    times_cloned = self._times_cloned + 1
-    attrs = self.attributes_for_cloning()
-    attrs["user_id"] = associated_user_id
-    attrs["name"] = "#{self.name} clone #{times_cloned}"
-    if custom_attrs.present?
-      attrs.update(custom_attrs)
-    end
-    new_record = self.class.create!(attrs)
-    #The above create! class method raises ActiveRecord::RecordInvalid if there is any validation error, and
-    # this is caught in application_controller.rb.
-    self.update!({_times_cloned: times_cloned })
-    return new_record
-  end
-
   def parents
     """
     Looks for sibling records of the same model that are considered to be parents of the current record.
@@ -90,6 +74,25 @@ module Cloning
   end
 
   private
+
+  # Make this method private since Models have their own clone instance method named in the format
+  # clone_model that calls this one, where model is the lower-cased class name of the model with 
+  # underscores instead of camelcase. There is no need to call this class or those that follow outside
+  # of model code. 
+  def clone(associated_user_id:, custom_attrs:)
+    times_cloned = self._times_cloned + 1
+    attrs = self.attributes_for_cloning()
+    attrs["user_id"] = associated_user_id
+    attrs["name"] = "#{self.name} clone #{times_cloned}"
+    if custom_attrs.present?
+      attrs.update(custom_attrs)
+    end
+    new_record = self.class.create!(attrs)
+    #The above create! class method raises ActiveRecord::RecordInvalid if there is any validation error, and
+    # this is caught in application_controller.rb.
+    self.update!({_times_cloned: times_cloned })
+    return new_record
+  end
 
   def propagate_update_if_prototype
     # An after_update callback.

@@ -26,6 +26,26 @@
   </tr>
 
   <tr>
+    <th><strong>Times cloned:</strong></th>
+    <td><%= @biosample._times_cloned %></td>
+  </tr>
+
+  <% if @biosample.starting_biosample_single_cell_sortings.any? %>
+    <tr>
+      <th><strong>starting biosample for Single Cell Sortings</strong></th>
+      <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.starting_biosample_single_cell_sortings} %></td>
+    </tr>
+  <% end %>
+
+
+  <% if @biosample.sorting_biosample_single_cell_sorting.present? %>
+    <tr>
+      <th><strong>sorting biosample for Single Cell Sorting</strong></th>
+      <td><%= link_to_record(@biosample.sorting_biosample_single_cell_sorting) %></td>
+    </tr>
+  <% end %>
+
+  <tr>
     <th><strong>Tube label</strong></th>
     <td><%= @biosample.tube_label %></td>
   </tr>
@@ -54,13 +74,6 @@
       <th><strong>Well</strong></th>
       <% plate = @biosample.well.plate %>
       <td>Plate: <%= link_to plate.name, plate %>, Well: <%= link_to @biosample.well.name, [plate, @biosample.well] %></td>
-    </tr>
-  <% end %>
-
-  <% if @biosample.starting_biosample_single_cell_sortings.any? %>
-    <tr>
-      <th><strong>Single Cell Sortings</strong></th>
-      <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.starting_biosample_single_cell_sortings} %></td>
     </tr>
   <% end %>
 
@@ -193,11 +206,6 @@
     <% else %>
       <td>None</td>
     <% end %>
-  </tr>
-
-  <tr>
-    <th><strong>Times cloned:</strong></th>
-    <td><%= @biosample._times_cloned %></td>
   </tr>
 
   <tr class="notes-row">                                                                               

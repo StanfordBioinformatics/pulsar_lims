@@ -18,6 +18,11 @@
   </tr>
 
   <tr>
+    <th><strong>Times cloned:</strong></th>
+    <td><%= @library._times_cloned %></td>
+  </tr>
+
+  <tr>
     <th><strong>Prototype?</strong></th>
     <td>
       <% if @library.prototype? %>
@@ -27,6 +32,13 @@
       <% end %>
     </td>
   </tr>
+
+  <% if @library.single_cell_sorting.present? %>
+    <tr>
+      <th><strong>Prototype for Single Cell Sorting:</strong></th>
+      <td><%= link_to_record(@library.single_cell_sorting) %></td>
+    </tr>
+  <% end %>
 
   <tr>
     <th><strong>Sequencing Library Prep Kit:</strong></th>
@@ -41,7 +53,7 @@
   <tr>
     <th><strong>Documents:</strong></th>
     <td>
-      <%= render partial: "application_partials/link_to_has_many", locals: {documents: @library.all_documents} %>
+      <%= render partial: "application_partials/link_to_has_many", locals: {links: @library.all_documents} %>
     </td>
   </tr>
 
@@ -124,7 +136,7 @@
     <% end %>
   </tr>
 
-  <tr>  
+  <tr>
     <th><strong>Size range:</strong></th>
     <td><%= @library.size_range %></td>
   </tr>
@@ -134,13 +146,13 @@
     <td><%= @library.strand_specific %></td>
    </tr>
 
-  <tr class="notes-row">                                                                               
-    <th><strong>Notes</strong></th>                                                                    
-    <td><%= simple_format(@library.notes) %></td>                                                     
-  </tr> 
+  <tr class="notes-row">
+    <th><strong>Notes</strong></th>
+    <td><%= simple_format(@library.notes) %></td>
+  </tr>
 </table>
 
-<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->
 <%= render partial: "application_partials/edit_notes", locals: {rec: @library} %>
 
 <%= render partial: "back" %>
