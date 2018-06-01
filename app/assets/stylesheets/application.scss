@@ -263,6 +263,14 @@ input.search:focus + .search-btn {
   }
 }
 
+html {
+  height: 100%;
+
+  body {
+    height: 100%;
+  }
+}
+
 body { 
   background-color: #ddd;
   padding: 0;
