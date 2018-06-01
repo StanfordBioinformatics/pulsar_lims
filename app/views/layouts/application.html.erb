@@ -175,7 +175,7 @@
               </ul>
             </nav>
           </div>
-          <div style="float: left;" class="main-body data-container col-xs-8 col-sm-9 col-md-10">
+          <div class="main-body data-container col-xs-8 col-sm-9 col-md-10">
             <% flash.each do |key, message| %>
               <% next if ! [:alert,:notice].include?(key.to_sym) %>
               <div class="alert alert-dismissible alert-<%= key %>">
@@ -185,11 +185,10 @@
             <% end %>
             <%= yield %>
           </div>
-          <!-- <div id="right_sidebar" class="data-container col-xs-0 col-sm-1 col-md-2"></div> -->
         </div>
-        </br style="clear:both">
+        </br>
     </div> <!-- end 'main' div -->
-    <nav style="clear:both;" id="footer" class="navbar navbar-default navbar-bottom">
+    <nav style="clear:both;" id="footer" class="navbar navbar-default">
       <div class="navbar-right">
         <p class="navbar-text">
         <%= fa_icon("copyright") %><span> 2016-2017 The Board of Trustees of the Leland Stanford Junior University</span>

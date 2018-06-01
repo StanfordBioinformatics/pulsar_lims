@@ -10,4 +10,4 @@
   <%= f.input :extension_time %>
   <%= f.input :num_cycles, label_html: {"data-toggle": "tooltip", "title": "The number of PCR cycles."} %>
   <%= f.association :crispr_modification, label_html: {class: "refresh"} %>
-  <%= f.input :success, label_html: {"data-toggle": "tooltip", "title": "True if the PCR worked (gave us a product), False otherwise."}  %>
+  <%= f.input :success, label_html: {"data-toggle": "tooltip", "title": "True if the PCR worked (gave a product), False otherwise."}  %>
