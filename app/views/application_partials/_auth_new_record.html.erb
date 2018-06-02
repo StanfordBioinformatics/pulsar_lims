@@ -1,18 +1,18 @@
 <% if local_assigns[:nested].nil? %>
 <!-- can use the defined? method above instead of local_assigns, i.e. 'if defined?(nested) -->
-	<% nested = "" %>
+  <% nested = "" %>
 <% end %>
 
 <% if not defined?(:uppercase) %>
-	<!-- When set, means to display the model name in uppercase. ->
-	<% uppercase = "" %>
+  <!-- When set, means to display the model name in uppercase. ->
+  <% uppercase = "" %>
 <% end %>
 
 <% model_route_path = @model_class.model_name.singular_route_key %>
 <% if policy(@model_class).new? %>
-	<% if nested.present? %>
-		<li><%= link_to "New #{@model_class_hr}", [:new,nested,model_route_path].flatten,  class: "new" %></li>
-	<% else %>
-		<li><%= link_to "New #{@model_class_hr}", [:new,model_route_path],  class: "new" %></li>
-	<% end %>
+  <% if nested.present? %>
+    <li><%= link_to "New #{@model_class_hr}", [:new,nested,model_route_path].flatten,  class: "new" %></li>
+  <% else %>
+    <li><%= link_to "New #{@model_class_hr}", [:new,model_route_path],  class: "new" %></li>
+  <% end %>
 <% end %>

@@ -94,8 +94,10 @@
   
   
     <div class="main">
-      <%= form_tag("", method: "get", role: "search", style: "margin-left: 45%;margin-bottom: 1em;") do %>
-        <%= text_field_tag(:query_id,nil,placeholder: "Find record", class: "search", style: "padding: 1em;") %>
+      <!-- Form for running an Elasticsearch search -->
+      <%= form_tag("/search/search", method: "get", role: "search", style: "margin-left: 45%;margin-bottom: 1em;") do %>
+        <%= hidden_field_tag(:controller_name, controller_name) %>
+        <%= text_field_tag(:query, nil, placeholder: "Search", class: "search", style: "padding: 1em;") %>
         <%= button_tag("", type: "submit", style: "margin-left: -2.3em;", class: "fa fa-search search-btn" ) %>
         &nbsp;<%= content_tag(:span,"",class: "search-desc fa fa-lightbulb-o", style: "position: relative; top: -0.5em;", "data-toggle": "tooltip", "title": "Search for a record by using the record's Record ID, i.e. AB-1 for the antibody with primary key 1. Case-insensitive." ) %>
       <% end %>

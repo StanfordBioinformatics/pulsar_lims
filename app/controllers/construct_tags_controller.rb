@@ -6,23 +6,23 @@ class ConstructTagsController < ApplicationController
   end
 
   def show
-		authorize @construct_tag
+    authorize @construct_tag
   end
 
   def new
-		authorize ConstructTag
+    authorize ConstructTag
     @construct_tag = ConstructTag.new
   end
 
   def edit
-		authorize @construct_tag
+    authorize @construct_tag
   end
 
   def create
-		authorize ConstructTag
+    authorize ConstructTag
     @construct_tag = ConstructTag.new(construct_tag_params)
 
-		@construct_tag.user = current_user
+    @construct_tag.user = current_user
 
     respond_to do |format|
       if @construct_tag.save
@@ -36,7 +36,7 @@ class ConstructTagsController < ApplicationController
   end
 
   def update
-		authorize @construct_tag
+    authorize @construct_tag
     respond_to do |format|
       if @construct_tag.update(construct_tag_params)
         format.html { redirect_to @construct_tag, notice: 'Construct tag was successfully updated.' }
@@ -49,8 +49,8 @@ class ConstructTagsController < ApplicationController
   end
 
   def destroy
-		authorize @construct_tag
-		ddestroy(@construct_tag,construct_tags_path)
+    authorize @construct_tag
+    ddestroy(@construct_tag,construct_tags_path)
   end
 
   private

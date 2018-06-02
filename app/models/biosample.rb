@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class Biosample < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
   include ModelConcerns # A Concern
   include Cloning # A Concern that includes the clone() and parent() instance methods and related ones.
   include CloningForDocuments # A Concern that includes instance methods all_documents() and parent_documents().

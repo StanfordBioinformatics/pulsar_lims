@@ -7,6 +7,15 @@ Bundler.require(:default, Rails.env)
 
 module Pulsar 
   class Application < Rails::Application
+    # The config line below is set to pacify the deprecation warning below that can be generated:
+    # """
+    #   Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` 
+    #   callbacks and only print them to the logs. In the next version, these errors will no longer 
+    #   be suppressed. Instead, the errors will propagate normally just like in other Active Record 
+    #   callbacks.
+    # """
+    config.active_record.raise_in_transactional_callbacks = true
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

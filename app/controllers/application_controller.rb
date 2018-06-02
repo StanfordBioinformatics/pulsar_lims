@@ -26,6 +26,8 @@ class ApplicationController < ActionController::Base
   # For an example of this, see the biosample model.
   rescue_from ActiveRecord::DeleteRestrictionError, with: :destroy_not_allowed
 
+  private
+
   def ddestroy(record,redirect_path_success)
     #Named somewhat strangely as ddestroy instead of destroy in order to
     # not overwrite the destroy() method in the controllers that inherit from here.
@@ -36,14 +38,11 @@ class ApplicationController < ActionController::Base
         format.html { redirect_to redirect_path_success }
         format.json { head :no_content }
       else
-        #format.html { render action: 'show' }
         format.html { render Rails.application.routes.recognize_path(request.referer)[:action] }
         format.json { render json: @record.errors.full_messages,status: :unprocessable_entity }
       end
     end
   end
-
-  private
 
   def index(scope: nil, where: {})
     @records = policy_scope(@model_class).where(where)

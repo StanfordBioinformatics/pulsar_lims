@@ -1,11 +1,23 @@
 source 'https://rubygems.org'
 ruby "2.3.7"
 
+#Kaminari for pagination.
+gem 'kaminari'
+
+#Elasticsearch
+# Put Elasticsearch gems after pagination gems (Kaminari) per the documentation link noted below. 
+# Gem instructions from https://github.com/elastic/elasticsearch-rails.
+#
+#    Rubygem		Elasticsearch
+#    0.1	→	1.x
+#    2.x	→	2.x
+#    5.x	→	5.x
+#    master	→	master
+gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: 'master'
+gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: 'master'
+
 #Vue.js
 gem 'vuejs-rails'
-
-#Kaminari for pagination
-gem 'kaminari'
 
 gem 'country_select'
 

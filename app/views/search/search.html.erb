@@ -1,0 +1,39 @@
+<header>
+  <h1 class="index-page-header">Global search results</h1>
+</header>
+
+<table class="attributes index">
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Upstream</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @records.each do |rec| %>
+      <tr>
+        <td><%= rec.class.name %></td>
+        <td><%= link_to_record(rec) %></td>
+        <td><%= rec.id %></td>
+        <td>
+          <% if rec.respond_to?(:upstream_identifier) %>
+            <%= rec.upstream_identifier %>
+          <% end %>
+        </td>
+        <td>
+          <% if rec.respond_to?(:description) %>
+            <%= rec.description %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+<% end %>

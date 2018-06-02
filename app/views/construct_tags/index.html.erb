@@ -1,6 +1,6 @@
 <header>
   <h1 class="index-page-header">Construct Tags</h1>
-	<p class="model-definition"><%= ConstructTag::DEFINITION %></p>
+  <p class="model-definition"><%= ConstructTag::DEFINITION %></p>
   
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
@@ -22,9 +22,9 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.description %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_construct_tag_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_construct_tag_path(rec) %>
+          <%= link_to fa_icon("trash"), rec %>
+        </td>
       </tr>
     <% end %>
   </tbody>

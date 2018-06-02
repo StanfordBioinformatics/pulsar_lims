@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/elastic/elasticsearch-rails.git
+  revision: 7815039c0f78ed0b9b896936875ee4d01855390e
+  branch: master
+  specs:
+    elasticsearch-model (6.0.0.alpha1)
+      activesupport (> 3)
+      elasticsearch (> 1)
+      hashie
+    elasticsearch-rails (6.0.0.alpha1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -94,6 +105,14 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.3)
+    elasticsearch (6.0.2)
+      elasticsearch-api (= 6.0.2)
+      elasticsearch-transport (= 6.0.2)
+    elasticsearch-api (6.0.2)
+      multi_json
+    elasticsearch-transport (6.0.2)
+      faraday
+      multi_json
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.9.0)
@@ -101,11 +120,14 @@ GEM
     factory_girl_rails (4.9.0)
       factory_girl (~> 4.9.0)
       railties (>= 3.0.0)
+    faraday (0.15.2)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.23)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    hashie (3.5.7)
     hike (1.2.3)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
@@ -146,6 +168,7 @@ GEM
     money (6.11.3)
       i18n (>= 0.6.4, < 1.1)
     multi_json (1.13.1)
+    multipart-post (2.0.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
@@ -270,6 +293,8 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   country_select
   devise (~> 3.4.1)
+  elasticsearch-model!
+  elasticsearch-rails!
   factory_girl_rails (~> 4.5)
   font-awesome-rails (~> 4.3)
   jbuilder (~> 1.2)
