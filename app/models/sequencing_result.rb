@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class SequencingResult < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "SRES"
   DEFINITION = "Represents the sequencing results for a given Library.  Model abbreviation: #{ABBR}"

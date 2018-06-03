@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class Well < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "WELL"
   DEFINITION = "A well of a plate, such as a PCR plate or any other plate that holds individual samples in the lab.  Model abbreviation: #{ABBR}"

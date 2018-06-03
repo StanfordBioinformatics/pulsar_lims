@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class SequencingPlatform < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "SP"
   DEFINITION = "The type of sequencing machine, i.e. Illumina MiSeq, Illumina HiSeq 4000.  Model abbreviation: #{ABBR}"

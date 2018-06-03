@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class TreatmentTermName < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "TTN"
   DEFINITION = "Models the agent used in a biosample treatment. This is linked to the Treatment model.  Model abbreviation: #{ABBR}"

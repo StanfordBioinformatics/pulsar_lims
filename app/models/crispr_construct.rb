@@ -1,4 +1,7 @@
+require 'elasticsearch/model'
 class CrisprConstruct < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "CC"
   DEFINITION = "A DNA construct (i.e. plasmid) that you or a third party created using a Cloning Vector for a CRISPR experiment, and that contains a single guide sequence. This construct is separate from a Donor Construct, which contains the sequence to insert in the genome for genome editing.  Model abbreviation: #{ABBR}"

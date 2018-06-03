@@ -1,4 +1,7 @@
+require 'elasticsearch/model'
 class CrisprModification < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   #Submit to the ENCODE Portal as a genetic_modification:
   # https://www.encodeproject.org/profiles/genetic_modification.json
   include ModelConcerns # A Concern.

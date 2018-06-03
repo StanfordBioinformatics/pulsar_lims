@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class User < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   has_many :addresses, dependent: :nullify
   has_many :analyses, dependent: :nullify
   has_many :antibodies, dependent: :nullify

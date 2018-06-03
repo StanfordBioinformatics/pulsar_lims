@@ -1,4 +1,7 @@
+require 'elasticsearch/model'
 class Analysis < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   include ModelConcerns #defines get_record_id
   ABBR = "AN"
   DEFINITION = "An analysis object, which currenlty is only configured to be added to a Single Cell Sorting experiment.  Model abbreviation: #{ABBR}"

@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class SequencingRequest < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "SREQ"
   DEFINITION = "Represents the type of sequencing that you will have done on one or more Libraries together. When more than one Library is added to a given Sequencing Request, then this also represents a pooled Library to be sequenced.  Model abbreviation: #{ABBR}"

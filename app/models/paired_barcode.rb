@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class PairedBarcode < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "PBC"
   DEFINITION = "A representation of a duel-index barcode. There are two references to the Barcode model - one for index1 and another for index2.  Model abbreviation: #{ABBR}"

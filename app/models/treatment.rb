@@ -1,5 +1,9 @@
+require 'elasticsearch/model'
+
 require 'enums'
 class Treatment < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "TRT"
   DEFINITION = "A treatment applied to a biosample.  Model abbreviation: #{ABBR}"

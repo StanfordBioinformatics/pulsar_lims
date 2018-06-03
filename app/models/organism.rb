@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class Organism < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "ORG"
   DEFINITION = "Scientific name for a species.  Model abbreviation: #{ABBR}"

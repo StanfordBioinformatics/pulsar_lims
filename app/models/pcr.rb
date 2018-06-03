@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class Pcr < ActiveRecord::Base
+  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "PCR"
   DEFINITION = "A PCR assay.  Model abbreviation: #{ABBR}"
