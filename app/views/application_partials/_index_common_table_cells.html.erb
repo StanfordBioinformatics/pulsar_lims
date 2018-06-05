@@ -4,7 +4,7 @@ Adds the table data fields that are common to each table in the index views.
 This partial should mirror the one that has the th values in _index_common_table_headers.html.erb.
 -->
 
-<td><%= link_to_record(record) %></td>
+<td><%= link_to_record_id(record) %></td>
 
 <% if record.respond_to?(:upstream_identifier) %>
   <td><%= record.upstream_identifier %></td>

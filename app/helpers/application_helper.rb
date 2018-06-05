@@ -11,6 +11,15 @@ module ApplicationHelper
     return ["https://www.encodeproject.org",accession].join("/")
   end
 
+  def link_to_record_id(record)
+    record_id = record.get_record_id()
+    dest = record
+    if record.respond_to?(:params_for_url_for)
+      dest = record.params_for_url_for()
+    end
+    return link_to record_id, dest
+  end
+
   def link_to_record(record)
     display = record.display()
     dest = record

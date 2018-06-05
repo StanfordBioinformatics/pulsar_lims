@@ -1,3 +1,7 @@
+###
+# Author: Nathaniel Watson
+# email: nathan.watson86@gmail.com
+###
 
 """
 Contains utilities for working in the Rails console.
