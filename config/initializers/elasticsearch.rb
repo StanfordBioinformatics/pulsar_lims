@@ -5,9 +5,10 @@
 if ENV.include?("PROD")
   Elasticsearch::Model.client = Elasticsearch::Client.new hosts: [{
     host: ENV["FOUNDELASTICSEARCH_URL"],
-    port: 9243,
-    user: URI::encode(ENV["ES_USER"]),
-    password: URI::encode(ENV["ES_PASSWORD"])
+    user: ENV["ES_USER"],
+    port: "9243",
+    password: ENV["ES_PASSWORD"],
+    scheme: "https"
   }]
 else
   Elasticsearch::Model.client = Elasticsearch::Client.new host: "http://localhost:9200"
