@@ -13,8 +13,8 @@ Pulsar::Application.configure do
       domain: host,
       authentication: :plain,
     }   
-		#the from email is set in app/mailers/user_mailer.rb.
-		#specify default URL for links that are sent in the emails (i.e confirmation email)
+    #the from email is set in app/mailers/user_mailer.rb.
+    #specify default URL for links that are sent in the emails (i.e confirmation email)
     config.action_mailer.default_url_options = { 
     host: host
     }   

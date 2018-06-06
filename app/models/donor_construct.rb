@@ -29,6 +29,11 @@ class DonorConstruct < ActiveRecord::Base
 
   scope :persisted, lambda { where.not(id: nil) }
 
+  # Overwrite Elasticsearch method                                                                     
+  def as_indexed_json(options={})                                                                      
+    as_json(except: [:insert_sequence])                                                                           
+  end 
+
   def self.policy_class
     ApplicationPolicy
   end
