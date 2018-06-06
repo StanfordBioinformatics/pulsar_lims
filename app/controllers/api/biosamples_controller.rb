@@ -27,6 +27,7 @@ class Api::BiosamplesController < Api::ApplicationController
 
   def create
     @biosample = Biosample.new(biosample_params)
+    @biosample.user = @current_user
     authorize @biosample, :create?
     if @biosample.save
       render json: @biosample, status: 201

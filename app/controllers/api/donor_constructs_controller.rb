@@ -22,6 +22,7 @@ class Api::DonorConstructsController < Api::ApplicationController
 
   def create
     @donor_construct = DonorConstruct.new(donor_construct_params)
+    @donor_construct.user = @current_user
     authorize @donor_construct, :create?
     if @donor_construct.save
       render json: @donor_construct, status: 201

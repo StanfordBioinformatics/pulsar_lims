@@ -1,7 +1,7 @@
 class Api::TargetsController < Api::ApplicationController
-	#example with curl:
-	# curl -H "Authorization: Token token=${token}" http://localhost:3000/api/targets/3
-	before_action :set_target, only: [:show]
+  #example with curl:
+  # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/targets/3
+  before_action :set_target, only: [:show]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
@@ -15,35 +15,35 @@ class Api::TargetsController < Api::ApplicationController
     super
   end
 
-	def index
-		@targets = policy_scope(Target).order("lower(name)")
-		render json: @targets
-	end
+  def index
+    @targets = policy_scope(Target).order("lower(name)")
+    render json: @targets
+  end
 
-	def show
-		authorize @target
-		render json: @target
-	end
+  def show
+    authorize @target
+    render json: @target
+  end
 
-	def create
-		@target = Target.new(target_params)
-		@target.user = @current_user
-		authorize @target
-		if @target.save
-			render json: @target, status: :created
-		else
-			render json: { errors: @target.errors.full_messages }, status: :unprocessable_entity
-		end
-	end
+  def create
+    @target = Target.new(target_params)
+    @target.user = @current_user
+    authorize @target
+    if @target.save
+      render json: @target, status: :created
+    else
+      render json: { errors: @target.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
 
-	private
+  private
 
-	def set_target
-		@target = Target.find(params[:id])
-	end
+  def set_target
+    @target = Target.find(params[:id])
+  end
 
-	def target_params
-		params.require(:target).permit(
+  def target_params
+    params.require(:target).permit(
       :ensembl,
       :name,
       :notes,
@@ -51,5 +51,5 @@ class Api::TargetsController < Api::ApplicationController
       :uniprotkb,
       :upstream_identifier
     )
-	end
+  end
 end

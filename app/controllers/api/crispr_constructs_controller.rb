@@ -22,6 +22,7 @@ class Api::CrisprConstructsController < Api::ApplicationController
 
   def create
     @crispr_construct = CrisprConstruct.new(crispr_construct_params)
+    @crispr_construct.user = @current_user
     authorize @crispr_construct, :create?
     if @crispr_construct.save
       render json: @crispr_construct, status: 201

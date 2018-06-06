@@ -1,7 +1,7 @@
 class Api::DonorsController < Api::ApplicationController
-	#example with curl:
-	# curl -H "Authorization: Token token=${token}" http://localhost:3000/api/donors/3
-	before_action :set_donor, only: [:show]
+  #example with curl:
+  # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/donors/3
+  before_action :set_donor, only: [:show]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
@@ -15,34 +15,34 @@ class Api::DonorsController < Api::ApplicationController
     super
   end
 
-	def index
-		@donors = policy_scope(Donor).order("lower(name)")
-		render json: @donors
-	end
+  def index
+    @donors = policy_scope(Donor).order("lower(name)")
+    render json: @donors
+  end
 
-	def show
-		authorize @donor
-		render json: @donor
-	end
+  def show
+    authorize @donor
+    render json: @donor
+  end
 
-	def create
-		@donor = Donor.new(donor_params)
-		@donor.user = @current_user
-		authorize @donor
-		if @donor.save
-			render json: @donor, status: 201
-		else
-			render json: { errors: @donor.errors.full_messages }, status: 422
-		end
-	end
+  def create
+    @donor = Donor.new(donor_params)
+    @donor.user = @current_user
+    authorize @donor
+    if @donor.save
+      render json: @donor, status: 201
+    else
+      render json: { errors: @donor.errors.full_messages }, status: 422
+    end
+  end
 
-	private
+  private
 
-	def set_donor
-		@donor = Donor.find(params[:id])
-	end
+  def set_donor
+    @donor = Donor.find(params[:id])
+  end
 
-	def donor_params
+  def donor_params
       params.require(:donor).permit(
         :user_id,
         :age,
@@ -51,5 +51,5 @@ class Api::DonorsController < Api::ApplicationController
         :notes,
         :upstream_identifier
       )
-	end
+  end
 end
