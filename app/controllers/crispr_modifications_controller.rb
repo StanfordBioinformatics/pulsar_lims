@@ -44,7 +44,6 @@ class CrisprModificationsController < ApplicationController
     authorize CrisprModification
     @crispr = CrisprModification.new
     @crispr.build_genomic_integration_site
-    render layout: "layouts/application", partial: "crispr_modifications/new"
   end
 
   def edit
