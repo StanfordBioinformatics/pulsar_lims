@@ -30,8 +30,8 @@
   <tr>
     <th><strong>Associated biosamples:</strong></th>
     <td>
-      <% if @donor.biosamples.any? %>
-        <%= render partial: "biosamples/link_to_biosamples", locals: {biosamples: @donor.biosamples.non_plated} %>
+      <% if @donor.biosamples.non_plated.any? %>
+        <%= render partial: "application_partials/link_to_has_many", locals: {links: @donor.biosamples.non_plated} %>
       <% else %>
         None
       <% end %>
