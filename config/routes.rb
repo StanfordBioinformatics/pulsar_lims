@@ -1,5 +1,6 @@
 Pulsar::Application.routes.draw do
 
+  resources :chipseq_experiments
   resources :biosample_replicates
   get 'search/search'
 

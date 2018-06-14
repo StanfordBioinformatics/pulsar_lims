@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @chipseq_experiment.user %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @chipseq_experiment.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @chipseq_experiment.description %>
+</p>
+
+<p>
+  <strong>Upstream identifier:</strong>
+  <%= @chipseq_experiment.upstream_identifier %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @chipseq_experiment.target %>
+</p>
+
+<p>
+  <strong>Submitter comments:</strong>
+  <%= @chipseq_experiment.submitter_comments %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @chipseq_experiment.notes %>
+</p>
+
+<%= link_to 'Edit', edit_chipseq_experiment_path(@chipseq_experiment) %> |
+<%= link_to 'Back', chipseq_experiments_path %>

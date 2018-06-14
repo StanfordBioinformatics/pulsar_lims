@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180614003916) do
+ActiveRecord::Schema.define(version: 20180614011050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,9 +147,11 @@ ActiveRecord::Schema.define(version: 20180614003916) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "biosample_id"
+    t.integer  "chipseq_experiment_id"
   end
 
   add_index "biosample_replicates", ["biosample_id"], name: "index_biosample_replicates_on_biosample_id", using: :btree
+  add_index "biosample_replicates", ["chipseq_experiment_id"], name: "index_biosample_replicates_on_chipseq_experiment_id", using: :btree
   add_index "biosample_replicates", ["user_id"], name: "index_biosample_replicates_on_user_id", using: :btree
 
   create_table "biosample_term_names", force: :cascade do |t|
@@ -235,6 +237,21 @@ ActiveRecord::Schema.define(version: 20180614003916) do
 
   add_index "biosamples_treatments", ["biosample_id", "treatment_id"], name: "index_biosamples_treatments_on_biosample_id_and_treatment_id", using: :btree
   add_index "biosamples_treatments", ["treatment_id", "biosample_id"], name: "index_biosamples_treatments_on_treatment_id_and_biosample_id", using: :btree
+
+  create_table "chipseq_experiments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "upstream_identifier"
+    t.integer  "target_id"
+    t.text     "submitter_comments"
+    t.text     "notes"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "chipseq_experiments", ["target_id"], name: "index_chipseq_experiments_on_target_id", using: :btree
+  add_index "chipseq_experiments", ["user_id"], name: "index_chipseq_experiments_on_user_id", using: :btree
 
   create_table "chromosomes", force: :cascade do |t|
     t.string   "name"
@@ -971,6 +988,7 @@ ActiveRecord::Schema.define(version: 20180614003916) do
   add_foreign_key "barcodes", "users"
   add_foreign_key "biosample_ontologies", "users"
   add_foreign_key "biosample_replicates", "biosamples"
+  add_foreign_key "biosample_replicates", "chipseq_experiments"
   add_foreign_key "biosample_replicates", "users"
   add_foreign_key "biosample_term_names", "biosample_ontologies"
   add_foreign_key "biosample_term_names", "users"
@@ -984,6 +1002,8 @@ ActiveRecord::Schema.define(version: 20180614003916) do
   add_foreign_key "biosamples", "users", column: "owner_id"
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "biosamples", "wells"
+  add_foreign_key "chipseq_experiments", "targets"
+  add_foreign_key "chipseq_experiments", "users"
   add_foreign_key "chromosomes", "reference_genomes"
   add_foreign_key "chromosomes", "users"
   add_foreign_key "cloning_vectors", "users"

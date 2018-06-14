@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Chipseq Experiments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Upstream identifier</th>
+      <th>Target</th>
+      <th>Submitter comments</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @chipseq_experiments.each do |chipseq_experiment| %>
+      <tr>
+        <td><%= chipseq_experiment.user %></td>
+        <td><%= chipseq_experiment.name %></td>
+        <td><%= chipseq_experiment.description %></td>
+        <td><%= chipseq_experiment.upstream_identifier %></td>
+        <td><%= chipseq_experiment.target %></td>
+        <td><%= chipseq_experiment.submitter_comments %></td>
+        <td><%= chipseq_experiment.notes %></td>
+        <td><%= link_to 'Show', chipseq_experiment %></td>
+        <td><%= link_to 'Edit', edit_chipseq_experiment_path(chipseq_experiment) %></td>
+        <td><%= link_to 'Destroy', chipseq_experiment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Chipseq experiment', new_chipseq_experiment_path %>

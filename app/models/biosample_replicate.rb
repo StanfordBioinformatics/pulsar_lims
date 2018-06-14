@@ -6,6 +6,7 @@ class BiosampleReplicate < ActiveRecord::Base
   ABBR = "BR"
   DEFINITION = "A replicate of a biosample, used in experiments such as a Chipseq experiment."
   belongs_to :biosample
+  belongs_to :chipseq_experiment
   belongs_to :user
   has_many :documents
 
