@@ -1,39 +1,41 @@
-<p id="notice"><%= notice %></p>
+<header>
+  <h1 class="index-page-header">ChIP-Seq Experiments</h1>
+  <p class="model-definition"><%= ChipseqExperiment::DEFINITION %></p>
 
-<h1>Listing Chipseq Experiments</h1>
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record" %>
+  </ul>
+</header>
 
-<table>
+<table class="attributes index">
   <thead>
     <tr>
-      <th>User</th>
-      <th>Name</th>
+      <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Description</th>
-      <th>Upstream identifier</th>
       <th>Target</th>
       <th>Submitter comments</th>
       <th>Notes</th>
-      <th colspan="3"></th>
+      <th>Action</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @chipseq_experiments.each do |chipseq_experiment| %>
+    <% @records.each do |rec| %>
       <tr>
-        <td><%= chipseq_experiment.user %></td>
-        <td><%= chipseq_experiment.name %></td>
-        <td><%= chipseq_experiment.description %></td>
-        <td><%= chipseq_experiment.upstream_identifier %></td>
-        <td><%= chipseq_experiment.target %></td>
-        <td><%= chipseq_experiment.submitter_comments %></td>
-        <td><%= chipseq_experiment.notes %></td>
-        <td><%= link_to 'Show', chipseq_experiment %></td>
-        <td><%= link_to 'Edit', edit_chipseq_experiment_path(chipseq_experiment) %></td>
-        <td><%= link_to 'Destroy', chipseq_experiment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= rec.name %></td>
+        <td><%= rec.description %></td>
+        <td><%= rec.target %></td>
+        <td><%= rec.submitter_comments %></td>
+        <td><%= rec.notes %></td>
+        <td><%= link_to fa_icon("pencil"), edit_chipseq_experiment_path(rec) %></td>
+        <td><%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Chipseq experiment', new_chipseq_experiment_path %>
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+  <%= link_to "All", chipseq_experiments_path(all: true) %>                                                  
+<% end %>

@@ -13,4 +13,8 @@ class ChipseqExperiment < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
   validates :target, presence: true
+
+  def self.policy_class
+    ApplicationPolicy
+  end
 end
