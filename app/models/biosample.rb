@@ -27,6 +27,7 @@ class Biosample < ActiveRecord::Base
   has_and_belongs_to_many :documents
   has_and_belongs_to_many :treatments
   has_one :crispr_modification, validate: true, dependent: :destroy
+  has_one :biosample_replicate, dependent: :destroy
   #Note that specifying "dependent: :restrict_with_exception" when triggered will raise ActiveRecord::DeleteRestrictionError
   has_many :starting_biosample_single_cell_sortings, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id, dependent: :restrict_with_exception #the starting biosample used for sorting. Not required.
   has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :nullify #, dependent: :restrict_with_error #the starting biosample used for sorting. Not required.
@@ -40,7 +41,7 @@ class Biosample < ActiveRecord::Base
 
   validates :upstream_identifier, uniqueness: true, allow_blank: true
   validates :name, uniqueness: true, presence: true
-  validates :documents, presence: true, unless: Proc.new {|bio| bio.parents.any? }
+  #validates :documents, presence: true, unless: Proc.new {|bio| bio.parents.any? }
   validates :biosample_type_id, presence: true
   validates :biosample_term_name_id, presence: true
   validates :vendor_id, presence: true

@@ -10,8 +10,8 @@ class CrisprConstructsController < ApplicationController
         exclude_construct_tags = Array(exclude_construct_tags)
       end 
       @construct_tags = ConstructTag.where.not(id: [exclude_construct_tags])  
-		else
-			@construct_tags = ConstructTag.all
+    else
+      @construct_tags = ConstructTag.all
     end 
         
     render layout: false
@@ -22,23 +22,22 @@ class CrisprConstructsController < ApplicationController
   end
 
   def show
-		authorize @crispr_construct	
+    authorize @crispr_construct  
   end
 
   def new
-		authorize CrisprConstruct
+    authorize CrisprConstruct
     @crispr_construct = CrisprConstruct.new
   end
 
   def edit
-		authorize @crispr_construct
+    authorize @crispr_construct
   end
 
   def create
-		authorize CrisprConstruct
+    authorize CrisprConstruct
     @crispr_construct = CrisprConstruct.new(crispr_construct_params)
-
-		@crispr_construct.user = current_user
+    @crispr_construct.user = current_user
 
     respond_to do |format|
       if @crispr_construct.save
@@ -52,7 +51,7 @@ class CrisprConstructsController < ApplicationController
   end
 
   def update
-		authorize @crispr_construct
+    authorize @crispr_construct
     respond_to do |format|
       if @crispr_construct.update(crispr_construct_params)
         format.html { redirect_to @crispr_construct, notice: 'Crispr construct was successfully updated.' }
@@ -65,8 +64,8 @@ class CrisprConstructsController < ApplicationController
   end
 
   def destroy
-		authorize @crispr_construct
-		ddestroy(@crispr_construct,crispr_constructs_path)
+    authorize @crispr_construct
+    ddestroy(@crispr_construct,crispr_constructs_path)
   end
 
   private

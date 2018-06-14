@@ -4,7 +4,8 @@ class TreatmentSerializer < ActiveModel::Serializer
 
   has_one :concentration_unit
   has_one :treatment_term_name
-  has_many :biosamples
   has_many :documents
+  #has_any :biosamples #Don't do this since the biosample serializer already specifies the relationship. 
+  # Otherwise, this will beget recursive loop that will eventually kill the server. 
   
 end

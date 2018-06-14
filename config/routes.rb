@@ -1,5 +1,6 @@
 Pulsar::Application.routes.draw do
 
+  resources :biosample_replicates
   get 'search/search'
 
   resources :treatments do

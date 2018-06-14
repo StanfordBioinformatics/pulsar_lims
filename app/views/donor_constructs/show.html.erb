@@ -11,89 +11,89 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @donor_construct } %>
 
 <table class="attributes">
-	<tr>
-	  <th><strong>Name:</strong></th>
-	  <td><%= @donor_construct.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @donor_construct.name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Addgene:</strong></th>
-		<td>
-			<% if @donor_construct.addgene_id %>
-				<%= link_to @donor_construct.addgene_id, ENV["ADDGENE_WEBSITE"] + @donor_construct.addgene_id %>
-			<% end %>
-		</td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Cloning vector:</strong></th>
-	  <td><%= link_to @donor_construct.cloning_vector.name, @donor_construct.cloning_vector %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Vender:</strong></th>
-	  <td><%= link_to @donor_construct.vendor.name, @donor_construct.vendor %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Vender product identifier:</strong></th>
-	  <td><%= @donor_construct.vendor_product_identifier %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Target:</strong></th>
-	  <td><%= link_to @donor_construct.target.name, @donor_construct.target %></td>
-	</tr>
+  <tr>
+    <th><strong>Addgene:</strong></th>
+    <td>
+      <% if @donor_construct.addgene_id %>
+        <%= link_to @donor_construct.addgene_id, ENV["ADDGENE_WEBSITE"] + @donor_construct.addgene_id %>
+      <% end %>
+    </td>
+  </tr>
+  
+  <tr>
+    <th><strong>Cloning vector:</strong></th>
+    <td><%= link_to @donor_construct.cloning_vector.name, @donor_construct.cloning_vector %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Vender:</strong></th>
+    <td><%= link_to @donor_construct.vendor.name, @donor_construct.vendor %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Vender product identifier:</strong></th>
+    <td><%= @donor_construct.vendor_product_identifier %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Target:</strong></th>
+    <td><%= link_to @donor_construct.target.name, @donor_construct.target %></td>
+  </tr>
 
-	<tr>
-	  <th><strong>Ensembl transcript:</strong></th>
-	  <td><%= @donor_construct.ensembl_transcript %></td>
-	</tr>
+  <tr>
+    <th><strong>Ensembl transcript:</strong></th>
+    <td><%= @donor_construct.ensembl_transcript %></td>
+  </tr>
 
-	<tr>
-	  <th><strong>RefSeq transcript:</strong></th>
-	  <td><%= @donor_construct.refseq_transcript %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Insert sequence:</strong></th>
-	  <td><%= @donor_construct.insert_sequence %></td>
-	</tr>
+  <tr>
+    <th><strong>RefSeq transcript:</strong></th>
+    <td><%= @donor_construct.refseq_transcript %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Insert sequence:</strong></th>
+    <td><%= @donor_construct.insert_sequence %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Left forward primer:</strong></th>
-		<td><%= @donor_construct.primer_left_forward %></th>
-	</tr>
+  <tr>
+    <th><strong>Left forward primer:</strong></th>
+    <td><%= @donor_construct.primer_left_forward %></th>
+  </tr>
 
-	<tr>
-		<th><strong>Left reverse primer:</strong></th>
-		<td><%= @donor_construct.primer_left_reverse %></th>
-	</tr>
+  <tr>
+    <th><strong>Left reverse primer:</strong></th>
+    <td><%= @donor_construct.primer_left_reverse %></th>
+  </tr>
 
-	<tr>
-		<th><strong>Right forward primer:</strong></th>
-		<td><%= @donor_construct.primer_right_forward %></th>
-	</tr>
+  <tr>
+    <th><strong>Right forward primer:</strong></th>
+    <td><%= @donor_construct.primer_right_forward %></th>
+  </tr>
 
-	<tr>
-		<th><strong>Right reverse primer:</strong></th>
-		<td><%= @donor_construct.primer_right_reverse %></th>
-	</tr>
+  <tr>
+    <th><strong>Right reverse primer:</strong></th>
+    <td><%= @donor_construct.primer_right_reverse %></th>
+  </tr>
 
-	<tr>
-		<th><strong>Construct Tags:</strong></th>
-		<td>
-			<% if @donor_construct.construct_tags.present? %>
-				<ul class="list-unstyled">
-					<% @donor_construct.construct_tags.each do |t| %>
-						<li><%= link_to t.name, t %></li>
-					<% end %>
-				</ul>
-			<% else %>
-				None
-			<% end %>
-		</td>
-	</tr>
+  <tr>
+    <th><strong>Construct Tags:</strong></th>
+    <td>
+      <% if @donor_construct.construct_tags.present? %>
+        <ul class="list-unstyled">
+          <% @donor_construct.construct_tags.each do |t| %>
+            <li><%= link_to t.name, t %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        None
+      <% end %>
+    </td>
+  </tr>
 
   <tr>
     <th><strong>Sent to:</strong></th>
@@ -109,16 +109,16 @@
     <td><%= @donor_construct.date_sent %></td>
   </tr>
 
-	<tr>
-	  <th><strong>Description:</strong></th>
-	  <td><%= @donor_construct.description %></td>
-	</tr>
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @donor_construct.description %></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    
     <td><%= simple_format(@donor_construct.notes) %></td>                                                     
   </tr> 
-	
+  
 </table>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             

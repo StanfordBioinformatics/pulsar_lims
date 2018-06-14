@@ -112,6 +112,7 @@
               </div>
               <ul style="" class="nav navbar-nav">
                 <%= link_to "Biosamples",biosamples_path, class: controller_name() == "biosamples" ? "list-group-item active" : "list-group-item" %>
+                <%= link_to "Biosample Replicates",biosample_replicates_path, class: controller_name() == "biosample_replicates" ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "Biosample Term Names",biosample_term_names_path, class: controller_name() == "biosample_term_names" ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "Biosample Types",biosample_types_path, class: controller_name() == "biosample_types" ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "Treatments",treatments_path, class: controller_name() == "treatments" ? "list-group-item active" : "list-group-item" %>

@@ -1,0 +1,41 @@
+<header>                                                                                               
+  <h1 class="index-page-header">Biosample Replicates</h1>                                                    
+  <p class="model-definition"><%= BiosampleReplicate::DEFINITION %></p>                                      
+                                                                                                       
+  <ul class="actions">                                                                                 
+    <%= render partial: "application_partials/auth_new_record" %>                                      
+  </ul>                                                                                                
+</header>                                                                                              
+                                                                                                       
+<table class="attributes index">  
+  <thead>
+    <tr>
+      <%= render partial: "application_partials/index_common_table_headers" %>
+      <th>Biological replicate number</th>
+      <th>Technical replicate number</th>
+      <th>Notes</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @records.each do |rec| %>
+      <tr>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= link_to_record(rec) %></td>
+        <td><%= rec.biological_replicate_number %></td>
+        <td><%= rec.technical_replicate_number %></td>
+        <td><%= rec.notes %></td>
+        <td>
+          <%= link_to fa_icon("pencil"),  edit_biosample_replicate_path(rec) %><
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+  <%= link_to "All", construct_tags_path(all: true) %>                                                  
+<% end %> 

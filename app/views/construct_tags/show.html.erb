@@ -11,23 +11,23 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @construct_tag } %>
 
 <table class="attributes">
-	<tbody>
-		<tr>
-			<th><strong>Name:</strong></th>
-			<td><%= @construct_tag.name %></td>
-		</tr>
-	
-		<tr>
-			<th><strong>Description:</strong></th>
-			<td><%= @construct_tag.description %></td>
-		</tr>
+  <tbody>
+    <tr>
+      <th><strong>Name:</strong></th>
+      <td><%= @construct_tag.name %></td>
+    </tr>
+  
+    <tr>
+      <th><strong>Description:</strong></th>
+      <td><%= @construct_tag.description %></td>
+    </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    
     <td><%= simple_format(@construct_tag.notes) %></td>                                                     
   </tr> 
 
-	</tbody>
+  </tbody>
 </table>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
