@@ -45,7 +45,13 @@
   </tr>
 </table>
 
+<div>
+  <%= link_to "Add experiment replicate", [:add_experiment_biosample_replicate, @chipseq_experiment], class: "reg-btn" %>
+  <%= link_to "Add control replicate", [:add_control_biosample_replicate, @chipseq_experiment], class: "reg-btn" %>
+</div>
+
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
 <%= render partial: "application_partials/edit_notes", locals: {rec: @chipseq_experiment} %>
   
+</br>
 <%= link_to 'Back', chipseq_experiments_path %>

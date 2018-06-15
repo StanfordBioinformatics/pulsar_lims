@@ -63,6 +63,7 @@ class BiosampleReplicatesController < ApplicationController
       params.require(:biosample_replicate).permit(
         :biological_replicate_number, 
         :biosample_id,
+        :chipseq_experiment_id,
         :control,
         :name, 
         :notes,

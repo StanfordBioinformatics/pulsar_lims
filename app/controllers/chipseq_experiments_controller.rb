@@ -1,5 +1,16 @@
 class ChipseqExperimentsController < ApplicationController
-  before_action :set_chipseq_experiment, only: [:show, :edit, :update, :destroy]
+  before_action :set_chipseq_experiment, only: [:show, :edit, :update, :destroy, :add_experiment_biosample_replicate, :add_control_biosample_replicate]
+  skip_after_action :verify_authorized, only: [:add_experiment_biosample_replicate, :add_control_biosample_replicate]
+
+  def add_experiment_biosample_replicate
+    @biosample_replicate = @chipseq_experiment.experiment_biosample_replicates.build
+    render "biosample_replicates/new"
+  end
+
+  def add_control_biosample_replicate
+    @biosample_replicate = @chipseq_experiment.experiment_biosample_replicates.build({control: true})
+    render "biosample_replicates/new"
+  end
 
   def index
     super

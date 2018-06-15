@@ -1,12 +1,12 @@
 <%= simple_form_for @single_cell_sorting do |f| %>
-	<%= f.simple_fields_for :plates, @plate  do |ff| %>
-		<%= render partial: "plates/form", locals: {f: ff} %>
-	<% end %>
+  <%= f.simple_fields_for :plates, @plate  do |ff| %>
+    <%= render partial: "plates/form", locals: {f: ff} %>
+  <% end %>
   <div class="form-actions">
     <%= f.button :submit, "Create Plate", class: "btn-primary" %>
   </div></br>
-	<% if not @plate.errors.any? %>
-		<!-- Don't show toggle-up button if user is form was already submitted with errors. -->
-		<button style="position: absolute; right: 0; bottom: 0;" class="scs-toggle-up-plate-form" type="button" class="btn btn-link"><%= fa_icon("toggle-up lg") %></button>
-	<% end %>
+  <% if not @plate.errors.any? %>
+    <!-- Don't show toggle-up button if user is form was already submitted with errors. -->
+    <button style="position: absolute; right: 0; bottom: 0;" class="scs-toggle-up-plate-form" type="button" class="btn btn-link"><%= fa_icon("toggle-up lg") %></button>
+  <% end %>
 <% end %>

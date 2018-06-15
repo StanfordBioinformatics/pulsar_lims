@@ -25,7 +25,7 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.name %></td>
         <td><%= rec.description %></td>
-        <td><%= rec.target %></td>
+        <td><%= link_to_record(rec.target) %></td>
         <td><%= rec.submitter_comments %></td>
         <td><%= rec.notes %></td>
         <td><%= link_to fa_icon("pencil"), edit_chipseq_experiment_path(rec) %></td>

@@ -1,5 +1,11 @@
-<h1>Editing Biosample Replicate</h1>
+<header>
+  <h1>Editing biosample replicate</h1>
+</header>
 
-<%= render 'form' %>
+<%= simple_form_for(@biosample_replicate) do |f| %>                                                                  
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @biosample_replicate } %>
+  <%= render partial: 'form', locals: {f: f} %>                                                        
+  <%= render partial: "application_partials/submit", locals: {f: f} %>  
+<% end %>  
 
 <%= link_to 'Back', biosample_replicates_path %>

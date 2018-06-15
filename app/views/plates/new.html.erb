@@ -1,10 +1,10 @@
 <header>
-	<h1>New Plate</h1>
+  <h1>New Plate</h1>
 </header>
 <%= simple_form_for(@plate) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @plate } %>
-	<%= render partial: 'form', locals: {f: f} %>
-	<%= render partial: "application_partials/submit", locals: {f: f, add_classes: "submit_plate"} %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @plate } %>
+  <%= render partial: 'form', locals: {f: f} %>
+  <%= render partial: "application_partials/submit", locals: {f: f, add_classes: "submit_plate"} %>
 <% end %>
 
 <%= link_to 'Back', plates_path %>
