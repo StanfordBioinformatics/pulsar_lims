@@ -11,7 +11,6 @@ class ChipseqExperiment < ActiveRecord::Base
   has_many :control_biosample_replicates, -> {where control: true}, class_name: "BiosampleReplicate", dependent: :nullify
   has_many :experiment_biosample_replicates, -> {where control: false}, class_name: "BiosampleReplicate", dependent: :nullify
 
-  validates :experiment_biosample_replicates, presence: true
   validates :name, presence: true, uniqueness: true
   validates :target, presence: true
 
