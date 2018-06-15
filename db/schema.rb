@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180614011050) do
+ActiveRecord::Schema.define(version: 20180615040855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,10 +144,11 @@ ActiveRecord::Schema.define(version: 20180614011050) do
     t.integer  "biological_replicate_number"
     t.integer  "technical_replicate_number"
     t.text     "notes"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "biosample_id"
     t.integer  "chipseq_experiment_id"
+    t.boolean  "control",                     default: false
   end
 
   add_index "biosample_replicates", ["biosample_id"], name: "index_biosample_replicates_on_biosample_id", using: :btree

@@ -15,9 +15,9 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
+      <th>Replicates</th>
       <th>Tube label</th>
       <th>NIH Inst. Certification</th>
-      <th>Owner</th>
       <th>Parent Biosample</th>
       <th>Well</th>
       <!-- <th>Description</th> -->
@@ -31,14 +31,14 @@
   <tbody>
     <% @records.each do |rec| %>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td>
+          <% if rec.biosample_replicates.any? %>
+            <%= render partial: "application_partials/link_to_has_many", locals: {links: rec.biosample_replicates} %>
+          <% end %>
+        </td>
         <td><%= rec.tube_label %></td>
         <td>
           <%= rec.nih_institutional_certification %>
-        </td>
-        <td>
-          <% if rec.owner.present? %>
-            <%= rec.owner.display %>
-          <% end %>
         </td>
         <% if rec.part_of.present? %>
           <td><%= link_to rec.part_of.name, rec.part_of %></td>

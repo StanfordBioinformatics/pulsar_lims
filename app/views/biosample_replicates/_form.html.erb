@@ -2,6 +2,8 @@
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @biosample_replicate } %>
 
   <%= f.input :name %>
+  <%= f.input :control %>
+  <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The alias or accession of an existing replicate on the ENCODE Portal (leave blank if this is a new repliate that hasn't been registered there yet). For a list of available replicates on the ENCODE Portal, see https://www.encodeproject.org/replicates."} %>
   <%= f.association :biosample %>
   <%= f.input :biological_replicate_number %>
   <%= f.input :technical_replicate_number %>

@@ -27,14 +27,25 @@
   </tr>
   
   <tr>
+    <th><strong>Experiment replicates:</strong></th>
+    <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @chipseq_experiment.experiment_biosample_replicates} %>
+
+  <tr>
+    <th><strong>Control replicates:</strong></th>
+    <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @chipseq_experiment.control_biosample_replicates} %>
+
+  <tr>
     <th><strong>Submitter comments:</strong></th>
     <td><%= @chipseq_experiment.submitter_comments %></td>
   </tr>
   
-  <tr>
+  <tr class="notes-row">
     <th><strong>Notes:</strong></th>
     <td><%= @chipseq_experiment.notes %></td>
   </tr>
 </table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<%= render partial: "application_partials/edit_notes", locals: {rec: @chipseq_experiment} %>
   
 <%= link_to 'Back', chipseq_experiments_path %>

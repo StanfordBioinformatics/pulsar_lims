@@ -27,7 +27,7 @@ class Biosample < ActiveRecord::Base
   has_and_belongs_to_many :documents
   has_and_belongs_to_many :treatments
   has_one :crispr_modification, validate: true, dependent: :destroy
-  has_one :biosample_replicate, dependent: :destroy
+  has_many :biosample_replicates, dependent: :destroy #has_many because replicates can be technical and not just biological. 
   #Note that specifying "dependent: :restrict_with_exception" when triggered will raise ActiveRecord::DeleteRestrictionError
   has_many :starting_biosample_single_cell_sortings, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id, dependent: :restrict_with_exception #the starting biosample used for sorting. Not required.
   has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :nullify #, dependent: :restrict_with_error #the starting biosample used for sorting. Not required.
@@ -50,7 +50,7 @@ class Biosample < ActiveRecord::Base
   validates :starting_amount, presence: {message: "must be specified when the starting_amount_units is specified."}, if: "starting_amount_units.present?"
   validates :starting_amount_units, presence: {message: "must be specified when the starting_amount is specified."}, if: "starting_amount.present?"
   validates :tissue_preservation_method, inclusion: {in: Enums::TISSUE_PRESERVATION_METHODS, message: "must be an element in the list #{Enums::TISSUE_PRESERVATION_METHODS}."}, allow_blank: true
-  validate :not_pooled_and_part_of
+  validate :validate_not_pooled_and_part_of
   validate :validate_part_of, on: :update
 
   accepts_nested_attributes_for :crispr_modification, allow_destroy: true
@@ -187,6 +187,7 @@ class Biosample < ActiveRecord::Base
   private
 
   def validate_part_of
+    # validation
     # Make sure user didn't set parent to be itself.
     if self.part_of_id  == self.id
       self.errors.add(:part_of, "can't be the same as this record.")
@@ -194,7 +195,8 @@ class Biosample < ActiveRecord::Base
     end
   end
 
-  def not_pooled_and_part_of
+  def validate_not_pooled_and_part_of
+    # validation
     if self.part_of.present? and self.pooled_from_biosamples.present?
       self.errors.add(:base, "'Parent biosample' and 'Pooled from biosamples' can't both be specified.")
       return false

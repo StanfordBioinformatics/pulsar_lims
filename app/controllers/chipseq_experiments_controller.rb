@@ -20,6 +20,8 @@ class ChipseqExperimentsController < ApplicationController
 
   def create
     authorize ChipseqExperiment
+    #render json: params
+    #return
     @chipseq_experiment = ChipseqExperiment.new(chipseq_experiment_params)
     @chipseq_experiment.user = current_user
 
@@ -67,6 +69,8 @@ class ChipseqExperimentsController < ApplicationController
         :submitter_comments, 
         :target_id, 
         :upstream_identifier, 
+        :control_biosample_replicate_ids => [],
+        :experiment_biosample_replicate_ids => [],
       )
     end
 end
