@@ -18,6 +18,17 @@
     </tr>
 
     <tr>
+      <th><strong>Experiment:</strong></th>
+      <td>
+        <% if @biosample_replicate.chipseq_experiment.present? %>
+          <%= link_to_record_id(@biosample_replicate.chipseq_experiment) %>
+        <% else %>
+          None
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
       <th><strong>Control:</strong></th>
       <td><%= @biosample_replicate.control %></td>
     </tr>

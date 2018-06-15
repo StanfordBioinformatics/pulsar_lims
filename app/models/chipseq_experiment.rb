@@ -3,7 +3,7 @@ class ChipseqExperiment < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
-  ABBR = "CSEXP"
+  ABBR = "CS"
   DEFINITION = "A ChIP-Seq experiment"
   belongs_to :user
   belongs_to :target
