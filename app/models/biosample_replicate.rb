@@ -7,6 +7,7 @@ class BiosampleReplicate < ActiveRecord::Base
   DEFINITION = "A replicate of a biosample, used in experiments such as a Chipseq experiment."
   belongs_to :biosample
   belongs_to :chipseq_experiment
+  has_many   :chipseq_experiments, foreign_key: :wild_type_input_id, dependent: :nullify
   belongs_to :user
   has_many :documents
 
@@ -17,6 +18,7 @@ class BiosampleReplicate < ActiveRecord::Base
     # Make sure that this biosample can only have multiple technical biosample_replicates,
     # and not multiple biosample replicates of the same object type. Also make sure that all replicates
     # of a given experiment are on the same experiment. 
+  validate :validate_wild_type_input
 
   scope :persisted, lambda { where.not(id: nil) }
 
@@ -44,6 +46,14 @@ class BiosampleReplicate < ActiveRecord::Base
       if trn == rep.technical_replicate_number
         self.errors.add(:technical_replicate_number, "must be set to a different value than other technical replicates associated to the same biosample.")
       end
+    end
+  end
+
+  def validate_wild_type_input
+    # If the user checks the wild_type_input attribute, then 
+    # make sure that the control attribute is set to true since wt inputs are a type of controls.
+    if self.wild_type_input
+      self.control = true
     end
   end
 end

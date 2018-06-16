@@ -25,6 +25,17 @@
     <th><strong>Target:</strong></th>
     <td><%= link_to_record(@chipseq_experiment.target) %></td>
   </tr>
+
+  <tr>
+    <th><strong>WT input:</strong></th>
+    <td>
+      <% if @chipseq_experiment.wild_type_input.present? %>
+        <%= link_to_record(@chipseq_experiment.wild_type_input) %></td>
+      <% else %>
+        None
+      <% end %>
+    </td>
+  </tr>
   
   <tr>
     <th><strong>Experiment replicates:</strong></th>

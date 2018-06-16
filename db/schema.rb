@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180615040855) do
+ActiveRecord::Schema.define(version: 20180616020639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20180615040855) do
     t.integer  "biosample_id"
     t.integer  "chipseq_experiment_id"
     t.boolean  "control",                     default: false
+    t.boolean  "wild_type_input",             default: false
   end
 
   add_index "biosample_replicates", ["biosample_id"], name: "index_biosample_replicates_on_biosample_id", using: :btree
@@ -249,10 +250,12 @@ ActiveRecord::Schema.define(version: 20180615040855) do
     t.text     "notes"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "wild_type_input_id"
   end
 
   add_index "chipseq_experiments", ["target_id"], name: "index_chipseq_experiments_on_target_id", using: :btree
   add_index "chipseq_experiments", ["user_id"], name: "index_chipseq_experiments_on_user_id", using: :btree
+  add_index "chipseq_experiments", ["wild_type_input_id"], name: "index_chipseq_experiments_on_wild_type_input_id", using: :btree
 
   create_table "chromosomes", force: :cascade do |t|
     t.string   "name"
@@ -1003,6 +1006,7 @@ ActiveRecord::Schema.define(version: 20180615040855) do
   add_foreign_key "biosamples", "users", column: "owner_id"
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "biosamples", "wells"
+  add_foreign_key "chipseq_experiments", "biosample_replicates", column: "wild_type_input_id"
   add_foreign_key "chipseq_experiments", "targets"
   add_foreign_key "chipseq_experiments", "users"
   add_foreign_key "chromosomes", "reference_genomes"

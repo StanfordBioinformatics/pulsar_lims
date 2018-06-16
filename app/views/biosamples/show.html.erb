@@ -228,9 +228,9 @@
     <%= render partial: "add_crispr_modification" %>
   <% end %>
 <% end %>
-<div id="biosample_crispr_modification_form" ></div>
-  <!-- #biosample_crispr_modification_form will serve as the container for the result of the AJAX request above. See relevant jQuery in biosamples.js.coffee. -->
-</br></br>
+<%= link_to "Make replicate", [:make_replicate, @biosample], class: "reg-btn"  %>
+</br>
+</br>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
 <%= render partial: "application_partials/edit_notes", locals: {rec: @biosample} %>

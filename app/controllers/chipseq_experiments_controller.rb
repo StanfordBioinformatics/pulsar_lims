@@ -5,7 +5,9 @@ class ChipseqExperimentsController < ApplicationController
   def add_biosample_replicate
     # Required Params: 
     #     control: bool. true means that this is a control biosample_replicate. 
-    @biosample_replicate = @chipseq_experiment.experiment_biosample_replicates.build({control: params[:control]})
+    @control = params[:control]
+    @biosample_replicate = @chipseq_experiment.experiment_biosample_replicates.build({control: @control})
+    flash[:redirect] = chipseq_experiment_url(@chipseq_experiment)
     render "biosample_replicates/new"
   end
 
@@ -77,6 +79,7 @@ class ChipseqExperimentsController < ApplicationController
         :submitter_comments, 
         :target_id, 
         :upstream_identifier, 
+        :wild_type_input_id, 
         :control_biosample_replicate_ids => [],
         :experiment_biosample_replicate_ids => [],
       )

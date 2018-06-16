@@ -24,8 +24,14 @@ class BiosampleReplicatesController < ApplicationController
     @biosample_replicate.user = current_user
 
     respond_to do |format|
+      redirect = flash[:redirect]
+      if not redirect.present?
+        redirect = @biosample_replicate
+      else
+        flash[:redirect] = redirect
+      end
       if @biosample_replicate.save
-        format.html { redirect_to @biosample_replicate, notice: 'Biosample replicate was successfully created.' }
+        format.html { redirect_to redirect, notice: 'Biosample replicate was successfully created.' }
         format.json { render json: @biosample_replicate, status: :created }
       else
         format.html { render action: 'new' }
@@ -68,7 +74,8 @@ class BiosampleReplicatesController < ApplicationController
         :name, 
         :notes,
         :technical_replicate_number, 
-        :upstream_identifier
+        :upstream_identifier,
+        :wild_type_input
       )
     end
 end
