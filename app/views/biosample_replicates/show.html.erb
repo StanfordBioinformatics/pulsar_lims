@@ -1,6 +1,6 @@
 <%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @biosample_replicate } %>
 <header>                                                                                               
-  <h1><%= @biosample_replicate.name %></h1>                                                                  
+  <h1><%= @biosample_replicate.display() %></h1>                                                                  
                                                                                                        
   <ul class="actions">                                                                                 
     <%= render partial: "application_partials/auth_edit_record", locals: {record: @biosample_replicate} %>
@@ -12,11 +12,6 @@
 
 <table class="attributes">
   <tbody>
-    <tr>
-      <th><strong>Name:</strong></th>
-      <td><%= @biosample_replicate.name %></td>
-    </tr>
-
     <tr>
       <th><strong>Experiment:</strong></th>
       <td>

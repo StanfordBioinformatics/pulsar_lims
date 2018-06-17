@@ -1,4 +1,3 @@
-  <%= f.input :name %>
   <%= f.association :chipseq_experiment %>
   <%= f.input :wild_type_input, label_html: {"data-toggle": "tooltip", "title": "If this is a control that hasn't had any genetic modification applied, then check this box. Checking this box automitically will result in the 'control' attribute being set to true when saved, even if currently set to false."} %>
   <%= f.input :control %>

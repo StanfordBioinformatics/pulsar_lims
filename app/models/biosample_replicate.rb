@@ -11,7 +11,6 @@ class BiosampleReplicate < ActiveRecord::Base
   belongs_to :user
   has_many :documents
 
-  validates :name, presence: true
   validates :biosample, presence: true
   validates :biological_replicate_number, presence: true
   validate :validate_replicates 
@@ -27,7 +26,7 @@ class BiosampleReplicate < ActiveRecord::Base
   end
 
   def display
-    self.name + " [#{self.biological_replicate_number},#{self.technical_replicate_number}]"
+    self.biosample.name + " [#{self.biological_replicate_number},#{self.technical_replicate_number}]"
   end
 
   private

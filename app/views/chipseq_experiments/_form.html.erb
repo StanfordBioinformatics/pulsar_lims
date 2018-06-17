@@ -4,7 +4,7 @@
   <%= f.input :name %>
   <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The alias or accession of an existing ChIP-Seq experiment on the ENCODE Portal (leave blank if this is a new experiment that hasn't been registered there yet). For a list of available ChIP-Seq on the ENCODE Portal, see https://www.encodeproject.org/search/?type=Experiment&assay_title=ChIP-seq."} %>
   <%= f.input :description %>
-  <%= f.association :target %>
+  <%= f.association :target, collection: Target.order(:name) %>
   <%= f.association :wild_type_input, label_html: {"data-toggle": "tooltip", "title": "The input (control) BiosampleReplicate object that doesn't have a CRISPR modification."} %>
   <%= f.input :submitter_comments %>
   <%= render partial: "application_partials/notes", locals: {f: f} %>

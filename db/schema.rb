@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180616020639) do
+ActiveRecord::Schema.define(version: 20180617220325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,7 +139,6 @@ ActiveRecord::Schema.define(version: 20180616020639) do
 
   create_table "biosample_replicates", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "name"
     t.string   "upstream_identifier"
     t.integer  "biological_replicate_number"
     t.integer  "technical_replicate_number"
