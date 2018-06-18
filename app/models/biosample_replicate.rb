@@ -13,6 +13,7 @@ class BiosampleReplicate < ActiveRecord::Base
 
   validates :biosample, presence: true
   validates :biological_replicate_number, presence: true
+  validates :technical_replicate_number, presence: true
   validate :validate_replicates 
     # Make sure that this biosample can only have multiple technical biosample_replicates,
     # and not multiple biosample replicates of the same object type. Also make sure that all replicates
@@ -34,11 +35,16 @@ class BiosampleReplicate < ActiveRecord::Base
   def validate_replicates
     # validates that if a Biosample is going to have multiple BiosampleReplicates, that they are all
     # technical replicates whereby each BiosampleReplicate's biological_replicate_number attribute is
-    # the same, but varies with regard to the technical_replicate_number attribute.
+    # the same, but varies with regard to the technical_replicate_number attribute. They must also all
+    # be on the same ChipseqExperiment object.
     brn = self.biological_replicate_number
     trn = self.technical_replicate_number
+    chipseq_exp_id = self.chipseq_experiment_id
     self.biosample.biosample_replicates.persisted.each do |rep|
       next if self.id == rep.id
+      if chipseq_exp_id != rep.chipseq_experiment_id
+        self.errors.add(:chipseq_experiment_id, "must be the same value as other replicates of the same biosample.")
+      end
       if brn != rep.biological_replicate_number
         self.errors.add(:biological_replicate_number, "must be the same as any existing BiosampleReplicate objects associated with the selected Biosample. This is because a Biosample can only be associated to one biological replicate in the technical sense. It can, however, have multiple technical replicates, in which case each associated BiosampleReplicate object must have the same number set for the 'biological_replicate_number' attribute, but a different value for each 'technical_replicate_number' attribute.")
       end
