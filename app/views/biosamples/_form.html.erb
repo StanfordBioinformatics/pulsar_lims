@@ -4,6 +4,8 @@
 
   <%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique biosample name"} %> 
 
+  <%= f.input :control %>
+
   <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The corresponding ID for this biosample on the ENCODE Portal"} %>
   <%= f.input :tube_label, label_html: {"data-toggle": "tooltip", "title": "How the stored biosample is labeled (i.e. what is written on the tube)."} %> 
 
