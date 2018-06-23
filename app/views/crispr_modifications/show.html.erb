@@ -5,6 +5,9 @@
   <ul class="actions">
     <%= render partial: "application_partials/auth_edit_record", locals: {record: @crispr} %>
     <%= render partial: "application_partials/auth_destroy_record", locals: {record: @crispr} %>
+    <li>                                                                                             
+      <%= link_to "Clone", [:clone, @crispr], class: "clone" %>                                   
+    </li>  
   </ul>
 </header>
 

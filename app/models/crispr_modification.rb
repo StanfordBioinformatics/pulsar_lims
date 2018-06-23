@@ -69,6 +69,7 @@ class CrisprModification < ActiveRecord::Base
     attrs = {}
     attrs["from_prototype_id"] = self.id
     attrs["biosample_id"] = associated_biosample_id
+    attrs["crispr_construct_ids"] = self.crispr_construct_ids
     if custom_attrs.present?                                                                        
       attrs.update(custom_attrs)                                                                    
     end                                                                                             

@@ -1,12 +1,28 @@
 class CrisprModificationsController < ApplicationController
-  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy, :new_pcr_validation]
+  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy, :new_pcr_validation, :clone, :create_clone]
   skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct, :new_pcr_validation]
 
-  def select_options                                                                                   
+  def select_options
     #Called via ajax.
     #Typically called when the user selects the refresh icon in any form that has a crispr_modifications selection.
     @records = CrisprModification.all
-    render "application_partials/select_options", layout: false             
+    render "application_partials/select_options", layout: false
+  end
+
+  def clone
+    # Renders the view that submits a form to the create_clones action below.
+    authorize @crispr, :create?
+  end
+
+  def create_clone
+    authorize @crispr, :create?
+    #render json: params
+    #return
+    biosample_id = set_crispr_modification()[:biosample_id]
+    @crispr = @crispr.clone_crispr_modification(associated_biosample_id: biosample_id, associated_user_id: current_user.id)
+      # Add any has_one relationships to clone
+      #@biosample.clone_crispr_modification(associated_biosample_id: biosample_clone.id, associated_user_id: current_user.id)
+    redirect_to @crispr, notice: "Your CrisprModification clone has been created and attached to #{Biosample.find(biosample_id).name}"
   end
 
   def new_pcr_validation
@@ -14,17 +30,17 @@ class CrisprModificationsController < ApplicationController
   end
 
   def select_crispr_construct
-    # Called remotely in the crispr form when the user clicks the "Add Crispr Construct" button. 
+    # Called remotely in the crispr form when the user clicks the "Add Crispr Construct" button.
     # The rendered view is added to the HTML by Javascript.
     #
-    # Expected params: 
+    # Expected params:
     #   1. exclude_ids - Array of CrisprConstruct IDs to exclude from the selection.
     exclude_ids = params[:exclude_ids]
     @crispr = CrisprModification.new
     @crispr_constructs = CrisprConstruct.where.not(id: exclude_ids)
     render layout: false
   end
-  
+
   def select_chromosome_on_reference_genome
     @crispr = CrisprModification.new
     @crispr.build_genomic_integration_site
@@ -53,7 +69,7 @@ class CrisprModificationsController < ApplicationController
   def create
     authorize CrisprModification
     #render json: params
-    #return 
+    #return
     @crispr = CrisprModification.new(crispr_modification_params)
 
     @crispr.user = current_user
@@ -100,14 +116,14 @@ class CrisprModificationsController < ApplicationController
       params.require(:crispr_modification).permit(
         :biosample_id,
         :category,
-        :donor_construct_id, 
-        :name, 
+        :donor_construct_id,
+        :name,
         :notes,
         :prototype,
         :purpose,
         :_times_cloned,
         :upstream_identifier,
-        crispr_construct_ids: [], 
+        crispr_construct_ids: [],
         crispr_constructs_attributes: [:id, :_destroy],
         genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end]
       )
