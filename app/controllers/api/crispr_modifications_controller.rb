@@ -26,7 +26,7 @@ class Api::CrisprModificationsController < Api::ApplicationController
   end
 
   def create
-    @crispr = CrisprModification.new(crispr_params)
+    @crispr = CrisprModification.new(crispr_modification_params)
     @crispr.user = @current_user
     authorize @crispr
     if @crispr.save
