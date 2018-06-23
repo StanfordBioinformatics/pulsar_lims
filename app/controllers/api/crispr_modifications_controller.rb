@@ -49,7 +49,6 @@ class Api::CrisprModificationsController < Api::ApplicationController
         :donor_construct_id,
         :name,
         :notes,
-        :prototype,
         :purpose,
         :_times_cloned,
         :upstream_identifier,
