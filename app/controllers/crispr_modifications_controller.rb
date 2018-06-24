@@ -1,6 +1,6 @@
 class CrisprModificationsController < ApplicationController
-  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy, :new_pcr_validation, :clone, :create_clone]
-  skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct, :new_pcr_validation]
+  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy, :new_pcr_validation, :clone, :create_clone, :crispr_modification_parts, :prototype_instances]
+  skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct, :new_pcr_validation, :crispr_modification_parts, :prototype_instances]
 
   def select_options
     #Called via ajax.
@@ -23,6 +23,24 @@ class CrisprModificationsController < ApplicationController
       # Add any has_one relationships to clone
       #@biosample.clone_crispr_modification(associated_biosample_id: biosample_clone.id, associated_user_id: current_user.id)
     redirect_to @crispr, notice: "Your CrisprModification clone has been created and attached to #{Biosample.find(biosample_id).name}"
+  end
+
+  def crispr_modification_parts
+    #Called via ajax
+    set_model_class()
+    @records = policy_scope(CrisprModification.where({part_of: @crispr})).page params[:page]
+    @no_new_btn = true
+    @title = "Child CRISPR Modifications of #{@crispr.name}"
+    render action: "index"
+  end
+
+  def prototype_instances
+    #Called via ajax
+    set_model_class()
+    @records = policy_scope(CrisprModification.where({from_prototype: @crispr})).page params[:page]
+    @no_new_btn = true
+    @title = "Prototype instances of CRISPR Modification #{@crispr.name}"
+    render action: "index"
   end
 
   def new_pcr_validation

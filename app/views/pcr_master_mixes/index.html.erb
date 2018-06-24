@@ -1,6 +1,8 @@
 <header>
-  <h1 class="index-page-header">PCR Master Mixes</h1>
-	<p class="model-definition"><%= PcrMasterMix::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "PCR Master Mixes" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= PcrMasterMix::DEFINITION %></p>
   
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
@@ -13,7 +15,7 @@
       <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Vendor</th>
       <th>Vendor product identifier</th>
-			<th>Lot identifier</th>
+      <th>Lot identifier</th>
       <th>Vendor product url</th>
       <th>Actions</th>
     </tr>
@@ -25,16 +27,16 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
         <td><%= rec.vendor_product_identifier %></td>
-				<td><%= rec.lot_identifier %></td>
-				<% if rec.vendor_product_url.present? %>
-	        <td><%= link_to rec.vendor_product_url, rec.vendor_product_url %></td>
-				<% else %>
-	        <td></td>
-				<% end %>
-				<td>
-					<%= link_to fa_icon("pencil"), edit_pcr_master_mix_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+        <td><%= rec.lot_identifier %></td>
+        <% if rec.vendor_product_url.present? %>
+          <td><%= link_to rec.vendor_product_url, rec.vendor_product_url %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td>
+          <%= link_to fa_icon("pencil"), edit_pcr_master_mix_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

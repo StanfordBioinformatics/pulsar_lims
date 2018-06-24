@@ -1,6 +1,8 @@
 <header>
-  <h1 class="index-page-header">CRISPR Guide Constructs</h1>
-	<p class="model-definition"><%= CrisprConstruct::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "CRISPR Guide Constructs" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= CrisprConstruct::DEFINITION %></p>
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
@@ -13,10 +15,10 @@
       <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Sent to</th>
       <th>Date sent</th>
-			<th>Addgene ID</th>
+      <th>Addgene ID</th>
       <th>Target</th>
-			<th>Ensembl transcript</th>
-			<th>RefSeq transcript</th>
+      <th>Ensembl transcript</th>
+      <th>RefSeq transcript</th>
       <th>Guide sequence</th>
       <th>Cloning vector</th>
       <th>Description</th>
@@ -42,17 +44,17 @@
           <% end %>
         </td>
         <td><%= link_to rec.target.name, rec.target %></td>
-				<td><%= rec.ensembl_transcript %></td>
-				<td><%= rec.refseq_transcript %></td>
+        <td><%= rec.ensembl_transcript %></td>
+        <td><%= rec.refseq_transcript %></td>
         <td><%= rec.guide_sequence %></td>
         <td><%= link_to rec.cloning_vector.name, rec.cloning_vector %></td>
         <td><%= rec.description %></td>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
         <td><%= rec.vendor_product_identifier %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_crispr_construct_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_crispr_construct_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

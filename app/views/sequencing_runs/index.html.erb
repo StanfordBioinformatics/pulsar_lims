@@ -1,6 +1,8 @@
 <header>
-  <h1 class="index-page-header">Sequencing Results</h1>
-	<p class="model-definition"><%= SequencingRun::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Sequencing Results" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= SequencingRun::DEFINITION %></p>
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record", locals: {model_class: SequencingRun, nested: [@sequencing_request]} %>

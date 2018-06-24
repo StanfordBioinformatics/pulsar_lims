@@ -87,6 +87,7 @@ module Cloning
     if custom_attrs.present?
       attrs.update(custom_attrs)
     end
+    p attrs
     new_record = self.class.create!(attrs)
     #The above create! class method raises ActiveRecord::RecordInvalid if there is any validation error, and
     # this is caught in application_controller.rb.
@@ -103,7 +104,7 @@ module Cloning
     # is used to define what the sorted biosamples in each well should look like (each well has a 
     # single biosample and such a biosample has a single library).
     # This makes updating all of the biosample objects with regard to all the plates on a single_cell_sorting
-    # easy to do just by changing the biosample prototype (starting biosample) assocated with the single_cell_sorting.
+    # easy to do just by changing the biosample prototype assocated with the single_cell_sorting.
     if self.prototype_instances.any?
       self.prototype_instances.each do |pi|
         pi.update_from_sibling(self.id)

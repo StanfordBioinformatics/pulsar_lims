@@ -57,6 +57,36 @@
     <td><%= link_to target.name, target %></td>
   </tr>
 
+
+ <% if @crispr.part_of.present? %>                                                              
+    <tr>                                                                                            
+      <th><strong>Parent CRISPR Modification</strong></th>                                                    
+      <td><%= link_to_record @crispr.part_of %></td>                           
+    </tr>                                                                                           
+  <% end %>                                                                                         
+                                                                                                       
+  <% if @crispr.crispr_modification_parts.any? %>                                                             
+    <tr>                                                                                               
+      <th><strong>Child CRISPR Modifications:</strong></th>                                                      
+      <td>                                                                                             
+        <%= link_to "#{@crispr.crispr_modification_parts.length} total", [:crispr_modification_parts, @crispr] %>  
+      </td>                                                                                            
+    </tr>                                                                                              
+  <% end %>                                                                                            
+                                                                                                       
+  <% prototype_instances = @crispr.prototype_instances %>                                           
+  <% if prototype_instances.any? %>                                                                    
+  <tr>                                                                                                 
+    <th><strong>Prototype instances</strong></th>                                                      
+    <td>                                                                                               
+      <%= link_to "#{@crispr.prototype_instances.length} total", [:prototype_instances, @crispr] %>
+    </td>                                                                                              
+  <% else %>                                                                                           
+    <th><strong>Prototype?</strong></th>                                                               
+    <td>False</td>                                                                                     
+  <% end %>                                                                                            
+  </tr>
+
   <tr class="notes-row">
     <th><strong>Notes</strong></th>
     <td><%= simple_format(@crispr.notes) %></td>

@@ -1,6 +1,8 @@
 <header>
-	<h1 class="index-page-header">Antibodies</h1>
-	<p class="model-definition"><%= Antibody::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Antibodies" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= Antibody::DEFINITION %></p>
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
@@ -32,11 +34,11 @@
         <td><%= link_to rec.organism.name, rec.organism %></td>
         <td><%= link_to rec.target.name, rec.target %></td>
         <td><%= rec.clonality %></td>
-				<% if rec.isotype.present? %>
-	        <td><%= link_to rec.isotype.name, rec.isotype %></td>
-				<% else %>
-					<td></td>
-				<% end %>
+        <% if rec.isotype.present? %>
+          <td><%= link_to rec.isotype.name, rec.isotype %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
         <td><%= rec.vendor_product_identifier %></td>
         <td><%= link_to rec.vendor_product_url %></td>
@@ -44,9 +46,9 @@
         <td><%= rec.antigen_description %></td>
         <td><%= rec.antigen_sequence %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_antibody_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_antibody_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

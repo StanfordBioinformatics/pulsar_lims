@@ -1,6 +1,8 @@
 <header>
-  <h1 class="index-page-header">Cloning Vectors</h1>
-	<p class="model-definition"><%= CloningVector::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Cloning Vectors" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= CloningVector::DEFINITION %></p>
   
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
@@ -14,7 +16,7 @@
       <th>Description</th>
       <th>Vendor</th>
       <th>Product url</th>
-			<th>Map</th>
+      <th>Map</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -25,20 +27,20 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.description %></td>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
-				<% if rec.product_url.present? %>
-	        <td><%= link_to rec.product_url, rec.product_url %></td>
-				<% else %>
-					<td></td>
-				<% end %>
-				<% if rec.map.present? %>
-	        <td><%= link_to rec.map, rec.map %></td>
-				<% else %>
-					<td></td>
-				<% end %>
-				<td>
-					<%= link_to fa_icon("pencil"), edit_cloning_vector_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+        <% if rec.product_url.present? %>
+          <td><%= link_to rec.product_url, rec.product_url %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if rec.map.present? %>
+          <td><%= link_to rec.map, rec.map %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td>
+          <%= link_to fa_icon("pencil"), edit_cloning_vector_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

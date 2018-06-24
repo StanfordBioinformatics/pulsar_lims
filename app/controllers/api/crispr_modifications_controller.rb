@@ -1,7 +1,15 @@
 class Api::CrisprModificationsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/crisprs/3
-  before_action :set_crispr_modification, only: [:show]
+  before_action :set_crispr_modification, only: [:show, :clone]
+
+  def clone
+      authorize @crispr, :create?
+      biosample_id = params[:biosample_id]
+      cm = @crispr.clone_crispr_modification(associated_biosample_id: biosample_id, associated_user_id: current_user.id)
+      render json: cm
+      #render json: cm
+  end
 
   def find_by
     # find_by defined in ApplicationController#find_by.

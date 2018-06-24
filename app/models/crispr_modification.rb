@@ -12,6 +12,8 @@ class CrisprModification < ActiveRecord::Base
   belongs_to :user
   belongs_to :from_prototype, class_name: "CrisprModification"
   has_many   :prototype_instances, class_name: "CrisprModification", foreign_key: "from_prototype_id", dependent: :restrict_with_exception
+  belongs_to :part_of, class_name: "CrisprModification"
+  has_many :crispr_modification_parts, class_name: "CrisprModification", foreign_key: "part_of_id", dependent: :destroy
   belongs_to :biosample
   belongs_to :donor_construct
   belongs_to :genomic_integration_site, class_name: "GenomeLocation"
@@ -67,12 +69,10 @@ class CrisprModification < ActiveRecord::Base
     #
     # Example:
     attrs = {}
+    attrs["part_of_id"] = self.id  
     attrs["from_prototype_id"] = self.id
     attrs["biosample_id"] = associated_biosample_id
     attrs["crispr_construct_ids"] = self.crispr_construct_ids
-    if custom_attrs.present?                                                                        
-      attrs.update(custom_attrs)                                                                    
-    end                                                                                             
     return clone(associated_user_id: associated_user_id, custom_attrs: attrs) 
   end
 
@@ -120,7 +120,7 @@ class CrisprModification < ActiveRecord::Base
     return self.all_pcr_validations.where.not(id: self.pcr_validation_ids)
   end
 
-  protected
+  private
 
     def verify_target
       #Verifies that all crispr_constructs and the donor_construct all have the same target specified.

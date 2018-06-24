@@ -1,10 +1,12 @@
 <header> 
-	<h1 class="index-page-header">Biosample Types</h1>
-	<p class="model-definition"><%= BiosampleType::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Biosample Types" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= BiosampleType::DEFINITION %></p>
 
-	<ul class="actions">
-		<%= render partial: "application_partials/auth_new_record" %>
-	</ul>
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record" %>
+  </ul>
 </header>
 
 <table class="attributes index">
@@ -22,9 +24,9 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.tissue %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_biosample_type_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_biosample_type_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

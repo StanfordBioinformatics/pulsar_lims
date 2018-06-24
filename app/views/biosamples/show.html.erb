@@ -106,16 +106,27 @@
   <% end %>
 
   <% prototype_instances = @biosample.prototype_instances %>
+  <% if prototype_instances.any? %>
   <tr>
-    <% if prototype_instances.any? %>
-      <th><strong>Prototype instances</strong></th>
+    <th><strong>Prototype instances</strong></th>
+    <td>
+      <%= link_to "#{@biosample.prototype_instances.length} total", [:prototype_instances, @biosample] %>
+    </td>
+  <% else %>
+    <th><strong>Prototype?</strong></th>
+    <td>False</td>
+  <% end %>
+  </tr>
+
+  <% if @biosample.from_prototype_id.present? %>
+    <tr>
+      <th><strong>Tracking prototype</strong></th> 
       <td>
-        <%= link_to "#{@biosample.prototype_instances.length} total", [:prototype_instances, @biosample] %>
+        <%= link_to_record(@biosample.from_prototype)  %>
       </td>
-    <% else %>
-      <th><strong>Prototype?</strong></th>
-      <td>False</td>
-    <% end %>
+    </tr>
+  <% end %>
+    
   </tr>
   
   <tr>

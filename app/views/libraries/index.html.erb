@@ -1,26 +1,28 @@
 <header>
-	<h1 class="index-page-header">Libraries</h1>
-	<p class="model-definition"><%= Library::DEFINITION %></p>
-	
-	<ul class="actions">
-		<%= render partial: "application_partials/auth_new_record" %>
-	</ul>	
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Libraries" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= Library::DEFINITION %></p>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record" %>
+  </ul>  
 </header>
 
 <table class="attributes index">
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
-			<th>Sequencing Library Prep Kit</th>
-			<th>Paired End?</th>
+      <th>Sequencing Library Prep Kit</th>
+      <th>Paired End?</th>
       <th>Nucleic acid type</th>
       <th>Biosample</th>
       <th>Vendor</th>
       <th>Lot</th>
       <th>Barcode</th>
-			<th>Paired Barcode</th>
+      <th>Paired Barcode</th>
       <th>Fragmentation method</th>
-			<th>Concentration</th>
+      <th>Concentration</th>
       <th>Size range</th>
       <th>Strand specific?</th>
       <th>Actions</th>
@@ -31,8 +33,8 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
-				<td><%= link_to rec.sequencing_library_prep_kit.name, rec.sequencing_library_prep_kit %></td>
-				<td><%= rec.paired_end %></td>
+        <td><%= link_to rec.sequencing_library_prep_kit.name, rec.sequencing_library_prep_kit %></td>
+        <td><%= rec.paired_end %></td>
         <td><%= rec.nucleic_acid_term.name %></td>
         <td>
           <% unless rec.prototype? %>
@@ -49,34 +51,34 @@
         <td><%= rec.lot_identifier %></td>
         
         <!-- Either a barcode or a paired_barcode can be present, not both -->
-				<% if rec.barcode.present? %>
-					<td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: [rec.barcode]} %></td>
-				<% else %>
-					<td></td>
-				<% end %>
+        <% if rec.barcode.present? %>
+          <td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: [rec.barcode]} %></td>
+        <% else %>
+          <td></td>
+        <% end %>
 
-				<% if rec.paired_barcode.present? %>
-					<td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: [rec.paired_barcode]} %></td>
-				<% else %>
-					<td></td>
-				<% end %>
+        <% if rec.paired_barcode.present? %>
+          <td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: [rec.paired_barcode]} %></td>
+        <% else %>
+          <td></td>
+        <% end %>
 
-				<% if rec.library_fragmentation_method.present? %>
-	        <td><%= link_to rec.library_fragmentation_method.name, rec.library_fragmentation_method.name %></td>
-				<% else %>
-					<td></td>
-				<% end %>
-				<% if rec.concentration.present? %>
-					<td><%= rec.concentration %>&nbsp;<%= rec.concentration_unit.name %></td>
-				<% else %>
-					<td></td>
-				<% end %>
+        <% if rec.library_fragmentation_method.present? %>
+          <td><%= link_to rec.library_fragmentation_method.name, rec.library_fragmentation_method.name %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if rec.concentration.present? %>
+          <td><%= rec.concentration %>&nbsp;<%= rec.concentration_unit.name %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td><%= rec.size_range %></td>
         <td><%= rec.strand_specific %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_library_path(rec) %>
-        	<%= link_to fa_icon("trash"),rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_library_path(rec) %>
+          <%= link_to fa_icon("trash"),rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

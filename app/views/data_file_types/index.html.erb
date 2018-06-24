@@ -1,6 +1,8 @@
 <header>
-  <h1 class="index-page-header">Data File Types</h1>
-	<p class="model-definition"><%= DataFileType::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Data File Types" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= DataFileType::DEFINITION %></p>
   
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>

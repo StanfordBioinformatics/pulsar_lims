@@ -1,9 +1,11 @@
 <header>
-	<h1 class="index-page-header">Antibody Purifications</h1>
-	<p class="model-definition"><%= AntibodyPurification::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Antibody Purifications" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= AntibodyPurification::DEFINITION %></p>
 
   <ul class="actions">
-		<%= render partial: "application_partials/auth_new_record" %>
+    <%= render partial: "application_partials/auth_new_record" %>
   </ul> 
 </header>
 
@@ -20,9 +22,9 @@
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td>
-					<%= link_to fa_icon("pencil"), edit_antibody_purification_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_antibody_purification_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

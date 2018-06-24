@@ -1,6 +1,8 @@
 <header>
-	<h1 class="index-page-header">Sequencing Platforms</h1>
-	<p class="model-definition"><%= SequencingPlatform::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Sequencing Platforms" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= SequencingPlatform::DEFINITION %></p>
 
   <ul class="actions">
 		<%= render partial: "application_partials/auth_new_record" %>

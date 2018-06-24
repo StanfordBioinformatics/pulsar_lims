@@ -1,6 +1,8 @@
 <header>
-  <h1 class="index-page-header">Analyses</h1>
-	<p class="model-definition"><%= Analysis::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Analyses" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= Analysis::DEFINITION %></p>
   
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
@@ -12,7 +14,7 @@
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Description</th>
-			<th>Single cell sorting</th>
+      <th>Single cell sorting</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -22,15 +24,15 @@
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.description %></td>
-				<% if rec.single_cell_sorting_id.present? %>
-					<td><%= link_to rec.single_cell_sorting.name, rec.single_cell_sorting %></td>
-				<% else %>
-					<td></td>
-				<% end %>
+        <% if rec.single_cell_sorting_id.present? %>
+          <td><%= link_to rec.single_cell_sorting.name, rec.single_cell_sorting %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td>
-						<%= link_to fa_icon("pencil"), edit_analysis_path(rec) %>
-        		<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+            <%= link_to fa_icon("pencil"), edit_analysis_path(rec) %>
+            <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

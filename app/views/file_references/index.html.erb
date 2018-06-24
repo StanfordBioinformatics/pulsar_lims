@@ -1,6 +1,8 @@
 <header>
-  <h1 class="index-page-header">File References</h1>
-	<p class="model-definition"><%= FileReference::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "File References" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= FileReference::DEFINITION %></p>
   
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
@@ -13,7 +15,7 @@
       <%= render partial: "application_partials/index_common_table_headers", locals: {model: FileReference} %>
       <th>File path</th>
       <th>Data storage</th>
-			<th>Data file type</th>
+      <th>Data file type</th>
       <th>Fileid</th>
       <th>Actions</th>
     </tr>
@@ -25,12 +27,12 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= link_to rec.file_path, rec %></td>
         <td><%= link_to rec.data_storage.name, rec.data_storage %></td>
-				<td><%= link_to rec.data_file_type.name, rec.data_file_type %></td>
+        <td><%= link_to rec.data_file_type.name, rec.data_file_type %></td>
         <td><%= rec.fileid %></td>
         <td>
-						<%= link_to fa_icon("pencil"), edit_file_reference_path(rec) %>
-        		<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+            <%= link_to fa_icon("pencil"), edit_file_reference_path(rec) %>
+            <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

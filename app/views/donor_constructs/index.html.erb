@@ -1,6 +1,8 @@
 <header>
-  <h1 class="index-page-header">CRISPR Donor Constructs</h1>
-	<p class="model-definition"><%= DonorConstruct::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "CRISPR Donor Constructs" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= DonorConstruct::DEFINITION %></p>
   
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
@@ -13,13 +15,13 @@
       <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Sent to</th>
       <th>Date sent</th>
-			<th>Addgene ID</th>
+      <th>Addgene ID</th>
       <th>Cloning vector</th>
       <th>Vender</th>
       <th>Vender product identifier</th>
       <th>Target</th>
-			<th>Ensembl transcript</th>
-			<th>Refseq transcript</th>
+      <th>Ensembl transcript</th>
+      <th>Refseq transcript</th>
       <th>Description</th>
       <th>Insert sequence</th>
       <th>Actions</th>
@@ -36,11 +38,11 @@
           <% end %>
         </td>
         <td><%= rec.date_sent %></td>
-				<td>
-					<% if rec.addgene_id %>
-						<%= link_to rec.addgene_id, ENV["ADDGENE_WEBSITE"] + rec.addgene_id %>
-					<% end %>
-				</td>
+        <td>
+          <% if rec.addgene_id %>
+            <%= link_to rec.addgene_id, ENV["ADDGENE_WEBSITE"] + rec.addgene_id %>
+          <% end %>
+        </td>
         <td><%= link_to rec.cloning_vector.name, rec.cloning_vector %></td>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
         <td><%= rec.vendor_product_identifier %></td>
@@ -50,9 +52,9 @@
         <td><%= rec.description %></td>
         <td><%= rec.insert_sequence %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_donor_construct_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_donor_construct_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+        </td>
       </tr>
     <% end %>
   </tbody>

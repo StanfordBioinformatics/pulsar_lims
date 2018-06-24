@@ -1,6 +1,8 @@
 <header>
-  <h1 class="index-page-header">PCRs</h1>
-	<p class="model-definition"><%= Pcr::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "PCRs" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= Pcr::DEFINITION %></p>
   
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record", locals: {model_class: Pcr, uppercase: 1} %>
@@ -37,16 +39,16 @@
         <td><%= rec.annealing_temperature %></td>
         <td><%= rec.extension_time %></td>
         <td><%= rec.num_cycles %></td>
-				<% if rec.crispr_modification.present? %>
-	        <td><%= link_to rec.crispr_modification.name, rec.crispr_modification  %></td>
-				<% else %>
-					<td></td>
-				<% end %>
+        <% if rec.crispr_modification.present? %>
+          <td><%= link_to rec.crispr_modification.name, rec.crispr_modification  %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td><%= rec.success %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_pcr_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_pcr_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

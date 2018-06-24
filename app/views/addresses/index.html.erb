@@ -1,9 +1,11 @@
 <header>
-	<h1 class="index-page-header">Addresses</h1>
-	<p class="model-definition"><%= Address::DEFINITION %></p>
-	
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Addresses" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= Address::DEFINITION %></p>
+  
   <ul class="actions">
-		<%= render partial: "application_partials/auth_new_record" %>
+    <%= render partial: "application_partials/auth_new_record" %>
   </ul> 
 </header>
 
@@ -28,9 +30,9 @@
         <td><%= rec.state %></td>
         <td><%= rec.country %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_address_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_address_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

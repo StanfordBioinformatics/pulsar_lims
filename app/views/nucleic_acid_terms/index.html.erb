@@ -1,10 +1,12 @@
 <header>
-	<h1 class="index-page-header">Nucleic Acid Terms</h1>
-	<p class="model-definition"><%= NucleicAcidTerm::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Nucleic Acid Terms" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= NucleicAcidTerm::DEFINITION %></p>
 
-	<ul class="actions">
-		<%= render partial: "application_partials/auth_new_record" %>
-	</ul> 
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record" %>
+  </ul> 
 </header>
 
 <table class="attributes index">
@@ -24,9 +26,9 @@
         <td><%= rec.accession %></td>
         <td><%= rec.definition %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_nucleic_acid_term_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_nucleic_acid_term_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -45,6 +45,8 @@ Pulsar::Application.routes.draw do
   end
   resources :paired_barcodes
   resources :crispr_modifications do
+    get :crispr_modification_parts, on: :member
+    get :prototype_instances, on: :member
     get :clone, on: :member
     post :create_clone, on: :member
     get :select_options, on: :collection
@@ -121,6 +123,7 @@ Pulsar::Application.routes.draw do
     resources :crispr_modifications do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
+      post :clone, on: :member
     end
 
     resources :documents do

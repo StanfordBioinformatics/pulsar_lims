@@ -1,6 +1,8 @@
 <header>
-	<h1 class="index-page-header">Vendors</h1>
-	<p class="model-definition"><%= Vendor::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Vendors" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= Vendor::DEFINITION %></p>
 
   <ul class="actions">
 		<%= render partial: "application_partials/auth_new_record" %>

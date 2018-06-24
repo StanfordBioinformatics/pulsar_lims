@@ -1,6 +1,8 @@
 <header>
-  <h1 class="index-page-header">Data Storage Providers</h1>
-	<p class="model-definition"><%= DataStorageProvider::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Data Storage Providers" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= DataStorageProvider::DEFINITION %></p>
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
@@ -23,9 +25,9 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.bucket_storage? %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_data_storage_provider_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_data_storage_provider_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -1,7 +1,9 @@
 <header>
-	<h1 class="index-page-header">Sequencing Centers</h1>
-	<p class="model-definition"><%= SequencingCenter::DEFINITION %></p>
-	
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Sequencing Centers" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= SequencingCenter::DEFINITION %></p>
+  
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
   </ul> 
@@ -12,7 +14,7 @@
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Address</th>
-			<th>Web URL</th>
+      <th>Web URL</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -22,11 +24,11 @@
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.address %></td>
-				<td><%= link_to rec.url,rec.url %></td>
+        <td><%= link_to rec.url,rec.url %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_sequencing_center_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_sequencing_center_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

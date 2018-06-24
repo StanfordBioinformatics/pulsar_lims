@@ -147,7 +147,7 @@ class ApplicationController < ActionController::Base
         redirect_to(request.referrer || root_path)
       }
       format.json {
-        render json: {exception: "ActiveRecord::RecordNotDestroyed"}, status: 403
+        render json: {exception: "ActiveRecord::RecordNotDestroyed", message: err.message}, status: 403
       }
     end
   end
@@ -160,7 +160,7 @@ class ApplicationController < ActionController::Base
         redirect_to(request.referrer || root_path)
       }
       format.json  {
-        render json: {exception: "ActiveRecord::RecordInvalid"}, status: 403
+        render json: {exception: "ActiveRecord::RecordInvalid", message: err.message}, status: 403
       }
     end
   end
@@ -173,7 +173,7 @@ class ApplicationController < ActionController::Base
         redirect_to(request.referrer || root_path)
       }
       format.json  {
-        render json: {exception: "ActiveRecord::InvalidForeignKey"}, status: 403
+        render json: {exception: "ActiveRecord::InvalidForeignKey", message: err.message}, status: 403
       }
     end
   end
@@ -205,7 +205,7 @@ class ApplicationController < ActionController::Base
       #Why json here and not in API? Because the app internally makes some AJAX calls to
       # non API-end points. These should later be migrated to API endpoint calls, however.
       format.json {
-        render json: {exception: err.class.name, error: err.message},  status: 403
+        render json: {exception: err.class.name, message: err.message},  status: 403
       }
     end
   end

@@ -1,6 +1,8 @@
 <header>
-  <h1 class="index-page-header">Biosample Term Names</h1>
-	<p class="model-definition"><%= BiosampleTermName::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Biosample Term Names" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= BiosampleTermName::DEFINITION %></p>
   
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
@@ -26,9 +28,9 @@
         <td><%= rec.biosample_ontology.name %></td>
         <td><%= rec.description %></td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_biosample_term_name_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_biosample_term_name_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

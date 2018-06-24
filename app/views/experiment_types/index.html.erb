@@ -1,9 +1,11 @@
 <header>
-	<h1 class="index-page-header">Experiment Types</h1>
-	<p class="model-definition"><%= ExperimentType::DEFINITION %></p>
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Experiment Types" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= ExperimentType::DEFINITION %></p>
 
   <ul class="actions">
-		<%= render partial: "application_partials/auth_new_record" %>
+    <%= render partial: "application_partials/auth_new_record" %>
   </ul> 
 </header>
 
@@ -20,9 +22,9 @@
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td>
-					<%= link_to fa_icon("pencil"), edit_experiment_type_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_experiment_type_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
