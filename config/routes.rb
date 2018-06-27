@@ -97,6 +97,11 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
+    resources :biosample_replicates do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :biosample_types do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
