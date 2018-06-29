@@ -112,6 +112,11 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
+    resources :chipseq_experiment do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :concentration_units do
       post :find_by, on: :collection
       post :find_by_or, on: :collection

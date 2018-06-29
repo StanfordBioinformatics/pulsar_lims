@@ -44,5 +44,5 @@
 
 <% if defined?(@page) %>                                                                               
   <%= paginate @records %>                                                                             
-  <%= link_to "All", construct_tags_path(all: true) %>                                                  
+  <%= link_to "All", biosample_replicates_path(all: true) %>                                                  
 <% end %> 
