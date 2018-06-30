@@ -1,7 +1,7 @@
 class Api::ChipseqExperimentsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/chipseq_experiments/3
-  before_action :set_chipseq_experiment, only: [:show]
+  before_action :set_chipseq_experiment, only: [:show, :update, :destroy]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
@@ -34,6 +34,19 @@ class Api::ChipseqExperimentsController < Api::ApplicationController
     else
       render json: { errors: @chipseq_experiment.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def update
+    authorize @chipseq_experiment
+    if @chipseq_experiment.update(chipseq_experiment_params)
+      render json: @chipseq_experiment, status: 200
+    else
+      render json: { errors: @chipseq_experiment.errors.full_messages }, status: 422
+    end
+  end
+
+  def destroy
+    ddestroy(@chipseq_experiment)
   end
 
   private

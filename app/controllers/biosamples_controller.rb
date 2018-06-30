@@ -136,13 +136,12 @@ class BiosamplesController < ApplicationController
     end
   end
 
+  private 
+
   def destroy
-    authorize @biosample
     ddestroy(@biosample,biosamples_path)
   end
 
-
-  private
     # Use callbacks to share common setup or constraints between actions.
     def set_biosample
       @biosample = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb

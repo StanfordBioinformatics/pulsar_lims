@@ -1,7 +1,7 @@
 class Api::ConcentrationUnitsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/concentration_units/3
-  before_action :set_concentration_unit, only: [:show]
+  before_action :set_concentration_unit, only: [:show, :update, :destroy]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
@@ -34,6 +34,19 @@ class Api::ConcentrationUnitsController < Api::ApplicationController
     else
       render json: { errors: @concentration_unit.errors.full_messages }, status: 422
     end
+  end
+
+  def update
+    authorize @concentration_unit
+    if @concentration_unit.update(concentration_unit_params)
+      render json: @concentration_unit, status: 200
+    else
+      render json: { errors: @concentration_unit.errors.full_messages }, status: 422
+    end
+  end
+
+  def destroy
+    ddestroy(@concentration_unit)
   end
 
   private

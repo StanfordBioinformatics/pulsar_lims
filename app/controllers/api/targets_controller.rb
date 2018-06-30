@@ -1,7 +1,7 @@
 class Api::TargetsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/targets/3
-  before_action :set_target, only: [:show]
+  before_action :set_target, only: [:show, :update, :destroy]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
@@ -34,6 +34,19 @@ class Api::TargetsController < Api::ApplicationController
     else
       render json: { errors: @target.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def update
+    authorize @target
+    if @target.update(target_params)
+      render json: @target, status: 200
+    else
+      render json: { errors: @target.errors.full_messages }, status: 422
+    end
+  end
+
+  def destroy
+    ddestroy(@target)
   end
 
   private

@@ -1,17 +1,17 @@
 class Api::BiosampleTypesController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/biosample_types/3
-  before_action :set_biosample_type, only: [:show]
+  before_action :set_biosample_type, only: [:show, :update, :destroy]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
-    # Use this method when you want to AND all of your query parameters. 
+    # Use this method when you want to AND all of your query parameters.
     super
   end
 
   def find_by_or
     # find_by_or defined in ApplicationController#find_by_or.
-    # Use this method when you want to OR all of your query parameters. 
+    # Use this method when you want to OR all of your query parameters.
     super
   end
 
@@ -34,6 +34,19 @@ class Api::BiosampleTypesController < Api::ApplicationController
     else
       render json: { errors: @biosample_type.errors.full_messages }, status: 422
     end
+  end
+
+  def update
+    authorize @biosample_type
+    if @biosample_type.update(biosample_type_params)
+      render json: @biosample_type, status: 200
+    else
+      render json: { errors: @biosample_type.errors.full_messages }, status: 422
+    end
+  end
+
+  def destroy
+    ddestroy(@biosample_type)
   end
 
   private

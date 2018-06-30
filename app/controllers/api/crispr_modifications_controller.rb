@@ -1,7 +1,7 @@
 class Api::CrisprModificationsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/crisprs/3
-  before_action :set_crispr_modification, only: [:show, :clone]
+  before_action :set_crispr_modification, only: [:show, :update, :clone, :destroy]
 
   def clone
       authorize @crispr, :create?
@@ -42,6 +42,19 @@ class Api::CrisprModificationsController < Api::ApplicationController
     else
       render json: { errors: @crispr.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def update
+    authorize @crispr
+    if @crispr.update(crispr_params)
+      render json: @crispr, status: 200
+    else
+      render json: { errors: @crispr.errors.full_messages }, status: 422
+    end
+  end
+
+  def destroy
+    ddestroy(@crispr)
   end
 
   private

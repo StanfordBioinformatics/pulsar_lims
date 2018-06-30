@@ -1,25 +1,25 @@
 class Api::UsersController < Api::ApplicationController
-  before_action :set_user, only: [:show, :edit, :generate_api_key, :hide_api_key, :remove_api_key, :archive, :unarchive]
+  before_action :set_user, only: [:show, :update, :destroy, :edit, :generate_api_key, :hide_api_key, :remove_api_key, :archive, :unarchive]
   skip_after_action :verify_authorized
 
-  #example with curl:                                                                                  
-  # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/users/3           
-                                                                                                       
-  def find_by                                                                                          
-    # find_by defined in ApplicationController#find_by.                                                
-    # Use this method when you want to AND all of your query parameters.                               
-    super                                                                                              
-  end                                                                                                  
-                                                                                                       
-  def find_by_or                                                                                       
-    # find_by_or defined in ApplicationController#find_by_or.                                          
-    # Use this method when you want to OR all of your query parameters.                                
-    super                                                                                              
-  end 
+  #example with curl:
+  # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/users/3
+
+  def find_by
+    # find_by defined in ApplicationController#find_by.
+    # Use this method when you want to AND all of your query parameters.
+    super
+  end
+
+  def find_by_or
+    # find_by_or defined in ApplicationController#find_by_or.
+    # Use this method when you want to OR all of your query parameters.
+    super
+  end
 
   def archive
     # Params::
-    #     user_id: int. The ID of the user to archive. 
+    #     user_id: int. The ID of the user to archive.
     unless @user.admin?
       render json: {}, status: :forbidden
       return
@@ -31,7 +31,7 @@ class Api::UsersController < Api::ApplicationController
 
   def unarchive
     # Params::
-    #     user_id: int. The ID of the user to unarchive. 
+    #     user_id: int. The ID of the user to unarchive.
     unless @user.admin?
       render json: {}, status: :forbidden
       return
@@ -59,6 +59,19 @@ class Api::UsersController < Api::ApplicationController
     redirect_to :edit_user_registration
   end
 
+  def update
+    authorize @user
+    if @user.update(user_params)
+      render json: @user, status: 200
+    else
+      render json: { errors: @user.errors.full_messages }, status: 422
+    end
+  end
+
+  def destroy
+    ddestroy(@user)
+  end
+
   private
     def user_params
       params.require(:user).permit()
@@ -68,7 +81,7 @@ class Api::UsersController < Api::ApplicationController
       @user = User.find(params[:id])
       if not @user == current_user
         if not @user.admin?
-          raise Pundit::NotAuthorizedError  
+          raise Pundit::NotAuthorizedError
         end
       end
     end

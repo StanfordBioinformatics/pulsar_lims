@@ -1,17 +1,17 @@
 class Api::ConstructTagsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/construct_tags/3
-  before_action :set_construct_tag, only: [:show]
+  before_action :set_construct_tag, only: [:show, :update, :destroy]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
-    # Use this method when you want to AND all of your query parameters. 
+    # Use this method when you want to AND all of your query parameters.
     super
   end
 
   def find_by_or
     # find_by_or defined in ApplicationController#find_by_or.
-    # Use this method when you want to OR all of your query parameters. 
+    # Use this method when you want to OR all of your query parameters.
     super
   end
 
@@ -34,6 +34,19 @@ class Api::ConstructTagsController < Api::ApplicationController
     else
       render json: { errors: @construct_tag.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def update
+    authorize @construct_tag
+    if @construct_tag.update(construct_tag_params)
+      render json: @construct_tag, status: 200
+    else
+      render json: { errors: @construct_tag.errors.full_messages }, status: 422
+    end
+  end
+
+  def destroy
+    ddestroy(@construct_tag)
   end
 
   private

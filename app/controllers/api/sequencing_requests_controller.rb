@@ -1,7 +1,7 @@
 class Api::SequencingRequestsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/biosamples/3
-  before_action :set_biosample, only: [:show]
+  before_action :set_sequencing_request, only: [:show, :update, :destroy]
   skip_after_action :verify_authorized, only: [:find_by_name]
 
   def find_by
@@ -25,6 +25,19 @@ class Api::SequencingRequestsController < Api::ApplicationController
     name = params[:name]
     res = SequencingRequest.find_by(name: name)
     render json:  res
+  end
+
+  def update
+    authorize @sequencing_request
+    if @sequencing_request.update(sequencing_request_params)
+      render json: @sequencing_request, status: 200
+    else
+      render json: { errors: @sequencing_request.errors.full_messages }, status: 422
+    end
+  end
+
+  def destroy
+    ddestroy(@sequencing_request)
   end
 
 

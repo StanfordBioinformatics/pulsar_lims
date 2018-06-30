@@ -28,18 +28,19 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def ddestroy(record,redirect_path_success)
+  def ddestroy(record,redirect_path_success: nil)
     #Named somewhat strangely as ddestroy instead of destroy in order to
     # not overwrite the destroy() method in the controllers that inherit from here.
     # The idea is that each individual controller's destroy() method will call this one
     # in order to avoid duplicating logic and make updates a breeze.
+    authorize record
     respond_to do |format|
       if record.destroy
         format.html { redirect_to redirect_path_success }
         format.json { head :no_content }
       else
         format.html { render Rails.application.routes.recognize_path(request.referer)[:action] }
-        format.json { render json: @record.errors.full_messages,status: :unprocessable_entity }
+        format.json { render json: record.errors.full_messages,status: :unprocessable_entity }
       end
     end
   end

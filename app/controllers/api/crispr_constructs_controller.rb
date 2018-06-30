@@ -1,7 +1,7 @@
 class Api::CrisprConstructsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/crispr_constructs/3
-  before_action :set_crispr_construct, only: [:show]
+  before_action :set_crispr_construct, only: [:show, :update, :destroy]
 
   def find_by
     #find_by defined in ApplicationController#find_by.
@@ -29,6 +29,19 @@ class Api::CrisprConstructsController < Api::ApplicationController
     else
       render json: { errors: @crispr_construct.errors.full_messages }, status: 422
     end
+  end
+
+  def update
+    authorize @crispr_construct
+    if @crispr_construct.update(crispr_construct_params)
+      render json: @crispr_construct, status: 200
+    else
+      render json: { errors: @crispr_construct.errors.full_messages }, status: 422
+    end
+  end
+
+  def destrooy
+    ddestroy(@crispr_construct)
   end
 
   private

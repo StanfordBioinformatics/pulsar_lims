@@ -1,7 +1,7 @@
 class Api::DocumentsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/documents/3
-  before_action :set_document, only: [:show, :update, :download]
+  before_action :set_document, only: [:show, :destroy, :update, :download]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
@@ -49,6 +49,10 @@ class Api::DocumentsController < Api::ApplicationController
     else
       render json: { errors: @document.errors.full_messages }, status: 422
     end
+  end
+
+  def destroy
+    ddestroy(@document)
   end
 
   private

@@ -1,7 +1,7 @@
 class Api::TreatmentTermNamesController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/treatment_term_names/3
-  before_action :set_treatment_term_name, only: [:show]
+  before_action :set_treatment_term_name, only: [:show, :update, :destroy]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
@@ -34,6 +34,19 @@ class Api::TreatmentTermNamesController < Api::ApplicationController
     else
       render json: { errors: @treatment_term_name.errors.full_messages }, status: 422
     end
+  end
+
+  def update
+    authorize @treatment_term_name
+    if @treatment_term_name.update(treatment_term_name_params)
+      render json: @treatment_term_name, status: 200
+    else
+      render json: { errors: @treatment_term_name.errors.full_messages }, status: 422
+    end
+  end
+
+  def destroy
+    ddestroy(@treatment_term_name)
   end
 
   private

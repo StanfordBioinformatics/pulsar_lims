@@ -1,7 +1,7 @@
 class Api::DonorsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/donors/3
-  before_action :set_donor, only: [:show]
+  before_action :set_donor, only: [:show, :update, :destroy]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
@@ -34,6 +34,19 @@ class Api::DonorsController < Api::ApplicationController
     else
       render json: { errors: @donor.errors.full_messages }, status: 422
     end
+  end
+
+  def update
+    authorize @donor
+    if @donor.update(donor_params)
+      render json: @donor, status: 200
+    else
+      render json: { errors: @donor.errors.full_messages }, status: 422
+    end
+  end
+
+  def destroy
+    ddestroy(@donor)
   end
 
   private

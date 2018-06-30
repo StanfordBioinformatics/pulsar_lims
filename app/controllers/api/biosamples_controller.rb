@@ -46,12 +46,7 @@ class Api::BiosamplesController < Api::ApplicationController
   end
 
   def destroy
-    authorize @biosample
-    if @biosample.destroy
-      render json: @biosample, status: 204
-    else
-      render json: { errors: @biosample.errors.full_messages}, status: :unprocessable_entity
-    end
+    ddestroy(@biosample)
   end
 
   def add_crispr_modification

@@ -1,17 +1,17 @@
 class Api::BiosampleTermNamesController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/biosample_term_names/3
-  before_action :set_biosample_term_name, only: [:show]
+  before_action :set_biosample_term_name, only: [:show, :update, :destroy]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
-    # Use this method when you want to AND all of your query parameters. 
+    # Use this method when you want to AND all of your query parameters.
     super
   end
 
   def find_by_or
     # find_by_or defined in ApplicationController#find_by_or.
-    # Use this method when you want to OR all of your query parameters. 
+    # Use this method when you want to OR all of your query parameters.
     super
   end
 
@@ -36,6 +36,19 @@ class Api::BiosampleTermNamesController < Api::ApplicationController
     end
   end
 
+  def update
+    authorize @biosample_term_name
+    if @biosample_term_name.update(biosample_term_name_params)
+      render json: @biosample_term_name, status: 200
+    else
+      render json: { errors: @biosample_term_name.errors.full_messages }, status: 422
+    end
+  end
+
+  def destroy
+    ddestroy(@biosample_term_name)
+  end
+
   private
 
   def set_biosample_term_name
@@ -45,10 +58,10 @@ class Api::BiosampleTermNamesController < Api::ApplicationController
   def biosample_term_name_params
     params.require(:biosample_term_name).permit(
       :user_id,
-      :accession,                                                                                      
-      :biosample_ontology_id,                                                                          
-      :name,                                                                                           
-      :url                                                                                             
+      :accession,
+      :biosample_ontology_id,
+      :name,
+      :url
     )
   end
 end
