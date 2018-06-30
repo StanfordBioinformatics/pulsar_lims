@@ -6,5 +6,6 @@ class ChipseqExperimentSerializer < ActiveModel::Serializer
   has_one :user
   has_one :target
   has_many :control_biosample_replicates
+  has_many :documents
   has_many :experiment_biosample_replicates
 end

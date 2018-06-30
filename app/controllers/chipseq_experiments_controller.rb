@@ -48,6 +48,8 @@ class ChipseqExperimentsController < ApplicationController
 
   def update
     authorize @chipseq_experiment
+    #render json: params
+    #return
     respond_to do |format|
       if @chipseq_experiment.update(chipseq_experiment_params)
         format.html { redirect_to @chipseq_experiment, notice: 'Chipseq experiment was successfully updated.' }
@@ -80,8 +82,10 @@ class ChipseqExperimentsController < ApplicationController
         :target_id, 
         :upstream_identifier, 
         :wild_type_input_id, 
+        :document_ids => [],
         :control_biosample_replicate_ids => [],
         :experiment_biosample_replicate_ids => [],
+        documents_attributes: [:id, :_destroy]
       )
     end
 end

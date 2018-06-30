@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180624021338) do
+ActiveRecord::Schema.define(version: 20180630023218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -255,6 +255,14 @@ ActiveRecord::Schema.define(version: 20180624021338) do
   add_index "chipseq_experiments", ["target_id"], name: "index_chipseq_experiments_on_target_id", using: :btree
   add_index "chipseq_experiments", ["user_id"], name: "index_chipseq_experiments_on_user_id", using: :btree
   add_index "chipseq_experiments", ["wild_type_input_id"], name: "index_chipseq_experiments_on_wild_type_input_id", using: :btree
+
+  create_table "chipseq_experiments_documents", id: false, force: :cascade do |t|
+    t.integer "document_id",           null: false
+    t.integer "chipseq_experiment_id", null: false
+  end
+
+  add_index "chipseq_experiments_documents", ["chipseq_experiment_id", "document_id"], name: "cse_document_idx", using: :btree
+  add_index "chipseq_experiments_documents", ["document_id", "chipseq_experiment_id"], name: "document_cse_idx", using: :btree
 
   create_table "chromosomes", force: :cascade do |t|
     t.string   "name"

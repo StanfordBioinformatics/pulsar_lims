@@ -26,6 +26,13 @@
     <td><%= link_to_record(@chipseq_experiment.target) %></td>
   </tr>
 
+  <tr>                                                                                                 
+    <th><strong>Protocol documents:</strong></th>                                                      
+    <td>                                                                                               
+      <%= render partial: "application_partials/link_to_has_many", locals: {links: @chipseq_experiment.documents} %>
+    </td>                                                                                              
+  </tr>
+
   <tr>
     <th><strong>WT input:</strong></th>
     <td>
