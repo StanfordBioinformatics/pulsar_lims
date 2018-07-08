@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180630023218) do
+ActiveRecord::Schema.define(version: 20180708000947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,10 +149,12 @@ ActiveRecord::Schema.define(version: 20180630023218) do
     t.integer  "chipseq_experiment_id"
     t.boolean  "control",                     default: false
     t.boolean  "wild_type_input",             default: false
+    t.string   "name"
   end
 
   add_index "biosample_replicates", ["biosample_id"], name: "index_biosample_replicates_on_biosample_id", using: :btree
   add_index "biosample_replicates", ["chipseq_experiment_id"], name: "index_biosample_replicates_on_chipseq_experiment_id", using: :btree
+  add_index "biosample_replicates", ["name"], name: "index_biosample_replicates_on_name", unique: true, using: :btree
   add_index "biosample_replicates", ["user_id"], name: "index_biosample_replicates_on_user_id", using: :btree
 
   create_table "biosample_term_names", force: :cascade do |t|

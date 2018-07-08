@@ -11,6 +11,8 @@ class BiosampleReplicate < ActiveRecord::Base
   belongs_to :user
   has_many :documents
 
+  # :name is set automatically. 
+  validates :name, uniqueness: true 
   validates :biosample, presence: true
   validates :biological_replicate_number, presence: true
   validates :technical_replicate_number, presence: true
@@ -26,8 +28,8 @@ class BiosampleReplicate < ActiveRecord::Base
     ApplicationPolicy
   end
 
-  def display
-    self.biosample.name + " [#{self.biological_replicate_number},#{self.technical_replicate_number}]"
+  def name
+    self.name = self.biosample.name + " [#{self.biological_replicate_number},#{self.technical_replicate_number}]"
   end
 
   private

@@ -71,6 +71,7 @@ class BiosampleReplicatesController < ApplicationController
         :biosample_id,
         :chipseq_experiment_id,
         :control,
+        :name,
         :notes,
         :technical_replicate_number, 
         :upstream_identifier,
