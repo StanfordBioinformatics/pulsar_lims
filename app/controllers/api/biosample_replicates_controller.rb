@@ -38,7 +38,7 @@ class Api::BiosampleReplicatesController < Api::ApplicationController
 
   def update
     authorize @biosample_replicate
-    if @biosample_replicate.update(biosample_params)
+    if @biosample_replicate.update(biosample_replicate_params)
       render json: @biosample_replicate, status: 200
     else
       render json: { errors: @biosample_replicate.errors.full_messages }, status: 422
