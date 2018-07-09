@@ -100,7 +100,6 @@ class LibrariesController < ApplicationController
         :concentration,
         :concentration_unit_id,
         :from_prototype_id,
-        :is_control,
         :library_fragmentation_method_id,
         :lot_identifier,
         :name,
