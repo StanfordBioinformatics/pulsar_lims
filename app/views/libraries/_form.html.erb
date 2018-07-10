@@ -1,6 +1,6 @@
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @library } %>
 
-  <%= f.input :prototype, as: :hidden %>
+  <%= f.input :prototype %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library name"} %>
 
