@@ -65,7 +65,7 @@ class SequencingLibraryPrepKitsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@sequencing_library_prep_kit, sequencing_library_prep_kits_path)
+    ddestroy(@sequencing_library_prep_kit, redirect_path_success: sequencing_library_prep_kits_path)
   end
 
   private

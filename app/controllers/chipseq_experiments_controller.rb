@@ -62,7 +62,7 @@ class ChipseqExperimentsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@chipseq_experiment, chipseq_experiments_path)
+    ddestroy(@chipseq_experiment, redirect_path_success: chipseq_experiments_path)
   end
 
   private

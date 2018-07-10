@@ -48,7 +48,7 @@ class ExperimentTypesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@experiment_type, experiment_types_path)
+    ddestroy(@experiment_type, redirect_path_success: experiment_types_path)
   end
 
   private

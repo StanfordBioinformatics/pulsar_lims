@@ -119,7 +119,7 @@ class CrisprModificationsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@crispr, crispr_modifications_path)
+    ddestroy(@crispr, redirect_path_success: crispr_modifications_path)
   end
 
   private

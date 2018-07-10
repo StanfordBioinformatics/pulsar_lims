@@ -55,7 +55,7 @@ class SequencingCentersController < ApplicationController
   end
 
   def destroy
-    ddestroy(@sequencing_center, sequencing_centers_path)
+    ddestroy(@sequencing_center, redirect_path_success: sequencing_centers_path)
   end
 
   private

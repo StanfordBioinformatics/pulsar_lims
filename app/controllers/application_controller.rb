@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def ddestroy(record,redirect_path_success: nil)
+  def ddestroy(record, redirect_path_success: nil)
     #Named somewhat strangely as ddestroy instead of destroy in order to
     # not overwrite the destroy() method in the controllers that inherit from here.
     # The idea is that each individual controller's destroy() method will call this one

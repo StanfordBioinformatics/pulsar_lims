@@ -48,7 +48,7 @@ class GenomeLocationsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@genome_location, genome_locations_path)
+    ddestroy(@genome_location, redirect_path_success: genome_locations_path)
   end
 
   private

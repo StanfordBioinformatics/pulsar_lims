@@ -48,7 +48,7 @@ class FileReferencesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@file_reference, file_references_path)
+    ddestroy(@file_reference, redirect_path_success: file_references_path)
   end
 
   private

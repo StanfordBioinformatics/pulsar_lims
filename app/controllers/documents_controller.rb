@@ -51,7 +51,7 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@document, documents_path)
+    ddestroy(@document, redirect_path_success: documents_path)
   end
 
   def document

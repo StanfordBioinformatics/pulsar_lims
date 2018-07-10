@@ -48,7 +48,7 @@ class NucleicAcidTermsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@nucleic_acid_term, nucleic_acid_terms_path)
+    ddestroy(@nucleic_acid_term, redirect_path_success: nucleic_acid_terms_path)
   end
 
   private

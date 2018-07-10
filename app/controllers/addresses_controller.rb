@@ -48,7 +48,7 @@ class AddressesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@address, addresses_path)
+    ddestroy(@address, redirect_path_success: addresses_path)
   end
 
   private

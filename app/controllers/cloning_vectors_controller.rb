@@ -57,7 +57,7 @@ class CloningVectorsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@cloning_vector, cloning_vectors_path)
+    ddestroy(@cloning_vector, redirect_path_success: cloning_vectors_path)
   end
 
   private

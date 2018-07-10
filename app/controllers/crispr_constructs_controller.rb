@@ -64,7 +64,7 @@ class CrisprConstructsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@crispr_construct, crispr_constructs_path)
+    ddestroy(@crispr_construct, redirect_path_success: crispr_constructs_path)
   end
 
   private

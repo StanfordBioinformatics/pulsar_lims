@@ -55,7 +55,7 @@ class SequencingPlatformsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@sequencing_platform, sequencing_platforms_path)
+    ddestroy(@sequencing_platform, redirect_path_success: sequencing_platforms_path)
   end
 
   private

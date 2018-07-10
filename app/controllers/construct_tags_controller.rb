@@ -49,7 +49,7 @@ class ConstructTagsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@construct_tag, construct_tags_path)
+    ddestroy(@construct_tag, redirect_path_success: construct_tags_path)
   end
 
   private

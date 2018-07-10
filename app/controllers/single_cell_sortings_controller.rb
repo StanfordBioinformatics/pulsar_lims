@@ -124,7 +124,7 @@ class SingleCellSortingsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@single_cell_sorting, single_cell_sortings_path)
+    ddestroy(@single_cell_sorting, redirect_path_success: single_cell_sortings_path)
   end
 
   private

@@ -65,7 +65,7 @@ class DonorConstructsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@donor_construct, donor_constructs_path)
+    ddestroy(@donor_construct, redirect_path_success: donor_constructs_path)
   end
 
   private

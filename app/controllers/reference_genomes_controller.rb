@@ -48,7 +48,7 @@ class ReferenceGenomesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@reference_genome, reference_genomes_path)
+    ddestroy(@reference_genome, redirect_path_success: reference_genomes_path)
   end
 
   private

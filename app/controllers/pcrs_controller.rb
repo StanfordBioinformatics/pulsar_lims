@@ -48,7 +48,7 @@ class PcrsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@pcr.destroy, pcrs_path)
+    ddestroy(@pcr.destroy, redirect_path_success: pcrs_path)
   end
 
   private

@@ -71,7 +71,7 @@ class DataStoragesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@data_storage, data_storages_path)
+    ddestroy(@data_storage, redirect_path_success: data_storages_path)
   end
 
   private

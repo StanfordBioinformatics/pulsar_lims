@@ -82,7 +82,7 @@ class LibrariesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@library, libraries_path)
+    ddestroy(@library, redirect_path_success: libraries_path)
   end
 
   private

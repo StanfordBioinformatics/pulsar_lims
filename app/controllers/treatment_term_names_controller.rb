@@ -55,7 +55,7 @@ class TreatmentTermNamesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@treatment_term_name, treatment_term_names_path)
+    ddestroy(@treatment_term_name, redirect_path_success: treatment_term_names_path)
   end
 
   private

@@ -45,7 +45,7 @@ class ChromosomesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@chromosome, chromosomes_path)
+    ddestroy(@chromosome, redirect_path_success: chromosomes_path)
   end
 
   private

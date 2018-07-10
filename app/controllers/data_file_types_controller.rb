@@ -55,7 +55,7 @@ class DataFileTypesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@data_file_type, data_files_path)
+    ddestroy(@data_file_type, redirect_path_success: data_files_path)
   end
 
   private

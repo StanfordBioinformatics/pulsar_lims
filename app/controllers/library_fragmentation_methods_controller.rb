@@ -46,7 +46,7 @@ class LibraryFragmentationMethodsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@library_fragmentation_method, library_fragmentation_methods_path)
+    ddestroy(@library_fragmentation_method, redirect_path_success: library_fragmentation_methods_path)
   end
 
   private

@@ -55,7 +55,7 @@ class IsotypesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@isotype, isotypes_path)
+    ddestroy(@isotype, redirect_path_success: isotypes_path)
   end
 
   private

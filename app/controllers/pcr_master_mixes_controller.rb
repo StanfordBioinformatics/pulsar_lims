@@ -55,7 +55,7 @@ class PcrMasterMixesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@pcr_master_mix, pcr_master_mixes_path)
+    ddestroy(@pcr_master_mix, redirect_path_success: pcr_master_mixes_path)
   end
 
   private

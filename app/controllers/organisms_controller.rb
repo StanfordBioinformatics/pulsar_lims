@@ -48,7 +48,7 @@ class OrganismsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@organism, organisms_path)
+    ddestroy(@organism, redirect_path_success: organisms_path)
   end
 
   private

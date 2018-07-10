@@ -46,7 +46,7 @@ class BarcodesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@barcode, barcodes_path)
+    ddestroy(@barcode, redirect_path_success: barcodes_path)
   end
 
   private

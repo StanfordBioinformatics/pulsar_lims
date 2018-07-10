@@ -139,7 +139,7 @@ class BiosamplesController < ApplicationController
   private 
 
   def destroy
-    ddestroy(@biosample, biosamples_path)
+    ddestroy(@biosample, redirect_path_success: biosamples_path)
   end
 
     # Use callbacks to share common setup or constraints between actions.

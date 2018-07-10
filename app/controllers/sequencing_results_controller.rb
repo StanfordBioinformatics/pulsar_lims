@@ -84,7 +84,7 @@ class SequencingResultsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@sequencing_result, polymorphic_url([@sequencing_request,@sequencing_run]))
+    ddestroy(@sequencing_result, redirect_path_success: polymorphic_url([@sequencing_request,@sequencing_run]))
   end
 
   private

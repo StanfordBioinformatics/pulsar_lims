@@ -55,7 +55,7 @@ class TargetsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@target, targets_path)
+    ddestroy(@target, redirect_path_success: targets_path)
   end
 
   private

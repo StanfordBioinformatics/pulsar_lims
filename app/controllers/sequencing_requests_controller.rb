@@ -106,7 +106,7 @@ class SequencingRequestsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@sequencing_requests, sequencing_requests_path)
+    ddestroy(@sequencing_requests, redirect_path_success: sequencing_requests_path)
   end
 
   private

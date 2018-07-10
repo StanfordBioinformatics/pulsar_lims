@@ -48,7 +48,7 @@ class DataStorageProvidersController < ApplicationController
   end
 
   def destroy
-    ddestroy(@data_storage_provider, data_storage_providers_path)
+    ddestroy(@data_storage_provider, redirect_path_success: data_storage_providers_path)
   end
 
   private

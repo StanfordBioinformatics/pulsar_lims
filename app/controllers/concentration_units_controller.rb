@@ -52,7 +52,7 @@ class ConcentrationUnitsController < ApplicationController
 
 
   def destroy
-    ddestroy(@concentration_unit, concentration_units_path)
+    ddestroy(@concentration_unit, redirect_path_success: concentration_units_path)
   end
 
   private

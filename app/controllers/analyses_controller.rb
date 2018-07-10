@@ -68,7 +68,7 @@ class AnalysesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@analysis.destroy, analyses_path)
+    ddestroy(@analysis.destroy, redirect_path_success: analyses_path)
   end
 
   private

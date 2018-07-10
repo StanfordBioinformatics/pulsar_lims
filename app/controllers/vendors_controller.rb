@@ -55,7 +55,7 @@ class VendorsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@vendor, vendors_path)
+    ddestroy(@vendor, redirect_path_success: vendors_path)
   end
 
   private

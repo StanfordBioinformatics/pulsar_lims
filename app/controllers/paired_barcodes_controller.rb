@@ -90,7 +90,7 @@ class PairedBarcodesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@paired_barcode, paired_barcodes_path)
+    ddestroy(@paired_barcode, redirect_path_success: paired_barcodes_path)
   end
 
   private

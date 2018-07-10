@@ -55,7 +55,7 @@ class DonorsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@donor, donors_path)
+    ddestroy(@donor, redirect_path_success: donors_path)
   end
 
   private

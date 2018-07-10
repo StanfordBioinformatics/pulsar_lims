@@ -55,7 +55,7 @@ class AntibodyPurificationsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@antibody_purification, antibody_purifications_path)
+    ddestroy(@antibody_purification, redirect_path_success: antibody_purifications_path)
   end
 
   private

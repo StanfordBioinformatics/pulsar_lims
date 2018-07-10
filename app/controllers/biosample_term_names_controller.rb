@@ -55,7 +55,7 @@ class BiosampleTermNamesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@biosample_term_name, biosample_term_names_path)
+    ddestroy(@biosample_term_name, redirect_path_success: biosample_term_names_path)
   end
 
   private

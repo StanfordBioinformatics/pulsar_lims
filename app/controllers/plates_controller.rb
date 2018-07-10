@@ -75,7 +75,7 @@ class PlatesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@plate, plates_path)
+    ddestroy(@plate, redirect_path_success: plates_path)
   end
 
   private

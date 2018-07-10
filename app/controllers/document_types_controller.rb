@@ -48,7 +48,7 @@ class DocumentTypesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@document_type, document_types_path)
+    ddestroy(@document_type, redirect_path_success: document_types_path)
   end
 
   private

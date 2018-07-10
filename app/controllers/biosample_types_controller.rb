@@ -56,7 +56,7 @@ class BiosampleTypesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@biosample_type, biosample_types_path)
+    ddestroy(@biosample_type, redirect_path_success: biosample_types_path)
   end
 
   private
