@@ -195,7 +195,7 @@ class Library < ActiveRecord::Base
   def validate_plate_consistency
     #If the library is barcoded, and the biosample is in the well of a plate, then we need to make sure that no
     # other library on the plate has the same barcode.
-    return unless self.biosample.present? and self.biosample.well.present? and self.barcoded?
+    return true unless self.biosample.present? and self.biosample.well.present? and self.barcoded?
     if self.persisted?
       action_term = "update"
     else
