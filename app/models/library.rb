@@ -38,7 +38,7 @@ class Library < ActiveRecord::Base
   validates :nucleic_acid_term_id, presence: true
   validates :documents, presence: true, unless: Proc.new {|lib| lib.parents.any? }
   #validates :vendor_id, presence: true
-  validates :biosample_id, presence: true, unless: Proc.new {|lib| lib.prototype?}
+  #validates :biosample_id, presence: true, unless: Proc.new {|lib| lib.prototype?}
   validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"
   validates :concentration, presence: {message: "must be specified when the units are set."}, if: "concentration_unit.present?"
   validates :sequencing_library_prep_kit_id, presence: true
