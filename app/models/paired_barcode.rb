@@ -36,7 +36,7 @@ class PairedBarcode < ActiveRecord::Base
 
   def display
     seq = self.sequence()
-    return "#{name} #{seq}"
+    return "#{seq}"
   end
 
   def sequence
