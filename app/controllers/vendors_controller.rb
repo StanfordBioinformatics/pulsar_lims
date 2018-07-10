@@ -13,22 +13,22 @@ class VendorsController < ApplicationController
   end
 
   def show
-		authorize @vendor
+    authorize @vendor
   end
 
   def new
-		authorize Vendor
+    authorize Vendor
     @vendor = Vendor.new
   end
 
   def edit
-		authorize @vendor
+    authorize @vendor
   end
 
   def create
     @vendor = Vendor.new(vendor_params)
-		authorize @vendor
-		@vendor.user = current_user
+    authorize @vendor
+    @vendor.user = current_user
 
     respond_to do |format|
       if @vendor.save
@@ -42,7 +42,7 @@ class VendorsController < ApplicationController
   end
 
   def update
-		authorize @vendor
+    authorize @vendor
     respond_to do |format|
       if @vendor.update(vendor_params)
         format.html { redirect_to @vendor, notice: 'Vendor was successfully updated.' }
@@ -55,8 +55,7 @@ class VendorsController < ApplicationController
   end
 
   def destroy
-		authorize @vendor
-		ddestroy(@vendor,vendors_path)
+    ddestroy(@vendor, vendors_path)
   end
 
   private

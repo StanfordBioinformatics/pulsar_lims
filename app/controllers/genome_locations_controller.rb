@@ -6,22 +6,22 @@ class GenomeLocationsController < ApplicationController
   end
 
   def show
-		authorize $genome_location
+    authorize $genome_location
   end
 
   def new
-		authorize GenomeLocation
+    authorize GenomeLocation
     @genome_location = GenomeLocation.new
   end
 
   def edit
-		authorize $genome_location
+    authorize $genome_location
   end
 
   def create
-		authorize GenomeLocation
+    authorize GenomeLocation
     @genome_location = GenomeLocation.new(genome_location_params)
-		@genome_location.user = current_user
+    @genome_location.user = current_user
 
     respond_to do |format|
       if @genome_location.save
@@ -35,7 +35,7 @@ class GenomeLocationsController < ApplicationController
   end
 
   def update
-		authorize $genome_location
+    authorize $genome_location
     respond_to do |format|
       if @genome_location.update(genome_location_params)
         format.html { redirect_to @genome_location, notice: 'Genome location was successfully updated.' }
@@ -48,8 +48,7 @@ class GenomeLocationsController < ApplicationController
   end
 
   def destroy
-		authorize $genome_location
-		ddestroy(@genome_location,genome_locations_path)
+    ddestroy(@genome_location, genome_locations_path)
   end
 
   private

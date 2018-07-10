@@ -49,8 +49,7 @@ class ConstructTagsController < ApplicationController
   end
 
   def destroy
-    authorize @construct_tag
-    ddestroy(@construct_tag,construct_tags_path)
+    ddestroy(@construct_tag, construct_tags_path)
   end
 
   private

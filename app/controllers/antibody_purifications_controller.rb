@@ -13,22 +13,22 @@ class AntibodyPurificationsController < ApplicationController
   end
 
   def show
-		authorize @antibody_purification
+    authorize @antibody_purification
   end
 
   def new
-		authorize AntibodyPurification
+    authorize AntibodyPurification
     @antibody_purification = AntibodyPurification.new
   end
 
   def edit
-		authorize @antibody_purification
+    authorize @antibody_purification
   end
 
   def create
     @antibody_purification = AntibodyPurification.new(antibody_purification_params)
-		authorize @antibody_purification
-		@antibody_purification.user = current_user
+    authorize @antibody_purification
+    @antibody_purification.user = current_user
 
     respond_to do |format|
       if @antibody_purification.save
@@ -42,7 +42,7 @@ class AntibodyPurificationsController < ApplicationController
   end
 
   def update
-		authorize @antibody_purification
+    authorize @antibody_purification
     respond_to do |format|
       if @antibody_purification.update(antibody_purification_params)
         format.html { redirect_to @antibody_purification, notice: 'Antibody purification was successfully updated.' }
@@ -55,8 +55,7 @@ class AntibodyPurificationsController < ApplicationController
   end
 
   def destroy
-		authorize @antibody_purification
-		ddestroy(@antibody_purification,antibody_purifications_path)
+    ddestroy(@antibody_purification, antibody_purifications_path)
   end
 
   private

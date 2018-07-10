@@ -82,8 +82,7 @@ class LibrariesController < ApplicationController
   end
 
   def destroy
-    authorize @library
-    ddestroy(@library,libraries_path)
+    ddestroy(@library, libraries_path)
   end
 
   private

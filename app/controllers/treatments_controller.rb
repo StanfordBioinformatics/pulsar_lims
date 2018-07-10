@@ -55,8 +55,7 @@ class TreatmentsController < ApplicationController
   end
 
   def destroy
-    authorize @treatment
-    ddestroy(@treatment,treatments_path)
+    ddestroy(@treatment, treatments_path)
   end
 
   private

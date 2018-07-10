@@ -48,8 +48,7 @@ class AddressesController < ApplicationController
   end
 
   def destroy
-    authorize @address
-    ddestroy(@address,addresses_path)
+    ddestroy(@address, addresses_path)
   end
 
   private

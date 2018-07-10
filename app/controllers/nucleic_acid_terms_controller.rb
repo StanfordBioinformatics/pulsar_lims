@@ -6,22 +6,22 @@ class NucleicAcidTermsController < ApplicationController
   end
 
   def show
-		authorize @nucleic_acid_term
+    authorize @nucleic_acid_term
   end
 
   def new
-		authorize NucleicAcidTerm
+    authorize NucleicAcidTerm
     @nucleic_acid_term = NucleicAcidTerm.new
   end
 
   def edit
-		authorize @nucleic_acid_term
+    authorize @nucleic_acid_term
   end
 
   def create
     @nucleic_acid_term = NucleicAcidTerm.new(nucleic_acid_term_params)
-		authorize @nucleic_acid_term
-		@nucleic_acid_term.user = current_user
+    authorize @nucleic_acid_term
+    @nucleic_acid_term.user = current_user
 
     respond_to do |format|
       if @nucleic_acid_term.save
@@ -35,7 +35,7 @@ class NucleicAcidTermsController < ApplicationController
   end
 
   def update
-		authorize @nucleic_acid_term
+    authorize @nucleic_acid_term
     respond_to do |format|
       if @nucleic_acid_term.update(nucleic_acid_term_params)
         format.html { redirect_to @nucleic_acid_term, notice: 'nucleic acid term was successfully updated.' }
@@ -48,8 +48,7 @@ class NucleicAcidTermsController < ApplicationController
   end
 
   def destroy
-		authorize @nucleic_acid_term
-		ddestroy(@nucleic_acid_term,nucleic_acid_terms_path)
+    ddestroy(@nucleic_acid_term, nucleic_acid_terms_path)
   end
 
   private

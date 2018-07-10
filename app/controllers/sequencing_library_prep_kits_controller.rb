@@ -1,6 +1,6 @@
 class SequencingLibraryPrepKitsController < ApplicationController
   before_action :set_sequencing_library_prep_kit, only: [:show, :edit, :update, :destroy]
-	skip_after_action :verify_authorized, only: [:paired_end_kits]
+  skip_after_action :verify_authorized, only: [:paired_end_kits]
 
   def select_options
     #Called via ajax.
@@ -9,35 +9,35 @@ class SequencingLibraryPrepKitsController < ApplicationController
     render "application_partials/select_options", layout: false
   end 
 
-	def paired_end_kits
-		@pe_kits = SequencingLibraryPrepKit.paired_end_kits() #returns the entire objects in a list
-		ids = @pe_kits.map do |x|
-			x[:id]
-		end
-		render json: ids
-	end
+  def paired_end_kits
+    @pe_kits = SequencingLibraryPrepKit.paired_end_kits() #returns the entire objects in a list
+    ids = @pe_kits.map do |x|
+      x[:id]
+    end
+    render json: ids
+  end
 
   def index
     super
   end
 
   def show
-		authorize @sequencing_library_prep_kit
+    authorize @sequencing_library_prep_kit
   end
 
   def new
-		authorize SequencingLibraryPrepKit
+    authorize SequencingLibraryPrepKit
     @sequencing_library_prep_kit = SequencingLibraryPrepKit.new
   end
 
   def edit
-		authorize @sequencing_library_prep_kit
+    authorize @sequencing_library_prep_kit
   end
 
   def create
-		authorize SequencingLibraryPrepKit
+    authorize SequencingLibraryPrepKit
     @sequencing_library_prep_kit = SequencingLibraryPrepKit.new(sequencing_library_prep_kit_params)
-		@sequencing_library_prep_kit.user = current_user
+    @sequencing_library_prep_kit.user = current_user
 
     respond_to do |format|
       if @sequencing_library_prep_kit.save
@@ -51,7 +51,7 @@ class SequencingLibraryPrepKitsController < ApplicationController
   end
 
   def update
-		authorize @sequencing_library_prep_kit
+    authorize @sequencing_library_prep_kit
 
     respond_to do |format|
       if @sequencing_library_prep_kit.update(sequencing_library_prep_kit_params)
@@ -65,8 +65,7 @@ class SequencingLibraryPrepKitsController < ApplicationController
   end
 
   def destroy
-		authorize @sequencing_library_prep_kit
-		ddestroy(@sequencing_library_prep_kit,sequencing_library_prep_kits_path)
+    ddestroy(@sequencing_library_prep_kit, sequencing_library_prep_kits_path)
   end
 
   private

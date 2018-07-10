@@ -13,22 +13,22 @@ class SequencingCentersController < ApplicationController
   end
 
   def show
-		authorize @sequencing_center
+    authorize @sequencing_center
   end
 
   def new
     @sequencing_center = SequencingCenter.new
-		authorize @sequencing_center
+    authorize @sequencing_center
   end
 
   def edit
-		authorize @sequencing_center
+    authorize @sequencing_center
   end
 
   def create
     @sequencing_center = SequencingCenter.new(sequencing_center_params)
-		authorize @sequencing_center
-		@sequencing_center.user = current_user
+    authorize @sequencing_center
+    @sequencing_center.user = current_user
 
     respond_to do |format|
       if @sequencing_center.save
@@ -42,7 +42,7 @@ class SequencingCentersController < ApplicationController
   end
 
   def update
-		authorize @sequencing_center
+    authorize @sequencing_center
     respond_to do |format|
       if @sequencing_center.update(sequencing_center_params)
         format.html { redirect_to @sequencing_center, notice: 'Sequencing center was successfully updated.' }
@@ -55,8 +55,7 @@ class SequencingCentersController < ApplicationController
   end
 
   def destroy
-		authorize @sequencing_center
-		ddestroy(@sequencing_center,sequencing_centers_path)
+    ddestroy(@sequencing_center, sequencing_centers_path)
   end
 
   private

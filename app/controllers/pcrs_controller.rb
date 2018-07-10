@@ -48,12 +48,7 @@ class PcrsController < ApplicationController
   end
 
   def destroy
-    authorize @pcr
-    @pcr.destroy
-    respond_to do |format|
-      format.html { redirect_to pcrs_url }
-      format.json { head :no_content }
-    end
+    ddestroy(@pcr.destroy, pcrs_path)
   end
 
   private

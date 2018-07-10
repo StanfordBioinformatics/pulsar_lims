@@ -13,22 +13,22 @@ class DataFileTypesController < ApplicationController
   end
 
   def show
-		authorize @data_file_type
+    authorize @data_file_type
   end
 
   def new
-		authorize DataFileType
+    authorize DataFileType
     @data_file_type = DataFileType.new
   end
 
   def edit
-		authorize @data_file_type
+    authorize @data_file_type
   end
 
   def create
-		authorize DataFileType
+    authorize DataFileType
     @data_file_type = DataFileType.new(data_file_type_params)
-		@data_file_type.user = current_user
+    @data_file_type.user = current_user
 
     respond_to do |format|
       if @data_file_type.save
@@ -42,7 +42,7 @@ class DataFileTypesController < ApplicationController
   end
 
   def update
-		authorize @data_file_type
+    authorize @data_file_type
     respond_to do |format|
       if @data_file_type.update(data_file_type_params)
         format.html { redirect_to @data_file_type, notice: 'Data file type was successfully updated.' }
@@ -55,12 +55,7 @@ class DataFileTypesController < ApplicationController
   end
 
   def destroy
-		authorize @data_file_type
-    @data_file_type.destroy
-    respond_to do |format|
-      format.html { redirect_to data_file_types_url }
-      format.json { head :no_content }
-    end
+    ddestroy(@data_file_type, data_files_path)
   end
 
   private

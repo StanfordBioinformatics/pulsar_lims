@@ -6,11 +6,11 @@ class PairedBarcodesController < ApplicationController
   end
 
   def show
-		authorize @paired_barcode
+    authorize @paired_barcode
   end
 
   def new
-		authorize PairedBarcode
+    authorize PairedBarcode
     @paired_barcode = PairedBarcode.new
   end
 
@@ -18,66 +18,66 @@ class PairedBarcodesController < ApplicationController
   end
 
   def create
-		authorize PairedBarcode
+    authorize PairedBarcode
     @paired_barcode = PairedBarcode.new(paired_barcode_params)
-		#@paired_barcode.user = current_user
-		user = current_user
+    #@paired_barcode.user = current_user
+    user = current_user
 
-		prep_kit_id = paired_barcode_params[:sequencing_library_prep_kit_id]
-		if prep_kit_id.blank?
-			redirect_to new_paired_barcode_path, alert: "Sequencing library prep kit can't be blank."
-			return
-		end
-		prep_kit = SequencingLibraryPrepKit.find(prep_kit_id)
-		
-		pb_text = paired_barcode_params[:add_paired_barcodes].split("\n")
-		create_count = 0
-		pb_text.each do |line|
-			line.strip!
-			index1_seq,index2_seq = line.split("-") #the sequences
-			index1_seq.strip!
-			if index2_seq.nil?
-				redirect_to new_paired_barcode_path, alert: "No index2 barcode specified in line #{line}."
-				return
-			end
-			index2_seq.strip!
-			index1 = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, sequence: index1_seq, index_number: 1})
+    prep_kit_id = paired_barcode_params[:sequencing_library_prep_kit_id]
+    if prep_kit_id.blank?
+      redirect_to new_paired_barcode_path, alert: "Sequencing library prep kit can't be blank."
+      return
+    end
+    prep_kit = SequencingLibraryPrepKit.find(prep_kit_id)
+    
+    pb_text = paired_barcode_params[:add_paired_barcodes].split("\n")
+    create_count = 0
+    pb_text.each do |line|
+      line.strip!
+      index1_seq,index2_seq = line.split("-") #the sequences
+      index1_seq.strip!
+      if index2_seq.nil?
+        redirect_to new_paired_barcode_path, alert: "No index2 barcode specified in line #{line}."
+        return
+      end
+      index2_seq.strip!
+      index1 = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, sequence: index1_seq, index_number: 1})
 
-			if index1.blank?
-				redirect_to new_paired_barcode_path, alert: "Index1 barcode in pair #{line} does not exist in sequencing library prep kit #{prep_kit.name}. Make sure you provided the correct orientation and didn't reverse complement it"
-				return
-			end
+      if index1.blank?
+        redirect_to new_paired_barcode_path, alert: "Index1 barcode in pair #{line} does not exist in sequencing library prep kit #{prep_kit.name}. Make sure you provided the correct orientation and didn't reverse complement it"
+        return
+      end
 
-			index2 = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, sequence: index2_seq,index_number: 2})
-			if index2.blank?
+      index2 = Barcode.find_by({sequencing_library_prep_kit_id: prep_kit.id, sequence: index2_seq,index_number: 2})
+      if index2.blank?
         redirect_to new_paired_barcode_path, alert: "Index2 barcode in pair #{line} does not exist in sequencing library prep kit #{prep_kit.name}. Make sure you provided the correct orientation and didn't reverse complement it."
-				return
-			end
-			name = PairedBarcode.make_name(index1.name,index2.name)
-			#check if paired_barcode exists already by this name in the specified kit
-			existing_pb_rec = PairedBarcode.find_by(name: name)
-			if existing_pb_rec.present?
-				next
-			end
-			PairedBarcode.create!({name: name, user_id: user.id, sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1.id, index2_id: index2.id})
-			create_count = create_count += 1
-		end
+        return
+      end
+      name = PairedBarcode.make_name(index1.name,index2.name)
+      #check if paired_barcode exists already by this name in the specified kit
+      existing_pb_rec = PairedBarcode.find_by(name: name)
+      if existing_pb_rec.present?
+        next
+      end
+      PairedBarcode.create!({name: name, user_id: user.id, sequencing_library_prep_kit_id: prep_kit.id, index1_id: index1.id, index2_id: index2.id})
+      create_count = create_count += 1
+    end
 
 
    #format.json { render json: @paired_barcode, status: :created }
     respond_to do |format|
-			if create_count > 0
-				notice = "Paired barcodes were successfully created."
-      	format.html { redirect_to new_paired_barcode_path, notice: notice }
-			else
-				notice = "No new paired-barcodes were created as the input ones already existed or none were specified."
-      	format.html { redirect_to new_paired_barcode_path, alert: notice }
-			end
+      if create_count > 0
+        notice = "Paired barcodes were successfully created."
+        format.html { redirect_to new_paired_barcode_path, notice: notice }
+      else
+        notice = "No new paired-barcodes were created as the input ones already existed or none were specified."
+        format.html { redirect_to new_paired_barcode_path, alert: notice }
+      end
     end
   end
 
   def update
-		authorize @paired_barcode
+    authorize @paired_barcode
     respond_to do |format|
       if @paired_barcode.update(paired_barcode_params)
         format.html { redirect_to @paired_barcode, notice: 'Paired barcode was successfully updated.' }
@@ -90,8 +90,7 @@ class PairedBarcodesController < ApplicationController
   end
 
   def destroy
-		authorize @paired_barcode
-		ddestroy(@paired_barcode,paired_barcodes_path)
+    ddestroy(@paired_barcode, paired_barcodes_path)
   end
 
   private

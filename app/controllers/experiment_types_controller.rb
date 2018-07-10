@@ -6,22 +6,22 @@ class ExperimentTypesController < ApplicationController
   end
 
   def show
-		authorize @experiment_type
+    authorize @experiment_type
   end
 
   def new
-		authorize ExperimentType
+    authorize ExperimentType
     @experiment_type = ExperimentType.new
   end
 
   def edit
-		authorize @experiment_type
+    authorize @experiment_type
   end
 
   def create
     @experiment_type = ExperimentType.new(experiment_type_params)
-		authorize @experiment_type
-		@experiment_type.user = current_user
+    authorize @experiment_type
+    @experiment_type.user = current_user
 
     respond_to do |format|
       if @experiment_type.save
@@ -35,7 +35,7 @@ class ExperimentTypesController < ApplicationController
   end
 
   def update
-		authorize @experiment_type
+    authorize @experiment_type
     respond_to do |format|
       if @experiment_type.update(experiment_type_params)
         format.html { redirect_to @experiment_type, notice: 'Experiment type was successfully updated.' }
@@ -48,8 +48,7 @@ class ExperimentTypesController < ApplicationController
   end
 
   def destroy
-		authorize @experiment_type
-		ddestroy(@experiment_type,experiment_types_path)
+    ddestroy(@experiment_type, experiment_types_path)
   end
 
   private

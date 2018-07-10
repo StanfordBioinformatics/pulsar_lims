@@ -124,8 +124,7 @@ class SingleCellSortingsController < ApplicationController
   end
 
   def destroy
-    authorize @single_cell_sorting
-    ddestroy(@single_cell_sorting,single_cell_sortings_path)
+    ddestroy(@single_cell_sorting, single_cell_sortings_path)
   end
 
   private

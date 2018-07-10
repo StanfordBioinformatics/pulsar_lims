@@ -55,8 +55,7 @@ class DonorsController < ApplicationController
   end
 
   def destroy
-    authorize @donor
-    ddestroy(@donor,donors_path)
+    ddestroy(@donor, donors_path)
   end
 
   private

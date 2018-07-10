@@ -1,6 +1,6 @@
 class CloningVectorsController < ApplicationController
   before_action :set_cloning_vector, only: [:show, :edit, :update, :destroy]
-	before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
+  before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def select_options                                                                                   
     #Called via ajax.
@@ -14,23 +14,23 @@ class CloningVectorsController < ApplicationController
   end
 
   def show
-		authorize @cloning_vector
+    authorize @cloning_vector
   end
 
   def new
-		authorize CloningVector
+    authorize CloningVector
     @cloning_vector = CloningVector.new
   end
 
   def edit
-		authorize @cloning_vector
+    authorize @cloning_vector
   end
 
   def create
-		authorize CloningVector
+    authorize CloningVector
     @cloning_vector = CloningVector.new(cloning_vector_params)
-	
-		@cloning_vector.user = current_user	
+  
+    @cloning_vector.user = current_user  
 
     respond_to do |format|
       if @cloning_vector.save
@@ -44,7 +44,7 @@ class CloningVectorsController < ApplicationController
   end
 
   def update
-		authorize @cloning_vector
+    authorize @cloning_vector
     respond_to do |format|
       if @cloning_vector.update(cloning_vector_params)
         format.html { redirect_to @cloning_vector, notice: 'Cloning vector was successfully updated.' }
@@ -57,8 +57,7 @@ class CloningVectorsController < ApplicationController
   end
 
   def destroy
-		authorize @cloning_vector
-		ddestroy(@cloning_vector,cloning_vectors_path)
+    ddestroy(@cloning_vector, cloning_vectors_path)
   end
 
   private
@@ -82,8 +81,8 @@ class CloningVectorsController < ApplicationController
 
     def set_s3_direct_post
       @s3_direct_post = S3_BUCKET.presigned_post(key: "images/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
-			#From the AWS docs, regarding the 201 here: If the value is set to 201, Amazon S3 returns an XML document with a 201 status code.
-			#If we don't set the acl, then the file is not readable by others.
-			#Also using #{SecureRandom.uuid} so that users don't overwrite an existing file with the same name. 
+      #From the AWS docs, regarding the 201 here: If the value is set to 201, Amazon S3 returns an XML document with a 201 status code.
+      #If we don't set the acl, then the file is not readable by others.
+      #Also using #{SecureRandom.uuid} so that users don't overwrite an existing file with the same name. 
     end 
 end

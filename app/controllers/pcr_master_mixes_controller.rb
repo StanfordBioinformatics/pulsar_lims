@@ -13,22 +13,22 @@ class PcrMasterMixesController < ApplicationController
   end
 
   def show
-		authorize @pcr_master_mix
+    authorize @pcr_master_mix
   end
 
   def new
-		authorize PcrMasterMix
+    authorize PcrMasterMix
     @pcr_master_mix = PcrMasterMix.new
   end
 
   def edit
-		authorize @pcr_master_mix
+    authorize @pcr_master_mix
   end
 
   def create
-		authorize PcrMasterMix
+    authorize PcrMasterMix
     @pcr_master_mix = PcrMasterMix.new(pcr_master_mix_params)
-		@pcr_master_mix.user = current_user
+    @pcr_master_mix.user = current_user
 
     respond_to do |format|
       if @pcr_master_mix.save
@@ -42,7 +42,7 @@ class PcrMasterMixesController < ApplicationController
   end
 
   def update
-		authorize @pcr_master_mix
+    authorize @pcr_master_mix
     respond_to do |format|
       if @pcr_master_mix.update(pcr_master_mix_params)
         format.html { redirect_to @pcr_master_mix, notice: 'pcr master mix was successfully updated.' }
@@ -55,7 +55,6 @@ class PcrMasterMixesController < ApplicationController
   end
 
   def destroy
-    authorize @pcr_master_mix
     ddestroy(@pcr_master_mix, pcr_master_mixes_path)
   end
 

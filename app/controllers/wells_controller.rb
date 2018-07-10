@@ -3,17 +3,17 @@ class WellsController < ApplicationController
   before_action :set_well, only: [:show, :edit, :update]
 
   def show
-		authorize @well
+    authorize @well
   end
 
   def edit
-		authorize @well
+    authorize @well
   end
 
   def create
-		authorize Well
+    authorize Well
     @well = Well.new(well_params)
-		@well.user = current_user
+    @well.user = current_user
 
     respond_to do |format|
       if @well.save
@@ -27,7 +27,7 @@ class WellsController < ApplicationController
   end
 
   def update
-		authorize @well
+    authorize @well
     respond_to do |format|
       if @well.update(well_params)
         format.html { redirect_to @plate, notice: 'Well was successfully updated.' }
@@ -41,9 +41,9 @@ class WellsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-		def set_plate
-			@plate = set_record("Plate",params[:plate_id])
-		end
+    def set_plate
+      @plate = set_record("Plate",params[:plate_id])
+    end
 
     def set_well
       @well = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb

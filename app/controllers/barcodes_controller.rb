@@ -1,24 +1,24 @@
 class BarcodesController < ApplicationController
-	before_action :set_sequencing_library_prep_kit
+  before_action :set_sequencing_library_prep_kit
   before_action :set_barcode, only: [:show, :edit, :update, :destroy]
 
   def show
-		authorize @barcode
+    authorize @barcode
   end
 
   def new
-		authorize Barcode
+    authorize Barcode
     @barcode = @sequencing_library_prep_kit.barcodes.build
   end
 
   def edit
-		authorize @barcode
+    authorize @barcode
   end
 
   def create
-		authorize Barcode
+    authorize Barcode
     @barcode = @sequencing_library_prep_kit.barcodes.build(barcode_params)
-		@barcode.user = current_user
+    @barcode.user = current_user
 
     respond_to do |format|
       if @barcode.save
@@ -32,7 +32,7 @@ class BarcodesController < ApplicationController
   end
 
   def update
-		authorize @barcode
+    authorize @barcode
 
     respond_to do |format|
       if @barcode.update(barcode_params)
@@ -46,8 +46,7 @@ class BarcodesController < ApplicationController
   end
 
   def destroy
-		authorize @barcode
-		ddestroy(@barcode,barcodes_path)
+    ddestroy(@barcode, barcodes_path)
   end
 
   private

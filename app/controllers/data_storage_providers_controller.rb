@@ -6,22 +6,22 @@ class DataStorageProvidersController < ApplicationController
   end
 
   def show
-		authorize @data_storage_provider
+    authorize @data_storage_provider
   end
 
   def new
-		authorize DataStorageProvider
+    authorize DataStorageProvider
     @data_storage_provider = DataStorageProvider.new
   end
 
   def edit
-		authorize @data_storage_provider
+    authorize @data_storage_provider
   end
 
   def create
-		authorize DataStorageProvider
+    authorize DataStorageProvider
     @data_storage_provider = DataStorageProvider.new(data_storage_provider_params)
-		@data_storage_provider.user = current_user
+    @data_storage_provider.user = current_user
 
     respond_to do |format|
       if @data_storage_provider.save
@@ -35,7 +35,7 @@ class DataStorageProvidersController < ApplicationController
   end
 
   def update
-		authorize @data_storage_provider
+    authorize @data_storage_provider
     respond_to do |format|
       if @data_storage_provider.update(data_storage_provider_params)
         format.html { redirect_to @data_storage_provider, notice: 'Data storage provider was successfully updated.' }
@@ -48,12 +48,7 @@ class DataStorageProvidersController < ApplicationController
   end
 
   def destroy
-		authorize @data_storage_provider
-    @data_storage_provider.destroy
-    respond_to do |format|
-      format.html { redirect_to data_storage_providers_url }
-      format.json { head :no_content }
-    end
+    ddestroy(@data_storage_provider, data_storage_providers_path)
   end
 
   private

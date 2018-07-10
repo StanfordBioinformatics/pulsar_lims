@@ -54,7 +54,6 @@ class BiosampleReplicatesController < ApplicationController
   end
 
   def destroy
-    authorize @biosample_replicate
     ddestroy(@biosample_replicate, biosample_replicates_path)
   end
 

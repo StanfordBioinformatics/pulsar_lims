@@ -14,22 +14,22 @@ class BiosampleTypesController < ApplicationController
   end
 
   def show
-		authorize @biosample_type
+    authorize @biosample_type
   end
 
   def new
-		authorize BiosampleType
+    authorize BiosampleType
     @biosample_type = BiosampleType.new
   end
 
   def edit
-		authorize @biosample_type
+    authorize @biosample_type
   end
 
   def create
     @biosample_type = BiosampleType.new(biosample_type_params)
-		authorize @biosample_type
-		@biosample_type.user = current_user
+    authorize @biosample_type
+    @biosample_type.user = current_user
 
     respond_to do |format|
       if @biosample_type.save
@@ -43,7 +43,7 @@ class BiosampleTypesController < ApplicationController
   end
 
   def update
-		authorize @biosample_type
+    authorize @biosample_type
     respond_to do |format|
       if @biosample_type.update(biosample_type_params)
         format.html { redirect_to @biosample_type, notice: 'Biosample type was successfully updated.' }
@@ -56,8 +56,7 @@ class BiosampleTypesController < ApplicationController
   end
 
   def destroy
-		authorize @biosample_type
-		ddestroy(@biosample_type,biosample_types_path)
+    ddestroy(@biosample_type, biosample_types_path)
   end
 
   private

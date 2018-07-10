@@ -71,12 +71,7 @@ class DataStoragesController < ApplicationController
   end
 
   def destroy
-    authorize @data_storage
-    @data_storage.destroy
-    respond_to do |format|
-      format.html { redirect_to data_storages_url }
-      format.json { head :no_content }
-    end
+    ddestroy(@data_storage, data_storages_path)
   end
 
   private

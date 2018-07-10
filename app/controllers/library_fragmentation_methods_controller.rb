@@ -6,11 +6,11 @@ class LibraryFragmentationMethodsController < ApplicationController
   end
 
   def show
-		authorize @library_fragmentation_method
+    authorize @library_fragmentation_method
   end
 
   def new
-		authorize LibraryFragmentationMethod
+    authorize LibraryFragmentationMethod
     @library_fragmentation_method = LibraryFragmentationMethod.new
   end
 
@@ -18,7 +18,7 @@ class LibraryFragmentationMethodsController < ApplicationController
   end
 
   def create
-		authorize @library_fragmentation_method
+    authorize @library_fragmentation_method
     @library_fragmentation_method = LibraryFragmentationMethod.new(library_fragmentation_method_params)
 
     respond_to do |format|
@@ -33,7 +33,7 @@ class LibraryFragmentationMethodsController < ApplicationController
   end
 
   def update
-		authorize @library_fragmentation_method
+    authorize @library_fragmentation_method
     respond_to do |format|
       if @library_fragmentation_method.update(library_fragmentation_method_params)
         format.html { redirect_to @library_fragmentation_method, notice: 'Library fragmentation method was successfully updated.' }
@@ -46,8 +46,7 @@ class LibraryFragmentationMethodsController < ApplicationController
   end
 
   def destroy
-		authorize @library_fragmentation_method
-		ddestroy(@library_fragmentation_method,library_fragmentation_methods_path)
+    ddestroy(@library_fragmentation_method, library_fragmentation_methods_path)
   end
 
   private

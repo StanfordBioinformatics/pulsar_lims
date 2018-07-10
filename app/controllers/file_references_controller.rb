@@ -1,27 +1,27 @@
 class FileReferencesController < ApplicationController
   before_action :set_file_reference, only: [:show, :edit, :update, :destroy]
 
-	def index
-		super
-	end
+  def index
+    super
+  end
 
   def show
-		authorize @file_reference
+    authorize @file_reference
   end
 
   def new
-		authorize FileReference
+    authorize FileReference
     @file_reference = FileReference.new
   end
 
   def edit
-		authorize @file_reference
+    authorize @file_reference
   end
 
   def create
-		authorize FileReference
+    authorize FileReference
     @file_reference = FileReference.new(file_reference_params)
-		@file_reference.user = current_user
+    @file_reference.user = current_user
 
     respond_to do |format|
       if @file_reference.save
@@ -35,7 +35,7 @@ class FileReferencesController < ApplicationController
   end
 
   def update
-		authorize @file_reference
+    authorize @file_reference
     respond_to do |format|
       if @file_reference.update(file_reference_params)
         format.html { redirect_to @file_reference, notice: 'File reference was successfully updated.' }
@@ -48,12 +48,7 @@ class FileReferencesController < ApplicationController
   end
 
   def destroy
-		authorize @file_reference
-    @file_reference.destroy
-    respond_to do |format|
-      format.html { redirect_to file_references_url }
-      format.json { head :no_content }
-    end
+    ddestroy(@file_reference, file_references_path)
   end
 
   private

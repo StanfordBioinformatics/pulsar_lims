@@ -13,22 +13,22 @@ class BiosampleTermNamesController < ApplicationController
   end
 
   def show
-		authorize @biosample_term_name
+    authorize @biosample_term_name
   end
 
   def new
-		authorize BiosampleTermName
+    authorize BiosampleTermName
     @biosample_term_name = BiosampleTermName.new
   end
 
   def edit
-		authorize @biosample_term_name
+    authorize @biosample_term_name
   end
 
   def create
-		authorize BiosampleTermName 
+    authorize BiosampleTermName 
     @biosample_term_name = BiosampleTermName.new(biosample_term_name_params)
-		@biosample_term_name.user = current_user
+    @biosample_term_name.user = current_user
 
     respond_to do |format|
       if @biosample_term_name.save
@@ -42,7 +42,7 @@ class BiosampleTermNamesController < ApplicationController
   end
 
   def update
-		authorize @biosample_term_name
+    authorize @biosample_term_name
     respond_to do |format|
       if @biosample_term_name.update(biosample_term_name_params)
         format.html { redirect_to @biosample_term_name, notice: 'Biosample term name was successfully updated.' }
@@ -55,8 +55,7 @@ class BiosampleTermNamesController < ApplicationController
   end
 
   def destroy
-		authorize @biosample_term_name
-		ddestroy(@biosample_term_name,biosample_term_names_path)
+    ddestroy(@biosample_term_name, biosample_term_names_path)
   end
 
   private

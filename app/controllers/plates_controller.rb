@@ -75,8 +75,7 @@ class PlatesController < ApplicationController
   end
 
   def destroy
-    authorize @plate
-    ddestroy(@plate,plates_path)
+    ddestroy(@plate, plates_path)
   end
 
   private

@@ -6,22 +6,22 @@ class DocumentTypesController < ApplicationController
   end
 
   def show
-		authorize @document_type
+    authorize @document_type
   end
 
   def new
-		authorize DocumentType
+    authorize DocumentType
     @document_type = DocumentType.new
   end
 
   def edit
-		authorize @document_type
+    authorize @document_type
   end
 
   def create
     @document_type = DocumentType.new(document_type_params)
-		authorize @document_type
-		@document_type.user = current_user
+    authorize @document_type
+    @document_type.user = current_user
 
     respond_to do |format|
       if @document_type.save
@@ -35,7 +35,7 @@ class DocumentTypesController < ApplicationController
   end
 
   def update
-		authorize @document_type
+    authorize @document_type
     respond_to do |format|
       if @document_type.update(document_type_params)
         format.html { redirect_to @document_type, notice: 'Document type was successfully updated.' }
@@ -48,8 +48,7 @@ class DocumentTypesController < ApplicationController
   end
 
   def destroy
-		authorize @document_type
-		ddestroy(@document_type,document_types_path)
+    ddestroy(@document_type, document_types_path)
   end
 
   private

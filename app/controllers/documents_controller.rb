@@ -51,8 +51,7 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
-    authorize @document
-    ddestroy(@document,documents_path)
+    ddestroy(@document, documents_path)
   end
 
   def document

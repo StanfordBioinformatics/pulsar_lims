@@ -3,22 +3,22 @@ class ChromosomesController < ApplicationController
   before_action :set_chromosome, only: [:show, :edit, :update, :destroy]
 
   def show
-		authorize @chromosome
+    authorize @chromosome
   end
 
   def new
-		authorize Chromosome
+    authorize Chromosome
     @chromosome = @reference_genome.chromosomes.build
   end
 
   def edit
-		authorize @chromosome
+    authorize @chromosome
   end
 
   def create
-		authorize Chromosome
+    authorize Chromosome
     @chromosome = @reference_genome.chromosomes.build(chromosome_params)
-		@chromosome.user = current_user
+    @chromosome.user = current_user
 
     respond_to do |format|
       if @chromosome.save
@@ -32,7 +32,7 @@ class ChromosomesController < ApplicationController
   end
 
   def update
-		authorize @chromosome
+    authorize @chromosome
     respond_to do |format|
       if @chromosome.update(chromosome_params)
         format.html { redirect_to [@reference_genome, @chromosome], notice: 'Chromosome was successfully updated.' }
@@ -45,15 +45,14 @@ class ChromosomesController < ApplicationController
   end
 
   def destroy
-		authorize @chromosome
-		ddestroy(@chromosome,chromosomes_path)
+    ddestroy(@chromosome, chromosomes_path)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-		def set_reference_genome
-			@reference_genome = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
-		end
+    def set_reference_genome
+      @reference_genome = set_record(controller_name,params[:id]) #set_record defined in application_controller.rb
+    end
 
     def set_chromosome
       @chromosome = Chromosome.find(params[:id])

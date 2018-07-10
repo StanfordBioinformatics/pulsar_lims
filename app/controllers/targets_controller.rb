@@ -13,22 +13,22 @@ class TargetsController < ApplicationController
   end
 
   def show
-		authorize @target
+    authorize @target
   end
 
   def new
-		authorize Target
+    authorize Target
     @target = Target.new
   end
 
   def edit
-		authorize @target
+    authorize @target
   end
 
   def create
     @target = Target.new(target_params)
-		authorize @target
-		@target.user = current_user
+    authorize @target
+    @target.user = current_user
 
     respond_to do |format|
       if @target.save
@@ -42,7 +42,7 @@ class TargetsController < ApplicationController
   end
 
   def update
-		authorize @target
+    authorize @target
     respond_to do |format|
       if @target.update(target_params)
         format.html { redirect_to @target, notice: 'Target was successfully updated.' }
@@ -55,8 +55,7 @@ class TargetsController < ApplicationController
   end
 
   def destroy
-		authorize @target
-		ddestroy(@target,targets_path)
+    ddestroy(@target, targets_path)
   end
 
   private

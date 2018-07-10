@@ -62,7 +62,6 @@ class ChipseqExperimentsController < ApplicationController
   end
 
   def destroy
-    authorize @chipseq_experiment
     ddestroy(@chipseq_experiment, chipseq_experiments_path)
   end
 

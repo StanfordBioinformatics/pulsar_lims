@@ -6,22 +6,22 @@ class OrganismsController < ApplicationController
   end
 
   def show
-		authorize @organism
+    authorize @organism
   end
 
   def new
-		authorize Organism
+    authorize Organism
     @organism = Organism.new
   end
 
   def edit
-		authorize @organism
+    authorize @organism
   end
 
   def create
     @organism = Organism.new(organism_params)
-		authorize @organism
-		@organism.user = current_user
+    authorize @organism
+    @organism.user = current_user
 
     respond_to do |format|
       if @organism.save
@@ -35,7 +35,7 @@ class OrganismsController < ApplicationController
   end
 
   def update
-		authorize @organism
+    authorize @organism
     respond_to do |format|
       if @organism.update(organism_params)
         format.html { redirect_to @organism, notice: 'Organism was successfully updated.' }
@@ -48,8 +48,7 @@ class OrganismsController < ApplicationController
   end
 
   def destroy
-		authorize @organism
-		ddestroy(@organism,organisms_path)
+    ddestroy(@organism, organisms_path)
   end
 
   private

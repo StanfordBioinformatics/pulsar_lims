@@ -1,45 +1,45 @@
 class AnalysesController < ApplicationController
   before_action :set_analysis, only: [:show, :edit, :update, :destroy]
-	skip_after_action :verify_authorized, only: [:add_merged_file]
+  skip_after_action :verify_authorized, only: [:add_merged_file]
 
 
-	def add_merged_file
-		@analysis = Analysis.new
-		@file_attr = params[:attr].to_sym
+  def add_merged_file
+    @analysis = Analysis.new
+    @file_attr = params[:attr].to_sym
     if @file_attr == :merged_fastq_file
       @file_reference = @analysis.build_merged_fastq_file({user_id: current_user.id, data_file_type_id: DataFileType.find_by(name: "FASTQ").id})
     end
-		if @file_attr == :merged_bam_file
-			@file_reference = @analysis.build_merged_bam_file({user_id: current_user.id,data_file_type_id: DataFileType.find_by(name: "BAM").id})
-		elsif @file_attr == :merged_peaks_file
-			@file_reference = @analysis.build_merged_peaks_file({user_id: current_user.id, data_file_type_id: DataFileType.find_by(name: "BED").id})
-		elsif @file_attr == :merged_qc_file
-			@file_reference = @analysis.build_merged_qc_file({user_id: current_user.id})
-		end
-		render partial: "add_merged_file", layout: false
-	end
+    if @file_attr == :merged_bam_file
+      @file_reference = @analysis.build_merged_bam_file({user_id: current_user.id,data_file_type_id: DataFileType.find_by(name: "BAM").id})
+    elsif @file_attr == :merged_peaks_file
+      @file_reference = @analysis.build_merged_peaks_file({user_id: current_user.id, data_file_type_id: DataFileType.find_by(name: "BED").id})
+    elsif @file_attr == :merged_qc_file
+      @file_reference = @analysis.build_merged_qc_file({user_id: current_user.id})
+    end
+    render partial: "add_merged_file", layout: false
+  end
 
   def index
     super
   end
 
   def show
-		authorize @analysis
+    authorize @analysis
   end
 
   def new
-		authorize Analysis
+    authorize Analysis
     @analysis = Analysis.new
   end
 
   def edit
-		authorize @analysis
+    authorize @analysis
   end
 
   def create
-		authorize Analysis
+    authorize Analysis
     @analysis = Analysis.new(analysis_params)
-		@analysis.user = current_user
+    @analysis.user = current_user
 
     respond_to do |format|
       if @analysis.save
@@ -53,7 +53,7 @@ class AnalysesController < ApplicationController
   end
 
   def update
-		authorize @analysis
+    authorize @analysis
     #render json: params
     #return
     respond_to do |format|
@@ -68,12 +68,7 @@ class AnalysesController < ApplicationController
   end
 
   def destroy
-		authorize @analysis
-    @analysis.destroy
-    respond_to do |format|
-      format.html { redirect_to analyses_url }
-      format.json { head :no_content }
-    end
+    ddestroy(@analysis.destroy, analyses_path)
   end
 
   private

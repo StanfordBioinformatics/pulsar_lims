@@ -6,22 +6,22 @@ class ReferenceGenomesController < ApplicationController
   end
 
   def show
-		authorize @reference_genome
+    authorize @reference_genome
   end
 
   def new
-		authorize ReferenceGenome
+    authorize ReferenceGenome
     @reference_genome = ReferenceGenome.new
   end
 
   def edit
-		authorize @reference_genome
+    authorize @reference_genome
   end
 
   def create
     @reference_genome = ReferenceGenome.new(reference_genome_params)
-		authorize @reference_genome
-		@reference_genome.user = current_user
+    authorize @reference_genome
+    @reference_genome.user = current_user
 
     respond_to do |format|
       if @reference_genome.save
@@ -35,7 +35,7 @@ class ReferenceGenomesController < ApplicationController
   end
 
   def update
-		authorize @reference_genome
+    authorize @reference_genome
     respond_to do |format|
       if @reference_genome.update(reference_genome_params)
         format.html { redirect_to @reference_genome, notice: 'Reference genome was successfully updated.' }
@@ -48,8 +48,7 @@ class ReferenceGenomesController < ApplicationController
   end
 
   def destroy
-		authorize @reference_genome
-		ddestroy(@reference_genome,reference_genomes_path)
+    ddestroy(@reference_genome, reference_genomes_path)
   end
 
   private

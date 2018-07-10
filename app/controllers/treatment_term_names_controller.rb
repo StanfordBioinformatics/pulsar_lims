@@ -55,7 +55,6 @@ class TreatmentTermNamesController < ApplicationController
   end
 
   def destroy
-    authorize @treatment_term_name
     ddestroy(@treatment_term_name, treatment_term_names_path)
   end
 

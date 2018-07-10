@@ -13,22 +13,22 @@ class SequencingPlatformsController < ApplicationController
   end
 
   def show
-		authorize @sequencing_platform
+    authorize @sequencing_platform
   end
 
   def new
-		authorize SequencingPlatform
+    authorize SequencingPlatform
     @sequencing_platform = SequencingPlatform.new
   end
 
   def edit
-		authorize @sequencing_platform
+    authorize @sequencing_platform
   end
 
   def create
     @sequencing_platform = SequencingPlatform.new(sequencing_platform_params)
-		authorize @sequencing_platform
-		@sequencing_platform.user = current_user
+    authorize @sequencing_platform
+    @sequencing_platform.user = current_user
 
     respond_to do |format|
       if @sequencing_platform.save
@@ -42,7 +42,7 @@ class SequencingPlatformsController < ApplicationController
   end
 
   def update
-		authorize @sequencing_platform
+    authorize @sequencing_platform
     respond_to do |format|
       if @sequencing_platform.update(sequencing_platform_params)
         format.html { redirect_to @sequencing_platform, notice: 'Sequencing platform was successfully updated.' }
@@ -55,8 +55,7 @@ class SequencingPlatformsController < ApplicationController
   end
 
   def destroy
-		authorize @sequencing_platform
-		ddestroy(@sequencing_platform,sequencing_platforms_path)
+    ddestroy(@sequencing_platform, sequencing_platforms_path)
   end
 
   private

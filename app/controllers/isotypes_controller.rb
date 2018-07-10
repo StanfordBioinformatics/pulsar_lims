@@ -13,22 +13,22 @@ class IsotypesController < ApplicationController
   end
 
   def show
-		authorize @isotype
+    authorize @isotype
   end
 
   def new
-		authorize Isotype
+    authorize Isotype
     @isotype = Isotype.new
   end
 
   def edit
-		authorize @isotype
+    authorize @isotype
   end
 
   def create
     @isotype = Isotype.new(isotype_params)
-		authorize @isotype
-		@isotype.user = current_user
+    authorize @isotype
+    @isotype.user = current_user
 
     respond_to do |format|
       if @isotype.save
@@ -42,7 +42,7 @@ class IsotypesController < ApplicationController
   end
 
   def update
-		authorize @isotype
+    authorize @isotype
     respond_to do |format|
       if @isotype.update(isotype_params)
         format.html { redirect_to @isotype, notice: 'Isotype was successfully updated.' }
@@ -55,8 +55,7 @@ class IsotypesController < ApplicationController
   end
 
   def destroy
-		authorize @isotype
-		ddestroy(@isotype,isotypes_path)
+    ddestroy(@isotype, isotypes_path)
   end
 
   private

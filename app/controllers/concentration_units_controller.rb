@@ -6,7 +6,7 @@ class ConcentrationUnitsController < ApplicationController
   end
 
   def show
-		authorize @concentration_unit
+    authorize @concentration_unit
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @concentration_unit }
@@ -14,7 +14,7 @@ class ConcentrationUnitsController < ApplicationController
   end
 
   def new
-		authorize ConcentrationUnit
+    authorize ConcentrationUnit
     @concentration_unit = ConcentrationUnit.new
   end
 
@@ -22,9 +22,9 @@ class ConcentrationUnitsController < ApplicationController
   end
 
   def create
-		authorize ConcentrationUnit
+    authorize ConcentrationUnit
     @concentration_unit = ConcentrationUnit.new(concentration_unit_params)
-		@concentration_unit.user = current_user
+    @concentration_unit.user = current_user
 
     respond_to do |format|
       if @concentration_unit.save
@@ -38,7 +38,7 @@ class ConcentrationUnitsController < ApplicationController
   end
 
   def update
-		authorize @concentration_unit
+    authorize @concentration_unit
     respond_to do |format|
       if @concentration_unit.update(concentration_unit_params)
         format.html { redirect_to @concentration_unit, notice: 'Concentration unit was successfully updated.' }
@@ -52,8 +52,7 @@ class ConcentrationUnitsController < ApplicationController
 
 
   def destroy
-		authorize @concentration_unit
-		ddestroy(@concentration_unit,concentration_units_path)
+    ddestroy(@concentration_unit, concentration_units_path)
   end
 
   private

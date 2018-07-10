@@ -119,8 +119,7 @@ class CrisprModificationsController < ApplicationController
   end
 
   def destroy
-    authorize @crispr
-    ddestroy(@crispr,crispr_modifications_path)
+    ddestroy(@crispr, crispr_modifications_path)
   end
 
   private
