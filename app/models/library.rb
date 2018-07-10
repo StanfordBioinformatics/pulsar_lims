@@ -198,6 +198,7 @@ class Library < ActiveRecord::Base
     puts "MHEYYYYYYYYYYYYY"
     if self.biosample.present? and self.biosample.well.present? and self.barcoded?
       puts "2MHEYYYYYYYYYYYYY"
+      puts self.id
       if self.persisted?
         action_term = "update"
       else
