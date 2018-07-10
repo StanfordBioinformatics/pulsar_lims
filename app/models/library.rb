@@ -36,7 +36,7 @@ class Library < ActiveRecord::Base
 #  validates :barcode, format: { with: /\A[acgtnACGTN]+-?[acgtnACGTN]+\z/ }, allow_blank: true
   validates  :size_range, format: {with: /\A\d+-\d+\Z/}, presence: true
   validates :nucleic_acid_term_id, presence: true
-  #validates :documents, presence: true, unless: Proc.new {|lib| lib.parents.any? }
+  validates :documents, presence: true, unless: Proc.new {|lib| lib.parents.any? }
   #validates :vendor_id, presence: true
   validates :biosample_id, presence: true, unless: Proc.new {|lib| lib.prototype?}
   validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"
