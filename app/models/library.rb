@@ -55,7 +55,7 @@ class Library < ActiveRecord::Base
   before_validation :set_name, on: :create #Somehow this gets called when updating too, despite saying "on: :create". So in that method, I make sure that the record isn't persisted before continuing. 
   after_validation :check_plated
   validate :validate_barcode, unless: Proc.new {|lib| lib.single_cell_sorting.present? } #verifies self.barcode/self.paired_barcode
-  #NW validate :validate_plate_consistency # If biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
+  validate :validate_plate_consistency # If biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
 
   def self.policy_class
     ApplicationPolicy
