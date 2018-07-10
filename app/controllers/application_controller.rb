@@ -135,7 +135,8 @@ class ApplicationController < ActionController::Base
     begin
       rec = model.find(id_prop)
     rescue ActiveRecord::RecordNotFound
-      return
+      flash[:alert] = "Record not found."
+      redirect_to(request.referer || root_path)
     end
     return rec
   end
