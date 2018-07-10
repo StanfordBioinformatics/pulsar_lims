@@ -12,9 +12,9 @@
 
 <table class="attributes">
   <tr>
-		<th><strong>Name:</strong></th>
-  	<td><%= @sequencing_library_prep_kit.name %></td>
-	</tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @sequencing_library_prep_kit.name %></td>
+  </tr>
 
   <tr>
     <th><strong>Documents:</strong></th>
@@ -24,24 +24,24 @@
   </tr>
 
   <tr>
-		<th><strong>Vendor:</strong></th>
-  	<td><%= link_to @sequencing_library_prep_kit.vendor.name, @sequencing_library_prep_kit.vendor %></td>
-	</tr>
+    <th><strong>Vendor:</strong></th>
+    <td><%= link_to @sequencing_library_prep_kit.vendor.name, @sequencing_library_prep_kit.vendor %></td>
+  </tr>
 
   <tr>
-		<th><strong>Vendor Product ID:</strong></th>
-  	<td><%= @sequencing_library_prep_kit.vendor_product_identifier %></td>
-	</tr>
+    <th><strong>Vendor Product ID:</strong></th>
+    <td><%= @sequencing_library_prep_kit.vendor_product_identifier %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Supports Paired End Sequencing</th>
-		<td><%= @sequencing_library_prep_kit.supports_paired_end? %></td>
-	</tr>
+  <tr>
+    <th><strong>Supports Paired End Sequencing</th>
+    <td><%= @sequencing_library_prep_kit.supports_paired_end? %></td>
+  </tr>
 
-	<tr>
-  	<th><strong>Description:</strong></th>
-  	<td><%= @sequencing_library_prep_kit.description %></td>
-	</tr>
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @sequencing_library_prep_kit.description %></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    
@@ -51,52 +51,52 @@
 
 <div class="barcodes table-responsive bg-info">
   <h4> Barcodes</h4>
-	<table class="table table-bordered" id="bobba" style="margin-right: 50%; width: auto;"> 
-		<thead>
-			<tr>
-				<th>Index</th>
-				<th>Count</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @sequencing_library_prep_kit.barcodes.group(:index_number).count.each do |index,cnt| %>
-				<tr>
-					<td><%= index %></td>
-					<td><%= cnt %></td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table></br>
+  <table class="table table-bordered" id="bobba" style="margin-right: 50%; width: auto;"> 
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sequencing_library_prep_kit.barcodes.group(:index_number).count.each do |index,cnt| %>
+        <tr>
+          <td><%= index %></td>
+          <td><%= cnt %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table></br>
 
   <table class="attributes index" style="font-family: Courier, monospace;" >
     <thead>
       <tr>
-				<th>Row</th>
-				<th>Sequence</th>
-				<th>Index Number</th>
+        <th>Row</th>
+        <th>Sequence</th>
+        <th>Index Number</th>
         <% @model_class = Barcode %><!-- Set for partial below -->
         <%= render partial: "application_partials/index_common_table_headers" %>
         <th class="actions">Actions</th>
       </tr>
     </thead>
-		<tbody>
-			<% row_num = 0 %>
-	    <% @sequencing_library_prep_kit.barcodes.order("index_number").each do |rec| %>
-				<% row_num += 1 %>
-	      <tr>
-					<td><%= row_num %></td>
-	        <td><%= rec.sequence %></td>
-					<td><%= rec.index_number %></td>
+    <tbody>
+      <% row_num = 0 %>
+      <% @sequencing_library_prep_kit.barcodes.order("index_number").each do |rec| %>
+        <% row_num += 1 %>
+        <tr>
+          <td><%= row_num %></td>
+          <td><%= rec.sequence %></td>
+          <td><%= rec.index_number %></td>
           <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
-	        <td>
-	          <%= link_to fa_icon("pencil"), [:edit,@sequencing_library_prep_kit,rec] %>
-	          <%= link_to fa_icon("trash"), [@sequencing_library_prep_kit,rec], method: :delete, data: { confirm: 'Are you sure?' } %>
-	        </td>
-	      </tr>
-	    <% end %>
+          <td>
+            <%= link_to fa_icon("pencil"), [:edit,@sequencing_library_prep_kit,rec] %>
+            <%= link_to fa_icon("trash"), [@sequencing_library_prep_kit,rec], method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
 
-		</tbody>
-	</table>
+    </tbody>
+  </table>
 </div>
 
 <div>
