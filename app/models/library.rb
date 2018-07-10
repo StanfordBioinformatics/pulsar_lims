@@ -38,7 +38,7 @@ class Library < ActiveRecord::Base
   validates :nucleic_acid_term_id, presence: true
   validates :documents, presence: true, unless: Proc.new {|lib| lib.parents.any? }
   #validates :vendor_id, presence: true
-  #validates :biosample_id, presence: true, unless: Proc.new {|lib| lib.prototype?}
+  #NW validates :biosample_id, presence: true, unless: Proc.new {|lib| lib.prototype?}
   validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"
   validates :concentration, presence: {message: "must be specified when the units are set."}, if: "concentration_unit.present?"
   validates :sequencing_library_prep_kit_id, presence: true
@@ -54,8 +54,8 @@ class Library < ActiveRecord::Base
   # Only call self.set_name() if this is a library on a well.
   before_validation :set_name, on: :create #Somehow this gets called when updating too, despite saying "on: :create". So in that method, I make sure that the record isn't persisted before continuing. 
   after_validation :check_plated
-  validate :validate_barcode, unless: Proc.new {|lib| lib.single_cell_sorting.present? } #verifies self.barcode/self.paired_barcode
-  validate :validate_plate_consistency # If biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
+  #validate :validate_barcode, unless: Proc.new {|lib| lib.single_cell_sorting.present? } #verifies self.barcode/self.paired_barcode
+  #validate :validate_plate_consistency # If biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
 
   def self.policy_class
     ApplicationPolicy
