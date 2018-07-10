@@ -55,7 +55,6 @@ class Library < ActiveRecord::Base
   before_validation :set_name, on: :create #Somehow this gets called when updating too, despite saying "on: :create". So in that method, I make sure that the record isn't persisted before continuing. 
   after_validation :check_plated
   validate :validate_barcode, unless: Proc.new {|lib| lib.single_cell_sorting.present? } #verifies self.barcode/self.paired_barcode
-  validate :validate_plate_consistency # If biosample belongs_to a well, make sure barcode is unique amongst all used on the plate.
 
   def self.policy_class
     ApplicationPolicy
@@ -189,27 +188,6 @@ class Library < ActiveRecord::Base
     elsif self.paired_end and not self.sequencing_library_prep_kit.supports_paired_end?
       self.errors.add(:base, "Can't set paired_end to true when the sequencing library prep kit does not support paired-end sequencing.")
       return false
-    end
-  end
-
-  def validate_plate_consistency
-    #If the library is barcoded, and the biosample is in the well of a plate, then we need to make sure that no
-    # other library on the plate has the same barcode.
-    puts "MHEYYYYYYYYYYYYY"
-    if self.biosample.present? and self.biosample.well.present? and self.barcoded?
-      puts "2MHEYYYYYYYYYYYYY"
-      puts self.id
-      if self.persisted?
-        action_term = "update"
-      else
-        action_term = "create"
-      end
-      plate_barcodes = self.biosample.well.plate.get_barcodes([self.biosample.well])
-      bc = self.get_indexseq
-      if plate_barcodes.include?(bc)
-        self.errors.add(:base, "Can't #{action_term} library with barcode '#{bc.display}' since this barcode is present on another library for a biosample in a well on plate '#{biosample.well.plate.name}'.")
-        return false
-      end
     end
   end
 end
