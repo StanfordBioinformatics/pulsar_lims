@@ -40,6 +40,6 @@
 </table>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
-<%= render partial: "application_partials/edit_notes", locals: {rec: @barcode} %>
+<%= render partial: "application_partials/edit_notes", locals: {rec: @barcode, nested: @sequencing_library_prep_kit} %>
 
 <%= link_to 'Back', sequencing_library_prep_kit_path(@sequencing_library_prep_kit) %>

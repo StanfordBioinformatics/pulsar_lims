@@ -1,9 +1,22 @@
 <!-- Set initial display to hidden since it is already present in the show view of any model that
      includes the 'notes' attribute. The display will toggle to block when the user clicks on the 
      pencil icon
+
+Params:
+1) rec: A model record.
+2) nested: A model record in which rec is nested, i.e. a barcode is nestead within the sequencing_library_prep_kit model.
 -->
+<% if local_assigns[:nested].nil? %>                                                                   
+  <% nested = "" %>                                                                                    
+<% end %> 
+
 <div style="display: none;" class="notes-to-edit">                                                                                     
-  <%= simple_form_for rec do |f| %>                                                              
+  <% if :nested.present? %>
+    <% record = [nested, rec] %>
+  <% else %>
+    <% record = rec %>
+  <% end %>
+  <%= simple_form_for record do |f| %>                                                              
     <%= f.input_field :notes, class: "notes-input", style: "width: 30vw; height: 300px; padding: 1em; margin-bottom: 1em;" %>
     <div class="actions">                                                                              
       <%= f.button :submit, "Update notes", class: "btn-primary "%>                                    
