@@ -185,6 +185,7 @@ class SingleCellSortingsController < ApplicationController
         plates_attributes: [
           :dimensions, 
           :name, 
+          :notes,
           :starting_biosample_id, 
           :vendor_id, 
           :vendor_product_identifier,

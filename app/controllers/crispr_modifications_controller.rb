@@ -138,7 +138,7 @@ class CrisprModificationsController < ApplicationController
         :notes,
         :prototype,
         :purpose,
-        :_times_cloned,
+        :times_cloned,
         :upstream_identifier,
         crispr_construct_ids: [],
         crispr_constructs_attributes: [:id, :_destroy],

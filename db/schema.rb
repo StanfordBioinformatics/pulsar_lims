@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180708000947) do
+ActiveRecord::Schema.define(version: 20180712040741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,7 +208,7 @@ ActiveRecord::Schema.define(version: 20180708000947) do
     t.string   "starting_amount"
     t.string   "starting_amount_units"
     t.string   "tube_label"
-    t.integer  "_times_cloned",                               default: 0
+    t.integer  "times_cloned",                                default: 0
     t.text     "notes"
   end
 
@@ -379,7 +379,7 @@ ActiveRecord::Schema.define(version: 20180708000947) do
     t.string   "purpose"
     t.text     "notes"
     t.integer  "from_prototype_id"
-    t.integer  "_times_cloned",               default: 0
+    t.integer  "times_cloned",                default: 0
     t.integer  "part_of_id"
   end
 
@@ -594,7 +594,7 @@ ActiveRecord::Schema.define(version: 20180708000947) do
     t.string   "upstream_identifier"
     t.text     "notes"
     t.boolean  "prototype",                                   default: false
-    t.integer  "_times_cloned",                               default: 0
+    t.integer  "times_cloned",                                default: 0
   end
 
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree

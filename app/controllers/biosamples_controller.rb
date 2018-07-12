@@ -166,6 +166,7 @@ class BiosamplesController < ApplicationController
         :starting_amount,
         :starting_amount_units,
         :submitter_comments, 
+        :times_cloned,
         :tissue_preservation_method, 
         :tube_label,
         :upstream_identifier, 

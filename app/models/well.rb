@@ -84,10 +84,10 @@ class Well < ActiveRecord::Base
     # while that does issue a Rollback as expected as any exception would in a callback, the form errors appear to be gone
     # and don't display on the form. Thus, the user is left with a re-rendered and populated form w/o any indication
     # of what happened.
-    #if not biosample.valid?
-    #  raise "Unable to create biosample for well #{self.name}: #{biosample.errors.full_messages}"
+    if not biosample.valid?
+      raise "Unable to create biosample for well #{self.name}: #{biosample.errors.full_messages}"
       #throws a RuntimeError that I catch in single_cell_sortings_controller.rb in the update() method.
-    #end
+    end
   end
 
   def set_name

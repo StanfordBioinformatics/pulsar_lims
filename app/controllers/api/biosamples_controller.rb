@@ -76,6 +76,7 @@ class Api::BiosamplesController < Api::ApplicationController
         :starting_amount,
         :starting_amount_units,
         :submitter_comments,
+        :times_cloned,
         :tissue_preservation_method,
         :tube_label,
         :upstream_identifier,
@@ -88,6 +89,7 @@ class Api::BiosamplesController < Api::ApplicationController
           :name,
           :notes, 
           :donor_construct_id,
+          :times_cloned,
           crispr_constructs_attributes: [:id, :_destroy],
           crispr_construct_ids: [],
           genomic_integration_site_attributes: [

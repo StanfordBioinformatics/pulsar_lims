@@ -111,6 +111,7 @@ class LibrariesController < ApplicationController
         :sequencing_library_prep_kit_id,
         :size_range,
         :strand_specific,
+        :times_cloned,
         :vendor_id,
         :vendor_product_identifier,
         :document_ids => [],

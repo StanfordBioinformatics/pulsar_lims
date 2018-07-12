@@ -1,6 +1,6 @@
 class LibrarySerializer < ActiveModel::Serializer
   self.root = false
-  attributes :id, :concentration, :lot_identifier, :name, :notes, :upstream_identifier, :paired_end, :prototype, :size_range, :strand_specific, :vendor_product_identifier, :upstream_identifier, :created_at, :updated_at
+  attributes :id, :concentration, :lot_identifier, :name, :notes, :upstream_identifier, :paired_end, :prototype, :size_range, :strand_specific, :times_cloned, :vendor_product_identifier, :upstream_identifier, :created_at, :updated_at
 
   has_one :barcode
   has_one :biosample

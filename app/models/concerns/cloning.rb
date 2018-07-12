@@ -80,18 +80,17 @@ module Cloning
   # underscores instead of camelcase. There is no need to call this class or those that follow outside
   # of model code. 
   def clone(associated_user_id:, custom_attrs:)
-    times_cloned = self._times_cloned + 1
+    amount_cloned = self.times_cloned + 1
     attrs = self.attributes_for_cloning()
     attrs["user_id"] = associated_user_id
     attrs["name"] = "#{self.name} clone #{times_cloned}"
     if custom_attrs.present?
       attrs.update(custom_attrs)
     end
-    p attrs
     new_record = self.class.create!(attrs)
     #The above create! class method raises ActiveRecord::RecordInvalid if there is any validation error, and
     # this is caught in application_controller.rb.
-    self.update!({_times_cloned: times_cloned })
+    self.update({times_cloned: amount_cloned })
     return new_record
   end
 
@@ -106,8 +105,17 @@ module Cloning
     # This makes updating all of the biosample objects with regard to all the plates on a single_cell_sorting
     # easy to do just by changing the biosample prototype assocated with the single_cell_sorting.
     if self.prototype_instances.any?
-      self.prototype_instances.each do |pi|
-        pi.update_from_sibling(self.id)
+      cloning_attrs = self.attributes_for_cloning()
+      first_prototype_instance = self.prototype_instances[0]
+      fpi_cloning_attrs = first_prototype_instance.attributes_for_cloning()
+      if cloning_attrs == fpi_cloning_attrs
+        # No need to update all instances if the update to the prototype was on a field that isn't
+        # propagated.
+        return
+      else
+        self.prototype_instances.each do |pi|
+          pi.update_from_sibling(self.id)
+        end
       end
     end
 #    if self.sorting_biosample_single_cell_sorting.present?

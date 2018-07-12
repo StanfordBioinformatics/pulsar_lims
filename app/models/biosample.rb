@@ -149,6 +149,7 @@ class Biosample < ActiveRecord::Base
     if self.crispr_modification.present?   
       self.crispr_modification.clone_crispr_modification(associated_biosample_id: new_clone.id, associated_user_id: self.user.id)
     end
+    return new_clone
   end
 
   def attributes_for_cloning
