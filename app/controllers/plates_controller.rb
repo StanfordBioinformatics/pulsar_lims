@@ -51,12 +51,13 @@ class PlatesController < ApplicationController
       if plate_params[barcode_ids_param].present?
         # Set fake add_barcodes attribute so that the user won't have to retype them all in the
         # event of a validation error. 
-        @plate.add_barcodes = params[:plate][:add_barcodes]
-        add_barcodes_matrix_input(plate=@plate,barcodes=plate_params[barcode_ids_param])
+        @plate.add_barcodes = params[:plate][barcode_ids_param]
+        add_barcodes_matrix_input(@plate.add_barcodes)
       end 
     #rescue Exceptions::BarcodeNotFoundError, Exceptions::TooManyRowsError, Exceptions::TooManyColumnsError, Exceptions::WellNotFoundError, Exceptions::WellAndPlateMismatchError, Exceptions::WellNotSavedError => err #any of these could be raised when calling add_barcodes(). And they all inherit from StandardError.
     rescue StandardError => err #any of these could be raised when calling add_barcodes().
       respond_to do |format|
+        p err.backtrace
         flash[:alert] = err.message
         format.html { render "show"}
       end 

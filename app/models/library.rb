@@ -52,7 +52,7 @@ class Library < ActiveRecord::Base
   scope :non_plated, lambda { where(plated: false) }
 
   # Only call self.set_name() if this is a library on a well.
-  before_validation :set_name, on: :create #Somehow this gets called when updating too, despite saying "on: :create". So in that method, I make sure that the record isn't persisted before continuing. 
+  #before_validation :set_name, on: :create #Somehow this gets called when updating too, despite saying "on: :create". So in that method, I make sure that the record isn't persisted before continuing. 
   after_validation :check_plated
   validate :validate_barcode, unless: Proc.new {|lib| lib.single_cell_sorting.present? } #verifies self.barcode/self.paired_barcode
 

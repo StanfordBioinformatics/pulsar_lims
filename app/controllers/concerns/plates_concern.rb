@@ -3,7 +3,7 @@ module PlatesConcern
   
   private
   
-  def add_barcodes_matrix_input(plate,barcodes)
+  def add_barcodes_matrix_input(barcodes)
     #barcodes is a string of barcodes in a matrix format like that of the plate, i.e. 
     #
     # CATCGA\tGTCAGT\n
@@ -21,12 +21,11 @@ module PlatesConcern
     # A1 A2
      # B1 B2
     # C1 C2
-
     barcodes_rows = barcodes.split("\n")
     num_rows = barcodes_rows.length
     #check for more rows than the plate
-    if num_rows > plate.nrow
-      raise Exceptions::TooManyRowsError, "You have entered #{num_rows} but the plate only has #{plate.nrow} rows."
+    if num_rows > @plate.nrow
+      raise Exceptions::TooManyRowsError, "You have entered #{num_rows} but the plate only has #{@plate.nrow} rows."
     end
     max_row_len = 0
     barcodes_rows.map! do |row|
@@ -38,8 +37,8 @@ module PlatesConcern
       row
     end
     #check for any rows having more columns than the plate
-    if max_row_len > plate.ncol
-      raise Exceptions::TooManyColumnsError, "You have entered 1 or more rows with more columns than contained in the plate (#{plate.ncol})."
+    if max_row_len > @plate.ncol
+      raise Exceptions::TooManyColumnsError, "You have entered 1 or more rows with more columns than contained in the plate (#{@plate.ncol})."
     end
         
     row_num = 0
@@ -50,36 +49,36 @@ module PlatesConcern
         col_num += 1
         bc.strip!
         bc.upcase! #Barcode sequences  are stored uppercase
-        well = plate.wells.find_by({row: row_num, col: col_num})
+        well = @plate.wells.find_by({row: row_num, col: col_num})
         if well.blank?
-          raise Exceptions::WellNotFoundError, "No well on plate #{plate.name} could be found with row #{row_num} and column #{col_num}."
+          raise Exceptions::WellNotFoundError, "No well on plate #{@plate.name} could be found with row #{row_num} and column #{col_num}."
         end
         ActiveRecord::Base.transaction do
           #Transaction needed because the call below will delete any existing library(ies) for the given well.
           # If there is a problem when creating the new well, i.e. teh barcode is already present in another 
           # well, then an RuntimeError will occur (which is caught in the plates_controller.rb and a flash error is set. 
-          create_library_for_well(plate=plate,well=well,barcode=bc)
+          create_library_for_well(well=well,barcode=bc)
         end
       end
     end
   end
 
-  def create_library_for_well(plate,well,barcode)
+  def create_library_for_well(well,barcode)
     ###
-    #Args  plate - a plate instance
+    #Args  
     #      well  - a well on the plate
     #      barcode - a single-end barcode or a paired-end barcode. Paired-end will be assumed if the barcode has a '-' inside, 
     #                i.e. ATCGAT-GCTGAC.
-    if not plate.wells.include?(well)
-      raise Exceptions::WellAndPlateMismatchError, "Well #{well.name} does not belong on plate #{plate.name}."
+    if not @plate.wells.include?(well)
+      raise Exceptions::WellAndPlateMismatchError, "Well #{well.name} does not belong on plate #{@plate.name}."
     end
     user = current_user
     if well.biosample.libraries.any?
-      res = well.biosample.libraries.destroy_all
+      well.biosample.libraries.destroy_all
       #Could be that the user made a mistake when adding the libraries initially in matrix format (i.e. incorrect barcode layout)
       # to the plate and needs to redo this step.
     end
-    library_prototype = plate.single_cell_sorting.library_prototype
+    library_prototype = @plate.single_cell_sorting.library_prototype
     well_lib = library_prototype.clone_library(associated_biosample_id: well.biosample.id, associated_user_id: current_user.id)
     #the name is set to the biosample name (see code in the library.rb model file).
     barcode.upcase!

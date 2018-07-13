@@ -83,14 +83,14 @@ module Cloning
     amount_cloned = self.times_cloned + 1
     attrs = self.attributes_for_cloning()
     attrs["user_id"] = associated_user_id
-    attrs["name"] = "#{self.name} clone #{times_cloned}"
+    attrs["name"] = "#{self.name} clone #{amount_cloned}"
     if custom_attrs.present?
       attrs.update(custom_attrs)
     end
     new_record = self.class.create!(attrs)
     #The above create! class method raises ActiveRecord::RecordInvalid if there is any validation error, and
     # this is caught in application_controller.rb.
-    self.update({times_cloned: amount_cloned })
+    self.update_column(:times_cloned, amount_cloned)
     return new_record
   end
 
