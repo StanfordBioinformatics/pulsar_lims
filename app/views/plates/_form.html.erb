@@ -4,7 +4,7 @@
     <%= f.input :dimensions, collection: Plate::DIMENSIONS, prompt: "Select the plate size" %>
   <% end %>
   <%= f.association :single_cell_sorting, as: :hidden %>
-  <%= f.association :vendor %>
+  <%= f.association :vendor, collection: Vendor.order(:name) %>
   <%= f.input :vendor_product_identifier %>
 
   <div style="padding: 0.5em;max-width: 40em;" class="jumbotron table-responsive bg-info">
