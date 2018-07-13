@@ -91,6 +91,8 @@ module Cloning
     #The above create! class method raises ActiveRecord::RecordInvalid if there is any validation error, and
     # this is caught in application_controller.rb.
     self.update_column(:times_cloned, amount_cloned)
+    # use update_column() above so as not to trigger callbacks.  That is a problem otherwise, b/c
+    # when updating this prototype object, we don't need the after_update callback for propagate_update_if_prototype() to run.
     return new_record
   end
 
