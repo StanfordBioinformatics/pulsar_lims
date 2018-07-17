@@ -2,6 +2,7 @@ class SearchController < ApplicationController
   skip_after_action :verify_authorized, only: [:search]
 
   def search
+    limit = 10000
     @page = true # For use in pagination in view.
     query = params[:query]
     # Careful not use use 'controller_name' as a variable name as that is the name of a Rails method.
@@ -27,10 +28,10 @@ class SearchController < ApplicationController
     # message "uninitialized constant Welcome". In such a case, we'll search across all Elastic indices
     # (all models). 
     if @model_class.nil?
-      @records = Elasticsearch::Model.search(query).records
+      @records = Elasticsearch::Model.search(query, size: limit).records
       return
     elsif @model_class < ActiveRecord::Base
-      @records = @model_class.search(query).records
+      @records = @model_class.search(query, size: limit).records
     else
       flash[:notice] = "Search failed; contact administrator."
       redirect_to(request.referrer || root_path)
