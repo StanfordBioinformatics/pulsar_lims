@@ -40,7 +40,7 @@
         <td><%= rec.shipped %></td>
         <td>
 		  		<% if rec.sequencing_runs.present? %>
-              <%= render partial: "sequencing_runs/link_to_sequencing_runs", locals: {sequencing_runs: rec.sequencing_runs} %>
+              <%= render partial: "application_partials/link_to_has_many", locals: {links: rec.sequencing_runs} %>
   				<% end %>
         </td>
         <td>
