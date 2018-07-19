@@ -1,5 +1,7 @@
 class TreatmentSerializer < ActiveModel::Serializer
   self.root = false
+  embed :ids
+
   attributes :id, :concentration, :description, :duration, :duration_units, :name, :notes, :temperature_celsius, :treatment_type, :upstream_identifier, :created_at, :updated_at
 
   has_one :concentration_unit
