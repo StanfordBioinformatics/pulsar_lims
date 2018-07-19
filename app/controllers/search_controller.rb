@@ -28,7 +28,7 @@ class SearchController < ApplicationController
     # message "uninitialized constant Welcome". In such a case, we'll search across all Elastic indices
     # (all models). 
     if @model_class.nil?
-      @records = Elasticsearch::Model.search(query, size: limit).records
+      @records = Elasticsearch::Model.search(query, models=[], options={size: limit}).records
       return
     elsif @model_class < ActiveRecord::Base
       @records = @model_class.search(query, size: limit).records
