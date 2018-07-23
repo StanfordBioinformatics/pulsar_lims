@@ -46,7 +46,7 @@ class Api::CrisprModificationsController < Api::ApplicationController
 
   def update
     authorize @crispr
-    if @crispr.update(crispr_params)
+    if @crispr.update(crispr_modification_params)
       render json: @crispr, status: 200
     else
       render json: { errors: @crispr.errors.full_messages }, status: 422
