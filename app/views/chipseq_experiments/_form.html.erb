@@ -13,7 +13,6 @@
   <fieldset>
     <legend>Documents</legend>
     <strong>Linked documents:</strong>
-    <% persisted_docs =  @chipseq_experiment.documents.persisted %>
     <%= render partial: "application_partials/simple_fields_for", locals: {f: f, record: @chipseq_experiment, attribute: :documents} %>
     <%= f.association :documents, label: "Add documents", selected: nil, collection: sorted_document_name_id(),
         include_blank: true,

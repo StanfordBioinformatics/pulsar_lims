@@ -140,6 +140,7 @@ class CrisprModificationsController < ApplicationController
         :purpose,
         :times_cloned,
         :upstream_identifier,
+        document_ids: [],
         crispr_construct_ids: [],
         crispr_constructs_attributes: [:id, :_destroy],
         genomic_integration_site_attributes: [:id, :chromosome_id, :start, :end]

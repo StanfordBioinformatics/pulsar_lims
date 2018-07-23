@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180712040741) do
+ActiveRecord::Schema.define(version: 20180723190341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -389,6 +389,14 @@ ActiveRecord::Schema.define(version: 20180712040741) do
   add_index "crispr_modifications", ["genomic_integration_site_id"], name: "index_crispr_modifications_on_genomic_integration_site_id", using: :btree
   add_index "crispr_modifications", ["name"], name: "index_crispr_modifications_on_name", unique: true, using: :btree
   add_index "crispr_modifications", ["user_id"], name: "index_crispr_modifications_on_user_id", using: :btree
+
+  create_table "crispr_modifications_documents", id: false, force: :cascade do |t|
+    t.integer "document_id",            null: false
+    t.integer "crispr_modification_id", null: false
+  end
+
+  add_index "crispr_modifications_documents", ["crispr_modification_id", "document_id"], name: "cmod_document_idx", using: :btree
+  add_index "crispr_modifications_documents", ["document_id", "crispr_modification_id"], name: "document_cmod_idx", using: :btree
 
   create_table "data_file_types", force: :cascade do |t|
     t.integer  "user_id"

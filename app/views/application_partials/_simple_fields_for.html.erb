@@ -22,6 +22,11 @@ Required args:
 
 -->
 
+<!-- reload record so that when using simple_fields_for, we are only dealing with saving records in the relational set. -->
+<% record.reload %>
+
+<% related_records = record.send(attribute) %>
+
 <div class="responsive-table">                                                                     
   <div class="row">                                                                                
     <div class="col-xs-6">                                                                         
@@ -34,7 +39,7 @@ Required args:
         </thead>                                                                                   
         <tbody>                                                                                    
           <%= f.simple_fields_for attribute do |ff| %>                                       
-            <% related_record = record.send(attribute)[ff.index] %>                                 
+            <% related_record = related_records[ff.index] %>                                 
            <tr>                                                                                    
              <% if related_record.respond_to?(:params_for_url_for) %>
                <% link_to_value = related_record.params_for_url_for() %>

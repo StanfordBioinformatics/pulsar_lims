@@ -10,6 +10,7 @@ class Document < ActiveRecord::Base
   has_many :analyses, foreign_key: :protocol_id, dependent: :nullify
   has_and_belongs_to_many :biosamples
   has_and_belongs_to_many :chipseq_experiments
+  has_and_belongs_to_many :crispr_modifications
   has_and_belongs_to_many :treatments
   has_and_belongs_to_many :libraries
   has_and_belongs_to_many :sequencing_library_prep_kits

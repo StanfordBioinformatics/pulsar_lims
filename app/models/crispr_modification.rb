@@ -1,6 +1,6 @@
 require 'elasticsearch/model'
 class CrisprModification < ActiveRecord::Base
-  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   #Submit to the ENCODE Portal as a genetic_modification:
   # https://www.encodeproject.org/profiles/genetic_modification.json
@@ -24,6 +24,7 @@ class CrisprModification < ActiveRecord::Base
   # genetic_modification_characterization.characterizes property points to it.
   has_many :pcr_validations, class_name: "Pcr", dependent: :nullify
   has_and_belongs_to_many :crispr_constructs
+  has_and_belongs_to_many :documents
   validates :crispr_constructs, presence: true
   validates :category, presence: true, inclusion: {in: Enums::CRISPR_MOD_CATEGORIES, message: "Must be an element from the list #{Enums::CRISPR_MOD_CATEGORIES}"}
   validates :purpose, presence: true, inclusion: {in: Enums::CRISPR_MOD_PURPOSE, message: "Must be an element from the list #{Enums::CRISPR_MOD_PURPOSE}"}
@@ -32,8 +33,9 @@ class CrisprModification < ActiveRecord::Base
   validates :biosample, presence: true
   validates :donor_construct, presence: true
 
-  accepts_nested_attributes_for :genomic_integration_site, allow_destroy: true
   accepts_nested_attributes_for :crispr_constructs, allow_destroy: true
+  accepts_nested_attributes_for :documents, allow_destroy: true 
+  accepts_nested_attributes_for :genomic_integration_site, allow_destroy: true
 
   scope :persisted, lambda { where.not(id: nil) }
 
@@ -41,6 +43,22 @@ class CrisprModification < ActiveRecord::Base
 
   def self.policy_class
     ApplicationPolicy
+  end
+
+  def document_ids=(ids)
+    """
+    Function : Adds associations to Documents that are stored in self.documents.
+    Args     : ids - array of Document IDs.
+    """
+    ids.each do |i|
+      if i.blank?
+        next
+      end
+      doc = Document.find(i)
+      if not self.documents.include? doc
+        self.documents << doc
+      end
+    end
   end
 
   def crispr_construct_ids=(ids)
@@ -69,11 +87,11 @@ class CrisprModification < ActiveRecord::Base
     #
     # Example:
     attrs = {}
-    attrs["part_of_id"] = self.id  
+    attrs["part_of_id"] = self.id
     attrs["from_prototype_id"] = self.id
     attrs["biosample_id"] = associated_biosample_id
     attrs["crispr_construct_ids"] = self.crispr_construct_ids
-    return clone(associated_user_id: associated_user_id, custom_attrs: attrs) 
+    return clone(associated_user_id: associated_user_id, custom_attrs: attrs)
   end
 
   def attributes_for_cloning
@@ -81,7 +99,7 @@ class CrisprModification < ActiveRecord::Base
     attrs = {}
     attrs["donor_construct_id"] = self.donor_construct_id
     attrs["description"] = self.description
-    attrs["genomic_integration_site_id"] = self.genomic_integration_site_id 
+    attrs["genomic_integration_site_id"] = self.genomic_integration_site_id
     attrs["category"] = self.category
     attrs["purpose"] = self.purpose
     attrs["notes"] = self.notes

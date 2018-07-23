@@ -18,22 +18,22 @@
   <strong>Crispr constructs:</strong>
   <% parent_links = @crispr.parent_crispr_constructs %>
   <%= render partial: "application_partials/parental_and_self_fklinks", locals: {f: f, rec: @crispr, link_name: :crispr_constructs, parent_links: parent_links} %>
-        
+
   <div id="added_crispr_constructs"></div>
   <!-- .added_crispr_constructs will serve as the container for new crispr_construct selections added by jQuery. -->
 
   <% if not @crispr.persisted? and @crispr.crispr_constructs.any? %>
-    <!-- Then the form was rerendered (perhaps due to input error on submission), and 
+    <!-- Then the form was rerendered (perhaps due to input error on submission), and
          we want to show what the user originally selected.
     -->
-    <%= render partial: "crispr_constructs/select_crispr_construct", 
+    <%= render partial: "crispr_constructs/select_crispr_construct",
         locals: {f: f, crispr_constructs: CrisprConstruct.all} %>
   <% end %>
 
-  <%= link_to "Add Crispr Construct", select_crispr_construct_crispr_modifications_path({exclude_ids: @crispr.all_crispr_constructs.ids}), 
-      remote: true, 
+  <%= link_to "Add Crispr Construct", select_crispr_construct_crispr_modifications_path({exclude_ids: @crispr.all_crispr_constructs.ids}),
+      remote: true,
       class: "select_crispr_construct reg-btn" %>
-  </br></br>  
+  </br></br>
 
   <%= f.association :donor_construct, label_html: {"data-toggle" => "tooltip", "title" => "The Donor Construct that contains the donor sequence to integrate at the genomic site of the genetic modification."} %>
 
@@ -46,6 +46,16 @@
 
   <div class="container genomic_integration_site"></div>
   <!-- Jquery will fill in the div above when a reference_genome is selected -->
+
+  <fieldset>
+    <legend>Documents</legend>
+    <strong>Linked documents:</strong>
+    <%= render partial: "application_partials/simple_fields_for", locals: {f: f, record: @crispr, attribute: :documents} %>
+    <%= f.association :documents, label: "Add documents", selected: nil, collection: sorted_document_name_id(),
+        include_blank: true,
+        input_html: {class: "crispr_documents_selector"},
+        label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>
+  </fieldset>
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   </br>
