@@ -1,6 +1,6 @@
 require 'elasticsearch/model'
 class Chromosome < ActiveRecord::Base
-  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "CHR"
@@ -17,5 +17,11 @@ class Chromosome < ActiveRecord::Base
 
   def self.policy_class
     ApplicationPolicy
+  end
+
+  def params_for_url_for
+    #Returns the argument that can be used for the url_for helper (see use in the welcome controller).
+    #See https://github.com/nathankw/pulsar_lims/wiki/search.
+    return [self.reference_genome, self]
   end
 end
