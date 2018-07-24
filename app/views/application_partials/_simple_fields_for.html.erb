@@ -23,7 +23,9 @@ Required args:
 -->
 
 <!-- reload record so that when using simple_fields_for, we are only dealing with saving records in the relational set. -->
-<% record.reload %>
+<% if record.id.present? %>
+    <% record.reload %>
+<% end %>
 
 <% related_records = record.send(attribute) %>
 
