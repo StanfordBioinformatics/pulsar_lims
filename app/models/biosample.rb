@@ -162,6 +162,7 @@ class Biosample < ActiveRecord::Base
     attrs["date_biosample_taken"] = self.date_biosample_taken
     attrs["donor_id"] = self.donor_id
     attrs["lot_identifier"] = self.lot_identifier
+    attrs["nih_institutional_certification"] = self.nih_institutional_certification
     attrs["notes"] = self.notes
     attrs["tissue_preservation_method"] = self.tissue_preservation_method
     attrs["vendor_id"] = self.vendor_id
