@@ -6,7 +6,7 @@ class AgaroseGelSerializer < ActiveModel::Serializer
              :notes,
              :percent_agarose, 
              :run_date
-             :voltage, 
+             :voltage
 
   has_one :user
 end
