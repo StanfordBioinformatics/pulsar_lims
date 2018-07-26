@@ -3,7 +3,7 @@ class AgaroseGelSerializer < ActiveModel::Serializer
   embed :ids
 
   attributes :id, 
-             :notes
+             :notes,
              :percent_agarose, 
              :run_date
              :voltage, 
