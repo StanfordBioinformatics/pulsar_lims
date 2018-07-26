@@ -9,6 +9,7 @@ class BiosampleSerializer < ActiveModel::Serializer
   has_one :crispr_modification
   has_one :donor
   has_one :vendor
+  has_one :user
 
   has_many :documents
   has_many :pooled_from_biosamples

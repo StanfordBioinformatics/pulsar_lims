@@ -3,4 +3,6 @@ class ConcentrationUnitSerializer < ActiveModel::Serializer
   embed :ids
 
   attributes :id, :name, :created_at, :updated_at
+
+  has_one :user
 end

@@ -7,6 +7,7 @@ class DonorConstructSerializer < ActiveModel::Serializer
   has_one :cloning_vector
   has_one :sent_to
   has_one :target
+  has_one :user
   has_one :vendor
 
   has_many :construct_tags

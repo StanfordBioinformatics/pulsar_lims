@@ -128,6 +128,14 @@
                 <%= link_to "CRISPR Guide Constructs",crispr_constructs_path, class: controller_name() == "crispr_constructs" ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "CRISPR Modifications",crispr_modifications_path, class: controller_name() == "crispr_modifications" ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "CRISPR Donor Constructs",donor_constructs_path, class: controller_name() == "donor_constructs" ? "list-group-item active" : "list-group-item" %>
+
+                  <div class="navbar-header">
+                    <span class="navbar-brand"><h6>Validations<h6></span>
+                  </div>
+                  <ul style="" class="nav navbar-nav">
+                    <%= link_to "Agarose Gels",agarose_gels_path, class: controller_name() == "agarose_gels" ? "list-group-item active" : "list-group-item" %>
+                    <%= link_to "Gel Lanes",gel_lanes_path, class: controller_name() == "gel_lanes" ? "list-group-item active" : "list-group-item" %>
+                  </ul>
               </ul>
     
               <div class="navbar-header">

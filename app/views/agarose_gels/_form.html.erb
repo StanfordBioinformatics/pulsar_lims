@@ -1,0 +1,12 @@
+<%= simple_form_for(@agarose_gel) do |f| %>
+
+  <%= f.input :percent_agarose, placeholder: "%" %>
+  <%= f.input :voltage, placeholder: "volts" %>
+  <%= f.input :run_date %>
+  <%= f.input :notes %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div>
+<% end %>
+</br>

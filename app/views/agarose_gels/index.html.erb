@@ -1,0 +1,43 @@
+<header>                                                                                               
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Agarose gels" %>                                                                       
+  </h1>                                                                                                
+  <p class="model-definition"><%= AgaroseGel::DEFINITION %></p>                                           
+                                                                                                       
+  <ul class="actions">                                                                                 
+    <%= render partial: "application_partials/auth_new_record" %>                                      
+  </ul>                                                                                                
+</header>                                                                                              
+                                                                                                       
+<table class="attributes index">                                                                       
+  <thead>
+    <tr>
+      <%= render partial: "application_partials/index_common_table_headers" %> 
+      <th>Percent agarose</th>
+      <th>Voltage</th>
+      <th>Run date</th>
+      <th>Notes</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @records.each do |rec| %>
+      <tr>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= "#{rec.percent_agarose}%" %></td>
+        <td><%= "#{rec.voltage} volts" %></td>
+        <td><%= rec.run_date %></td>
+        <td><%= rec.notes %></td>
+        <td>
+          <%= link_to fa_icon("pencil"), edit_agarose_gel_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Agarose gel', new_agarose_gel_path %>

@@ -1,0 +1,55 @@
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @gel_lane } %>
+<header>                                                                                               
+  <h1><%= @gel_lane.display() %></h1>                                                                  
+                                                                                                       
+  <ul class="actions">                                                                                 
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @gel_lane} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @gel_lane} %>
+  </ul>                                                                                                
+</header>                                                                                              
+                                                                                                       
+<%= render partial: "application_partials/record_meta", locals: { record: @gel_lane } %>
+
+<table class="attributes" %>
+  <tr>
+    <th><strong>Lane number:</strong></th>
+    <td><%= @gel_lane.lane_number %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Sample volume:</strong></th>
+    <td><%= "#{@gel_lane.sample_volume} µL" %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Sample concentration:</strong></th>
+    <td><%= "#{@gel_lane.sample_concentration} #{@gel_lane.sample_concentration_units.name}" %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Expected product size:</strong></th>
+    <td><%= "#{@gel_lane.expected_product_size} kDa" %>
+  </tr>
+  
+  <tr>
+    <th><strong>Actual product size:</strong></th>
+    <td><%= "#{@gel_lane.actual_product_size} kDa" %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Pass:</strong></th>
+    <td><%= @gel_lane.pass %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Submitter comments:</strong></th>
+    <td><%= @gel_lane.submitter_comments %>
+  </tr>
+  
+  <tr class="notes-row">
+    <th><strong>Notes:</strong></th>
+    <td><%= simple_format(@gel_lane.notes) %></td>
+  </tr>
+</table>
+
+<%= link_to 'Back', gel_lanes_path %>

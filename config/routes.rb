@@ -1,5 +1,7 @@
 Pulsar::Application.routes.draw do
 
+  resources :agarose_gels
+  resources :gel_lanes
   resources :chipseq_experiments do
     get :add_biosample_replicate, on: :member
   end

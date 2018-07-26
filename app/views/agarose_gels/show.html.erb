@@ -1,0 +1,34 @@
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @agarose_gel } %>
+<header>                                                                                               
+  <h1><%= @agarose_gel.display() %></h1>                                                                  
+                                                                                                       
+  <ul class="actions">                                                                                 
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @agarose_gel} %>        
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @agarose_gel} %>  
+  </ul>                                                                                                
+</header>                                                                                              
+                                                                                                       
+<%= render partial: "application_partials/record_meta", locals: { record: @agarose_gel } %>
+<table class="attributes">
+  <tr>
+    <th><strong>Percent agarose:</strong></th>
+    <td><%= "#{@agarose_gel.percent_agarose}%" %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Voltage:</strong></th>
+    <td><%= "#{@agarose_gel.voltage} volts" %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Run date:</strong></th>
+    <td><%= @agarose_gel.run_date %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Notes:</strong></th>
+    <td><%= @agarose_gel.notes %></td>
+  </tr>
+</table>
+
+<%= link_to 'Back', agarose_gels_path %>

@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   include Elasticsearch::Model                                                                         
   include Elasticsearch::Model::Callbacks
   has_many :addresses, dependent: :nullify
+  has_many :agarose_gels, dependent: :nullify
   has_many :analyses, dependent: :nullify
   has_many :antibodies, dependent: :nullify
   has_many :antibody_purifications, dependent: :nullify
@@ -26,6 +27,7 @@ class User < ActiveRecord::Base
   has_many :donor_constructs, dependent: :nullify
   has_many :experiment_types, dependent: :nullify
   has_many :file_references, dependent: :nullify
+  has_many :gel_lanes, dependent: :nullify
   has_many :isotypes, dependent: :nullify
   has_many :libraries, dependent: :nullify
   has_many :library_fragmentation_methods, dependent: :nullify
