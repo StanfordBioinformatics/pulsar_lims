@@ -4,6 +4,11 @@
 
 
 $ ->                                                                                                   
+  #Refresh the data_storages list in the form when the refresh fa-icon is clicked:                   
+  $(document).on "click", ".file_reference_data_data_storage i.refresh", (event) ->                            
+    $.get "/data_storages/select_options", (responseText,status,jqXHR) ->                            
+      $(".file_reference_data_storage select").html(responseText) 
+
   #Refresh the data_file_types list in the form when the refresh fa-icon is clicked:                   
   $(document).on "click", ".file_reference_data_file_type i.refresh", (event) ->                            
     $.get "/data_file_types/select_options", (responseText,status,jqXHR) ->                            
