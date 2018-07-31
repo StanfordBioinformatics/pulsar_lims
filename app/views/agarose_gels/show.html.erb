@@ -7,6 +7,8 @@
     <%= render partial: "application_partials/auth_destroy_record", locals: {record: @agarose_gel} %>  
   </ul>                                                                                                
 </header>                                                                                              
+
+<span id="record_id" style="display: hidden;"><%= @agarose_gel.id %></span>
                                                                                                        
 <%= render partial: "application_partials/record_meta", locals: { record: @agarose_gel } %>
 <table class="attributes">
@@ -31,4 +33,14 @@
   </tr>
 </table>
 
+<h3 class="section">Agarose Gel</h3>
+<div style="overflow: auto; max-width: 95%;">
+  <%= render partial: "gel_lanes/headers" %>
+  <div class="agarose-gel-lanes" %>
+  </div>
+</div>
+</br>
+<%= link_to "Add lane", add_lane_agarose_gel_path(@agarose_gel), class: "add-agarose-gel-lane-btn reg-btn", remote: true %>
+
+</br></br>
 <%= link_to 'Back', agarose_gels_path %>

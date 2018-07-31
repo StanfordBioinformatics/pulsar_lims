@@ -12,9 +12,10 @@
 //@import "responsive.scss";
 
 @import "admin/application";
-@import "reference_genomes";
+@import "agarose_gels";
 @import "libraries";
 @import "plates";
+@import "reference_genomes";
 @import "sequencing_library_prep_kits";
 
 @media (max-width: $screen-xs-min) {
@@ -46,6 +47,11 @@
   body {
     font-size: 1.6em;
   }
+}
+
+.section {
+  padding-bottom: 0.3em;
+  border-bottom: 2px solid #bfbfbf;
 }
 
 .hbtm--remove {

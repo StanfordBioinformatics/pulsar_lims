@@ -10,6 +10,9 @@ class GelLane < ActiveRecord::Base
   belongs_to :user
   belongs_to :sample_concentration_units, class_name: "ConcentrationUnit"
 
+  validates :sample_concentration, presence: true
+  validates :sample_concentration_units_id, presence: true
+
   scope :persisted, lambda { where.not(id: nil) }
 
   def self.policy_class                                                                                

@@ -1,5 +1,20 @@
 class AgaroseGelsController < ApplicationController
-  before_action :set_agarose_gel, only: [:show, :edit, :update, :destroy]
+  before_action :set_agarose_gel, only: [:show, :edit, :update, :destroy, :add_lane, :create_gel_lane]
+  skip_after_action :verify_authorized, only: [:add_lane, :create_gel_lane]
+
+  def add_lane
+    # Called in /views/agarose_gels/show.html.erb via AJAX to add a new row for entering a 
+    # GelLane.
+    @gel_lane = @agarose_gel.gel_lanes.build()
+    flash[:redirect] = "show"
+    render partial: "agarose_gels/add_lane", layout: false
+  end
+
+  def create_gel_lane
+    lane = agarose_gel_params[:gel_lanes_attributes][0] # Index the dict with only key being 0.
+    @gel_lane = GelLane.create(lane)
+    render partial: "agarose_gels/add_lane", layout: false
+  end
 
   def index
     super
@@ -63,6 +78,18 @@ class AgaroseGelsController < ApplicationController
         :notes,
         :percent_agarose, 
         :run_date,
-        :voltage)
+        :voltage,
+        gel_lanes_attributes:  [
+          :actual_product_size,                                                                        
+          :agarose_gel_id,                                                                             
+          :expected_product_size,                                                                      
+          :lane_number,                                                                                
+          :sample_concentration,                                                                       
+          :sample_concentration_units_id,                                                              
+          :sample_volume,                                                                              
+          :notes,                                                                                      
+          :pass,                                                                                       
+          :submitter_comments  
+        ])
     end
 end

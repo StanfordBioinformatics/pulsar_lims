@@ -1,22 +1,12 @@
-<%= simple_form_for(@gel_lane) do |f| %>
+<%= f.association :agarose_gel, as: :hidden %>
 
-  <%= f.input :lane_number %>
-  <%= f.input :sample_volume, placeholder: "µL", label_html: {"data-toggle": "tooltip", title: "The volume in µL of sample loaded into this lane of the gel."} %>
-
-  <label for="gel_lane_sample_concentration" data-toggle="tooltip" title="The concentration of biosample loaded into the well."><span>Sample concentration</span></label>
-  <%= f.input_field :sample_concentration %>
-  <label for="gel_lane_sample_concentration_units" data-toggle="tooltip" title="The concentration units for the sample concentration field."><span>Units</span></label>
-  <%= f.input_field :sample_concentration_units_id, collection: ConcentrationUnit.all %>
-  </br></br>
-
-  <%= f.input :expected_product_size, placeholder: "kDa" %>
-  <%= f.input :actual_product_size, placeholder: "kDa" %>
-  <%= f.input :pass %>
-  <%= f.input :submitter_comments %>
-  <%= f.input :notes %>
-
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn-primary" %>
-  </div>
-<% end %>
-</br>
+<%= f.input :lane_number, label: false %>
+<%= f.input :sample_volume, label: false, placeholder: "µL", label_html: {"data-toggle": "tooltip", title: "The volume in µL of sample loaded into this lane of the gel."} %>
+  
+<%= f.input :sample_concentration, label: false %>
+<%= f.input :sample_concentration_units_id, label: false, collection: ConcentrationUnit.all %>
+<%= f.input :expected_product_size, label: false, placeholder: "kDa" %>
+<%= f.input :actual_product_size, label: false, placeholder: "kDa" %>
+<%= f.input :pass, as: :select, default: true, label: false %>
+<%= f.input :submitter_comments, label: false %>
+<%= f.input :notes, label: false %>
