@@ -97,6 +97,7 @@ class AgaroseGelsController < ApplicationController
         :run_date,
         :voltage,
         gel_lanes_attributes:  [
+          :id,
           :actual_product_size,                                                                        
           :agarose_gel_id,                                                                             
           :expected_product_size,                                                                      

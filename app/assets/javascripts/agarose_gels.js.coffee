@@ -10,6 +10,7 @@ $ ->
     event.preventDefault()
     event.stopPropagation()
     $form =  $(this).closest("form")
+    alert($form.serialize())
     $.post "/agarose_gels/" + $("#record_id").text() + "/create_or_update_gel_lane", $form.serialize(), (data) ->
       $form.replaceWith(data) 
 
