@@ -1,3 +1,7 @@
+<!-- Add hidden element to serve as a status check for jQuery to know whether this record exists or not. -->
+<% if @gel_lane.id.present? %>
+  <span style="display: none" id="gel-lane-persisted"></span>
+<% end %>
 <%= f.association :agarose_gel, as: :hidden %>
 
 <%= f.input :lane_number, label: false %>

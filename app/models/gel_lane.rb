@@ -10,6 +10,8 @@ class GelLane < ActiveRecord::Base
   belongs_to :user
   belongs_to :sample_concentration_units, class_name: "ConcentrationUnit"
 
+  validates :lane_number, presence: true
+  validates_uniqueness_of :lane_number, scope: [:agarose_gel]
   validates :sample_concentration, presence: true
   validates :sample_concentration_units_id, presence: true
 

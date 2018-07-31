@@ -37,6 +37,10 @@
 <div style="overflow: auto; max-width: 95%;">
   <%= render partial: "gel_lanes/headers" %>
   <div class="agarose-gel-lanes" %>
+    <% @agarose_gel.gel_lanes.order(:lane_number).each do |lane| %>
+      <% @gel_lane = lane %>
+      <%= render partial: "agarose_gels/add_lane" %>
+    <% end %>
   </div>
 </div>
 </br>

@@ -2,7 +2,8 @@ Pulsar::Application.routes.draw do
 
   resources :agarose_gels do
     get :add_lane, on: :member
-    post :create_gel_lane, on: :member
+    post :create_or_update_gel_lane, on: :member
+    delete :remove_gel_lane, on: :member
   end
   resources :gel_lanes
   resources :chipseq_experiments do

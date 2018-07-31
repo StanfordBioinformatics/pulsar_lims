@@ -1,6 +1,12 @@
-<%= simple_form_for @agarose_gel, url: {action: "create_gel_lane"}, html: {remote: true, method: :post, class: "gel-lane-form"} do |f| %>
+<%= simple_form_for @agarose_gel, html: {method: :post, class: "gel-lane-form"} do |f| %>
   <%= f.simple_fields_for :gel_lanes, @gel_lane do |ff| %>
     <%= render partial: "gel_lanes/form", locals: {f: ff} %>
   <% end %>
-  <%= f.button :submit, "Create", action: :create_gel_lane, class: "btn-primary agarose-gel-create-lane-btn" %>
+  <div style="display: flex; align-items: flex-start;">
+    <% if not @gel_lane.persisted? %>
+      <%= f.button :submit, "Create", class: "btn-primary agarose-gel-create-lane-btn", style: "padding: 0.3em; margin-right: 1em;" %>
+    <% end %>
+    <!-- Also add button to delete gel_lane form (whether gel_lane is persisted or not -->
+    <%= link_to fa_icon("trash lg"), remove_gel_lane_agarose_gel_path(gel_lane_id: @gel_lane.id), method: :delete, class: "agarose-gel-remove-gel-lane", remote: true %>
+  </div>
 <% end %>

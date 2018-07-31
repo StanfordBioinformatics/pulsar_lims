@@ -1,6 +1,6 @@
 class AgaroseGelsController < ApplicationController
-  before_action :set_agarose_gel, only: [:show, :edit, :update, :destroy, :add_lane, :create_gel_lane]
-  skip_after_action :verify_authorized, only: [:add_lane, :create_gel_lane]
+  before_action :set_agarose_gel, only: [:show, :edit, :update, :destroy, :add_lane, :create_or_update_gel_lane, :remove_gel_lane]
+  skip_after_action :verify_authorized, only: [:add_lane, :create_or_update_gel_lane, :remove_gel_lane]
 
   def add_lane
     # Called in /views/agarose_gels/show.html.erb via AJAX to add a new row for entering a 
@@ -10,10 +10,27 @@ class AgaroseGelsController < ApplicationController
     render partial: "agarose_gels/add_lane", layout: false
   end
 
-  def create_gel_lane
-    lane = agarose_gel_params[:gel_lanes_attributes][0] # Index the dict with only key being 0.
-    @gel_lane = GelLane.create(lane)
+  def create_or_update_gel_lane
+    gel_lane_params = agarose_gel_params[:gel_lanes_attributes]["0"] # Index the dict with only key being 0.
+    if gel_lane_params[:id].present?
+      # Then do an update
+      @gel_lane = GelLane.find(gel_lane_params[:id])
+      @gel_lane.update(gel_lane_params)
+    else
+      # Create it
+      @gel_lane = GelLane.create(gel_lane_params)
+    end
     render partial: "agarose_gels/add_lane", layout: false
+  end
+
+  def remove_gel_lane 
+    gel_lane_id = params[:gel_lane_id]
+    # May be that the user never saved the gel_lane in the form and just wants to remove it. 
+    if gel_lane_id.present?
+      @gel_lane = GelLane.find(gel_lane_id)
+      @gel_lane.destroy!
+    end
+    render json: {}, status: :no_content
   end
 
   def index
