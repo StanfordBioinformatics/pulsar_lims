@@ -1,14 +1,14 @@
 <%= simple_form_for(@cloning_vector, html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @cloning_vector } %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @cloning_vector } %>
 
   <%= f.input :name, {"data-toggle" => "tooltip", "title" => "Unique name"} %>
   <%= f.input :description %>
   <%= render partial: "vendors/fieldset_input", locals: {f: f, url: true} %> 
-	<% file_upload_hint="" %>
-	<% if @cloning_vector.map.present? %>
-		<% file_upload_hint="You previously uploaded #{@cloning_vector.map}." %>
-	<% end %>
-	<%= f.input :map, as: :file, label: "Map image", hint: file_upload_hint, input_html: {class: "image"} %>
+  <% file_upload_hint="" %>
+  <% if @cloning_vector.map.present? %>
+    <% file_upload_hint="You previously uploaded #{@cloning_vector.map}." %>
+  <% end %>
+  <%= f.input :map, as: :file, label: "Map image", hint: file_upload_hint, input_html: {class: "image"} %>
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   <div class="form-actions">

@@ -3,7 +3,7 @@
   grid-gap: 0.5em;
   margin: 0;
   padding: 0;
-  grid-template-columns: repeat(7, 8em) repeat(2, 15em) 4em;
+  grid-template-columns: 3em repeat(6, 8em) repeat(2, 15em) 4em;
   align-items: center;
 }
 
@@ -17,6 +17,7 @@
 .gel-lane-form {
   & > div > * {
     padding: 0;
+    padding-left: 0.5em;
     margin: 0;
   }
   & > div {

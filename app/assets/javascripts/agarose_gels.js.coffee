@@ -4,13 +4,12 @@ $ ->
 
   $(".add-agarose-gel-lane-btn").on "ajax:success", (event,data) ->
     $lanes = $(".agarose-gel-lanes")
-    $lanes.after(data)
+    $lanes.append(data)
 
   $(document).on "click", ".agarose-gel-create-lane-btn", (event) -> 
     event.preventDefault()
     event.stopPropagation()
     $form =  $(this).closest("form")
-    alert($form.serialize())
     $.post "/agarose_gels/" + $("#record_id").text() + "/create_or_update_gel_lane", $form.serialize(), (data) ->
       $form.replaceWith(data) 
 

@@ -28,11 +28,11 @@
 
 <tr>
   <th><strong>Product url:</strong></th>
-	<% if @cloning_vector.product_url.present? %>
-  	<td><%= link_to @cloning_vector.product_url, @cloning_vector.product_url %></td>
-	<% else %>
-		<td></td>
-	<% end %>
+  <% if @cloning_vector.product_url.present? %>
+    <td><%= link_to @cloning_vector.product_url, @cloning_vector.product_url %></td>
+  <% else %>
+    <td></td>
+  <% end %>
 </tr>
 
 <tr>
@@ -41,12 +41,12 @@
 </tr>
 
 <tr>
-	<th><strong>Map</strong></th>
-	<% if @cloning_vector.map.present? %>
-		<td><%= image_tag @cloning_vector.map, alt: "Map", class: "map-img" %></td>
-	<% else %>
-		<td></td>
-	<% end %>
+  <th><strong>Map</strong></th>
+  <% if @cloning_vector.map.present? %>
+    <td><%= image_tag @cloning_vector.map, alt: "Map", class: "map-img" %></td>
+  <% else %>
+    <td></td>
+  <% end %>
 </tr>
 
   <tr class="notes-row">                                                                               

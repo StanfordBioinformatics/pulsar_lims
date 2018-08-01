@@ -1,4 +1,10 @@
-<%= simple_form_for(@agarose_gel) do |f| %>
+<%= simple_form_for(@agarose_gel, html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
+
+  <% file_upload_hint="" %>
+  <% if @agarose_gel.gel_image.present? %>
+    <% file_upload_hint="You previously uploaded #{@agarose_gel.gel_image}." %>
+  <% end %>
+  <%= f.input :gel_image, as: :file, label: "Gel image", hint: file_upload_hint, input_html: {class: "image"} %>
 
   <%= f.input :percent_agarose, placeholder: "%" %>
   <%= f.input :voltage, placeholder: "volts" %>

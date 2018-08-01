@@ -1,6 +1,7 @@
 class AgaroseGelsController < ApplicationController
   before_action :set_agarose_gel, only: [:show, :edit, :update, :destroy, :add_lane, :create_or_update_gel_lane, :remove_gel_lane]
   skip_after_action :verify_authorized, only: [:add_lane, :create_or_update_gel_lane, :remove_gel_lane]
+  before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def add_lane
     # Called in /views/agarose_gels/show.html.erb via AJAX to add a new row for entering a 
@@ -18,7 +19,9 @@ class AgaroseGelsController < ApplicationController
       @gel_lane.update(gel_lane_params)
     else
       # Create it
-      @gel_lane = GelLane.create(gel_lane_params)
+      payload = gel_lane_params
+      payload.update({user_id: current_user.id})
+      @gel_lane = GelLane.create(payload)
     end
     render partial: "agarose_gels/add_lane", layout: false
   end
@@ -92,6 +95,7 @@ class AgaroseGelsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def agarose_gel_params
       params.require(:agarose_gel).permit(
+        :gel_image,
         :notes,
         :percent_agarose, 
         :run_date,
@@ -109,5 +113,12 @@ class AgaroseGelsController < ApplicationController
           :pass,                                                                                       
           :submitter_comments  
         ])
+    end
+
+    def set_s3_direct_post                                                                             
+      @s3_direct_post = S3_BUCKET.presigned_post(key: "images/gels/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+      #From the AWS docs, regarding the 201 here: If the value is set to 201, Amazon S3 returns an XML document with a 201 status code.
+      #If we don't set the acl, then the file is not readable by others.                               
+      #Also using #{SecureRandom.uuid} so that users don't overwrite an existing file with the same name.
     end
 end
