@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180801064314) do
+ActiveRecord::Schema.define(version: 20180802051653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20180801064314) do
     t.float    "voltage"
     t.float    "percent_agarose"
     t.string   "gel_image"
+    t.text     "caption"
   end
 
   add_index "agarose_gels", ["user_id"], name: "index_agarose_gels_on_user_id", using: :btree

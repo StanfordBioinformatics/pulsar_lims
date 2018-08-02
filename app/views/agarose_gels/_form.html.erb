@@ -5,6 +5,7 @@
     <% file_upload_hint="You previously uploaded #{@agarose_gel.gel_image}." %>
   <% end %>
   <%= f.input :gel_image, as: :file, label: "Gel image", hint: file_upload_hint, input_html: {class: "image"} %>
+  <%= f.input :caption, label_html: {"data-toggle": "tooltip", "title": "A short description of the gel image to be shown alongside the image when viewed."} %>
 
   <%= f.input :percent_agarose, placeholder: "%" %>
   <%= f.input :voltage, placeholder: "volts" %>

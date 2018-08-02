@@ -30,6 +30,12 @@ class Well < ActiveRecord::Base
   end
 
   def get_library
+    # Biosamples can have many Libraries. A Biosample on a Well, however, has different application
+    # semantics. Such a Biosample should only have a single Library; if more than only the first is
+    # considered here. 
+    if self.biosample.blank? or self.biosample.libraries.blank?
+      return nil
+    end
     return self.biosample.libraries.first
   end
 

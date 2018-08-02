@@ -23,3 +23,4 @@ $ ->
   $(document).on "ajax:success", ".agarose-gel-remove-gel-lane", (event, data) ->
     $form = $(this).closest("form")
     $form.fadeOut()
+

@@ -3,6 +3,7 @@ class AgaroseGelSerializer < ActiveModel::Serializer
   embed :ids
 
   attributes :id, 
+             :caption,
              :gel_image,
              :notes,
              :percent_agarose, 

@@ -241,7 +241,9 @@ Pulsar::Application.routes.draw do
 
   resources :attachments, only: [:show,:new]
 
-  resources :welcome, only: [:index]
+  resources :welcome, only: [:index] do
+    get :modal_for_image, on: :collection
+  end
 
   resources :reference_genomes do
     resources :chromosomes, except: [:index]

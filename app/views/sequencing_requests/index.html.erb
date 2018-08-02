@@ -6,7 +6,7 @@
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
-  </ul> 	
+  </ul>   
 </header>
 
 <table class="attributes index">
@@ -16,10 +16,10 @@
       <th>Comment</th>
       <th>Sequencing platform</th>
       <th>Sequencing center</th>
-			<th>Concentration</th>
-			<th>Paired-end</th>
+      <th>Concentration</th>
+      <th>Paired-end</th>
       <th>Shipped</th>
-			<th>Sequencing runs</th>
+      <th>Sequencing runs</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -31,22 +31,22 @@
         <td><%= rec.comment %></td>
         <td><%= link_to rec.sequencing_platform.name, rec.sequencing_platform %></td>
         <td><%= link_to rec.sequencing_center.name, rec.sequencing_center %></td>
-				<% if rec.concentration.present? %>
-					<td><%= rec.concentration %>&nbsp;<%= rec.concentration_unit.name %></td>
-				<% else %>
-					<td></td>
-				<% end %>
+        <% if rec.concentration.present? %>
+          <td><%= rec.concentration %>&nbsp;<%= rec.concentration_unit.name %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td><%= rec.paired_end%></td>
         <td><%= rec.shipped %></td>
         <td>
-		  		<% if rec.sequencing_runs.present? %>
+          <% if rec.sequencing_runs.present? %>
               <%= render partial: "application_partials/link_to_has_many", locals: {links: rec.sequencing_runs} %>
-  				<% end %>
+          <% end %>
         </td>
         <td>
-					<%= link_to fa_icon("pencil"), edit_sequencing_request_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_sequencing_request_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -95,6 +95,7 @@ class AgaroseGelsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def agarose_gel_params
       params.require(:agarose_gel).permit(
+        :caption,
         :gel_image,
         :notes,
         :percent_agarose, 

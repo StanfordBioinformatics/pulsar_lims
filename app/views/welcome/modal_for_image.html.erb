@@ -3,15 +3,10 @@
 
      CSS for the modal logic is in application.scss. The modal class sets "display: none".
 -->
-<div id="select_plates_modal" class="modal"> 
+<div class="modal"> 
   <div class="modal-content">
     <span class="close-modal"><%= fa_icon("window-close") %></span>
-    <h3 class="display-3">Select Plates</h3>
-    <%= simple_form_for @sequencing_request do |f| %>
-      <%= f.association :plates, collection: @plates %>
-      <div class="form-actions">
-        <%= f.button :submit, "Add Plates", class: "btn-primary", input_html: {name: "sreq_add_plates_submit"} %>
-      </div>
-    <% end %>
+    <p><%= @caption %></p>
+    <%= image_tag @image_url, style: "max-width: 100%;" %>
   </div>
 </div>

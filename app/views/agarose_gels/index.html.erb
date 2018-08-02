@@ -16,6 +16,7 @@
       <th>Percent agarose</th>
       <th>Voltage</th>
       <th>Run date</th>
+      <th>Gel image</th>
       <th>Notes</th>
       <th>Actions</th>
     </tr>
@@ -28,6 +29,11 @@
         <td><%= "#{rec.percent_agarose}%" %></td>
         <td><%= "#{rec.voltage} volts" %></td>
         <td><%= rec.run_date %></td>
+        <td>
+          <% if rec.gel_image.present? %>
+            <%= link_to File.basename(rec.gel_image), rec.gel_image, data: {"caption": rec.caption}, class: "modal-for-image" %>
+          <% end %>
+        </td>
         <td><%= rec.notes %></td>
         <td>
           <%= link_to fa_icon("pencil"), edit_agarose_gel_path(rec) %>
@@ -39,5 +45,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Agarose gel', new_agarose_gel_path %>

@@ -11,40 +11,40 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @sequencing_result } %>
 
 <table class="attributes">
-		<tr>
-		  <th><strong>Sequencing result:</strong></th>
-	  	<td><%= link_to @sequencing_result.sequencing_run.name, [@sequencing_request,@sequencing_run] %></td>
-		</tr>
-	
-		<tr>
-		  <th><strong>Library:</strong></th>
-	  	<td><%= link_to @sequencing_result.library.name, @sequencing_result.library %></td>
-		</tr>
-	
-		<tr>
-	  	<th><strong>Comment:</strong></th>
-	  	<td><%= @sequencing_result.comment %></td>
-		</tr>
-	
-		<tr>
-	  	<th><strong>Read1 uri:</strong></th>
-	  	<td><%= @sequencing_result.read1_uri %></td>
-		</tr>
-	
-		<tr>
-	  	<th><strong>Read2 uri:</strong></th>
-	  	<td><%= @sequencing_result.read2_uri %></td>
-		</tr>
-	
-		<tr>
-	  	<th><strong>Read1 count:</strong></th>
-	  	<td><%= @sequencing_result.read1_count %></td>
-		</tr>
-	
-		<tr>
-	  	<th><strong>Read2 count:</strong></th>
-	  	<td><%= @sequencing_result.read2_count %></td>
-		</tr>
+    <tr>
+      <th><strong>Sequencing result:</strong></th>
+      <td><%= link_to @sequencing_result.sequencing_run.name, [@sequencing_request,@sequencing_run] %></td>
+    </tr>
+  
+    <tr>
+      <th><strong>Library:</strong></th>
+      <td><%= link_to @sequencing_result.library.name, @sequencing_result.library %></td>
+    </tr>
+  
+    <tr>
+      <th><strong>Comment:</strong></th>
+      <td><%= @sequencing_result.comment %></td>
+    </tr>
+  
+    <tr>
+      <th><strong>Read1 uri:</strong></th>
+      <td><%= @sequencing_result.read1_uri %></td>
+    </tr>
+  
+    <tr>
+      <th><strong>Read2 uri:</strong></th>
+      <td><%= @sequencing_result.read2_uri %></td>
+    </tr>
+  
+    <tr>
+      <th><strong>Read1 count:</strong></th>
+      <td><%= @sequencing_result.read1_count %></td>
+    </tr>
+  
+    <tr>
+      <th><strong>Read2 count:</strong></th>
+      <td><%= @sequencing_result.read2_count %></td>
+    </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    

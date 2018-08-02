@@ -16,7 +16,7 @@
 //= require_tree .
 
 //Nathaniel Watson notes:
-// While in dev mode, it appears that any updates to this file are not be reflected in the browser until the browser cache 
+// While in dev mode, it appears that any updates to this file are not be reflected in the browser until the browser cache
 // has been cleared. This is at least the case with Google Chrome. Modifying other JS files in this directory don't appear
 // to need a clearning of the browser cache, as the changes take effect immediately.
 
@@ -43,6 +43,30 @@
 //  $("select",document).attr("size","8");
 //})
 
+// A click handler for elements with the class ".modal-for-image", which is geared towards
+// anchor and img elements that have a picture to show up front. For example, in the index view of
+// AgaroseGels, when the user clicks on the link to a gel image, this will cause a popup to show
+// with the image and caption.
+$(function() {
+    $(".modal-for-image").on("click", function(event, data) {
+        event.preventDefault();
+        event.stopPropagation();
+        node_name = this.nodeName;
+        if (node_name === "A") {
+            image_url = $(this).prop("href");
+        } else if (node_name == "IMG") {
+            image_url = $(this).prop("src");
+        }
+        // Caption is optional. If a caption is desired to be display alongside the image, then
+        // the link or image tag needs to define caption as a data attribute.
+        caption = $(this).data("caption");
+        $.get("/welcome/modal_for_image", {"image_url": image_url, "caption": caption}, function(data) {
+            $(document.body).append(data);
+            $(".modal").show();
+        })
+    })
+})
+
 //Close flash messages with a fade out when the 'x' is clicked:
 $(function() {
   $("a.close").on("click", function(event){
@@ -53,17 +77,17 @@ $(function() {
 })
 
 $(function() {
-  //Add edit fa-icon for editing the notes attribute of a record in the show view  
+  //Add edit fa-icon for editing the notes attribute of a record in the show view
   $(".notes-row strong").after('<i style="padding-left: 0.6em;" class="edit-notes-pencil fa fa-pencil"></i>')
   $(document).on("click", ".edit-notes-pencil", function(event) {
     $(".edit-notes-pencil").hide();
     orig = $(".notes-row td").html(); // Save a reference to whatever is currently there.
     // Set the td cell to a form field for the notes attribute. This form field is rendered in _form.html.erb
-    // from a 
-    // partial at /app/views/application_partials/_edit_notes.html.erb, and has a div wrapper with 
+    // from a
+    // partial at /app/views/application_partials/_edit_notes.html.erb, and has a div wrapper with
     // class 'notes-to-edit', a Cancel button to close the form, and a Submit button to update the
-    // record. 
-    $(".notes-row td").html($(".notes-to-edit").clone().show()); 
+    // record.
+    $(".notes-row td").html($(".notes-to-edit").clone().show());
     $(".cancel-edit-notes").on("click", function(event) {
       event.preventDefault();
       event.stopPropagation();
@@ -99,10 +123,10 @@ $(function() {
 
 
   //This block is specific for the index views with regards to displaying the model's definition.
-  //For this to work properly, for a given index view you must add the class "index-page-header" to <h1> tag (or <h2>, <h3>, etc) in the 
-  // <header> tag and code a block element immediately after the <h1> tag with a class of 'model-definition'. 
+  //For this to work properly, for a given index view you must add the class "index-page-header" to <h1> tag (or <h2>, <h3>, etc) in the
+  // <header> tag and code a block element immediately after the <h1> tag with a class of 'model-definition'.
   // I suggest using a <p> tag. The textual content of the block should be a definition describing the models purpose.
-  // I suggest storing the definition as a class variable within the model's own class, and referencing this within the block using ERB. 
+  // I suggest storing the definition as a class variable within the model's own class, and referencing this within the block using ERB.
   // Take a look at app/views/crispr_modifications/index.html.erb for an example.
 
   $model_definition = $("header .model-definition");
@@ -112,23 +136,23 @@ $(function() {
     //Add a fa-icon plus sign that the user can click in the <header> element to trigger the display of the model's definition.
     $(".index-page-header").css("display","inline-block").after('<span class="define-model btn fa fa-plus-square-o"></span>');
     $define_model_btn = $(".define-model"); //A button that, when clicked, expands to show the model's definition.
-  
+
     $define_model_btn.on("click", function(event) {
       event.stopPropagation();
       $(this).hide();
       //First wrap definition in <div> in order to add a btn (fa-thumbs-up icon) to hide the definition content.
-      // when the user clicks on it. This will only happen the first time the user clicks on the fa-plus btn. 
+      // when the user clicks on it. This will only happen the first time the user clicks on the fa-plus btn.
       definition_wrapper_id = "definition_wrapper";
       $definition_wrapper = $("#" + definition_wrapper_id); //Not defined until after first click of $(".define-model").
       if ( $definition_wrapper.length == 0 ) {
         //Then this is the first time the user is clicking to view the model definition.
         $model_definition.wrap('<div id="' + definition_wrapper_id + '" style="padding: 1em; margin-bottom: 1em; background-color: #ffffcc;">');
         //See w3schools color picker at https://www.w3schools.com/colors/colors_picker.asp
-        // #ffffcc is a creamy white color. 
+        // #ffffcc is a creamy white color.
         $definition_wrapper = $("#" + definition_wrapper_id);
         //Add thumbs-up icon that, when clicked, closes the model definition.
-        $model_definition.append('&nbsp;</br><span style="margin-top: 1em;font-size: 0.9em;" class="btn btn-default fa fa-thumbs-up hide-model-definition"></span>') 
-        
+        $model_definition.append('&nbsp;</br><span style="margin-top: 1em;font-size: 0.9em;" class="btn btn-default fa fa-thumbs-up hide-model-definition"></span>')
+
         //Register handler to close the definition.
         $(".hide-model-definition").on("click",function(event) {
           event.stopPropagation();
@@ -136,9 +160,9 @@ $(function() {
             $define_model_btn.show();
           })
         })
-  
+
         $model_definition.show();
-  
+
       }
       else {
         $definition_wrapper.show();
@@ -147,10 +171,10 @@ $(function() {
   }
 
 
-  //Delete table rows when the user clicks on the trash icon. Does so remotely w/o a page refresh. 
+  //Delete table rows when the user clicks on the trash icon. Does so remotely w/o a page refresh.
   //Create variable that can be used in all other JavaScript files. This one is to add the asterisk next to the label
   // of an input field when the is conditional requirements. For an example of a conditional requirement, see
-  // data_storages.js.coffee, which referneces this variable. 
+  // data_storages.js.coffee, which referneces this variable.
 
   $("tr a .fa-trash").on("click",function(event) {
     event.preventDefault();
@@ -159,7 +183,7 @@ $(function() {
       url = $(this).closest("a").attr("href");
       $tr = $(this).closest("tr");
       $.ajax(url, {
-        method: "DELETE", 
+        method: "DELETE",
         dataType: "json",
         error: function(xhr,errmsg,err) {
           msg = JSON.parse(xhr.responseText)
@@ -210,7 +234,7 @@ $(function() {
   $("label[data-toggle='tooltip']",document).append('<sup><i style="padding-left: 0.4em;" class="fa fa-info-circle"></i></sup>');
   $(document).on("click",".close-modal",function(event) {
     $(".modal").hide();
-  }) 
+  })
   window.onclick = function(event) {
     if (event.target.className == "modal") {
       //i.e. see model in views/sequencing_requests/select_scs_plates.html.erb, which is displayed when
@@ -220,7 +244,7 @@ $(function() {
   }
   $('[data-toggle="tooltip"]').attr("data-delay",800)
   $('[data-toggle="tooltip"]').tooltip({ trigger: 'hover', placement: 'right' })
-  //Above I pass in { trigger: 'click' } - the default is "trigger: 'focus'". The default is an issue for 
+  //Above I pass in { trigger: 'click' } - the default is "trigger: 'focus'". The default is an issue for
   //inputs such as checkboxes that maintain focus after selection until another elements gains focus.
 });
 
