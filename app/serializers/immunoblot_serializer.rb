@@ -9,6 +9,7 @@ class ImmunoblotSerializer < ActiveModel::Serializer
              :created_at,
              :updated_at
 
+  has_one :analyst
   has_one :primary_antibody
   has_one :primary_antibody_concentration
   has_one :primary_antibody_concentration_units

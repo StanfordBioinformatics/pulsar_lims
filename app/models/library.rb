@@ -20,7 +20,7 @@ class Library < ActiveRecord::Base
   # as a template for making library objects associated to the each biosample in each well of each plate present on the singe_cell_sorting. 
   belongs_to :barcode
   belongs_to :biosample
-  belongs_to :concentration_unit
+  belongs_to :concentration_unit, class_name: "Unit"
   belongs_to :from_prototype, class_name: "Library"
   has_many   :prototype_instances, class_name: "Library", foreign_key: "from_prototype_id", dependent: :restrict_with_exception
   belongs_to :library_fragmentation_method
@@ -42,6 +42,7 @@ class Library < ActiveRecord::Base
   validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"
   validates :concentration, presence: {message: "must be specified when the units are set."}, if: "concentration_unit.present?"
   validates :sequencing_library_prep_kit_id, presence: true
+  validate :validate_concentration_units
 
   accepts_nested_attributes_for :documents, allow_destroy: true
   accepts_nested_attributes_for :sequencing_requests, allow_destroy: true
@@ -152,6 +153,15 @@ class Library < ActiveRecord::Base
   end
 
   private
+
+  def validate_concentration_units
+    if self.concentration_unit.present?
+      if self.concentration_unit.unit_type != "concentration"
+        self.errors.add(:concentration_unit_id, "must be a concentration type of unit.")
+        return false
+      end
+    end
+  end
 
   def check_plated
     if biosample.present? and self.biosample.plated?

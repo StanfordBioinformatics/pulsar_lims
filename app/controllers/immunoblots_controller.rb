@@ -61,12 +61,13 @@ class ImmunoblotsController < ApplicationController
     def immunoblot_params
       params.require(:immunoblot).permit(
         :agarose_gel_id, 
+        :analyst_id, 
         :date_performed, 
         :notes,
-        :primary_antibody,
+        :primary_antibody_id,
         :primary_antibody_concentration,
         :primary_antibody_concentration_units_id,
-        :secondary_antibody,
+        :secondary_antibody_id,
         :secondary_antibody_concentration,
         :secondary_antibody_concentration_units_id,
         :submitter_comments, 

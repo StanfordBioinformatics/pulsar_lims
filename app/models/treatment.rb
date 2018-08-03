@@ -9,7 +9,7 @@ class Treatment < ActiveRecord::Base
   DEFINITION = "A treatment applied to a biosample.  Model abbreviation: #{ABBR}"
   belongs_to :user
   belongs_to :treatment_term_name
-  belongs_to :concentration_unit
+  belongs_to :concentration_unit, class_name: "Unit"
   has_and_belongs_to_many :biosamples
   has_and_belongs_to_many :documents
 
@@ -19,10 +19,22 @@ class Treatment < ActiveRecord::Base
   validates :name, uniqueness: true, presence: true, length: { minimum: 2, maximum: 40 }, allow_blank: true
   validates :treatment_term_name_id, presence: true
   validates :treatment_type, presence: true, inclusion: {in: Enums::TREATMENT_TYPES, message: "must be an element from the list #{Enums::TREATMENT_TYPES}"}
+  validate :validate_concentration_unit
   scope :persisted, lambda { where.not(id: nil) }
 
   def self.policy_class 
     ApplicationPolicy
   end
+
+  private
+
+    def validate_concentration_unit                                                                    
+      if self.concentration_unit.present?                                                              
+        if self.concentration_unit.unit_type != "concentration"                                        
+          self.errors.add(:concentration_unit_id, "must be a concentration type of unit.")             
+          return false                                                                                 
+        end                                                                                            
+      end                                                                                              
+    end   
 end
 

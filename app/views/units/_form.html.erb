@@ -2,6 +2,7 @@
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @unit } %>
 
   <%= f.input :name %>
+  <%= f.input :unit_type, as: :select, collection: Enums::UNIT_TYPES %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

@@ -11,54 +11,48 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @treatment } %>               
                                                                                                        
 <table class="attributes">                                                                             
-	<tr>
-	  <th><strong>Name:</strong></th>
-	  <td><%= @treatment.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @treatment.name %></td>
+  </tr>
 
   <tr>
     <th><strong>Treatment term name:</strong></th>
     <td><%= link_to @treatment.treatment_term_name.name, @treatment.treatment_term_name %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Description:</strong></th>
-	  <td><%= @treatment.description %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Treatment type:</strong></th>
-	  <td><%= @treatment.treatment_type %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Concentration:</strong></th>
-	  <td><%= @treatment.concentration %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Concentration unit:</strong></th>
-    <td>
-      <% if @treatment.concentration.present? %>
-  	    <%= @treatment.concentration_unit.name %>
-      <% end %>
+  </tr>
+  
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @treatment.description %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Treatment type:</strong></th>
+    <td><%= @treatment.treatment_type %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Concentration:</strong></th>
+    <td><%= "#{@treatment.concentration} #{@treatment.concentration_unit.name}" %></td>
+  </tr>
+  
     </td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Duration:</strong></th>
-	  <td><%= @treatment.duration %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Duration units:</strong></th>
-	  <td><%= @treatment.duration_units %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Temperature Celsius:</strong></th>
-	  <td><%= @treatment.temperature_celsius %> &#8451;</td>
-	</tr>
+  </tr>
+  
+  <tr>
+    <th><strong>Duration:</strong></th>
+    <td><%= @treatment.duration %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Duration units:</strong></th>
+    <td><%= @treatment.duration_units %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Temperature Celsius:</strong></th>
+    <td><%= @treatment.temperature_celsius %> &#8451;</td>
+  </tr>
 
   <tr>                                                                                                 
     <th><strong>Documents:</strong></th>                                                               

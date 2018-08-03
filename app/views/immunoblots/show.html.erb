@@ -19,7 +19,11 @@
 
   <tr>
     <th><strong>Analyst:</strong></th>
-    <td><%= link_to @immunoblot.analyst.display(), @immunoblot.analyst %></td>
+    <td>
+      <% if @immunoblot.analyst.present? %>
+        <%= link_to @immunoblot.analyst.display(), @immunoblot.analyst %></td>
+      <% end %>
+    </td>
   </tr>
 
   <tr>
@@ -29,22 +33,30 @@
 
   <tr>
     <th><strong>Primary antibody conc.:</strong></th>
-    <td><%= "#{@immunoblot.primary_antibody_concentration} #{@immunoblot.primary_antibody_concentration_units.name}" %></td>
+    <td>
+      <% if @immunoblot.primary_antibody_concentration.present? %>
+        <%= "#{@immunoblot.primary_antibody_concentration} #{@immunoblot.primary_antibody_concentration_units.name}" %>
+      <% end %>
+    </td>
   </tr>
 
   <tr>
     <th><strong>Secondary antibody:</strong></th>
-    <td><%= link_to "#{@immunoblot.secondary_antibody.name} #{@immunoblot.secondary_antibody}" %></td>
+    <td><%= link_to @immunoblot.secondary_antibody.name, @immunoblot.secondary_antibody %></td>
   </tr>
 
   <tr>
     <th><strong>Secondary antibody conc.:</strong></th>
-    <td><%= "#{@immunoblot.secondary_antibody_concentration} #{@immunoblot.secondary_antibody_concentration_units.name}" %></td>
+    <td>
+      <% if @immunoblot.secondary_antibody_concentration.present? %>
+        <%= "#{@immunoblot.secondary_antibody_concentration} #{@immunoblot.secondary_antibody_concentration_units.name}" %>
+      <% end %>
+    </td>
   </tr>
 
   <tr>
     <th><strong>Agarose gel:</strong></th>
-    <td><%= @immunoblot.agarose_gel %></td>
+    <td><%= link_to @immunoblot.agarose_gel.display(), @immunoblot.agarose_gel %></td>
   </tr>
   
   <tr>

@@ -6,16 +6,16 @@
 
   <div style="display: flex;" %>
     <%= f.input :primary_antibody_concentration, wrapper_html: {style: "margin-right: 0.5em;"} %>
-    <%= f.association :primary_antibody_concentration_units, label: "Units" %>
+    <%= f.association :primary_antibody_concentration_units, collection: Unit.where(unit_type: "concentration"), label: "Units" %>
   </div>
 
   <%= f.association :secondary_antibody, label_html: {"data-toggle": "tooltip", "title": "The antibody used to target the primary antibody."} %>
   <div style="display: flex">
     <%= f.input :secondary_antibody_concentration, wrapper_html: {style: "margin-right: 0.5em;"} %>
-    <%= f.association :secondary_antibody_concentration_units, label: "Units" %>
+    <%= f.association :secondary_antibody_concentration_units, collection: Unit.where(unit_type: "concentration"), label: "Units" %>
   </div>
 
-  <%= f.association :agarose_gel %>
+  <%= f.association :agarose_gel, label_method: :display %>
   <%= f.input :submitter_comments %>
   <%= f.input :notes %>
 

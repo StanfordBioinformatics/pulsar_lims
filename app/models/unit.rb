@@ -7,7 +7,7 @@ class Unit < ActiveRecord::Base
   DEFINITION = "Stores units of concentration, mass, and volume. Model abbreviation: #{ABBR}"
   belongs_to :user
   validates :name, presence: true, uniqueness: true
-  validates :type, presence: true, inclusion: {in: Enums::UNIT_TYPES, message: "must be an element from the list #{Enums::UNIT_TYPES}"}
+  validates :unit_type, presence: true, inclusion: {in: Enums::UNIT_TYPES, message: "must be an element from the list #{Enums::UNIT_TYPES}"}
 
   def self.policy_class
     ApplicationPolicy

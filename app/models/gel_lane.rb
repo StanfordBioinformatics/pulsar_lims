@@ -14,6 +14,7 @@ class GelLane < ActiveRecord::Base
   validates_uniqueness_of :lane_number, scope: [:agarose_gel]
   validates :sample_concentration, presence: true
   validates :sample_concentration_units_id, presence: true
+  validate :validate_sample_concentration_units
 
   scope :persisted, lambda { where.not(id: nil) }
 
@@ -23,5 +24,14 @@ class GelLane < ActiveRecord::Base
 
   def display
     self.lane_number
+  end
+
+  private
+
+  def validate_sample_concentration_units
+    if self.sample_concentration_units.unit_type != "concentration"
+      self.errors.add(:sample_concentration_units_id, "must be a concentration type of unit.")
+      return false
+    end
   end
 end

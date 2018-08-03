@@ -31,7 +31,11 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.lane_number %></td>
         <td><%= "#{rec.sample_volume} µL" %></td>
-        <td><%= "#{rec.sample_concentration} #{rec.sample_concentration_units.name}" %></td>
+        <td>
+          <% if rec.sample_concentration.present? %>
+            <%= "#{rec.sample_concentration} #{rec.sample_concentration_units.name}" %>
+          <% end %>
+        </td>
         <td><%= rec.expected_product_size %></td>
         <td><%= rec.actual_product_size %></td>
         <td><%= rec.pass %></td>

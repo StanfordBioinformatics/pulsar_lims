@@ -13,6 +13,7 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
+      <th>Type</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -21,6 +22,7 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= rec.unit_type %></td>
         <td>
           <%= link_to fa_icon("pencil"), edit_unit_path(rec) %>
            <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>

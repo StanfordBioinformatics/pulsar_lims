@@ -10,7 +10,7 @@ class SequencingRequest < ActiveRecord::Base
   # the same library to be added twice.
   has_and_belongs_to_many :libraries
   has_and_belongs_to_many :plates, after_remove: :remove_plate_libraries
-  belongs_to :concentration_unit
+  belongs_to :concentration_unit, class_name: "Unit"
   belongs_to :sequencing_platform
   belongs_to :sequencing_center
   has_many    :sequencing_runs, dependent: :destroy
@@ -28,6 +28,7 @@ class SequencingRequest < ActiveRecord::Base
   scope :persisted, lambda { where.not(id: nil) }
   validate :validate_unique_barcodes
   validate :validate_libs_have_same_kit
+  validate :validate_concentration_unit
 
   def self.policy_class
     ApplicationPolicy
@@ -96,6 +97,15 @@ class SequencingRequest < ActiveRecord::Base
     end
 
   private
+
+    def validate_concentration_unit
+      if self.concentration_unit.present?
+        if self.concentration_unit.unit_type != "concentration"
+          self.errors.add(:concentration_unit_id, "must be a concentration type of unit.")
+          return false
+        end
+      end
+    end
 
     def remove_plate_libraries(plate)
       #Gets called after an associated plate is removed so that its libraries, which were added to self.libraries, can be also removed

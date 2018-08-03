@@ -12,10 +12,15 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @unit} %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name:</strong></th>
-		<td><%= @unit.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @unit.name %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Type:</strong></th>
+    <td><%= @unit.unit_type %></td>
+  </tr>
 </table>
 
 <%= link_to 'Back', units_path %>

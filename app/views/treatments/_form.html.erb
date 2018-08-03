@@ -11,31 +11,26 @@
   <%= f.input :description %>
   <%= f.input :treatment_type, collection: Enums::TREATMENT_TYPES %>
 
-  <!-- Create one line containing the two inputs for concentration and concentration_units -->
-  <label for="treatment_concentration" data-toggle="tooltip" title="The concentration of the treatment agent.">
-    <span>Concentration</span>
-  </label>
-  <%= f.input_field :concentration %>                                                                  
-  <label for="treatment_concentration_unit" data-toggle="tooltip" title="The concentration units.">
-    <span>Units</span>
-  </label>
-  <%= f.input_field :concentration_unit_id, collection: Unit.all %>                       
-  </br></br> 
+  <div style="display: flex">
+    <%= f.input :concentration %>
+    <%= f.association :concentration_unit, collection: Unit.where(unit_type: "concentration")  %>
+  </div>
+  </br></br>
 
   <!-- Create one line containing the two inputs for duration and duration_units -->
   <label for="treatment_duration" data-toggle="tooltip" title="The amount of time that the treatment is applied.">
     <span>Duration</span>
   </label>
-  <%= f.input_field :duration %>                                                                  
+  <%= f.input_field :duration %>
   <label for="treatment_duration_units" data-toggle="tooltip" title="The duration units.">
     <span>Units</span>
   </label>
-  <%= f.input_field :duration_units, collection: Enums::DURATION_UNITS %>                       
-  </br></br> 
+  <%= f.input_field :duration_units, collection: Enums::DURATION_UNITS %>
+  </br></br>
 
   <%= f.input :temperature_celsius, label_html: {"data-toggle": "tooltip", "title": "Temperature in Celsius at which the treatment was applied."} %>
 
-  <%= f.association :documents, collection: sorted_document_name_id(), include_blank: true,            
+  <%= f.association :documents, collection: sorted_document_name_id(), include_blank: true,
       label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not a data file)."} %>
 
   <%= render partial: "application_partials/notes", locals: {f: f} %>
