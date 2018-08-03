@@ -8,7 +8,7 @@ class GelLane < ActiveRecord::Base
 
   belongs_to :agarose_gel
   belongs_to :user
-  belongs_to :sample_concentration_units, class_name: "ConcentrationUnit"
+  belongs_to :sample_concentration_units, class_name: "Unit"
 
   validates :lane_number, presence: true
   validates_uniqueness_of :lane_number, scope: [:agarose_gel]

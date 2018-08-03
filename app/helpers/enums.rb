@@ -16,4 +16,6 @@ module Enums
 
   TREATMENT_TYPES = ["antibody","chemical","exposure","infection","injection","irradiation","protein","transplantation"]
 
+  UNIT_TYPES = [:concentration, :items, :mass, :volume]
+
 end

@@ -1,5 +1,6 @@
 Pulsar::Application.routes.draw do
 
+  resources :immunoblots
   resources :agarose_gels do
     get :add_lane, on: :member
     post :create_or_update_gel_lane, on: :member
@@ -37,7 +38,7 @@ Pulsar::Application.routes.draw do
     get :get_base_path, on: :member
     get :customize_for_data_storage_provider, on: :collection
   end
-  resources :concentration_units
+  resources :units
   resources :single_cell_sortings do
     get :add_plate, on: :member
     get :add_sorting_biosample, on: :member  
@@ -123,7 +124,7 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
-    resources :concentration_units do
+    resources :units do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end

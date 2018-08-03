@@ -1,0 +1,9 @@
+<%= simple_form_for(@unit) do |f| %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @unit } %>
+
+  <%= f.input :name %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
+<% end %>

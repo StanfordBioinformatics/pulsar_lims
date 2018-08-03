@@ -60,16 +60,19 @@ SequencingCenter.create!([
   {user_id: admin, name: "Stanford Genome Sequencing Service Center", url: "http://med.stanford.edu/gssc.html", address: "3155 Porter Dr; Palo Alto, CA 94304"}
 ])
 
-ConcentrationUnit.delete_all
-ConcentrationUnit.create!([
-  {user_id: admin, name: "cells" },
-  {user_id: admin, name: "cell-equivalent" },
-  {user_id: admin, name: "µg" },
-  {user_id: admin, name: "μM" },
-  {user_id: admin, name: "ng" },
-  {user_id: admin, name: "pg" },
-  {user_id: admin, name: "mg" },
-  {user_id: admin, name: "nM" }
+Unit.delete_all
+Unit.create!([
+  {user_id: admin, name: "µg/µL", type: "concentration"},
+  {user_id: admin, name: "μM", type: "concentration"},
+  {user_id: admin, name: "nM", type: "concentration"},
+  {user_id: admin, name: "cells", type: "items"},
+  {user_id: admin, name: "cell-equivalent", type: "items"},
+  {user_id: admin, name: "mg", type: "mass"},
+  {user_id: admin, name: "µg", type: "mass"},
+  {user_id: admin, name: "ng", type: "mass"},
+  {user_id: admin, name: "pg", type: "mass"},
+  {user_id: admin, name: "mL", type: "volume"},
+  {user_id: admin, name: "µL", type: "volume"}
 ])
   
 

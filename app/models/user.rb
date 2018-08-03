@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   has_many :experiment_types, dependent: :nullify
   has_many :file_references, dependent: :nullify
   has_many :gel_lanes, dependent: :nullify
+  has_many :immunoblots, dependent: :nullify
   has_many :isotypes, dependent: :nullify
   has_many :libraries, dependent: :nullify
   has_many :library_fragmentation_methods, dependent: :nullify

@@ -133,6 +133,7 @@
                     <span class="navbar-brand"><h6>Validations<h6></span>
                   </div>
                   <ul style="" class="nav navbar-nav">
+                    <%= link_to "Immunoblots",immunoblots_path, class: controller_name() == "immunoblots" ? "list-group-item active" : "list-group-item" %>
                     <%= link_to "Agarose Gels",agarose_gels_path, class: controller_name() == "agarose_gels" ? "list-group-item active" : "list-group-item" %>
                     <%= link_to "Gel Lanes",gel_lanes_path, class: controller_name() == "gel_lanes" ? "list-group-item active" : "list-group-item" %>
                   </ul>
@@ -177,7 +178,7 @@
                 <%= link_to "Addresses",addresses_path, class: controller_name() == "addresses" ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "Antibodies",antibodies_path, class: controller_name() == "antibodies" ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "Antibody Purifications",antibody_purifications_path, class: controller_name() == "antibody_purifications" ? "list-group-item active" : "list-group-item" %>
-                <%= link_to "Concentration Units",concentration_units_path, class: controller_name() == "concentration_units" ? "list-group-item active" : "list-group-item" %>
+                <%= link_to "Units", units_path, class: controller_name() == "units" ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "Donors",donors_path, class: controller_name() == "donors" ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "Experiment Types",experiment_types_path, class: controller_name() == "experiment_types" ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "Isotypes",isotypes_path, class: controller_name() == "isotypes" ? "list-group-item active" : "list-group-item" %>

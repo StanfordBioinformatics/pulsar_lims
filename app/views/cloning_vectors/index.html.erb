@@ -33,7 +33,7 @@
           <td></td>
         <% end %>
         <% if rec.map.present? %>
-          <td><%= link_to File.basename(rec.map), rec.map %></td>
+          <td><%= link_to File.basename(rec.map), rec.map, data: {"caption": rec.caption}, class: "modal-for-image" %></td>
         <% else %>
           <td></td>
         <% end %>

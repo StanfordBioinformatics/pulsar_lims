@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180802051653) do
+ActiveRecord::Schema.define(version: 20180803001441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -308,15 +308,6 @@ ActiveRecord::Schema.define(version: 20180802051653) do
   add_index "cloning_vectors", ["user_id"], name: "index_cloning_vectors_on_user_id", using: :btree
   add_index "cloning_vectors", ["vendor_id"], name: "index_cloning_vectors_on_vendor_id", using: :btree
 
-  create_table "concentration_units", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "concentration_units", ["user_id"], name: "index_concentration_units_on_user_id", using: :btree
-
   create_table "construct_tags", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -601,6 +592,31 @@ ActiveRecord::Schema.define(version: 20180802051653) do
 
   add_index "genome_locations", ["chromosome_id"], name: "index_genome_locations_on_chromosome_id", using: :btree
   add_index "genome_locations", ["user_id"], name: "index_genome_locations_on_user_id", using: :btree
+
+  create_table "immunoblots", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "agarose_gel_id"
+    t.date     "date_performed"
+    t.text     "submitter_comments"
+    t.text     "notes"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "analyst_id"
+    t.integer  "primary_antibody_id"
+    t.integer  "primary_antibody_concentration_units_id"
+    t.integer  "secondary_antibody_id"
+    t.integer  "secondary_antibody_concentration_units_id"
+    t.float    "primary_antibody_concentration"
+    t.float    "secondary_antibody_concentration"
+  end
+
+  add_index "immunoblots", ["agarose_gel_id"], name: "index_immunoblots_on_agarose_gel_id", using: :btree
+  add_index "immunoblots", ["analyst_id"], name: "index_immunoblots_on_analyst_id", using: :btree
+  add_index "immunoblots", ["primary_antibody_concentration_units_id"], name: "index_immunoblots_on_primary_antibody_concentration_units_id", using: :btree
+  add_index "immunoblots", ["primary_antibody_id"], name: "index_immunoblots_on_primary_antibody_id", using: :btree
+  add_index "immunoblots", ["secondary_antibody_concentration_units_id"], name: "index_immunoblots_on_secondary_antibody_concentration_units_id", using: :btree
+  add_index "immunoblots", ["secondary_antibody_id"], name: "index_immunoblots_on_secondary_antibody_id", using: :btree
+  add_index "immunoblots", ["user_id"], name: "index_immunoblots_on_user_id", using: :btree
 
   create_table "isotypes", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -965,6 +981,16 @@ ActiveRecord::Schema.define(version: 20180802051653) do
 
   add_index "uberons", ["user_id"], name: "index_uberons_on_user_id", using: :btree
 
+  create_table "units", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "type"
+  end
+
+  add_index "units", ["user_id"], name: "index_units_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -1066,7 +1092,6 @@ ActiveRecord::Schema.define(version: 20180802051653) do
   add_foreign_key "chromosomes", "users"
   add_foreign_key "cloning_vectors", "users"
   add_foreign_key "cloning_vectors", "vendors"
-  add_foreign_key "concentration_units", "users"
   add_foreign_key "construct_tags", "users"
   add_foreign_key "crispr_constructs", "addresses", column: "sent_to_id"
   add_foreign_key "crispr_constructs", "cloning_vectors"
@@ -1097,19 +1122,26 @@ ActiveRecord::Schema.define(version: 20180802051653) do
   add_foreign_key "file_references", "data_storages"
   add_foreign_key "file_references", "users"
   add_foreign_key "gel_lanes", "agarose_gels"
-  add_foreign_key "gel_lanes", "concentration_units", column: "sample_concentration_units_id"
+  add_foreign_key "gel_lanes", "units", column: "sample_concentration_units_id"
   add_foreign_key "gel_lanes", "users"
   add_foreign_key "genome_locations", "chromosomes"
   add_foreign_key "genome_locations", "users"
+  add_foreign_key "immunoblots", "agarose_gels"
+  add_foreign_key "immunoblots", "antibodies", column: "primary_antibody_id"
+  add_foreign_key "immunoblots", "antibodies", column: "secondary_antibody_id"
+  add_foreign_key "immunoblots", "units", column: "primary_antibody_concentration_units_id"
+  add_foreign_key "immunoblots", "units", column: "secondary_antibody_concentration_units_id"
+  add_foreign_key "immunoblots", "users"
+  add_foreign_key "immunoblots", "users", column: "analyst_id"
   add_foreign_key "isotypes", "users"
   add_foreign_key "libraries", "barcodes"
   add_foreign_key "libraries", "biosamples"
-  add_foreign_key "libraries", "concentration_units"
   add_foreign_key "libraries", "libraries", column: "from_prototype_id"
   add_foreign_key "libraries", "library_fragmentation_methods"
   add_foreign_key "libraries", "nucleic_acid_terms"
   add_foreign_key "libraries", "paired_barcodes"
   add_foreign_key "libraries", "sequencing_library_prep_kits"
+  add_foreign_key "libraries", "units", column: "concentration_unit_id"
   add_foreign_key "libraries", "users"
   add_foreign_key "libraries", "vendors"
   add_foreign_key "library_fragmentation_methods", "users"
@@ -1132,9 +1164,9 @@ ActiveRecord::Schema.define(version: 20180802051653) do
   add_foreign_key "sequencing_library_prep_kits", "users"
   add_foreign_key "sequencing_library_prep_kits", "vendors"
   add_foreign_key "sequencing_platforms", "users"
-  add_foreign_key "sequencing_requests", "concentration_units"
   add_foreign_key "sequencing_requests", "sequencing_centers"
   add_foreign_key "sequencing_requests", "sequencing_platforms"
+  add_foreign_key "sequencing_requests", "units", column: "concentration_unit_id"
   add_foreign_key "sequencing_requests", "users"
   add_foreign_key "sequencing_results", "libraries"
   add_foreign_key "sequencing_results", "sequencing_runs"
@@ -1149,10 +1181,11 @@ ActiveRecord::Schema.define(version: 20180802051653) do
   add_foreign_key "single_cell_sortings", "users"
   add_foreign_key "targets", "users"
   add_foreign_key "treatment_term_names", "users"
-  add_foreign_key "treatments", "concentration_units"
   add_foreign_key "treatments", "treatment_term_names"
+  add_foreign_key "treatments", "units", column: "concentration_unit_id"
   add_foreign_key "treatments", "users"
   add_foreign_key "uberons", "users"
+  add_foreign_key "units", "users"
   add_foreign_key "vendors", "users"
   add_foreign_key "wells", "plates"
   add_foreign_key "wells", "users"

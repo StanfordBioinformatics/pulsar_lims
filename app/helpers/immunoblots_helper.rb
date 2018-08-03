@@ -1,0 +1,2 @@
+module ImmunoblotsHelper
+end
