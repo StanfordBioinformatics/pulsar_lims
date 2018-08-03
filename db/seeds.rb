@@ -62,17 +62,17 @@ SequencingCenter.create!([
 
 Unit.delete_all
 Unit.create!([
-  {user_id: admin, name: "µg/µL", type: "concentration"},
-  {user_id: admin, name: "μM", type: "concentration"},
-  {user_id: admin, name: "nM", type: "concentration"},
-  {user_id: admin, name: "cells", type: "items"},
-  {user_id: admin, name: "cell-equivalent", type: "items"},
-  {user_id: admin, name: "mg", type: "mass"},
-  {user_id: admin, name: "µg", type: "mass"},
-  {user_id: admin, name: "ng", type: "mass"},
-  {user_id: admin, name: "pg", type: "mass"},
-  {user_id: admin, name: "mL", type: "volume"},
-  {user_id: admin, name: "µL", type: "volume"}
+  {user_id: admin, name: "µg/µL", unit_type: "concentration"},
+  {user_id: admin, name: "μM", unit_type: "concentration"},
+  {user_id: admin, name: "nM", unit_type: "concentration"},
+  {user_id: admin, name: "cells", unit_type: "items"},
+  {user_id: admin, name: "cell-equivalent", unit_type: "items"},
+  {user_id: admin, name: "mg", unit_type: "mass"},
+  {user_id: admin, name: "µg", unit_type: "mass"},
+  {user_id: admin, name: "ng", unit_type: "mass"},
+  {user_id: admin, name: "pg", unit_type: "mass"},
+  {user_id: admin, name: "mL", unit_type: "volume"},
+  {user_id: admin, name: "µL", unit_type: "volume"}
 ])
   
 
