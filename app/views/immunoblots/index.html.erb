@@ -1,15 +1,15 @@
-<header>                                                                                               
-  <h1 class="index-page-header">                                                                       
-    <%= @title || "Immunoblots" %>                                                                       
-  </h1>                                                                                                
-  <p class="model-definition"><%= Immunoblot::DEFINITION %></p>                                         
-                                                                                                       
-  <ul class="actions">                                                                                 
-    <%= render partial: "application_partials/auth_new_record" %>                                      
-  </ul>                                                                                                
-</header>                                                                                              
-                                                                                                       
-<table class="attributes index">   
+<header>
+  <h1 class="index-page-header">
+    <%= @title || "Immunoblots" %>
+  </h1>
+  <p class="model-definition"><%= Immunoblot::DEFINITION %></p>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record" %>
+  </ul>
+</header>
+
+<table class="attributes index">
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
@@ -33,10 +33,25 @@
         <td><%= rec.date_performed %></td>
         <td><%= rec.analyst.display() %></td>
         <td><%= rec.primary_antibody.name %></td>
-        <td><%= "#{rec.primary_antibody_concentration} #{rec.primary_antibody_concentration_units.name}" %></td>
+        <td>
+          <% if rec.primary_antibody_concentration.present? %>
+            <%= "#{rec.primary_antibody_concentration} #{rec.primary_antibody_concentration_units.name}" %>
+          <% end %>
+        </td>
         <td><%= rec.secondary_antibody.name %></td>
-        <td><%= "#{rec.secondary_antibody_concentration} #{rec.secondary_antibody_concentration.name}" %></td>
-        <td><%= rec.agarose_gel %></td>
+        <td>
+          <% if rec.secondary_antibody_concentration.present? %>
+            <%= "#{rec.secondary_antibody_concentration} #{rec.secondary_antibody_concentration.name}" %>
+          <% end %>
+        </td>
+        <td>
+          <div style="display: flex">
+            <%= link_to rec.agarose_gel.display(), rec.agarose_gel %>
+            <% if rec.agarose_gel.gel_image.present? %>
+              <%= image_tag rec.agarose_gel.gel_image, alt: "gel", class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+            <% end %>
+          </div>
+        </td>
         <td><%= rec.submitter_comments %></td>
         <td><%= rec.notes %></td>
         <td>

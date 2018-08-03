@@ -47,6 +47,26 @@
 // anchor and img elements that have a picture to show up front. For example, in the index view of
 // AgaroseGels, when the user clicks on the link to a gel image, this will cause a popup to show
 // with the image and caption.
+
+// First add mouseenter handler to reveal that it's clickable. 
+$(function() {
+    $(".modal-for-image").on("mouseenter", function(event, data) {
+        event.preventDefault();
+        event.stopPropagation();
+        $(this).addClass("modal-content-box-shadow");
+    })
+})
+
+// Second, add mouseleave to undo the above functions work. 
+$(function() {
+    $(".modal-for-image").on("mouseleave", function(event, data) {
+        event.preventDefault();
+        event.stopPropagation();
+        $(this).removeClass("modal-content-box-shadow");
+    })
+})
+        
+
 $(function() {
     $(".modal-for-image").on("click", function(event, data) {
         event.preventDefault();
