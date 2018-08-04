@@ -19,4 +19,10 @@ class CloningVector < ActiveRecord::Base
   def self.policy_class
     ApplicationPolicy
   end
+
+  def s3_direct_post                                                                                   
+    # Used for getting a bucket object URI for uploading a gel image.                                  
+    # Called in the controller via a private method with the same name.                                
+    return S3_BUCKET.presigned_post(key: "images/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+  end
 end

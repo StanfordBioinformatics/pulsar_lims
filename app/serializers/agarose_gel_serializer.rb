@@ -10,5 +10,6 @@ class AgaroseGelSerializer < ActiveModel::Serializer
              :run_date
              :voltage
 
+  has_one :immunoblot
   has_one :user
 end

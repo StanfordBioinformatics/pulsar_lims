@@ -45,12 +45,14 @@
           <% end %>
         </td>
         <td>
-          <div style="display: flex">
-            <%= link_to rec.agarose_gel.display(), rec.agarose_gel %>
-            <% if rec.agarose_gel.gel_image.present? %>
-              <%= image_tag rec.agarose_gel.gel_image, alt: "gel", class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
-            <% end %>
-          </div>
+          <% if rec.agarose_gel.present? %>
+            <div style="display: flex">
+              <%= link_to rec.agarose_gel.display(), rec.agarose_gel %>
+              <% if rec.agarose_gel.gel_image.present? %>
+                <%= image_tag rec.agarose_gel.gel_image, alt: "gel", class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+              <% end %>
+            </div>
+          <% end %>
         </td>
         <td><%= rec.submitter_comments %></td>
         <td><%= rec.notes %></td>

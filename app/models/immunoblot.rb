@@ -12,7 +12,7 @@ class Immunoblot < ActiveRecord::Base
   belongs_to :secondary_antibody, class_name: "Antibody"
   belongs_to :secondary_antibody_concentration_units, class_name: "Unit"
   belongs_to :user
-  belongs_to :agarose_gel
+  has_one :agarose_gel
   has_many :documents
 
   validates :primary_antibody_concentration_units, presence: {message: "must be specified when 'primary antibody concentration' is specified."}, if: "primary_antibody_concentration.present?"
@@ -24,6 +24,10 @@ class Immunoblot < ActiveRecord::Base
   def self.policy_class                                                                                
     ApplicationPolicy                                                                                  
   end 
+
+  def display
+    self.get_record_id()
+  end
 
   private
 

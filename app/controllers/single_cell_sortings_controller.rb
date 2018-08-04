@@ -196,7 +196,7 @@ class SingleCellSortingsController < ApplicationController
     end
 
     def set_s3_direct_post
-      @s3_direct_post = S3_BUCKET.presigned_post(key: "fluorescence_intensity/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+      @s3_direct_post = self.s3_direct_post()
       #From the AWS docs, regarding the 201 here: If the value is set to 201, Amazon S3 returns an XML document with a 201 status code.
       #If we don't set the acl, then the file is not readable by others.
       #Also using #{SecureRandom.uuid} so that users don't overwrite an existing file with the same name. 

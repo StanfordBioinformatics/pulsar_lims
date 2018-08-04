@@ -15,9 +15,10 @@
     <%= f.association :secondary_antibody_concentration_units, collection: Unit.where(unit_type: "concentration"), label: "Units" %>
   </div>
 
-  <%= f.association :agarose_gel, label_method: :display %>
   <%= f.input :submitter_comments %>
   <%= f.input :notes %>
+
+  <!-- Add section for building a new agarose_gel association -->
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

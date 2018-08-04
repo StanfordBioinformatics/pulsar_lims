@@ -13,6 +13,7 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %> 
+      <th>Immunoblot</th>
       <th>Percent agarose</th>
       <th>Voltage</th>
       <th>Run date</th>
@@ -26,6 +27,11 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td>
+          <% if rec.immunoblot.present? %>
+            <% link_to_record(rec.immunoblot) %>
+          <% end %>
+        </td>
         <td><%= "#{rec.percent_agarose}%" %></td>
         <td><%= "#{rec.voltage} volts" %></td>
         <td><%= rec.run_date %></td>

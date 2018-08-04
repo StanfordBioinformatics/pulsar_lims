@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180803010842) do
+ActiveRecord::Schema.define(version: 20180803175841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,8 +40,10 @@ ActiveRecord::Schema.define(version: 20180803010842) do
     t.float    "percent_agarose"
     t.string   "gel_image"
     t.text     "caption"
+    t.integer  "immunoblot_id"
   end
 
+  add_index "agarose_gels", ["immunoblot_id"], name: "index_agarose_gels_on_immunoblot_id", using: :btree
   add_index "agarose_gels", ["user_id"], name: "index_agarose_gels_on_user_id", using: :btree
 
   create_table "analyses", force: :cascade do |t|
@@ -595,7 +597,6 @@ ActiveRecord::Schema.define(version: 20180803010842) do
 
   create_table "immunoblots", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "agarose_gel_id"
     t.date     "date_performed"
     t.text     "submitter_comments"
     t.text     "notes"
@@ -610,7 +611,6 @@ ActiveRecord::Schema.define(version: 20180803010842) do
     t.float    "secondary_antibody_concentration"
   end
 
-  add_index "immunoblots", ["agarose_gel_id"], name: "index_immunoblots_on_agarose_gel_id", using: :btree
   add_index "immunoblots", ["analyst_id"], name: "index_immunoblots_on_analyst_id", using: :btree
   add_index "immunoblots", ["primary_antibody_concentration_units_id"], name: "index_immunoblots_on_primary_antibody_concentration_units_id", using: :btree
   add_index "immunoblots", ["primary_antibody_id"], name: "index_immunoblots_on_primary_antibody_id", using: :btree
@@ -1052,6 +1052,7 @@ ActiveRecord::Schema.define(version: 20180803010842) do
   add_index "wells", ["user_id"], name: "index_wells_on_user_id", using: :btree
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "agarose_gels", "immunoblots"
   add_foreign_key "agarose_gels", "users"
   add_foreign_key "analyses", "documents", column: "protocol_id"
   add_foreign_key "analyses", "file_references", column: "merged_bam_file_id"
@@ -1126,7 +1127,6 @@ ActiveRecord::Schema.define(version: 20180803010842) do
   add_foreign_key "gel_lanes", "users"
   add_foreign_key "genome_locations", "chromosomes"
   add_foreign_key "genome_locations", "users"
-  add_foreign_key "immunoblots", "agarose_gels"
   add_foreign_key "immunoblots", "antibodies", column: "primary_antibody_id"
   add_foreign_key "immunoblots", "antibodies", column: "secondary_antibody_id"
   add_foreign_key "immunoblots", "units", column: "primary_antibody_concentration_units_id"

@@ -69,5 +69,12 @@
     <td><%= @immunoblot.notes %></td>
   </tr>
 </table>
+
+<!-- Add section for building a new agarose_gel association -->
+<% if @immunoblot.agarose_gel.blank? %>
+  <h3 class="section">Agarose Gel</h3>
+  <%= link_to "Add", add_agarose_gel_immunoblot_path(@immunoblot), id: "immunoblot-add-agarose-gel-btn", class: "reg-btn", method: :post %>
+<% end %>
   
+</br></br>
 <%= link_to 'Back', immunoblots_path %>

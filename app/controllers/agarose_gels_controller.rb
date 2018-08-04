@@ -1,13 +1,12 @@
 class AgaroseGelsController < ApplicationController
   before_action :set_agarose_gel, only: [:show, :edit, :update, :destroy, :add_lane, :create_or_update_gel_lane, :remove_gel_lane]
   skip_after_action :verify_authorized, only: [:add_lane, :create_or_update_gel_lane, :remove_gel_lane]
-  before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
+  before_action :set_s3_direct_post, only: [:new, :edit, :update]
 
   def add_lane
     # Called in /views/agarose_gels/show.html.erb via AJAX to add a new row for entering a 
     # GelLane.
     @gel_lane = @agarose_gel.gel_lanes.build()
-    flash[:redirect] = "show"
     render partial: "agarose_gels/add_lane", layout: false
   end
 
@@ -57,10 +56,10 @@ class AgaroseGelsController < ApplicationController
     authorize AgaroseGel
     @agarose_gel = AgaroseGel.new(agarose_gel_params)
     @agarose_gel.user = current_user
-
+    
     respond_to do |format|
       if @agarose_gel.save
-        format.html { redirect_to @agarose_gel, notice: 'Agarose gel was successfully created.' }
+        format.html { redirect_to @agarose_gel, notice: 'Agarose gel was successfully created.  Now you can add gel lanes.' }
         format.json { render json: @agarose_gel, status: :created }
       else
         format.html { render action: 'new' }
@@ -71,6 +70,7 @@ class AgaroseGelsController < ApplicationController
 
   def update
     authorize @agarose_gel
+    
     respond_to do |format|
       if @agarose_gel.update(agarose_gel_params)
         format.html { redirect_to @agarose_gel, notice: 'Agarose gel was successfully updated.' }
@@ -86,7 +86,6 @@ class AgaroseGelsController < ApplicationController
     ddestroy(@agarose_gel, redirect_path_success: agarose_gels_path)
   end
 
-  private
     # Use callbacks to share common setup or constraints between actions.
     def set_agarose_gel
       @agarose_gel = AgaroseGel.find(params[:id])
@@ -97,6 +96,7 @@ class AgaroseGelsController < ApplicationController
       params.require(:agarose_gel).permit(
         :caption,
         :gel_image,
+        :immunoblot_id,
         :notes,
         :percent_agarose, 
         :run_date,
@@ -117,7 +117,7 @@ class AgaroseGelsController < ApplicationController
     end
 
     def set_s3_direct_post                                                                             
-      @s3_direct_post = S3_BUCKET.presigned_post(key: "images/gels/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+      @s3_direct_post = self.s3_direct_post()
       #From the AWS docs, regarding the 201 here: If the value is set to 201, Amazon S3 returns an XML document with a 201 status code.
       #If we don't set the acl, then the file is not readable by others.                               
       #Also using #{SecureRandom.uuid} so that users don't overwrite an existing file with the same name.

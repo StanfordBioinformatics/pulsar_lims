@@ -1,5 +1,11 @@
 class ImmunoblotsController < ApplicationController
-  before_action :set_immunoblot, only: [:show, :edit, :update, :destroy]
+  before_action :set_immunoblot, only: [:show, :edit, :update, :destroy, :add_agarose_gel]
+  skip_after_action :verify_authorized, only: [:add_agarose_gel]
+
+  def add_agarose_gel
+    @agarose_gel = @immunoblot.build_agarose_gel({"notes": "hi"})
+    @s3_direct_post = @agarose_gel.s3_direct_post()
+  end
 
   def index
     super
@@ -60,7 +66,6 @@ class ImmunoblotsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def immunoblot_params
       params.require(:immunoblot).permit(
-        :agarose_gel_id, 
         :analyst_id, 
         :date_performed, 
         :notes,

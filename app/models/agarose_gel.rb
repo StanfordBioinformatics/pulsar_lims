@@ -7,6 +7,7 @@ class AgaroseGel < ActiveRecord::Base
   ABBR = "AG"
   DEFINITION = "Represents an agarose gel used in electrophoresis."
 
+  belongs_to :immunoblot
   belongs_to :user
   has_many :gel_lanes, dependent: :destroy
 
@@ -18,8 +19,14 @@ class AgaroseGel < ActiveRecord::Base
     ApplicationPolicy
   end
 
+  def s3_direct_post
+    # Used for getting a bucket object URI for uploading a gel image.
+    # Called in the controller via a private method with the same name. 
+    return S3_BUCKET.presigned_post(key: "images/gels/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+  end
+
   def display
-    "#{GelLane::ABBR}-#{self.id}"
+    "#{AgaroseGel::ABBR}-#{self.id}"
   end
 
 end

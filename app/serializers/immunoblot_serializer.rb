@@ -17,5 +17,4 @@ class ImmunoblotSerializer < ActiveModel::Serializer
   has_one :secondary_antibody_concentration
   has_one :secondary_antibody_concentration_units
   has_one :user
-  has_one :agarose_gel
 end

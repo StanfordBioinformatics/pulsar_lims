@@ -13,6 +13,15 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @agarose_gel } %>
 <table class="attributes">
   <tr>
+    <th><strong>Immunoblot:</strong></th>
+    <td>
+      <% if @agarose_gel.immunoblot.present? %>
+        <%= link_to_record(@agarose_gel.immunoblot) %>
+      <% end %>
+    </td>
+  </tr>
+  
+  <tr>
     <th><strong>Percent agarose:</strong></th>
     <td><%= "#{@agarose_gel.percent_agarose}%" %></td>
   </tr>
