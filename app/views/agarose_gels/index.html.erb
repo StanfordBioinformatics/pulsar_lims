@@ -37,8 +37,10 @@
         <td><%= rec.run_date %></td>
         <td>
           <% if rec.gel_image.present? %>
-            <%= link_to File.basename(rec.gel_image), rec.gel_image, data: {"caption": rec.caption}, class: "modal-for-image" %>
-          <% end %>
+            <div style="display: flex">                                                                
+              <%= image_tag rec.gel_image, alt: "gel", data: {"caption": rec.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+            </div> 
+          <% end %>                                                                                
         </td>
         <td><%= rec.notes %></td>
         <td>

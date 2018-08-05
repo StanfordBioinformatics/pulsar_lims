@@ -73,9 +73,12 @@ $(function() {
         event.stopPropagation();
         node_name = this.nodeName;
         if (node_name === "A") {
-            image_url = $(this).prop("href");
+            image_url = $(this).attr("href");
         } else if (node_name == "IMG") {
-            image_url = $(this).prop("src");
+            image_url = $(this).attr("src");
+        }
+        if (!image_url) {
+          return
         }
         // Caption is optional. If a caption is desired to be display alongside the image, then
         // the link or image tag needs to define caption as a data attribute.

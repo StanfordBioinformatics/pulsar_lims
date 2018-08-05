@@ -1,7 +1,6 @@
 class AgaroseGelsController < ApplicationController
   before_action :set_agarose_gel, only: [:show, :edit, :update, :destroy, :add_lane, :create_or_update_gel_lane, :remove_gel_lane]
   skip_after_action :verify_authorized, only: [:add_lane, :create_or_update_gel_lane, :remove_gel_lane]
-  before_action :set_s3_direct_post, only: [:new, :edit, :update]
 
   def add_lane
     # Called in /views/agarose_gels/show.html.erb via AJAX to add a new row for entering a 
@@ -46,10 +45,12 @@ class AgaroseGelsController < ApplicationController
   def new
     authorize AgaroseGel
     @agarose_gel = AgaroseGel.new
+    @s3_direct_post = @agarose_gel.s3_direct_post()  
   end
 
   def edit
     authorize @agarose_gel
+    @s3_direct_post = @agarose_gel.s3_direct_post()  
   end
 
   def create
@@ -86,6 +87,8 @@ class AgaroseGelsController < ApplicationController
     ddestroy(@agarose_gel, redirect_path_success: agarose_gels_path)
   end
 
+  private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_agarose_gel
       @agarose_gel = AgaroseGel.find(params[:id])
@@ -114,12 +117,5 @@ class AgaroseGelsController < ApplicationController
           :pass,                                                                                       
           :submitter_comments  
         ])
-    end
-
-    def set_s3_direct_post                                                                             
-      @s3_direct_post = self.s3_direct_post()
-      #From the AWS docs, regarding the 201 here: If the value is set to 201, Amazon S3 returns an XML document with a 201 status code.
-      #If we don't set the acl, then the file is not readable by others.                               
-      #Also using #{SecureRandom.uuid} so that users don't overwrite an existing file with the same name.
     end
 end

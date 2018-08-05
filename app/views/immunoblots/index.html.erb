@@ -49,7 +49,7 @@
             <div style="display: flex">
               <%= link_to rec.agarose_gel.display(), rec.agarose_gel %>
               <% if rec.agarose_gel.gel_image.present? %>
-                <%= image_tag rec.agarose_gel.gel_image, alt: "gel", class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+                <%= image_tag rec.agarose_gel.gel_image, alt: "gel", data: {"caption": rec.agarose_gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
               <% end %>
             </div>
           <% end %>

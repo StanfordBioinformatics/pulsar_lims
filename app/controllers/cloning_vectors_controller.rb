@@ -1,6 +1,5 @@
 class CloningVectorsController < ApplicationController
   before_action :set_cloning_vector, only: [:show, :edit, :update, :destroy]
-  before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def select_options                                                                                   
     #Called via ajax.
@@ -20,10 +19,12 @@ class CloningVectorsController < ApplicationController
   def new
     authorize CloningVector
     @cloning_vector = CloningVector.new
+    @s3_direct_post = @cloning_vector.s3_direct_post()
   end
 
   def edit
     authorize @cloning_vector
+    @s3_direct_post = @cloning_vector.s3_direct_post()
   end
 
   def create
@@ -78,11 +79,4 @@ class CloningVectorsController < ApplicationController
         :vendor_product_identifier
       )
     end
-
-    def set_s3_direct_post
-      @s3_direct_post = self.s3_direct_post()
-      #From the AWS docs, regarding the 201 here: If the value is set to 201, Amazon S3 returns an XML document with a 201 status code.
-      #If we don't set the acl, then the file is not readable by others.
-      #Also using #{SecureRandom.uuid} so that users don't overwrite an existing file with the same name. 
-    end 
 end
