@@ -1,6 +1,7 @@
 class SingleCellSortingsController < ApplicationController
   before_action :set_single_cell_sorting, only: [:show, :edit, :update, :destroy, :add_sorting_biosample, :add_plate, :add_library_prototype, :new_analysis]
   skip_after_action :verify_authorized, only: [:add_sorting_biosample, :add_plate, :add_library_prototype, :new_analysis]
+  before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def new_analysis
     #non AJAX
@@ -55,12 +56,10 @@ class SingleCellSortingsController < ApplicationController
   def new
     authorize SingleCellSorting
     @single_cell_sorting = SingleCellSorting.new
-    @s3_direct_post = @single_cell_sortin.s3_direct_post()
   end
 
   def edit
     authorize @single_cell_sorting
-    @s3_direct_post = @single_cell_sortin.s3_direct_post()
   end
 
   def create
@@ -195,4 +194,11 @@ class SingleCellSortingsController < ApplicationController
         analyses_ids: []
       )
     end
+
+    def set_s3_direct_post
+      @s3_direct_post = S3_BUCKET.presigned_post(key: "fluorescence_intensity/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+      #From the AWS docs, regarding the 201 here: If the value is set to 201, Amazon S3 returns an XML document with a 201 status code.
+      #If we don't set the acl, then the file is not readable by others.
+      #Also using #{SecureRandom.uuid} so that users don't overwrite an existing file with the same name. 
+    end 
 end

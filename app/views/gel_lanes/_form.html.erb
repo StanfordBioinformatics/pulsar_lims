@@ -8,8 +8,10 @@
 <%= f.input :lane_number, label: false %>
 <%= f.input :sample_volume, label: false, placeholder: "µL", label_html: {"data-toggle": "tooltip", title: "The volume in µL of sample loaded into this lane of the gel."} %>
   
-<%= f.input :sample_concentration, label: false %>
-<%= f.input :sample_concentration_units_id, label: false, collection: Unit.where(unit_type: "concentration") %>
+<div style="display: flex">
+  <%= f.input :sample_concentration, label: false, wrapper_html: {style: "flex: 1 1 55%"} %>
+  <%= f.input :sample_concentration_units_id, label: false, collection: Unit.where(unit_type: "concentration"), wrapper_html: {style: "flex: 1 1 45%"} %>
+</div>
 <%= f.input :expected_product_size, label: false, placeholder: "kDa" %>
 <%= f.input :actual_product_size, label: false, placeholder: "kDa" %>
 <%= f.input :pass, as: :select, default: true, label: false %>

@@ -10,11 +10,11 @@ class GelLane < ActiveRecord::Base
   belongs_to :user
   belongs_to :sample_concentration_units, class_name: "Unit"
 
-  validates :lane_number, presence: true
+  validates :lane_number, presence: true, numericality: {greater_than: 0}
   validates_uniqueness_of :lane_number, scope: [:agarose_gel]
-  validates :sample_concentration, presence: true
+  validates :sample_concentration, presence: true, numericality: {greater_than: 0}
   validates :sample_concentration_units_id, presence: true
-  validate :validate_sample_concentration_units
+  validate :validate_sample_concentration_units, on: :save
 
   scope :persisted, lambda { where.not(id: nil) }
 

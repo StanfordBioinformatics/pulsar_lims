@@ -10,6 +10,7 @@ class AgaroseGel < ActiveRecord::Base
   belongs_to :immunoblot
   belongs_to :user
   has_many :gel_lanes, dependent: :destroy
+  validates :voltage, numericality: {greater_than: 0}, allow_blank: true
 
   accepts_nested_attributes_for :gel_lanes, allow_destroy: true 
 
