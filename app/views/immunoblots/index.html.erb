@@ -36,13 +36,21 @@
             <%= rec.analyst.display() %>
           <% end %>
         </td>
-        <td><%= rec.primary_antibody.name %></td>
+        <td>
+          <% if rec.primary_antibody.present? %>
+            <%= rec.primary_antibody.name %>
+          <% end %>
+        </td>
         <td>
           <% if rec.primary_antibody_concentration.present? %>
             <%= "#{rec.primary_antibody_concentration} #{rec.primary_antibody_concentration_units.name}" %>
           <% end %>
         </td>
-        <td><%= rec.secondary_antibody.name %></td>
+        <td>
+          <% if rec.secondary_antibody.present? %>
+            <%= rec.secondary_antibody.name %>
+          <% end %>
+        </td>
         <td>
           <% if rec.secondary_antibody_concentration.present? %>
             <%= "#{rec.secondary_antibody_concentration} #{rec.secondary_antibody_concentration.name}" %>
