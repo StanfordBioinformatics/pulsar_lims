@@ -11,6 +11,9 @@ class Biosample < ActiveRecord::Base
   ###
   # Support pooled from
   ###
+  has_many :gel_lanes
+  has_many :agarose_gels, through: :gel_lanes
+  has_many :immunoblots, through: :agarose_gels
   has_and_belongs_to_many :pooled_from_biosamples, class_name: "Biosample", join_table: "biosamples_pooled_from_biosamples", foreign_key: "biosample_id", association_foreign_key: "pooled_from_biosample_id"
 
   ###
