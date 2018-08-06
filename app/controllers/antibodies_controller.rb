@@ -2,6 +2,13 @@ class AntibodiesController < ApplicationController
   include AntibodyPurificationsConcern #provides add_antibody_purifications()
   before_action :set_antibody, only: [:show, :edit, :update, :destroy]
 
+  def select_options                                                                                   
+    #Called via ajax.                                                                                  
+    #Typically called when the user selects the refresh icon in any form that has an input for the users model.
+    @records = Antibody.all                                                                              
+    render "application_partials/select_options", layout: false                                        
+  end  
+
   def index
     super
   end

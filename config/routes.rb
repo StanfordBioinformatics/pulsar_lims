@@ -40,7 +40,9 @@ Pulsar::Application.routes.draw do
     get :get_base_path, on: :member
     get :customize_for_data_storage_provider, on: :collection
   end
-  resources :units
+  resources :units do
+    get :select_options, on: :collection
+  end
   resources :single_cell_sortings do
     get :add_plate, on: :member
     get :add_sorting_biosample, on: :member  
@@ -191,6 +193,7 @@ Pulsar::Application.routes.draw do
     end
 
     resources :users, only: [:show, :edit] do
+      get :select_options, on: :collection
       post :find_by, on: :collection
       post :find_by_or, on: :collection
       patch :generate_api_key, on: :member                                                                
@@ -263,7 +266,9 @@ Pulsar::Application.routes.draw do
     get :select_barcode, on: :collection
   end
 
-  resources :antibodies
+  resources :antibodies do
+    get :select_options, on: :collection
+  end
 
   resources :antibody_purifications do
     get :select_options, on: :collection

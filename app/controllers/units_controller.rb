@@ -1,6 +1,13 @@
 class UnitsController < ApplicationController
   before_action :set_unit, only: [:show, :edit, :update, :destroy]
 
+  def select_options                                                                                   
+    #Called via ajax.                                                                                  
+    #Typically called when the user selects the refresh icon in any form that has an input for the unit model.
+    @records = Unit.all                                                                             
+    render "application_partials/select_options", layout: false                                        
+  end
+
   def index
     super
   end

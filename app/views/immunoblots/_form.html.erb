@@ -3,17 +3,17 @@
 
   <%= f.input :date_performed %>
   <%= f.association :analyst, label_html: {"data-toggle": "tooltip", "title": "The user that performed the analysis."} %>
-  <%= f.association :primary_antibody, label_html: {"data-toggle": "tooltip", "title": "The antibody that is specific to the protein of interest."} %>
+  <%= f.association :primary_antibody, label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The antibody that is specific to the protein of interest."} %>
 
   <div style="display: flex;" %>
     <%= f.input :primary_antibody_concentration, wrapper_html: {style: "margin-right: 0.5em;"} %>
-    <%= f.association :primary_antibody_concentration_units, collection: Unit.where(unit_type: "concentration"), label: "Units" %>
+    <%= f.association :primary_antibody_concentration_units, collection: Unit.where(unit_type: "concentration"), label: "Units", label_html: {class: "refresh"} %>
   </div>
 
-  <%= f.association :secondary_antibody, label_html: {"data-toggle": "tooltip", "title": "The antibody used to target the primary antibody."} %>
+  <%= f.association :secondary_antibody, label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The antibody used to target the primary antibody."} %>
   <div style="display: flex">
     <%= f.input :secondary_antibody_concentration, wrapper_html: {style: "margin-right: 0.5em;"} %>
-    <%= f.association :secondary_antibody_concentration_units, collection: Unit.where(unit_type: "concentration"), label: "Units" %>
+    <%= f.association :secondary_antibody_concentration_units, collection: Unit.where(unit_type: "concentration"), label: "Units", label_html: {"class": "refresh"} %>
   </div>
 
   <%= f.input :submitter_comments %>
