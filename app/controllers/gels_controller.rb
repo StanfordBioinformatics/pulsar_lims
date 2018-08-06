@@ -100,7 +100,7 @@ class GelsController < ApplicationController
         :gel_image,
         :immunoblot_id,
         :notes,
-        :percent_agarose, 
+        :percentage,
         :run_date,
         :voltage,
         gel_lanes_attributes:  [

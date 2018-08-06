@@ -8,8 +8,8 @@
   <%= f.input :gel_image, as: :file, label: "Gel image", hint: file_upload_hint, input_html: {class: "image"} %>
   <%= f.input :caption, label_html: {"data-toggle": "tooltip", "title": "A short description of the gel image to be shown alongside the image when viewed."} %>
 
-  <%= f.input :percent_agarose, placeholder: "%" %>
-  <%= f.input :voltage, placeholder: "volts" %>
+  <%= f.input :percentage, placeholder: "%", label_html: {"data-toggle": "tooltip", "title": "The percentage of agarose or polyacrylamide of which the gel is composed."} %>
+  <%# f.input :voltage, placeholder: "volts" %>
   <%= f.input :run_date %>
   <%= f.input :notes %>
 

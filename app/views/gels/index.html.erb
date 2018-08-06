@@ -14,8 +14,7 @@
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %> 
       <th>Immunoblot</th>
-      <th>Percent agarose</th>
-      <th>Voltage</th>
+      <th>Percentage</th>
       <th>Run date</th>
       <th>Gel image</th>
       <th>Notes</th>
@@ -32,8 +31,7 @@
             <% link_to_record(rec.immunoblot) %>
           <% end %>
         </td>
-        <td><%= "#{rec.percent_agarose}%" %></td>
-        <td><%= "#{rec.voltage} volts" %></td>
+        <td><%= "#{rec.percentage}%" %></td>
         <td><%= rec.run_date %></td>
         <td>
           <% if rec.gel_image.present? %>

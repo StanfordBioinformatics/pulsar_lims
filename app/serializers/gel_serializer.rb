@@ -6,7 +6,7 @@ class GelSerializer < ActiveModel::Serializer
              :caption,
              :gel_image,
              :notes,
-             :percent_agarose, 
+             :percentage,
              :run_date
              :voltage
 

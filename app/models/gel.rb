@@ -5,7 +5,7 @@ class Gel < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "GEL"
-  DEFINITION = "Represents an agarose or polyacrylamide gel used in electrophoresis. Model abbreviation: #{ABBR}""
+  DEFINITION = "Represents an agarose or polyacrylamide gel used in electrophoresis. Model abbreviation: #{ABBR}"
 
   belongs_to :immunoblot
   belongs_to :user
