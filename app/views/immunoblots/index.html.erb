@@ -31,7 +31,11 @@
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.date_performed %></td>
-        <td><%= rec.analyst.display() %></td>
+        <td>
+          <% if rec.analyst.present? %>
+            <%= rec.analyst.display() %>
+          <% end %>
+        </td>
         <td><%= rec.primary_antibody.name %></td>
         <td>
           <% if rec.primary_antibody_concentration.present? %>
