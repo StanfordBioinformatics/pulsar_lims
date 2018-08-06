@@ -251,4 +251,10 @@
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
 <%= render partial: "application_partials/edit_notes", locals: {rec: @biosample} %>
 
+<h3 class="section">Validations</h3>
+<h4>Immunoblots</h4>
+<% if @biosample.immunoblots.any? %>
+  <%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.immunoblots} %>
+<% end %>
+
 <%= link_to "Back", biosamples_path %>
