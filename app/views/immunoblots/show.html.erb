@@ -28,7 +28,11 @@
 
   <tr>
     <th><strong>Primary antibody:</strong></th>
-    <td><%= link_to @immunoblot.primary_antibody.name, @immunoblot.primary_antibody %></td>
+    <td>
+      <% if @immunoblot.primary_antibody.present? %>
+        <%= link_to @immunoblot.primary_antibody.name, @immunoblot.primary_antibody %>
+      <% end %>
+    </td>
   </tr>
 
   <tr>
@@ -42,7 +46,10 @@
 
   <tr>
     <th><strong>Secondary antibody:</strong></th>
-    <td><%= link_to @immunoblot.secondary_antibody.name, @immunoblot.secondary_antibody %></td>
+    <% if @immunoblot.secondary_antibody.present? %>
+      <%= link_to @immunoblot.secondary_antibody.name, @immunoblot.secondary_antibody %>
+    <% end %>
+    </td>
   </tr>
 
   <tr>
