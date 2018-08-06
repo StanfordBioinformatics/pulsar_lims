@@ -16,6 +16,16 @@
     <%= f.association :secondary_antibody_concentration_units, collection: Unit.where(unit_type: "concentration"), label: "Units", label_html: {"class": "refresh"} %>
   </div>
 
+  <fieldset>
+    <legend>Documents</legend>
+    <strong>Linked documents:</strong>
+    <%= render partial: "application_partials/simple_fields_for", locals: {f: f, record: @immunoblot, attribute: :documents} %>
+    <%= f.association :documents, label: "Add documents", selected: nil, collection: sorted_document_name_id(),
+        include_blank: true,
+        input_html: {class: "immunoblot_documents_selector"},
+        label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>
+  </fieldset>
+
   <%= f.input :submitter_comments %>
   <%= f.input :notes %>
 

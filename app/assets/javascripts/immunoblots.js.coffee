@@ -5,6 +5,11 @@
 
 $ ->                                                                                                   
 
+  #Refresh the documents list in the form when the refresh fa-icon is clicked:                   
+  $(document).on "click", ".immunoblot_documents i.refresh", (event) ->                      
+    $.get "/documents/select_options", (responseText,status,jqXHR) ->                            
+      $(".immunoblot_documents select").html(responseText)  
+
   #Refresh the primary_antibody list in the form when the refresh fa-icon is clicked:                   
   $(document).on "click", ".immunoblot_primary_antibody i.refresh", (event) ->                      
     $.get "/antibodies/select_options", (responseText,status,jqXHR) ->                            

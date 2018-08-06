@@ -75,7 +75,9 @@ class ImmunoblotsController < ApplicationController
         :secondary_antibody_id,
         :secondary_antibody_concentration,
         :secondary_antibody_concentration_units_id,
-        :submitter_comments, 
+        :submitter_comments,
+        document_ids: [],
+        documents_attributes: [:id, :_destroy],
       )
     end
 end

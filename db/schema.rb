@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180803175841) do
+ActiveRecord::Schema.define(version: 20180806052218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -467,6 +467,14 @@ ActiveRecord::Schema.define(version: 20180803175841) do
   add_index "documents", ["document_type_id"], name: "index_documents_on_document_type_id", using: :btree
   add_index "documents", ["name"], name: "index_documents_on_name", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
+
+  create_table "documents_immunoblots", id: false, force: :cascade do |t|
+    t.integer "document_id",   null: false
+    t.integer "immunoblot_id", null: false
+  end
+
+  add_index "documents_immunoblots", ["document_id", "immunoblot_id"], name: "index_documents_immunoblots_on_document_id_and_immunoblot_id", using: :btree
+  add_index "documents_immunoblots", ["immunoblot_id", "document_id"], name: "index_documents_immunoblots_on_immunoblot_id_and_document_id", using: :btree
 
   create_table "documents_libraries", id: false, force: :cascade do |t|
     t.integer "document_id"
