@@ -1,9 +1,9 @@
 Pulsar::Application.routes.draw do
 
   resources :immunoblots do
-    post :add_agarose_gel, on: :member
+    post :add_gel, on: :member
   end
-  resources :agarose_gels do
+  resources :gels do
     get :add_lane, on: :member
     post :create_or_update_gel_lane, on: :member
     delete :remove_gel_lane, on: :member

@@ -1,17 +1,17 @@
-class AgaroseGelsController < ApplicationController
-  before_action :set_agarose_gel, only: [:show, :edit, :update, :destroy, :add_lane, :create_or_update_gel_lane, :remove_gel_lane]
+class GelsController < ApplicationController
+  before_action :set_gel, only: [:show, :edit, :update, :destroy, :add_lane, :create_or_update_gel_lane, :remove_gel_lane]
   skip_after_action :verify_authorized, only: [:add_lane, :create_or_update_gel_lane, :remove_gel_lane]
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def add_lane
-    # Called in /views/agarose_gels/show.html.erb via AJAX to add a new row for entering a 
+    # Called in /views/gels/show.html.erb via AJAX to add a new row for entering a 
     # GelLane.
-    @gel_lane = @agarose_gel.gel_lanes.build()
-    render partial: "agarose_gels/add_lane", layout: false
+    @gel_lane = @gel.gel_lanes.build()
+    render partial: "gels/add_lane", layout: false
   end
 
   def create_or_update_gel_lane
-    gel_lane_params = agarose_gel_params[:gel_lanes_attributes]["0"] # Index the dict with only key being 0.
+    gel_lane_params = gel_params[:gel_lanes_attributes]["0"] # Index the dict with only key being 0.
     if gel_lane_params[:id].present?
       # Then do an update
       @gel_lane = GelLane.find(gel_lane_params[:id])
@@ -22,7 +22,7 @@ class AgaroseGelsController < ApplicationController
       payload.update({user_id: current_user.id})
       @gel_lane = GelLane.create(payload)
     end
-    render partial: "agarose_gels/add_lane", layout: false
+    render partial: "gels/add_lane", layout: false
   end
 
   def remove_gel_lane 
@@ -40,62 +40,62 @@ class AgaroseGelsController < ApplicationController
   end
 
   def show
-    authorize @agarose_gel
+    authorize @gel
   end
 
   def new
-    authorize AgaroseGel
-    @agarose_gel = AgaroseGel.new
+    authorize Gel
+    @gel = Gel.new
   end
 
   def edit
-    authorize @agarose_gel
+    authorize @gel
   end
 
   def create
-    authorize AgaroseGel
-    @agarose_gel = AgaroseGel.new(agarose_gel_params)
-    @agarose_gel.user = current_user
+    authorize Gel
+    @gel = Gel.new(gel_params)
+    @gel.user = current_user
     
     respond_to do |format|
-      if @agarose_gel.save
-        format.html { redirect_to @agarose_gel, notice: 'Agarose gel was successfully created.  Now you can add gel lanes.' }
-        format.json { render json: @agarose_gel, status: :created }
+      if @gel.save
+        format.html { redirect_to @gel, notice: 'Gel was successfully created.  Now you can add gel lanes.' }
+        format.json { render json: @gel, status: :created }
       else
         format.html { render action: 'new' }
-        format.json { render json: @agarose_gel.errors, status: :unprocessable_entity }
+        format.json { render json: @gel.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
-    authorize @agarose_gel
+    authorize @gel
     
     respond_to do |format|
-      if @agarose_gel.update(agarose_gel_params)
-        format.html { redirect_to @agarose_gel, notice: 'Agarose gel was successfully updated.' }
+      if @gel.update(gel_params)
+        format.html { redirect_to @gel, notice: 'Gel was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @agarose_gel.errors, status: :unprocessable_entity }
+        format.json { render json: @gel.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    ddestroy(@agarose_gel, redirect_path_success: agarose_gels_path)
+    ddestroy(@gel, redirect_path_success: gels_path)
   end
 
   private
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_agarose_gel
-      @agarose_gel = AgaroseGel.find(params[:id])
+    def set_gel
+      @gel = Gel.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def agarose_gel_params
-      params.require(:agarose_gel).permit(
+    def gel_params
+      params.require(:gel).permit(
         :caption,
         :gel_image,
         :immunoblot_id,
@@ -106,7 +106,7 @@ class AgaroseGelsController < ApplicationController
         gel_lanes_attributes:  [
           :id,
           :actual_product_size,                                                                        
-          :agarose_gel_id,                                                                             
+          :gel_id,                                                                             
           :biosample_id,
           :expected_product_size,                                                                      
           :lane_number,                                                                                

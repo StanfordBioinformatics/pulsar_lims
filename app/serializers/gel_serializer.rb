@@ -1,4 +1,4 @@
-class AgaroseGelSerializer < ActiveModel::Serializer
+class GelSerializer < ActiveModel::Serializer
   self.root = true
   embed :ids
 

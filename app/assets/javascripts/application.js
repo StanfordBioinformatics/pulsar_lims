@@ -45,7 +45,7 @@
 
 // A click handler for elements with the class ".modal-for-image", which is geared towards
 // anchor and img elements that have a picture to show up front. For example, in the index view of
-// AgaroseGels, when the user clicks on the link to a gel image, this will cause a popup to show
+// Gels, when the user clicks on the link to a gel image, this will cause a popup to show
 // with the image and caption.
 
 // First add mouseenter handler to reveal that it's clickable. 
@@ -75,6 +75,10 @@ $(function() {
         if (node_name === "A") {
             image_url = $(this).attr("href");
         } else if (node_name == "IMG") {
+            // Use $(this).attr() instead of $(this).prop() below. When using prop to access the 
+            // src attribute of an image tag, the value will be prefixed with the hostname of your app
+            // as an HTTP URI. Thus, even if the value of the src attribute is the empty string, when
+            // accessed via prop you'll just get your apps HTTP URI as the value.
             image_url = $(this).attr("src");
         }
         if (!image_url) {

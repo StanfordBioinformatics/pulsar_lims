@@ -1,11 +1,11 @@
 require 'elasticsearch/model'
 
-class AgaroseGel < ActiveRecord::Base
+class Gel < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
-  ABBR = "AG"
-  DEFINITION = "Represents an agarose gel used in electrophoresis."
+  ABBR = "GEL"
+  DEFINITION = "Represents an agarose or polyacrylamide gel used in electrophoresis. Model abbreviation: #{ABBR}""
 
   belongs_to :immunoblot
   belongs_to :user
@@ -28,7 +28,7 @@ class AgaroseGel < ActiveRecord::Base
   end
 
   def display
-    "#{AgaroseGel::ABBR}-#{self.id}"
+    "#{Gel::ABBR}-#{self.id}"
   end
 
 end

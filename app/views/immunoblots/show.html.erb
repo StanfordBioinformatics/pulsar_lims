@@ -69,8 +69,8 @@
   </tr>
 
   <tr>
-    <th><strong>Agarose gel:</strong></th>
-    <td><%= link_to @immunoblot.agarose_gel.display(), @immunoblot.agarose_gel %></td>
+    <th><strong>Gel:</strong></th>
+    <td><%= link_to @immunoblot.gel.display(), @immunoblot.gel %></td>
   </tr>
   
   <tr>
@@ -84,10 +84,10 @@
   </tr>
 </table>
 
-<!-- Add section for building a new agarose_gel association -->
-<% if @immunoblot.agarose_gel.blank? %>
-  <h3 class="section">Agarose Gel</h3>
-  <%= link_to "Add", add_agarose_gel_immunoblot_path(@immunoblot), id: "immunoblot-add-agarose-gel-btn", class: "reg-btn", method: :post %>
+<!-- Add section for building a new gel association -->
+<% if @immunoblot.gel.blank? %>
+  <h3 class="section">Gel</h3>
+  <%= link_to "Add", add_gel_immunoblot_path(@immunoblot), id: "immunoblot-add-gel-btn", class: "reg-btn", method: :post %>
 <% end %>
   
 </br></br>

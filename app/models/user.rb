@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   include Elasticsearch::Model                                                                         
   include Elasticsearch::Model::Callbacks
   has_many :addresses, dependent: :nullify
-  has_many :agarose_gels, dependent: :nullify
+  has_many :gels, dependent: :nullify
   has_many :analyses, dependent: :nullify
   has_many :antibodies, dependent: :nullify
   has_many :antibody_purifications, dependent: :nullify

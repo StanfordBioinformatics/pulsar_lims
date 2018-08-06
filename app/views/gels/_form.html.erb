@@ -1,9 +1,9 @@
-<%= simple_form_for(@agarose_gel, html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
+<%= simple_form_for(@gel, html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
 
   <%= f.association :immunoblot, as: :hidden, label_method: :display, label_html: {"data-toggle": "tooltip", title: "If this gel is part of an immunoblot analysis, specify the ummunoblot record here."} %>
   <% file_upload_hint="" %>
-  <% if @agarose_gel.gel_image.present? %>
-    <% file_upload_hint="You previously uploaded #{@agarose_gel.gel_image}." %>
+  <% if @gel.gel_image.present? %>
+    <% file_upload_hint="You previously uploaded #{@gel.gel_image}." %>
   <% end %>
   <%= f.input :gel_image, as: :file, label: "Gel image", hint: file_upload_hint, input_html: {class: "image"} %>
   <%= f.input :caption, label_html: {"data-toggle": "tooltip", "title": "A short description of the gel image to be shown alongside the image when viewed."} %>

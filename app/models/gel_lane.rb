@@ -6,14 +6,14 @@ class GelLane < ActiveRecord::Base
   ABBR = "GL"                                                                                          
   DEFINITION = "Represents a lane from an aragose gel. Model abbreviation: #{ABBR}"
 
-  belongs_to :agarose_gel
+  belongs_to :gel
   belongs_to :biosample
   belongs_to :user
   belongs_to :sample_concentration_units, class_name: "Unit"
 
   validates :biosample, presence: true
   validates :lane_number, presence: true, numericality: {greater_than: 0}
-  validates_uniqueness_of :lane_number, scope: [:agarose_gel]
+  validates_uniqueness_of :lane_number, scope: [:gel]
   validates :sample_concentration, presence: true, numericality: {greater_than: 0}
   validates :sample_concentration_units_id, presence: true
   validate :validate_sample_concentration_units, on: :save

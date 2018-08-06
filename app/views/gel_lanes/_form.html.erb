@@ -3,7 +3,7 @@
   <span style="display: none" id="gel-lane-persisted"></span>
 <% end %>
 <%= f.input :id, as: :hidden %>
-<%= f.association :agarose_gel, as: :hidden %>
+<%= f.association :gel, as: :hidden %>
 
 <%= f.input :lane_number, label: false %>
 <%= f.association :biosample, collection: Biosample.non_plated.order("LOWER(name)"),  label: false %>

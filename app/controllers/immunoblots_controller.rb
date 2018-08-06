@@ -1,10 +1,10 @@
 class ImmunoblotsController < ApplicationController
-  before_action :set_immunoblot, only: [:show, :edit, :update, :destroy, :add_agarose_gel]
-  skip_after_action :verify_authorized, only: [:add_agarose_gel]
+  before_action :set_immunoblot, only: [:show, :edit, :update, :destroy, :add_gel]
+  skip_after_action :verify_authorized, only: [:add_gel]
 
-  def add_agarose_gel
-    @agarose_gel = @immunoblot.build_agarose_gel({"notes": "hi"})
-    @s3_direct_post = @agarose_gel.s3_direct_post()
+  def add_gel
+    @gel = @immunoblot.build_gel({"notes": "hi"})
+    @s3_direct_post = @gel.s3_direct_post()
   end
 
   def index

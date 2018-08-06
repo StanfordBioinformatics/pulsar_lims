@@ -15,7 +15,7 @@ class GelLaneSerializer < ActiveModel::Serializer
              :updated_at
 
 
-  has_one :agarose_gel
+  has_one :gel
   has_one :biosample
   has_one :sample_concentration_unit
   has_one :user

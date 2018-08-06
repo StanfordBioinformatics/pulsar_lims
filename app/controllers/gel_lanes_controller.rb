@@ -61,7 +61,7 @@ class GelLanesController < ApplicationController
     def gel_lane_params
       params.require(:gel_lane).permit(
           :actual_product_size, 
-          :agarose_gel_id, 
+          :gel_id, 
           :biosample_id,
           :expected_product_size, 
           :lane_number, 

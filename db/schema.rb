@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180806074641) do
+ActiveRecord::Schema.define(version: 20180806205431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,22 +29,6 @@ ActiveRecord::Schema.define(version: 20180806074641) do
   end
 
   add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
-
-  create_table "agarose_gels", force: :cascade do |t|
-    t.date     "run_date"
-    t.text     "notes"
-    t.integer  "user_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.float    "voltage"
-    t.float    "percent_agarose"
-    t.string   "gel_image"
-    t.text     "caption"
-    t.integer  "immunoblot_id"
-  end
-
-  add_index "agarose_gels", ["immunoblot_id"], name: "index_agarose_gels_on_immunoblot_id", using: :btree
-  add_index "agarose_gels", ["user_id"], name: "index_agarose_gels_on_user_id", using: :btree
 
   create_table "analyses", force: :cascade do |t|
     t.integer  "user_id"
@@ -580,7 +564,7 @@ ActiveRecord::Schema.define(version: 20180806074641) do
     t.datetime "updated_at",                    null: false
     t.integer  "user_id"
     t.integer  "sample_concentration_units_id"
-    t.integer  "agarose_gel_id"
+    t.integer  "gel_id"
     t.float    "expected_product_size"
     t.float    "actual_product_size"
     t.float    "sample_volume"
@@ -588,10 +572,26 @@ ActiveRecord::Schema.define(version: 20180806074641) do
     t.integer  "biosample_id"
   end
 
-  add_index "gel_lanes", ["agarose_gel_id"], name: "index_gel_lanes_on_agarose_gel_id", using: :btree
   add_index "gel_lanes", ["biosample_id"], name: "index_gel_lanes_on_biosample_id", using: :btree
+  add_index "gel_lanes", ["gel_id"], name: "index_gel_lanes_on_gel_id", using: :btree
   add_index "gel_lanes", ["sample_concentration_units_id"], name: "index_gel_lanes_on_sample_concentration_units_id", using: :btree
   add_index "gel_lanes", ["user_id"], name: "index_gel_lanes_on_user_id", using: :btree
+
+  create_table "gels", force: :cascade do |t|
+    t.date     "run_date"
+    t.text     "notes"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.float    "voltage"
+    t.float    "percent_agarose"
+    t.string   "gel_image"
+    t.text     "caption"
+    t.integer  "immunoblot_id"
+  end
+
+  add_index "gels", ["immunoblot_id"], name: "index_gels_on_immunoblot_id", using: :btree
+  add_index "gels", ["user_id"], name: "index_gels_on_user_id", using: :btree
 
   create_table "genome_locations", force: :cascade do |t|
     t.integer  "user_id"
@@ -1062,8 +1062,6 @@ ActiveRecord::Schema.define(version: 20180806074641) do
   add_index "wells", ["user_id"], name: "index_wells_on_user_id", using: :btree
 
   add_foreign_key "addresses", "users"
-  add_foreign_key "agarose_gels", "immunoblots"
-  add_foreign_key "agarose_gels", "users"
   add_foreign_key "analyses", "documents", column: "protocol_id"
   add_foreign_key "analyses", "file_references", column: "merged_bam_file_id"
   add_foreign_key "analyses", "file_references", column: "merged_fastq_file_id"
@@ -1132,10 +1130,12 @@ ActiveRecord::Schema.define(version: 20180806074641) do
   add_foreign_key "file_references", "data_file_types"
   add_foreign_key "file_references", "data_storages"
   add_foreign_key "file_references", "users"
-  add_foreign_key "gel_lanes", "agarose_gels"
   add_foreign_key "gel_lanes", "biosamples"
+  add_foreign_key "gel_lanes", "gels"
   add_foreign_key "gel_lanes", "units", column: "sample_concentration_units_id"
   add_foreign_key "gel_lanes", "users"
+  add_foreign_key "gels", "immunoblots"
+  add_foreign_key "gels", "users"
   add_foreign_key "genome_locations", "chromosomes"
   add_foreign_key "genome_locations", "users"
   add_foreign_key "immunoblots", "antibodies", column: "primary_antibody_id"

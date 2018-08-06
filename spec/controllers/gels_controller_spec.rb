@@ -23,10 +23,10 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe AgaroseGelsController, type: :controller do
+RSpec.describe GelsController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # AgaroseGel. As you add validations to AgaroseGel, be sure to
+  # Gel. As you add validations to Gel, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -38,12 +38,12 @@ RSpec.describe AgaroseGelsController, type: :controller do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # AgaroseGelsController. Be sure to keep this updated too.
+  # GelsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
     it "returns a success response" do
-      agarose_gel = AgaroseGel.create! valid_attributes
+      gel = Gel.create! valid_attributes
       get :index, {}, valid_session
       expect(response).to be_success
     end
@@ -51,8 +51,8 @@ RSpec.describe AgaroseGelsController, type: :controller do
 
   describe "GET #show" do
     it "returns a success response" do
-      agarose_gel = AgaroseGel.create! valid_attributes
-      get :show, {:id => agarose_gel.to_param}, valid_session
+      gel = Gel.create! valid_attributes
+      get :show, {:id => gel.to_param}, valid_session
       expect(response).to be_success
     end
   end
@@ -66,29 +66,29 @@ RSpec.describe AgaroseGelsController, type: :controller do
 
   describe "GET #edit" do
     it "returns a success response" do
-      agarose_gel = AgaroseGel.create! valid_attributes
-      get :edit, {:id => agarose_gel.to_param}, valid_session
+      gel = Gel.create! valid_attributes
+      get :edit, {:id => gel.to_param}, valid_session
       expect(response).to be_success
     end
   end
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new AgaroseGel" do
+      it "creates a new Gel" do
         expect {
-          post :create, {:agarose_gel => valid_attributes}, valid_session
-        }.to change(AgaroseGel, :count).by(1)
+          post :create, {:gel => valid_attributes}, valid_session
+        }.to change(Gel, :count).by(1)
       end
 
-      it "redirects to the created agarose_gel" do
-        post :create, {:agarose_gel => valid_attributes}, valid_session
-        expect(response).to redirect_to(AgaroseGel.last)
+      it "redirects to the created gel" do
+        post :create, {:gel => valid_attributes}, valid_session
+        expect(response).to redirect_to(Gel.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, {:agarose_gel => invalid_attributes}, valid_session
+        post :create, {:gel => invalid_attributes}, valid_session
         expect(response).to be_success
       end
     end
@@ -100,41 +100,41 @@ RSpec.describe AgaroseGelsController, type: :controller do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested agarose_gel" do
-        agarose_gel = AgaroseGel.create! valid_attributes
-        put :update, {:id => agarose_gel.to_param, :agarose_gel => new_attributes}, valid_session
-        agarose_gel.reload
+      it "updates the requested gel" do
+        gel = Gel.create! valid_attributes
+        put :update, {:id => gel.to_param, :gel => new_attributes}, valid_session
+        gel.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the agarose_gel" do
-        agarose_gel = AgaroseGel.create! valid_attributes
-        put :update, {:id => agarose_gel.to_param, :agarose_gel => valid_attributes}, valid_session
-        expect(response).to redirect_to(agarose_gel)
+      it "redirects to the gel" do
+        gel = Gel.create! valid_attributes
+        put :update, {:id => gel.to_param, :gel => valid_attributes}, valid_session
+        expect(response).to redirect_to(gel)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        agarose_gel = AgaroseGel.create! valid_attributes
-        put :update, {:id => agarose_gel.to_param, :agarose_gel => invalid_attributes}, valid_session
+        gel = Gel.create! valid_attributes
+        put :update, {:id => gel.to_param, :gel => invalid_attributes}, valid_session
         expect(response).to be_success
       end
     end
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested agarose_gel" do
-      agarose_gel = AgaroseGel.create! valid_attributes
+    it "destroys the requested gel" do
+      gel = Gel.create! valid_attributes
       expect {
-        delete :destroy, {:id => agarose_gel.to_param}, valid_session
-      }.to change(AgaroseGel, :count).by(-1)
+        delete :destroy, {:id => gel.to_param}, valid_session
+      }.to change(Gel, :count).by(-1)
     end
 
-    it "redirects to the agarose_gels list" do
-      agarose_gel = AgaroseGel.create! valid_attributes
-      delete :destroy, {:id => agarose_gel.to_param}, valid_session
-      expect(response).to redirect_to(agarose_gels_url)
+    it "redirects to the gels list" do
+      gel = Gel.create! valid_attributes
+      delete :destroy, {:id => gel.to_param}, valid_session
+      expect(response).to redirect_to(gels_url)
     end
   end
 

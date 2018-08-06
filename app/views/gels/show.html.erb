@@ -1,0 +1,68 @@
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @gel } %>
+<header>
+  <h1><%= @gel.display() %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @gel} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @gel} %>
+  </ul>
+</header>
+
+<span id="record_id" style="display: none;"><%= @gel.id %></span>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @gel } %>
+<table class="attributes">
+  <tr>
+    <th><strong>Immunoblot:</strong></th>
+    <td>
+      <% if @gel.immunoblot.present? %>
+        <%= link_to_record(@gel.immunoblot) %>
+      <% end %>
+    </td>
+  </tr>
+  
+  <tr>
+    <th><strong>Percent agarose:</strong></th>
+    <td><%= "#{@gel.percent_agarose}%" %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Voltage:</strong></th>
+    <td><%= "#{@gel.voltage} volts" %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Run date:</strong></th>
+    <td><%= @gel.run_date %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Caption:</strong></th>
+    <td><%= simple_format(@gel.caption) %></th>
+  </tr>
+
+  <tr class="notes-row">
+    <th><strong>Notes:</strong></th>
+    <td><%= @gel.notes %></td>
+  </tr>
+</table>
+
+<h3 class="section">Gel image</h3>
+<%= image_tag @gel.gel_image, alt: "gel", class: "modal-for-image", style: "width: 100px;" %>
+</br></br>
+<h4 class="section">Gel lanes</h4>
+
+<div style="overflow: auto; max-width: 95%;">
+  <%= render partial: "gel_lanes/headers" %>
+  <div class="gel-lanes" %>
+    <% @gel.gel_lanes.order(:lane_number).each do |lane| %>
+      <% @gel_lane = lane %>
+      <%= render partial: "gels/add_lane" %>
+    <% end %>
+  </div>
+</div>
+</br>
+<%= link_to "Add lane", add_lane_gel_path(@gel), class: "add-gel-lane-btn reg-btn", remote: true %>
+
+</br></br>
+<%= link_to 'Back', gels_path %>
