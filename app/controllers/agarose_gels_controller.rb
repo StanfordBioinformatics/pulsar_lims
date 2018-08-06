@@ -107,6 +107,7 @@ class AgaroseGelsController < ApplicationController
           :id,
           :actual_product_size,                                                                        
           :agarose_gel_id,                                                                             
+          :biosample_id,
           :expected_product_size,                                                                      
           :lane_number,                                                                                
           :sample_concentration,                                                                       

@@ -7,9 +7,11 @@ class GelLane < ActiveRecord::Base
   DEFINITION = "Represents a lane from an aragose gel."
 
   belongs_to :agarose_gel
+  belongs_to :biosample
   belongs_to :user
   belongs_to :sample_concentration_units, class_name: "Unit"
 
+  validates :biosample, presence: true
   validates :lane_number, presence: true, numericality: {greater_than: 0}
   validates_uniqueness_of :lane_number, scope: [:agarose_gel]
   validates :sample_concentration, presence: true, numericality: {greater_than: 0}

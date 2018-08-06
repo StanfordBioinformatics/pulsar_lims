@@ -14,6 +14,7 @@
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %> 
       <th>Lane number</th>
+      <th>Biosample</th>
       <th>Sample volume</th>
       <th>Sample concentration</th>
       <th>Expected product size</th>
@@ -30,6 +31,7 @@
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.lane_number %></td>
+        <td><%= link_to rec.biosample.name, rec.biosample %></td>
         <td><%= "#{rec.sample_volume} µL" %></td>
         <td>
           <% if rec.sample_concentration.present? %>

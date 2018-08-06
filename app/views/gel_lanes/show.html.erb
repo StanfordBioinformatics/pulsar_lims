@@ -17,6 +17,11 @@
   </tr>
 
   <tr>
+    <th><strong>Biosample:</strong></th>
+    <td><%= link_to @gel_lane.biosample.name, @gel_lane.biosample %></td>
+  </tr>
+
+  <tr>
     <th><strong>Sample volume:</strong></th>
     <td><%= "#{@gel_lane.sample_volume} µL" %></td>
   </tr>

@@ -6,6 +6,7 @@
 <%= f.association :agarose_gel, as: :hidden %>
 
 <%= f.input :lane_number, label: false %>
+<%= f.association :biosample, collection: Biosample.non_plated.order("LOWER(name)"),  label: false %>
 <%= f.input :sample_volume, label: false, placeholder: "µL", label_html: {"data-toggle": "tooltip", title: "The volume in µL of sample loaded into this lane of the gel."} %>
   
 <div style="display: flex">

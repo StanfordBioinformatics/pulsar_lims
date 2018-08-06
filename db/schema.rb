@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180806052218) do
+ActiveRecord::Schema.define(version: 20180806074641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -585,9 +585,11 @@ ActiveRecord::Schema.define(version: 20180806052218) do
     t.float    "actual_product_size"
     t.float    "sample_volume"
     t.float    "sample_concentration"
+    t.integer  "biosample_id"
   end
 
   add_index "gel_lanes", ["agarose_gel_id"], name: "index_gel_lanes_on_agarose_gel_id", using: :btree
+  add_index "gel_lanes", ["biosample_id"], name: "index_gel_lanes_on_biosample_id", using: :btree
   add_index "gel_lanes", ["sample_concentration_units_id"], name: "index_gel_lanes_on_sample_concentration_units_id", using: :btree
   add_index "gel_lanes", ["user_id"], name: "index_gel_lanes_on_user_id", using: :btree
 
@@ -1131,6 +1133,7 @@ ActiveRecord::Schema.define(version: 20180806052218) do
   add_foreign_key "file_references", "data_storages"
   add_foreign_key "file_references", "users"
   add_foreign_key "gel_lanes", "agarose_gels"
+  add_foreign_key "gel_lanes", "biosamples"
   add_foreign_key "gel_lanes", "units", column: "sample_concentration_units_id"
   add_foreign_key "gel_lanes", "users"
   add_foreign_key "genome_locations", "chromosomes"
