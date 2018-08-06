@@ -4,7 +4,7 @@ class GelLane < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks                                                              
   include ModelConcerns 
   ABBR = "GL"                                                                                          
-  DEFINITION = "Represents a lane from an aragose gel."
+  DEFINITION = "Represents a lane from an aragose gel. Model abbreviation: #{ABBR}"
 
   belongs_to :agarose_gel
   belongs_to :biosample

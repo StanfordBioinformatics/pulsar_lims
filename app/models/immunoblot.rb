@@ -4,7 +4,7 @@ class Immunoblot < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "IB"
-  DEFINITION = "Immunoblot"
+  DEFINITION = "Immunoblot. Model abbreviation: #{ABBR}"
 
   belongs_to :analyst, class_name: "User"
   belongs_to :primary_antibody, class_name: "Antibody"
