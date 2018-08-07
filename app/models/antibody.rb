@@ -1,6 +1,6 @@
 require 'elasticsearch/model'
 class Antibody < ActiveRecord::Base
-  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "AB"
@@ -13,6 +13,7 @@ class Antibody < ActiveRecord::Base
   belongs_to :organism
   belongs_to :isotype
   belongs_to :target
+  belongs_to :concentration_units, class_name: "Unit"
 
   validates  :upstream_identifier, uniqueness: true, allow_blank: true
   validates  :name, length: { maximum: 40 }, presence: true, uniqueness: true
@@ -23,6 +24,8 @@ class Antibody < ActiveRecord::Base
   validates  :vendor_product_identifier, presence: true
   validates  :lot_identifier, presence: true
   validates  :clonality, inclusion: CLONALITY_TYPES, presence: true
+  validates  :concentration, presence: {message: "must be specified when 'concentration units' is specified."}, if: "concentration_units.present?"
+  validate :concentration_units, on: :save
 
   accepts_nested_attributes_for :antibody_purifications, allow_destroy: true
 
@@ -34,36 +37,46 @@ class Antibody < ActiveRecord::Base
 
   def add_antibody_purifications(purifications)
     """
-    Function : Adds AntibodyPurification associations to the self.antibody_purifications attr. 
+    Function : Adds AntibodyPurification associations to the self.antibody_purifications attr.
     Args     : purification - Array of AntibodyPurification primary key IDs.
     """
     if purifications.nil?
       return
     end
-    purifications.each do |p| 
+    purifications.each do |p|
       if not p.empty?
         pur = AntibodyPurification.find(p)
-        if not antibody_purifications.include? pur 
-          antibody_purifications << pur 
+        if not antibody_purifications.include? pur
+          antibody_purifications << pur
         end
-      end 
-    end 
-  end 
+      end
+    end
+  end
 
 #  def remove_antibody_purifications(purifications)
 #    """
-#    Function : Removes AntibodyPurification associations from the self.antibody_purifications attr. 
+#    Function : Removes AntibodyPurification associations from the self.antibody_purifications attr.
 #    Args     : purifications - Array of AntibodyPurification foreign key IDs.
 #    """
 #    if purifications.nil?
 #      return
 #    end
-#    purifications.each do |p| 
+#    purifications.each do |p|
 #      pur = AntibodyPurification.find(p)
-#      if antibody_purifications.include? pur 
+#      if antibody_purifications.include? pur
 #        antibody_purifications.destroy(pur)
-#      end 
-#    end 
-#  end 
+#      end
+#    end
+#  end
+
+  private
+    def validate_concentration_units
+      if self.concentration_units.present?
+        if self.concentration_units.unit_type != "concentration"
+          self.errors.add(:concentration_units_id, "must be a concentration type of unit.")
+          return false
+        end
+      end
+    end
 
 end

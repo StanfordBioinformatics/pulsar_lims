@@ -8,17 +8,14 @@ class Immunoblot < ActiveRecord::Base
 
   belongs_to :analyst, class_name: "User"
   belongs_to :primary_antibody, class_name: "Antibody"
-  belongs_to :primary_antibody_concentration_units, class_name: "Unit"
   belongs_to :secondary_antibody, class_name: "Antibody"
-  belongs_to :secondary_antibody_concentration_units, class_name: "Unit"
   belongs_to :user
   has_one :gel, dependent: :nullify
   has_and_belongs_to_many :documents
   has_many :biosamples, through: :gel
 
-  validates :primary_antibody_concentration_units, presence: {message: "must be specified when 'primary antibody concentration' is specified."}, if: "primary_antibody_concentration.present?"
-  validates :secondary_antibody_concentration_units, presence: {message: "must be specified when 'secondary antibody concentration' is specified."}, if: "secondary_antibody_concentration.present?"
-  validate :validate_concentration_units
+  validates :primary_antibody, presence: {message: "must be specified when 'primary antibody dilution' is specified."}, if: "primary_antibody_dilution.present?"
+  validates :secondary_antibody, presence: {message: "must be specified when 'secondary antibody dilution' is specified."}, if: "secondary_antibody_dilution.present?"
 
   accepts_nested_attributes_for :documents, allow_destroy: true
 
@@ -49,19 +46,4 @@ class Immunoblot < ActiveRecord::Base
   end
 
   private
-
-  def validate_concentration_units
-    if self.primary_antibody_concentration_units.present?
-      if self.primary_antibody_concentration_units.unit_type != "concentration"
-        self.errors.add(:primary_antibody_concentration_units_id, "must be a concentration type of unit.")
-        return false
-      end
-    end
-    if self.secondary_antibody_concentration_units.present?
-      if self.secondary_antibody_concentration_units.unit_type != "concentration"
-        self.errors.add(:secondary_antibody_concentration_units_id, "must be a concentration type of unit.")
-        return false
-      end
-    end
-  end
 end

@@ -11,6 +11,7 @@ class GelLanesController < ApplicationController
 
   def new
     authorize GelLane
+    defaults = INPUT_DEFAULTS["GelLane"]
     @gel_lane = GelLane.new
   end
 

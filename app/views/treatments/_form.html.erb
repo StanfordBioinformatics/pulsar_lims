@@ -11,7 +11,7 @@
   <%= f.input :description %>
   <%= f.input :treatment_type, collection: Enums::TREATMENT_TYPES %>
 
-  <div style="display: flex">
+  <div class="my-flex">
     <%= f.input :concentration %>
     <%= f.association :concentration_unit, collection: Unit.where(unit_type: "concentration")  %>
   </div>

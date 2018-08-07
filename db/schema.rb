@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180806213813) do
+ActiveRecord::Schema.define(version: 20180807001113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,8 +69,11 @@ ActiveRecord::Schema.define(version: 20180806213813) do
     t.integer  "target_id"
     t.string   "upstream_identifier"
     t.text     "notes"
+    t.string   "concentration"
+    t.integer  "concentration_units_id"
   end
 
+  add_index "antibodies", ["concentration_units_id"], name: "index_antibodies_on_concentration_units_id", using: :btree
   add_index "antibodies", ["isotype_id"], name: "index_antibodies_on_isotype_id", using: :btree
   add_index "antibodies", ["name"], name: "index_antibodies_on_name", unique: true, using: :btree
   add_index "antibodies", ["organism_id"], name: "index_antibodies_on_organism_id", using: :btree
@@ -610,21 +613,17 @@ ActiveRecord::Schema.define(version: 20180806213813) do
     t.date     "date_performed"
     t.text     "submitter_comments"
     t.text     "notes"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "analyst_id"
     t.integer  "primary_antibody_id"
-    t.integer  "primary_antibody_concentration_units_id"
     t.integer  "secondary_antibody_id"
-    t.integer  "secondary_antibody_concentration_units_id"
-    t.float    "primary_antibody_concentration"
-    t.float    "secondary_antibody_concentration"
+    t.string   "primary_antibody_dilution"
+    t.string   "secondary_antibody_dilution"
   end
 
   add_index "immunoblots", ["analyst_id"], name: "index_immunoblots_on_analyst_id", using: :btree
-  add_index "immunoblots", ["primary_antibody_concentration_units_id"], name: "index_immunoblots_on_primary_antibody_concentration_units_id", using: :btree
   add_index "immunoblots", ["primary_antibody_id"], name: "index_immunoblots_on_primary_antibody_id", using: :btree
-  add_index "immunoblots", ["secondary_antibody_concentration_units_id"], name: "index_immunoblots_on_secondary_antibody_concentration_units_id", using: :btree
   add_index "immunoblots", ["secondary_antibody_id"], name: "index_immunoblots_on_secondary_antibody_id", using: :btree
   add_index "immunoblots", ["user_id"], name: "index_immunoblots_on_user_id", using: :btree
 
@@ -1072,6 +1071,7 @@ ActiveRecord::Schema.define(version: 20180806213813) do
   add_foreign_key "antibodies", "isotypes"
   add_foreign_key "antibodies", "organisms"
   add_foreign_key "antibodies", "targets"
+  add_foreign_key "antibodies", "units", column: "concentration_units_id"
   add_foreign_key "antibodies", "users"
   add_foreign_key "antibodies", "vendors"
   add_foreign_key "antibody_purifications", "users"
@@ -1140,8 +1140,6 @@ ActiveRecord::Schema.define(version: 20180806213813) do
   add_foreign_key "genome_locations", "users"
   add_foreign_key "immunoblots", "antibodies", column: "primary_antibody_id"
   add_foreign_key "immunoblots", "antibodies", column: "secondary_antibody_id"
-  add_foreign_key "immunoblots", "units", column: "primary_antibody_concentration_units_id"
-  add_foreign_key "immunoblots", "units", column: "secondary_antibody_concentration_units_id"
   add_foreign_key "immunoblots", "users"
   add_foreign_key "immunoblots", "users", column: "analyst_id"
   add_foreign_key "isotypes", "users"

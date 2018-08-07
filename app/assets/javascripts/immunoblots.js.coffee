@@ -25,11 +25,6 @@ $ ->
     $.get "/antibodies/select_options", (responseText,status,jqXHR) ->                            
       $(".immunoblot_secondary_antibody select").html(responseText)  
 
-  #Refresh the primary_antibody_concentration_units list in the form when the refresh fa-icon is clicked:                   
-  $(document).on "click", ".immunoblot_primary_antibody_concentration_units i.refresh", (event) ->                      
-    $.get "/antibodies/select_options", (responseText,status,jqXHR) ->                            
-      $(".immunoblot_primary_antibody_concentration_units select").html(responseText)  
-
   #Refresh the secondary_antibody_concentration_units list in the form when the refresh fa-icon is clicked:                   
   $(document).on "click", ".immunoblot_secondary_antibody_concentration_units i.refresh", (event) ->                      
     $.get "/antibodies/select_options", (responseText,status,jqXHR) ->                            

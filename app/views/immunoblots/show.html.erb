@@ -1,17 +1,18 @@
 <%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @immunoblot } %>
-<header>                                                                                               
-  <h1><%= @immunoblot.display() %></h1>                                                               
-                                                                                                       
-  <ul class="actions">                                                                                 
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @immunoblot} %>  
+<header>
+  <h1><%= @immunoblot.display() %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @immunoblot} %>
     <%= render partial: "application_partials/auth_destroy_record", locals: {record: @immunoblot} %>
-  </ul>                                                                                                
-</header>                                                                                              
-                                                                                                       
-<span id="record_id" style="display: none;"><%= @immunoblot.id %></span>                              
-                                                                                                       
-<%= render partial: "application_partials/record_meta", locals: { record: @immunoblot} %>            
-<table class="attributes">  
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: @immunoblot } %>
+
+<span id="record_id" style="display: none;"><%= @immunoblot.id %></span>
+
+<table class="attributes">
   <tr>
     <th><strong>Date performed:</strong></th>
     <td><%= @immunoblot.date_performed %></td>
@@ -21,7 +22,7 @@
     <th><strong>Analyst:</strong></th>
     <td>
       <% if @immunoblot.analyst.present? %>
-        <%= link_to @immunoblot.analyst.display(), @immunoblot.analyst %></td>
+        <%= link_to @immunoblot.analyst.display(), @immunoblot.analyst %>
       <% end %>
     </td>
   </tr>
@@ -36,48 +37,49 @@
   </tr>
 
   <tr>
-    <th><strong>Primary antibody conc.:</strong></th>
+    <th><strong>Primary antibody dilution:</strong></th>
     <td>
-      <% if @immunoblot.primary_antibody_concentration.present? %>
-        <%= "#{@immunoblot.primary_antibody_concentration} #{@immunoblot.primary_antibody_concentration_units.name}" %>
+      <% if @immunoblot.primary_antibody_dilution.present? %>
+        <%= @immunoblot.primary_antibody_dilution  %>
       <% end %>
     </td>
   </tr>
 
   <tr>
     <th><strong>Secondary antibody:</strong></th>
-    <% if @immunoblot.secondary_antibody.present? %>
-      <%= link_to @immunoblot.secondary_antibody.name, @immunoblot.secondary_antibody %>
-    <% end %>
-    </td>
-  </tr>
-
-  <tr>
-    <th><strong>Secondary antibody conc.:</strong></th>
     <td>
-      <% if @immunoblot.secondary_antibody_concentration.present? %>
-        <%= "#{@immunoblot.secondary_antibody_concentration} #{@immunoblot.secondary_antibody_concentration_units.name}" %>
+      <% if @immunoblot.secondary_antibody.present? %>
+        <%= link_to @immunoblot.secondary_antibody.name, @immunoblot.secondary_antibody %>
       <% end %>
     </td>
   </tr>
 
-  <tr>                                                                                                 
-    <th><strong>Protocol documents:</strong></th>                                                      
-    <td>                                                                                               
+  <tr>
+    <th><strong>Secondary antibody dilution:</strong></th>
+    <td>
+      <% if @immunoblot.secondary_antibody_dilution.present? %>
+        <%= @immunoblot.secondary_antibody_dilution  %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <th><strong>Protocol documents:</strong></th>
+    <td>
       <%= render partial: "application_partials/link_to_has_many", locals: {links: @immunoblot.documents} %>
-    </td>                                                                                              
+    </td>
   </tr>
 
   <tr>
     <th><strong>Gel:</strong></th>
     <td><%= link_to @immunoblot.gel.display(), @immunoblot.gel %></td>
   </tr>
-  
+
   <tr>
     <th><strong>Submitter comments:</strong></th>
     <td><%= @immunoblot.submitter_comments %></td>
   </tr>
-  
+
   <tr>
     <th><strong>Notes:</strong></th>
     <td><%= @immunoblot.notes %></td>
@@ -89,6 +91,6 @@
   <h3 class="section">Gel</h3>
   <%= link_to "Add", add_gel_immunoblot_path(@immunoblot), id: "immunoblot-add-gel-btn", class: "reg-btn", method: :post %>
 <% end %>
-  
+
 </br></br>
 <%= link_to 'Back', immunoblots_path %>

@@ -1,12 +1,12 @@
 <header>
-  <h1 class="index-page-header">                                                                       
-    <%= @title || "Antibodies" %>                                                                      
+  <h1 class="index-page-header">
+    <%= @title || "Antibodies" %>
   </h1>
   <p class="model-definition"><%= Antibody::DEFINITION %></p>
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
-  </ul> 
+  </ul>
 </header>
 
 <table class="attributes index">
@@ -20,6 +20,7 @@
       <th>Vendor</th>
       <th>Vendor Product Identifier</th>
       <th>Vendor Product Url</th>
+      <th>Stock concentration</th>
       <th>Lot Identifier</th>
       <th>Antigen Description</th>
       <th>Antigen Sequence</th>
@@ -42,6 +43,11 @@
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
         <td><%= rec.vendor_product_identifier %></td>
         <td><%= link_to rec.vendor_product_url %></td>
+        <td>
+          <% if rec.concentration.present? %>
+            <%= "#{rec.concentration} #{rec.concentration_units.name}" %>
+          <% end %>
+        </td>
         <td><%= rec.lot_identifier %></td>
         <td><%= rec.antigen_description %></td>
         <td><%= rec.antigen_sequence %></td>
@@ -54,7 +60,7 @@
   </tbody>
 </table>
 
-<% if defined?(@page) %>                                                                               
-  <%= paginate @records %>                                                                             
-  <%= link_to "All", antibodies_path(all: true) %>                                                        
+<% if defined?(@page) %>
+  <%= paginate @records %>
+  <%= link_to "All", antibodies_path(all: true) %>
 <% end %>

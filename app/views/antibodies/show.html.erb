@@ -4,81 +4,90 @@
   <h1><%= @antibody.name %></h1>
 
   <ul class="actions">
-		<%= render partial: "application_partials/auth_edit_record", locals: {record: @antibody} %>
-		<%= render partial: "application_partials/auth_destroy_record", locals: {record: @antibody} %>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @antibody} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @antibody} %>
   </ul>
 </header>
 
 <%= render partial: "application_partials/record_meta", locals: { record: @antibody} %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name</strong></th>
-		<td><%= @antibody.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name</strong></th>
+    <td><%= @antibody.name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Organism</strong></th>
-		<td><%= @antibody.organism.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Organism</strong></th>
+    <td><%= @antibody.organism.name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Antibody Purifications</strong></th>
-		<td>
-			<ul class="list-unstyled">
-				<%= render(@antibody.antibody_purifications) %>
-		  </ul>
-		</td>
-	</tr>
+  <tr>
+    <th><strong>Antibody Purifications</strong></th>
+    <td>
+      <ul class="list-unstyled">
+        <%= render(@antibody.antibody_purifications) %>
+      </ul>
+    </td>
+  </tr>
 
-	<tr>
-		<th><strong>Vendor</strong></th>
-		<td><%= link_to @antibody.vendor.name, @antibody.vendor %></td>
-	</tr>
+  <tr>
+    <th><strong>Vendor</strong></th>
+    <td><%= link_to @antibody.vendor.name, @antibody.vendor %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Vendor Product Identifier</strong></th>
-		<td><%= @antibody.vendor_product_identifier %></td>
-	</tr>
+  <tr>
+    <th><strong>Vendor Product Identifier</strong></th>
+    <td><%= @antibody.vendor_product_identifier %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Vendor Product URL</strong></th>
-		<td><%= link_to @antibody.vendor_product_url %></td>
-	</tr>
+  <tr>
+    <th><strong>Vendor Product URL</strong></th>
+    <td><%= link_to @antibody.vendor_product_url %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Isotpye</strong></th>
-		<td>
-			<% if @antibody.isotype.present? %>
-			  <%= link_to @antibody.isotype.name, @antibody.isotype %>
-			<% end %>
-		</td>
-	</tr>
+  <tr>
+    <th><strong>Stock concentration:</strong></th>
+    <td>
+      <% if @antibody.concentration.present? %>
+        <%= "#{@antibody.concentration} #{@antibody.concentration_units.name}" %>
+      <% end %>
+    </td>
+  </tr>
 
-	<tr>
-		<th><strong>Target</strong></th>
-		<td><%= link_to @antibody.target.name, @antibody.target %></td>
-	</tr>
+  <tr>
+    <th><strong>Isotpye</strong></th>
+    <td>
+      <% if @antibody.isotype.present? %>
+        <%= link_to @antibody.isotype.name, @antibody.isotype %>
+      <% end %>
+    </td>
+  </tr>
 
-	<tr>
-		<th><strong>Lot Identifier</strong></th>
-		<td><%= @antibody.lot_identifier %></td>
-	</tr>
+  <tr>
+    <th><strong>Target</strong></th>
+    <td><%= link_to @antibody.target.name, @antibody.target %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Clonality</strong></th>
-		<td><%= @antibody.clonality %></td>
-	</tr>
+  <tr>
+    <th><strong>Lot Identifier</strong></th>
+    <td><%= @antibody.lot_identifier %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Antigen Description</strong></th>
-		<td><%= @antibody.antigen_description %></td>
-	</tr>
+  <tr>
+    <th><strong>Clonality</strong></th>
+    <td><%= @antibody.clonality %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Antigen Sequence</strong></th>
-		<td><%= @antibody.antigen_sequence %></td>
-	</tr>
+  <tr>
+    <th><strong>Antigen Description</strong></th>
+    <td><%= @antibody.antigen_description %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Antigen Sequence</strong></th>
+    <td><%= @antibody.antigen_sequence %></td>
+  </tr>
 
   <tr class="notes-row">
     <th><strong>Notes</strong></th>
@@ -86,5 +95,5 @@
   </tr>
 </table>
 
-<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->
 <%= render partial: "application_partials/edit_notes", locals: {rec: @antibody} %>

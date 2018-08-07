@@ -16,9 +16,7 @@
       <th>Date performed</th>
       <th>Analyst</th>
       <th>Primary antibody</th>
-      <th>Primary antibody conc.</th>
       <th>Secondary antibody</th>
-      <th>Secondary antibody conc.</th>
       <th>Gel</th>
       <th>Submitter comments</th>
       <th>Notes</th>
@@ -42,18 +40,8 @@
           <% end %>
         </td>
         <td>
-          <% if rec.primary_antibody_concentration.present? %>
-            <%= "#{rec.primary_antibody_concentration} #{rec.primary_antibody_concentration_units.name}" %>
-          <% end %>
-        </td>
-        <td>
           <% if rec.secondary_antibody.present? %>
             <%= rec.secondary_antibody.name %>
-          <% end %>
-        </td>
-        <td>
-          <% if rec.secondary_antibody_concentration.present? %>
-            <%= "#{rec.secondary_antibody_concentration} #{rec.secondary_antibody_concentration.name}" %>
           <% end %>
         </td>
         <td>
