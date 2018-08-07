@@ -21,4 +21,3 @@ lib/DataFiles
 **/__pycache__
 **Pulsarpy_Logs
 **.swp
-form_input_defaults.yaml

@@ -1,0 +1,13 @@
+Gel:
+    percentage: 4-15
+
+GelLane:
+    sample_volume: 7
+
+Immunoblot:
+    primary_antibody_id: 9
+    primary_antibody_dilution: 1:2000
+    secondary_antibody_id: 10
+    secondary_antibody_dilution: 1:10000
+
+
