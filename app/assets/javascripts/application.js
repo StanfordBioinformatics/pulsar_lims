@@ -335,6 +335,7 @@ $(function() {
       },
       fail: function(e, data) {
         $submitButton.prop('disabled', false);
+        alert(e)
         console.log(e)
 
         $progressBar.
