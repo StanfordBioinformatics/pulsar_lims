@@ -12,7 +12,7 @@ class Target < ActiveRecord::Base
   belongs_to :user
 
   validates  :upstream_identifier, uniqueness: true, allow_blank: true
-  validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
+  validates :name, length: { minimum: 1, maximum: 40 }, uniqueness: true
 
   scope :persisted, lambda { where.not(id: nil) }
 
