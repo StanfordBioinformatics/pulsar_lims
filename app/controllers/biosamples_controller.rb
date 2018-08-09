@@ -136,11 +136,11 @@ class BiosamplesController < ApplicationController
     end
   end
 
-  private 
-
   def destroy
     ddestroy(@biosample, redirect_path_success: biosamples_path)
   end
+
+  private
 
     # Use callbacks to share common setup or constraints between actions.
     def set_biosample
