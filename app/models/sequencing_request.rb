@@ -16,7 +16,7 @@ class SequencingRequest < ActiveRecord::Base
   has_many    :sequencing_runs, dependent: :destroy
   belongs_to :user
 
-  validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
+  validates :name, uniqueness: true, allow_blank: true
   validates :sequencing_center, presence: true
   validates :sequencing_platform, presence: true
   validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"

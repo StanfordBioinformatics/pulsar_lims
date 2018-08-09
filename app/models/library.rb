@@ -32,7 +32,7 @@ class Library < ActiveRecord::Base
   belongs_to :well
 
   validates  :upstream_identifier, uniqueness: true, allow_blank: true
-  validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true, presence: true
+  validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true, allow_blank: true
 #  validates :barcode, format: { with: /\A[acgtnACGTN]+-?[acgtnACGTN]+\z/ }, allow_blank: true
   validates  :size_range, format: {with: /\A\d+-\d+\Z/}, presence: true
   validates :nucleic_acid_term_id, presence: true
@@ -56,6 +56,10 @@ class Library < ActiveRecord::Base
   #before_validation :set_name, on: :create #Somehow this gets called when updating too, despite saying "on: :create". So in that method, I make sure that the record isn't persisted before continuing. 
   after_validation :check_plated
   validate :validate_barcode, unless: Proc.new {|lib| lib.single_cell_sorting.present? } #verifies self.barcode/self.paired_barcode
+
+  def display
+    self.get_record_id()
+  end
 
   def self.policy_class
     ApplicationPolicy

@@ -1,17 +1,17 @@
 <div style="position: relative;" class="bg-info jumbotron">
-	<h3 class="display-3">Select a library</h3>
-	<%= simple_form_for @sequencing_request do |f| %>
-		<% if @exclude_library_ids.present? %>
-			<%= render partial: "libraries/select_library", locals: {f: f, exclude_library_ids: @exclude_library_ids} %>
-		<% else %>
-			<%= render partial: "libraries/select_library", locals: {f: f} %>
-		<% end %>
-		<div class="form-actions">
-			<%= f.button :submit, "Add Library", class: "btn-primary" %>
-		</div>
-	<% end %>
+  <h3 class="display-3">Select a library</h3>
+  <%= simple_form_for @sequencing_request do |f| %>
+    <% if @exclude_library_ids.present? %>
+      <%= render partial: "libraries/select_library", locals: {f: f, exclude_library_ids: @exclude_library_ids} %>
+    <% else %>
+      <%= render partial: "libraries/select_library", locals: {f: f} %>
+    <% end %>
+    <div class="form-actions">
+      <%= f.button :submit, "Add Library", class: "btn-primary" %>
+    </div>
+  <% end %>
   <% if not @sequencing_request.errors.any? %>
-	  <!-- Don't show toggle-up button if user is form was already submitted with errors. -->
+    <!-- Don't show toggle-up button if user is form was already submitted with errors. -->
     <button style="position: absolute; right: 0; bottom: 0;" class="sreq-toggle-up btn btn-link"><%= fa_icon("toggle-up lg") %></button>
   <% end %>
 </div>
