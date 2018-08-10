@@ -27,7 +27,7 @@
             <% next %>
           <% end %>
           <tr>
-            <td><%= link_to lib.name, lib %></td>
+            <td><%= link_to lib.to_label(), lib %></td>
             <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
           </tr>
         <% end %>  
@@ -62,7 +62,8 @@
     <%= f.input :concentration, label_html: {"data-toggle": "tooltip", "title": "The concentration of nucleic acids in the pooled library."} %>
     <%= f.association :concentration_unit, collection: Unit.where(unit_type: "concentration") %>
   </div>
-  </br></br>
+
+  <%= f.input :average_size, label: "Average library size", placeholder: "bp" %>
           
   <%= f.association :sequencing_platform, 
       collection: SequencingPlatform.order(:name), 

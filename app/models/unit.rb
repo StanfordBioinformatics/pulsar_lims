@@ -12,5 +12,10 @@ class Unit < ActiveRecord::Base
   def self.policy_class
     ApplicationPolicy
   end
+
+  def to_label
+    # Shadows the to_label method defined in /app/models/concerns/model_concerns.
+    self.name
+  end
     
 end

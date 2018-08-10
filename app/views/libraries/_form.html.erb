@@ -54,7 +54,7 @@
   <%= f.association :library_fragmentation_method,
       label_html: {"data-toggle" => "tooltip", "title" => "A short description or reference of the nucleic acid fragmentation protocol used in library preparation, if applicable."} %>
 
-  <div class: "my-flex">
+  <div class="my-flex">
     <%= f.input :concentration, label_html: {"data-toggle": "tooltip", title: "The concentration of nucleic acids in the library."} %>
     <%= f.association :concentration_unit, collection: Unit.where(unit_type: "concentration") %>
   </div>

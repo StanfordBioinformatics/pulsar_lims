@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180807001113) do
+ActiveRecord::Schema.define(version: 20180810183017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -669,7 +669,6 @@ ActiveRecord::Schema.define(version: 20180807001113) do
   add_index "libraries", ["concentration_unit_id"], name: "index_libraries_on_concentration_unit_id", using: :btree
   add_index "libraries", ["from_prototype_id"], name: "index_libraries_on_from_prototype_id", using: :btree
   add_index "libraries", ["library_fragmentation_method_id"], name: "index_libraries_on_library_fragmentation_method_id", using: :btree
-  add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true, using: :btree
   add_index "libraries", ["nucleic_acid_term_id"], name: "index_libraries_on_nucleic_acid_term_id", using: :btree
   add_index "libraries", ["paired_barcode_id"], name: "index_libraries_on_paired_barcode_id", using: :btree
   add_index "libraries", ["sequencing_library_prep_kit_id"], name: "index_libraries_on_sequencing_library_prep_kit_id", using: :btree
@@ -869,10 +868,10 @@ ActiveRecord::Schema.define(version: 20180807001113) do
     t.float    "concentration"
     t.string   "sample_sheet"
     t.text     "notes"
+    t.string   "average_size"
   end
 
   add_index "sequencing_requests", ["concentration_unit_id"], name: "index_sequencing_requests_on_concentration_unit_id", using: :btree
-  add_index "sequencing_requests", ["name"], name: "index_sequencing_requests_on_name", unique: true, using: :btree
   add_index "sequencing_requests", ["sequencing_center_id"], name: "index_sequencing_requests_on_sequencing_center_id", using: :btree
   add_index "sequencing_requests", ["sequencing_platform_id"], name: "index_sequencing_requests_on_sequencing_platform_id", using: :btree
   add_index "sequencing_requests", ["user_id"], name: "index_sequencing_requests_on_user_id", using: :btree

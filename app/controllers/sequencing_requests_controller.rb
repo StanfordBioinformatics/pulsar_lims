@@ -118,6 +118,7 @@ class SequencingRequestsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def sequencing_request_params
       params.require(:sequencing_request).permit(
+        :average_size,
         :comment,
         :concentration,
         :concentration_unit_id,

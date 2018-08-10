@@ -21,7 +21,8 @@ module ApplicationHelper
   end
 
   def link_to_record(record)
-    display = record.display()
+    #display = record.display()
+    display = record.to_label()
     dest = record
     if record.respond_to?(:params_for_url_for)
       dest = record.params_for_url_for()

@@ -16,15 +16,6 @@
   </tr>
 
   <tr>
-    <th><strong>Sample sheet:</strong></th>
-    <% if @sequencing_request.sample_sheet.present? %>
-      <td><%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " " + File.basename(@sequencing_request.sample_sheet), @sequencing_request.sample_sheet %></td>
-    <% else %>
-      <td></td>
-    <% end %>
-  </tr>
-
-  <tr>
     <th><strong>Comment:</strong></th>
     <td><%= @sequencing_request.comment %></td>
   </tr>
@@ -41,11 +32,6 @@
   </tr>
       
   <tr>
-    <th><strong>Sequencing platform:</strong></th>
-    <td><%= link_to @sequencing_request.sequencing_platform.name, @sequencing_request.sequencing_platform %></td>
-  </tr>
-
-  <tr>
     <th><strong>Concentration:</strong></th>
     <% if @sequencing_request.concentration.present? %>
       <td><%= @sequencing_request.concentration %>&nbsp;<%= @sequencing_request.concentration_unit.name %></td>
@@ -55,8 +41,12 @@
   </tr>
   
   <tr>
-    <th><strong>Sequencing center:</strong></th>
-    <td><%= link_to @sequencing_request.sequencing_center.name, @sequencing_request.sequencing_center %></td></td>
+    <th><strong>Average library size:</strong></th>
+    <td>
+      <% if @sequencing_request.average_size.present? %>
+        <%= "#{@sequencing_request.average_size} bp" %>
+      <% end %>
+    </td>
   </tr>
 
   <tr>
@@ -64,22 +54,6 @@
     <td><%= @sequencing_request.paired_end %></td>
   </tr>
   
-  <tr>
-    <th><strong>Shipped:</strong></th>
-    <td><%= @sequencing_request.shipped %></td>
-  </tr>
-
-  <tr>
-    <th><strong>Sequencing runs:</strong></th>
-    <td>
-    <% if @sequencing_request.sequencing_runs.present? %>
-      <%= render partial: "application_partials/link_to_has_many", locals: {links: @sequencing_request.sequencing_runs} %>
-    <% else %>
-      None
-    <% end %>
-    </td>
-  </tr>
-
   <tr>
     <th><strong>Libraries:</strong></th>
     <% if @sequencing_request.libraries.present? %>
@@ -119,7 +93,7 @@
     <% if @sequencing_request.sequencing_runs.persisted.any? %>
       <% btn_txt = "Add Another Sequencing Run" %>
     <% end %>
-    <li>
+      <li>
       <%= link_to btn_txt,
           new_sequencing_request_sequencing_run_path(@sequencing_request),
           class: "reg-btn", id: "add_sequencing_run"
@@ -129,6 +103,38 @@
 </ul>
 <div class="sreq_lib_or_scs_selector"></div> <!-- Used in sequencing_requests.js to add the library or scs selector. -->
 <div class="sreq_plate_selector"></div> <!-- Used in sequencing_requests.js to add the plates selector. -->
+
+<h3 class="section">Sequencing status</h3>
+<div class="my-flex">
+  <h4>Sequencing center:</h4>
+  <%= link_to @sequencing_request.sequencing_center.name, @sequencing_request.sequencing_center %>
+</div>
+<div class="my-flex">
+  <h4>Shipped out?</h4>
+  <%= @sequencing_request.shipped? %>
+</div>
+
+<div class="my-flex">
+  <h4>Platform:</h4>
+  <%= link_to @sequencing_request.sequencing_platform.name, @sequencing_request.sequencing_platform %>
+</div>
+
+<div class="my-flex">
+  <h4>Sample sheet:</strong></h4>
+  <% if @sequencing_request.sample_sheet.present? %>
+    <%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " " + File.basename(@sequencing_request.sample_sheet), @sequencing_request.sample_sheet %>
+  <% end %>
+</div>
+
+<div class="my-flex">
+  <h4>Sequencing runs:</h4>
+  <% if @sequencing_request.sequencing_runs.present? %>
+    <%= render partial: "application_partials/link_to_has_many", locals: {links: @sequencing_request.sequencing_runs} %>
+  <% else %>
+    None
+  <% end %>
+</div>
+</br>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
 <%= render partial: "application_partials/edit_notes", locals: {rec: @sequencing_request} %>

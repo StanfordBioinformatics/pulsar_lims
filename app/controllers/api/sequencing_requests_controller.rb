@@ -49,6 +49,7 @@ class Api::SequencingRequestsController < Api::ApplicationController
 
   def sequencing_request_params
     params.require(:sequencing_request).permit(
+      :average_size,
       :user_id,
       :comment,
       :concentration,
