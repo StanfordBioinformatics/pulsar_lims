@@ -1,7 +1,0 @@
-<%= simple_form_for(@crispr, method: :post, url: {action: "create_clone"}) do |f| %>
-  <%= f.association :biosample, collection: Biosample.non_plated.order(:name) %>
-
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn-primary" %>
-  </div></br>
-<% end %>

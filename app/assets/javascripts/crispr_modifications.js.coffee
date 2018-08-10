@@ -9,6 +9,11 @@ $ ->
     $.get "/documents/select_options", (responseText,status,jqXHR) ->
       $(".crispr_documents_selector").html(responseText)
 
+  #Refresh the crispr_constructs list in the form when the refresh fa-icon is clicked:
+  $(document).on "click", ".crispr_constructs i.refresh", (event) ->
+    $.get "/crispr_constructs/select_options", (responseText,status,jqXHR) ->
+      $(".crispr_constructs_selector").html(responseText)
+
 
   $genomic_integration_site = $(".genomic_integration_site")
 

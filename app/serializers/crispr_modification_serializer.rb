@@ -2,7 +2,7 @@ class CrisprModificationSerializer < ActiveModel::Serializer
   self.root = false
   embed :ids
 
-  attributes :id, :biosample_id, :category, :donor_construct_id, :name, :notes, :purpose, :times_cloned, :created_at, :updated_at, :upstream_identifier
+  attributes :id, :biosample_id, :category, :donor_construct_id, :name, :notes, :purpose, :created_at, :updated_at, :upstream_identifier
 
   has_one :user
 

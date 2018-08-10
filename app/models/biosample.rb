@@ -149,9 +149,6 @@ class Biosample < ActiveRecord::Base
       attrs.update(custom_attrs)
     end
     new_clone = clone(associated_user_id: associated_user_id, custom_attrs: attrs)
-    if self.crispr_modification.present?   
-      self.crispr_modification.clone_crispr_modification(associated_biosample_id: new_clone.id, associated_user_id: self.user.id)
-    end
     return new_clone
   end
 

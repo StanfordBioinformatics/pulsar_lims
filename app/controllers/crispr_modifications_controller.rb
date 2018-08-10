@@ -1,5 +1,5 @@
 class CrisprModificationsController < ApplicationController
-  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy, :new_pcr_validation, :clone, :create_clone, :crispr_modification_parts, :prototype_instances]
+  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy, :new_pcr_validation, :crispr_modification_parts, :prototype_instances]
   skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct, :new_pcr_validation, :crispr_modification_parts, :prototype_instances]
 
   def select_options
@@ -7,22 +7,6 @@ class CrisprModificationsController < ApplicationController
     #Typically called when the user selects the refresh icon in any form that has a crispr_modifications selection.
     @records = CrisprModification.all
     render "application_partials/select_options", layout: false
-  end
-
-  def clone
-    # Renders the view that submits a form to the create_clones action below.
-    authorize @crispr, :create?
-  end
-
-  def create_clone
-    authorize @crispr, :create?
-    #render json: params
-    #return
-    biosample_id = set_crispr_modification()[:biosample_id]
-    @crispr = @crispr.clone_crispr_modification(associated_biosample_id: biosample_id, associated_user_id: current_user.id)
-      # Add any has_one relationships to clone
-      #@biosample.clone_crispr_modification(associated_biosample_id: biosample_clone.id, associated_user_id: current_user.id)
-    redirect_to @crispr, notice: "Your CrisprModification clone has been created and attached to #{Biosample.find(biosample_id).name}"
   end
 
   def crispr_modification_parts
@@ -138,7 +122,6 @@ class CrisprModificationsController < ApplicationController
         :notes,
         :prototype,
         :purpose,
-        :times_cloned,
         :upstream_identifier,
         document_ids: [],
         crispr_construct_ids: [],

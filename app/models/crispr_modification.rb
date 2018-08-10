@@ -5,7 +5,6 @@ class CrisprModification < ActiveRecord::Base
   #Submit to the ENCODE Portal as a genetic_modification:
   # https://www.encodeproject.org/profiles/genetic_modification.json
   include ModelConcerns # A Concern.
-  include Cloning # A Concern that includes the clone() and parent() instance methods and related ones.
   #crisprs only belong to biosamples.
   ABBR = "CRISPR"
   DEFINITION = "A genetic modification carried out using CRISPR technology.  This object links together one or more CRISPR Construct objects (each containing an individual guide sequence), and a Donor Construct object (containing the donor sequence). Model abbreviation: #{ABBR}"
@@ -73,27 +72,6 @@ class CrisprModification < ActiveRecord::Base
     end
   end
 
-  def clone_crispr_modification(associated_biosample_id:, associated_user_id:, custom_attrs: nil)
-    # Generates a hash of attributes that can be used to duplicate the current genetic_modification (GM). In the generated
-    # attributes, the attribute part_of_genetic_modification_id will be set to the current GM,
-    # and the property from_prototype_id will as well.
-    # Some attributes don't make sense to duplicate, and hence aren't. Such attributes include
-    # the user_id (could be a different user cloning than the one that created the original),
-    # record id, name, created_at, updated_at, upstream_identifier, and some foreign keys, such as if present.
-    # The calling code should set the user and name attributes.
-    #
-    # Returns:
-    #     Hash containing the attributes for creating a new GM.
-    #
-    # Example:
-    attrs = {}
-    attrs["part_of_id"] = self.id
-    attrs["from_prototype_id"] = self.id
-    attrs["biosample_id"] = associated_biosample_id
-    attrs["crispr_construct_ids"] = self.crispr_construct_ids
-    return clone(associated_user_id: associated_user_id, custom_attrs: attrs)
-  end
-
   def attributes_for_cloning
     # Whitelist of attributes used for cloning or updating child biosamples.
     attrs = {}
@@ -104,38 +82,6 @@ class CrisprModification < ActiveRecord::Base
     attrs["purpose"] = self.purpose
     attrs["notes"] = self.notes
     return attrs
-  end
-
-  def all_crispr_constructs
-    """
-    Returns:
-        CrisprConstruct::ActiveRecord_Relation.
-    """
-    cc_ids = self.crispr_construct_ids
-    self.parents.each do |p|
-      cc_ids.concat(p.crispr_construct_ids)
-    end
-    return CrisprConstruct.where(id: cc_ids)
-  end
-
-  def parent_crispr_constructs
-    return self.all_crispr_constructs.where.not(id: self.crispr_construct_ids)
-  end
-
-  def all_pcr_validations
-    """
-    Returns:
-        PcrValidation::ActiveRecord_Relation.
-    """
-    ids = self.pcr_validation_ids
-    self.parents.each do |p|
-      ids.concat(p.pcr_validation_ids)
-    end
-    return Pcr.where(id: ids)
-  end
-
-  def parent_pcr_validations
-    return self.all_pcr_validations.where.not(id: self.pcr_validation_ids)
   end
 
   private

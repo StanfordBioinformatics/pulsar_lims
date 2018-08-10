@@ -69,6 +69,7 @@ Pulsar::Application.routes.draw do
     get :select_chromosome_on_reference_genome, on: :collection
   end
   resources :crispr_constructs do
+    get :select_options, on: :collection
     get :select_construct_tag, on: :collection
   end
 
@@ -144,7 +145,6 @@ Pulsar::Application.routes.draw do
     resources :crispr_modifications do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
-      post :clone, on: :member
     end
 
     resources :documents do

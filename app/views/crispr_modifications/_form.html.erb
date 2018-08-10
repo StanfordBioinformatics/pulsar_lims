@@ -12,12 +12,15 @@
 
   <%= f.input :purpose, collection: Enums::CRISPR_MOD_PURPOSE, label_html: {"data-toggle": "tooltip", "title":  "The purpose of the genetic modification."} %>
 
-  <!-- If crispr is being updated, show any existing associated crispr_constructs and allow user to be able to delete them. -->
-  <!-- But if this has a parent CM (self.from_prototype_id is set), then the parent's associated
-       crispr_constructs can only be deleted from the parent. -->
-  <strong>Crispr constructs:</strong>
-  <% parent_links = @crispr.parent_crispr_constructs %>
-  <%= render partial: "application_partials/parental_and_self_fklinks", locals: {f: f, rec: @crispr, link_name: :crispr_constructs, parent_links: parent_links} %>
+  <fieldset>                                                                                           
+    <legend>CRISPR Constructs</legend>                                                                         
+    <strong>Linked:</strong>                                                                 
+    <%= render partial: "application_partials/simple_fields_for", locals: {f: f, record: @crispr, attribute: :crispr_constructs} %>
+    <%= f.association :crispr_constructs, label: "Add CRISPR Constructs", selected: nil,
+        include_blank: true,                                                                           
+        input_html: {class: "crispr_constructs_selector"},                                          
+        label_html: {class: "refresh"} %>
+  </fieldset> 
 
   <div id="added_crispr_constructs"></div>
   <!-- .added_crispr_constructs will serve as the container for new crispr_construct selections added by jQuery. -->
@@ -30,7 +33,7 @@
         locals: {f: f, crispr_constructs: CrisprConstruct.all} %>
   <% end %>
 
-  <%= link_to "Add Crispr Guide Construct", select_crispr_construct_crispr_modifications_path({exclude_ids: @crispr.all_crispr_constructs.ids}),
+  <%= link_to "Add Crispr Guide Construct", select_crispr_construct_crispr_modifications_path({exclude_ids: @crispr.crispr_constructs.ids}),
       remote: true,
       class: "select_crispr_construct reg-btn" %>
   </br></br>

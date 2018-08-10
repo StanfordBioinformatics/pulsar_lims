@@ -2,6 +2,13 @@ class CrisprConstructsController < ApplicationController
   before_action :set_crispr_construct, only: [:show, :edit, :update, :destroy]
   skip_after_action :verify_authorized, only: [:select_construct_tag]
 
+  def select_options                                                                                   
+    #Called via ajax.                                                                                  
+    #Typically called when the user selects the refresh icon in any form that has a crispr_constructs input
+    @records = CrisprConstruct.all                                                                       
+    render "application_partials/select_options", layout: false                                        
+  end 
+
   def select_construct_tag
     @crispr_construct = CrisprConstruct.new
     exclude_construct_tags = params[:exclude_construct_tags]
