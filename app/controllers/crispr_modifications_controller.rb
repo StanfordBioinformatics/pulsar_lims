@@ -1,21 +1,12 @@
 class CrisprModificationsController < ApplicationController
-  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy, :new_pcr_validation, :crispr_modification_parts, :prototype_instances]
-  skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct, :new_pcr_validation, :crispr_modification_parts, :prototype_instances]
+  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy, :new_pcr_validation, :prototype_instances]
+  skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct, :new_pcr_validation, :prototype_instances]
 
   def select_options
     #Called via ajax.
     #Typically called when the user selects the refresh icon in any form that has a crispr_modifications selection.
     @records = CrisprModification.all
     render "application_partials/select_options", layout: false
-  end
-
-  def crispr_modification_parts
-    #Called via ajax
-    set_model_class()
-    @records = policy_scope(CrisprModification.where({part_of: @crispr})).page params[:page]
-    @no_new_btn = true
-    @title = "Child CRISPR Modifications of #{@crispr.name}"
-    render action: "index"
   end
 
   def prototype_instances

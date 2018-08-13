@@ -17,7 +17,7 @@
       <th>Sequencing center</th>
       <th>Concentration</th>
       <th>Paired-end</th>
-      <th>Shipped</th>
+      <th>Submitted?</th>
       <th>Sequencing runs</th>
       <th>Actions</th>
     </tr>
@@ -35,7 +35,7 @@
           <td></td>
         <% end %>
         <td><%= rec.paired_end%></td>
-        <td><%= rec.shipped %></td>
+        <td><%= rec.date_submitted %></td>
         <td>
           <% if rec.sequencing_runs.present? %>
               <%= render partial: "application_partials/link_to_has_many", locals: {links: rec.sequencing_runs} %>

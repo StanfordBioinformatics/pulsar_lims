@@ -56,10 +56,7 @@ Pulsar::Application.routes.draw do
   end
   resources :paired_barcodes
   resources :crispr_modifications do
-    get :crispr_modification_parts, on: :member
     get :prototype_instances, on: :member
-    get :clone, on: :member
-    post :create_clone, on: :member
     get :select_options, on: :collection
     #crisprs only belong to biosamples.
     get :new_pcr_validation, on: :member

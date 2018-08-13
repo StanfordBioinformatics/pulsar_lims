@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180813171347) do
+ActiveRecord::Schema.define(version: 20180813202843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -374,7 +374,6 @@ ActiveRecord::Schema.define(version: 20180813171347) do
     t.text     "notes"
     t.integer  "from_prototype_id"
     t.integer  "times_cloned",                default: 0
-    t.integer  "part_of_id"
   end
 
   add_index "crispr_modifications", ["biosample_id"], name: "index_crispr_modifications_on_biosample_id", using: :btree
@@ -858,7 +857,6 @@ ActiveRecord::Schema.define(version: 20180813171347) do
     t.string   "name"
     t.integer  "sequencing_platform_id"
     t.integer  "sequencing_center_id"
-    t.boolean  "shipped"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "user_id"
@@ -1110,7 +1108,6 @@ ActiveRecord::Schema.define(version: 20180813171347) do
   add_foreign_key "crispr_constructs", "vendors"
   add_foreign_key "crispr_modifications", "biosamples"
   add_foreign_key "crispr_modifications", "crispr_modifications", column: "from_prototype_id"
-  add_foreign_key "crispr_modifications", "crispr_modifications", column: "part_of_id"
   add_foreign_key "crispr_modifications", "donor_constructs"
   add_foreign_key "crispr_modifications", "genome_locations", column: "genomic_integration_site_id"
   add_foreign_key "crispr_modifications", "users"

@@ -11,8 +11,6 @@ class CrisprModification < ActiveRecord::Base
   belongs_to :user
   belongs_to :from_prototype, class_name: "CrisprModification"
   has_many   :prototype_instances, class_name: "CrisprModification", foreign_key: "from_prototype_id", dependent: :restrict_with_exception
-  belongs_to :part_of, class_name: "CrisprModification"
-  has_many :crispr_modification_parts, class_name: "CrisprModification", foreign_key: "part_of_id", dependent: :destroy
   belongs_to :biosample
   belongs_to :donor_construct
   belongs_to :genomic_integration_site, class_name: "GenomeLocation"
