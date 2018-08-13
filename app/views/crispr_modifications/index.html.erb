@@ -16,12 +16,11 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
-      <th>Cell line</th>
       <th>Category</th>
       <th>Purpose</th>
       <th>Crispr constructs</th>
       <th>Donor construct</th>
-      <th>Biosample</th>
+      <th>Biosamples</th>
       <th>Target</th>
       <th>Actions</th>
     </tr>
@@ -31,7 +30,6 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
-        <td><%= rec.biosample.biosample_term_name.name %>
         <td><%= rec.category %></td>
         <td><%= rec.purpose %></td>
         <td>
@@ -40,7 +38,7 @@
           <% end %>
         </td>
         <td><%= link_to rec.donor_construct.name, rec.donor_construct %></td>
-        <td><%= link_to rec.biosample.name, rec.biosample %></td>
+        <td><%= render partial: "application_partials/link_to_has_many", locals: {links: rec.biosamples} %></td>
         <% target = rec.crispr_constructs.first.target %>
         <td><%= link_to target.name, target %></td>
         <td>
