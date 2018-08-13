@@ -3,7 +3,6 @@
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_request } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing request name"} %>
-  <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Notes about the sequencing request"} %>
 
   <% sample_sheet_upload_hint="" %>
   <% if @sequencing_request.sample_sheet.present? %>
@@ -76,7 +75,8 @@
       label_method: :name %>
 
   <%= f.input :paired_end %>
-  <%= f.input :shipped, label_html: {"data-toggle" => "tooltip", "title" => "Whether the material to be sequenced was already delivered to the sequencing center"} %>
+  <%= f.input :date_submitted, label_html: {"data-toggle" => "tooltip", "title" => "The day the sequencing request was formally submitted to the sequencing center."} %>
+  <%= f.association :submitted_by, collection: User.order([:last_name, :first_name]), label_html: {class: "refresh", "data-toggle" => "tooltip", "title" => "Who submitted the sequencing request to to the sequencing center."} %>
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 
 

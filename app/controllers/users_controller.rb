@@ -2,6 +2,13 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :generate_api_key, :show_api_key, :hide_api_key, :remove_api_key, :archive]
   skip_after_action :verify_authorized
 
+  def select_options                                                                                   
+    #Called via ajax.                                                                                  
+    #Typically called when the user selects the refresh icon in any form that has a crispr_constructs input
+    @records = User.all                                                                      
+    render "application_partials/select_options", layout: false                                        
+  end  
+
   def archive
     @user.archive
     # Issue a new session identifier (http://guides.rubyonrails.org/v3.2/security.html)

@@ -93,7 +93,7 @@
   <%= f.input :lot_identifier,
       label_html: {"data-toggle": "tooltip", "title": "The lot identifier provided by the originating lab or vendor."} %>
 
-  <%= f.association :donor, collection: Donor.order(:name), label_method: :name,
+  <%= f.association :donor, label_html: {class: "refresh"} %>
       label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The donor of the biosample"} %>
 
   <%= f.input :passage_number,

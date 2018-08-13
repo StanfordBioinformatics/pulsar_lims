@@ -16,11 +16,6 @@
   </tr>
 
   <tr>
-    <th><strong>Comment:</strong></th>
-    <td><%= @sequencing_request.comment %></td>
-  </tr>
-  
-  <tr>
     <th><strong>Plates:</strong></th>
     <% if @sequencing_request.plates.present?%>
       <td>
@@ -104,14 +99,22 @@
 <div class="sreq_lib_or_scs_selector"></div> <!-- Used in sequencing_requests.js to add the library or scs selector. -->
 <div class="sreq_plate_selector"></div> <!-- Used in sequencing_requests.js to add the plates selector. -->
 
-<h3 class="section">Sequencing status</h3>
+<h3 class="section">Sequencing status:</h3>
+<div class="my-flex"%>
+  <h4>Submission status:</h4>
+  <% status = "Not submitted" %>
+  <% if @sequencing_request.date_submitted.present? %>
+    <% ds = @sequencing_request.date_submitted %>
+    <% by = @sequencing_request.submitted_by %>
+    <% status = "Submitted on #{ds} by #{by}." %>
+  <% end %>
+  <p><%= status %></p>
+</div>
 <div class="my-flex">
   <h4>Sequencing center:</h4>
   <%= link_to @sequencing_request.sequencing_center.name, @sequencing_request.sequencing_center %>
 </div>
 <div class="my-flex">
-  <h4>Shipped out?</h4>
-  <%= @sequencing_request.shipped? %>
 </div>
 
 <div class="my-flex">

@@ -8,7 +8,7 @@ module ModelConcerns
     # This method is looked up by simple_form and if found is used as the labeling method for
     # items in a selection list.
     label = self.get_record_id
-    if self.send(:name)
+    if self.respond_to?(:name)
       name = self.name
       if name.present?
         label += " #{name}"

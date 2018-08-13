@@ -3,6 +3,9 @@ require 'elasticsearch/model'
 class User < ActiveRecord::Base
   include Elasticsearch::Model                                                                         
   include Elasticsearch::Model::Callbacks
+  include ModelConcerns
+  ABBR = "U"
+  default_scope {order(:last_name, :first_name)}
   has_many :addresses, dependent: :nullify
   has_many :gels, dependent: :nullify
   has_many :analyses, dependent: :nullify
@@ -77,6 +80,11 @@ class User < ActiveRecord::Base
 
   def display
     return "#{first_name} #{last_name}"
+  end
+
+  def to_label
+    # Shadows to to_label method defined in concerns/model_concerns.rb.
+    "#{last_name}, #{first_name}"
   end
 
   def generate_api_key

@@ -1,4 +1,4 @@
-<% options = @records.order(:name).map {|rec| [rec.name, rec.id]} %>
+<% options = @records.map {|rec| [rec.to_label, rec.id]} %>
 <% if not defined?(@no_blank) %>
   <% options.unshift(["",""]) %>
 <% end %>

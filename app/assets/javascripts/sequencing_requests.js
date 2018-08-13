@@ -2,6 +2,13 @@
 
 $(function() {
   //Refresh the sequencing_platforms list in the form when the refresh fa-icon is clicked:                           
+  $(document).on("click", ".sequencing_request_submitted_by i.refresh", function(event){
+    $.get("/users/select_options", function (responseText,status,jqXHR){
+      $(".sequencing_request_submitted_by select").html(responseText);
+    })
+  })
+
+  //Refresh the sequencing_platforms list in the form when the refresh fa-icon is clicked:                           
   $(document).on("click", ".sequencing_request_sequencing_platform i.refresh", function(event){
     $.get("/sequencing_platforms/select_options", function (responseText,status,jqXHR){
       $(".sequencing_request_sequencing_platform select").html(responseText);

@@ -51,9 +51,9 @@ class Api::SequencingRequestsController < Api::ApplicationController
     params.require(:sequencing_request).permit(
       :average_size,
       :user_id,
-      :comment,
       :concentration,
       :concentration_unit_id,
+      :date_submitted,
       :name,
       :notes,
       :paired_end,
@@ -61,6 +61,7 @@ class Api::SequencingRequestsController < Api::ApplicationController
       :sequencing_center_id,
       :sequencing_platform_id,
       :shipped,
+      :submitted_by_id,
       :plate_ids => [],
       plates_attributes: [:id,:_destroy],
       :library_ids => [],

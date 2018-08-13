@@ -193,7 +193,6 @@ Pulsar::Application.routes.draw do
     end
 
     resources :users, only: [:show, :edit] do
-      get :select_options, on: :collection
       post :find_by, on: :collection
       post :find_by_or, on: :collection
       patch :generate_api_key, on: :member                                                                
@@ -238,6 +237,7 @@ Pulsar::Application.routes.draw do
     registrations: 'registrations'
   }
   resources :users, only: [:show, :edit] do
+    get :select_options, on: :collection
     post :generate_api_key, on: :member
     get  :show_api_key, on: :member
     post  :remove_api_key, on: :member
