@@ -60,7 +60,7 @@ class Api::BiosamplesController < Api::ApplicationController
         :biosample_term_name_id,
         :biosample_type_id,
         :control,
-        :crispr_modification_id
+        :crispr_modification_id,
         :date_biosample_taken,
         :description,
         :donor_id,
