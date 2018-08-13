@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180813202843) do
+ActiveRecord::Schema.define(version: 20180813213450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,10 +213,12 @@ ActiveRecord::Schema.define(version: 20180813202843) do
     t.string   "tube_label"
     t.integer  "times_cloned",                                default: 0
     t.text     "notes"
+    t.integer  "crispr_modification_id"
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
   add_index "biosamples", ["biosample_type_id"], name: "index_biosamples_on_biosample_type_id", using: :btree
+  add_index "biosamples", ["crispr_modification_id"], name: "index_biosamples_on_crispr_modification_id", using: :btree
   add_index "biosamples", ["donor_id"], name: "index_biosamples_on_donor_id", using: :btree
   add_index "biosamples", ["from_prototype_id"], name: "index_biosamples_on_from_prototype_id", using: :btree
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
@@ -363,7 +365,6 @@ ActiveRecord::Schema.define(version: 20180813202843) do
     t.string   "name"
     t.integer  "user_id"
     t.integer  "donor_construct_id"
-    t.integer  "biosample_id"
     t.text     "description"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
@@ -376,7 +377,6 @@ ActiveRecord::Schema.define(version: 20180813202843) do
     t.integer  "times_cloned",                default: 0
   end
 
-  add_index "crispr_modifications", ["biosample_id"], name: "index_crispr_modifications_on_biosample_id", using: :btree
   add_index "crispr_modifications", ["donor_construct_id"], name: "index_crispr_modifications_on_donor_construct_id", using: :btree
   add_index "crispr_modifications", ["from_prototype_id"], name: "index_crispr_modifications_on_from_prototype_id", using: :btree
   add_index "crispr_modifications", ["genomic_integration_site_id"], name: "index_crispr_modifications_on_genomic_integration_site_id", using: :btree
@@ -1088,6 +1088,7 @@ ActiveRecord::Schema.define(version: 20180813202843) do
   add_foreign_key "biosamples", "biosample_types"
   add_foreign_key "biosamples", "biosamples", column: "from_prototype_id"
   add_foreign_key "biosamples", "biosamples", column: "part_of_id"
+  add_foreign_key "biosamples", "crispr_modifications"
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"
   add_foreign_key "biosamples", "users", column: "owner_id"
@@ -1106,7 +1107,6 @@ ActiveRecord::Schema.define(version: 20180813202843) do
   add_foreign_key "crispr_constructs", "targets"
   add_foreign_key "crispr_constructs", "users"
   add_foreign_key "crispr_constructs", "vendors"
-  add_foreign_key "crispr_modifications", "biosamples"
   add_foreign_key "crispr_modifications", "crispr_modifications", column: "from_prototype_id"
   add_foreign_key "crispr_modifications", "donor_constructs"
   add_foreign_key "crispr_modifications", "genome_locations", column: "genomic_integration_site_id"

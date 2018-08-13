@@ -1,7 +1,7 @@
 class Api::BiosamplesController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/biosamples/3
-  before_action :set_biosample, only: [:show, :update, :destroy, :add_crispr_modification]
+  before_action :set_biosample, only: [:show, :update, :destroy]
 
   def find_by
     #find_by defined in ApplicationController#find_by.
@@ -49,9 +49,6 @@ class Api::BiosamplesController < Api::ApplicationController
     ddestroy(@biosample)
   end
 
-  def add_crispr_modification
-  end
-
   private
 
   def set_biosample
@@ -63,6 +60,7 @@ class Api::BiosamplesController < Api::ApplicationController
         :biosample_term_name_id,
         :biosample_type_id,
         :control,
+        :crispr_modification_id
         :date_biosample_taken,
         :description,
         :donor_id,
@@ -82,23 +80,6 @@ class Api::BiosamplesController < Api::ApplicationController
         :upstream_identifier,
         :vendor_id,
         :vendor_product_identifier,
-
-        crispr_modification_attributes: [
-          :user_id,
-          :_destroy,
-          :name,
-          :notes, 
-          :donor_construct_id,
-          :times_cloned,
-          crispr_constructs_attributes: [:id, :_destroy],
-          crispr_construct_ids: [],
-          genomic_integration_site_attributes: [
-            :id,
-            :chromosome_id,
-            :end,
-            :start
-          ]
-        ],
         documents_attributes: [:id, :_destroy],
         :document_ids => [],
         pooled_from_biosamples_attributes: [:id, :_destroy],

@@ -1,7 +1,11 @@
 class BiosamplesController < ApplicationController
 #  include DocumentsConcern #gives me add_documents(), remove_documents()
-  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :biosample_parts, :prototype_instances, :clone, :create_clones, :delete_biosample_document,:add_crispr_modification, :make_replicate]
-  skip_after_action :verify_authorized, only: [:biosample_parts, :prototype_instances, :select_biosample_term_name,:add_crispr_modification, :make_replicate]
+  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :biosample_parts, :prototype_instances, :clone, :create_clones, :delete_biosample_document, :make_replicate, :add_crispr_modification]
+  skip_after_action :verify_authorized, only: [:biosample_parts, :prototype_instances, :select_biosample_term_name, :make_replicate, :crispr_modification_id, :add_crispr_modification]
+
+  def add_crispr_modification
+    #ajax call from show view
+  end
 
   def make_replicate
     @biosample_replicate = @biosample.biosample_replicates.build
@@ -48,10 +52,6 @@ class BiosamplesController < ApplicationController
     #Typically called when the user selects the refresh icon in any form that has a biosamples selection.
     @records = Biosample.non_plated
     render "application_partials/select_options", layout: false
-  end
-
-  def add_crispr_modification
-    @crispr = @biosample.build_crispr_modification({user: current_user})
   end
 
   def select_biosample_term_name
@@ -116,10 +116,6 @@ class BiosamplesController < ApplicationController
     #@biosample = add_documents(@biosample,params[:biosample][:documents])
     #render json: params
     #return
-    crispr_attrs = biosample_params()[:crispr_modification_attributes]
-    if crispr_attrs.present?
-      params[:biosample][:crispr_modification_attributes].update({user_id: current_user.id})
-    end
     respond_to do |format|
       if @biosample.update(biosample_params)
         format.html { redirect_to @biosample, notice: 'Biosample was successfully updated.' }
@@ -153,6 +149,7 @@ class BiosamplesController < ApplicationController
         :control, 
         :biosample_term_name_id, 
         :biosample_type_id,
+        :crispr_modification_id,
         :date_biosample_taken, 
         :description, 
         :donor_id,

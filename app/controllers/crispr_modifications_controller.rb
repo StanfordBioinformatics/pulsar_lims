@@ -106,7 +106,6 @@ class CrisprModificationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def crispr_modification_params
       params.require(:crispr_modification).permit(
-        :biosample_id,
         :category,
         :donor_construct_id,
         :name,

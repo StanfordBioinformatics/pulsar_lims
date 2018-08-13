@@ -282,6 +282,7 @@ Pulsar::Application.routes.draw do
   end
 
   resources :biosamples do
+    get :add_crispr_modification, on: :member
     get :make_replicate, on: :member
     get :clone, on: :member
     post :create_clones, on: :member
@@ -289,7 +290,6 @@ Pulsar::Application.routes.draw do
     get :prototype_instances, on: :member
     get :select_options, on: :collection
     get :select_biosample_term_name, on: :collection
-    get :add_crispr_modification, on: :member
   end
 
   resources :donors do

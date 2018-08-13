@@ -57,7 +57,6 @@ class Api::CrisprModificationsController < Api::ApplicationController
 
   def crispr_modification_params
     params.require(:crispr_modification).permit(
-        :biosample_id,
         :category,
         :donor_construct_id,
         :name,

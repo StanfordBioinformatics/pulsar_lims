@@ -238,11 +238,6 @@
 <% if @biosample.crispr_modification.blank? %>
   <%= link_to "Add CRISPR modification", add_crispr_modification_biosample_path(@biosample), class: "new", 
       id: "biosample_add_crispr_modification" %>
-<% else %>
-  <% if not @biosample.crispr_modification.persisted? %>
-    <!-- The an attempt to create one was made, but there was a validation issue -->
-    <%= render partial: "add_crispr_modification" %>
-  <% end %>
 <% end %>
 <%= link_to "Make replicate", [:make_replicate, @biosample], class: "reg-btn"  %>
 </br>

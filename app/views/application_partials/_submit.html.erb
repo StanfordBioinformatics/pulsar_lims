@@ -1,11 +1,11 @@
 <div class="actions">
-	<% class_val = "btn-primary" %>
+  <% class_val = "btn-primary" %>
   <% if defined?(add_classes) %>
     <% class_val += " " + add_classes %>
-	<% end %>
+  <% end %>
   <% if defined?(btn_txt) %>
-  	<%= f.button :submit, btn_txt, class: class_val %>
-	<% else %>
-	  <%= f.button :submit, class: class_val %>
-	<% end %>
+    <%= f.button :submit, btn_txt, class: class_val %>
+  <% else %>
+    <%= f.button :submit, class: class_val %>
+  <% end %>
 </div></br>
