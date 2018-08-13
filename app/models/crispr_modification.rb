@@ -1,5 +1,6 @@
 require 'elasticsearch/model'
 class CrisprModification < ActiveRecord::Base
+  default_scope {order(:id)}
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   #Submit to the ENCODE Portal as a genetic_modification:

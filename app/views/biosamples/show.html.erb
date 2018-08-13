@@ -235,21 +235,30 @@
   </tr>
 </table>
 
+<h3 class="section">CRISPR modification</h3>
 <% if @biosample.crispr_modification.blank? %>
   <%= link_to "Add CRISPR modification", add_crispr_modification_biosample_path(@biosample), class: "new", 
       id: "biosample_add_crispr_modification" %>
+<% else %>
+  <%= link_to_record @biosample.crispr_modification %>
+  </br></br>
 <% end %>
-<%= link_to "Make replicate", [:make_replicate, @biosample], class: "reg-btn"  %>
-</br>
-</br>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
 <%= render partial: "application_partials/edit_notes", locals: {rec: @biosample} %>
 
 <h3 class="section">Validations</h3>
-<h4>Immunoblots</h4>
-<% if @biosample.immunoblots.any? %>
-  <%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.immunoblots} %>
-<% end %>
+<div class="my-flex">
+  <h4>Immunoblots:</h4>
+  <% if @biosample.immunoblots.any? %>
+    <%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.immunoblots} %>
+  <% else %>
+    None
+  <% end %>
+</div>
+</br></br>
+<%= link_to "Make replicate", [:make_replicate, @biosample], class: "reg-btn"  %>
+</br>
+</br>
 
 <%= link_to "Back", biosamples_path %>

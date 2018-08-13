@@ -39,8 +39,8 @@
   </tr>
 
   <tr>
-    <th><strong>Biosample:</strong></th>
-    <td><%= link_to @crispr.biosample.name, @crispr.biosample %></td>
+    <th><strong>Biosamples:</strong></th>
+    <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @crispr.biosamples} %></td>
   </tr>
 
   <tr>

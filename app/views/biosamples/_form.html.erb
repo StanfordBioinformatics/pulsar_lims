@@ -116,4 +116,12 @@
 
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 
+  <% if @biosample.crispr_modification.present? %>
+    <!-- Only allow user to update assocation in this view, not add it. Adding it is done via a
+         btn on the show view. -->
+    </br>
+    <h3 class="section">CRISPR Modificaiton</h3>
+    <%= f.association :crispr_modification, label: false %>
+  <% end %>
+
   </br>
