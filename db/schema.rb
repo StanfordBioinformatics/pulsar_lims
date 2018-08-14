@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180813213450) do
+ActiveRecord::Schema.define(version: 20180814011855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,6 +214,8 @@ ActiveRecord::Schema.define(version: 20180813213450) do
     t.integer  "times_cloned",                                default: 0
     t.text     "notes"
     t.integer  "crispr_modification_id"
+    t.date     "transfection_date"
+    t.integer  "transfected_by_id"
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
@@ -224,6 +226,7 @@ ActiveRecord::Schema.define(version: 20180813213450) do
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
   add_index "biosamples", ["owner_id"], name: "index_biosamples_on_owner_id", using: :btree
   add_index "biosamples", ["part_of_id"], name: "index_biosamples_on_part_of_id", using: :btree
+  add_index "biosamples", ["transfected_by_id"], name: "index_biosamples_on_transfected_by_id", using: :btree
   add_index "biosamples", ["user_id"], name: "index_biosamples_on_user_id", using: :btree
   add_index "biosamples", ["vendor_id"], name: "index_biosamples_on_vendor_id", using: :btree
   add_index "biosamples", ["well_id"], name: "index_biosamples_on_well_id", using: :btree
@@ -366,15 +369,14 @@ ActiveRecord::Schema.define(version: 20180813213450) do
     t.integer  "user_id"
     t.integer  "donor_construct_id"
     t.text     "description"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "genomic_integration_site_id"
     t.string   "upstream_identifier"
     t.string   "category"
     t.string   "purpose"
     t.text     "notes"
     t.integer  "from_prototype_id"
-    t.integer  "times_cloned",                default: 0
   end
 
   add_index "crispr_modifications", ["donor_construct_id"], name: "index_crispr_modifications_on_donor_construct_id", using: :btree
@@ -1092,6 +1094,7 @@ ActiveRecord::Schema.define(version: 20180813213450) do
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"
   add_foreign_key "biosamples", "users", column: "owner_id"
+  add_foreign_key "biosamples", "users", column: "transfected_by_id"
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "biosamples", "wells"
   add_foreign_key "chipseq_experiments", "biosample_replicates", column: "wild_type_input_id"

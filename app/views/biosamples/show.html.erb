@@ -205,15 +205,6 @@
   </tr>
 
   <tr>
-    <th><strong>CRISPR</strong></th>
-    <% if @biosample.crispr_modification.present? and @biosample.crispr_modification.persisted?%>
-      <td><%= link_to @biosample.crispr_modification.name, @biosample.crispr_modification %></td>
-    <% else %>
-      <td></td>
-    <% end %>
-  </tr>
-
-  <tr>
     <th><strong>Associated libraries:</strong></th>
     <% if @biosample.libraries.present? %>
       <td>
@@ -235,21 +226,32 @@
   </tr>
 </table>
 
-<h3 class="section">CRISPR modification</h3>
+<h3 class="section">Transfection</h3>
 <% if @biosample.crispr_modification.blank? %>
   <%= link_to "Add CRISPR modification", add_crispr_modification_biosample_path(@biosample), class: "new", 
       id: "biosample_add_crispr_modification" %>
-<% else %>
-  <%= link_to_record @biosample.crispr_modification %>
   </br></br>
+<% else %>
+  <div class="my-flex">
+    <strong>CRISPR modification:</strong>
+    <%= link_to_record @biosample.crispr_modification %>
+  </div>
 <% end %>
+<div class="my-flex">
+  <strong>Transfection date:</strong>
+  <%= @biosample.transfection_date %>
+</div>
+<div class="my-flex">
+  <strong>Transfected by:</strong>
+  <%= @biosample.transfected_by %>
+</div>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
 <%= render partial: "application_partials/edit_notes", locals: {rec: @biosample} %>
 
 <h3 class="section">Validations</h3>
 <div class="my-flex">
-  <h4>Immunoblots:</h4>
+  <strong>Immunoblots:</strong>
   <% if @biosample.immunoblots.any? %>
     <%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.immunoblots} %>
   <% else %>

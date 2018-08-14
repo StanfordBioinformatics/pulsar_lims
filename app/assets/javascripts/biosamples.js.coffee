@@ -3,6 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+  #Refresh the analyst list in the form when the refresh fa-icon is clicked:
+  $(document).on "click", ".biosample_transfected_by i.refresh", (event) -> 
+    $.get "/users/select_options", (responseText,status,jqXHR) ->
+      $(".biosample_transfected_by select").html(responseText)
+
   #Refresh the part_of list in the form when the refresh fa-icon is clicked:
   $(document).on "click", ".biosample_part_of i.refresh", (event) -> 
     $.get "/biosamples/select_options", (responseText,status,jqXHR) ->

@@ -165,6 +165,8 @@ class BiosamplesController < ApplicationController
         :submitter_comments, 
         :times_cloned,
         :tissue_preservation_method, 
+        :transfection_date,
+        :transfected_by_id,
         :tube_label,
         :upstream_identifier, 
         :vendor_id,

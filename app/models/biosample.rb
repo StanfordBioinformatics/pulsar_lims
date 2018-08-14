@@ -30,6 +30,7 @@ class Biosample < ActiveRecord::Base
   has_and_belongs_to_many :documents
   has_and_belongs_to_many :treatments
   belongs_to :crispr_modification
+  belongs_to :transfected_by, class_name: "User"
   has_many :biosample_replicates, dependent: :destroy #has_many because replicates can be technical and not just biological. 
   #Note that specifying "dependent: :restrict_with_exception" when triggered will raise ActiveRecord::DeleteRestrictionError
   has_many :starting_biosample_single_cell_sortings, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id, dependent: :restrict_with_exception #the starting biosample used for sorting. Not required.
@@ -157,6 +158,7 @@ class Biosample < ActiveRecord::Base
     attrs["biosample_term_name_id"] = self.biosample_term_name_id
     attrs["biosample_type_id"] = self.biosample_type_id
     attrs["control"] = self.control
+    attrs["crispr_modification"] = self.crispr_modification
     attrs["description"] = self.description
     attrs["date_biosample_taken"] = self.date_biosample_taken
     attrs["donor_id"] = self.donor_id

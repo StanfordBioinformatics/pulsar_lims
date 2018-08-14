@@ -1,7 +1,7 @@
 <!-- This partial is used to list linked records with a checkbox next to each one that allows
 the user to remove the link. For example, a Biosample can have many documents. If the user has
 selected two documents, but later wants to remove one of the linked documents such that only a single
-document is now linked to the biosample record, this partial allows fulfuills that capability. 
+document is now linked to the biosample record, this partial fulfills that capability. 
 
 The partial renders the linked records in a small table with two fields:
   1. The record name
@@ -19,6 +19,7 @@ Required args:
   1) f - A form object
   2) record - an ActiveRecord instance
   3) attribute - The attribute of the ActiveRecord instance that identifies the foreign key relationship, i.e. documents. 
+  4) title 
 
 -->
 
@@ -48,7 +49,7 @@ Required args:
              <% else %>
                <% link_to_value = related_record %>
              <% end %>
-             <td><%= link_to related_record.name, link_to_value %></td>                                                              
+             <td><%= link_to related_record, link_to_value %></td>                                                              
              <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>                         
            </tr>                                                                                   
           <% end %>                                                                                

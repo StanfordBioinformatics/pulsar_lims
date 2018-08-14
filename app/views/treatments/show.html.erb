@@ -33,7 +33,11 @@
   
   <tr>
     <th><strong>Concentration:</strong></th>
-    <td><%= "#{@treatment.concentration} #{@treatment.concentration_unit.name}" %></td>
+    <td>
+      <% if @treatment.concentration.present? %>
+        <%= "#{@treatment.concentration} #{@treatment.concentration_unit.name}" %></td>
+      <% end %>
+    </td>
   </tr>
   
     </td>

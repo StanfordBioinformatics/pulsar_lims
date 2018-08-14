@@ -51,6 +51,7 @@
       }
   %>
 
+
   <fieldset>
     <legend>Treatments</legend>
     <strong>Linked treatments:</strong>
@@ -93,7 +94,7 @@
   <%= f.input :lot_identifier,
       label_html: {"data-toggle": "tooltip", "title": "The lot identifier provided by the originating lab or vendor."} %>
 
-  <%= f.association :donor, label_html: {class: "refresh"} %>
+  <%= f.association :donor,
       label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The donor of the biosample"} %>
 
   <%= f.input :passage_number,
@@ -116,12 +117,17 @@
 
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 
-  <% if @biosample.crispr_modification.present? %>
-    <!-- Only allow user to update assocation in this view, not add it. Adding it is done via a
-         btn on the show view. -->
-    </br>
-    <h3 class="section">CRISPR Modificaiton</h3>
-    <%= f.association :crispr_modification, label: false %>
-  <% end %>
-
+  <fieldset>
+    <% if @biosample.crispr_modification.present? %>
+      <!-- Only allow user to update assocation in this view, not add it. Adding it is done via a
+           btn on the show view. -->
+      <%= f.association :crispr_modification %>
+    <% end %>
+    <legend>Transfection</legend>
+    <%= f.input :transfection_date, include_blank: true %>
+    <%= f.association :transfected_by,
+        label: "Analyst",
+        label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The analyst who performed the transfection."} %>
+  <!-- When the user changes the value in the biosample_type selector, jQuery will update the biosample_term_name list. -->
+  </fieldset>
   </br>
