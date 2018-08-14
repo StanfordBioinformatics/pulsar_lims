@@ -38,7 +38,7 @@
           <% end %>
         </td>
         <td><%= link_to rec.donor_construct.name, rec.donor_construct %></td>
-        <td><%= render partial: "application_partials/link_to_has_many", locals: {links: rec.biosamples} %></td>
+        <td style="font-size: 0.8em;"><%= render partial: "application_partials/link_to_has_many", locals: {links: rec.biosamples} %></td>
         <% target = rec.crispr_constructs.first.target %>
         <td><%= link_to target.name, target %></td>
         <td>
