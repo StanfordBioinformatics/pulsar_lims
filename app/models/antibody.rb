@@ -25,6 +25,7 @@ class Antibody < ActiveRecord::Base
   validates  :lot_identifier, presence: true
   validates  :clonality, inclusion: CLONALITY_TYPES, presence: true
   validates  :concentration, presence: {message: "must be specified when 'concentration units' is specified."}, if: "concentration_units.present?"
+  validates  :concentration_units, presence: {message: "must be specified when 'concentration' is specified."}, if: "concentration.present?"
   validate :concentration_units, on: :save
 
   accepts_nested_attributes_for :antibody_purifications, allow_destroy: true

@@ -77,7 +77,7 @@ class AntibodiesController < ApplicationController
         :antigen_sequence,
         :clonality,
         :concentration, 
-        :concentration_units,
+        :concentration_units_id,
         :isotype_id,
         :lot_identifier,
         :name,
