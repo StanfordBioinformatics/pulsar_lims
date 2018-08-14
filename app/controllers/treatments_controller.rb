@@ -9,7 +9,7 @@ class TreatmentsController < ApplicationController
   end 
 
   def index
-    @records = policy_scope(Treatment).page params[:page]
+    super
   end
 
   def show

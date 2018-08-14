@@ -54,6 +54,7 @@ class ApplicationController < ActionController::Base
       @records = @records.page params[:page]
       @page = true
     end
+    @total = @records.count
   end
 
   def find_by

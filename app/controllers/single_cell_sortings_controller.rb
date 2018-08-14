@@ -42,7 +42,7 @@ class SingleCellSortingsController < ApplicationController
   end 
 
   def index
-    @records = policy_scope(SingleCellSorting).page params[:page]
+    super
   end
 
   def show

@@ -1,9 +1,9 @@
-<header>
+<header class="index-view-header">
   <h1 class="index-page-header">                                                                       
     <%= @title || "Genome Locations" %>                                                                      
   </h1>
   <p class="model-definition"><%= GenomeLocation::DEFINITION %></p>
-
+  <%= render partial: "application_partials/total", locals: {total: @total} %>
 </header>
 
 <table class="attributes index">

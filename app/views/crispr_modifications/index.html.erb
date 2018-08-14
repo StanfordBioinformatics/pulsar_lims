@@ -1,4 +1,4 @@
-<header>
+<header class="index-view-header">
   <h1 class="index-page-header">
     <%= @title || "CRISPR Modifications" %>
   </h1>
@@ -9,7 +9,7 @@
       <%= render partial: "application_partials/auth_new_record" %>                                    
     </ul>                                                                                              
   <% end %>
-
+  <%= render partial: "application_partials/total", locals: {total: @total} %>
 </header> 
 
 <table class="attributes index">

@@ -31,8 +31,7 @@ class SequencingResultsController < ApplicationController
   end
 
   def index
-    @records = @sequencing_run.sequencing_results.page params[:page]
-    policy_scope(SequencingResult)
+    super
   end
 
   def show

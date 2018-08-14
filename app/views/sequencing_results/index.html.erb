@@ -1,4 +1,4 @@
-<header>
+<header class="index-view-header">
   <h1 class="index-page-header">                                                                       
     <%= @title || "Barcode Sequencing Results" %>                                                                      
   </h1>
@@ -11,6 +11,7 @@
 	<\%= render partial: "application_partials/auth_new_record" %>
 	</ul> 
 -->
+  <%= render partial: "application_partials/total", locals: {total: @total} %>
 </header>
 
 <table class="attributes index">

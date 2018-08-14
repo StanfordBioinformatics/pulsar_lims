@@ -1,4 +1,4 @@
-<header>
+<header class="index-view-header">
   <h1 class="index-page-header">                                                                       
     <%= @title || "Plates" %>                                                                      
   </h1>
@@ -9,6 +9,7 @@
       #Don't allow users to add plates here. Only via the "Add Plate" button on the single_cell_sorting experiment object.
     -->
   </ul> 
+  <%= render partial: "application_partials/total", locals: {total: @total} %>
 </header>
 
 <table class="attributes index">

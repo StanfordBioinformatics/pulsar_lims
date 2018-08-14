@@ -65,6 +65,17 @@
   cursor: pointer;
 }
 
+.index-view-header {
+  position: relative;
+}
+
+.index-view-total {
+  position: absolute; 
+  bottom: 0; 
+  right: 0;
+  margin-right: 3em;
+}
+
 .section {
   padding-bottom: 0.3em;
   border-bottom: 2px solid #bfbfbf;

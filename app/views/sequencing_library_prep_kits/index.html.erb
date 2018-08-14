@@ -1,4 +1,4 @@
-<header>
+<header class="index-view-header">
   <h1 class="index-page-header">                                                                       
     <%= @title || "Sequencing Library Prep Kit" %>                                                                      
   </h1>
@@ -7,6 +7,7 @@
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
   </ul> 
+  <%= render partial: "application_partials/total", locals: {total: @total} %>
 </header>
 
 <table class="attributes index">

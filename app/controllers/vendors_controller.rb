@@ -9,7 +9,7 @@ class VendorsController < ApplicationController
   end       
 
   def index
-    @records = policy_scope(Vendor).page params[:page]
+    super
   end
 
   def show
