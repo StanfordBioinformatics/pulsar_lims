@@ -15,6 +15,7 @@ class Biosample < ActiveRecord::Base
   has_many :gels, through: :gel_lanes
   has_many :immunoblots, through: :gels
   has_and_belongs_to_many :pooled_from_biosamples, class_name: "Biosample", join_table: "biosamples_pooled_from_biosamples", foreign_key: "biosample_id", association_foreign_key: "pooled_from_biosample_id"
+  has_and_belongs_to_many :pooled_biosamples, class_name: "Biosample", join_table: "biosamples_pooled_from_biosamples", foreign_key: "pooled_from_biosample_id", association_foreign_key: "biosample_id"
 
   ###
   #Add self reference so that a part_of biosample can be modelled:
@@ -73,6 +74,10 @@ class Biosample < ActiveRecord::Base
 
   def self.possible_biosample_terms(biosample_type)
     BiosampleTermName.all
+  end
+
+  def children
+    return self.biosample_parts + self.pooled_biosamples
   end
 
   def document_ids=(ids)

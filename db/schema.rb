@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180814011855) do
+ActiveRecord::Schema.define(version: 20180815002041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -216,6 +216,8 @@ ActiveRecord::Schema.define(version: 20180814011855) do
     t.integer  "crispr_modification_id"
     t.date     "transfection_date"
     t.integer  "transfected_by_id"
+    t.integer  "replicate_number"
+    t.boolean  "wild_type",                                   default: false
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree

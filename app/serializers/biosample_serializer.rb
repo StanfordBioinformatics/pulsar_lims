@@ -12,6 +12,7 @@ class BiosampleSerializer < ActiveModel::Serializer
              :nih_institutional_certification,
              :part_of_id,
              :passage_number,
+             :replicate_number,
              :starting_amount,
              :starting_amount_units,
              :submitter_comments,
@@ -20,6 +21,7 @@ class BiosampleSerializer < ActiveModel::Serializer
              :transfection_date,
              :tube_label,
              :vendor_product_identifier,
+             :wild_type,
              :upstream_identifier,
              :created_at,
              :updated_at

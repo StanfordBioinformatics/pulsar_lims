@@ -32,7 +32,8 @@ class BiosamplesController < ApplicationController
   def biosample_parts 
     #Called via ajax
     set_model_class()
-    @records = policy_scope(Biosample.where({part_of: @biosample})).page params[:page]
+    @records = @biosample.children
+    @total = @records.count
     @no_new_btn = true
     @title = "Child biosamples of #{@biosample.name}"
     render action: "index" 
@@ -160,6 +161,7 @@ class BiosamplesController < ApplicationController
         :owner_id, 
         :part_of_id, 
         :passage_number, 
+        :replicate_number,
         :starting_amount,
         :starting_amount_units,
         :submitter_comments, 
@@ -171,6 +173,7 @@ class BiosamplesController < ApplicationController
         :upstream_identifier, 
         :vendor_id,
         :vendor_product_identifier, 
+        :wild_type,
         
         documents_attributes: [:id, :_destroy], 
         :document_ids => [], 
