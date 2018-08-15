@@ -44,6 +44,7 @@ class Biosample < ActiveRecord::Base
   belongs_to  :vendor
   has_many    :libraries, dependent: :destroy
 
+  validates :replicate_number, numericality: { greater_than: 0 }, allow_nil: true
   validates :upstream_identifier, uniqueness: true, allow_blank: true
   validates :name, uniqueness: true, presence: true
   #validates :documents, presence: true, unless: Proc.new {|bio| bio.parents.any? }
@@ -57,6 +58,7 @@ class Biosample < ActiveRecord::Base
   validates :tissue_preservation_method, inclusion: {in: Enums::TISSUE_PRESERVATION_METHODS, message: "must be an element in the list #{Enums::TISSUE_PRESERVATION_METHODS}."}, allow_blank: true
   validate :validate_not_pooled_and_part_of
   validate :validate_part_of, on: :update
+  validate :validate_wild_type, on: [:create, :update]
 
   accepts_nested_attributes_for :documents, allow_destroy: true
   accepts_nested_attributes_for :pooled_from_biosamples, allow_destroy: true
@@ -194,10 +196,17 @@ class Biosample < ActiveRecord::Base
 
   private
 
+  def validate_wild_type
+    if self.wild_type == true && self.crispr_modification.present?
+      self.errors.add(:wild_type, "can't be set when a CRISPR modification is also set.")
+      return false
+    end
+  end
+
   def validate_part_of
     # validation
     # Make sure user didn't set parent to be itself.
-    if self.part_of_id  == self.id
+    if self.part_of_id == self.id
       self.errors.add(:part_of, "can't be the same as this record.")
       return false
     end

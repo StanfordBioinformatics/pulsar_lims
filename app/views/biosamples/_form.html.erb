@@ -4,7 +4,13 @@
 
   <%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique biosample name"} %> 
 
-  <%= f.input :control, label_html: {"data-toggle": "tooltip", "title": "Select if this biosample will be used as a control in an experiment."} %>
+  <%= f.input :wild_type, label_html: {"data-toggle": "tooltip", "title": "Select if this biosample represents the pure, non-experimentally modified state."} %>
+
+  <%= f.input :control, label_html: {"data-toggle": "tooltip", "title": "Select if this will be used as a control in an experiment."} %>
+
+  <div style="max-width: 30%;">
+    <%= f.input :replicate_number, inline_label: "Replicate number", label_html: {"data-toggle": "tooltip", title: "If this is a replicate on an experiment, enter the replicate number, i.e. 1, 2."} %>
+  </div>
 
   <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The corresponding ID for this biosample on the ENCODE Portal"} %>
 

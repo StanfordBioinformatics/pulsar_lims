@@ -16,12 +16,12 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
+      <th>Wild type?</th>
       <th>Control?</th>
-      <th>Replicates</th>
+      <th>Replicate</th>
       <th>Tube label</th>
       <th>NIH Inst. Certification</th>
       <th>Parent Biosample</th>
-      <th>Well</th>
       <!-- <th>Description</th> -->
       <th>Vendor</th>
       <th>Biosample Type</th>
@@ -33,6 +33,7 @@
   <tbody>
     <% @records.each do |rec| %>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= rec.wild_type? %></td>
         <td><%= rec.control? %></td>
         <td>
           <% if rec.biosample_replicates.any? %>
@@ -45,11 +46,6 @@
         </td>
         <% if rec.part_of.present? %>
           <td><%= link_to rec.part_of.name, rec.part_of %></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if rec.well.present? %>
-          <td><%= link_to rec.well.name, [rec.well.plate, rec.well] %></td>
         <% else %>
           <td></td>
         <% end %>
