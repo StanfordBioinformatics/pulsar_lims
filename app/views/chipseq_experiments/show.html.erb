@@ -18,7 +18,11 @@
 
   <tr>
     <th><strong>Starting biosample:</strong></th>
-    <td><%= link_to_record @chipseq_experiment.starting_biosample %></td>
+    <td>
+      <% if @chipseq_experiment.starting_biosample.present? %>
+        <%= link_to_record @chipseq_experiment.starting_biosample %>
+      <% end %>
+    </td>
   </td>
   
   <tr>

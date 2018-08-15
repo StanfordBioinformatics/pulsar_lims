@@ -27,7 +27,11 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
-        <td><%= link_to_record rec.starting_biosample %></td>
+        <td>
+          <% if rec.starting_biosample.present? %>
+            <%= link_to_record rec.starting_biosample %>
+          <% end %>
+        </td>
         <td><%= rec.description %></td>
         <td><%= link_to_record(rec.target) %></td>
         <td><%= rec.submitter_comments %></td>
