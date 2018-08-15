@@ -8,7 +8,7 @@
   <%= f.association :target, collection: Target.order(:name), 
       label_html: {class: "refresh"}
   %>
-  <%= f.association :wild_type_input, label_html: {"data-toggle": "tooltip", "title": "The input (control) biosample record that doesn't have a CRISPR modification."} %>
+  <%= f.association :wild_type_control, label_html: {"data-toggle": "tooltip", "title": "The input (control) biosample record that doesn't have a CRISPR modification."} %>
   <%= f.input :submitter_comments %>
 
   <fieldset>

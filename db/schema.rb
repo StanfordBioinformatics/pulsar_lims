@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180815064750) do
+ActiveRecord::Schema.define(version: 20180815215517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,7 +197,7 @@ ActiveRecord::Schema.define(version: 20180815064750) do
     t.date     "transfection_date"
     t.integer  "transfected_by_id"
     t.integer  "replicate_number"
-    t.boolean  "wild_type",                                   default: false
+    t.boolean  "wild_type_control",                           default: false
     t.integer  "chipseq_experiment_id"
   end
 

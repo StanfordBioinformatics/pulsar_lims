@@ -81,7 +81,7 @@ class ChipseqExperimentsController < ApplicationController
         :target_id, 
         :starting_biosample_id,
         :upstream_identifier, 
-        :wild_type_input_id, 
+        :wild_type_control_id, 
         :document_ids => [],
         :replicate_ids => [],
         :control_replicate_ids => [],

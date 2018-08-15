@@ -10,7 +10,7 @@ class ChipseqExperiment < ActiveRecord::Base
   # The starting_biosample is the one that is the ancestor of all the 'control_replicates' and 'replicates'.
   belongs_to :starting_biosample, class_name: "Biosample"
   has_and_belongs_to_many :documents
-  belongs_to :wild_type_input, -> {wild_type_controls}, class_name: "Biosample"
+  belongs_to :wild_type_control, -> {wild_type_controls}, class_name: "Biosample"
   has_many :control_replicates, -> {controls}, class_name: "Biosample", dependent: :nullify
   has_many :replicates, -> {experimental}, class_name: "Biosample", dependent: :nullify
 

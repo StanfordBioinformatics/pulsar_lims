@@ -14,9 +14,11 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
-      <th>Starting biosample</th>
-      <th>Description</th>
       <th>Target</th>
+      <th>Starting biosample</th>
+      <th>Replicates</th>
+      <th>Controls</th>
+      <th>Wild type control</th>
       <th>Submitter comments</th>
       <th>Notes</th>
       <th>Action</th>
@@ -27,13 +29,24 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= link_to_record(rec.target) %></td>
         <td>
           <% if rec.starting_biosample.present? %>
             <%= link_to_record rec.starting_biosample %>
           <% end %>
         </td>
+        <td>
+          <%= render partial: "application_partials/link_to_has_many", locals: {links: rec.replicates} %>
+        </td>
+        <td>
+          <%= render partial: "application_partials/link_to_has_many", locals: {links: rec.control_replicates} %>
+        </td>
+        <td>
+          <% if rec.wild_type_control.present? %>
+            <%= link_to_record(rec.wild_type_control) %>
+          <% end %>
+        </td>
         <td><%= rec.description %></td>
-        <td><%= link_to_record(rec.target) %></td>
         <td><%= rec.submitter_comments %></td>
         <td><%= rec.notes %></td>
         <td><%= link_to fa_icon("pencil"), edit_chipseq_experiment_path(rec) %></td>

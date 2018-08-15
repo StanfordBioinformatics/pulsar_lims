@@ -10,7 +10,6 @@ class ChipseqExperimentSerializer < ActiveModel::Serializer
              :submitter_comments,
              :target_id,
              :upstream_identifier,
-             :wild_type_input_id,
              :upstream_identifier,
              :created_at,
              :updated_at
@@ -19,6 +18,7 @@ class ChipseqExperimentSerializer < ActiveModel::Serializer
   has_one :user
   has_one :starting_biosample
   has_one :target
+  has_one :wild_type_control
   has_many :control_replicates
   has_many :replicates
   #has_many :documents

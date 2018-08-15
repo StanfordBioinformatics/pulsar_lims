@@ -43,10 +43,10 @@
   </tr>
 
   <tr>
-    <th><strong>WT input:</strong></th>
+    <th><strong>WT control:</strong></th>
     <td>
-      <% if @chipseq_experiment.wild_type_input.present? %>
-        <%= link_to_record(@chipseq_experiment.wild_type_input) %></td>
+      <% if @chipseq_experiment.wild_type_control.present? %>
+        <%= link_to_record(@chipseq_experiment.wild_type_control) %></td>
       <% else %>
         None
       <% end %>
