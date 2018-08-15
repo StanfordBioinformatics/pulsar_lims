@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180815215517) do
+ActiveRecord::Schema.define(version: 20180815220537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,7 +197,7 @@ ActiveRecord::Schema.define(version: 20180815215517) do
     t.date     "transfection_date"
     t.integer  "transfected_by_id"
     t.integer  "replicate_number"
-    t.boolean  "wild_type_control",                           default: false
+    t.boolean  "wild_type",                                   default: false
     t.integer  "chipseq_experiment_id"
   end
 
@@ -244,13 +244,13 @@ ActiveRecord::Schema.define(version: 20180815215517) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.integer  "starting_biosample_id"
-    t.integer  "wild_type_input_id"
+    t.integer  "wild_type_control_id"
   end
 
   add_index "chipseq_experiments", ["starting_biosample_id"], name: "index_chipseq_experiments_on_starting_biosample_id", using: :btree
   add_index "chipseq_experiments", ["target_id"], name: "index_chipseq_experiments_on_target_id", using: :btree
   add_index "chipseq_experiments", ["user_id"], name: "index_chipseq_experiments_on_user_id", using: :btree
-  add_index "chipseq_experiments", ["wild_type_input_id"], name: "index_chipseq_experiments_on_wild_type_input_id", using: :btree
+  add_index "chipseq_experiments", ["wild_type_control_id"], name: "index_chipseq_experiments_on_wild_type_control_id", using: :btree
 
   create_table "chipseq_experiments_documents", id: false, force: :cascade do |t|
     t.integer "document_id",           null: false
@@ -1082,7 +1082,7 @@ ActiveRecord::Schema.define(version: 20180815215517) do
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "biosamples", "wells"
   add_foreign_key "chipseq_experiments", "biosamples", column: "starting_biosample_id"
-  add_foreign_key "chipseq_experiments", "biosamples", column: "wild_type_input_id"
+  add_foreign_key "chipseq_experiments", "biosamples", column: "wild_type_control_id"
   add_foreign_key "chipseq_experiments", "targets"
   add_foreign_key "chipseq_experiments", "users"
   add_foreign_key "chromosomes", "reference_genomes"
