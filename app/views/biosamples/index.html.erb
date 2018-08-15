@@ -35,11 +35,7 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.wild_type? %></td>
         <td><%= rec.control? %></td>
-        <td>
-          <% if rec.biosample_replicates.any? %>
-            <%= render partial: "application_partials/link_to_has_many", locals: {links: rec.biosample_replicates} %>
-          <% end %>
-        </td>
+        <td><%= rec.replicate_number %></td>
         <td><%= rec.tube_label %></td>
         <td>
           <%= rec.nih_institutional_certification %>
