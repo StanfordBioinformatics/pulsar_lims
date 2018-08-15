@@ -229,11 +229,6 @@
     <th><strong>Notes</strong></th>                                                                    
     <td><%= simple_format(@biosample.notes) %></td>                                                     
   </tr> 
-
-  <tr>
-    <th><strong>Replicates</th></strong>
-    <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.biosample_replicates} %></td>
-  </tr>
 </table>
 
 <h3 class="section">Transfection</h3>
