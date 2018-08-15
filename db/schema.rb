@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180815061811) do
+ActiveRecord::Schema.define(version: 20180815064750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,26 +140,6 @@ ActiveRecord::Schema.define(version: 20180815061811) do
   add_index "biosample_ontologies", ["url"], name: "index_biosample_ontologies_on_url", unique: true, using: :btree
   add_index "biosample_ontologies", ["user_id"], name: "index_biosample_ontologies_on_user_id", using: :btree
 
-  create_table "biosample_replicates", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "upstream_identifier"
-    t.integer  "biological_replicate_number"
-    t.integer  "technical_replicate_number"
-    t.text     "notes"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.integer  "biosample_id"
-    t.integer  "chipseq_experiment_id"
-    t.boolean  "control",                     default: false
-    t.boolean  "wild_type_input",             default: false
-    t.string   "name"
-  end
-
-  add_index "biosample_replicates", ["biosample_id"], name: "index_biosample_replicates_on_biosample_id", using: :btree
-  add_index "biosample_replicates", ["chipseq_experiment_id"], name: "index_biosample_replicates_on_chipseq_experiment_id", using: :btree
-  add_index "biosample_replicates", ["name"], name: "index_biosample_replicates_on_name", unique: true, using: :btree
-  add_index "biosample_replicates", ["user_id"], name: "index_biosample_replicates_on_user_id", using: :btree
-
   create_table "biosample_term_names", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -263,8 +243,8 @@ ActiveRecord::Schema.define(version: 20180815061811) do
     t.text     "notes"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
-    t.integer  "wild_type_input_id"
     t.integer  "starting_biosample_id"
+    t.integer  "wild_type_input_id"
   end
 
   add_index "chipseq_experiments", ["starting_biosample_id"], name: "index_chipseq_experiments_on_starting_biosample_id", using: :btree
@@ -1086,9 +1066,6 @@ ActiveRecord::Schema.define(version: 20180815061811) do
   add_foreign_key "barcodes", "sequencing_library_prep_kits"
   add_foreign_key "barcodes", "users"
   add_foreign_key "biosample_ontologies", "users"
-  add_foreign_key "biosample_replicates", "biosamples"
-  add_foreign_key "biosample_replicates", "chipseq_experiments"
-  add_foreign_key "biosample_replicates", "users"
   add_foreign_key "biosample_term_names", "biosample_ontologies"
   add_foreign_key "biosample_term_names", "users"
   add_foreign_key "biosample_types", "users"
@@ -1104,8 +1081,8 @@ ActiveRecord::Schema.define(version: 20180815061811) do
   add_foreign_key "biosamples", "users", column: "transfected_by_id"
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "biosamples", "wells"
-  add_foreign_key "chipseq_experiments", "biosample_replicates", column: "wild_type_input_id"
   add_foreign_key "chipseq_experiments", "biosamples", column: "starting_biosample_id"
+  add_foreign_key "chipseq_experiments", "biosamples", column: "wild_type_input_id"
   add_foreign_key "chipseq_experiments", "targets"
   add_foreign_key "chipseq_experiments", "users"
   add_foreign_key "chromosomes", "reference_genomes"
