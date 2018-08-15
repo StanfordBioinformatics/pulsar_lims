@@ -7,13 +7,16 @@ class ChipseqExperiment < ActiveRecord::Base
   DEFINITION = "A ChIP-Seq experiment"
   belongs_to :user
   belongs_to :target
+  # The starting_biosample is the one that is the ancestor of all the 'control_replicates' and 'replicates'.
+  belongs_to :starting_biosample, class_name: "Biosample"
   has_and_belongs_to_many :documents
-  belongs_to :wild_type_input, -> {where wild_type_input: true}, class_name: "BiosampleReplicate"
-  has_many :control_biosample_replicates, -> {where control: true}, class_name: "BiosampleReplicate", dependent: :nullify
-  has_many :experiment_biosample_replicates, -> {where control: false}, class_name: "BiosampleReplicate", dependent: :nullify
+  belongs_to :wild_type_input, -> {where wild_type: true}, class_name: "Biosample"
+  has_many :control_replicates, -> {where control: true}, class_name: "Biosample", dependent: :nullify
+  has_many :replicates, -> {where control: false}, class_name: "Biosample", dependent: :nullify
 
   accepts_nested_attributes_for :documents, allow_destroy: true
 
+  validates :starting_biosample, presence: true
   validates :name, presence: true, uniqueness: true
   validates :target, presence: true
 

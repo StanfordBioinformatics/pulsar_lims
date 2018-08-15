@@ -62,11 +62,12 @@ class Api::ChipseqExperimentsController < Api::ApplicationController
         :notes,
         :submitter_comments,
         :target_id,
+        :starting_biosample_id,
         :upstream_identifier,
         :wild_type_input_id,
         :document_ids => [], 
-        :control_biosample_replicate_ids => [],
-        :experiment_biosample_replicate_ids => []
+        :replicate_ids => [],
+        :control_replicate_ids => []
     )
   end
 end

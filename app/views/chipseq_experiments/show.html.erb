@@ -15,6 +15,11 @@
     <th><strong>Name:</strong></th>
     <td><%= @chipseq_experiment.name %></td>
   </tr>
+
+  <tr>
+    <th><strong>Starting biosample:</strong></th>
+    <td><%= link_to_record @chipseq_experiment.starting_biosample %></td>
+  </td>
   
   <tr>
     <th><strong>Description:</strong></th>
@@ -45,12 +50,12 @@
   </tr>
   
   <tr>
-    <th><strong>Experiment replicates:</strong></th>
-    <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @chipseq_experiment.experiment_biosample_replicates} %>
+    <th><strong>Replicates:</strong></th>
+    <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @chipseq_experiment.replicates} %>
 
   <tr>
     <th><strong>Control replicates:</strong></th>
-    <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @chipseq_experiment.control_biosample_replicates} %>
+    <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @chipseq_experiment.control_replicates} %>
 
   <tr>
     <th><strong>Submitter comments:</strong></th>

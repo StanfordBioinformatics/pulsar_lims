@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180815002041) do
+ActiveRecord::Schema.define(version: 20180815061811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -218,10 +218,12 @@ ActiveRecord::Schema.define(version: 20180815002041) do
     t.integer  "transfected_by_id"
     t.integer  "replicate_number"
     t.boolean  "wild_type",                                   default: false
+    t.integer  "chipseq_experiment_id"
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
   add_index "biosamples", ["biosample_type_id"], name: "index_biosamples_on_biosample_type_id", using: :btree
+  add_index "biosamples", ["chipseq_experiment_id"], name: "index_biosamples_on_chipseq_experiment_id", using: :btree
   add_index "biosamples", ["crispr_modification_id"], name: "index_biosamples_on_crispr_modification_id", using: :btree
   add_index "biosamples", ["donor_id"], name: "index_biosamples_on_donor_id", using: :btree
   add_index "biosamples", ["from_prototype_id"], name: "index_biosamples_on_from_prototype_id", using: :btree
@@ -259,11 +261,13 @@ ActiveRecord::Schema.define(version: 20180815002041) do
     t.integer  "target_id"
     t.text     "submitter_comments"
     t.text     "notes"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.integer  "wild_type_input_id"
+    t.integer  "starting_biosample_id"
   end
 
+  add_index "chipseq_experiments", ["starting_biosample_id"], name: "index_chipseq_experiments_on_starting_biosample_id", using: :btree
   add_index "chipseq_experiments", ["target_id"], name: "index_chipseq_experiments_on_target_id", using: :btree
   add_index "chipseq_experiments", ["user_id"], name: "index_chipseq_experiments_on_user_id", using: :btree
   add_index "chipseq_experiments", ["wild_type_input_id"], name: "index_chipseq_experiments_on_wild_type_input_id", using: :btree
@@ -1092,6 +1096,7 @@ ActiveRecord::Schema.define(version: 20180815002041) do
   add_foreign_key "biosamples", "biosample_types"
   add_foreign_key "biosamples", "biosamples", column: "from_prototype_id"
   add_foreign_key "biosamples", "biosamples", column: "part_of_id"
+  add_foreign_key "biosamples", "chipseq_experiments"
   add_foreign_key "biosamples", "crispr_modifications"
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"
@@ -1100,6 +1105,7 @@ ActiveRecord::Schema.define(version: 20180815002041) do
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "biosamples", "wells"
   add_foreign_key "chipseq_experiments", "biosample_replicates", column: "wild_type_input_id"
+  add_foreign_key "chipseq_experiments", "biosamples", column: "starting_biosample_id"
   add_foreign_key "chipseq_experiments", "targets"
   add_foreign_key "chipseq_experiments", "users"
   add_foreign_key "chromosomes", "reference_genomes"

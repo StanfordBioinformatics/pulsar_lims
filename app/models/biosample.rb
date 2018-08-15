@@ -22,6 +22,7 @@ class Biosample < ActiveRecord::Base
   # Virtual biosamples are used currently in the single_cell_sorting model via the sorting_biosample_id foreign key.
   # This biosample is a prototype used as a reference for creating the biosamples in the wells of the plates on
   # the single_cell_sorting experiment. kk
+  belongs_to :chipseq_experiment
   belongs_to :well
   has_many :biosample_parts, class_name: "Biosample", foreign_key: "part_of_id", dependent: :destroy
   belongs_to :part_of, class_name: "Biosample"
@@ -32,7 +33,6 @@ class Biosample < ActiveRecord::Base
   has_and_belongs_to_many :treatments
   belongs_to :crispr_modification
   belongs_to :transfected_by, class_name: "User"
-  has_many :biosample_replicates, dependent: :destroy #has_many because replicates can be technical and not just biological. 
   #Note that specifying "dependent: :restrict_with_exception" when triggered will raise ActiveRecord::DeleteRestrictionError
   has_many :starting_biosample_single_cell_sortings, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id, dependent: :restrict_with_exception #the starting biosample used for sorting. Not required.
   has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :nullify #, dependent: :restrict_with_error #the starting biosample used for sorting. Not required.
