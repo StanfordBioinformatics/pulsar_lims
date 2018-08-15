@@ -64,8 +64,12 @@ class Biosample < ActiveRecord::Base
   accepts_nested_attributes_for :pooled_from_biosamples, allow_destroy: true
   accepts_nested_attributes_for :treatments, allow_destroy: true
 
-  scope :non_plated, lambda { where(plated: false) }
-  scope :persisted, lambda { where.not(id: nil) }
+  scope :non_plated, -> { where(plated: false) }
+  scope :persisted, -> { where.not(id: nil) }
+  scope :wild_types, -> { where(wild_type: true, control: false) }
+  scope :wild_type_controls, -> {wild_type.where(control: true) }
+  scope :controls, -> { where(control: true, wild_type: false) }
+  scope :experimental, -> { where(wild_type: false, control: false) }
 
   before_validation :set_name, on: [:create, :update]
   after_validation :check_plated #true if it belongs to a well.
