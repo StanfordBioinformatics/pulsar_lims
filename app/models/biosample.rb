@@ -66,7 +66,7 @@ class Biosample < ActiveRecord::Base
 
   scope :non_plated, -> { where(plated: false) }
   scope :persisted, -> { where.not(id: nil) }
-  scope :wild_types, -> { where(wild_type: true, control: false) }
+  scope :wild_types, -> { where(wild_type: true) }
   scope :wild_type_controls, -> {wild_types.where(control: true) }
   scope :controls, -> { where(control: true, wild_type: false) }
   scope :experimental, -> { where(wild_type: false, control: false) }
