@@ -7,6 +7,20 @@
   <%= f.input :control, label_html: {"data-toggle": "tooltip", "title": "Select if this biosample will be used as a control in an experiment."} %>
 
   <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The corresponding ID for this biosample on the ENCODE Portal"} %>
+
+  <%= f.input :nih_institutional_certification, label: "NIH Institutional Certification number",
+      label_html: {class: "refresh", "data-toggle": "tooltip", title: " See https://osp.od.nih.gov/scientific-sharing/researchers-institutional-certifications"} %>
+
+  <fieldset>
+    <legend>Classification</legend>
+    <%= f.association :biosample_type, collection: BiosampleType.order(:name), 
+        input_html: {class: "biosample_type_selector"}, label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The categorization of the biosample. See 'Biosample Types' in the Object Store."} %>
+    <%= f.association :biosample_term_name, input_html: {class: "biosample_term_name_selector"},
+        label_html: {class: "refresh", "data-toggle": "tooltip", "title": "An ontology term for the biosamaple. The selection choices change depending on the value chosen for \"Biosample type\"."}
+  %>
+  <!-- When the user changes the value in the biosample_type selector, jQuery will update the biosample_term_name list. -->
+  </fieldset>
+
   <%= f.input :tube_label, label_html: {"data-toggle": "tooltip", "title": "How the stored biosample is labeled (i.e. what is written on the tube)."} %> 
 
 
@@ -31,9 +45,6 @@
          user will have been presented with this form again to correct it, 
          and I set the default selectioned to what the user had originally, 
          if any. -->
-
-  <%= f.input :nih_institutional_certification, label: "NIH Institutional Certification number",
-      label_html: {class: "refresh", "data-toggle": "tooltip", title: " See https://osp.od.nih.gov/scientific-sharing/researchers-institutional-certifications"} %>
 
   <% if @biosample.pooled_from_biosamples.persisted.any? %>
     <%= render partial: "application_partials/simple_fields_for", locals: {title: "Pooled-from biosamples", record: @biosample, f: f, attribute: :pooled_from_biosamples} %>
@@ -79,20 +90,7 @@
         label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>
   </fieldset>
 
-  <fieldset>
-    <legend>Classification</legend>
-    <%= f.association :biosample_type, collection: BiosampleType.order(:name), 
-        input_html: {class: "biosample_type_selector"}, label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The categorization of the biosample. See 'Biosample Types' in the Object Store."} %>
-    <%= f.association :biosample_term_name, input_html: {class: "biosample_term_name_selector"},
-        label_html: {class: "refresh", "data-toggle": "tooltip", "title": "An ontology term for the biosamaple. The selection choices change depending on the value chosen for \"Biosample type\"."}
-  %>
-  <!-- When the user changes the value in the biosample_type selector, jQuery will update the biosample_term_name list. -->
-  </fieldset>
-
-  <%= render partial: "vendors/fieldset_input", locals: {f: f} %>
-
-  <%= f.input :lot_identifier,
-      label_html: {"data-toggle": "tooltip", "title": "The lot identifier provided by the originating lab or vendor."} %>
+  <%= render partial: "vendors/fieldset_input", locals: {f: f, lot: true} %>
 
   <%= f.association :donor,
       label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The donor of the biosample"} %>

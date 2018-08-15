@@ -1,7 +1,20 @@
+
+<!-- 
+  Args:
+      f - A form builder object.
+      lot - bool. True indicates that the object that the form builder wraps has an attribute named
+            lot_identifier and it should be added to the form.
+      url - Presence of this option means that the object that the form builder wraps has an attribute
+            named product_url and it should be added to the form.
+-->
 <fieldset>                                                                                           
   <legend>Source details</legend>                                                                    
   <%= f.association :vendor, label_html: {class: "refresh"} %>                                       
   <%= f.input :vendor_product_identifier %>                                                          
+  <% if defined?(lot) && lot == true %>
+    <%= f.input :lot_identifier, 
+        label_html: {"data-toggle": "tooltip", "title": "The lot identifier provided by the originating lab or vendor."} %>
+  <% end %>
   <% if defined?(url) %>
     <!-- The CloningVector has a product_url whereas most other models that reference a vendor just
          need the addition of vendor_product_identifier, which CloningVector also has. 
