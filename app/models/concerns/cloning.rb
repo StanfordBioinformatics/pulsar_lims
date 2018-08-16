@@ -3,7 +3,7 @@ module Cloning
 
   included do
     # This is the only way I know how to add callbacks in a concern; see blog article at https://medium.com/@RyanDavidson/add-callbacks-to-a-concern-in-ruby-on-rails-ef1a8d26e7ab.
-    before_save :validate_prototype
+    #before_save :validate_prototype
     after_update :propagate_update_if_prototype
   end
 
