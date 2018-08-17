@@ -33,6 +33,7 @@ class Biosample < ActiveRecord::Base
   has_and_belongs_to_many :treatments
   belongs_to :crispr_modification
   belongs_to :transfected_by, class_name: "User"
+  has_one :starting_biosample_chipseq, class_name: "ChipseqExperiment", foreign_key: "starting_biosample_id", dependent: :restrict_with_exception
   #Note that specifying "dependent: :restrict_with_exception" when triggered will raise ActiveRecord::DeleteRestrictionError
   has_many :starting_biosample_single_cell_sortings, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id, dependent: :restrict_with_exception #the starting biosample used for sorting. Not required.
   has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :nullify #, dependent: :restrict_with_error #the starting biosample used for sorting. Not required.

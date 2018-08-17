@@ -1,5 +1,5 @@
 class GelSerializer < ActiveModel::Serializer
-  self.root = true
+  self.root = false
   embed :ids
 
   attributes :id, 

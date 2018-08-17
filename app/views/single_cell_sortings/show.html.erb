@@ -11,31 +11,31 @@
 <%= render partial: "application_partials/record_meta", locals: { record: @single_cell_sorting } %>
 
 <table class="attributes">
-	<tr>
-	  <th><strong>Name:</strong></th>
-	  <td><%= @single_cell_sorting.name %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Description:</strong></th>
-	  <td><%= @single_cell_sorting.description %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @single_cell_sorting.name %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @single_cell_sorting.description %></td>
+  </tr>
 
   <tr>
     <th><strong>Documents:</strong></th>
     <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @single_cell_sorting.documents} %></td>
   </tr>
 
-	<tr>
-		<th><strong>Library Prototype:</strong></th>
-		<% library_prototype = @single_cell_sorting.library_prototype %>
-		<% if library_prototype.present? and library_prototype.persisted? %>
-			<td><%= link_to library_prototype.name, library_prototype %></td>
-		<% else %>
-			<td><%= link_to "Create", add_library_prototype_single_cell_sorting_path(@single_cell_sorting), class: "new" %></td>
-		<% end %>
-	</tr>
-	
+  <tr>
+    <th><strong>Library Prototype:</strong></th>
+    <% library_prototype = @single_cell_sorting.library_prototype %>
+    <% if library_prototype.present? and library_prototype.persisted? %>
+      <td><%= link_to library_prototype.name, library_prototype %></td>
+    <% else %>
+      <td><%= link_to "Create", add_library_prototype_single_cell_sorting_path(@single_cell_sorting), class: "new" %></td>
+    <% end %>
+  </tr>
+  
   <tr>
     <th><strong>Starting Biosample:</strong></th>
     <td><%= link_to @single_cell_sorting.starting_biosample.name, @single_cell_sorting.starting_biosample %></td>
@@ -46,30 +46,30 @@
      add biosamples to each well that are modeled ofter the sorting biosample prototype. By defualt, wells are created when the plate
      is created.
 -->   
-	
-	<% if @single_cell_sorting.sorting_biosample.present? %>
-		<tr>
-			<th><strong>Sorting Biosample:</strong></th>
-			<td><%= link_to @single_cell_sorting.sorting_biosample.name, @single_cell_sorting.sorting_biosample %></td>
-		</tr>
-	<% end %>
+  
+  <% if @single_cell_sorting.sorting_biosample.present? %>
+    <tr>
+      <th><strong>Sorting Biosample:</strong></th>
+      <td><%= link_to @single_cell_sorting.sorting_biosample.name, @single_cell_sorting.sorting_biosample %></td>
+    </tr>
+  <% end %>
 
-	<tr>
-		<th><strong>Fluorescence intensity file:</strong></th>
-		<% if @single_cell_sorting.fluorescence_intensity_file.present? %>
-			<td><%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " " + File.basename(@single_cell_sorting.fluorescence_intensity_file), @single_cell_sorting.fluorescence_intensity_file %></td>
-		<% else %>
-			<td></td>
-		<% end %>
-	</tr>
+  <tr>
+    <th><strong>Fluorescence intensity file:</strong></th>
+    <% if @single_cell_sorting.fluorescence_intensity_file.present? %>
+      <td><%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " " + File.basename(@single_cell_sorting.fluorescence_intensity_file), @single_cell_sorting.fluorescence_intensity_file %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+  </tr>
 
-	<tr>
-		<th><strong>Analyses:</strong></th>
-		<td>
+  <tr>
+    <th><strong>Analyses:</strong></th>
+    <td>
       <%= render partial: "application_partials/link_to_has_many", locals: {links: @single_cell_sorting.analyses} %>
-			<span style="padding-top: 0.5em"><%= link_to "Add",new_analysis_single_cell_sorting_path, class: "reg-btn btn-sm", id: "scs-add-analysis" %></span>
-		</td>
-	</tr>
+      <span style="padding-top: 0.5em"><%= link_to "Add",new_analysis_single_cell_sorting_path, class: "reg-btn btn-sm", id: "scs-add-analysis" %></span>
+    </td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    
@@ -80,36 +80,36 @@
 
 
 <% if @single_cell_sorting.plates.any? %>
-	<div class="table-responsive">
-		<h3>Plates</h3>
-		<table class="table">
-			<tr>
-				<th><strong>Plate:</strong></th>
-				<th><strong>Dimensions:</strong></th>
-				<th><strong>Num. wells with a library:</strong></th>
-				<th><strong>Num. failed wells:</strong></th>
-				<th><strong>Sequencing requests:</strong></th>
-			</tr>
-			<% @single_cell_sorting.plates.each do |p| %>
-				<tr>
-					<td><%= link_to p.name, p %></td>
-					<td><%= p.dimensions %></td>
-					<% libs = p.get_libraries() %>
-					<td><%= libs.length %></td>
-					<td><%= p.wells.where({fail: true}).size %></td>
-					<td>
-						<ul class="list-unstyled">
-							<% @single_cell_sorting.plates.persisted.each do |plate| %>
-								<% plate.sequencing_requests.each do |sreq| %>
-									<li><%= link_to sreq.name, sreq %></li>
-								<% end %>
-							<% end %>
-						</ul>
-					</td>
-				</tr>
-			<% end %>
-		</table>
-	</div>
+  <div class="table-responsive">
+    <h3>Plates</h3>
+    <table class="table">
+      <tr>
+        <th><strong>Plate:</strong></th>
+        <th><strong>Dimensions:</strong></th>
+        <th><strong>Num. wells with a library:</strong></th>
+        <th><strong>Num. failed wells:</strong></th>
+        <th><strong>Sequencing requests:</strong></th>
+      </tr>
+      <% @single_cell_sorting.plates.each do |p| %>
+        <tr>
+          <td><%= link_to p.name, p %></td>
+          <td><%= p.dimensions %></td>
+          <% libs = p.get_libraries() %>
+          <td><%= libs.length %></td>
+          <td><%= p.wells.where({fail: true}).size %></td>
+          <td>
+            <ul class="list-unstyled">
+              <% @single_cell_sorting.plates.persisted.each do |plate| %>
+                <% plate.sequencing_requests.each do |sreq| %>
+                  <li><%= link_to sreq.name, sreq %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 <% end %>
 
 
@@ -117,46 +117,46 @@
 
 
 <% if @single_cell_sorting.sorting_biosample.blank? or not @single_cell_sorting.sorting_biosample.persisted? %>
-	<!-- Then create "Add Sorting Biosample" button. -->
-	<div style="position: relative" class="bg-info jumbotron" id="sorting_biosample">
-		<h3 class="display-3">What are your sorting?</h3>
-		<p class="lead">Enter details about the type of biosample that is being sorted into the wells of any plates added to this experiment.</p>
-		<% if @single_cell_sorting.sorting_biosample.present? %>
-			<% @biosample = @single_cell_sorting.sorting_biosample %>
-			<!-- Needed to set @biosample above since that is used in the partial below that renders a Biosample form. -->
-			<%= render partial: "add_sorting_biosample" %>
-		<% else %>
-			<%= link_to "Add Sorting Biosample", add_sorting_biosample_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "scs_add_sorting_biosample", class: "new" %>
-		<% end %>
-	</div>
+  <!-- Then create "Add Sorting Biosample" button. -->
+  <div style="position: relative" class="bg-info jumbotron" id="sorting_biosample">
+    <h3 class="display-3">What are your sorting?</h3>
+    <p class="lead">Enter details about the type of biosample that is being sorted into the wells of any plates added to this experiment.</p>
+    <% if @single_cell_sorting.sorting_biosample.present? %>
+      <% @biosample = @single_cell_sorting.sorting_biosample %>
+      <!-- Needed to set @biosample above since that is used in the partial below that renders a Biosample form. -->
+      <%= render partial: "add_sorting_biosample" %>
+    <% else %>
+      <%= link_to "Add Sorting Biosample", add_sorting_biosample_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "scs_add_sorting_biosample", class: "new" %>
+    <% end %>
+  </div>
 <% end %>
 
 <% if not @single_cell_sorting.library_prototype.present? %>
-		<div><p>You must create the library prototype before you can sort any plates.</p></div>
+    <div><p>You must create the library prototype before you can sort any plates.</p></div>
 <% else %>
-	<% if @single_cell_sorting.sorting_biosample.present? and @single_cell_sorting.sorting_biosample.persisted? %>
-		<!-- Then create "Sort" button to sort a Plate. -->
-		<div style="position: relative;" class="bg-info jumbotron" id="plate">
-			<% if @single_cell_sorting.plates.persisted.any? %>
-				<% display_msg = "Sort another plate" %>
-			<% else %>
-				<% display_msg = "Sort a plate" %>
-			<% end %>
-	    <h3 class="display-3"><%= display_msg %></h3>
-	    <p class="lead">Wells and well-specific biosamples (one per well) will be created automatically.</p>
-			<% if @single_cell_sorting.plates.any? and not @single_cell_sorting.plates.last.persisted? %>
-				<% @plate = @single_cell_sorting.plates.last %>
-				<!-- Needed to set @plate above since that is used in the partial below that renders a plate form. -->
-				<%= render partial: "add_plate" %>
-			<% else %>
-		    <%= link_to "Sort", add_plate_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "scs_add_plate", class: "new" %>
-			<% end %>
-		</div>
-	<% end %>
+  <% if @single_cell_sorting.sorting_biosample.present? and @single_cell_sorting.sorting_biosample.persisted? %>
+    <!-- Then create "Sort" button to sort a Plate. -->
+    <div style="position: relative;" class="bg-info jumbotron" id="plate">
+      <% if @single_cell_sorting.plates.persisted.any? %>
+        <% display_msg = "Sort another plate" %>
+      <% else %>
+        <% display_msg = "Sort a plate" %>
+      <% end %>
+      <h3 class="display-3"><%= display_msg %></h3>
+      <p class="lead">Wells and well-specific biosamples (one per well) will be created automatically.</p>
+      <% if @single_cell_sorting.plates.any? and not @single_cell_sorting.plates.last.persisted? %>
+        <% @plate = @single_cell_sorting.plates.last %>
+        <!-- Needed to set @plate above since that is used in the partial below that renders a plate form. -->
+        <%= render partial: "add_plate" %>
+      <% else %>
+        <%= link_to "Sort", add_plate_single_cell_sorting_path(@single_cell_sorting), remote: true, id: "scs_add_plate", class: "new" %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
 <%= render partial: "application_partials/edit_notes", locals: {rec: @single_cell_sorting} %>
 
-	
+  
 <%= link_to 'Back', single_cell_sortings_path %>

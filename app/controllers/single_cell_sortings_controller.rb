@@ -143,7 +143,7 @@ class SingleCellSortingsController < ApplicationController
         :notes,
         :sorting_biosample_id, 
         :starting_biosample_id, 
-        :upstream, 
+        :upstream_identifier, 
         :document_ids => [], 
         documents_attributes: [:id,:_destroy], 
         library_prototype_attributes: [
@@ -176,7 +176,7 @@ class SingleCellSortingsController < ApplicationController
           :part_of_id, 
           :passage_number, 
           :submitter_comments, 
-          :upstream, 
+          :upstream_identifier, 
           :vendor_id,
           :vendor_product_identifier, 
           :document_ids => [], 
