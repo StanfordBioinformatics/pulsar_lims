@@ -75,7 +75,7 @@
       label_method: :name %>
 
   <%= f.input :paired_end %>
-  <%= f.input :date_submitted, label_html: {"data-toggle" => "tooltip", "title" => "The day the sequencing request was formally submitted to the sequencing center."} %>
+  <%= f.input :date_submitted, include_blank: true, label_html: {"data-toggle" => "tooltip", "title" => "The day the sequencing request was formally submitted to the sequencing center."} %>
   <%= f.association :submitted_by, collection: User.order([:last_name, :first_name]), label_html: {class: "refresh", "data-toggle" => "tooltip", "title" => "Who submitted the sequencing request to to the sequencing center."} %>
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 

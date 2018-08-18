@@ -1,6 +1,6 @@
 class BiosampleSerializer < ActiveModel::Serializer
   self.root = false
-  embed :ids
+  #embed :ids
 
   attributes :id,
              :control,
@@ -10,11 +10,9 @@ class BiosampleSerializer < ActiveModel::Serializer
              :name,
              :notes,
              :nih_institutional_certification,
-             :part_of_id,
              :passage_number,
              :replicate_number,
              :starting_amount,
-             :starting_amount_units,
              :submitter_comments,
              :times_cloned,
              :tissue_preservation_method,
@@ -30,6 +28,8 @@ class BiosampleSerializer < ActiveModel::Serializer
   has_one :biosample_type
   has_one :crispr_modification
   has_one :donor
+  has_one :part_of
+  has_one :starting_amount_units
   has_one :transfected_by
   has_one :vendor
   has_one :user
