@@ -1,10 +1,17 @@
 class ChipseqExperimentsController < ApplicationController
   before_action :set_chipseq_experiment, only: [:show, :edit, :update, :destroy, :add_biosample_replicate]
-  skip_after_action :verify_authorized, only: [:add_biosample_replicate]
+  skip_after_action :verify_authorized, only: [:add_biosample_replicate, :get_wt_control_selection]
+
+  def get_wt_control_selection
+    @wild_type_controls = Biosample.wild_type_controls.where(biosample_term_name: params[:biosample_term_name])
+    @chipseq_experiment = ChipseqExperiment.new
+    #render layout: false    
+    render layout: false
+  end
 
   def add_biosample_replicate
-    # Required Params: 
-    #     control: bool. true means that this is a control biosample_replicate. 
+    # Required Params:
+    #     control: bool. true means that this is a control biosample_replicate.
     @control = params[:control]
     @biosample_replicate = @chipseq_experiment.experiment_biosample_replicates.build({control: @control})
     flash[:redirect] = chipseq_experiment_url(@chipseq_experiment)
@@ -74,14 +81,14 @@ class ChipseqExperimentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def chipseq_experiment_params
       params.require(:chipseq_experiment).permit(
-        :name, 
-        :description, 
+        :name,
+        :description,
         :notes,
-        :submitter_comments, 
-        :target_id, 
+        :submitter_comments,
+        :target_id,
         :starting_biosample_id,
-        :upstream_identifier, 
-        :wild_type_control_id, 
+        :upstream_identifier,
+        :wild_type_control_id,
         :document_ids => [],
         :replicate_ids => [],
         :control_replicate_ids => [],

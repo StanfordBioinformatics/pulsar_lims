@@ -10,6 +10,7 @@ Pulsar::Application.routes.draw do
   end
   resources :gel_lanes
   resources :chipseq_experiments do
+    get :get_wt_control_selection, on: :collection
     get :add_biosample_replicate, on: :member
   end
   get 'search/search'

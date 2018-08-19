@@ -1,0 +1,3 @@
+<%= simple_fields_for @chipseq_experiment do |f| %>
+  <%= f.association :wild_type_control, collection: @wild_type_controls, label_html: {"data-toggle": "tooltip", "title": "The input (control) biosample record that doesn't have a CRISPR modification. Can only be selected after a starting biosample has been selected."} %>
+<% end %>
