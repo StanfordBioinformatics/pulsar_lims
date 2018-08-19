@@ -14,8 +14,6 @@ $ ->
     $.get "/targets/select_options", (responseText,status,jqXHR) ->
       $(".chipseq_experiment_target select").html(responseText)
 
-  $("#chipseq_experiment_starting_biosample_id").change () ->
-    alert("you")
+  $("#chipseq_experiment_starting_biosample_id").on "change", () ->
     $.get "/chipseq_experiments/get_wt_control_selection", {starting_biosample: $("#chipseq_experiment_starting_biosample_id").serialize()}, (responseText,status,jqXHR) ->
-      alert("howdy")
       $("#chipseq_experiment_wild_type_control_id").closest("div").replaceWith($(responseText))
