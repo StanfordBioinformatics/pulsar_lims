@@ -19,6 +19,12 @@ $ ->
     $.get "/chipseq_experiments/get_wt_control_selection", {starting_biosample_id: $("#chipseq_experiment_starting_biosample_id").val()}, (responseText,status,jqXHR) ->
       $("#chipseq_experiment_wild_type_control_id").closest("div").replaceWith(responseText)
 
+  $("#chipseq-add-ctl").on "click", (event) ->
+    if $(event.target).attr("disabled") == "disabled"
+      # Then user hasn't selected any experimental replicates yet from which the controls are made.
+      event.preventDefault()
+      event.stopPropagation()
+
   $("#chipseq-add-rep, #chipseq-add-ctl").on "ajax:success", (event, data) -> 
     $(".bottom-btns").hide()
     $(".bottom-btns").after(data)
