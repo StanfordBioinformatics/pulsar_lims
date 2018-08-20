@@ -72,9 +72,10 @@
   </tr>
 </table>
 
-<div>
-  <%= link_to "Add experiment replicate", [:add_biosample_replicate, @chipseq_experiment, {control: false}], class: "reg-btn" %>
-  <%= link_to "Add control replicate", [:add_biosample_replicate, @chipseq_experiment, {control: true}], class: "reg-btn" %>
+
+<div class="bottom-btns xfade-in">
+  <%= link_to "Add experiment replicate", [:add_replicate, @chipseq_experiment], class: "reg-btn", id: "chipseq-add-rep", remote: true %>
+  <%= link_to "Add control replicate", [:choose_replicates_for_control, @chipseq_experiment], class: "reg-btn", id: "chipseq-add-ctl", remote: true %>
 </div>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             

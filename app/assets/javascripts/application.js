@@ -38,6 +38,18 @@
 //    });
 
 
+
+// When the fa icon with class "xfade-out" is clicked, then                                            
+// remove the closest container element with class "xfade". The removal will                           
+// happed by fading out the element in application.js. Then, any element on the page with class        
+// "fade-in" will fade in.  See an example of these classes being used in /app/views/chipseq_experiments/add_replicate.html.erb.
+$(document).on("click", ".xfade-out", function(event) {
+  event.preventDefault();
+  $(this).closest(".xfade").fadeOut( function(event) {
+    $(".xfade-in").fadeIn();
+  })
+})
+
 //Set select inputs to show 6 rows:
 //$(function() {
 //  $("select",document).attr("size","8");

@@ -1,0 +1,7 @@
+<div class="xfade bg-info jumbotron">
+  <%= simple_form_for(@chipseq_experiment, method: "post", url: [:create_control_replicate, @chipseq_experiment], html: {style: "position: relative;"}) do |f| %>
+    <%= f.association :replicates, label: "Which replicate(s) were used to create the control?", collection: @selection %>
+    <%= f.button :submit, "Update", class: "reg-btn" %>
+    <%= link_to fa_icon("close lg"), "#", class: "xfade-out" %>
+  <% end %>
+</div>

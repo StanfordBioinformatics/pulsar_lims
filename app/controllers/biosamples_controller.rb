@@ -150,6 +150,7 @@ class BiosamplesController < ApplicationController
         :control, 
         :biosample_term_name_id, 
         :biosample_type_id,
+        :chipseq_experiment_id,
         :crispr_modification_id,
         :date_biosample_taken, 
         :description, 

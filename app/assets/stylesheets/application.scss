@@ -49,6 +49,19 @@
   }
 }
 
+// When the fa icon with class "xfade-out" is clicked, then 
+// remove the closest container element with class "xfade". The removal will 
+// happed by fading out the element in application.js. Then, any element on the page with class
+// "fade-in" will fade in.
+// See an example of these classes being used in /app/views/chipseq_experiments/add_replicate.html.erb.
+.xfade-out {
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   margin: 0.3em;
+}
+  
+
 .my-flex {
   display: flex;
   margin-bottom: 0.3em;
