@@ -1,6 +1,5 @@
 class ChipseqExperimentSerializer < ActiveModel::Serializer
   self.root = false
-  embed :ids
 
   attributes :id, 
              :document_ids,

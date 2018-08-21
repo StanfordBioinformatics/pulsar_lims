@@ -1,6 +1,5 @@
 class BiosampleSerializer < ActiveModel::Serializer
   self.root = false
-  #embed :ids
 
   attributes :id,
              :control,

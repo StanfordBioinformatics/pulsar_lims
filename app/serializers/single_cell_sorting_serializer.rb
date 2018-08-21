@@ -1,6 +1,5 @@
 class SingleCellSortingSerializer < ActiveModel::Serializer
   self.root = false
-  #embed :ids
 
   attributes :id,
              :description,

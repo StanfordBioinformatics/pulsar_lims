@@ -1,6 +1,5 @@
 class UnitSerializer < ActiveModel::Serializer
   self.root = false
-  embed :ids
 
   attributes :id, 
              :name, 

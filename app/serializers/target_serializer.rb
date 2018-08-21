@@ -1,6 +1,5 @@
 class TargetSerializer < ActiveModel::Serializer
   self.root = false
-  embed :ids
  
   attributes :id, 
              :ensembl, 
