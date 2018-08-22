@@ -98,6 +98,11 @@ Pulsar::Application.routes.draw do
   end
 
   namespace :api do
+    resources :barcodes do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :biosamples do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
@@ -163,6 +168,16 @@ Pulsar::Application.routes.draw do
     end
 
     resources :libraries do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
+    resources :paired_barcodes do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
+    resources :plates do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
