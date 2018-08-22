@@ -38,7 +38,7 @@ class BiosampleTermName < ActiveRecord::Base
   validates :biosample_ontology_id, presence: true
 
   scope :cl, lambda { where(biosample_ontology_id: BiosampleOntology.find_by(name: "CL")) }
-  scope :uberon, lambda { where(biosample_ontology_id: BiosampleOntology.find_by(name: "Uberon")) }
+  scope :uberon, lambda { where(biosample_ontology_id: BiosampleOntology.find_by(name: "UBERON")) }
   scope :efo, lambda { where(biosample_ontology_id: BiosampleOntology.find_by(name: "EFO")) }
   scope :persisted, lambda { where.not(id: nil) }
 
