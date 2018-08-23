@@ -1,0 +1,52 @@
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @shipping } %>
+<header>                                                                                               
+  <h1><%= @shipping.to_label() %></h1>                                                                  
+                                                                                                       
+  <ul class="actions">                                                                                 
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: @shipping} %>
+    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @shipping} %>
+  </ul>                                                                                                
+</header>                                                                                              
+                                                                                                       
+<%= render partial: "application_partials/record_meta", locals: { record: @shipping } %>
+
+<table class="attributes"> 
+  <% if @shipping.biosample.present? %>
+    <tr>
+      <th><strong>Biosample:</strong></th>
+      <td><%= link_to_record @shipping.biosample %></td>
+    </tr>
+  <% end %>
+
+  <tr>
+    <th><strong>From:</strong></th>
+    <td><%= link_to_record @shipping.from %></td>
+  </tr>
+
+  <tr>
+    <th><strong>To:</strong></th>
+    <td><%= link_to_record @shipping.to %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Carrier:</strong></th>
+    <td><%= @shipping.carrier %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Tracking code:</strong></th>
+    <td><%= @shipping.tracking_code %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Date shipped:</strong></th>
+    <td><%= @shipping.date_shipped %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Received:</strong></th>
+    <td><%= @shipping.received %></td>
+  </tr>
+</table>
+
+<%= link_to 'Back', shippings_path %>

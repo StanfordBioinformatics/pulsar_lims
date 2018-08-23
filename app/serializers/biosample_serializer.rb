@@ -36,6 +36,7 @@ class BiosampleSerializer < ActiveModel::Serializer
   has_many :documents
   has_many :libraries
   has_many :pooled_from_biosamples
+  has_many :shippings
   has_many :treatments
 
 end

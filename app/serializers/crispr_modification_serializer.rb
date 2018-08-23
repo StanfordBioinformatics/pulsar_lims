@@ -1,7 +1,15 @@
 class CrisprModificationSerializer < ActiveModel::Serializer
   self.root = false
 
-  attributes :id, :category, :donor_construct_id, :name, :notes, :purpose, :created_at, :updated_at, :upstream_identifier
+  attributes :id, 
+             :category,
+             :donor_construct_id,
+             :name,
+             :notes,
+             :purpose,
+             :created_at,
+             :updated_at,
+             :upstream_identifier
 
   has_one :user
 

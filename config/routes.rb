@@ -1,5 +1,6 @@
 Pulsar::Application.routes.draw do
 
+  resources :shippings
   resources :immunoblots do
     post :add_gel, on: :member
   end
@@ -304,6 +305,7 @@ Pulsar::Application.routes.draw do
   end
 
   resources :biosamples do
+    get :add_shipping, on: :member
     get :add_crispr_modification, on: :member
     get :make_replicate, on: :member
     get :clone, on: :member

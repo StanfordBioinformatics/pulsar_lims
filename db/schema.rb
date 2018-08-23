@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180815220537) do
+ActiveRecord::Schema.define(version: 20180823192355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -901,6 +901,24 @@ ActiveRecord::Schema.define(version: 20180815220537) do
   add_index "sequencing_runs", ["storage_location_id"], name: "index_sequencing_runs_on_storage_location_id", using: :btree
   add_index "sequencing_runs", ["user_id"], name: "index_sequencing_runs_on_user_id", using: :btree
 
+  create_table "shippings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "carrier"
+    t.string   "tracking_code"
+    t.date     "date_shipped"
+    t.boolean  "received"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "from_id"
+    t.integer  "to_id"
+    t.integer  "biosample_id"
+  end
+
+  add_index "shippings", ["biosample_id"], name: "index_shippings_on_biosample_id", using: :btree
+  add_index "shippings", ["from_id"], name: "index_shippings_on_from_id", using: :btree
+  add_index "shippings", ["to_id"], name: "index_shippings_on_to_id", using: :btree
+  add_index "shippings", ["user_id"], name: "index_shippings_on_user_id", using: :btree
+
   create_table "single_cell_sortings", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -1171,6 +1189,10 @@ ActiveRecord::Schema.define(version: 20180815220537) do
   add_foreign_key "sequencing_runs", "file_references", column: "storage_location_id"
   add_foreign_key "sequencing_runs", "sequencing_requests"
   add_foreign_key "sequencing_runs", "users"
+  add_foreign_key "shippings", "addresses", column: "from_id"
+  add_foreign_key "shippings", "addresses", column: "to_id"
+  add_foreign_key "shippings", "biosamples"
+  add_foreign_key "shippings", "users"
   add_foreign_key "single_cell_sortings", "biosamples", column: "sorting_biosample_id"
   add_foreign_key "single_cell_sortings", "biosamples", column: "starting_biosample_id"
   add_foreign_key "single_cell_sortings", "libraries", column: "library_prototype_id"

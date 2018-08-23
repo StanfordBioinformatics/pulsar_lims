@@ -1,0 +1,47 @@
+<header class="index-view-header">                                                                     
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "Shippings" %>                                                                      
+  </h1>                                                                                                
+  <p class="model-definition"><%= Shipping::DEFINITION %></p>                                      
+                                                                                                       
+  <ul class="actions">                                                                                 
+    <%= render partial: "application_partials/auth_new_record" %>                                      
+  </ul>                                                                                                
+  <%= render partial: "application_partials/total", locals: {total: @total} %>                         
+</header>                                                                                              
+                                                                                                       
+<table class="attributes index">  
+  <thead>
+    <tr>
+      <th>From</th>
+      <th>To</th>
+      <th>Carrier</th>
+      <th>Tracking code</th>
+      <th>Date shipped</th>
+      <th>Received</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @records.each do |rec| %>
+      <tr>
+        <td><%= link_to_record rec.from %></td>
+        <td><%= link_to_record rec.to %></td>
+        <td><%= rec.carrier %></td>
+        <td><%= rec.tracking_code %></td>
+        <td><%= rec.date_shipped %></td>
+        <td><%= rec.received %></td>
+        </td>
+          <%= link_to fa_icon("pencil"), edit_shipping_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if defined?(@page) %>                                                                               
+  <%= paginate @records %>                                                                             
+  <%= link_to "All", shippings_path(all: true) %>                                                  
+<% end %>  

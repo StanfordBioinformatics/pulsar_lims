@@ -1,4 +1,4 @@
-<% title(@biosample.name,"Biosamples") %> 
+<% title(@biosample.name,"Biosamples") %>
 <%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @biosample } %>
 <header>
   <h1><%= @biosample.name %></h1>
@@ -14,7 +14,7 @@
       </li>
     <% end %>
   </ul>
-</header>  
+</header>
 
 <%= render partial: "application_partials/record_meta", locals: { record: @biosample } %>
 
@@ -144,15 +144,15 @@
 
   <% if @biosample.from_prototype_id.present? %>
     <tr>
-      <th><strong>Tracking prototype</strong></th> 
+      <th><strong>Tracking prototype</strong></th>
       <td>
         <%= link_to_record(@biosample.from_prototype)  %>
       </td>
     </tr>
   <% end %>
-    
+
   </tr>
-  
+
   <tr>
     <th><strong>Protocol documents:</strong></th>
     <td>
@@ -239,15 +239,38 @@
     <% end %>
   </tr>
 
-  <tr class="notes-row">                                                                               
-    <th><strong>Notes</strong></th>                                                                    
-    <td><%= simple_format(@biosample.notes) %></td>                                                     
-  </tr> 
+  <tr class="notes-row">
+    <th><strong>Notes</strong></th>
+    <td><%= simple_format(@biosample.notes) %></td>
+  </tr>
 </table>
+
+<fieldset>
+  <legend>Shipment Tracking</legend>
+  <ul class="list-unstyled" style="display: grid; grid-gap: 0.5em; grid-template-columns: repeat(6, 6em);">
+    <li><strong>From</strong></li>
+    <li><strong>To</strong></li>
+    <li><strong>Carrier</strong></li>
+    <li><strong>Tracking code</strong></li>
+    <li><strong>Date shipped</strong></li>
+    <li><strong>Received?</strong></li>
+  </ul>
+  <% @biosample.shippings.each do |s| %>
+    <ul class="list-unstyled" style="display: grid; grid-gap: 0.5em; grid-template-columns: repeat(6, 6em);">
+      <li><%= link_to_record s.from %></li>
+      <li><%= link_to_record s.to %></li>
+      <li><%= s.carrier %></li>
+      <li><%= s.tracking_code %></li>
+      <li><%= s.date_shipped %></li>
+      <li><%= s.received? %></li>
+    </ul>
+  <% end %>
+  <%= link_to "Add", [:add_shipping, @biosample], class: "reg-btn" %>
+</fieldset>
 
 <h3 class="section">Transfection</h3>
 <% if @biosample.crispr_modification.blank? %>
-  <%= link_to "Add CRISPR modification", add_crispr_modification_biosample_path(@biosample), class: "new", 
+  <%= link_to "Add CRISPR modification", add_crispr_modification_biosample_path(@biosample), class: "new",
       id: "biosample_add_crispr_modification" %>
   </br></br>
 <% else %>
@@ -265,7 +288,7 @@
   <%= @biosample.transfected_by %>
 </div>
 
-<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->
 <%= render partial: "application_partials/edit_notes", locals: {rec: @biosample} %>
 
 <h3 class="section">Validations</h3>

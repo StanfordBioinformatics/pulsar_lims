@@ -1,0 +1,17 @@
+<%= simple_form_for(@shipping) do |f| %>                                                               
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @shipping } %> 
+
+  <% if @shipping.biosample.present? %>
+    <%= f.association :biosample %>  
+  <% end %>
+  <%= f.association :from %>
+  <%= f.association :to %>
+  <%= f.input :carrier, label_html: {"data-toggle": "tooltip", title: "The business/agency that is transporting the package, i.e. USPS, FedEx"} %>
+  <%= f.input :tracking_code, label_html: {"data-toggle": "tooltip", title: "The tracking identifier provided by the shipping carrior."} %>
+  <%= f.input :date_shipped, include_blank: true %>
+  <%= f.input :received %>
+
+  <div class="form-actions">                                                                           
+    <%= f.button :submit, class: "btn-primary" %>                                                      
+  </div></br>                                                                                          
+<% end %> 
