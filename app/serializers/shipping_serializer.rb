@@ -5,7 +5,7 @@ class ShippingSerializer < ActiveModel::Serializer
              :carrier, 
              :tracking_code,  
              :date_shipped, 
-             :received
+             :received,
              :created_at,                                                                              
              :updated_at
 
