@@ -2,7 +2,7 @@
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @shipping } %> 
 
   <% if @shipping.biosample.present? %>
-    <%= f.association :biosample %>  
+    <%= f.association :biosample, collection: Biosample.non_plated %>  
   <% end %>
   <%= f.association :from %>
   <%= f.association :to %>
