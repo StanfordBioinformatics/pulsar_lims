@@ -2,6 +2,7 @@ class ShippingSerializer < ActiveModel::Serializer
   self.root = false
 
   attributes :id, 
+             :biosample_id,
              :carrier, 
              :tracking_code,  
              :date_shipped, 
@@ -9,7 +10,8 @@ class ShippingSerializer < ActiveModel::Serializer
              :created_at,                                                                              
              :updated_at
 
-  has_one :biosample
+  # Don't serialize
+  # 1) biosample_id
   has_one :from
   has_one :to
   has_one :user

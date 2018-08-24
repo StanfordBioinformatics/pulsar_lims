@@ -188,6 +188,11 @@ Pulsar::Application.routes.draw do
       post :add_crispr_modification, on: :member
     end
 
+    resources :shippings do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :single_cell_sortings do
       post :find_by_name, on: :collection
       post :add_crispr_modification, on: :member

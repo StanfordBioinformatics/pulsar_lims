@@ -13,6 +13,7 @@
 <table class="attributes index">  
   <thead>
     <tr>
+      <%= render partial: "application_partials/index_common_table_headers" %>
       <th>From</th>
       <th>To</th>
       <th>Carrier</th>
@@ -26,13 +27,14 @@
   <tbody>
     <% @records.each do |rec| %>
       <tr>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= link_to_record rec.from %></td>
         <td><%= link_to_record rec.to %></td>
         <td><%= rec.carrier %></td>
         <td><%= rec.tracking_code %></td>
         <td><%= rec.date_shipped %></td>
         <td><%= rec.received %></td>
-        </td>
+        <td>
           <%= link_to fa_icon("pencil"), edit_shipping_path(rec) %>
           <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
