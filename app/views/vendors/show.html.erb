@@ -1,29 +1,19 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @vendor } %>
-<header>
-  <h1><%= @vendor.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @vendor} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @vendor} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @vendor} %>
+<%= render partial:  "application_partials/header", locals: {rec: @vendor } %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Description:</strong></th>
-		<td><%= @vendor.description %></td>
-	</tr>
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @vendor.description %></td>
+  </tr>
 
-	<tr>
-		<th><strong>URL:</strong></th>
-		<% if not @vendor.url.blank? %>
-			<td><%= link_to @vendor.url, @vendor.url %></td>
-		<% else %>
-			<td></td>
-		<% end %>
-	</tr>
+  <tr>
+    <th><strong>URL:</strong></th>
+    <% if not @vendor.url.blank? %>
+      <td><%= link_to @vendor.url, @vendor.url %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    

@@ -1,14 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @single_cell_sorting } %>
-<header>
-  <h1><%= @single_cell_sorting.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @single_cell_sorting} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @single_cell_sorting} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @single_cell_sorting } %>
+<%= render partial:  "application_partials/header", locals: {rec: @single_cell_sorting } %>
 
 <table class="attributes">
   <tr>

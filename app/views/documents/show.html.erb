@@ -1,46 +1,35 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @document } %>
-<% title(@document.name, "Documents") %>
-<header>
-  <h1><%= @document.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @document} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @document} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @document } %>
+<%= render partial:  "application_partials/header", locals: {rec: @document } %>
 
 <table class="attributes">
-	<tr>
-	  <th><strong>Name:</strong></th>
-	  <td><%= @document.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @document.name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Is Protocol?:</strong</th>
-		<td><%= @document.is_protocol? %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Description:</strong></th>
-	  <td><%= @document.description %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Content Type:</strong></th>
-	  <td><%= @document.content_type%></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Data:</strong></th>
-		<td><%= link_to(fa_icon("download") + " #{@document.name}",:action => "document", :id => @document.id) %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Document type:</strong></th>
-	 	<td><%= link_to @document.document_type.name, @document.document_type %></td>
-	</tr>
+  <tr>
+    <th><strong>Is Protocol?:</strong</th>
+    <td><%= @document.is_protocol? %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @document.description %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Content Type:</strong></th>
+    <td><%= @document.content_type%></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Data:</strong></th>
+    <td><%= link_to(fa_icon("download") + " #{@document.name}",:action => "document", :id => @document.id) %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Document type:</strong></th>
+     <td><%= link_to @document.document_type.name, @document.document_type %></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    

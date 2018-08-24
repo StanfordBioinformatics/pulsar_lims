@@ -1,15 +1,4 @@
-<% title(@unit.name, "Units") %>
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @unit } %>
-<header>
-  <h1><%= @unit.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @unit} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @unit} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @unit} %>
+<%= render partial:  "application_partials/header", locals: {rec: @unit } %>
 
 <table class="attributes">
   <tr>

@@ -1,25 +1,12 @@
-<% title(@biosample.name,"Biosamples") %>
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @biosample } %>
-<header>
-  <h1><%= @biosample.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @biosample} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @biosample} %>
-    <!-- Add button for cloning the biosample X times, but only if it isn't a biosample prototype
-         on a single_cell_sorting since this functionality doesn't make sense there. -->
-    <% unless @biosample.sorting_biosample_single_cell_sorting.present? %>
-      <li>
-        <%= link_to "Clone", [:clone, @biosample], class: "clone" %>
-      </li>
-    <% end %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @biosample } %>
+<!-- Add button for cloning the biosample X times, but only if it isn't a biosample prototype
+     on a single_cell_sorting since this functionality doesn't make sense there. -->
+<% clone = false %>
+<% unless @biosample.sorting_biosample_single_cell_sorting.present? %>
+  <% clone = true %>
+<% end %>
+<%= render partial:  "application_partials/header", locals: { rec: @biosample, clone: clone} %>
 
 <table class="attributes">
-
   <tr>
     <th><strong>Name:</strong></th>
     <td><%= @biosample.name %></td>

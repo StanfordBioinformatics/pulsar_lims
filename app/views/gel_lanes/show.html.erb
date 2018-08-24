@@ -1,14 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @gel_lane } %>
-<header>                                                                                               
-  <h1><%= @gel_lane.display() %></h1>                                                                  
-                                                                                                       
-  <ul class="actions">                                                                                 
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @gel_lane} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @gel_lane} %>
-  </ul>                                                                                                
-</header>                                                                                              
-                                                                                                       
-<%= render partial: "application_partials/record_meta", locals: { record: @gel_lane } %>
+<%= render partial:  "application_partials/header", locals: {rec: @gel_lane } %>
 
 <table class="attributes" %>
   <tr>

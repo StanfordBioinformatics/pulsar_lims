@@ -1,20 +1,10 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @document_type } %>
-<header>
-	<h1><%= @document_type.name %></h1>
-	
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @document_type} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @document_type} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @document_type } %>
+<%= render partial:  "application_partials/header", locals: {rec: @document_type } %>
 
 <table class="attributes">
-	<tr>
-  	<th><strong>Name:</strong></th>
-  	<td><%= @document_type.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @document_type.name %></td>
+  </tr>
 </table>
 
 <%= link_to 'Back', document_types_path %>

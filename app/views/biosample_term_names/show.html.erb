@@ -1,35 +1,25 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @biosample_term_name } %>
-<header>
-  <h1><%= @biosample_term_name.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @biosample_term_name} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @biosample_term_name} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @biosample_term_name } %>
+<%= render partial:  "application_partials/header", locals: { rec: @biosample_term_name } %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name:</strong></th>
-		<td><%= @biosample_term_name.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @biosample_term_name.name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Accession:</strong></th>
-		<td><%= @biosample_term_name.accession %></td>
-	</tr>
+  <tr>
+    <th><strong>Accession:</strong></th>
+    <td><%= @biosample_term_name.accession %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Biosample ontology:</strong></th>
-		<td><%= @biosample_term_name.biosample_ontology.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Biosample ontology:</strong></th>
+    <td><%= @biosample_term_name.biosample_ontology.name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Description:</strong></th>
-		<td><%= @biosample_term_name.description %></td>
-	</tr>
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @biosample_term_name.description %></td>
+  </tr>
 </table>
 
 <%= link_to 'Back', biosample_term_names_path %>

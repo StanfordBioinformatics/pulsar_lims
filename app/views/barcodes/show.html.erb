@@ -1,37 +1,26 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @barcode } %>
-<header>
-  <h1><%= "#{@barcode.name} on #{@sequencing_library_prep_kit.name}" %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @barcode, nested: @sequencing_library_prep_kit } %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @barcode, nested: @sequencing_library_prep_kit } %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @barcode } %>
-
+<%= render partial:  "application_partials/header", locals: {rec: @barcode, nested: @sequencing_library_prep_kit } %>
 
 <table class="attributes">
 
-	<tr>
-	  <th><strong>Name:</strong></th>
-	  <td><%= @barcode.name %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Sequencing library prep kit:</strong></th>
-		<td><%= link_to @barcode.sequencing_library_prep_kit.name, @sequencing_library_prep_kit %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @barcode.name %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Sequencing library prep kit:</strong></th>
+    <td><%= link_to @barcode.sequencing_library_prep_kit.name, @sequencing_library_prep_kit %></td>
+  </tr>
 
-	<tr>
-	  <th><strong>Sequence:</strong></th>
-	  <td><%= @barcode.sequence %></td>
-	</tr>
+  <tr>
+    <th><strong>Sequence:</strong></th>
+    <td><%= @barcode.sequence %></td>
+  </tr>
 
-	<tr>
-	  <th><strong>Index Number:</strong></th>
-	  <td><%= @barcode.index_number %></td>
-	</tr>
+  <tr>
+    <th><strong>Index Number:</strong></th>
+    <td><%= @barcode.index_number %></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    

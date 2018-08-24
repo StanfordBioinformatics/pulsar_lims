@@ -1,25 +1,15 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @chromosome } %>
-<header>
-  <h1><%= @chromosome.name %>on <%= @reference_genome.name %></h1>
-  
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @chromosome, nested: @reference_genome} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @chromosome, nested: @reference_genome } %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @chromosome } %>
+<%= render partial: "application_partials/header", locals: {rec: @chromosome, nested: @reference_genome} %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name:</strong></th>
-		<td><%= @chromosome.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @chromosome.name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Reference genome:</strong></th>
-		<td><%= link_to @chromosome.reference_genome.name, @reference_genome %></td>
-	</tr>
+  <tr>
+    <th><strong>Reference genome:</strong></th>
+    <td><%= link_to @chromosome.reference_genome.name, @reference_genome %></td>
+  </tr>
 </table>
 
 <%= link_to 'Back', reference_genome_path(@reference_genome) %>

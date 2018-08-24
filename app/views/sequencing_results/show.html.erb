@@ -1,14 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @sequencing_result } %>
-<header>
-  <h1><%= @sequencing_result.display %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_result, nested: [@sequencing_request,@sequencing_run]} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_result, nested: [@sequencing_request,@sequencing_run]} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @sequencing_result } %>
+<%= render partial: "application_partials/header", locals: {rec: @sequencing_result, no_new_btn: true, nested: [@sequencing_request,@sequencing_run]} %>
 
 <table class="attributes">
     <tr>

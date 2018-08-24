@@ -1,15 +1,4 @@
-<% title(@donor.name, "Donors") %>
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @donor } %>
-<header>
-  <h1><%= @donor.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @donor} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @donor} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @donor } %>
+<%= render partial:  "application_partials/header", locals: {rec: @donor } %>
 
 <table class="attributes">
 	<tr>

@@ -1,35 +1,25 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @file_reference } %>
-<header>
-  <h1><%= @file_reference.display() %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @file_reference} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @file_reference} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @file_reference } %>
+<%= render partial:  "application_partials/header", locals: {rec: @file_reference } %>
 
 <table class="attributes">
-	<tr>
-	  <th><strong>Data storage:</strong></th>
-	  <td><%= link_to @file_reference.data_storage.display(), @file_reference.data_storage %></td>
-	</tr>
+  <tr>
+    <th><strong>Data storage:</strong></th>
+    <td><%= link_to @file_reference.data_storage.display(), @file_reference.data_storage %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Data File Type:</strong></th>
-		<td><%= link_to @file_reference.data_file_type.name, @file_reference.data_file_type %></th>
-	</tr>
-	
-	<tr>
-	  <th><strong>File path:</strong></th>
-	  <td><%= @file_reference.file_path %></td>
-	</tr>
+  <tr>
+    <th><strong>Data File Type:</strong></th>
+    <td><%= link_to @file_reference.data_file_type.name, @file_reference.data_file_type %></th>
+  </tr>
+  
+  <tr>
+    <th><strong>File path:</strong></th>
+    <td><%= @file_reference.file_path %></td>
+  </tr>
 
-	<tr>
-	  <th><strong>Fileid:</strong></th>
-	  <td><%= @file_reference.fileid %></td>
-	</tr>
+  <tr>
+    <th><strong>Fileid:</strong></th>
+    <td><%= @file_reference.fileid %></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    

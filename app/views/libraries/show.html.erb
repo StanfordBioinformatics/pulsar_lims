@@ -1,15 +1,4 @@
-<% title(@library.name, "Libraries") %>
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @library } %>
-<header>
-  <h1><%= @library.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @library} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @library} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @library } %>
+<%= render partial: "application_partials/header", locals: {rec: @library } %>
 
 <table class="attributes">
   <tr>

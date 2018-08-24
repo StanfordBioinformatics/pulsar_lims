@@ -1,31 +1,20 @@
-<% title(@nucleic_acid_term.name,"NucleicAcidTerms") %>
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @nucleic_acid_term } %>
-<header>
-	<h1><%= @nucleic_acid_term.name %></h1>
-	
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @nucleic_acid_term} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @nucleic_acid_term} %>
-  </ul>
-</header> 
-
-<%= render partial: "application_partials/record_meta", locals: { record: @nucleic_acid_term } %>
+<%= render partial:  "application_partials/header", locals: {rec: @nucleic_acid_term } %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name:</strong></th>
-		<td><%= @nucleic_acid_term.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @nucleic_acid_term.name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Accession:</strong></th>
-		<td><%= @nucleic_acid_term.accession %></td>
-	</tr>
+  <tr>
+    <th><strong>Accession:</strong></th>
+    <td><%= @nucleic_acid_term.accession %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Definition:</strong></th>
-		<td><%= @nucleic_acid_term.definition %></td>
-	</tr>
+  <tr>
+    <th><strong>Definition:</strong></th>
+    <td><%= @nucleic_acid_term.definition %></td>
+  </tr>
 </table>
 
 <%= link_to 'Back', nucleic_acid_terms_path %>

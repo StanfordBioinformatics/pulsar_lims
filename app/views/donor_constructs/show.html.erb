@@ -1,14 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @donor_construct } %>
-<header>
-  <h1><%= @donor_construct.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @donor_construct} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @donor_construct} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @donor_construct } %>
+<%= render partial:  "application_partials/header", locals: {rec: @donor_construct } %>
 
 <table class="attributes">
   <tr>

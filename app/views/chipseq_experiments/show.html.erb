@@ -1,14 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @chipseq_experiment } %>
-<header>                                                                                               
-  <h1><%= @chipseq_experiment.name %></h1>                                                                  
-                                                                                                       
-  <ul class="actions">                                                                                 
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @chipseq_experiment} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @chipseq_experiment} %>
-  </ul>                                                                                                
-</header>                                                                                              
-                                                                                                       
-<%= render partial: "application_partials/record_meta", locals: { record: @chipseq_experiment } %>          
+<%= render partial:  "application_partials/header", locals: {rec: @chipseq_experiment } %>
                                                                                                        
 <table class="attributes">  
   <tr>

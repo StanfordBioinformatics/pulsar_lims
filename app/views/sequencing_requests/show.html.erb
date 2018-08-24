@@ -1,13 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @sequencing_request } %>
-<header>
-  <h1><%= @sequencing_request.name %></h1>  
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_request} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_request} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @sequencing_request} %>
+<%= render partial:  "application_partials/header", locals: {rec: @sequencing_request } %>
 
 <table class="attributes">
   <tr>

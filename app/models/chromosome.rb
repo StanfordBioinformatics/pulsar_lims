@@ -19,6 +19,10 @@ class Chromosome < ActiveRecord::Base
     ApplicationPolicy
   end
 
+  def display
+    "#{@chromosome.name} on #{@reference_genome.name}"
+  end
+
   def params_for_url_for
     #Returns the argument that can be used for the url_for helper (see use in the welcome controller).
     #See https://github.com/nathankw/pulsar_lims/wiki/search.

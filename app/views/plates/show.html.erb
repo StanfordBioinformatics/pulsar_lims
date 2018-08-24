@@ -1,15 +1,4 @@
-<% title(@plate.name, "Plates") %>
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @plate } %>
-<header>
-  <h1><%= @plate.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @plate} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @plate} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @plate } %>
+<%= render partial:  "application_partials/header", locals: {rec: @plate } %>
 
 <table class="attributes">
   <tr>

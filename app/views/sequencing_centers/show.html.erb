@@ -1,30 +1,20 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @sequencing_center } %>
-<header>
-	<h1><%= @sequencing_center.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_center} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_center} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @sequencing_center} %>
+<%= render partial:  "application_partials/header", locals: {rec: @sequencing_center } %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name:</strong></th>
-		<td><%= @sequencing_center.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @sequencing_center.name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Address:</strong></th>
-		<td><%= @sequencing_center.address %></td>
-	</tr>
+  <tr>
+    <th><strong>Address:</strong></th>
+    <td><%= @sequencing_center.address %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Web URL:</strong></th>
-		<td><%= link_to @sequencing_center.url, @sequencing_center.url%></td>
-	</tr>
+  <tr>
+    <th><strong>Web URL:</strong></th>
+    <td><%= link_to @sequencing_center.url, @sequencing_center.url%></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    

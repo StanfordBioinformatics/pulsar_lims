@@ -1,14 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @pcr } %>
-<header>
-  <h1><%= @pcr.id %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @pcr} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @pcr} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @pcr } %>
+<%= render partial:  "application_partials/header", locals: {rec: @pcr } %>
 
 <table class="attributes">
   <tr>

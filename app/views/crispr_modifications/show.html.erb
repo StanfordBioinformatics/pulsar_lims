@@ -1,14 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @crispr } %>
-<header>
-  <h1><%= @crispr.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @crispr} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @crispr} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @crispr } %>
+<%= render partial: "application_partials/header", locals: {rec: @crispr } %>
 
 <table class="attributes">
   <tr>

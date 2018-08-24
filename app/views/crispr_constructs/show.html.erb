@@ -1,64 +1,54 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @crispr_construct } %>
-<header>
-  <h1><%= @crispr_construct.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @crispr_construct} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @crispr_construct} %>
-  </ul>
-</header> 
-
-<%= render partial: "application_partials/record_meta", locals: { record: @crispr_construct } %>
+<%= render partial:  "application_partials/header", locals: {rec: @crispr_construct } %>
 
 <table class="attributes">
-	<tr>
-	  <th><strong>Name:</strong></th>
-	  <td><%= @crispr_construct.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @crispr_construct.name %></td>
+  </tr>
 
   <tr>
     <th><strong>Addgene:</strong></th>
     <td>
       <% if @crispr_construct.addgene_id %>
         <%= link_to @crispr_construct.addgene_id, ENV["ADDGENE_WEBSITE"] + @crispr_construct.addgene_id %>
-			<% end %>
+      <% end %>
     </td>
   </tr>
-	
-	<tr>
-	  <th><strong>Target:</strong></th>
-	  <td><%= link_to @crispr_construct.target.name, @crispr_construct.target %></td>
-	</tr>
+  
+  <tr>
+    <th><strong>Target:</strong></th>
+    <td><%= link_to @crispr_construct.target.name, @crispr_construct.target %></td>
+  </tr>
 
-	<tr>
-	  <th><strong>Ensembl transcript:</strong></th>
-	  <td><%= @crispr_construct.ensembl_transcript %></td>
-	</tr>
+  <tr>
+    <th><strong>Ensembl transcript:</strong></th>
+    <td><%= @crispr_construct.ensembl_transcript %></td>
+  </tr>
 
-	<tr>
-	  <th><strong>RefSeq transcript:</strong></th>
-	  <td><%= @crispr_construct.refseq_transcript %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Guide sequence:</strong></th>
-	  <td><%= @crispr_construct.guide_sequence %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Cloning vector:</strong></th>
-	  <td><%= link_to @crispr_construct.cloning_vector.name, @crispr_construct.cloning_vector %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Vendor:</strong></th>
-	  <td><%= link_to @crispr_construct.vendor.name, @crispr_construct.vendor %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Vendor product identifier:</strong></th>
-	  <td><%= @crispr_construct.vendor_product_identifier %>
-	</tr>
+  <tr>
+    <th><strong>RefSeq transcript:</strong></th>
+    <td><%= @crispr_construct.refseq_transcript %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Guide sequence:</strong></th>
+    <td><%= @crispr_construct.guide_sequence %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Cloning vector:</strong></th>
+    <td><%= link_to @crispr_construct.cloning_vector.name, @crispr_construct.cloning_vector %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Vendor:</strong></th>
+    <td><%= link_to @crispr_construct.vendor.name, @crispr_construct.vendor %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Vendor product identifier:</strong></th>
+    <td><%= @crispr_construct.vendor_product_identifier %>
+  </tr>
 
   <tr>
     <th><strong>Construct Tags:</strong></th>
@@ -89,10 +79,10 @@
     <td><%= @crispr_construct.date_sent %></td>                                                         
   </tr>
 
-	<tr>
-	  <th><strong>Description:</strong></th>
-	  <td><%= @crispr_construct.description %></td>
-	</tr>
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @crispr_construct.description %></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes:</strong></th>                                                                    

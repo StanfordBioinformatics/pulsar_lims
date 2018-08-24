@@ -4,41 +4,41 @@
   <h1><%= @user %></h1>
 
   <ul class="actions">
-		<li><%= link_to "Edit", [:edit,@user], class: "edit" %></li>
+    <li><%= link_to "Edit", [:edit,@user], class: "edit" %></li>
   </ul>
 </header>
 
 <%= render partial: "application_partials/record_meta", locals: { record: @user } %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>First Name:</strong></th>
-		<td><%= @user.first_name %></td>
-	</tr>
+  <tr>
+    <th><strong>First Name:</strong></th>
+    <td><%= @user.first_name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Last Name:</strong></th>
-		<td><%= @user.last_name %></td>
-	</tr>
+  <tr>
+    <th><strong>Last Name:</strong></th>
+    <td><%= @user.last_name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Email:</strong></th>
-		<td><%= @user.email%></td>
-	</tr>
+  <tr>
+    <th><strong>Email:</strong></th>
+    <td><%= @user.email%></td>
+  </tr>
 
-	<tr>
-		<th><strong>Role:</strong></th>
-		<td><%= @user.role_name %></td>
-	</tr>
+  <tr>
+    <th><strong>Role:</strong></th>
+    <td><%= @user.role_name %></td>
+  </tr>
 
-	<% if @user.role >= User::MANAGER_ROLE %>
-		<tr>
-			<th><strong>API Key:</strong></th>
-			<% if @user.api_key.present? %>
-				<td id="api_key"><%= render partial: "users/link_to_show_api_key", locals: {user: @user} %></td>
-			<% else %>
-				<td><%= button_to "Generate", generate_api_key_user_path(@user) %></td>
-			<% end %>
-		</tr>
-	<% end %>
+  <% if @user.role >= User::MANAGER_ROLE %>
+    <tr>
+      <th><strong>API Key:</strong></th>
+      <% if @user.api_key.present? %>
+        <td id="api_key"><%= render partial: "users/link_to_show_api_key", locals: {user: @user} %></td>
+      <% else %>
+        <td><%= button_to "Generate", generate_api_key_user_path(@user) %></td>
+      <% end %>
+    </tr>
+  <% end %>
 </table>

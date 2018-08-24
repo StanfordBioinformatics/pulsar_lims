@@ -1,20 +1,10 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @experiment_type } %>
-<header>
-  <h1><%= @experiment_type.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @experiment_type} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @experiment_type} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @experiment_type } %>
+<%= render partial:  "application_partials/header", locals: {rec: @experiment_type } %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name:</strong></th>
-		<td><%= @experiment_type.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @experiment_type.name %></td>
+  </tr>
 </table>
 
 <%= link_to 'Back', experiment_types_path %>

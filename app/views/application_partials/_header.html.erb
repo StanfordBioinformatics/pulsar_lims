@@ -1,0 +1,54 @@
+<!--
+
+Params:
+  rec - A record instance of a model.
+  clone - bool. True means to add a clone button. Only makes sense if the corresponding record's model
+          supports this functionality.
+  nested - The model records that make up a nested path, i.e. [@sequencing_request, @sequencing_run]
+           in the case of a SequencingResult., which is used to consturct a URL path for various actions.
+           Non-nested models won't use this.
+  no_new_btn - bool. True means not to include a New button for creating a new record.
+-->
+<% if not defined?(nested) %>
+  <% nested = "" %>
+<% end %>
+
+<% if not defined?(clone) %>
+  <% clone = nil %>
+<% end %>
+
+<% if defined?(no_new_btn) %>
+  <% no_new_btn = true %>
+<% else %>
+  <% no_new_btn = false %>
+<% end %>
+
+<% if defined?(no_destroy_btn) %>
+  <% no_destroy_btn = true %>
+<% else %>
+  <% no_destroy_btn = false %>
+<% end %>
+
+
+<% title(rec.display, "Addresses") %>
+<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => rec } %>
+<header>
+  <h1><%= rec.display %></h1>
+
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: rec, nested: nested} %>
+    <% unless no_destroy_btn %>
+      <%= render partial: "application_partials/auth_destroy_record", locals: {record: rec, nested: nested} %>
+    <% end %>
+    <% unless no_new_btn %>
+      <%= render partial: "application_partials/auth_new_record", locals: {nested: nested} %>
+    <% end %>
+    <% if clone.present? %>
+      <li>                                                                                             
+        <%= link_to "Clone", [:clone, rec], class: "clone" %>                                   
+      </li>                                                                                            
+    <% end %>  
+  </ul>
+</header>
+
+<%= render partial: "application_partials/record_meta", locals: { record: rec } %>

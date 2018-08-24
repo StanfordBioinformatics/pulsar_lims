@@ -1,25 +1,15 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @biosample_type } %>
-<header>
-	<h1><%= @biosample_type.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @biosample_type} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @biosample_type} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @biosample_type } %>
+<%= render partial:  "application_partials/headers", locals: { rec: @biosample_type } %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name:</strong></th>
-		<td><%= @biosample_type.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @biosample_type.name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Tissue?</strong></th>
-		<td><%= @biosample_type.tissue %></td>
-	</tr>
+  <tr>
+    <th><strong>Tissue?</strong></th>
+    <td><%= @biosample_type.tissue %></td>
+  </tr>
 </table>
 
 <%= link_to 'Back', biosample_types_path %>

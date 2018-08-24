@@ -1,54 +1,46 @@
-<% title(@well.name, "Wells") %>
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @well } %>
-<header>
-  <h1><%= @well.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @well, nested: @plate} %>
-    <!-- <%# render partial: "application_partials/auth_destroy_record", locals: {record: @well, nested: @plate} %> 
-			#leave out the destroy button since users shouldn't be able to destroy well directly as it doens't make sense to. 
-			#It makes more sense for the user to instead destroy the plate and in turn the wells as a side effect.
-		-->
-  </ul>
-</header>
+<%= render partial:  "application_partials/header", no_destroy_btn: true, no_new_btn: true, rec: @well, nested: @plate } %>
+<!--
+  #leave out the destroy button since users shouldn't be able to destroy well directly as it doens't make sense to. 
+  #It makes more sense for the user to instead destroy the plate and in turn the wells as a side effect.
+-->
 
 <%= render partial: "application_partials/record_meta", locals: { record: @well } %>
 
 <table class="attributes">
-	<tr>
-	  <th><strong>Name:</strong></th>
-	  <td><%= @well.name %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Plate:</strong></th>
-	  <td><%= link_to @well.plate.name, @plate %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Row:</strong></th>
-	  <td><%= @well.row %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Column:</strong></th>
-	  <td><%= @well.col %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @well.name %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Plate:</strong></th>
+    <td><%= link_to @well.plate.name, @plate %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Row:</strong></th>
+    <td><%= @well.row %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Column:</strong></th>
+    <td><%= @well.col %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Biosample</strong></th>
-		<td><%= link_to @well.biosample.name, @well.biosample %></td>
-	</tr>
+  <tr>
+    <th><strong>Biosample</strong></th>
+    <td><%= link_to @well.biosample.name, @well.biosample %></td>
+  </tr>
 
-	<tr>
-	  <th><strong>Fail:</strong></th>
-	  <td><%= @well.fail %></td>
-	</tr>
-	
-	<tr>
-	  <th><strong>Comment:</strong></th>
-	  <td><%= @well.comment %></td>
-	</tr>
+  <tr>
+    <th><strong>Fail:</strong></th>
+    <td><%= @well.fail %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Comment:</strong></th>
+    <td><%= @well.comment %></td>
+  </tr>
 </table>
 
 <%= link_to 'Back', @plate %>

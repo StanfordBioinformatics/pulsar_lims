@@ -1,14 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @sequencing_library_prep_kit } %>
-<header>
-  <h1><%= @sequencing_library_prep_kit.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_library_prep_kit} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_library_prep_kit} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @sequencing_library_prep_kit } %>
+<%= render partial:  "application_partials/header", locals: {rec: @sequencing_library_prep_kit } %>
 
 <table class="attributes">
   <tr>

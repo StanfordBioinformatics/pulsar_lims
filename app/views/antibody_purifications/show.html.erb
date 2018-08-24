@@ -1,21 +1,10 @@
-<% title(@antibody_purification.name, "AntibodyPurifications") %>
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @antibody_purification } %>
-<header>
-  <h1><%= @antibody_purification.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @antibody_purification} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @antibody_purification} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @antibody_purification } %>
+<%= render partial:  "application_partials/header", locals: {rec: @antibody_purification} %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name:</strong></th>
-		<td><%= @antibody_purification.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @antibody_purification.name %></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    

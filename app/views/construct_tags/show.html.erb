@@ -1,14 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @construct_tag } %>
-<header>
-  <h1><%= @construct_tag.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @construct_tag} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @construct_tag} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @construct_tag } %>
+<%= render partial:  "application_partials/header", locals: {rec: @construct_tag } %>
 
 <table class="attributes">
   <tbody>

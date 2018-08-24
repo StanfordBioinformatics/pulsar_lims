@@ -1,20 +1,10 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @sequencing_platform } %>
-<header>
-  <h1><%= @sequencing_platform.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @sequencing_platform} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @sequencing_platform} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @sequencing_platform } %>
+<%= render partial:  "application_partials/header", locals: {rec: @sequencing_platform } %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name:</strong></th>
-		<td><%= @sequencing_platform.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @sequencing_platform.name %></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    

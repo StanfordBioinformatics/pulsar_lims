@@ -1,14 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: {model_obj: @analysis } %>
-<header>
-  <h1><%= @analysis.id %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @analysis} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @analysis} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @analysis } %>
+<%= render partial:  "application_partials/header", locals: {rec: @analysis } %>
 
 <table class="attributes">
   <tr>

@@ -1,14 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @treatment_term_name } %>
-<header>
-  <h1><%= @treatment_term_name.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @treatment_term_name} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @treatment_term_name} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @treatment_term_name } %>
+<%= render partial:  "application_partials/header", locals: {rec: @treatment_term_name } %>
 
 <table class="attributes">
   <tr>

@@ -1,14 +1,4 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @immunoblot } %>
-<header>
-  <h1><%= @immunoblot.display() %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @immunoblot} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @immunoblot} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @immunoblot } %>
+<%= render partial:  "application_partials/header", locals: {rec: @immunoblot } %>
 
 <span id="record_id" style="display: none;"><%= @immunoblot.id %></span>
 

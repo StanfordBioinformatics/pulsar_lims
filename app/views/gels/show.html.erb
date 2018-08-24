@@ -1,16 +1,7 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @gel } %>
-<header>
-  <h1><%= @gel.display() %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @gel} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @gel} %>
-  </ul>
-</header>
+<%= render partial:  "application_partials/header", locals: {rec: @gel } %>
 
 <span id="record_id" style="display: none;"><%= @gel.id %></span>
 
-<%= render partial: "application_partials/record_meta", locals: { record: @gel } %>
 <table class="attributes">
   <tr>
     <th><strong>Immunoblot:</strong></th>

@@ -1,25 +1,15 @@
-<%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => @reference_genome } %>
-<header>
-  <h1><%= @reference_genome.name %></h1>
-
-  <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: @reference_genome} %>
-    <%= render partial: "application_partials/auth_destroy_record", locals: {record: @reference_genome} %>
-  </ul>
-</header>
-
-<%= render partial: "application_partials/record_meta", locals: { record: @reference_genome } %>
+<%= render partial:  "application_partials/header", locals: {rec: @reference_genome } %>
 
 <table class="attributes">
-	<tr>
-		<th><strong>Name:</strong></th>
-		<td><%= @reference_genome.name %></td>
-	</tr>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @reference_genome.name %></td>
+  </tr>
 
-	<tr>
-		<th><strong>Url:</strong></th>
-		<td><%= link_to @reference_genome.url, @reference_genome.url %></td>
-	</tr>
+  <tr>
+    <th><strong>Url:</strong></th>
+    <td><%= link_to @reference_genome.url, @reference_genome.url %></td>
+  </tr>
 
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    
@@ -28,24 +18,24 @@
 </table>
 
 <div class="chromosomes bg-info">
-	<h4> Chromosomes</h4>
-	<table class="attributes">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th class="actions">Actions</th>
-			</tr>
-		</thead>
-		<% @reference_genome.chromosomes.each do |c| %>
-			<tr>
-				<td><%= link_to c.name, [@reference_genome,c] %></td>
-				<td>
-					<%= link_to fa_icon("pencil"), [:edit,@reference_genome,c] %>
-					<%= link_to fa_icon("trash"), [@reference_genome,c], method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
-			</tr>
-		<% end %>
-	</table>
+  <h4> Chromosomes</h4>
+  <table class="attributes">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th class="actions">Actions</th>
+      </tr>
+    </thead>
+    <% @reference_genome.chromosomes.each do |c| %>
+      <tr>
+        <td><%= link_to c.name, [@reference_genome,c] %></td>
+        <td>
+          <%= link_to fa_icon("pencil"), [:edit,@reference_genome,c] %>
+          <%= link_to fa_icon("trash"), [@reference_genome,c], method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>
 
 <div>
