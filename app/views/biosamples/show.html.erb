@@ -266,7 +266,7 @@
       <li><%= s.received? %></li>
       <li>
         <%= link_to fa_icon("pencil"), edit_shipping_path(s), style: "margin-right: 0.5em;" %>
-        <%= link_to fa_icon("trash"), s, id: "biosample-rm-shipping" %>
+        <%= link_to fa_icon("trash"), s, id: "biosample-rm-shipping", remote: true %>
       </li>
     </ul>
   <% end %>
