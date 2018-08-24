@@ -261,8 +261,9 @@ label.radio_buttons {
 
 
 fieldset {
+  display: inline-block;
+  overflow: auto;
   padding: 1em;
-  max-width: 70%;
   margin-top: 3.0em;
   margin-bottom: 3.0em;
   box-shadow: 0 3px 5px 0 rgba(0,0,0,0.40);
