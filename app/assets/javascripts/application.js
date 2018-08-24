@@ -214,7 +214,6 @@ $(function() {
   //Create variable that can be used in all other JavaScript files. This one is to add the asterisk next to the label
   // of an input field when the is conditional requirements. For an example of a conditional requirement, see
   // data_storages.js.coffee, which referneces this variable.
-
   $("a .fa-trash").on("click",function(event) {
     event.preventDefault();
     event.stopPropagation();
