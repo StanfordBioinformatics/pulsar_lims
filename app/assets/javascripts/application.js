@@ -215,12 +215,15 @@ $(function() {
   // of an input field when the is conditional requirements. For an example of a conditional requirement, see
   // data_storages.js.coffee, which referneces this variable.
 
-  $("tr a .fa-trash").on("click",function(event) {
+  $("a .fa-trash").on("click",function(event) {
     event.preventDefault();
     event.stopPropagation();
     if (confirm("Are you sure you want to delete this?") == true) {
       url = $(this).closest("a").attr("href");
-      $tr = $(this).closest("tr");
+      $rm = $(this).closest("tr");
+      if ($rm.length === 0) {
+        $rm = $(this).closest(".rm-on-record-del");
+      }
       $.ajax(url, {
         method: "DELETE",
         dataType: "json",
@@ -241,8 +244,8 @@ $(function() {
             alert(data);
             return;
           }
-          $tr.fadeOut(function(){
-            $tr.remove()
+          $rm.fadeOut(function(){
+            $rm.remove()
           })
           if ($(event.target).closest("a").hasClass("sequencing_result")) {
             //Then make sure the btn to add new seq res is activated:
