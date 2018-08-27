@@ -11,6 +11,7 @@ class LibrarySerializer < ActiveModel::Serializer
              :upstream_identifier,
              :paired_end,
              :prototype,
+             :single_cell_sorting_id,
              :size_range,
              :strand_specific,
              :times_cloned,
@@ -22,6 +23,7 @@ class LibrarySerializer < ActiveModel::Serializer
   # Dont serialize the following associations:
   #    1. from_prototype_id
   #    2. biosample_id
+  #    3. single_cell_sorting_id
   has_one :barcode
   has_one :concentration_unit
   has_one :library_fragmentation_method

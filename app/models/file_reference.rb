@@ -23,6 +23,9 @@ class FileReference < ActiveRecord::Base
     ApplicationPolicy
   end 
 
+  def to_label
+    super + self.display() 
+  end
   def display
     ds = self.data_storage
     bucket = ds.bucket

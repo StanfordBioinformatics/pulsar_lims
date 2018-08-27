@@ -54,8 +54,6 @@ class AnalysesController < ApplicationController
 
   def update
     authorize @analysis
-    #render json: params
-    #return
     respond_to do |format|
       if @analysis.update(analysis_params)
         format.html { redirect_to @analysis, notice: 'Analysis was successfully updated.' }

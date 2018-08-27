@@ -1,8 +1,22 @@
-<div class="container-fluid merged-file-form-fields bg-info" style="position: relative">
-<%= simple_fields_for @analysis do |f| %>
-	<%= f.simple_fields_for @file_attr, @file_reference do |ff| %>
-		<%= render partial: "file_references/form", locals: {f: ff} %>
-	<% end %>
-	<button style="position: absolute; right: 0; bottom: 0;" class="toggle-up-merged-file-form" type="button" class="btn btn-link"><%= fa_icon("toggle-up lg") %></button>
-<% end %>
+<div class="merged-file-form-fields bg-info" style="position: relative; padding: 1em;">
+  <fieldset id="analysis-select-file-ref" style="margin-top: 1em; margin-bottom: 1em;">
+    <legend>Select existing File Reference</legend>
+    <%= simple_fields_for @analysis do |f| %>
+      <%= f.association @file_attr, collection: FileReference.where(data_file_type_id: @file_reference.data_file_type.id) %>
+    <% end %>
+  </fieldset>
+
+  <div id="analysis-file-ref-or">
+    <h2 style="text-align: center;">Or</h2>
+  </div>
+    
+  <fieldset id="analysis-create-file-ref" style="margin-top: 1em; margin-bottom: 1em;">
+    <legend>Create a new File Reference</legend>
+      <%= simple_fields_for @analysis do |f| %>
+        <%= f.simple_fields_for @file_attr, @file_reference do |ff| %>
+          <%= render partial: "file_references/form", locals: {f: ff} %>
+        <% end %>
+      <% end %>
+  </fieldset>
+  <button style="position: absolute; right: 0; bottom: 0;" class="toggle-up-merged-file-form" type="button" class="btn btn-link"><%= fa_icon("toggle-up lg") %></button>
 </div>

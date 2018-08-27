@@ -32,3 +32,12 @@ $ ->
       $td.css("width","initial")
       $(".analysis-add-merged-file").removeAttr("disabled").show()
 
+  $(document).on "change", "#analysis-create-file-ref input, #analysis-create-file-ref select", () ->
+    $("#analysis-select-file-ref").fadeOut -> 
+      $(this).remove()
+    $("#analysis-file-ref-or").fadeOut()
+
+  $(document).on "change", "#analysis-select-file-ref select", () ->
+    $("#analysis-create-file-ref").fadeOut -> 
+      $(this).remove()
+    $("#analysis-file-ref-or").fadeOut()
