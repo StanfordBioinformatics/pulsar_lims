@@ -73,7 +73,7 @@ class BiosamplesController < ApplicationController
     if biosample_term_name_id.present?
       biosample_term_name = BiosampleTermName.find(biosample_term_name_id)
     end
-    @biosample_term_name_selection = BiosampleType.get_biosample_term_names(biosample_type.id)
+    @biosample_term_name_selection = BiosampleType.get_biosample_term_names(biosample_type.id).order(:name)
     @selected = nil
     if biosample_term_name.present?
       @selected = biosample_term_name.id
