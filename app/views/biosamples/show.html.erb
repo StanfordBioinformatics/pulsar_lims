@@ -243,7 +243,7 @@
     <li><strong>Received?</strong></li>
     <li><strong>Actions</strong></li>
   </ul>
-  <% @biosample.shippings.each do |s| %>
+  <% @biosample.shippings.order(:date_shipped).each do |s| %>
     <ul class="rm-on-record-del list-unstyled" style="display: grid; grid-gap: 0.5em; grid-template-columns: repeat(7, 9em);">
       <li><%= link_to_record s.from %></li>
       <li><%= link_to_record s.to %></li>
