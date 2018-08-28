@@ -6,10 +6,10 @@ class Analysis < ActiveRecord::Base
   ABBR = "AN"
   DEFINITION = "An analysis object, which currenlty is only configured to be added to a Single Cell Sorting experiment.  Model abbreviation: #{ABBR}"
   belongs_to :protocol, class_name: "Document"
-  belongs_to :merged_bam_file, class_name: "FileReference", dependent: :destroy
-  belongs_to :merged_fastq_file, class_name: "FileReference", dependent: :destroy
-  belongs_to :merged_peaks_file, class_name: "FileReference", dependent: :destroy
-  belongs_to :merged_qc_file, class_name: "FileReference", dependent: :destroy
+  belongs_to :merged_bam_file, class_name: "FileReference"
+  belongs_to :merged_fastq_file, class_name: "FileReference"
+  belongs_to :merged_peaks_file, class_name: "FileReference"
+  belongs_to :merged_qc_file, class_name: "FileReference"
   belongs_to :single_cell_sorting
   belongs_to :user
 

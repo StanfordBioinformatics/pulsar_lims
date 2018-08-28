@@ -24,7 +24,7 @@ class FileReference < ActiveRecord::Base
   end 
 
   def to_label
-    super + self.display() 
+    super + " " + self.display() 
   end
   def display
     ds = self.data_storage
@@ -40,9 +40,25 @@ class FileReference < ActiveRecord::Base
     if self.file_path.present?
       txt += " #{self.file_path}"
     else
+      self.fileid.present?
       txt += " #{self.fileid}"
     end
     return txt
+  end
+
+  def analysis
+    if self.analysis_merged_bam_file.present?
+      analysis = self.analysis_merged_bam_file
+    elsif self.analysis_merged_fastq_file.present?
+      analysis = self.analysis_merged_fastq_file
+    elsif self.analysis_merged_peaks_file.present?
+      analysis = self.analysis_merged_peaks_file
+    elsif self.analysis_merged_qc_file.present?
+      analysis = self.analysis_merged_qc_file
+    else
+      analysis = nil
+    end
+    return analysis
   end
 
   private

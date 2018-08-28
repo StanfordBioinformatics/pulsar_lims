@@ -22,7 +22,12 @@ module ApplicationHelper
 
   def link_to_record(record)
     #display = record.display()
-    display = record.to_label()
+    if record.respond_to?(:display)
+      display = record.display()
+    else
+      # Includes the ID in the form MODEL_ABBR-ID.
+      display = record.to_label()
+    end
     dest = record
     if record.respond_to?(:params_for_url_for)
       dest = record.params_for_url_for()

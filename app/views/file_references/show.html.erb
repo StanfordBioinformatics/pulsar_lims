@@ -2,6 +2,15 @@
 
 <table class="attributes">
   <tr>
+    <th><strong>Analysis:</strong></th>
+    <td>
+      <% if @file_reference.analysis.present? %>
+        <%= link_to_record @file_reference.analysis %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
     <th><strong>Data storage:</strong></th>
     <td><%= link_to @file_reference.data_storage.display(), @file_reference.data_storage %></td>
   </tr>

@@ -9,6 +9,6 @@
 
   <%= f.input :file_path, input_html: {class: "file-reference-file-path"}, label_html: {"data-toggle": "tooltip", "title": "The path to a file (or folder, depending on the context) within the bucket or project. If the referenced data storage object has a base folder path specified, then this path must be given as a relative (subpath) of the base path."}  %>
 
-  <%= f.input :fileid %>
+  <%= f.input :fileid, label_html: {"data-toggle": "tooltip", "title": "Some platforms that host your files provide a file ID; this field can be used to track that external ID."} %>
 
   <%= f.association :data_file_type, label_html: {class: "refresh"} %>
