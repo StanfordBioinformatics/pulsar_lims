@@ -1,4 +1,4 @@
-<%= render partial:  "application_partials/header", no_destroy_btn: true, no_new_btn: true, rec: @well, nested: @plate } %>
+<%= render partial:  "application_partials/header", locals: {no_destroy_btn: true, no_new_btn: true, rec: @well, nested: @plate } %>
 <!--
   #leave out the destroy button since users shouldn't be able to destroy well directly as it doens't make sense to. 
   #It makes more sense for the user to instead destroy the plate and in turn the wells as a side effect.
