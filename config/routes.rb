@@ -158,6 +158,11 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
+    resources :document_types do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :donors do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
@@ -224,6 +229,11 @@ Pulsar::Application.routes.draw do
       patch :remove_api_key, on: :member                                                                  
       patch :archive, on: :member  
       patch :unarchive, on: :member  
+    end
+
+    resources :wells do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
     end
 
   end

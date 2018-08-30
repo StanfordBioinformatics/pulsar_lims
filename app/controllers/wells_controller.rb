@@ -51,6 +51,9 @@ class WellsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def well_params
-      params.require(:well).permit(:fail, :comment)
+      params.require(:well).permit(
+        :fail,
+        :comment
+      )
     end
 end
