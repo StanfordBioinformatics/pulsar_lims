@@ -1,12 +1,17 @@
 class SingleCellSortingSerializer < ActiveModel::Serializer
+  embed :ids
   self.root = false
 
   attributes :id,
              :description,
              :fluorescence_intensity_file,
+             :library_prototype_id,
              :name,
              :notes,
+             :sorting_biosample,
+             :starting_biosample,
              :upstream_identifier,
+             :user_id,
              :created_at,
              :updated_at
 
@@ -14,9 +19,5 @@ class SingleCellSortingSerializer < ActiveModel::Serializer
   has_many :documents
   has_many :plates
   has_many :sequencing_requests
-  has_one  :library_prototype 
-  has_one  :sorting_biosample
-  has_one  :starting_biosample
-  has_one  :user
 
 end

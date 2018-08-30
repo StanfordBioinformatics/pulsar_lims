@@ -1,4 +1,5 @@
 class WellSerializer < ActiveModel::Serializer
+  embed :ids
   self.root = false
 
   attributes :id,
@@ -8,9 +9,9 @@ class WellSerializer < ActiveModel::Serializer
              :name,
              :plate_id, # No need to serialize this via has_one. 
              :row,
+             :user,
              :created_at,
              :updated_at
 
-  has_one :biosample
-  has_one :user
+has_one :biosample
 end

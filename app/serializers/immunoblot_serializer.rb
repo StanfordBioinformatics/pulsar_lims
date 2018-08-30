@@ -1,4 +1,5 @@
 class ImmunoblotSerializer < ActiveModel::Serializer
+  embed :ids
   self.root = false
   
   attributes :id, 

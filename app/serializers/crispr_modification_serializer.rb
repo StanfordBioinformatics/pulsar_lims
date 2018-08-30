@@ -1,4 +1,5 @@
 class CrisprModificationSerializer < ActiveModel::Serializer
+  embed :ids
   self.root = false
 
   attributes :id, 

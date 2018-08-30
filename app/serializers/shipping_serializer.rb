@@ -1,4 +1,5 @@
 class ShippingSerializer < ActiveModel::Serializer
+  embed :ids
   self.root = false
 
   attributes :id, 

@@ -15,7 +15,7 @@ class Library < ActiveRecord::Base
   has_many :sequencing_results, dependent: :destroy
   has_and_belongs_to_many :documents
   has_and_belongs_to_many :sequencing_requests
-  has_one :single_cell_sorting, foreign_key: :library_prototype_id, dependent: :nullify
+  has_one :single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :library_prototype_id, dependent: :nullify
   #A virtual (prototype) library can be used as a template for a single_cell_sorting experiment. This would then be used
   # as a template for making library objects associated to the each biosample in each well of each plate present on the singe_cell_sorting. 
   belongs_to :barcode

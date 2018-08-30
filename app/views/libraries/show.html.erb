@@ -90,7 +90,7 @@
     <% else %>
       <th><strong>Paired Barcode:</strong></th>
       <% if  @library.paired_barcode.present? %>
-        <td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: [@library.paired_barcode]} %></td>
+        <td><%= render link_to_record @paired_barcode %></td>
       <% else %>
         <td></td>
       <% end %>

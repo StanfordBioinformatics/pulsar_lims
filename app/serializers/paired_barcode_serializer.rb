@@ -1,4 +1,5 @@
 class PairedBarcodeSerializer < ActiveModel::Serializer
+  embed :ids
   self.root = false
 
   attributes :id,
