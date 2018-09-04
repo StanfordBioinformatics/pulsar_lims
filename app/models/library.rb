@@ -147,7 +147,6 @@ class Library < ActiveRecord::Base
     attrs["lot_identifier"] = self.lot_identifier
     attrs["notes"] = self.notes
     attrs["paired_end"] = self.paired_end
-    attrs["plated"] = self.plated
     attrs["sequencing_library_prep_kit_id"] = self.sequencing_library_prep_kit_id
     attrs["size_range"] = self.size_range
     attrs["strand_specific"] = self.strand_specific
