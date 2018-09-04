@@ -6,6 +6,7 @@ class Antibody < ActiveRecord::Base
   ABBR = "AB"
   DEFINITION = "An antibody that was either purchased from a third party, or created from within the lab.  Model abbreviation: #{ABBR}"
   CLONALITY_TYPES = ["monoclonal", "polyclonal"]
+  default_scope {order("lower(name)")}
   has_and_belongs_to_many :antibody_purifications
   has_and_belongs_to_many :plates
   belongs_to :user

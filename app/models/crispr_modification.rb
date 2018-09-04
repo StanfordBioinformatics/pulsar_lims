@@ -9,6 +9,7 @@ class CrisprModification < ActiveRecord::Base
   #crisprs only belong to biosamples.
   ABBR = "CRISPR"
   DEFINITION = "A genetic modification carried out using CRISPR technology.  This object links together one or more CRISPR Construct objects (each containing an individual guide sequence), and a Donor Construct object (containing the donor sequence). Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   belongs_to :user
   belongs_to :from_prototype, class_name: "CrisprModification"
   has_many   :prototype_instances, class_name: "CrisprModification", foreign_key: "from_prototype_id", dependent: :restrict_with_exception

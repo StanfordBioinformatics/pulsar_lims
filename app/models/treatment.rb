@@ -7,6 +7,7 @@ class Treatment < ActiveRecord::Base
   include ModelConcerns
   ABBR = "TRT"
   DEFINITION = "A treatment applied to a biosample.  Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   belongs_to :user
   belongs_to :treatment_term_name
   belongs_to :concentration_unit, class_name: "Unit"

@@ -5,6 +5,7 @@ class DocumentType < ActiveRecord::Base
   include ModelConcerns
   ABBR = "DOCTY"
   DEFINITION = "The type of protocol.  Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   has_many :documents
   belongs_to :user
 

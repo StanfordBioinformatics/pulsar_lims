@@ -6,6 +6,7 @@ class NucleicAcidTerm < ActiveRecord::Base
   include ModelConcerns
   ABBR = "NAT"
   DEFINITION = "The type of nucleic acid, i.e. DNA, RNA, polyadenylated mRNA.  Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   has_many :libraries
   belongs_to :user
   validates :name, presence: true, uniqueness: true

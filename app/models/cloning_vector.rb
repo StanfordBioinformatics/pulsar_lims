@@ -5,6 +5,7 @@ class CloningVector < ActiveRecord::Base
   include ModelConcerns
   ABBR = "CV"
   DEFINITION = "The vector backbone that you use to insert DNA of interest for cloning.  Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   has_many :crispr_constructs
   has_many :donor_constructs
   belongs_to :user

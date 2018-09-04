@@ -6,6 +6,7 @@ class Vendor < ActiveRecord::Base
   include ModelConcerns
   ABBR = "V"
   DEFINITION = "A source, such as a person, lab, or industry, from where a product was procured.  Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   has_many :biosample
   has_many :antibodies
   has_many :crispr_constructs

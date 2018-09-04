@@ -91,7 +91,7 @@
     <% parent_links = @biosample.parent_documents %>  
     <%= render partial: "application_partials/parental_and_self_fklinks", locals: {f: f, rec: @biosample, link_name: :documents, parent_links: parent_links} %>
 
-    <%= f.association :documents, label: "Add documents", selected: nil, collection: sorted_document_name_id(),
+    <%= f.association :documents, label: "Add documents", selected: nil, 
         include_blank: true,
         input_html: {class: "biosample_documents_selector"},
         label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>

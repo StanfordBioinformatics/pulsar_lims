@@ -5,6 +5,7 @@ class DataStorageProvider < ActiveRecord::Base
   include ModelConcerns
   ABBR = "DSP"
   DEFINITION = "A cloud vendor that provides data storage services, i.e. AWS, Google, Azure, DNAnexus.  Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   has_many :data_storages, dependent: :nullify
   belongs_to :user
 

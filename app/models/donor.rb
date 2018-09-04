@@ -5,6 +5,7 @@ class Donor < ActiveRecord::Base
   include ModelConcerns
   ABBR = "DON"
   DEFINITION = "The donor of a biosample, whether human or some other type of organism. For available identifiers of human donors, see https://www.encodeproject.org/human-donors.  Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   has_many :biosamples, dependent: :restrict_with_error
   belongs_to :user
 

@@ -5,6 +5,7 @@ class ExperimentType < ActiveRecord::Base
   include ModelConcerns
   ABBR = "ETY"
   DEFINITION = "The type of experiment, such as ATAC-Seq, ChIP-Seq, ... Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   belongs_to :user
   validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true
 

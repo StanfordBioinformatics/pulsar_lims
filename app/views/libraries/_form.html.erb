@@ -46,7 +46,7 @@
 
   <!-- The biosample isn't required if this is a prototype library. Nonetheless, sometimes it still
        is useful to set it. -->
-  <%= f.association :biosample, collection: Biosample.order(:name), label_method: :name,
+  <%= f.association :biosample,
       label_html: {class: "refresh", "data-toggle" => "tooltip","title" => "The biosample that nucleic acid was isolated from to generate the library."}
   %>
 

@@ -6,6 +6,7 @@ class Pcr < ActiveRecord::Base
   include ModelConcerns
   ABBR = "PCR"
   DEFINITION = "A PCR assay.  Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   belongs_to :user
   belongs_to :pcr_master_mix
   belongs_to :crispr_modification

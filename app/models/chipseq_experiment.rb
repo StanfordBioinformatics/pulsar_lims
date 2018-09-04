@@ -5,6 +5,7 @@ class ChipseqExperiment < ActiveRecord::Base
   include ModelConcerns
   ABBR = "CS"
   DEFINITION = "A ChIP-Seq experiment"
+  default_scope {order("lower(name)")}
   belongs_to :user
   belongs_to :target
   has_and_belongs_to_many :documents

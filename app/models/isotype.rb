@@ -5,6 +5,7 @@ class Isotype < ActiveRecord::Base
   include ModelConcerns
   ABBR = "ITY"
   DEFINITION = "An antibody isotype or subtype, i.e. IgG, IgG1, ... Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   has_many :antibodies
   belongs_to :user
   validates :name, presence: true, uniqueness: true

@@ -6,6 +6,7 @@ class SequencingPlatform < ActiveRecord::Base
   include ModelConcerns
   ABBR = "SP"
   DEFINITION = "The type of sequencing machine, i.e. Illumina MiSeq, Illumina HiSeq 4000.  Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   belongs_to :user
 
   validates  :upstream_identifier, uniqueness: true, allow_blank: true

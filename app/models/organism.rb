@@ -6,6 +6,7 @@ class Organism < ActiveRecord::Base
   include ModelConcerns
   ABBR = "ORG"
   DEFINITION = "Scientific name for a species.  Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   has_many :antibodies
   belongs_to :user
 

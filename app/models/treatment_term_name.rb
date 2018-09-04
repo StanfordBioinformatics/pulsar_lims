@@ -6,6 +6,7 @@ class TreatmentTermName < ActiveRecord::Base
   include ModelConcerns
   ABBR = "TTN"
   DEFINITION = "Models the agent used in a biosample treatment. This is linked to the Treatment model.  Model abbreviation: #{ABBR}"
+  default_scope {order("lower(name)")}
   belongs_to :user
   has_many :biosamples
 
