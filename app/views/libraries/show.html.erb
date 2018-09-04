@@ -7,10 +7,12 @@
   </tr>
 
   <!-- library prototypes don't have a biosample -->
-  <tr>
-    <th><strong>Biosample:</strong></th>
-    <td><%= link_to @library.biosample.name, @library.biosample %></td>
-  <tr>
+  <% if @library.biosample.present? %>
+    <tr>
+      <th><strong>Biosample:</strong></th>
+      <td><%= link_to @library.biosample.name, @library.biosample %></td>
+    <tr>
+  <% end %>
 
   <tr>
     <th><strong>Times cloned:</strong></th>
