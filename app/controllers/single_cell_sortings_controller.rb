@@ -13,7 +13,8 @@ class SingleCellSortingsController < ApplicationController
     #non AJAX
     custom_lib_params = {
       prototype: true,
-      name: "#{@single_cell_sorting.name} library prototype"
+      name: "#{@single_cell_sorting.name} library prototype",
+      biosample_id: @single_cell_sorting.sorting_biosample.id
     }
     @library = @single_cell_sorting.build_library_prototype(custom_lib_params)
     flash[:action] = :add_library_prototype

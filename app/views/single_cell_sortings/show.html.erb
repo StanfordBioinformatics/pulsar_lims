@@ -22,7 +22,12 @@
     <% if library_prototype.present? and library_prototype.persisted? %>
       <td><%= link_to library_prototype.name, library_prototype %></td>
     <% else %>
-      <td><%= link_to "Create", add_library_prototype_single_cell_sorting_path(@single_cell_sorting), class: "new" %></td>
+      <!-- Create btn to add lib prototype, but grey it out until the sorting biosample is created first. -->
+      <% disabled = " disabled" %>
+      <% if @single_cell_sorting.sorting_biosample.present? and @single_cell_sorting.sorting_biosample.persisted? %>
+        <% disabled = "" %>
+      <% end %>
+      <td><%= link_to "Create", add_library_prototype_single_cell_sorting_path(@single_cell_sorting), id: "ssc-add-lib-prototype", class: "new#{disabled}" %></td>
     <% end %>
   </tr>
   

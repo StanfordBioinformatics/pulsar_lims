@@ -44,12 +44,11 @@
       label_method: :name, prompt: "Select the Term Name",
       label_html: {"data-toggle" => "tooltip","title" => "SO (Sequence Ontology) term best matching the molecule isolated to generate the library (e.g. 'RNA' for a total RNA library, even if that library is subsequently reverse transcribed for DNA sequencing.)"} %>
 
-  <% unless @library.prototype? %>
-    <!-- The biosample isn't required if this is a prototype library. -->
-    <%= f.association :biosample, collection: Biosample.order(:name), label_method: :name,
-        label_html: {class: "refresh", "data-toggle" => "tooltip","title" => "The biosample that nucleic acid was isolated from to generate the library."}
-    %>
-  <% end %>
+  <!-- The biosample isn't required if this is a prototype library. Nonetheless, sometimes it still
+       is useful to set it. -->
+  <%= f.association :biosample, collection: Biosample.order(:name), label_method: :name,
+      label_html: {class: "refresh", "data-toggle" => "tooltip","title" => "The biosample that nucleic acid was isolated from to generate the library."}
+  %>
 
   <%= f.association :library_fragmentation_method,
       label_html: {"data-toggle" => "tooltip", "title" => "A short description or reference of the nucleic acid fragmentation protocol used in library preparation, if applicable."} %>
