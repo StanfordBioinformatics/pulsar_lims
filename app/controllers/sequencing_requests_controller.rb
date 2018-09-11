@@ -1,14 +1,23 @@
 class SequencingRequestsController < ApplicationController
-  before_action :set_sequencing_request, only: [:show, :edit, :update, :destroy, :select_library, :select_scs, :select_scs_plates]
-  skip_after_action :verify_authorized, only: [:select_library,:select_scs, :select_scs_plates]
+  before_action :set_sequencing_request, only: [:show, :edit, :update, :destroy, :libraries_index, :select_library, :select_scs, :select_scs_plates]
+  skip_after_action :verify_authorized, only: [:select_library,:select_scs, :select_scs_plates, :libraries_index]
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
-  def select_options                                                                                   
-    #Called via ajax.                                                                                  
+  def libraries_index
+    #Called via ajax
+    @model_class = Library
+    @records = @sequencing_request.libraries
+    @no_new_btn = true
+    @title = "Libraries on SequencingRequest #{@sequencing_request.to_label}"
+    render template: "libraries/index"
+  end
+
+  def select_options
+    #Called via ajax.
     #Typically called when the user selects the refresh icon in any form that has a sequencing_library_prep_kits selection.
-    @records = SequencingLibraryPrepKit.all                                                             
-    render "application_partials/select_options", layout: false                                        
-  end 
+    @records = SequencingLibraryPrepKit.all
+    render "application_partials/select_options", layout: false
+  end
 
   def select_scs
     render layout: false
@@ -39,7 +48,7 @@ class SequencingRequestsController < ApplicationController
     flash[:action] = :show
     render layout: false
   end
-    
+
   def index
     super
   end
@@ -126,12 +135,12 @@ class SequencingRequestsController < ApplicationController
         :notes,
         :paired_end,
         :sample_sheet,
-        :sequencing_center_id, 
-        :sequencing_platform_id, 
+        :sequencing_center_id,
+        :sequencing_platform_id,
         :submitted_by_id,
-        :plate_ids => [], 
-        plates_attributes: [:id,:_destroy], 
-        :library_ids => [], 
+        :plate_ids => [],
+        plates_attributes: [:id,:_destroy],
+        :library_ids => [],
         libraries_attributes: [:id,:_destroy]
       )
     end
@@ -139,6 +148,6 @@ class SequencingRequestsController < ApplicationController
       @s3_direct_post = S3_BUCKET.presigned_post(key: "sample_sheets/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
       #From the AWS docs, regarding the 201 here: If the value is set to 201, Amazon S3 returns an XML document with a 201 status code.
       #If we don't set the acl, then the file is not readable by others.
-      #Also using #{SecureRandom.uuid} so that users don't overwrite an existing file with the same name. 
+      #Also using #{SecureRandom.uuid} so that users don't overwrite an existing file with the same name.
     end
 end

@@ -3,7 +3,7 @@
   <!-- <p class="lead">Single Cell Sorting</p> -->
   <div>
     <%= label_tag "single_cell_sorting_selector","Filter by Single Cell Sorting", style: "font-weight: normal" %></br>
-    <%= select_tag "single_cell_sorting_selector", options_from_collection_for_select(SingleCellSorting.all, :id, :to_label),{style: "width: 15em;", size: 10, data: {sequencing_request_id: @sequencing_request.id}} %>
+    <%= select_tag "single_cell_sorting_selector", options_from_collection_for_select(SingleCellSorting.all, :id, :to_label),{style: "overflow: auto; width: 20em;", size: 10, data: {sequencing_request_id: @sequencing_request.id}} %>
   </div>
   <button style="position: absolute; right: 0; bottom: 0;" class="sreq-toggle-up btn btn-link" type="button" ><%= fa_icon("toggle-up lg") %></button>
 </div>

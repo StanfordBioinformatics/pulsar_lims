@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  # Set @model_class instance
   before_action :set_model_class, only: [:index, :new, :show, :find_by, :find_by_or]
   # Note that :find_by is defined as an action in controller subclasses, which are expected to
   # call the prviate :find_by method defined here (not as an action), particularly the api

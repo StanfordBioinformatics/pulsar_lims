@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def link_to_record_id(record)
-    record_id = record.get_record_id()
+    record_id = record.get_record_id() #i.e. "#{self.class::ABBR}-#{self.id}" 
     dest = record
     if record.respond_to?(:params_for_url_for)
       dest = record.params_for_url_for()

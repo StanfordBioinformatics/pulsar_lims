@@ -44,7 +44,7 @@
     <th><strong>Libraries:</strong></th>
     <% if @sequencing_request.libraries.present? %>
       <td>
-        <%= render partial: "application_partials/link_to_has_many", locals: {links: @sequencing_request.libraries.persisted} %>
+        <%= link_to "#{@sequencing_request.libraries.length} total", [:libraries_index, @sequencing_request] %>
       </td>
     <% else %>
       <td>None</td>

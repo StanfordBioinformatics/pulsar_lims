@@ -282,6 +282,7 @@ Pulsar::Application.routes.draw do
   end
 
   resources :sequencing_requests do
+    get  :libraries_index, on: :member
     get :select_scs, on: :member
     get :select_scs_plates, on: :member
     get :select_library, on: :member
