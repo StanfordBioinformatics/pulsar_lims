@@ -19,9 +19,12 @@ module ModelConcerns
 
   def display
     if self.respond_to?(:name)
-      return self.name
-    else
-      return self.get_record_id()
+      # The 'name' attribute isn't all all objects, and isn't required for all Models that have it,
+      # although it is for most.
+      if self.name.present?
+        return self.name
+      end
     end
+    return self.get_record_id()
   end
 end

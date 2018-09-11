@@ -15,7 +15,6 @@ class SingleCellSorting < ActiveRecord::Base
   has_many :analyses, dependent: :destroy
   has_many :plates, dependent: :destroy
   has_many :sequencing_requests, through: :plates
-  #has_many :sequencing_requests, through: :plates
   has_and_belongs_to_many :documents
 
   validates  :upstream_identifier, uniqueness: true, allow_blank: true

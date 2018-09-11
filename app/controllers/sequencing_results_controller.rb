@@ -111,6 +111,7 @@ class SequencingResultsController < ApplicationController
         :read1_count, 
         :read2_uri, 
         :read2_count,
+        :sequencing_run_id,
         :user_id
       )
     end

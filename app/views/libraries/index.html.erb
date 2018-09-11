@@ -14,14 +14,14 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
-      <th>Sequencing Library Prep Kit</th>
+      <th>Sequencing requests</th>
+      <th>Sequencing library prep kit</th>
       <th>Paired End?</th>
       <th>Nucleic acid type</th>
       <th>Biosample</th>
       <th>Vendor</th>
-      <th>Lot</th>
       <th>Barcode</th>
-      <th>Paired Barcode</th>
+      <th>Paired barcode</th>
       <th>Fragmentation method</th>
       <th>Concentration</th>
       <th>Size range</th>
@@ -34,6 +34,7 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= render partial: "application_partials/link_to_has_many", locals: {links: rec.sequencing_requests} %></td>
         <td><%= link_to rec.sequencing_library_prep_kit.name, rec.sequencing_library_prep_kit %></td>
         <td><%= rec.paired_end %></td>
         <td><%= rec.nucleic_acid_term.name %></td>
@@ -43,37 +44,37 @@
           <% end %>
         </td>
 
-        <% if rec.vendor.present? %>
-          <td><%= rec.vendor.name %></td>
-        <% else %>
-          <td></td>
-        <% end %>
+        <td>
+          <% if rec.vendor.present? %>
+            <%= link_to_record rec.vendor %>
+          <% end %>
+        <td>
   
-        <td><%= rec.lot_identifier %></td>
-        
         <!-- Either a barcode or a paired_barcode can be present, not both -->
-        <% if rec.barcode.present? %>
-          <td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: [rec.barcode]} %></td>
-        <% else %>
-          <td></td>
-        <% end %>
+        <td>
+          <% if rec.barcode.present? %>
+            <%= render partial: "barcodes/link_to_barcode", locals: {barcodes: [rec.barcode]} %>
+          <% end %>
+        </td>
 
-        <% if rec.paired_barcode.present? %>
-          <td><%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: [rec.paired_barcode]} %></td>
-        <% else %>
-          <td></td>
-        <% end %>
+        <td>
+          <% if rec.paired_barcode.present? %>
+            <%= render partial: "paired_barcodes/link_to_paired_barcode", locals: {paired_barcodes: [rec.paired_barcode]} %>
+          <% end %>
+        </td>
 
-        <% if rec.library_fragmentation_method.present? %>
-          <td><%= link_to rec.library_fragmentation_method.name, rec.library_fragmentation_method.name %></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <% if rec.concentration.present? %>
-          <td><%= rec.concentration %>&nbsp;<%= rec.concentration_unit.name %></td>
-        <% else %>
-          <td></td>
-        <% end %>
+        <td>
+          <% if rec.library_fragmentation_method.present? %>
+            <%= link_to rec.library_fragmentation_method.name, rec.library_fragmentation_method.name %>
+          <% end %>
+        </td>
+
+        <td>
+          <% if rec.concentration.present? %>
+            <%= rec.concentration %>&nbsp;<%= rec.concentration_unit.name %></td>
+          <% end %>
+        </td>
+
         <td><%= rec.size_range %></td>
         <td><%= rec.strand_specific %></td>
         <td>

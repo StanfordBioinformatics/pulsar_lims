@@ -129,6 +129,16 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
+    resources :data_storages do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
+    resources :data_storage_providers do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :chipseq_experiments do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
@@ -199,6 +209,16 @@ Pulsar::Application.routes.draw do
     end
 
     resources :sequencing_requests do
+      post :find_by_name, on: :collection
+      post :add_crispr_modification, on: :member
+    end
+
+    resources :sequencing_runs do
+      post :find_by_name, on: :collection
+      post :add_crispr_modification, on: :member
+    end
+
+    resources :sequencing_results do
       post :find_by_name, on: :collection
       post :add_crispr_modification, on: :member
     end

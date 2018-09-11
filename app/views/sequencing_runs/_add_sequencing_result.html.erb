@@ -1,7 +1,7 @@
 <%= simple_form_for [@sequencing_request,@sequencing_run] do |f| %>
-	<%= f.simple_fields_for :sequencing_results, @sequencing_result  do |ff| %>
-		<%= render partial: "sequencing_results/form", locals: {f: ff} %>
-	<% end %>
+  <%= f.simple_fields_for :sequencing_results, @sequencing_result  do |ff| %>
+    <%= render partial: "sequencing_results/form", locals: {f: ff} %>
+  <% end %>
   <div class="form-actions">
     <%= f.button :submit, "Create Sequencing Result", class: "btn-primary" %>
   </div></br>

@@ -107,8 +107,8 @@ class SequencingRunsController < ApplicationController
         :lane,
         :name,
         :notes,
+        :report_id,
         :sequencing_request_id,
-        :sequencing_run_id,
         sequencing_results_attributes: [
           :library_id,
           :sequencing_run_id,

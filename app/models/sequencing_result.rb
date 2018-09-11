@@ -26,15 +26,6 @@ class SequencingResult < ActiveRecord::Base
     ApplicationPolicy
   end
 
-  def display
-    res = library.name
-    barcode = library.get_indexseq #returns nil if not a barcoded library.
-    if barcode
-      res += " " + barcode.sequence
-    end
-    return res
-  end
-
   def library_paired_end?
     library.paired_end?
   end

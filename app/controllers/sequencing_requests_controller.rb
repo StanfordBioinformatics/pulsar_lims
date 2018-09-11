@@ -128,7 +128,6 @@ class SequencingRequestsController < ApplicationController
         :sample_sheet,
         :sequencing_center_id, 
         :sequencing_platform_id, 
-        :shipped, 
         :submitted_by_id,
         :plate_ids => [], 
         plates_attributes: [:id,:_destroy], 
