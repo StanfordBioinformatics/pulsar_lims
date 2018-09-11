@@ -1,7 +1,7 @@
 <%= simple_form_for([@sequencing_request,@sequencing_run]) do |f| %>
-	<%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_run} %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_run} %>
 
-  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Sequencing run name. If unknown, can also be something like 'Run1', or 'Run2', ..."} %>
+  <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Sequencing run name. If unknown, can also be something like 'Run1', or 'Run2', ... For Illumina runs, if you only have the FASTQ file and don't know the run name assigned by the Illumina sequencer, you can peek into the FASTQ file and take the first three fields of the header line of a FASTQ record, i.e. J00118:308:HLKM5BBXX, where the first ':' delimited field is the sequencing instrument name, the second is the run ID, and the third is the flowcell ID."} %>
   <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Any particular remarks you may want to add."} %>
 
   <%= f.input :lane, label_html: {"data-toggle" => "tooltip", "title" => "The lane number on the flowcell."} %>

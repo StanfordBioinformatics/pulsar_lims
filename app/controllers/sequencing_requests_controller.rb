@@ -6,7 +6,7 @@ class SequencingRequestsController < ApplicationController
   def libraries_index
     #Called via ajax
     @model_class = Library
-    @records = @sequencing_request.libraries
+    @records = @sequencing_request.libraries.page params[:page]
     @no_new_btn = true
     @title = "Libraries on SequencingRequest #{@sequencing_request.to_label}"
     render template: "libraries/index"
