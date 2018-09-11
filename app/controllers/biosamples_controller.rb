@@ -47,8 +47,8 @@ class BiosamplesController < ApplicationController
   def prototype_instances
     #Called via ajax
     set_model_class()
-    @records = policy_scope(Biosample.where({from_prototype: @biosample})).page params[:page]
-    @no_new_btn = true
+    @records = policy_scope(Biosample.where({from_prototype: @biosample}))
+    @no_new_btn = tru
     @title = "Prototype instances of Biosample #{@biosample.name}"
     render action: "index" 
   end
