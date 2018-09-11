@@ -17,7 +17,6 @@ class SequencingRequest < ActiveRecord::Base
   belongs_to :user
   belongs_to :submitted_by, class_name: "User"
 
-  validates :date_submitted, presence: {message: "must be specified when 'submitted by' is set."}, if: "submitted_by.present?"
   validates :submitted_by, presence: {message: "must be specified when 'date submitted' is set."}, if: "date_submitted.present?"
   validates :name, uniqueness: true, allow_blank: true
   validates :sequencing_center, presence: true
