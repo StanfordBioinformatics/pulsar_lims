@@ -94,10 +94,8 @@
           <td><%= p.wells.where({fail: true}).size %></td>
           <td>
             <ul class="list-unstyled">
-              <% @single_cell_sorting.plates.persisted.each do |plate| %>
-                <% plate.sequencing_requests.each do |sreq| %>
-                  <li><%= link_to sreq.name, sreq %></li>
-                <% end %>
+              <% p.sequencing_requests.each do |sreq| %>
+                <li><%= link_to sreq.name, sreq %></li>
               <% end %>
             </ul>
           </td>
