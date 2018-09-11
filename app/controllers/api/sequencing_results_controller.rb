@@ -67,7 +67,6 @@ class Api::SequencingResultsController < Api::ApplicationController
         :read2_count,                                                                                  
         :sequencing_run_id,
         :user_id                                                                                       
-      )    
     )
   end
 end
