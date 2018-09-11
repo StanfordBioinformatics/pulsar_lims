@@ -7,6 +7,7 @@ class SequencingRequestsController < ApplicationController
     #Called via ajax
     @model_class = Library
     @records = @sequencing_request.libraries
+    @total = @records.count
     @no_new_btn = true
     @title = "Libraries on SequencingRequest #{@sequencing_request.to_label}"
     render template: "libraries/index"
