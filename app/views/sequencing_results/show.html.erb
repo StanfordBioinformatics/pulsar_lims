@@ -2,13 +2,24 @@
 
 <table class="attributes">
     <tr>
+      <th><strong>Merged?</strong></th>
+      <td><%= @sequencing_result.merged? %></td>
+    </tr>
+
+    <tr>
       <th><strong>Sequencing run:</strong></th>
       <td><%= link_to @sequencing_result.sequencing_run.name, [@sequencing_request,@sequencing_run] %></td>
     </tr>
   
     <tr>
       <th><strong>Library:</strong></th>
-      <td><%= link_to @sequencing_result.library.name, @sequencing_result.library %></td>
+      <td>
+        <% unless @sequencing_result.merged? %>
+          <%= link_to @sequencing_result.library.name, @sequencing_result.library %>
+        <% else %>
+          N/A
+        <% end %>
+      </td>
     </tr>
   
     <tr>
