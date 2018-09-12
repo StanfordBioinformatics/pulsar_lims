@@ -13,7 +13,7 @@ class SequencingResult < ActiveRecord::Base
   belongs_to :user
   belongs_to :sequencing_run
 
-  validates :library, presence: true
+  validates :library, presence: true, unless: lambda {|rec| rec.merged?}
   validates :read1_count, numericality: { greater_than: 0 }, allow_nil: true
   validates :read2_count, numericality: { greater_than: 0 }, allow_nil: true
   validates_uniqueness_of :library, scope: :sequencing_run, message: "sequencing result already exists for this library."

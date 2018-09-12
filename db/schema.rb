@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180823192355) do
+ActiveRecord::Schema.define(version: 20180911222959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -876,6 +876,7 @@ ActiveRecord::Schema.define(version: 20180823192355) do
     t.integer  "user_id"
     t.integer  "sequencing_run_id"
     t.text     "notes"
+    t.boolean  "merged"
   end
 
   add_index "sequencing_results", ["library_id"], name: "index_sequencing_results_on_library_id", using: :btree

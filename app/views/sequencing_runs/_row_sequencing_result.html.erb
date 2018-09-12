@@ -4,13 +4,28 @@
 -->
   <tr>
     <td><%= link_to_record(res) %></td>
-    <td><%= link_to res.library.name, res.library %></td>
-    <% barcode = res.library.get_indexseq %>
-    <% if barcode %>
-      <td><%= link_to barcode.display, [barcode.sequencing_library_prep_kit, barcode] %></td>
-    <% else %>
-      <td></td>
-    <% end %>
+    <td><%= res.merged? %></td>
+    <td>
+      <% if not res.merged? %>
+        <%= link_to res.library.name, res.library %>
+      <% else %>
+        N/A
+      <% end %>
+    </td>
+
+    <td>
+      <% if not res.merged? %>
+        <% barcode = res.library.get_indexseq %>
+          <% if barcode %>
+            <%= link_to barcode.display, [barcode.sequencing_library_prep_kit, barcode] %>
+          <% else %>
+            N/A
+          <% end %>
+      <% else %>
+        N/A
+      <% end %>
+    </td>
+
     <td><%= res.read1_count %></td>
     <td><%= res.read1_uri %></td>
     <% if @sequencing_request.paired_end? %>

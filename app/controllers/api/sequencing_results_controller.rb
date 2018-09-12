@@ -60,6 +60,8 @@ class Api::SequencingResultsController < Api::ApplicationController
         :comment,                                                                                      
         :is_control,                                                                                   
         :library_id,                                                                                   
+        :merged_r1,
+        :merged_r1,
         :notes,                                                                                        
         :read1_uri,                                                                                    
         :read1_count,                                                                                  

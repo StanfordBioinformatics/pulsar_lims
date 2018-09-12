@@ -9,7 +9,7 @@ class SequencingRunsController < ApplicationController
   end
 
   def new_sequencing_result
-    @sequencing_result = @sequencing_run.sequencing_results.build  
+    @sequencing_result = @sequencing_run.sequencing_results.build({merged: false})
     flash[:action] = "show"
     render layout: "fieldset_sequencing_result", partial: "add_sequencing_result"
   end
@@ -111,6 +111,7 @@ class SequencingRunsController < ApplicationController
         :sequencing_request_id,
         sequencing_results_attributes: [
           :library_id,
+          :merged,
           :sequencing_run_id,
           :read1_uri,
           :read2_uri,
