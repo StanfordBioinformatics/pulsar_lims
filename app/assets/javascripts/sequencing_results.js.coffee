@@ -1,4 +1,4 @@
-#
+
 $ -> 
 
  # When adding a new SequencingResult (i.e. on the show view of a SequencingRun), if this represents
