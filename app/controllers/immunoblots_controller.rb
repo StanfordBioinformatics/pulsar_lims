@@ -68,6 +68,7 @@ class ImmunoblotsController < ApplicationController
       params.require(:immunoblot).permit(
         :analyst_id, 
         :date_performed, 
+        :name,
         :notes,
         :primary_antibody_id,
         :primary_antibody_dilution,

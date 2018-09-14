@@ -4,10 +4,11 @@ class ImmunoblotSerializer < ActiveModel::Serializer
   
   attributes :id, 
              :date_performed, 
-             :submitter_comments,
+             :name,
              :notes, 
              :primary_antibody_dilution,
              :secondary_antibody_dilution,
+             :submitter_comments,
              :created_at,
              :updated_at
 

@@ -2,6 +2,7 @@
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @immunoblot } %>
   <% defaults = INPUT_DEFAULTS[@immunoblot.class.name] %>
 
+  <%= f.input :name %>
   <%= f.input :date_performed %>
   <%= f.association :analyst, label_html: {"data-toggle": "tooltip", "title": "The user that performed the analysis."} %>
   <div class="my-flex">
