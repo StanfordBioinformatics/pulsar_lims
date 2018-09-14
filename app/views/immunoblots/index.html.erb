@@ -41,8 +41,8 @@
           <% end %>
         </td>
         <td>
-          <% if rec.secondary_antibody.present? %>
-            <%= rec.secondary_antibody.name %>
+          <% if rec.secondary_antibodies.any? %>
+            <%= render partial: "application_partials/link_to_has_many", locals: {links:  rec.secondary_antibodies} %>
           <% end %>
         </td>
         <td>

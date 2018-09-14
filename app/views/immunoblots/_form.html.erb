@@ -12,7 +12,7 @@
   </div>
 
   <div class="my-flex">
-    <%= f.association :secondary_antibody, selected: @immunoblot.secondary_antibody_id || defaults["secondary_antibody_id"], include_blank: true, label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The antibody used to target the primary antibody."}, order: "LOWER(name)" %>
+    <%= f.association :secondary_antibodies, selected: @immunoblot.secondary_antibody_ids || defaults["secondary_antibody_id"], include_blank: true, label_html: {class: "refresh", "data-toggle": "tooltip", "title": "The antibody used to target the primary antibody."}, order: "LOWER(name)" %>
     <%= f.input :secondary_antibody_dilution, input_html: {value: @immunoblot.secondary_antibody_dilution || defaults["secondary_antibody_dilution"]},
         label: "Dilution", label_html: {"data-toggle": "tooltip", "title": "The dilution ratio, i.e. 1:10000, of the antibody's stock concentration."} %>
   </div>

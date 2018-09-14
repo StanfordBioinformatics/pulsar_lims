@@ -7,7 +7,7 @@ GelLane:
 Immunoblot:
     primary_antibody_id: 9
     primary_antibody_dilution: 1:2000
-    secondary_antibody_id: 11
+    secondary_antibody_ids: [11]
     secondary_antibody_dilution: 1:10000
 
 

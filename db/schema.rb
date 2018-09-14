@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180914175638) do
+ActiveRecord::Schema.define(version: 20180914181852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -614,6 +614,14 @@ ActiveRecord::Schema.define(version: 20180914175638) do
   add_index "immunoblots", ["primary_antibody_id"], name: "index_immunoblots_on_primary_antibody_id", using: :btree
   add_index "immunoblots", ["secondary_antibody_id"], name: "index_immunoblots_on_secondary_antibody_id", using: :btree
   add_index "immunoblots", ["user_id"], name: "index_immunoblots_on_user_id", using: :btree
+
+  create_table "immunoblots_secondary_antibodies", id: false, force: :cascade do |t|
+    t.integer "immunoblot_id"
+    t.integer "secondary_antibody_id"
+  end
+
+  add_index "immunoblots_secondary_antibodies", ["immunoblot_id", "secondary_antibody_id"], name: "immunoblot_secondaryab_idx", using: :btree
+  add_index "immunoblots_secondary_antibodies", ["secondary_antibody_id", "immunoblot_id"], name: "secondaryab_immunoblot_idx", using: :btree
 
   create_table "isotypes", force: :cascade do |t|
     t.string   "name",       limit: 255

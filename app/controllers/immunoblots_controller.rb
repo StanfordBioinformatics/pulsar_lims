@@ -72,10 +72,10 @@ class ImmunoblotsController < ApplicationController
         :notes,
         :primary_antibody_id,
         :primary_antibody_dilution,
-        :secondary_antibody_id,
         :secondary_antibody_dilution,
         :submitter_comments,
         document_ids: [],
+        secondary_antibody_ids: [],
         documents_attributes: [:id, :_destroy],
       )
     end

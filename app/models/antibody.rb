@@ -15,6 +15,7 @@ class Antibody < ActiveRecord::Base
   belongs_to :isotype
   belongs_to :target
   belongs_to :concentration_units, class_name: "Unit"
+  has_and_belongs_to_many :immunoblots
 
   validates  :upstream_identifier, uniqueness: true, allow_blank: true
   validates  :name, length: { maximum: 40 }, presence: true, uniqueness: true

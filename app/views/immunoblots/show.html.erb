@@ -41,10 +41,10 @@
   </tr>
 
   <tr>
-    <th><strong>Secondary antibody:</strong></th>
+    <th><strong>Secondary antibodies:</strong></th>
     <td>
-      <% if @immunoblot.secondary_antibody.present? %>
-        <%= link_to @immunoblot.secondary_antibody.name, @immunoblot.secondary_antibody %>
+      <% if @immunoblot.secondary_antibodies.any? %>
+        <%= render partial: "application_partials/link_to_has_many", locals: {links:  @immunoblot.secondary_antibodies} %>
       <% end %>
     </td>
   </tr>
