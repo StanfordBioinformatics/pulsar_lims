@@ -5,9 +5,9 @@
   <p class="model-definition"><%= SequencingPlatform::DEFINITION %></p>
 
   <ul class="actions">
-		<%= render partial: "application_partials/auth_new_record" %>
+    <%= render partial: "application_partials/auth_new_record" %>
   </ul> 
-  <%= render partial: "application_partials/total", locals: {total: @total} %>
+  <%= render partial: "application_partials/total", locals: {records: @records} %>
 </header>
 
 <table class="attributes index">
@@ -23,9 +23,9 @@
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td>
-					<%= link_to fa_icon("pencil"), edit_sequencing_platform_path(rec) %>
-        	<%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), edit_sequencing_platform_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -52,11 +52,11 @@ class ApplicationController < ActionController::Base
       @records = @records.send(scope)
     end
     @records = @records.unscoped.order(updated_at: :desc)
+    @total = @records.count
     unless params[:all].present?
       @records = @records.page params[:page]
       @page = true
     end
-    @total = @records.count
   end
 
   def find_by

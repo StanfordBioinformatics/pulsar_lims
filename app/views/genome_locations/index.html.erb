@@ -3,7 +3,7 @@
     <%= @title || "Genome Locations" %>                                                                      
   </h1>
   <p class="model-definition"><%= GenomeLocation::DEFINITION %></p>
-  <%= render partial: "application_partials/total", locals: {total: @total} %>
+  <%= render partial: "application_partials/total", locals: {records: @records} %>
 </header>
 
 <table class="attributes index">

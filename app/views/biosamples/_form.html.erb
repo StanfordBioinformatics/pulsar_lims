@@ -47,12 +47,6 @@
       }
   %>
 
-  <!-- Show select for Documents. Mutliple documents can be selected.
-         If the form was rejected due to a validation error, then the
-         user will have been presented with this form again to correct it, 
-         and I set the default selectioned to what the user had originally, 
-         if any. -->
-
   <% if @biosample.pooled_from_biosamples.persisted.any? %>
     <%= render partial: "application_partials/simple_fields_for", locals: {title: "Pooled-from biosamples", record: @biosample, f: f, attribute: :pooled_from_biosamples} %>
   <% end %>
