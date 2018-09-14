@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180914181852) do
+ActiveRecord::Schema.define(version: 20180914184542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -604,7 +604,6 @@ ActiveRecord::Schema.define(version: 20180914181852) do
     t.datetime "updated_at",                  null: false
     t.integer  "analyst_id"
     t.integer  "primary_antibody_id"
-    t.integer  "secondary_antibody_id"
     t.string   "primary_antibody_dilution"
     t.string   "secondary_antibody_dilution"
     t.string   "name"
@@ -612,7 +611,6 @@ ActiveRecord::Schema.define(version: 20180914181852) do
 
   add_index "immunoblots", ["analyst_id"], name: "index_immunoblots_on_analyst_id", using: :btree
   add_index "immunoblots", ["primary_antibody_id"], name: "index_immunoblots_on_primary_antibody_id", using: :btree
-  add_index "immunoblots", ["secondary_antibody_id"], name: "index_immunoblots_on_secondary_antibody_id", using: :btree
   add_index "immunoblots", ["user_id"], name: "index_immunoblots_on_user_id", using: :btree
 
   create_table "immunoblots_secondary_antibodies", id: false, force: :cascade do |t|
@@ -1153,7 +1151,6 @@ ActiveRecord::Schema.define(version: 20180914181852) do
   add_foreign_key "genome_locations", "chromosomes"
   add_foreign_key "genome_locations", "users"
   add_foreign_key "immunoblots", "antibodies", column: "primary_antibody_id"
-  add_foreign_key "immunoblots", "antibodies", column: "secondary_antibody_id"
   add_foreign_key "immunoblots", "users"
   add_foreign_key "immunoblots", "users", column: "analyst_id"
   add_foreign_key "isotypes", "users"
