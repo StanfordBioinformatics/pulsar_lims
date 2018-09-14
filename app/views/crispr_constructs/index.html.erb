@@ -17,11 +17,12 @@
       <th>Sent to</th>
       <th>Date sent</th>
       <th>Addgene ID</th>
+      <th>Cloning vector</th>
+      <th>Documents</th>
       <th>Target</th>
       <th>Ensembl transcript</th>
       <th>RefSeq transcript</th>
       <th>Guide sequence</th>
-      <th>Cloning vector</th>
       <th>Description</th>
       <th>Vendor</th>
       <th>Vendor product identifier</th>
@@ -44,11 +45,12 @@
             <%= link_to rec.addgene_id, ENV["ADDGENE_WEBSITE"] + rec.addgene_id %>
           <% end %>
         </td>
+        <td><%= link_to rec.cloning_vector.name, rec.cloning_vector %></td>
+        <td><%= render partial: "application_partials/link_to_has_many", locals: {links: rec.documents} %></td>
         <td><%= link_to rec.target.name, rec.target %></td>
         <td><%= rec.ensembl_transcript %></td>
         <td><%= rec.refseq_transcript %></td>
         <td><%= rec.guide_sequence %></td>
-        <td><%= link_to rec.cloning_vector.name, rec.cloning_vector %></td>
         <td><%= rec.description %></td>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
         <td><%= rec.vendor_product_identifier %></td>

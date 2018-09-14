@@ -75,8 +75,10 @@ class DocumentsController < ApplicationController
     def document_params
 #      params.require(:document).permit(:name, :description, :content_type, :data, :document_type)
       params.require(:document).permit(
+        :crispr_construct_id,
         :description,
         :document_type_id,
+        :donor_construct_id,
         :is_protocol, 
         :notes,
         :uploaded_document,

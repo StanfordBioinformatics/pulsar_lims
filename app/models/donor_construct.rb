@@ -1,6 +1,6 @@
 require 'elasticsearch/model'
 class DonorConstruct < ActiveRecord::Base
-  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "DONC"
@@ -10,6 +10,7 @@ class DonorConstruct < ActiveRecord::Base
 
   has_and_belongs_to_many :construct_tags
   has_many :crispr_modifications
+  has_many :documents, dependent: :nullify
   belongs_to :sent_to, class_name: "Address"
   belongs_to :user
   belongs_to :cloning_vector
@@ -27,22 +28,39 @@ class DonorConstruct < ActiveRecord::Base
   validates :target_id, presence: true
 
   accepts_nested_attributes_for :construct_tags, allow_destroy: true
+  accepts_nested_attributes_for :documents, allow_destroy: true
 
   scope :persisted, lambda { where.not(id: nil) }
 
-  # Overwrite Elasticsearch method                                                                     
-  def as_indexed_json(options={})                                                                      
-    as_json(except: [:insert_sequence])                                                                           
-  end 
+  # Overwrite Elasticsearch method
+  def as_indexed_json(options={})
+    as_json(except: [:insert_sequence])
+  end
 
   def self.policy_class
     ApplicationPolicy
   end
 
+  def document_ids=(ids)
+    """
+    Function : Adds associations to Documents that are stored in self.documents.
+    Args     : ids - array of Document IDs.
+    """
+    ids.each do |i|
+      if i.blank?
+        next
+      end
+      doc = Document.find(i)
+      if not self.documents.include? doc
+        self.documents << doc
+      end
+    end
+  end
+
   def construct_tag_ids=(ids)
     ids.each do |i|
       if i.present?
-        construct = ConstructTag.find(i) 
+        construct = ConstructTag.find(i)
         if self.construct_tags.include?(construct)
           next
         end

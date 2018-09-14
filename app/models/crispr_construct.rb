@@ -1,6 +1,6 @@
 require 'elasticsearch/model'
 class CrisprConstruct < ActiveRecord::Base
-  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "CC"
@@ -9,6 +9,7 @@ class CrisprConstruct < ActiveRecord::Base
   attr_accessor :construct_tag_ids
   has_and_belongs_to_many :construct_tags
   has_and_belongs_to_many :crispr_modifications
+  has_many :documents, dependent: :nullify
   belongs_to :sent_to, class_name: "Address"
   belongs_to :user
   belongs_to :target
@@ -18,10 +19,11 @@ class CrisprConstruct < ActiveRecord::Base
   validates :cloning_vector, presence: true
   validates :guide_sequence, presence: true, format: { with: /\A[acgtnACGTN]+\z/, message: "can only contain characters in the set ACTGN" }
   validates :name, presence: true, uniqueness: true
-  validates :target, presence: true  
+  validates :target, presence: true
   validates :vendor, presence: true
 
   accepts_nested_attributes_for :construct_tags, allow_destroy: true
+  accepts_nested_attributes_for :documents, allow_destroy: true
 
   scope :persisted, lambda { where.not(id: nil) }
   scope :non_persisted, lambda { where(id: nil) }
@@ -30,15 +32,31 @@ class CrisprConstruct < ActiveRecord::Base
     ApplicationPolicy
   end
 
+  def document_ids=(ids)
+    """
+    Function : Adds associations to Documents that are stored in self.documents.
+    Args     : ids - array of Document IDs.
+    """
+    ids.each do |i|
+      if i.blank?
+        next
+      end
+      doc = Document.find(i)
+      if not self.documents.include? doc
+        self.documents << doc
+      end
+    end
+  end
+
   def construct_tag_ids=(ids)
-    ids.each do |i| 
+    ids.each do |i|
       if i.present?
-        construct = ConstructTag.find(i) 
+        construct = ConstructTag.find(i)
         if self.construct_tags.include?(construct)
           next
-        end 
+        end
         self.construct_tags << construct
-      end 
-    end 
-  end 
+      end
+    end
+  end
 end

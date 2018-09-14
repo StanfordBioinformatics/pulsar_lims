@@ -29,6 +29,14 @@
 
   <%= render partial: "vendors/fieldset_input", locals: {f: f} %>
 
+  <fieldset>
+    <legend>Documents</legend>
+    <strong>Linked documents:</strong>
+    <%= render partial: "application_partials/simple_fields_for", locals: {f: f, record: @donor_construct, attribute: :documents} %>
+    <%= f.association :documents, label: "Add documents", include_blank: true,
+        label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>
+  </fieldset>
+
   <!-- Add inputs for sent_to and date_sent -->
   <%= render partial: "addresses/fieldset_input", locals: {f: f} %>
 
@@ -47,7 +55,7 @@
             <td><%= tag.name %></td>
             <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>
           </tr>
-        <% end %>  
+        <% end %>
       </tbody>
     </table></br>
   <% end %>
@@ -56,14 +64,14 @@
   <!-- .added_construct_tags will serve as the container for new construct_tag selections added by jQuery. -->
   <!-- Relevant jQuery in construct_tags.js.coffee. -->
 
-  <p> 
+  <p>
     <% exclude_tags = [] %>
     <% if @donor_construct.construct_tags.persisted.any? %>
       <% exclude_tags = @donor_construct.construct_tags.persisted.each { |x| x.id } %>
     <% end %>
-    <%= link_to "Add construct tag", 
+    <%= link_to "Add construct tag",
         select_construct_tag_donor_constructs_path(:exclude_construct_tags => exclude_tags),
-        remote: true, 
+        remote: true,
         class: "add_construct_tag reg-btn" %>
   </p>
 

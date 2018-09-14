@@ -29,6 +29,11 @@
     <th><strong>Vender product identifier:</strong></th>
     <td><%= @donor_construct.vendor_product_identifier %></td>
   </tr>
+
+  <tr>
+    <th><strong>Protocol documents:</strong></th>
+    <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @donor_construct.documents} %></td>
+  </tr>
   
   <tr>
     <th><strong>Target:</strong></th>

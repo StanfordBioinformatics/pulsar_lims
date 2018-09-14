@@ -18,6 +18,8 @@ class Document < ActiveRecord::Base
   has_and_belongs_to_many :sequencing_library_prep_kits
   has_and_belongs_to_many :single_cell_sortings
   belongs_to :user
+  belongs_to :donor_construct
+  belongs_to :crispr_construct
   ###
   ##Columns:
   # name

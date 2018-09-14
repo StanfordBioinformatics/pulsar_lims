@@ -97,7 +97,9 @@ class CrisprConstructsController < ApplicationController
         :vendor_id, 
         :vendor_product_identifier, 
         construct_tags_attributes: [:id,:_destroy],
-        :construct_tag_ids => []
+        documents_attributes: [:id, :_destroy],
+        :construct_tag_ids => [],
+        document_ids: []
       )
     end
 end

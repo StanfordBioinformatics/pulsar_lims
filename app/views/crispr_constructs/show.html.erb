@@ -14,7 +14,7 @@
       <% end %>
     </td>
   </tr>
-  
+
   <tr>
     <th><strong>Target:</strong></th>
     <td><%= link_to @crispr_construct.target.name, @crispr_construct.target %></td>
@@ -29,25 +29,30 @@
     <th><strong>RefSeq transcript:</strong></th>
     <td><%= @crispr_construct.refseq_transcript %></td>
   </tr>
-  
+
   <tr>
     <th><strong>Guide sequence:</strong></th>
     <td><%= @crispr_construct.guide_sequence %></td>
   </tr>
-  
+
   <tr>
     <th><strong>Cloning vector:</strong></th>
     <td><%= link_to @crispr_construct.cloning_vector.name, @crispr_construct.cloning_vector %></td>
   </tr>
-  
+
   <tr>
     <th><strong>Vendor:</strong></th>
     <td><%= link_to @crispr_construct.vendor.name, @crispr_construct.vendor %></td>
   </tr>
-  
+
   <tr>
     <th><strong>Vendor product identifier:</strong></th>
     <td><%= @crispr_construct.vendor_product_identifier %>
+  </tr>
+
+  <tr>
+    <th><strong>Protocol documents:</strong></th>
+    <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @crispr_construct.documents} %></td>
   </tr>
 
   <tr>
@@ -65,18 +70,18 @@
     </td>
   </tr>
 
-  <tr>                                                                                                 
-    <th><strong>Sent to:</strong></th>                                                                 
-    <td>                                                                                               
-      <% if @crispr_construct.sent_to.present? %>                                                       
-        <%= link_to @crispr_construct.sent_to.name, @crispr_construct.sent_to %>                                 
-      <% end %>                                                                                        
-    </td>                                                                                              
-  </tr>                                                                                                
-                                                                                                       
-  <tr>                                                                                                 
-    <th><strong>Date sent:</strong></th>                                                               
-    <td><%= @crispr_construct.date_sent %></td>                                                         
+  <tr>
+    <th><strong>Sent to:</strong></th>
+    <td>
+      <% if @crispr_construct.sent_to.present? %>
+        <%= link_to @crispr_construct.sent_to.name, @crispr_construct.sent_to %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <th><strong>Date sent:</strong></th>
+    <td><%= @crispr_construct.date_sent %></td>
   </tr>
 
   <tr>
@@ -84,13 +89,13 @@
     <td><%= @crispr_construct.description %></td>
   </tr>
 
-  <tr class="notes-row">                                                                               
-    <th><strong>Notes:</strong></th>                                                                    
-    <td><%= simple_format(@crispr_construct.notes) %></td>                                                     
-  </tr> 
+  <tr class="notes-row">
+    <th><strong>Notes:</strong></th>
+    <td><%= simple_format(@crispr_construct.notes) %></td>
+  </tr>
 </table>
 
-<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->
 <%= render partial: "application_partials/edit_notes", locals: {rec: @crispr_construct} %>
 
 <%= link_to 'Back', crispr_constructs_path %>

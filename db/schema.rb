@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180914184542) do
+ActiveRecord::Schema.define(version: 20180914202906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -436,9 +436,13 @@ ActiveRecord::Schema.define(version: 20180914184542) do
     t.boolean  "is_protocol"
     t.string   "upstream_identifier"
     t.text     "notes"
+    t.integer  "crispr_construct_id"
+    t.integer  "donor_construct_id"
   end
 
+  add_index "documents", ["crispr_construct_id"], name: "index_documents_on_crispr_construct_id", using: :btree
   add_index "documents", ["document_type_id"], name: "index_documents_on_document_type_id", using: :btree
+  add_index "documents", ["donor_construct_id"], name: "index_documents_on_donor_construct_id", using: :btree
   add_index "documents", ["name"], name: "index_documents_on_name", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
@@ -1130,7 +1134,9 @@ ActiveRecord::Schema.define(version: 20180914184542) do
   add_foreign_key "data_storages", "data_storage_providers"
   add_foreign_key "data_storages", "users"
   add_foreign_key "document_types", "users"
+  add_foreign_key "documents", "crispr_constructs"
   add_foreign_key "documents", "document_types"
+  add_foreign_key "documents", "donor_constructs"
   add_foreign_key "documents", "users"
   add_foreign_key "donor_constructs", "addresses", column: "sent_to_id"
   add_foreign_key "donor_constructs", "cloning_vectors"

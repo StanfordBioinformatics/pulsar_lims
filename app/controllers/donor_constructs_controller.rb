@@ -97,7 +97,9 @@ class DonorConstructsController < ApplicationController
         :vendor_id,
         :vendor_product_identifier,
         :construct_tag_ids => [],
-        construct_tags_attributes: [:id, :_destroy]
+        document_ids: [],
+        construct_tags_attributes: [:id, :_destroy],
+        documents_attributes: [:id, :_destroy],
       )
     end
 end
