@@ -6,4 +6,10 @@ Args:
     1. records - An ActiveRecord_Relation.
 
 -->
-<span style="position: absolute; bottom: 0; right: 0;" class="index-view-total"><%= page_entries_info records%></span>
+
+<!-- Make sure input is an ActiveRecord_Relation -->
+<% if records.class < ActiveRecord::Relation %>
+  <span style="position: absolute; bottom: 0; right: 0;" class="index-view-total"><%= page_entries_info records %></span>
+<% else %>
+  <span style="position: absolute; bottom: 0; right: 0;" class="index-view-total"><strong>Total: </strong><%= records.count %></span>
+<% end %>
