@@ -9,7 +9,7 @@ class CrisprConstruct < ActiveRecord::Base
   attr_accessor :construct_tag_ids
   has_and_belongs_to_many :construct_tags
   has_and_belongs_to_many :crispr_modifications
-  has_many :documents, dependent: :nullify
+  has_and_belongs_to_many :documents, dependent: :nullify
   belongs_to :sent_to, class_name: "Address"
   belongs_to :user
   belongs_to :target

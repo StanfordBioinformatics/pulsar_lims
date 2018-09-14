@@ -33,9 +33,7 @@
         <td><%= rec.category %></td>
         <td><%= rec.purpose %></td>
         <td>
-          <% rec.crispr_constructs.each do |cc| %>
-            <%= link_to cc.name, cc %>
-          <% end %>
+          <%= render partial: "application_partials/link_to_has_many", locals: {links: rec.crispr_constructs} %>
         </td>
         <td><%= link_to rec.donor_construct.name, rec.donor_construct %></td>
         <td style="font-size: 0.8em;"><%= render partial: "application_partials/link_to_has_many", locals: {links: rec.biosamples} %></td>

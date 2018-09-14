@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180914202906) do
+ActiveRecord::Schema.define(version: 20180914231343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -342,6 +342,14 @@ ActiveRecord::Schema.define(version: 20180914202906) do
   add_index "crispr_constructs", ["user_id"], name: "index_crispr_constructs_on_user_id", using: :btree
   add_index "crispr_constructs", ["vendor_id"], name: "index_crispr_constructs_on_vendor_id", using: :btree
 
+  create_table "crispr_constructs_documents", id: false, force: :cascade do |t|
+    t.integer "crispr_construct_id"
+    t.integer "document_id"
+  end
+
+  add_index "crispr_constructs_documents", ["crispr_construct_id", "document_id"], name: "cc_doc_idx", using: :btree
+  add_index "crispr_constructs_documents", ["document_id", "crispr_construct_id"], name: "doc_cc_idx", using: :btree
+
   create_table "crispr_constructs_modifications", id: false, force: :cascade do |t|
     t.integer "crispr_construct_id",    null: false
     t.integer "crispr_modification_id", null: false
@@ -445,6 +453,14 @@ ActiveRecord::Schema.define(version: 20180914202906) do
   add_index "documents", ["donor_construct_id"], name: "index_documents_on_donor_construct_id", using: :btree
   add_index "documents", ["name"], name: "index_documents_on_name", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
+
+  create_table "documents_donor_constructs", id: false, force: :cascade do |t|
+    t.integer "document_id"
+    t.integer "donor_construct_id"
+  end
+
+  add_index "documents_donor_constructs", ["document_id", "donor_construct_id"], name: "doc_donor_construct_idx", using: :btree
+  add_index "documents_donor_constructs", ["donor_construct_id", "document_id"], name: "donor_construct_doc_idx", using: :btree
 
   create_table "documents_immunoblots", id: false, force: :cascade do |t|
     t.integer "document_id",   null: false
