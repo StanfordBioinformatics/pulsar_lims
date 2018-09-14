@@ -31,6 +31,7 @@ Pulsar::Application.routes.draw do
     get :select_options, on: :collection
   end
   resources :analyses do
+    get :add_merged_file, on: :member
     get :add_merged_file, on: :collection
   end
   resources :data_file_types do

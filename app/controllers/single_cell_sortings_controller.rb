@@ -5,6 +5,9 @@ class SingleCellSortingsController < ApplicationController
 
   def new_analysis
     #non AJAX
+    # A list of SequencingResult objects to be used as the selection list for
+    # when choosing a value for Analysis.input_reads.
+    @input_reads = @single_cell_sorting.input_reads_selection_for_analysis()
     @analysis = @single_cell_sorting.analyses.build
     flash[:action] = :new_analysis
   end 

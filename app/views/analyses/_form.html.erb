@@ -4,22 +4,10 @@
   <%= f.association :single_cell_sorting, as: :hidden %>
   <%= f.association :protocol, label_html: {"data-toggle": "tooltip", "title": "Document detailing the analysis procedure. If you haven't already uploaded the protocol to the database, you must first go to the 'Documents' page to add it."} %>
   
+  <%= f.association :input_reads, label: "Merged FASTQ file", collection: @input_reads || SequencingResult.all %>
+
   <div class="responseive-table">
     <table class="table table-hover table-condensed" style="max-width: 50%;">
-      <tr>
-        <th><strong>Merged FASTQ file:</strong></th>
-        <% if @analysis.merged_fastq_file.present? %>
-          <%= f.simple_fields_for :merged_fastq_file, @analysis.merged_fastq_file do |ff| %>
-            <td>
-              <%= link_to @analysis.merged_fastq_file.display(), @analysis.merged_fastq_file %>&nbsp&nbsp
-              <%= ff.input_field :_destroy, as: :boolean %> Remove
-            </td>
-          <% end %>
-        <% else %>
-          <td><%= link_to "Add", add_merged_file_analyses_path({attr: :merged_fastq_file}), remote: true, class: "reg-btn analysis-add-merged-file" %></td>
-        <% end %>
-      </tr>
-
     <tr>
       <th><strong>Merged BAM file:</strong></th>
       <% if @analysis.merged_bam_file.present? %>

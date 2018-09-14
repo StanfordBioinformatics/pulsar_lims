@@ -3,7 +3,7 @@ class ImmunoblotsController < ApplicationController
   skip_after_action :verify_authorized, only: [:add_gel]
 
   def add_gel
-    @gel = @immunoblot.build_gel({"notes": "hi"})
+    @gel = @immunoblot.build_gel
     @s3_direct_post = @gel.s3_direct_post()
   end
 

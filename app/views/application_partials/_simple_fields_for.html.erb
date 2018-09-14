@@ -44,12 +44,7 @@ Required args:
           <%= f.simple_fields_for attribute do |ff| %>                                       
             <% related_record = related_records[ff.index] %>                                 
            <tr>                                                                                    
-             <% if related_record.respond_to?(:params_for_url_for) %>
-               <% link_to_value = related_record.params_for_url_for() %>
-             <% else %>
-               <% link_to_value = related_record %>
-             <% end %>
-             <td><%= link_to related_record, link_to_value %></td>                                                              
+             <td><%= link_to_record related_record %></td>                                                              
              <td><%= ff.input_field :_destroy, as: :boolean %> Remove</td>                         
            </tr>                                                                                   
           <% end %>                                                                                

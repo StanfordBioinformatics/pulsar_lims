@@ -11,12 +11,15 @@ $ ->
   $seqresult_table_btns = $(".seqresult-table-btns")
 
   if $("#hide_new_sequencing_result").length == 1 
+    # Present in view once each library has a SequencingResult. In that case, no use for a button
+    # to add another SequencingResult.
     $new_bc_res_btn.attr("disabled", "disabled")
 
   $new_bc_res_btn.click (event) -> 
     if ($new_bc_res_btn.attr("disabled") == "disabled")
       event.preventDefault()
     else
+      # Hide buttons while new SequencingResult form is shown.
       $seqresult_table_btns.hide()
 
   $new_bc_res_btn.on "ajax:success", (event,data) ->  

@@ -53,4 +53,17 @@ class SingleCellSorting < ActiveRecord::Base
       end 
     end 
   end
+
+  def input_reads_selection_for_analysis
+    input_reads = [] # A list of SequencingResult objects to be used as the selection list for        
+                         # when choosing a value for Analysis.input_reads.                             
+    self.sequencing_requests.each do |sreq|                                            
+      sreq.sequencing_runs.each do |srun|                                                              
+        srun.sequencing_results.each do |sres|                                                         
+          input_reads << sres                                                                       
+        end                                                                                            
+      end                                                                                              
+    end 
+    return input_reads
+  end
 end

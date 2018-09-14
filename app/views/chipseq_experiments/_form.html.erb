@@ -17,9 +17,11 @@
 
   <fieldset>
     <legend>Documents</legend>
-    <strong>Linked documents:</strong>
-    <%= render partial: "application_partials/simple_fields_for", locals: {f: f, record: @chipseq_experiment, attribute: :documents} %>
-    <%= f.association :documents, label: "Add documents", selected: nil, collection: sorted_document_name_id(),
+    <% if @chipseq_experiment.persisted? %>
+      <strong>Linked documents:</strong>
+      <%= render partial: "application_partials/simple_fields_for", locals: {f: f, record: @chipseq_experiment, attribute: :documents} %>
+    <% end %>
+    <%= f.association :documents, label: "Add documents",
         include_blank: true,
         input_html: {class: "chipseq_documents_selector"},
         label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>

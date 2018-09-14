@@ -15,10 +15,10 @@
 
   <tr>
     <th><strong>Merged FASTQ file:</strong></th>
-    <% if @analysis.merged_fastq_file.blank? %>
+    <% if @analysis.input_reads.blank? %>
       <td></td>
     <% else %>
-      <td><%= link_to @analysis.merged_fastq_file.display(), @analysis.merged_fastq_file %></td>
+      <td><%= link_to_record @analysis.input_reads %></td>
     <% end %>
   </tr>
     

@@ -14,8 +14,8 @@ class GelLane < ActiveRecord::Base
   validates :biosample, presence: true
   validates :lane_number, presence: true, numericality: {greater_than: 0}
   validates_uniqueness_of :lane_number, scope: [:gel]
-  validates :sample_concentration, presence: true, numericality: {greater_than: 0}
-  validates :sample_concentration_units_id, presence: true
+  validates :sample_concentration, numericality: {greater_than: 0}, allow_blank: true
+  validates :sample_concentration_units_id, presence: {message: "must be specified when the concentration is specified."}, if: "sample_concentration.present?"
   validate :validate_sample_concentration_units, on: :save
 
   scope :persisted, lambda { where.not(id: nil) }

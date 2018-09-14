@@ -51,6 +51,7 @@ class ApplicationController < ActionController::Base
     if scope.present?
       @records = @records.send(scope)
     end
+    @records = @records.unscoped.order(updated_at: :desc)
     unless params[:all].present?
       @records = @records.page params[:page]
       @page = true

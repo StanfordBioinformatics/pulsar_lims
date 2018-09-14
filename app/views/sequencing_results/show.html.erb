@@ -2,6 +2,11 @@
 
 <table class="attributes">
     <tr>
+      <th><strong>Analyses</strong></th>
+      <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @sequencing_result.analyses} %></td>
+    </tr>
+
+    <tr>
       <th><strong>Merged?</strong></th>
       <td><%= @sequencing_result.merged? %></td>
     </tr>

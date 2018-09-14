@@ -5,11 +5,11 @@
   <p class="model-definition"><%= SequencingResult::DEFINITION %></p>
 
 <!--
-	#Dont include lines below since we don't want users to be able to create a sequencing_result
+  #Dont include lines below since we don't want users to be able to create a sequencing_result
   # from it's own page, rather, only through a sequencing_run object.
-	<ul class="actions">
-	<\%= render partial: "application_partials/auth_new_record" %>
-	</ul> 
+  <ul class="actions">
+  <\%= render partial: "application_partials/auth_new_record" %>
+  </ul> 
 -->
   <%= render partial: "application_partials/total", locals: {total: @total} %>
 </header>
@@ -18,8 +18,10 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers", locals: {model: SequencingResult} %>
+      <th>Analyses</th>
       <th>Sequencing run</th>
       <th>Library</th>
+      <th>Barcode</th>
       <th>Comment</th>
       <th>Read1 uri</th>
       <th>Read2 uri</th>
@@ -33,23 +35,29 @@
     <% @records.each do |rec| %>
       <tr> 
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= render partial: "application_partials/link_to_has_many", locals: {links: rec.analyses} %></td>
         <td><%= link_to @sequencing_run.name, [@sequencing_request,@sequencing_run] %></td>
-        <td><%= link_to rec.library.name, rec.library %></td>
+        <td>
+          <% if rec.library.present? %>
+            <%= link_to rec.library.name, rec.library %>
+          <% end %>
+        </td>
+        <td>
+          <% if rec.library.present? and rec.library.barcoded? %>
+            <% bc = rec.library.get_indexseq() %>
+            <%= link_to_record bc %>
+          <% end %>
+        </td>
         <td><%= rec.comment %></td>
         <td><%= rec.read1_uri %></td>
         <td><%= rec.read2_uri %></td>
         <td><%= rec.read1_count %></td>
         <td><%= rec.read2_count %></td>
         <td>
-					<%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_run,rec] %>
-        	<%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_run,rec], method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+          <%= link_to fa_icon("pencil"), [:edit,@sequencing_request,@sequencing_run,rec] %>
+          <%= link_to fa_icon("trash"), [@sequencing_request,@sequencing_run,rec], method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<% if defined?(@page) %>                                                                               
-  <%= paginate @records %>                                                                             
-  <%= link_to "All", sequencing_results_path(all: true) %>                                                        
-<% end %>
