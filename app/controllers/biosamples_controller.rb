@@ -37,7 +37,7 @@ class BiosamplesController < ApplicationController
   def biosample_parts 
     #Called via ajax
     set_model_class()
-    @records = @biosample.children.page params[:page] 
+    @records = @biosample.children
     @total = @records.count
     @no_new_btn = true
     @title = "Child biosamples of #{@biosample.name}"
