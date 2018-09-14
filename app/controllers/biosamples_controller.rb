@@ -37,7 +37,7 @@ class BiosamplesController < ApplicationController
   def biosample_parts 
     #Called via ajax
     set_model_class()
-    @records = @biosample.children
+    @records = @biosample.children.page params[:page] 
     @total = @records.count
     @no_new_btn = true
     @title = "Child biosamples of #{@biosample.name}"
@@ -47,8 +47,8 @@ class BiosamplesController < ApplicationController
   def prototype_instances
     #Called via ajax
     set_model_class()
-    @records = policy_scope(Biosample.where({from_prototype: @biosample}))
-    @no_new_btn = tru
+    @records = policy_scope(Biosample.where({from_prototype: @biosample})).page params[:page]
+    @no_new_btn = true
     @title = "Prototype instances of Biosample #{@biosample.name}"
     render action: "index" 
   end
