@@ -145,6 +145,11 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
+    resources :file_references do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :library_fragmentation_methods do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
