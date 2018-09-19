@@ -12,6 +12,6 @@ class SequencingRunSerializer < ActiveModel::Serializer
 
   has_one :report
   has_one :sequencing_request
-  has_one :storage_location
+  has_one :data_storage
   has_one :user
 end

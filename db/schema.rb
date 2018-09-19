@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180914231343) do
+ActiveRecord::Schema.define(version: 20180918211432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -919,14 +919,14 @@ ActiveRecord::Schema.define(version: 20180914231343) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.string   "name"
-    t.integer  "storage_location_id"
     t.text     "notes"
+    t.integer  "data_storage_id"
   end
 
+  add_index "sequencing_runs", ["data_storage_id"], name: "index_sequencing_runs_on_data_storage_id", using: :btree
   add_index "sequencing_runs", ["name"], name: "index_sequencing_runs_on_name", unique: true, using: :btree
   add_index "sequencing_runs", ["report_id"], name: "index_sequencing_runs_on_report_id", using: :btree
   add_index "sequencing_runs", ["sequencing_request_id"], name: "index_sequencing_runs_on_sequencing_request_id", using: :btree
-  add_index "sequencing_runs", ["storage_location_id"], name: "index_sequencing_runs_on_storage_location_id", using: :btree
   add_index "sequencing_runs", ["user_id"], name: "index_sequencing_runs_on_user_id", using: :btree
 
   create_table "shippings", force: :cascade do |t|
@@ -1214,8 +1214,8 @@ ActiveRecord::Schema.define(version: 20180914231343) do
   add_foreign_key "sequencing_results", "libraries"
   add_foreign_key "sequencing_results", "sequencing_runs"
   add_foreign_key "sequencing_results", "users"
+  add_foreign_key "sequencing_runs", "data_storages"
   add_foreign_key "sequencing_runs", "documents", column: "report_id"
-  add_foreign_key "sequencing_runs", "file_references", column: "storage_location_id"
   add_foreign_key "sequencing_runs", "sequencing_requests"
   add_foreign_key "sequencing_runs", "users"
   add_foreign_key "shippings", "addresses", column: "from_id"

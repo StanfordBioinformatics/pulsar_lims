@@ -22,10 +22,10 @@
   </tr>
 
   <tr>
-    <th><strong>Storage location:</strong></th>
+    <th><strong>Data storage:</strong></th>
     <td>
-      <% if @sequencing_run.storage_location.present? %>
-        <%= link_to @sequencing_run.storage_location.display, @sequencing_run.storage_location %>
+      <% if @sequencing_run.data_storage.present? %>
+        <%= link_to_record @sequencing_run.data_storage %>
     <% end %>
     </td>
   </tr>
@@ -35,13 +35,6 @@
     <td><%= simple_format(@sequencing_run.notes) %></td>                                                     
   </tr> 
 </table>
-
-<% if not @sequencing_run.storage_location.present? %>
-  <div style="padding-left: 5px;" class="jumbotron bg-info"%>
-    <p class="lead">Sequencing results storage location</p>
-    <%= link_to "Add",[:add_storage_location, @sequencing_request,@sequencing_run], class:   "reg-btn" %>
-  </div>
-<% end %>
 
 <% if @sequencing_run.sequencing_results.persisted.any? %>
   <h4>Library Sequencing Results</h4>
@@ -86,13 +79,11 @@
   <% @sequencing_result = @sequencing_run.sequencing_results.last %>
   <%= render partial: "add_sequencing_result", layout: "layouts/fieldset_sequencing_result" %>
 <% else %>
-  <% if @sequencing_run.storage_location.present? and @sequencing_run.storage_location.persisted? %>
-    <table class="seqresult-table-btns">
-      <td><%= link_to "Add Sequencing Result", [:new_sequencing_result,@sequencing_request,@sequencing_run], class: "reg-btn", remote: true, id: "new_sequencing_result" %></td>
-      <td style="padding-left: 1em; padding-right: 1em;">or</td>
-      <td><%= link_to "Automated Fetch","#", class: "reg-btn" %></td>
-    </table>
-  <% end %>
+  <table class="seqresult-table-btns">
+    <td><%= link_to "Add Sequencing Result", [:new_sequencing_result,@sequencing_request,@sequencing_run], class: "reg-btn", remote: true, id: "new_sequencing_result" %></td>
+    <td style="padding-left: 1em; padding-right: 1em;">or</td>
+    <td><%= link_to "Automated Fetch","#", class: "reg-btn" %></td>
+  </table>
 <% end %>
 </br></br>
 

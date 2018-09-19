@@ -1,6 +1,9 @@
 <h1>Editing Data Storage</h1>
 
-<%= render 'form' %>
+<%= simple_form_for(@data_storage) do |f| %> 
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @data_storage } %>
+  <%= render partial: 'form', locals: {f: f} %>
+  <%= render partial: "application_partials/submit", locals: {f: f} %>
+<% end %>
 
-<%= link_to 'Show', @data_storage %> |
 <%= link_to 'Back', data_storages_path %>

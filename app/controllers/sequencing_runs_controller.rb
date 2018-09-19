@@ -1,11 +1,19 @@
 class SequencingRunsController < ApplicationController
-  before_action :set_sequencing_run, only: [:show, :edit, :update, :destroy, :new_sequencing_result, :add_storage_location]
+  before_action :set_sequencing_run, only: [:show, :edit, :update, :destroy, :new_sequencing_result]
   before_action :set_sequencing_request
-  skip_after_action :verify_authorized, only: [:new_sequencing_result,:add_storage_location]
+  skip_after_action :verify_authorized, only: [:new_sequencing_result, :add_data_storage]
 
-  def add_storage_location 
-    @file_reference = @sequencing_run.build_storage_location({user_id: current_user.id, data_file_type_id: DataFileType.find_by(name: "FASTQ").id })
-    flash[:action] = :show
+  def add_data_storage
+    # AJAX from show view.
+    @sequencing_run = @sequencing_request.sequencing_runs.build
+    @sequencing_run.build_data_storage({user_id: current_user.id})
+    if params[:select]
+      @select = true
+    elsif params[:build]
+      @build = true
+      @sequencing_run.build_data_storage({user_id: current_user.id})
+    end
+    render layout: false
   end
 
   def new_sequencing_result
@@ -32,6 +40,7 @@ class SequencingRunsController < ApplicationController
 
   def new
     @sequencing_run = @sequencing_request.sequencing_runs.build
+    @sequencing_run.build_data_storage({user_id: current_user.id})
     authorize @sequencing_run
   end
 
@@ -42,6 +51,8 @@ class SequencingRunsController < ApplicationController
   def create
     @sequencing_run = @sequencing_request.sequencing_runs.build(sequencing_run_params)
     authorize @sequencing_run
+    #render json: params
+    #return
     @sequencing_run.user = current_user
 
     respond_to do |format|
@@ -118,12 +129,13 @@ class SequencingRunsController < ApplicationController
           :read1_count,
           :read2_count
         ],
-        storage_location_attributes: [
-          :user_id,
-          :data_storage_id,
-          :file_path,
-          :fileid,
-          :data_file_type_id
+        data_storage_attributes: [
+          :bucket,                                                                                       
+          :data_storage_provider_id,                                                                     
+          :folder_base_path,                                                                             
+          :name,                                                                                         
+          :notes,                                                                                        
+          :project_identifier 
         ]
       )
     end

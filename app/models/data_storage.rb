@@ -10,13 +10,14 @@ class DataStorage < ActiveRecord::Base
   belongs_to :data_storage_provider
   has_many :sequencing_runs
   has_many :file_references, dependent: :nullify
-
+  
   validates :name, presence: true, uniqueness: true
   validates :data_storage_provider, presence: true
   validates :bucket, presence: true, if: "data_storage_provider && data_storage_provider.bucket_storage?"
   validates_presence_of :project_identifier, if: "self.data_storage_provider.name == DataStorageProvider::DNANEXUS"
-
   validate :validate_folder_base_path
+
+  scope :persisted, lambda { where.not(id: nil) } 
 
   def self.policy_class
     ApplicationPolicy

@@ -17,7 +17,7 @@
       <th>Comment</th>
       <th>Sequencing request</th>
       <th>Lane</th>
-      <th>Storage Location</th>
+      <th>Data storage</th>
       <th>Comment</th>
       <th>Actions</th>
     </tr>
@@ -31,8 +31,8 @@
         <td><%= link_to rec.sequencing_request.name, rec.sequencing_request %></td>
         <td><%= rec.lane %></td>
         <td>
-          <% if rec.storage_location.present? %>
-            <%= link_to rec.storage_location.display, rec.storage_location %>
+          <% if rec.data_storage.present? %>
+            <%= link_to_record rec.data_storage %></td>
           <% end %>
         </td>
         <td><%= rec.comment %></td>

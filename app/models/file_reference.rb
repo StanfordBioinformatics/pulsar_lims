@@ -11,7 +11,6 @@ class FileReference < ActiveRecord::Base
   has_one    :analysis_merged_bam_file, class_name: "Analysis", foreign_key: :merged_bam_file_id, dependent: :nullify
   has_one    :analysis_merged_peaks_file, class_name: "Analysis", foreign_key: :merged_peaks_file_id, dependent: :nullify
   has_one    :analysis_merged_qc_file, class_name: "Analysis", foreign_key: :merged_qc_file_id, dependent: :nullify
-  has_many   :sequencing_runs, foreign_key: :storage_location_id, dependent: :nullify
 
   validates :data_storage_id, presence: true
   validates_presence_of :file_path, if: "self.data_storage.bucketed?"

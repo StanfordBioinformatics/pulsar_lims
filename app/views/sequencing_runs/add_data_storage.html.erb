@@ -1,0 +1,19 @@
+<!-- If "Select" button is clicked, then show below. -->                                           
+<% if defined?(@select)  %>
+  <div id="sres-data-storage">                                         
+    <%= link_to fa_icon("undo"), "#", class: "sres-undo-data-storage" %>                             
+    <%= simple_fields_for @sequencing_run do |f| %>
+      <%= f.association :data_storage, wrapper: false, label: false %>                                 
+    <% end %>
+  </div>                                                                                             
+<% elsif defined?(@build) %>
+  <!-- Else if "Create new" button is clicked, then show below. -->                                  
+  <div id="sres-storage-storage">                                           
+    <%= link_to fa_icon("undo"), "#", class: "sres-undo-data-storage" %>                             
+    <%= simple_fields_for @sequencing_run do |f| %>
+      <%= f.simple_fields_for :data_storage, @sequencing_run.data_storage do |ff| %>                   
+        <%= render partial: "data_storages/form", locals: {f: ff} %>                                   
+      <% end %>                                                                                        
+    <% end %>
+  </div> 
+<% end %>

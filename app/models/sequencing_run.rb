@@ -9,16 +9,17 @@ class SequencingRun< ActiveRecord::Base
   belongs_to :user
   belongs_to :sequencing_request
   belongs_to :report, class_name: "Document"
-  belongs_to :storage_location, class_name: "FileReference"
+  belongs_to :data_storage
   has_many   :sequencing_results, dependent: :destroy
 
+  validates :data_storage, presence: true
   validates :name, length: { minimum: 2, maximum: 40 }
   validates :name, presence: true
   validates_uniqueness_of :name, scope: :sequencing_request_id
 
   scope :persisted, lambda { where.not(id: nil) }
   accepts_nested_attributes_for :sequencing_results, allow_destroy: true
-  accepts_nested_attributes_for :storage_location, allow_destroy: true
+  accepts_nested_attributes_for :data_storage, allow_destroy: true
 
   def self.policy_class
     ApplicationPolicy

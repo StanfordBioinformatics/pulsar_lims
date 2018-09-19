@@ -293,7 +293,7 @@ Pulsar::Application.routes.draw do
     get :select_scs_plates, on: :member
     get :select_library, on: :member
     resources :sequencing_runs do
-      get :add_storage_location, on: :member
+      get :add_data_storage, on: :collection
       get :new_sequencing_result, on: :member
       resources :sequencing_results do
         get :get_barcode_selector, on: :collection

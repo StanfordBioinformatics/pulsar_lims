@@ -1,7 +1,0 @@
-<h1>Sequencing results storage location</h1>
-<%= simple_form_for [@sequencing_request, @sequencing_run] do |f| %>
-	<%= f.simple_fields_for :storage_location, @file_reference do |ff| %>
-		<%= render partial: "file_references/form", locals: {f: ff} %>
-	<% end %>
-	<%= render partial: "application_partials/submit", locals: {f: f} %>
-<% end %>
