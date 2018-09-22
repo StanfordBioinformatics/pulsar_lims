@@ -24,7 +24,7 @@ $ ->
   hide_project_attrs()
 
   additional_fields = -> 
-    $.get "/data_storages/customize_for_data_storage_provider", { data_storage_provider_id:  $("#data_storage_data_storage_provider_id").val()}, (responseText,status,jqXHR) ->
+    $.get "/data_storages/customize_for_data_storage_provider", { data_storage_provider_id:  $("#ds_data_storage_provider").val()}, (responseText,status,jqXHR) ->
       if (responseText == "bucket" )
         hide_project_attrs()
         show_bucket_attrs()    
@@ -32,7 +32,7 @@ $ ->
         hide_bucket_attrs()
         show_project_attrs()
 
-  if $("#data_storage_data_storage_provider_id").val()
+  if $("#ds_data_storage_provider").val()
     additional_fields()
 
-  $(document).on "change", "#data_storage_data_storage_provider_id", additional_fields
+  $(document).on "change", "#ds_data_storage_provider", additional_fields

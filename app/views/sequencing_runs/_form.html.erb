@@ -10,7 +10,7 @@
        from two buttons: 1) Select, 2) Create new. After selecting one of the buttons, they will be
        hidden, and depending on the choice, a select box will appear if button 1 is clicked, or additional
        form fields if 2 is clicked.  -->
-  <% if not @sequencing_run.data_storage.persisted? %>
+  <% if not @sequencing_run.data_storage.present? %>
     <fieldset style="min-width: 70%;">
       <legend>Data storage</legend>
       <div id="sres-data-storage-btns">
@@ -18,8 +18,16 @@
         <%= link_to "Create new", add_data_storage_sequencing_request_sequencing_runs_path(@sequencing_request, {build: 1}), class: "reg-btn", id: "sres-data-storage-new", remote: true %>
       </div>
     </fieldset>
-  <% else %>
+  <% elsif @sequencing_run.persisted? %>
     <%= f.association :data_storage %>
+  <% else %>
+    <!-- Then user has a partially entered form and there was a re-render. -->
+    <fieldset style="min-width: 70%;">
+      <legend>Data storage</legend>
+        <%= f.simple_fields_for :data_storage, @sequencing_run.data_storage do |ff| %>
+          <%= render partial: "data_storages/form", locals: {f: ff} %> 
+        <% end %>
+    </fieldset>
   <% end %>
 
   <%= render partial: "application_partials/notes", locals: {f: f} %>

@@ -6,7 +6,6 @@ class SequencingRunsController < ApplicationController
   def add_data_storage
     # AJAX from show view.
     @sequencing_run = @sequencing_request.sequencing_runs.build
-    @sequencing_run.build_data_storage({user_id: current_user.id})
     if params[:select]
       @select = true
     elsif params[:build]
@@ -40,7 +39,6 @@ class SequencingRunsController < ApplicationController
 
   def new
     @sequencing_run = @sequencing_request.sequencing_runs.build
-    @sequencing_run.build_data_storage({user_id: current_user.id})
     authorize @sequencing_run
   end
 
@@ -115,6 +113,7 @@ class SequencingRunsController < ApplicationController
     def sequencing_run_params
       params.require(:sequencing_run).permit(
         :comment,
+        :data_storage_id,
         :lane,
         :name,
         :notes,

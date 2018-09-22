@@ -5,29 +5,16 @@
 
 $ ->  
   # The following code is for the form view.
-
-
   $("#sres-data-storage-select, #sres-data-storage-new").on "ajax:success", (event, data) ->
     event.stopPropagation()
     event.preventDefault()
-    $("#sres-data-storage-btns").after(data)
+    $("#sres-data-storage-btns").fadeOut().after(data)
 
-#  $("#sres-data-storage-select, #sres-data-storage-new").on "click", (event) ->
-#    event.preventDefault()
-#    event.stopPropagation()
-#    $select_ds_input = $("#sres-select-data-storage")
-#
-#    $("#sres-data-storage-btns").fadeOut()
-#    if event.target.id == "sres-data-storage-select"
-#      $select_ds_input.fadeIn()
-#    else
-#      $("#sres-data-storage-form").fadeIn()
-#
-#  $(".sres-undo-data-storage").on "click", (event) ->
-#    event.preventDefault()
-#    event.stopPropagation()
-#    $(this).closest("div").fadeOut()
-#    $("#sres-data-storage-btns").fadeIn()
+  $(document).on "click", ".sres-undo-data-storage", (event) ->
+    event.preventDefault()
+    event.stopPropagation()
+    $(this).closest("div").fadeOut("fast").remove()
+    $("#sres-data-storage-btns").fadeIn()
    
 
   #The following code is for the show view.

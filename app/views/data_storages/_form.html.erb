@@ -1,5 +1,5 @@
   <%= f.input :name %>
-  <%= f.association :data_storage_provider %>
+  <%= f.association :data_storage_provider, input_html: {id: "ds_data_storage_provider"} %>
 
   <div class="bucket-attrs">
     <%= f.input :bucket, input_html: {class: "required"}, label_html: {"data-toggle" => "tooltip", "title" => "Name of the bucket" } %>
