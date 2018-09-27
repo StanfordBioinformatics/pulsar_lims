@@ -63,7 +63,7 @@ class Api::SequencingRunsController < Api::ApplicationController
         :name,
         :notes,
         :report_id,
-        :sequencing_request_id
+        :sequencing_request_id,
         :status,
         :submitted_by_id
     )
