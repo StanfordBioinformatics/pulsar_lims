@@ -38,7 +38,6 @@
           <td></td>
         <% end %>
         <td><%= rec.paired_end%></td>
-        <td><%= rec.date_submitted %></td>
         <td>
           <% if rec.sequencing_runs.present? %>
               <%= render partial: "application_partials/link_to_has_many", locals: {links: rec.sequencing_runs} %>

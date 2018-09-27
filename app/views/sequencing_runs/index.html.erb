@@ -14,6 +14,9 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
+      <th>Status</th>
+      <th>Date submitted</th>
+      <th>Submitted by</th>
       <th>Comment</th>
       <th>Sequencing request</th>
       <th>Lane</th>
@@ -27,6 +30,17 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= rec.status %></td>
+        <td>
+          <% if rec.date_submitted.present? %>
+            <%= rec.date_submitted %>
+          <% end %>
+        </td>
+        <td>
+          <% if rec.submitted_by.present? %>
+            <%= rec.submitted_by %>
+          <% end %>
+        </td>
         <td><%= rec.comment %></td>
         <td><%= link_to rec.sequencing_request.name, rec.sequencing_request %></td>
         <td><%= rec.lane %></td>

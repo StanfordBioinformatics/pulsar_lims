@@ -1,7 +1,12 @@
 <%= simple_form_for([@sequencing_request,@sequencing_run]) do |f| %>
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_run} %>
 
+  <%= f.input :status, collection: Enums::SEQUENCING_STATUS, label_html: {"data-toggle" => "tooltip", "title" => "The status of the sequencing run. Note that the Data storage location must be specified once the status is set to 'finished'."} %>
+
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Sequencing run name. If unknown, can also be something like 'Run1', or 'Run2', ... For Illumina runs, if you only have the FASTQ file and don't know the run name assigned by the Illumina sequencer, you can peek into the FASTQ file and take the first three fields of the header line of a FASTQ record, i.e. J00118:308:HLKM5BBXX, where the first ':' delimited field is the sequencing instrument name, the second is the run ID, and the third is the flowcell ID."} %>
+
+  <%= f.input :date_submitted, include_blank: true, label_html: {"data-toggle" => "tooltip", "title" => "The day the request for sequencing was formally submitted to the sequencing center."} %>
+  <%= f.association :submitted_by, collection: User.order([:last_name, :first_name]), label_html: {class: "refresh", "data-toggle" => "tooltip", "title" => "Who submitted the request for sequencing to the sequencing center."} %>
   <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Any particular remarks you may want to add."} %>
 
   <%= f.input :lane, label_html: {"data-toggle" => "tooltip", "title" => "The lane number on the flowcell."} %>
@@ -25,7 +30,7 @@
     <fieldset style="min-width: 70%;">
       <legend>Data storage</legend>
         <%= f.simple_fields_for :data_storage, @sequencing_run.data_storage do |ff| %>
-          <%= render partial: "data_storages/form", locals: {f: ff} %> 
+          <%= render partial: "data_storages/form", locals: {f: ff} %>
         <% end %>
     </fieldset>
   <% end %>

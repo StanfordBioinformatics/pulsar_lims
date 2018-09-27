@@ -2,8 +2,31 @@
 
 <table class="attributes">
   <tr>
+    <th><strong>Status:</strong></th>
+    <td><%= @sequencing_run.status %></td>
+  </tr>
+
+  <tr>
     <th><strong>Name:</strong></th>
     <td><%= @sequencing_run.name %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Date submitted:</strong></th>
+    <td>
+      <% if @sequencing_run.date_submitted.present? %>
+        <%= @sequencing_run.date_submitted %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <th><strong>Submitted by</strong></th>
+    <td>
+      <% if @sequencing_run.submitted_by.present? %>
+        <%= @sequencing_run.submitted_by.display() %>
+      <% end %>
+    </td>
   </tr>
 
   <tr>

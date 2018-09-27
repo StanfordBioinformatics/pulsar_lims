@@ -10,6 +10,8 @@ module Enums
 
   GENDERS = ["female", "male", "mixed", "unknown"]
 
+  SEQUENCING_STATUS = ["not started", "started", "trouble-shooting", "failed", "finished"]
+
   STARTING_AMOUNT_UNITS = ["cells", "cells/ml", "g", "items", "mg", "whole animals", "whole embryos", "μg"]
 
   TISSUE_PRESERVATION_METHODS = ["cryopreservation", "flash-freezing", "fresh"]

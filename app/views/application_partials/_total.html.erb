@@ -7,9 +7,13 @@ Args:
 
 -->
 
-<!-- Make sure input is an ActiveRecord_Relation -->
-<% if records.class < ActiveRecord::Relation %>
-  <span style="position: absolute; bottom: 0; right: 0;" class="index-view-total"><%= page_entries_info records %></span>
-<% else %>
+<!-- Doesn't work on arrays. Also, doesn't work on all subclasses of ActiveRecod::Relation, such as
+     ActiveRecord_Associations_CollectionProxy, in which case the error you'll get is
+     "undefined method `entry_name' for #<Library::ActiveRecord_Associations_CollectionProxy". One
+     can manually specify the entry_name (model_name) via the entry_name parameter. -->
+<% begin %>
+  <% val = page_entries_info(records) %>
+  <span style="position: absolute; bottom: 0; right: 0;" class="index-view-total"><%= val %></span>
+<% rescue Exception %>
   <span style="position: absolute; bottom: 0; right: 0;" class="index-view-total"><strong>Total: </strong><%= records.count %></span>
 <% end %>

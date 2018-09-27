@@ -10,9 +10,12 @@ class SequencingRun< ActiveRecord::Base
   belongs_to :sequencing_request
   belongs_to :report, class_name: "Document"
   belongs_to :data_storage
+  belongs_to :submitted_by, class_name: "User"
   has_many   :sequencing_results, dependent: :destroy
 
-  validates :data_storage, presence: true
+  validates :status, presence: true, inclusion: {in: Enums::SEQUENCING_STATUS, message: "must be an element in the list #{Enums::SEQUENCING_STATUS}."}
+  validates :submitted_by, presence: {message: "must be specified when 'date submitted' is set."}, if: "date_submitted.present?"
+  validates :data_storage, presence: {message: "must be set when the status is set to 'finished'.", if:  "status == 'finished'"}
   validates :name, length: { minimum: 2, maximum: 40 }
   validates :name, presence: true
   validates_uniqueness_of :name, scope: :sequencing_request_id

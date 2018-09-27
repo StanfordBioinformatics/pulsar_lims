@@ -84,7 +84,7 @@ class SequencingRunsController < ApplicationController
 
     respond_to do |format|
       if @sequencing_run.update(params)
-        format.html { redirect_to [@sequencing_request,@sequencing_run], notice: 'Sequencing run was successfully updated.' }
+        format.html { redirect_to [@sequencing_request, @sequencing_run], notice: 'Sequencing run was successfully updated.' }
         format.json { head :no_content }
       else
         action = flash[:action]
@@ -92,7 +92,7 @@ class SequencingRunsController < ApplicationController
           #set again for next request.
           flash[:action] = action
         end 
-        format.html { render action: action }
+        format.html { render action: action || "edit" }
         format.json { render json: @sequencing_run.errors, status: :unprocessable_entity }
       end
     end
@@ -117,11 +117,14 @@ class SequencingRunsController < ApplicationController
       params.require(:sequencing_run).permit(
         :comment,
         :data_storage_id,
+        :date_submitted,
         :lane,
         :name,
         :notes,
         :report_id,
         :sequencing_request_id,
+        :status,
+        :submitted_by_id,
         sequencing_results_attributes: [
           :library_id,
           :merged,

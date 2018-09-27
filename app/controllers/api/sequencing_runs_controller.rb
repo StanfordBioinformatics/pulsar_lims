@@ -58,11 +58,14 @@ class Api::SequencingRunsController < Api::ApplicationController
   def sequencing_run_params
     params.require(:sequencing_run).permit(
         :comment,
+        :date_submitted,
         :lane,
         :name,
         :notes,
         :report_id,
         :sequencing_request_id
+        :status,
+        :submitted_by_id
     )
   end
 end

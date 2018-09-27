@@ -7,7 +7,6 @@ class SequencingRequestsController < ApplicationController
     #Called via ajax
     @model_class = Library
     @records = @sequencing_request.libraries
-    @total = @records.count
     @no_new_btn = true
     @title = "Libraries on SequencingRequest #{@sequencing_request.to_label}"
     render template: "libraries/index"
@@ -131,14 +130,12 @@ class SequencingRequestsController < ApplicationController
         :average_size,
         :concentration,
         :concentration_unit_id,
-        :date_submitted,
         :name,
         :notes,
         :paired_end,
         :sample_sheet,
         :sequencing_center_id,
         :sequencing_platform_id,
-        :submitted_by_id,
         :plate_ids => [],
         plates_attributes: [:id,:_destroy],
         :library_ids => [],

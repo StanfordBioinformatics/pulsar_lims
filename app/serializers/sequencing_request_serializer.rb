@@ -5,7 +5,6 @@ class SequencingRequestSerializer < ActiveModel::Serializer
   attributes :id,
         :average_size,
         :concentration,
-        :date_submitted,
         :name,
         :notes,
         :paired_end,
@@ -14,7 +13,6 @@ class SequencingRequestSerializer < ActiveModel::Serializer
   has_one :concentration_unit
   has_one :sequencing_center
   has_one :sequencing_platform
-  has_one :submitted_by
   has_one :user
   has_many :libraries
   has_many :plates
