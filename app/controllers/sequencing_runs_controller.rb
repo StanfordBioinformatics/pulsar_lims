@@ -52,6 +52,9 @@ class SequencingRunsController < ApplicationController
     #render json: params
     #return
     @sequencing_run.user = current_user
+    if @sequencing_run.data_storage.present? and @sequencing_run.data_storage.user.blank?
+      @sequencing_run.data_storage.user = current_user
+    end
 
     respond_to do |format|
       if @sequencing_run.save
