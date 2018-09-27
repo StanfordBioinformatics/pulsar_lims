@@ -92,7 +92,7 @@ class SequencingRunsController < ApplicationController
           #set again for next request.
           flash[:action] = action
         end 
-        format.html { render action: action || "edit" }
+        format.html { render action || "edit" }
         format.json { render json: @sequencing_run.errors, status: :unprocessable_entity }
       end
     end
