@@ -14,3 +14,4 @@ $ ->
    
    
  $(document).on "change", "#sequencing_result_merged",  check_merged_result
+ check_merged_result()
