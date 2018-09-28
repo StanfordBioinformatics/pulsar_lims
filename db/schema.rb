@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180927215927) do
+ActiveRecord::Schema.define(version: 20180928191114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -921,6 +921,8 @@ ActiveRecord::Schema.define(version: 20180927215927) do
     t.string   "status"
     t.date     "date_submitted"
     t.integer  "submitted_by_id"
+    t.integer  "forward_read_len"
+    t.integer  "reverse_read_len"
   end
 
   add_index "sequencing_runs", ["data_storage_id"], name: "index_sequencing_runs_on_data_storage_id", using: :btree
