@@ -19,7 +19,6 @@
       <th>Sequencing center</th>
       <th>Concentration</th>
       <th>Paired-end</th>
-      <th>Submitted?</th>
       <th>Sequencing runs</th>
       <th>Actions</th>
     </tr>
@@ -32,12 +31,12 @@
         <td><%= link_to "#{rec.libraries.length} total", [:libraries_index, rec] %></td>
         <td><%= link_to rec.sequencing_platform.name, rec.sequencing_platform %></td>
         <td><%= link_to rec.sequencing_center.name, rec.sequencing_center %></td>
-        <% if rec.concentration.present? %>
-          <td><%= rec.concentration %>&nbsp;<%= rec.concentration_unit.name %></td>
-        <% else %>
-          <td></td>
-        <% end %>
-        <td><%= rec.paired_end%></td>
+        <td>
+          <% if rec.concentration.present? %>
+            <%= rec.concentration %>&nbsp;<%= rec.concentration_unit.name %>
+          <% end %>
+        </td>
+        <td><%= rec.paired_end %></td>
         <td>
           <% if rec.sequencing_runs.present? %>
               <%= render partial: "application_partials/link_to_has_many", locals: {links: rec.sequencing_runs} %>

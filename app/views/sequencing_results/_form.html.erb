@@ -5,17 +5,21 @@
                  We also need to set the library and barcode selectors to what the current values are as a default.
             -->
   <% libs = @sequencing_request.libraries %>
-  <% library_selected = @sequencing_result.library.id %>
   <% barcodes = @sequencing_run.get_barcodes_on_request() %>
-  <% selected_barcode = @sequencing_result.library.get_indexseq %>
-  <% if not selected_barcode.nil? %>
-    <% selected_barcode = selected_barcode.id %>
+  <% library_selected = nil %>
+  <% barcode_selected = nil %>
+  <% if @sequencing_result.merged == false %>
+    <% library_selected = @sequencing_result.library.id %>
+    <% barcode_selected = @sequencing_result.library.get_indexseq %> <!-- Library could be un-barcoded, which makes sense if it is the only library being sequenced. -->
+  <% end %>
+  <% if not barcode_selected.nil? %>
+    <% barcode_selected = barcode_selected.id %>
   <% end %>
 <% else %>
   <% libs = @sequencing_run.get_libraries_without_sequencing_results %>
   <% barcodes = @sequencing_run.get_barcodes_on_request(without_sequencing_result=true) %>
   <% selected_library = nil %>
-  <% selected_barcode = nil %>
+  <% barcode_selected = nil %>
 <% end %>
 
 <% include_blank = false %>
@@ -31,7 +35,7 @@
 <!-- The barcode_id attribute is a fake attribute implemented through an attr_accessor. It is only
      used to aid in selecting the Library - if a barcode is selected, then some jQuery will run to
      automatically set the Library. -->
-<%= f.input :barcode_id, as: :select,  collection: barcodes.map {|x| [x.display,x.id]}, selected: selected_barcode, include_blank: include_blank, input_html: { id: "sequencing_result_barcode_id" } %>
+<%= f.input :barcode_id, as: :select,  collection: barcodes.map {|x| [x.display,x.id]}, selected: barcode_selected, include_blank: include_blank, input_html: { id: "sequencing_result_barcode_id" } %>
   
 <%= f.input :read1_count %>
   

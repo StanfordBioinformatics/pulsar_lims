@@ -40,14 +40,22 @@ $ ->
     $("#new_sequencing_result_form").hide().fadeIn("fast")
 
   $(document).on "change","#sequencing_result_library_id", (event) -> 
-    #use event delegation above
-    get_path = window.location.pathname + "/sequencing_results/get_barcode_selector"
+    #use event delegation above to set the barcode, if any.
+    get_path = window.location.pathname.split("sequencing_results")[0]
+    # Split path above, since the event handling can be triggered if the user is editing a sequencing_result as well,
+    # not just creating a new one from inside of a sequencing_run's show view. In each case, we can use
+    # the same controller action.
+    get_path = get_path + "/sequencing_results/get_barcode_selector"
     $.get get_path, {library_id: $("#sequencing_result_library_id").val()}, (responseText,status,jqXHR) ->
       $("#sequencing_result_barcode_id").val(responseText)
 
   $(document).on "change", "#sequencing_result_barcode_id", (event) ->
-    #use event delegation above
-    get_path = window.location.pathname + "/sequencing_results/get_library_selector"
+    #use event delegation above to set the library.
+    get_path = window.location.pathname.split("sequencing_results")[0]
+    # Split path above, since the event handling can be triggered if the user is editing a sequencing_result as well,
+    # not just creating a new one from inside of a sequencing_run's show view. In each case, we can use
+    # the same controller action.
+    get_path = get_path + "/sequencing_results/get_library_selector"
     $.get get_path, {barcode_id: $("#sequencing_result_barcode_id").val()}, (responseText,status,jqXHR) ->
       $("#sequencing_result_library_id").val(responseText)
         
