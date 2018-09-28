@@ -4,7 +4,7 @@
 
 
 $ ->  
-  # The following code is for the form view.
+  #### The following code is for the form view.
   $("#sres-data-storage-select, #sres-data-storage-new").on "ajax:success", (event, data) ->
     event.stopPropagation()
     event.preventDefault()
@@ -15,9 +15,24 @@ $ ->
     event.stopPropagation()
     $(this).closest("div").fadeOut("fast").remove()
     $("#sres-data-storage-btns").fadeIn()
+
+  # When the user fills in a value for forward_read_len, check the value of reverse_read_len and if
+  # blank, set to same value. Likewise for the other way around. This is done because normally 
+  # the R1 and R2 have the same number of cycles. 
+  $r1_cycles = $("#sequencing_run_forward_read_len")
+  $r2_cycles = $("#sequencing_run_reverse_read_len")
+
+  $r1_cycles.on "change", (event) -> 
+    if $r2_cycles
+      # $r2_cycles won't be present if it's a single-end sequencing run. 
+      if not $r2_cycles.val()
+        $r2_cycles.val($r1_cycles.val())
+  $r2_cycles.on "change", (event) -> 
+    if not $r1_cycles.val()
+      $r1_cycles.val($r2_cycles.val())
    
 
-  #The following code is for the show view.
+  #### The following code is for the show view.
 
   $new_bc_res_btn = $("#new_sequencing_result") #the button
   $seqresult_table_btns = $(".seqresult-table-btns")

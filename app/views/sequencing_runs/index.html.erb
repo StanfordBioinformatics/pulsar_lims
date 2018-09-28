@@ -1,6 +1,6 @@
 <header class="index-view-header">
   <h1 class="index-page-header">                                                                       
-    <%= @title || "Sequencing Results" %>                                                                      
+    <%= @title || "Sequencing Runs" %>                                                                      
   </h1>
   <p class="model-definition"><%= SequencingRun::DEFINITION %></p>
 
@@ -20,6 +20,7 @@
       <th>Comment</th>
       <th>Sequencing request</th>
       <th>Lane</th>
+      <th>Read length</th>
       <th>Data storage</th>
       <th>Comment</th>
       <th>Actions</th>
@@ -44,6 +45,14 @@
         <td><%= rec.comment %></td>
         <td><%= link_to rec.sequencing_request.name, rec.sequencing_request %></td>
         <td><%= rec.lane %></td>
+        <td>
+          <% if rec.forward_read_len.present? %>
+            <%= rec.forward_read_len %>
+          <% end %>
+          <% if rec.reverse_read_len.present? %>
+            x <%= rec.reverse_read_len %> 
+          <% end %>
+        </td>
         <td>
           <% if rec.data_storage.present? %>
             <%= link_to_record rec.data_storage %></td>

@@ -45,6 +45,18 @@
   </tr>
 
   <tr>
+    <th><strong>Read length:</strong></th>
+    <td>
+      <% if @sequencing_run.forward_read_len.present? %>
+        <%= @sequencing_run.forward_read_len %>
+        <% if @sequencing_run.reverse_read_len.present? %>
+          x <%= @sequencing_run.reverse_read_len %>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
     <th><strong>Data storage:</strong></th>
     <td>
       <% if @sequencing_run.data_storage.present? %>

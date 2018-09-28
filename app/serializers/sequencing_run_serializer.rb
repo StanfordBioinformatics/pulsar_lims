@@ -5,9 +5,11 @@ class SequencingRunSerializer < ActiveModel::Serializer
   attributes :id,
              :comment,
              :date_submitted,
+             :forward_read_len,
              :lane,
              :name,
              :notes,
+             :reverse_read_len,
              :status,
              :created_at,
              :updated_at

@@ -10,6 +10,13 @@
   <%= f.input :comment, label_html: {"data-toggle" => "tooltip", "title" => "Any particular remarks you may want to add."} %>
 
   <%= f.input :lane, label_html: {"data-toggle" => "tooltip", "title" => "The lane number on the flowcell."} %>
+  
+  <div style="display: flex">
+    <%= f.input :forward_read_len, label: "R1 cycles", wrapper_html: {style: "margin-right: 1em; max-width: 8em;"} %>
+    <% if @sequencing_request.paired_end? %>
+      <%= f.input :reverse_read_len, label: "R2 cycles", wrapper_html: {style: "max-width: 8em;"} %>
+    <% end %>
+  </div>
 
   <!-- Add/update associated data_storage. If this is a new @sequencing_run, then the user can pick
        from two buttons: 1) Select, 2) Create new. After selecting one of the buttons, they will be
