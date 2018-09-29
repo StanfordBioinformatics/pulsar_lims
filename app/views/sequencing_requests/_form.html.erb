@@ -4,6 +4,9 @@
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing request name"} %>
 
+  <%= f.input :date_submitted, include_blank: true, label_html: {"data-toggle" => "tooltip", "title" => "The day the request for sequencing was formally submitted to the sequencing center."} %>
+  <%= f.association :submitted_by, collection: User.order([:last_name, :first_name]), label_html: {class: "refresh", "data-toggle" => "tooltip", "title" => "Who submitted the request for sequencing to the sequencing center."} %>
+
   <% sample_sheet_upload_hint="" %>
   <% if @sequencing_request.sample_sheet.present? %>
     <% sample_sheet_upload_hint="You previously uploaded #{@sequencing_request.sample_sheet}." %>
@@ -59,7 +62,8 @@
 
   <div class="my-flex">
     <%= f.input :concentration, label_html: {"data-toggle": "tooltip", "title": "The concentration of nucleic acids in the pooled library."} %>
-    <%= f.association :concentration_unit, collection: Unit.where(unit_type: "concentration") %>
+    <%= f.association :concentration_unit, label: "Units", collection: Unit.where(unit_type: "concentration") %>
+    <%= f.input :concentration_instrument, label: "Instrument", collection: Enums::CONCENTRATION_INSTRUMENTS %>
   </div>
 
   <%= f.input :average_size, label: "Average library size", placeholder: "bp" %>

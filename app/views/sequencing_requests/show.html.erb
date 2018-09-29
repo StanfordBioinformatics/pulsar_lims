@@ -7,6 +7,24 @@
   </tr>
 
   <tr>
+    <th><strong>Date submitted:</strong></th>
+    <td>
+      <% if @sequencing_request.date_submitted.present? %>
+        <%= @sequencing_request.date_submitted %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <th><strong>Submitted by</strong></th>
+    <td>
+      <% if @sequencing_request.submitted_by.present? %>
+        <%= @sequencing_request.submitted_by.display() %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
     <th><strong>Plates:</strong></th>
     <% if @sequencing_request.plates.present?%>
       <td>
@@ -16,16 +34,21 @@
       <td>None</td>
     <% end %>
   </tr>
-      
+
   <tr>
     <th><strong>Concentration:</strong></th>
     <% if @sequencing_request.concentration.present? %>
-      <td><%= @sequencing_request.concentration %>&nbsp;<%= @sequencing_request.concentration_unit.name %></td>
+      <td>
+        <%= @sequencing_request.concentration %>&nbsp;<%= @sequencing_request.concentration_unit.name %>
+        <% if @sequencing_request.concentration_instrument.present? %>
+           (<%= @sequencing_request.concentration_instrument %>)
+        <% end %>
+      </td>
     <% else %>
       <td></td>
     <% end %>
   </tr>
-  
+
   <tr>
     <th><strong>Average library size:</strong></th>
     <td>
@@ -39,7 +62,7 @@
     <th><strong>Paired-end:</strong></th>
     <td><%= @sequencing_request.paired_end %></td>
   </tr>
-  
+
   <tr>
     <th><strong>Libraries:</strong></th>
     <% if @sequencing_request.libraries.present? %>
@@ -51,10 +74,10 @@
     <% end %>
   </tr>
 
-  <tr class="notes-row">                                                                               
-    <th><strong>Notes</strong></th>                                                                    
-    <td><%= simple_format(@sequencing_request.notes) %></td>                                                     
-  </tr> 
+  <tr class="notes-row">
+    <th><strong>Notes</strong></th>
+    <td><%= simple_format(@sequencing_request.notes) %></td>
+  </tr>
 </table>
 
 <div class="added_libraries"></div>
@@ -63,7 +86,7 @@
 <% end %>
 <ul class="bl-btns actions"> <!-- bl means business logic -->
   <li>
-    <%= link_to "Add Library", 
+    <%= link_to "Add Library",
         select_library_sequencing_request_path(@sequencing_request,:exclude_libraries => exclude_libraries),
         class: "reg-btn", remote: true, id: "add_library"
     %>
@@ -120,7 +143,7 @@
 </div>
 </br>
 
-<!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->
 <%= render partial: "application_partials/edit_notes", locals: {rec: @sequencing_request} %>
 
 <%= link_to 'Back', sequencing_requests_path, class: "back-btn" %>

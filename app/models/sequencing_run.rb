@@ -14,7 +14,6 @@ class SequencingRun< ActiveRecord::Base
   has_many   :sequencing_results, dependent: :destroy
 
   validates :status, presence: true, inclusion: {in: Enums::SEQUENCING_STATUS, message: "must be an element in the list #{Enums::SEQUENCING_STATUS}."}
-  validates :submitted_by, presence: {message: "must be specified when 'date submitted' is set."}, if: "date_submitted.present?"
   validates :data_storage, presence: {message: "must be set when the status is set to 'finished'.", if:  "status == 'finished'"}
   validates :name, length: { minimum: 2, maximum: 40 }
   validates :name, presence: true

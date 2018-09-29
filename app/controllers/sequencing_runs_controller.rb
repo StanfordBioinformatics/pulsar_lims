@@ -38,7 +38,7 @@ class SequencingRunsController < ApplicationController
   end
 
   def new
-    @sequencing_run = @sequencing_request.sequencing_runs.build
+    @sequencing_run = @sequencing_request.sequencing_runs.build({date_submitted: @sequencing_request.date_submitted, submitted_by: @sequencing_request.submitted_by})
     authorize @sequencing_run
   end
 

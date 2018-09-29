@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180928191114) do
+ActiveRecord::Schema.define(version: 20180928230810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -872,8 +872,8 @@ ActiveRecord::Schema.define(version: 20180928191114) do
     t.string   "name"
     t.integer  "sequencing_platform_id"
     t.integer  "sequencing_center_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "user_id"
     t.boolean  "paired_end"
     t.integer  "concentration_unit_id"
@@ -881,11 +881,15 @@ ActiveRecord::Schema.define(version: 20180928191114) do
     t.string   "sample_sheet"
     t.text     "notes"
     t.string   "average_size"
+    t.integer  "submitted_by_id"
+    t.date     "date_submitted"
+    t.string   "concentration_instrument"
   end
 
   add_index "sequencing_requests", ["concentration_unit_id"], name: "index_sequencing_requests_on_concentration_unit_id", using: :btree
   add_index "sequencing_requests", ["sequencing_center_id"], name: "index_sequencing_requests_on_sequencing_center_id", using: :btree
   add_index "sequencing_requests", ["sequencing_platform_id"], name: "index_sequencing_requests_on_sequencing_platform_id", using: :btree
+  add_index "sequencing_requests", ["submitted_by_id"], name: "index_sequencing_requests_on_submitted_by_id", using: :btree
   add_index "sequencing_requests", ["user_id"], name: "index_sequencing_requests_on_user_id", using: :btree
 
   create_table "sequencing_results", force: :cascade do |t|
@@ -1213,6 +1217,7 @@ ActiveRecord::Schema.define(version: 20180928191114) do
   add_foreign_key "sequencing_requests", "sequencing_platforms"
   add_foreign_key "sequencing_requests", "units", column: "concentration_unit_id"
   add_foreign_key "sequencing_requests", "users"
+  add_foreign_key "sequencing_requests", "users", column: "submitted_by_id"
   add_foreign_key "sequencing_results", "libraries"
   add_foreign_key "sequencing_results", "sequencing_runs"
   add_foreign_key "sequencing_results", "users"

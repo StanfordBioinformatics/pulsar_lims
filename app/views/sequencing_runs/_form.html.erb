@@ -11,8 +11,8 @@
 
   <%= f.input :lane, label_html: {"data-toggle" => "tooltip", "title" => "The lane number on the flowcell."} %>
   
-  <div style="display: flex">
-    <%= f.input :forward_read_len, label: "R1 cycles", wrapper_html: {style: "margin-right: 1em; max-width: 8em;"} %>
+  <div class="my-flex">
+    <%= f.input :forward_read_len, label: "R1 cycles", wrapper_html: {style: "max-width: 8em;"} %>
     <% if @sequencing_request.paired_end? %>
       <%= f.input :reverse_read_len, label: "R2 cycles", wrapper_html: {style: "max-width: 8em;"} %>
     <% end %>

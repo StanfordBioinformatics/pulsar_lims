@@ -13,14 +13,15 @@ class SequencingRequest < ActiveRecord::Base
   belongs_to :concentration_unit, class_name: "Unit"
   belongs_to :sequencing_platform
   belongs_to :sequencing_center
+  belongs_to :submitted_by, class_name: "User"
   has_many    :sequencing_runs, dependent: :destroy
   belongs_to :user
 
   validates :name, uniqueness: true, allow_blank: true
   validates :sequencing_center, presence: true
   validates :sequencing_platform, presence: true
-  validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"
-  validates :concentration, presence: {message: "must be specified when the units are set."}, if: "concentration_unit.present?"
+  validates :concentration, presence: {message: "must be specified."}, if: "concentration_unit.present? or concentration_instrument.present?"
+  validates :concentration_unit, presence: {message: "must be specified."}, if: "concentration.present? or concentration_instrument.present?"
 
   accepts_nested_attributes_for :libraries, allow_destroy: true
   accepts_nested_attributes_for :plates, allow_destroy: true
