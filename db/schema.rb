@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180928230810) do
+ActiveRecord::Schema.define(version: 20181001215826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -884,6 +884,7 @@ ActiveRecord::Schema.define(version: 20180928230810) do
     t.integer  "submitted_by_id"
     t.date     "date_submitted"
     t.string   "concentration_instrument"
+    t.string   "submission_sheet"
   end
 
   add_index "sequencing_requests", ["concentration_unit_id"], name: "index_sequencing_requests_on_concentration_unit_id", using: :btree

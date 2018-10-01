@@ -1,7 +1,7 @@
 require 'elasticsearch/model'
 
 class SequencingRequest < ActiveRecord::Base
-  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "SREQ"
@@ -35,10 +35,14 @@ class SequencingRequest < ActiveRecord::Base
     ApplicationPolicy
   end
 
-  def s3_direct_post                                                                                   
-    # Used for getting a bucket object URI for uploading a gel image.                                  
-    # Called in the controller via a private method with the same name.                                
+  def s3_direct_post
+    # Used for getting a bucket object URI for uploading an Illumina SampleSheet.
+    # Called in the controller via a private method with the same name.
     return S3_BUCKET.presigned_post(key: "sample_sheets/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+  end
+
+  def s3_submission_sheet_direct_post
+    return S3_BUCKET.presigned_post(key: "submission_sheets/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
   end
 
 
@@ -48,9 +52,9 @@ class SequencingRequest < ActiveRecord::Base
       next if i.blank?
       plate = Plate.find(i)
       next if self.plates.include?(plate)
-      self.plates << plate 
+      self.plates << plate
       self.add_libraries_from_plate(plate)
-    end  
+    end
   end
 
   def library_ids=(ids)
@@ -60,7 +64,7 @@ class SequencingRequest < ActiveRecord::Base
       lib = Library.find(i)
       next if self.libraries.include?(lib)
       self.libraries << lib
-    end  
+    end
   end
 
   def get_barcodes(sequences=false)
@@ -73,7 +77,7 @@ class SequencingRequest < ActiveRecord::Base
         if sequences
           bc = bc.sequence
         end
-        barcodes << bc 
+        barcodes << bc
       end
     end
     return barcodes
@@ -92,7 +96,7 @@ class SequencingRequest < ActiveRecord::Base
     def add_libraries_from_plate(plate)
       #I Set this method under the protected block so that this can be called from an instance method within the class definition.
       # Originally I had this under the private block, but that didn't allow for instance methods in the class definition
-      # to call it. 
+      # to call it.
       plate.wells.each do |w|
         next if w.fail?
         lib = w.get_library()
@@ -147,11 +151,11 @@ class SequencingRequest < ActiveRecord::Base
       count = -1
       libs.each do |lib|
         count += 1
-        kit_name = lib.sequencing_library_prep_kit.name  
+        kit_name = lib.sequencing_library_prep_kit.name
         if kit_name != prev_kit_name
-          self.errors[:base] << "Multiple library prep kits are present. For example, library #{lib.name} was prepared with #{kit_name}, whereas libary #{libs[count -1].name} was prepared with #{prev_kit_name}." 
+          self.errors[:base] << "Multiple library prep kits are present. For example, library #{lib.name} was prepared with #{kit_name}, whereas libary #{libs[count -1].name} was prepared with #{prev_kit_name}."
           return false
-          #raise "Multiple library prep kits are present. For example, library #{lib.name} was prepared with #{kit_name}, whereas libary #{libs[count -1].name} was prepared with #{prev_kit_name}." 
+          #raise "Multiple library prep kits are present. For example, library #{lib.name} was prepared with #{kit_name}, whereas libary #{libs[count -1].name} was prepared with #{prev_kit_name}."
         end
         prev_kit_name = kit_name
       end

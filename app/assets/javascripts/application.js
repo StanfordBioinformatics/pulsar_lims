@@ -293,7 +293,7 @@ $(function() {
 //The code below was derived from https://devcenter.heroku.com/articles/direct-to-s3-image-uploads-in-rails.
 //Also see wiki page https://github.com/blueimp/jQuery-File-Upload/wiki/Options.
 $(function() {
-  $('.directUpload').find("input:file").each(function(i, elem) {
+  $('.directUpload').each(function(i, elem) {
     var $fileInput    = $(elem); //The file input field jQuery object, that is listening for change events.
     var $form         = $($fileInput.closest('form'));
     var $submitButton = $form.find('input[type="submit"]');
@@ -302,10 +302,10 @@ $(function() {
     $fileInput.after($barContainer);
     $fileInput.fileupload({
       fileInput:       $fileInput,
-      url:             $form.data('url'), //The url is set in the form view.
+      url:             $fileInput.data('url'), //The url is set in the form view.
       type:            'POST',
       autoUpload:       true, //upload starts autom. when file is selected.
-      formData:         $form.data('form-data'), //includes things like AWS Access Keys.
+      formData:         $fileInput.data('form-data'), //includes things like AWS Access Keys.
       paramName:        'file', // S3 does not like nested name fields i.e. name="user[avatar_url]"
       dataType:         'XML',  // The type of data that is expected back from the server. S3 returns XML if success_action_status (set in controller set_s3_direct_post method) is set to 201
       replaceFileInput: false,
@@ -318,11 +318,9 @@ $(function() {
       //Callback for the submit event of each file upload. If this callback returns false, the file upload request is not started.
       submit: function (e) {
         //Only allow the MIME type of text/plain since it will be programatically parsed.
-        if (! $fileInput.hasClass("image")) {
-          if (! $fileInput.val().endsWith(".txt")) {
-            alert("Invalid file type. Only plain text files are allowed and should have a .txt extension.");
-            return false;
-          }
+        if ($fileInput.hasClass("text-only")) {
+          alert("Invalid file type. Only plain text files are allowed and should have a .txt extension.");
+          return false;
         }
       },
 
@@ -342,7 +340,7 @@ $(function() {
 
         // extract key and generate URL from response
         var key   = $(data.jqXHR.responseXML).find("Key").text();
-        var url   = '//' + $form.data('host') + '/' + key;
+        var url   = '//' + $fileInput.data('host') + '/' + key;
 
         // create hidden field
         var input = $("<input />", { type:'hidden', name: $fileInput.attr('name'), value: url })

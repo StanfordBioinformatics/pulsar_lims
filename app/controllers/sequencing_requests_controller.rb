@@ -1,7 +1,7 @@
 class SequencingRequestsController < ApplicationController
   before_action :set_sequencing_request, only: [:show, :edit, :update, :destroy, :libraries_index, :select_library, :select_scs, :select_scs_plates]
   skip_after_action :verify_authorized, only: [:select_library,:select_scs, :select_scs_plates, :libraries_index]
-  before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
+  before_action :set_s3_direct_post, :set_s3_submission_sheet_direct_post, only: [:new, :edit, :create, :update]
 
   def libraries_index
     #Called via ajax
@@ -138,6 +138,7 @@ class SequencingRequestsController < ApplicationController
         :sample_sheet,
         :sequencing_center_id,
         :sequencing_platform_id,
+        :submission_sheet,
         :submitted_by_id, 
         :plate_ids => [],
         plates_attributes: [:id,:_destroy],
@@ -145,10 +146,15 @@ class SequencingRequestsController < ApplicationController
         libraries_attributes: [:id,:_destroy]
       )
     end
+
     def set_s3_direct_post
       @s3_direct_post = S3_BUCKET.presigned_post(key: "sample_sheets/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
       #From the AWS docs, regarding the 201 here: If the value is set to 201, Amazon S3 returns an XML document with a 201 status code.
       #If we don't set the acl, then the file is not readable by others.
       #Also using #{SecureRandom.uuid} so that users don't overwrite an existing file with the same name.
     end
+
+    def set_s3_submission_sheet_direct_post                                                                  
+      @s3_submission_sheet_direct_post = S3_BUCKET.presigned_post(key: "submission_sheets/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+    end 
 end

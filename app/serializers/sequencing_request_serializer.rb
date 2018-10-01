@@ -10,7 +10,8 @@ class SequencingRequestSerializer < ActiveModel::Serializer
         :name,
         :notes,
         :paired_end,
-        :sample_sheet
+        :sample_sheet,
+        :submission_sheet
 
   has_one :concentration_unit
   has_one :sequencing_center

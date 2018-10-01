@@ -1,4 +1,4 @@
-<%= simple_form_for(@single_cell_sorting, html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
+<%= simple_form_for @single_cell_sorting do |f| %>
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @single_cell_sorting } %>
   <%= f.input :name %>
   <%= f.input :description %>
@@ -10,7 +10,7 @@
     <% file_upload_hint="You previously uploaded #{@single_cell_sorting.fluorescence_intensity_file}." %>
   <% end %>
     
-  <%= f.input :fluorescence_intensity_file, as: :file, hint: file_upload_hint %>
+  <%= f.input :fluorescence_intensity_file, as: :file, hint: file_upload_hint, input_html: {class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }} %>
   
   <%= f.association :documents %>
 

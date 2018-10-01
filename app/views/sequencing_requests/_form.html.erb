@@ -1,4 +1,4 @@
-<%= simple_form_for(@sequencing_request, html: { class: 'directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host } }) do |f| %>
+<%= simple_form_for @sequencing_request do |f| %>
 
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_request } %>
 
@@ -11,8 +11,13 @@
   <% if @sequencing_request.sample_sheet.present? %>
     <% sample_sheet_upload_hint="You previously uploaded #{@sequencing_request.sample_sheet}." %>
   <% end %>
+  <%= f.input :sample_sheet, as: :file, hint: sample_sheet_upload_hint, input_html: {class: "directUpload", data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }}, label_html: {"data-toggle": "tooltip", "title": "The sample sheet that you submit to the sequencing center. Must be in the Illumina-specified format, containing at least the 'Data Section' (See 'Data Section' in the Illumina bcl2fastq guide)."} %>
 
-  <%= f.input :sample_sheet, as: :file, hint: sample_sheet_upload_hint, label_html: {"data-toggle": "tooltip", "title": "The sample sheet that you submit to the sequencing center. Must be in the Illumina-specified format, containing at least the 'Data Section' (See 'Data Section' in the Illumina bcl2fastq guide)."} %>
+  <% submission_sheet_upload_hint="" %>
+  <% if @sequencing_request.submission_sheet.present? %>
+    <% submission_sheet_upload_hint="You previously uploaded #{@sequencing_request.submission_sheet}." %>
+  <% end %>
+  <%= f.input :submission_sheet, as: :file, hint: submission_sheet_upload_hint, input_html: {class: "directUpload", data: { 'form-data' => (@s3_submission_sheet_direct_post.fields), 'url' => @s3_submission_sheet_direct_post.url, 'host' => URI.parse(@s3_submission_sheet_direct_post.url).host }}, label_html: {"data-toggle": "tooltip", "title": "The sequencing request form that you send/fill out for the sequencing center. Useful if you want to reference a copy for your records."} %>
 
   <% if @sequencing_request.libraries.persisted.any? %>
     <table class="min-table" id="libraries">

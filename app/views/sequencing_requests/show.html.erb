@@ -134,6 +134,13 @@
 </div>
 
 <div class="my-flex">
+  <h4>Submission sheet:</strong></h4>
+  <% if @sequencing_request.submission_sheet.present? %>
+    <%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " " + File.basename(@sequencing_request.submission_sheet), @sequencing_request.sample_sheet %>
+  <% end %>
+</div>
+
+<div class="my-flex">
   <h4>Sequencing runs:</h4>
   <% if @sequencing_request.sequencing_runs.present? %>
     <%= render partial: "application_partials/link_to_has_many", locals: {links: @sequencing_request.sequencing_runs} %>
