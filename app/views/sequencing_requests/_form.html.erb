@@ -1,5 +1,6 @@
 <%= simple_form_for @sequencing_request do |f| %>
 
+  <% defaults = INPUT_DEFAULTS[@sequencing_request.class.name] %>
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @sequencing_request } %>
 
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique sequencing request name"} %>
@@ -67,19 +68,20 @@
 
   <div class="my-flex">
     <%= f.input :concentration, label_html: {"data-toggle": "tooltip", "title": "The concentration of nucleic acids in the pooled library."} %>
-    <%= f.association :concentration_unit, label: "Units", collection: Unit.where(unit_type: "concentration") %>
-    <%= f.input :concentration_instrument, label: "Instrument", collection: Enums::CONCENTRATION_INSTRUMENTS %>
+    <%= f.association :concentration_unit, label: "Units", collection: Unit.where(unit_type: "concentration"), selected: @sequencing_request.concentration_unit || defaults["concentration_unit"] %>
+    <%= f.input :concentration_instrument, selected: @sequencing_request.concentration_instrument || defaults["concentration_instrument"], label: "Instrument", collection: Enums::CONCENTRATION_INSTRUMENTS %>
   </div>
 
   <%= f.input :average_size, label: "Average library size", placeholder: "bp" %>
           
   <%= f.association :sequencing_platform, 
-      collection: SequencingPlatform.order(:name), 
+      selected: defaults["sequencing_platform"],
       label_html: {class: "refresh"},
       label_method: :name %>
 
   <%= f.association :sequencing_center, 
       collection: SequencingCenter.order(:name), 
+      selected: @sequencing_request.sequencing_center || defaults["sequencing_center"],
       label_html: {class: "refresh"},
       label_method: :name %>
 

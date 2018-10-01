@@ -63,6 +63,7 @@ SequencingCenter.create!([
 Unit.delete_all
 Unit.create!([
   {user_id: admin, name: "µg/µL", unit_type: "concentration"},
+  {user_id: admin, name: "ng/µL", unit_type: "concentration"},
   {user_id: admin, name: "μM", unit_type: "concentration"},
   {user_id: admin, name: "nM", unit_type: "concentration"},
   {user_id: admin, name: "cells", unit_type: "items"},
