@@ -62,6 +62,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true #already required, but for some reason with Devise the asterisk doesn't show up on the form.
   validates :first_name, presence: true #already required, but for some reason with Devise the asterisk doesn't show up on the form.
   validates :last_name, presence: true #already required, but for some reason with Devise the asterisk doesn't show up on the form.
+  validate :set_name, on: [:create, :update]
 
   VIEWER_ROLE = 1
   MANAGER_ROLE = 5
@@ -169,5 +170,11 @@ class User < ActiveRecord::Base
       return false
     end
   end
+
+  private
+
+    def set_name
+        self.name = "#{self.first_name} #{self.last_name}"
+    end 
 
 end
