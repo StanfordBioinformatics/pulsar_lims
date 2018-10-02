@@ -47,6 +47,9 @@
 $(document).on("click", ".xfade-out", function(event) {
   event.preventDefault();
   $(this).closest(".xfade").fadeOut( function(event) {
+    if ($(this).hasClass("xfade-remove")) {
+        $(this).remove()
+    }
     $(".xfade-in").fadeIn();
   })
 })

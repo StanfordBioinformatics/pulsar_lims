@@ -44,7 +44,6 @@
   <%= select_tag(:reference_genome_id, options_for_select( ReferenceGenome.order("lower(name)").map {|x| [x.name, x.id]}),
       prompt: "Select reference")  %>
   </br>
-
   <div class="container genomic_integration_site"></div>
   <!-- Jquery will fill in the div above when a reference_genome is selected -->
 

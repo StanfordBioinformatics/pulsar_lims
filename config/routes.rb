@@ -369,7 +369,6 @@ Pulsar::Application.routes.draw do
   resources :biosamples do
     get :add_shipping, on: :member
     get :add_crispr_modification, on: :member
-    get :make_replicate, on: :member
     get :clone, on: :member
     post :create_clones, on: :member
     get :biosample_parts, on: :member

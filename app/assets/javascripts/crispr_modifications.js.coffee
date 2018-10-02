@@ -14,7 +14,10 @@ $ ->
     $.get "/crispr_constructs/select_options", (responseText,status,jqXHR) ->
       $(".crispr_constructs_selector").html(responseText)
 
-
+  # REFERENCE GENOME LOGIC
+  # The user can select a reference genome to specify a modification site. When selecting one, 
+  # send an AJAX request to give back a genome build and chromosome selection form. Allow the user
+  # to remove the form as well. 
   $genomic_integration_site = $(".genomic_integration_site")
 
   chromosome_selection = ->
@@ -27,6 +30,10 @@ $ ->
     #set when page loads to, because if the _form.html.erb refreshed with a validation error, the
     # reference_genome may already have been set, but no change event will fire.
 
+  $(document).on "click", "#crispr_modification_select_chromosome .xfade-out", (event) ->
+     $("#reference_genome_id").val("")
+
+  # END REFERENCE GENOME LOGIC
 
   $("#reference_genome_id").change (event) ->
     chromosome_selection()
@@ -38,3 +45,4 @@ $ ->
 
   $(document).on "ajax:success", ".select_crispr_construct", (event,data) ->
     $("#added_crispr_constructs").append(data)
+
