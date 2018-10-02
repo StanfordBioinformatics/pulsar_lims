@@ -214,6 +214,11 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
+    resources :sequencing_platforms do
+      post :find_by_name, on: :collection
+      post :add_crispr_modification, on: :member
+    end
+
     resources :sequencing_requests do
       post :find_by_name, on: :collection
       post :add_crispr_modification, on: :member
