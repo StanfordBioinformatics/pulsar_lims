@@ -74,6 +74,7 @@ class ApplicationController < ActionController::Base
         render json: {}
         return
     end
+    p params[:find_by].to_hash
     res = @model_class.find_by(params[:find_by].to_hash)
     # NOTE ON ABOVE: I have to add the call to to_hash() since w/o it, we'll get the RAILS error
     # ActiveModel::ForbiddenAttributesError. That is becuase were using the raw params, and not
