@@ -225,18 +225,18 @@ Pulsar::Application.routes.draw do
     end
 
     resources :sequencing_requests do
-      post :find_by_name, on: :collection
-      post :add_crispr_modification, on: :member
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
     end
 
     resources :sequencing_runs do
-      post :find_by_name, on: :collection
-      post :add_crispr_modification, on: :member
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
     end
 
     resources :sequencing_results do
-      post :find_by_name, on: :collection
-      post :add_crispr_modification, on: :member
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
     end
 
     resources :shippings do
@@ -245,8 +245,8 @@ Pulsar::Application.routes.draw do
     end
 
     resources :single_cell_sortings do
-      post :find_by_name, on: :collection
-      post :add_crispr_modification, on: :member
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
     end
 
     resources :targets do
