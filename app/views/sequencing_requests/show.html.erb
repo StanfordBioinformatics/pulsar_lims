@@ -136,7 +136,7 @@
 <div class="my-flex">
   <h4>Submission sheet:</strong></h4>
   <% if @sequencing_request.submission_sheet.present? %>
-    <%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " " + File.basename(@sequencing_request.submission_sheet), @sequencing_request.sample_sheet %>
+    <%= link_to fa_icon("cloud-download", style: "font-size: 1.3em;") + " " + File.basename(@sequencing_request.submission_sheet), @sequencing_request.submission_sheet %>
   <% end %>
 </div>
 
