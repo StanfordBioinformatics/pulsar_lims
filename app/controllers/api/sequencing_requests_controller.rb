@@ -1,11 +1,10 @@
 class Api::SequencingRequestsController < Api::ApplicationController
   #example with curl:
-  # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/biosamples/3
+  # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/sequencing_requests/3
   before_action :set_sequencing_request, only: [:show, :update, :destroy]
-  skip_after_action :verify_authorized, only: [:find_by_name]
 
   def find_by
-    #find_by defined in ApplicationController#find_by.
+    # find_by defined in ApplicationController#find_by.
     # Use this method when you want to AND all of your query parameters.
     super
   end
@@ -16,15 +15,25 @@ class Api::SequencingRequestsController < Api::ApplicationController
     super
   end
 
+  def index
+    @sequencing_requests = policy_scope(SequencingRequest).order("lower(name)")
+    render json: @sequencing_requests
+  end
+
   def show
     authorize @sequencing_request
     render json: @sequencing_request
   end
 
-  def find_by_name
-    name = params[:name]
-    res = SequencingRequest.find_by(name: name)
-    render json:  res
+  def create
+    @sequencing_request = SequencingRequest.new(sequencing_request_params)
+    @sequencing_request.user = @current_user
+    authorize @sequencing_request
+    if @sequencing_request.save
+      render json: @sequencing_request, status: :created
+    else
+      render json: { errors: @sequencing_request.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -40,7 +49,6 @@ class Api::SequencingRequestsController < Api::ApplicationController
     ddestroy(@sequencing_request)
   end
 
-
   private
 
   def set_sequencing_request
@@ -49,25 +57,21 @@ class Api::SequencingRequestsController < Api::ApplicationController
 
   def sequencing_request_params
     params.require(:sequencing_request).permit(
-      :average_size,
-      :user_id,
-      :concentration,
-      :concentration_instrument,
-      :concentration_unit_id,
-      :date_submitted,
-      :name,
-      :notes,
-      :paired_end,
-      :sample_sheet,
-      :sequencing_center_id,
-      :sequencing_platform_id,
-      :submitted_by_id,
-      :submission_sheet,
-      :plate_ids => [],
-      plates_attributes: [:id,:_destroy],
-      :library_ids => [],
-      libraries_attributes: [:id,:_destroy]
+        :average_size,
+        :concentration,
+        :concentration_instrument,
+        :concentration_unit_id,
+        :date_submitted,
+        :name,
+        :notes,
+        :paired_end,
+        :sample_sheet,
+        :sequencing_center_id,
+        :sequencing_platform_id,
+        :submission_sheet,
+        :submitted_by_id,
+        :plate_ids => [],
+        :library_ids => []
     )
   end
-
 end
