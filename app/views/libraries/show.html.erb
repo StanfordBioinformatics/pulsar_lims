@@ -106,6 +106,15 @@
   </tr>
 
   <tr>
+    <th><strong>Crosslinking Method:</strong></th>
+    <td>
+      <% if @library.crosslinking_method.present? %>
+        <%= @library.crosslinking_method %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
     <th><strong>Concentration:</strong></th>
     <% if @library.concentration.present? %>
       <td><%= @library.concentration %>&nbsp;<%= @library.concentration_unit.name %></td>

@@ -8,6 +8,8 @@ module Enums
 
   CRISPR_MOD_PURPOSE = ["activation", "analysis", "overexpression", "repression", "tagging", "validation"]
 
+  CROSSLINKING_METHOD = ["EGS and formaldehyde", "formaldehyde", "ultraviolet irradiation"] # Library
+
   DURATION_UNITS = ["second", "minute", "hour", "day"]
 
   GENDERS = ["female", "male", "mixed", "unknown"]

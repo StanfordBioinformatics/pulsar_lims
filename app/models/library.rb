@@ -32,6 +32,7 @@ class Library < ActiveRecord::Base
   belongs_to :vendor
   belongs_to :well
 
+  validates :crosslinking_method, inclusion: {in: Enums::CROSSLINKING_METHOD, message: "must be an element in the list #{Enums::CROSSLINKING_METHOD}."}, allow_blank: true
   validates  :upstream_identifier, uniqueness: true, allow_blank: true
   validates :name, length: { minimum: 2, maximum: 80 }, uniqueness: true, allow_blank: true
 #  validates :barcode, format: { with: /\A[acgtnACGTN]+-?[acgtnACGTN]+\z/ }, allow_blank: true

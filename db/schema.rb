@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181002050443) do
+ActiveRecord::Schema.define(version: 20181003215104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -676,6 +676,7 @@ ActiveRecord::Schema.define(version: 20181002050443) do
     t.text     "notes"
     t.boolean  "prototype",                                   default: false
     t.integer  "times_cloned",                                default: 0
+    t.string   "crosslinking_method"
   end
 
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree

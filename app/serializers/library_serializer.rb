@@ -5,6 +5,7 @@ class LibrarySerializer < ActiveModel::Serializer
   attributes :id,
              :biosample_id, 
              :concentration,
+             :crosslinking_method,
              :from_prototype_id, 
              :lot_identifier,
              :name,
