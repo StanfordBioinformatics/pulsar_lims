@@ -11,7 +11,7 @@ module ModelConcerns
     if self.respond_to?(:name)
       name = self.name
       if name.present?
-        label += " #{name}"
+        label = "#{name} #{label}"
       end
     end
     return label
