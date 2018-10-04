@@ -1,0 +1,13 @@
+<%= simple_form_for(@chip_batch) do |f| %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @chip_batch } %>
+
+  <%= f.association :analyst %>
+
+  <%= f.input :crosslinking_method, collection: Enums::CROSSLINKING_METHOD, label_html: {"data-toggle": "tooltip", title: "Crosslinking protocol used in the ChIP experiment."} %>
+
+  <%= f.input :date %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
+<% end %>

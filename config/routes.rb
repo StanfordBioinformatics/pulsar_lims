@@ -1,5 +1,7 @@
 Pulsar::Application.routes.draw do
 
+  resources :chip_batch_items
+  resources :chip_batches
   resources :shippings
   resources :immunoblots do
     post :add_gel, on: :member
@@ -49,7 +51,7 @@ Pulsar::Application.routes.draw do
   end
   resources :single_cell_sortings do
     get :add_plate, on: :member
-    get :add_sorting_biosample, on: :member  
+    get :add_sorting_biosample, on: :member
     get :add_library_prototype, on: :member
     get :new_analysis, on: :member
   end
@@ -126,6 +128,16 @@ Pulsar::Application.routes.draw do
     end
 
     resources :biosample_term_names do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
+    resources :chip_batches do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
+    resources :chip_batch_items do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
@@ -271,10 +283,10 @@ Pulsar::Application.routes.draw do
     resources :users, only: [:show, :edit] do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
-      patch :generate_api_key, on: :member                                                                
-      patch :remove_api_key, on: :member                                                                  
-      patch :archive, on: :member  
-      patch :unarchive, on: :member  
+      patch :generate_api_key, on: :member
+      patch :remove_api_key, on: :member
+      patch :archive, on: :member
+      patch :unarchive, on: :member
     end
 
     resources :wells do
@@ -324,8 +336,8 @@ Pulsar::Application.routes.draw do
     get  :show_api_key, on: :member
     post  :remove_api_key, on: :member
     patch :archive, on: :member
-  end 
-    
+  end
+
 
   resources :attachments, only: [:show,:new]
 
@@ -354,7 +366,7 @@ Pulsar::Application.routes.draw do
 
   resources :antibody_purifications do
     get :select_options, on: :collection
-  end 
+  end
 
   resources :organisms
 
@@ -439,7 +451,7 @@ Pulsar::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

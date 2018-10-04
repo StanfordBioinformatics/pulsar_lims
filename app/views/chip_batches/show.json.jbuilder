@@ -1,0 +1,1 @@
+json.extract! @chip_batch, :id, :user_id, :crosslinking_method, :date, :created_at, :updated_at

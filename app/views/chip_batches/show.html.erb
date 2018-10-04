@@ -1,0 +1,26 @@
+<%= render partial:  "application_partials/header", locals: {rec: @chip_batch } %>
+
+<table class="attributes">
+  <tbody>
+    <tr>
+      <th><strong>Analyst:</strong></th>
+      <td><%= @chip_batch.analyst %></td>
+    </tr>
+
+    <tr>
+      <th><strong>Crosslinking Method:</strong></th>
+      <td>
+        <% if @chip_batch.crosslinking_method.present? %>
+          <%= @chip_batch.crosslinking_method %>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <th><strong>Date:</strong></th>
+      <td><%= @chip_batch.date %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Back', chip_batches_path %>

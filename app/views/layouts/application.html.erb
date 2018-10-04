@@ -141,6 +141,7 @@
                 <span class="navbar-brand"><h5>Experiments<h5></span>
               </div>
               <ul style="" class="nav navbar-nav">
+                <%= link_to "ChIP Batches", chip_batches_path, class: controller_name() == "chip_batches" ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "ChIP-Seq Experiments", chipseq_experiments_path, class: controller_name() == "chipseq_experiments" ? "list-group-item active" : "list-group-item" %>
               </ul>
 

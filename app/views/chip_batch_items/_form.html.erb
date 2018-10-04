@@ -1,0 +1,15 @@
+<%= simple_form_for(@chip_batch_item) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user %>
+    <%= f.association :chip_batch %>
+    <%= f.association :biosample %>
+    <%= f.input :concentration %>
+    <%= f.input :notes %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

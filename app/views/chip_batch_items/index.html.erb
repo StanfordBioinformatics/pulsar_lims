@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Chip Batch Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Chip batch</th>
+      <th>Biosample</th>
+      <th>Concentration</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @chip_batch_items.each do |chip_batch_item| %>
+      <tr>
+        <td><%= chip_batch_item.user %></td>
+        <td><%= chip_batch_item.chip_batch %></td>
+        <td><%= chip_batch_item.biosample %></td>
+        <td><%= chip_batch_item.concentration %></td>
+        <td><%= chip_batch_item.notes %></td>
+        <td><%= link_to 'Show', chip_batch_item %></td>
+        <td><%= link_to 'Edit', edit_chip_batch_item_path(chip_batch_item) %></td>
+        <td><%= link_to 'Destroy', chip_batch_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Chip batch item', new_chip_batch_item_path %>

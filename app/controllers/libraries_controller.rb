@@ -98,7 +98,6 @@ class LibrariesController < ApplicationController
         :biosample_id,
         :concentration,
         :concentration_unit_id,
-        :crosslinking_method,
         :from_prototype_id,
         :library_fragmentation_method_id,
         :lot_identifier,

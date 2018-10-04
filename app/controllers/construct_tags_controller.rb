@@ -21,7 +21,6 @@ class ConstructTagsController < ApplicationController
   def create
     authorize ConstructTag
     @construct_tag = ConstructTag.new(construct_tag_params)
-
     @construct_tag.user = current_user
 
     respond_to do |format|

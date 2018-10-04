@@ -51,9 +51,7 @@
       label_html: {"data-toggle" => "tooltip","title" => "SO (Sequence Ontology) term best matching the molecule isolated to generate the library (e.g. 'RNA' for a total RNA library, even if that library is subsequently reverse transcribed for DNA sequencing.)"} %>
 
   <%= f.association :library_fragmentation_method,
-      label_html: {"data-toggle" => "tooltip", "title" => "The crosslinking protocol used in the library preparation, if applicable."} %>
-
-  <%= f.input :crosslinking_method, collection: Enums::CROSSLINKING_METHOD, label_html: {"data-toggle": "tooltip", title: "Crosslinking protocol used in the library preparation, if applicable."} %>
+      label_html: {"data-toggle" => "tooltip", "title" => "The fragmentation protocol used in the library preparation, if applicable."} %>
 
   <div class="my-flex">
     <%= f.input :concentration, label_html: {"data-toggle": "tooltip", title: "The concentration of nucleic acids in the library."} %>
