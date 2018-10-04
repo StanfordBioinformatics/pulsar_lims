@@ -26,6 +26,7 @@ class UnitsController < ApplicationController
   end
 
   def edit
+    authorize @unit
   end
 
   def create

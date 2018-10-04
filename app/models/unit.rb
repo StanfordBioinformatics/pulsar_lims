@@ -9,6 +9,10 @@ class Unit < ActiveRecord::Base
   belongs_to :user
   validates :name, presence: true, uniqueness: true
   validates :unit_type, presence: true, inclusion: {in: Enums::UNIT_TYPES, message: "must be an element from the list #{Enums::UNIT_TYPES}"}
+  scope :concentration, lambda { where(unit_type: "concentration") }
+  scope :items, lambda { where(unit_type: "items") }
+  scope :mass, lambda { where(unit_type: "mass") }
+  scope :volume, lambda { where(unit_type: "volume") }
 
   def self.policy_class
     ApplicationPolicy
