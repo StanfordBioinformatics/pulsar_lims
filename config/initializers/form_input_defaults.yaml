@@ -1,3 +1,6 @@
+ChipBatchItem:
+    concentration_unit: 10 #ng/µl
+
 Gel:
     percentage: 4-15
 
@@ -15,5 +18,3 @@ SequencingRequest:
     sequencing_center: 1 #Stanford Genome Sequencing Service Center
     concentration_unit: 10 #ng/µl
     sequencing_platform: 3 #illumina hiseq 4000
-
-

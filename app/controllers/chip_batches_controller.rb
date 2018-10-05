@@ -1,12 +1,12 @@
 class ChipBatchesController < ApplicationController
   before_action :set_chip_batch, only: [:show, :edit, :update, :destroy, :add_chip_batch_item, :create_or_update_chip_batch_row]
-  skip_after_action :verify_authorized, only: [:add_chip_batch_item, :create_or_update_chip_batch_row]
+  skip_after_action :verify_authorized, only: [:add_chip_batch_item, :create_or_update_chip_batch_row, :remove_chip_batch_item]
 
   def add_chip_batch_item
     # Called in /views/chip_batches/show.html.erb via AJAX to add a new row for entering a
     # ChipBatchItem.
     @chip_batch_item = @chip_batch.chip_batch_items.build()
-    render partial: "chip_batch/add_chip_batch_item", layout: false
+    render partial: "chip_batches/add_chip_batch_item", layout: false
   end
 
   def create_or_update_chip_batch_item
@@ -44,6 +44,7 @@ class ChipBatchesController < ApplicationController
 
   def new
     authorize ChipBatch
+    @chip_batch = ChipBatch.new 
   end
 
   def edit
@@ -96,7 +97,7 @@ class ChipBatchesController < ApplicationController
         :chip_batch_item_ids,
         :crosslinking_method,
         :date,
-        :chip_batch_items_attributes [
+        chip_batch_items_attributes: [
           :id,
           :biosample_id,
           :chip_batch_id,

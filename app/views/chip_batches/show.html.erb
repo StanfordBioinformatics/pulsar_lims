@@ -10,6 +10,11 @@
     </tr>
 
     <tr>
+      <th><strong>Date:</strong></th>
+      <td><%= @chip_batch.date %></td>
+    </tr>
+
+    <tr>
       <th><strong>Crosslinking Method:</strong></th>
       <td>
         <% if @chip_batch.crosslinking_method.present? %>
@@ -18,10 +23,6 @@
       </td>
     </tr>
 
-    <tr>
-      <th><strong>Date:</strong></th>
-      <td><%= @chip_batch.date %></td>
-    </tr>
   </tbody>
 </table>
 
@@ -37,5 +38,5 @@
 </br>
 <%= link_to "Add row", add_chip_batch_item_chip_batch_path(@chip_batch), class: "add-chip-batch-item-btn reg-btn", remote: true %>
 
-
+</br></br>
 <%= link_to 'Back', chip_batches_path %>

@@ -5,7 +5,7 @@ class ChipBatchItem < ActiveRecord::Base
   include ModelConcerns
   ABBR = "CBI"
   DEFINITION = "Howdy"
-  default_scope {order("lower(name)")}
+  #default_scope {order("lower(name)")} #no name column
   belongs_to :user
   belongs_to :biosample
   belongs_to :chip_batch

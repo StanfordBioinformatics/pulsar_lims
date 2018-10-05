@@ -3,9 +3,9 @@
 
   <%= f.association :analyst %>
 
-  <%= f.input :crosslinking_method, collection: Enums::CROSSLINKING_METHOD, label_html: {"data-toggle": "tooltip", title: "Crosslinking protocol used in the ChIP experiment."} %>
-
   <%= f.input :date %>
+
+  <%= f.input :crosslinking_method, collection: Enums::CROSSLINKING_METHOD, label_html: {"data-toggle": "tooltip", title: "Crosslinking protocol used in the ChIP experiment."} %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
