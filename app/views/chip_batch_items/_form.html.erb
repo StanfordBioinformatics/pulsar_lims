@@ -1,6 +1,5 @@
 <!-- Add hidden element to serve as a status check for jQuery to know whether this record exists or not. -->
 <% defaults = INPUT_DEFAULTS[@chip_batch_item.class.name] %>
-<p><%= defaults.to_s %></p>
 <% if @chip_batch_item.id.present? %>
   <span style="display: none" id="chip-batch-item-persisted"></span>
 <% end %>
