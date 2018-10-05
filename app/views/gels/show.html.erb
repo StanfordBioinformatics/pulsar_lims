@@ -48,6 +48,10 @@
   </div>
 </div>
 </br>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<%= render partial: "application_partials/edit_notes", locals: {rec: @gel} %> 
+
 <%= link_to "Add lane", add_lane_gel_path(@gel), class: "add-gel-lane-btn reg-btn", remote: true %>
 
 </br></br>

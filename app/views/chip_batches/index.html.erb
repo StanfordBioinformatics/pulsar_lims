@@ -25,16 +25,17 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
-        <td><%= link_to_record chip_batch.analyst %></td>
+        <td><%= link_to_record rec.analyst %></td>
         <td>
           <% if rec.crosslinking_method.present? %>
             <%= rec.crosslinking_method %>
           <% end %>
         </td>
-        <td><%= chip_batch.date %></td>
+        <td><%= rec.date %></td>
         <td>
-          <%= link_to fa_icon("pencil"), edit_chip_batch_path(rec) %></td>
-          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%= link_to fa_icon("pencil"), edit_chip_batch_path(rec) %>
+          <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

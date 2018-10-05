@@ -1,29 +1,34 @@
-<p id="notice"><%= notice %></p>
+<%= render partial:  "application_partials/header", locals: {rec: @chip_batch_item } %>
 
-<p>
-  <strong>User:</strong>
-  <%= @chip_batch_item.user %>
-</p>
+<table class="attributes">
+  <tbody>
+    <tr>
+      <th><strong>Chip batch:</strong></th>
+      <td><%= link_to_record @chip_batch_item.chip_batch %></td>
+    </tr>
+    
+    <tr>
+      <th><strong>Biosample:</strong></th>
+      <td><%= link_to_record @chip_batch_item.biosample %></td>
+    </tr>
+    
+    <tr>                                                                                                 
+      <th><strong>Concentration:</strong></th>                                                    
+      <td>
+        <% if @chip_batch_item.concentration.present? %>
+          <%= "#{@chip_batch_item.concentration} #{@chip_batch_item.concentration_unit.name}" %>
+        <% end %>
+      </td>
+    </tr> 
+    
+    <tr class="notes-row">
+      <th><strong>Notes:</strong></th>
+      <td><%= simple_format(@chip_batch_item.notes) %></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>
-  <strong>Chip batch:</strong>
-  <%= @chip_batch_item.chip_batch %>
-</p>
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<%= render partial: "application_partials/edit_notes", locals: {rec: @chip_batch_item} %>  
 
-<p>
-  <strong>Biosample:</strong>
-  <%= @chip_batch_item.biosample %>
-</p>
-
-<p>
-  <strong>Concentration:</strong>
-  <%= @chip_batch_item.concentration %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @chip_batch_item.notes %>
-</p>
-
-<%= link_to 'Edit', edit_chip_batch_item_path(@chip_batch_item) %> |
 <%= link_to 'Back', chip_batch_items_path %>

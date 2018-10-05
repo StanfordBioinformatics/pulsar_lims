@@ -1,6 +1,6 @@
 class ChipBatchesController < ApplicationController
-  before_action :set_chip_batch, only: [:show, :edit, :update, :destroy, :add_chip_batch_item, :create_or_update_chip_batch_row]
-  skip_after_action :verify_authorized, only: [:add_chip_batch_item, :create_or_update_chip_batch_row, :remove_chip_batch_item]
+  before_action :set_chip_batch, only: [:show, :edit, :update, :destroy, :add_chip_batch_item, :create_or_update_chip_batch_item]
+  skip_after_action :verify_authorized, only: [:add_chip_batch_item, :create_or_update_chip_batch_item, :remove_chip_batch_item]
 
   def add_chip_batch_item
     # Called in /views/chip_batches/show.html.erb via AJAX to add a new row for entering a

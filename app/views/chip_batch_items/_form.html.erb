@@ -8,6 +8,6 @@
 <%= f.association :biosample, collection: Biosample.non_plated, label: false %>
 <div style="display: flex;">
   <%= f.input :concentration, label: false, wrapper_html: {style: "flex: 1 1 55%"} %>
-  <%= f.input :concentration_unit, label: false, collection: Unit.where(unit_type: "concentration"), selected: @chip_batch_item.concentration_unit || defaults["concentration_unit"], wrapper_html: {style: "flex: 1 1 45%"} %>
+  <%= f.association :concentration_unit, label: false, include_blank: true, collection: Unit.where(unit_type: "concentration"), selected: @chip_batch_item.concentration_unit || defaults["concentration_unit"], wrapper_html: {style: "flex: 1 1 45%"} %>
 </div>
 <%= f.input :notes, label: false %>

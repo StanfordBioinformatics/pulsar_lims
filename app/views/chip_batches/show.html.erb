@@ -30,8 +30,8 @@
   <%= render partial: "chip_batch_items/headers" %>
   <div class="chip-batch-item-rows" %>
     <% @chip_batch.chip_batch_items.each do |item| %>
-      <% @chip_batch_lane = item %>
-      <%= render partial: "chip_batch_items/add_chip_batch_item" %>
+      <% @chip_batch_item = item %>
+      <%= render partial: "chip_batches/add_chip_batch_item" %>
     <% end %>
   </div>
 </div>

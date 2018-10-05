@@ -13,7 +13,7 @@
   
 <div style="display: flex;">
   <%= f.input :sample_concentration, label: false, wrapper_html: {style: "flex: 1 1 55%"} %>
-  <%= f.input :sample_concentration_units_id, label: false, collection: Unit.where(unit_type: "concentration"), wrapper_html: {style: "flex: 1 1 45%"} %>
+  <%= f.association :sample_concentration_units, label: false, collection: Unit.where(unit_type: "concentration"), wrapper_html: {style: "flex: 1 1 45%"} %>
 </div>
 <%= f.input :expected_product_size, label: false, placeholder: "kDa" %>
 <%= f.input :actual_product_size, label: false, placeholder: "kDa" %>

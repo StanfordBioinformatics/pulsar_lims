@@ -125,11 +125,10 @@ $(function() {
   $(document).on("click", ".edit-notes-pencil", function(event) {
     $(".edit-notes-pencil").hide();
     orig = $(".notes-row td").html(); // Save a reference to whatever is currently there.
-    // Set the td cell to a form field for the notes attribute. This form field is rendered in _form.html.erb
-    // from a
-    // partial at /app/views/application_partials/_edit_notes.html.erb, and has a div wrapper with
-    // class 'notes-to-edit', a Cancel button to close the form, and a Submit button to update the
-    // record.
+    // Set the td cell to a form field for the notes attribute. This form field is rendered (and initially hidden) in show.html.erb
+    // from the partial at /app/views/application_partials/_edit_notes.html.erb, and has a div 
+    // wrapper with class 'notes-to-edit', a Cancel button to close the form, and a Submit button 
+    // to update the record.
     $(".notes-row td").html($(".notes-to-edit").clone().show());
     $(".cancel-edit-notes").on("click", function(event) {
       event.preventDefault();

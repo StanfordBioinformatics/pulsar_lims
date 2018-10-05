@@ -13,8 +13,9 @@ class ChipBatchItem < ActiveRecord::Base
 
   validates :chip_batch_id, presence: true
   validates :biosample_id, presence: true
+  validates :concentration, numericality: {greater_than: 0}, allow_blank: true  
+  validates :concentration, presence: {message: "must be specified when the units are set."}, if: "concentration_unit_id.present?"
   validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"
-  validates :concentration, presence: {message: "must be specified when the units are set."}, if: "concentration_unit.present?"
   validate :validate_concentration_units
 
   def self.policy_class
