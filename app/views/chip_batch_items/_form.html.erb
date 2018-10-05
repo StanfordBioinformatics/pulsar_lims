@@ -1,15 +1,9 @@
-<%= simple_form_for(@chip_batch_item) do |f| %>
-  <%= f.error_notification %>
+<!-- Add hidden element to serve as a status check for jQuery to know whether this record exists or not. -->
+<% if @chip_batch_item.id.present? %>                                                                         
+  <span style="display: none" id="chip-batch-item-persisted"></span>                                          
+<% end %> 
 
-  <div class="form-inputs">
-    <%= f.association :user %>
-    <%= f.association :chip_batch %>
-    <%= f.association :biosample %>
-    <%= f.input :concentration %>
-    <%= f.input :notes %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+<%= f.association :chip_batch, as: :hidden %>
+<%= f.association :biosample %>
+<%= f.input :concentration %>
+<%= f.input :notes %>

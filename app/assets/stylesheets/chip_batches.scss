@@ -1,3 +1,39 @@
-// Place all the styles related to the chip_batches controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.chip-batch-item-form, .chip-batch-item-headers {
+  display: grid;
+  grid-gap: 0.5em;
+  margin: 0;
+  padding: 0;
+  // Biosample Concentration Notes Actions
+  grid-template-columns: repeat(4, 8em);
+  align-items: center;
+}
+
+.chip-batch-item-headers {
+  border: none;
+  & > * {
+    font-weight: bold;
+  }
+}
+
+.chip-batch-item-form {
+  & > div > * {
+    padding: 0;
+    padding-left: 0.5em;
+    margin: 0;
+  }
+  & > div {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #d9d9d9;
+    border-right: none;
+    border-radius: 0.2em;
+    &:last-of-type {
+      border: none;
+    }
+    width: 100%;
+    min-width: 100%;
+    & textarea {
+      min-height: 5em;
+    }
+  }
+}

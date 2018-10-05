@@ -1,5 +1,38 @@
 class ChipBatchesController < ApplicationController
-  before_action :set_chip_batch, only: [:show, :edit, :update, :destroy]
+  before_action :set_chip_batch, only: [:show, :edit, :update, :destroy, :add_chip_batch_item, :create_or_update_chip_batch_row]
+  skip_after_action :verify_authorized, only: [:add_chip_batch_item, :create_or_update_chip_batch_row]
+
+  def add_chip_batch_item
+    # Called in /views/chip_batches/show.html.erb via AJAX to add a new row for entering a
+    # ChipBatchItem.
+    @chip_batch_item = @chip_batch.chip_batch_items.build()
+    render partial: "chip_batch/add_chip_batch_item", layout: false
+  end
+
+  def create_or_update_chip_batch_item
+    item_params = chip_batch_params[:chip_batch_items_attributes]["0"] # Subset the dict with only key being 0.
+    if item_params[:id].present?
+      # Then do an update
+      @chip_batch_item = ChipBatchItem.find(item_params[:id])
+      @chip_batch_item.update(item_params)
+    else
+      # Create it
+      payload = item_params
+      payload.update({user_id: current_user.id})
+      @chip_batch_item = ChipBatchItem.create(payload)
+    end
+    render partial: "chip_batches/add_chip_batch_item", layout: false
+  end
+
+  def remove_chip_batch_item
+    item_id = params[:chip_batch_item_id]
+    # May be that the user never saved the chip_batch_item (row) and just wants to remove it.
+    if item_id.present?
+      @chip_batch_item = ChipBatchItem.find(item_id)
+      @chip_batch_item.destroy!
+    end
+    render json: {}, status: :no_content
+  end
 
   def index
     super
@@ -47,7 +80,7 @@ class ChipBatchesController < ApplicationController
   end
 
   def destroy
-    ddestroy(@chip_batch, redirect_path_success: chip_batches_path) 
+    ddestroy(@chip_batch, redirect_path_success: chip_batches_path)
   end
 
   private
@@ -61,8 +94,16 @@ class ChipBatchesController < ApplicationController
       params.require(:chip_batch).permit(
         :analyst_id,
         :chip_batch_item_ids,
-        :crosslinking_method, 
-        :date
+        :crosslinking_method,
+        :date,
+        :chip_batch_items_attributes [
+          :id,
+          :biosample_id,
+          :chip_batch_id,
+          :concentration,
+          :concentration_unit_id,
+          :notes
+        ]
       )
     end
 end

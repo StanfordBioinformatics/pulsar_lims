@@ -13,6 +13,8 @@ class ChipBatch < ActiveRecord::Base
   validates :analyst, presence: true
   validates :crosslinking_method, inclusion: {in: Enums::CROSSLINKING_METHOD, message: "must be an element in the list #{Enums::CROSSLINKING_METHOD}."}, allow_blank: true
 
+  accepts_nested_attributes_for :chip_batch_items, allow_destroy: true
+
   def self.policy_class
     ApplicationPolicy
   end

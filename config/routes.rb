@@ -1,7 +1,11 @@
 Pulsar::Application.routes.draw do
 
   resources :chip_batch_items
-  resources :chip_batches
+  resources :chip_batches do
+    get :add_chip_batch_item, on: :member
+    post :create_or_update_chip_batch_item, on: :member
+    delete :remove_chip_batch_item, on: :member
+  end
   resources :shippings
   resources :immunoblots do
     post :add_gel, on: :member

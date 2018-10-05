@@ -1,5 +1,7 @@
 <%= render partial:  "application_partials/header", locals: {rec: @chip_batch } %>
 
+<span id="record_id" style="display: none;"><%= @chip_batch.id %></span>
+
 <table class="attributes">
   <tbody>
     <tr>
@@ -22,5 +24,18 @@
     </tr>
   </tbody>
 </table>
+
+<div style="overflow: auto; max-width: 95%;">
+  <%= render partial: "chip_batch_items/headers" %>
+  <div class="chip-batch-item-rows" %>
+    <% @chip_batch.chip_batch_items.each do |item| %>
+      <% @chip_batch_lane = item %>
+      <%= render partial: "chip_batch_items/add_chip_batch_item" %>
+    <% end %>
+  </div>
+</div>
+</br>
+<%= link_to "Add row", add_chip_batch_item_chip_batch_path(@chip_batch), class: "add-chip-batch-item-btn reg-btn", remote: true %>
+
 
 <%= link_to 'Back', chip_batches_path %>
