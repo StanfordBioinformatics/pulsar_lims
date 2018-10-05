@@ -1,13 +1,14 @@
 <!-- Add hidden element to serve as a status check for jQuery to know whether this record exists or not. -->
 <% defaults = INPUT_DEFAULTS[@chip_batch_item.class.name] %>
-<% if @chip_batch_item.id.present? %>                                                                         
-  <span style="display: none" id="chip-batch-item-persisted"></span>                                          
-<% end %> 
+<p><%= defaults.to_s %></p>
+<% if @chip_batch_item.id.present? %>
+  <span style="display: none" id="chip-batch-item-persisted"></span>
+<% end %>
 
 <%= f.association :chip_batch, as: :hidden, label: false %>
 <%= f.association :biosample, collection: Biosample.non_plated, label: false %>
 <div style="display: flex;">
-  <%= f.input :concentration, label: false, wrapper_html: {style: "flex: 1 1 55%"} %>           
-  <%= f.input :concentration_unit_id, label: false, collection: Unit.where(unit_type: "concentration"), default: defaults["concentration_unit"], wrapper_html: {style: "flex: 1 1 45%"} %>
+  <%= f.input :concentration, label: false, wrapper_html: {style: "flex: 1 1 55%"} %>
+  <%= f.input :concentration_unit, label: false, collection: Unit.where(unit_type: "concentration"), selected: @chip_batch_item.concentration_unit || defaults["concentration_unit"], wrapper_html: {style: "flex: 1 1 45%"} %>
 </div>
 <%= f.input :notes, label: false %>
