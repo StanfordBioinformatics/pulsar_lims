@@ -29,7 +29,7 @@ class ChipBatchesController < ApplicationController
     # May be that the user never saved the chip_batch_item (row) and just wants to remove it.
     if item_id.present?
       @chip_batch_item = ChipBatchItem.find(item_id)
-      @chip_batch_item.destroy!
+      @chip_batch_item.destroy
     end
     render json: {}, status: :no_content
   end
