@@ -1,11 +1,12 @@
 <%= simple_form_for(@chip_batch) do |f| %>
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @chip_batch } %>
+  <% defaults = INPUT_DEFAULTS[@chip_batch.class.name] %>
 
   <%= f.association :analyst %>
 
   <%= f.input :date, label: "Batch date" %>
 
-  <%= f.input :crosslinking_method, collection: Enums::CROSSLINKING_METHOD, label_html: {"data-toggle": "tooltip", title: "Crosslinking protocol used in the ChIP experiment."} %>
+  <%= f.input :crosslinking_method, selected: @chip_batch.crosslinking_method || defaults["crosslinking_method"], collection: Enums::CROSSLINKING_METHOD, label_html: {"data-toggle": "tooltip", title: "Crosslinking protocol used in the ChIP experiment."} %>
 
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 

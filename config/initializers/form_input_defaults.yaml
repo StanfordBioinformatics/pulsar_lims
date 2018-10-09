@@ -1,4 +1,7 @@
 
+ChipBatch:
+    crosslinking_method: formaldehyde
+
 ChipBatchItem:
     concentration_unit: 10 #ng/µl
 
