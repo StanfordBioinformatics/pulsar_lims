@@ -235,6 +235,11 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
+    resources :sequencing_library_prep_kits do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :sequencing_platforms do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
