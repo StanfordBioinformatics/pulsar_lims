@@ -11,7 +11,13 @@ $ ->
 
   #When the user clicks on the "Add Sorting Biosample" button, append the response from the action (SingleCellSortingController.add_sorting_biosamples) to the show view at the end of the div element with id "sorting_biosample".
   $("#scs_add_sorting_biosample").on "ajax:success", (event,data) ->  
-    $("#scs_add_sorting_biosample").after(data)
+    $d = $(data)
+    # Remove teh following inputs that aren't needed in the context of a SSC:
+    $d.find(".single_cell_sorting_sorting_biosample_control").remove()
+    $d.find(".single_cell_sorting_sorting_biosample_wild_type").remove()
+    $d.find(".single_cell_sorting_sorting_biosample_replicate_number").remove()
+    $("#scs_add_sorting_biosample").after($d)
+    add_tooltip_icon() #defined in application.js
     $("#scs_add_sorting_biosample").hide()
 
   $(document).on "click", ".scs-toggle-up-biosample-form", (event) -> 

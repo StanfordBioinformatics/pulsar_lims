@@ -11,7 +11,7 @@ class LibrarySerializer < ActiveModel::Serializer
              :name,
              :notes,
              :upstream_identifier,
-             :paired_end,
+             :dual_indexed,
              :prototype,
              :size_range,
              :strand_specific,

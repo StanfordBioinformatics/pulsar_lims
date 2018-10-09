@@ -1,6 +1,6 @@
 class SequencingLibraryPrepKitsController < ApplicationController
   before_action :set_sequencing_library_prep_kit, only: [:show, :edit, :update, :destroy]
-  skip_after_action :verify_authorized, only: [:paired_end_kits]
+  skip_after_action :verify_authorized, only: [:dual_indexing_kits]
 
   def select_options
     #Called via ajax.
@@ -9,8 +9,8 @@ class SequencingLibraryPrepKitsController < ApplicationController
     render "application_partials/select_options", layout: false
   end 
 
-  def paired_end_kits
-    @pe_kits = SequencingLibraryPrepKit.paired_end_kits() #returns the entire objects in a list
+  def dual_indexing_kits 
+    @pe_kits = SequencingLibraryPrepKit.dual_indexing_kits() #returns the entire objects in a list
     ids = @pe_kits.map do |x|
       x[:id]
     end
@@ -80,7 +80,7 @@ class SequencingLibraryPrepKitsController < ApplicationController
         :description,
         :name,
         :notes,
-        :supports_paired_end,
+        :supports_dual_indexing,
         :vendor_id,
         :vendor_product_identifier,
         documents_attributes: [:id, :_destroy]

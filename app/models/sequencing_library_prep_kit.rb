@@ -29,8 +29,8 @@ class SequencingLibraryPrepKit < ActiveRecord::Base
     ApplicationPolicy
   end
 
-  def self.paired_end_kits
-    return SequencingLibraryPrepKit.where({:supports_paired_end => true})
+  def self.dual_indexing_kits
+    return SequencingLibraryPrepKit.where({:supports_dual_indexing => true})
   end
 
   def document_ids=(ids)

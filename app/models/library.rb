@@ -89,7 +89,7 @@ class Library < ActiveRecord::Base
 
   def get_indexseq
     return nil unless barcoded?
-    if paired_end?
+    if dual_indexed?
       return paired_barcode
     else
       return barcode
@@ -147,7 +147,7 @@ class Library < ActiveRecord::Base
     attrs["library_fragmentation_method_id"] = self.library_fragmentation_method_id
     attrs["lot_identifier"] = self.lot_identifier
     attrs["notes"] = self.notes
-    attrs["paired_end"] = self.paired_end
+    attrs["dual_indexed"] = self.dual_indexed
     attrs["sequencing_library_prep_kit_id"] = self.sequencing_library_prep_kit_id
     attrs["size_range"] = self.size_range
     attrs["strand_specific"] = self.strand_specific
@@ -189,18 +189,18 @@ class Library < ActiveRecord::Base
     return unless barcoded?
 
     if self.barcode.present? and self.paired_barcode.present?
-      self.errors.add(:base, "Can't specify both the \"barcode\" attribute (which is used only for single-end libraries) and the \"paired_barcode\" attribute (which is used only for paired-end libraries).")
+      self.errors.add(:base, "Can't specify both the \"barcode\" attribute (which is used only for single-end libraries) and the \"paired_barcode\" attribute (which is used only for dual-indexed libraries).")
       return false
-    elsif self.barcode.present? and self.paired_end?
-      self.errors.add(:base, "Can't set a single-end barcode when the library is marked as paired-end. You must instead select a paired-end barcode.")
+    elsif self.barcode.present? and self.dual_indexed?
+      self.errors.add(:base, "Can't set a single-end barcode when the library is marked as dual-indexed end. You must instead select a paired-end barcode.")
       return false
     elsif self.paired_barcode_id.present?
-      if not self.paired_end?
-        self.errors.add(:base, "Can't set a paired-end barcode when the library is not marked as paired-end. You must instead select a single-end barode.")
+      if not self.dual_indexed?
+        self.errors.add(:base, "Can't set a paired-end barcode when the library is not marked as dual_indexed. You must instead select a single-end barode.")
         return false
       end
-    elsif self.paired_end and not self.sequencing_library_prep_kit.supports_paired_end?
-      self.errors.add(:base, "Can't set paired_end to true when the sequencing library prep kit does not support paired-end sequencing.")
+    elsif self.dual_indexed and not self.sequencing_library_prep_kit.supports_dual_indexing?
+      self.errors.add(:base, "Can't set dual_indexed to true when the sequencing library prep kit does not support dual-indexed sequencing.")
       return false
     end
   end

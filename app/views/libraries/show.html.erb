@@ -43,8 +43,8 @@
   </tr>
 
   <tr>
-    <th><strong>Paired End</strong></th>
-    <td><%= @library.paired_end? %></td>
+    <th><strong>Dual indexed</strong></th>
+    <td><%= @library.dual_indexed? %></td>
   </tr>
 
   <tr>
@@ -79,7 +79,7 @@
 
   <!-- Either a barcode or a paired_barcode can be present, not both -->
   <tr>
-    <% if not @library.paired_end?%>
+    <% if not @library.dual_indexed? %>
       <th><strong>Barcode:</strong></th>
       <% if @library.barcode.present? %>
           <td><%= render partial: "barcodes/link_to_barcode", locals: {barcodes: [@library.barcode]} %></td>

@@ -17,7 +17,7 @@
       <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Vendor</th>
       <th>Vendor product ID</th>
-      <th>Supports paired end</th>
+      <th>Supports dual-indexed sequencing?</th>
       <th>Description</th>
       <th>Actions</th>
     </tr>
@@ -29,7 +29,7 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>
         <td><%= rec.vendor_product_identifier %></td>
-        <td><%= rec.supports_paired_end %></td>
+        <td><%= rec.supports_dual_indexing? %></td>
         <td><%= rec.description %></td>
         <td>
           <%= link_to fa_icon("pencil"), edit_sequencing_library_prep_kit_path(rec) %>

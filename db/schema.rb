@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181005041119) do
+ActiveRecord::Schema.define(version: 20181008225937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -694,7 +694,7 @@ ActiveRecord::Schema.define(version: 20181005041119) do
     t.float    "concentration"
     t.integer  "library_fragmentation_method_id"
     t.integer  "sequencing_library_prep_kit_id"
-    t.boolean  "paired_end"
+    t.boolean  "dual_indexed"
     t.integer  "barcode_id"
     t.integer  "paired_barcode_id"
     t.integer  "from_prototype_id"
@@ -877,7 +877,7 @@ ActiveRecord::Schema.define(version: 20181005041119) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.string   "vendor_product_identifier"
-    t.boolean  "supports_paired_end"
+    t.boolean  "supports_dual_indexing"
     t.text     "notes"
   end
 

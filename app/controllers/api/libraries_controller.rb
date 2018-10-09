@@ -69,7 +69,7 @@ class Api::LibrariesController < Api::ApplicationController
         :nucleic_acid_term_id,
         :upstream_identifier,
         :paired_barcode_id,
-        :paired_end,
+        :dual_indexed,
         :prototype,
         :sequencing_library_prep_kit_id,
         :size_range,

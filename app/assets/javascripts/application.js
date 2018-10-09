@@ -38,6 +38,14 @@
 //      })
 //    });
 
+//Add fonts awesome icon 'info-circle' after all labels that have a tooltip:
+function add_tooltip_icon() {
+  $('label[data-toggle="tooltip"]').append('<sup><i style="padding-left: 0.4em;" class="fa fa-info-circle"></i></sup>');
+  $('[data-toggle="tooltip"]').attr("data-delay",800)
+  $('[data-toggle="tooltip"]').tooltip({ trigger: 'hover', placement: 'right' })
+  //Above I pass in { trigger: 'click' } - the default is "trigger: 'focus'". The default is an issue for
+  //inputs such as checkboxes that maintain focus after selection until another elements gains focus.
+}
 
 
 // When the fa icon with class "xfade-out" is clicked, then                                            
@@ -144,6 +152,9 @@ $(function() {
 $(function() {
   //Add refresh FontsAwesome icon too all labels with class 'refresh':
   $("label.refresh").after('<i class="refresh fa fa-refresh"></i>')
+
+  // Run add_tooltip_icon() 
+  add_tooltip_icon();
 
 
   //Highlight table columns in the index views when user mouses over a table cell.
@@ -262,20 +273,16 @@ $(function() {
   $(document).ajaxSend(function() {
     $("body").addClass("waiting");
   })
+  //Remove spinner whenever an AJAX request completes.
+  $(document).ajaxComplete(function() {
+    $("body").removeClass("waiting");
+  })
 
   //Add spinner whenever a form's submit btn is clicked.
   $(document).on("click","input[type='submit']", function(event) {
     $("body").addClass("waiting");
   })
 
-
-  //Remove spinner cursor when AJAX request completes.
-  $(document).ajaxComplete(function() {
-    $("body").removeClass("waiting")
-  })
-
-  //Add fonts awesome icon 'info-circle' after all labels that have a tooltip:
-  $("label[data-toggle='tooltip']",document).append('<sup><i style="padding-left: 0.4em;" class="fa fa-info-circle"></i></sup>');
   $(document).on("click",".close-modal",function(event) {
     $(".modal").hide();
   })
@@ -286,10 +293,6 @@ $(function() {
       $(".modal").hide();
     }
   }
-  $('[data-toggle="tooltip"]').attr("data-delay",800)
-  $('[data-toggle="tooltip"]').tooltip({ trigger: 'hover', placement: 'right' })
-  //Above I pass in { trigger: 'click' } - the default is "trigger: 'focus'". The default is an issue for
-  //inputs such as checkboxes that maintain focus after selection until another elements gains focus.
 });
 
 //The code below was derived from https://devcenter.heroku.com/articles/direct-to-s3-image-uploads-in-rails.

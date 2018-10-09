@@ -27,8 +27,8 @@ class SequencingResult < ActiveRecord::Base
     ApplicationPolicy
   end
 
-  def library_paired_end?
-    library.paired_end?
+  def library_dual_indexed?
+    library.dual_indexed?
   end
 
   def params_for_url_for

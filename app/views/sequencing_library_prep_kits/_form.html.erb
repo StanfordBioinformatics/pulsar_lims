@@ -7,7 +7,7 @@
       label_html: {class: "refresh", "data-toggle": "tooltip", "title": "Select the vendor of the library prep kit."} %>
 
   <%= f.input :vendor_product_identifier %>
-  <%= f.input :supports_paired_end, 
+  <%= f.input :supports_dual_indexing, 
       label_html: {"data-toggle" => "tooltip", "title" => "Select if this kit can support paired-end sequencing (contains index2 barcodes)."}  %>
 
   <% if @sequencing_library_prep_kit.documents.persisted.any? %>

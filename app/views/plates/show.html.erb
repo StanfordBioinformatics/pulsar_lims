@@ -58,7 +58,7 @@
 <%= render partial: "plate" %>
 
 <div class="add_barcodes bg-info">
-  <% if @plate.single_cell_sorting.library_prototype.paired_end? %>
+  <% if @plate.single_cell_sorting.library_prototype.dual_indexed? %>
     <% placeholder="TAAGGCGA-TAGATCGC   CGTACTAG-CTCTCTAT\nAGGCAGAA-TATCCTCT   TCCTGAGC-AGAGTAGA\n..." %>
     <% submit_text="Add paired barcodes" %>
     <% label_text="#{submit_text} to wells to create libraries." %>
