@@ -60,7 +60,8 @@ class Api::ChipBatchsController < Api::ApplicationController
         :analyst_id,
         :chip_batch_item_ids,
         :crosslinking_method,
-        :date
+        :date,
+        :notes
     )
   end
 end

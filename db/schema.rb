@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181008225937) do
+ActiveRecord::Schema.define(version: 20181009195216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -256,6 +256,7 @@ ActiveRecord::Schema.define(version: 20181008225937) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.integer  "analyst_id"
+    t.text     "notes"
   end
 
   add_index "chip_batches", ["analyst_id"], name: "index_chip_batches_on_analyst_id", using: :btree
