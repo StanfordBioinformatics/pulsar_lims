@@ -109,7 +109,7 @@ class LibrariesController < ApplicationController
         :paired_barcode_id,
         :prototype,
         :sequencing_library_prep_kit_id,
-        sequencing_request_ids: [],
+        :sequencing_request_ids => [],
         :size_range,
         :strand_specific,
         :times_cloned,
