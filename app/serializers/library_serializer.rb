@@ -33,5 +33,6 @@ class LibrarySerializer < ActiveModel::Serializer
   has_one :vendor
 
   has_many :documents
+  has_many :sequencing_requests
 
 end
