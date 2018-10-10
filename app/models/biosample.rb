@@ -179,6 +179,7 @@ class Biosample < ActiveRecord::Base
     attrs["lot_identifier"] = self.lot_identifier
     attrs["nih_institutional_certification"] = self.nih_institutional_certification
     attrs["notes"] = self.notes
+    attrs["shipping_ids"] = self.shipping_ids
     attrs["tissue_preservation_method"] = self.tissue_preservation_method
     attrs["vendor_id"] = self.vendor_id
     attrs["vendor_product_identifier"] = self.vendor_product_identifier

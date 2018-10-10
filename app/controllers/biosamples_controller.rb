@@ -18,6 +18,7 @@ class BiosamplesController < ApplicationController
   end
 
   def create_clones
+    # Called from the view rendered by the clone action above. 
     authorize @biosample, :create?
     num_clones = params[:copies].to_i
     (1..num_clones).each do |num|
