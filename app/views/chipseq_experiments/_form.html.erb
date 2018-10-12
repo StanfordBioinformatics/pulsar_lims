@@ -1,3 +1,6 @@
+<% defaults = INPUT_DEFAULTS[@chipseq_experiment.class.name] %>
+<% new_rec = @chipseq_experiment.id.blank? %>
+
 <%= simple_form_for(@chipseq_experiment) do |f| %>
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @chipseq_experiment } %>
 
@@ -10,7 +13,7 @@
   <% end %>
   <%= f.association :wild_type_control, disabled: wtc_disabled, collection: Biosample.wild_type_controls, label_html: {"data-toggle": "tooltip", "title": "The input (control) biosample record that doesn't have a CRISPR modification. Can only be selected after a starting biosample has been selected."} %>
   <%= f.input :description %>
-  <%= f.association :target, collection: Target.order(:name), 
+  <%= f.association :target, collection: Target.order(:name),
       label_html: {class: "refresh"}
   %>
   <%= f.input :submitter_comments %>
@@ -21,7 +24,13 @@
       <strong>Linked documents:</strong>
       <%= render partial: "application_partials/simple_fields_for", locals: {f: f, record: @chipseq_experiment, attribute: :documents} %>
     <% end %>
+    <% if new_rec %>
+      <% documents_default = defaults["document_ids"] %>
+    <% else %>
+      <% documents_default = nil %>
+    <% end %>
     <%= f.association :documents, label: "Add documents",
+        selected: documents_default,
         include_blank: true,
         input_html: {class: "chipseq_documents_selector"},
         label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>

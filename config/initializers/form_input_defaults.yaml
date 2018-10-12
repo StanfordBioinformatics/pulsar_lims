@@ -5,6 +5,14 @@ ChipBatch:
 ChipBatchItem:
     concentration_unit: 10 #ng/µl
 
+CrisprModification:
+    category: insertion
+    purpose: tagging
+    document_ids: [38, 39]
+
+ChipseqExperiment:
+    document_ids: [10]
+
 Gel:
     percentage: 4-15
 
@@ -16,6 +24,13 @@ Immunoblot:
     primary_antibody_dilution: 1:2000
     secondary_antibody_ids: [11]
     secondary_antibody_dilution: 1:10000
+
+Library:
+    concentration_unit_id: 10 # ng/µl
+    library_fragmentation_method_id: 14 # sonication (Bioruptor Pico)
+    nucleic_acid_term_id: 1 # DNA
+    sequencing_library_prep_kit_id: 6 # Custom ChIP-seq library kit (Snyder lab)
+    size_range: 250-450
 
 SequencingRequest:
     concentration_instrument: Qubit

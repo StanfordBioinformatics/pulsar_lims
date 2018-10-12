@@ -1,4 +1,5 @@
-
+  <% defaults = INPUT_DEFAULTS[@crispr.class.name] %>
+  <% new_rec = @crispr.id.blank? %>
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @crispr } %>
   <%# is_crispr_modification_path = request.fullpath.start_with?(crispr_modifications_path) %>
 
@@ -6,9 +7,9 @@
 
   <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The alias or accession of an existing genetic_modification on the ENCODE Portal (leave blank if this is a new genetic_modification that hasn't been registered there yet). For a list of available genetic_modifications on the ENCODE Portal, see https://www.encodeproject.org/genetic-modifications."} %>
 
-  <%= f.input :category, collection: Enums::CRISPR_MOD_CATEGORIES, label_html: {"data-toggle": "tooltip", "title":  "The category/type of the genetic modification performed."} %>
+  <%= f.input :category, selected: @crispr.category || defaults["category"], collection: Enums::CRISPR_MOD_CATEGORIES, label_html: {"data-toggle": "tooltip", "title":  "The category/type of the genetic modification performed."} %>
 
-  <%= f.input :purpose, collection: Enums::CRISPR_MOD_PURPOSE, label_html: {"data-toggle": "tooltip", "title":  "The purpose of the genetic modification."} %>
+  <%= f.input :purpose, selected: @crispr.purpose || defaults["purpose"], collection: Enums::CRISPR_MOD_PURPOSE, label_html: {"data-toggle": "tooltip", "title":  "The purpose of the genetic modification."} %>
 
   <fieldset>                                                                                           
     <legend>CRISPR Constructs</legend>                                                                         
@@ -51,7 +52,12 @@
     <legend>Documents</legend>
     <strong>Linked documents:</strong>
     <%= render partial: "application_partials/simple_fields_for", locals: {f: f, record: @crispr, attribute: :documents} %>
-    <%= f.association :documents, label: "Add documents", selected: nil, collection: sorted_document_name_id(),
+    <% if new_rec %>
+      <% documents_default = defaults["document_ids"] %>
+    <% else %>
+      <% documents_default = nil %>
+    <% end %>
+    <%= f.association :documents, label: "Add documents", selected: documents_default, collection: sorted_document_name_id(),
         include_blank: true,
         input_html: {class: "crispr_documents_selector"},
         label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>
