@@ -37,11 +37,11 @@
         </td>
         <td><%= link_to rec.donor_construct.name, rec.donor_construct %></td>
         <td style="font-size: 0.8em;"><%= render partial: "application_partials/link_to_has_many", locals: {links: rec.biosamples} %></td>
-        <% target = rec.crispr_constructs.first.target %>
-        <% if target.blank? %>
+        <% first_cc = rec.crispr_constructs.first %>
+        <% if first_cc.blank? %>
           <td>BOBBBBBBBB</td>
         <% else %>
-          <td><%= link_to target.name, target %></td>
+          <td><%= link_to first_cc.target.name, first_cc.target %></td>
         <% end %>
         <td>
           <%= link_to fa_icon("pencil"), edit_crispr_modification_path(rec) %>
