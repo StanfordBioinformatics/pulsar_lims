@@ -39,7 +39,7 @@
         <td style="font-size: 0.8em;"><%= render partial: "application_partials/link_to_has_many", locals: {links: rec.biosamples} %></td>
         <% first_cc = rec.crispr_constructs.first %>
         <% if first_cc.blank? %>
-          <td>BOBBBBBBBB</td>
+          <td></td>
         <% else %>
           <td><%= link_to first_cc.target.name, first_cc.target %></td>
         <% end %>
