@@ -38,7 +38,11 @@
         <td><%= link_to rec.donor_construct.name, rec.donor_construct %></td>
         <td style="font-size: 0.8em;"><%= render partial: "application_partials/link_to_has_many", locals: {links: rec.biosamples} %></td>
         <% target = rec.crispr_constructs.first.target %>
-        <td><%= link_to target.name, target %></td>
+        <% if target.blank? %>
+          <td>BOBBBBBBBB</td>
+        <% else %>
+          <td><%= link_to target.name, target %></td>
+        <% end %>
         <td>
           <%= link_to fa_icon("pencil"), edit_crispr_modification_path(rec) %>
           <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
