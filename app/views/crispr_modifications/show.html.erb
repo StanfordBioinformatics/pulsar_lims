@@ -35,8 +35,12 @@
 
   <tr>
     <th><strong>Target</strong</th>
-    <% target = @crispr.crispr_constructs.first.target %>
-    <td><%= link_to target.name, target %></td>
+    <% first_cc = @crispr.crispr_constructs.first %>
+    <% if first_cc.blank? %>
+      <td></td>
+    <% else %>
+      <td><%= link_to first_cc.target.name, first_cc.target %></td>
+    <% end %>
   </tr>
 
   <% prototype_instances = @crispr.prototype_instances %>                                           
