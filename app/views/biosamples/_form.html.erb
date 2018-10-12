@@ -3,7 +3,7 @@
   <%= f.association :user, as: :hidden %>
 
   <%= f.input :name, label_html: {"data-toggle": "tooltip", "title": "Unique biosample name"} %> 
-  <%# f.association :chipseq_experiment, label_html: {class: "refresh"} %>
+  <%= f.association :chipseq_experiment, label_html: {class: "refresh"} %>
 
   <%= f.input :wild_type, label_html: {"data-toggle": "tooltip", "title": "Select if this biosample represents the pure, non-experimentally modified state."} %>
 
