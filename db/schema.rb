@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181015194411) do
+ActiveRecord::Schema.define(version: 20181015202628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -968,12 +968,12 @@ ActiveRecord::Schema.define(version: 20181015194411) do
 
   create_table "shippings", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "carrier"
-    t.string   "tracking_code"
+    t.string   "carrier",       default: ""
+    t.string   "tracking_code", default: ""
     t.date     "date_shipped"
-    t.boolean  "received"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.boolean  "received",      default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "from_id"
     t.integer  "to_id"
     t.integer  "biosample_id"
