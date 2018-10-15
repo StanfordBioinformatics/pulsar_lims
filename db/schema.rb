@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181015202628) do
+ActiveRecord::Schema.define(version: 20181015221534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(version: 20181015202628) do
     t.integer  "donor_id"
     t.integer  "user_id"
     t.integer  "biosample_term_name_id"
-    t.boolean  "control"
+    t.boolean  "control",                                     default: false
     t.integer  "part_of_id"
     t.integer  "well_id"
     t.integer  "from_prototype_id"
