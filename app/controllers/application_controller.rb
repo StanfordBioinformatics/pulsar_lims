@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
   rescue_from ActiveRecord::InvalidForeignKey, with: :foreign_key_constraint
   rescue_from ActiveRecord::RecordNotDestroyed, with: :record_not_destroyed
+  rescue_from ActiveRecord::RecordNotUnique, with: :record_not_unique
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   #ActiveRecord::DeleteRestrictionError is raised when there is a model dependency that sets
   # "dependent: :restrict_with_exception" and deleting the model would result in a foreign key error.
@@ -154,6 +155,19 @@ class ApplicationController < ActionController::Base
       }
       format.json {
         render json: {exception: "ActiveRecord::RecordNotDestroyed", message: err.message}, status: 403
+      }
+    end
+  end
+
+  def record_not_unique(err)
+    # Error handler for ActiveRecord::RecordNotUnique
+    respond_to do |format|
+      format.html {
+        flash[:alert] = err.message
+        redirect_to(request.referrer || root_path)
+      }
+      format.json {
+        render json: {exception: "ActiveRecord::RecordNotUnique", message: err.message}, status: 403
       }
     end
   end

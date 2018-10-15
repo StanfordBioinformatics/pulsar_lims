@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181009195216) do
+ActiveRecord::Schema.define(version: 20181015184743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -979,6 +979,7 @@ ActiveRecord::Schema.define(version: 20181009195216) do
     t.integer  "biosample_id"
   end
 
+  add_index "shippings", ["biosample_id", "carrier", "date_shipped", "from_id", "to_id", "received", "tracking_code"], name: "shipping_composite_unique_index", unique: true, using: :btree
   add_index "shippings", ["biosample_id"], name: "index_shippings_on_biosample_id", using: :btree
   add_index "shippings", ["from_id"], name: "index_shippings_on_from_id", using: :btree
   add_index "shippings", ["to_id"], name: "index_shippings_on_to_id", using: :btree
