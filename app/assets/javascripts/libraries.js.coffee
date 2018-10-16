@@ -31,11 +31,6 @@ $ ->
   $kit_selector = $("#library_sequencing_library_prep_kit_id")
   $dual_indexed_checkbox = $("#library_dual_indexed")
   $dual_indexed_checkbox.closest("div").hide()
-  pe_kit_ids = [];
-  $.get "/sequencing_library_prep_kits/dual_indexing_kits", (responseText,status,jqXHR) ->
-    #responseText is JSON, i.e { "sequencing_library_prep_kits": [ 5 ] }
-    pe_kit_ids = responseText.sequencing_library_prep_kits
-    #alert($.type(pe_kit_ids)) #array
 
   $barcode_selector = $("#barcode_selector")
 
@@ -46,25 +41,32 @@ $ ->
   load_barcode_selection = -> 
     hide_barcode_selector()
     kit_id = parseInt($kit_selector.val())
-    if $.inArray(parseInt($kit_selector.val()),pe_kit_ids) >= 0
-      $dual_indexed_checkbox.closest("div").show()
-    else
-      $dual_indexed_checkbox.attr("checked",false)
-      $dual_indexed_checkbox.closest("div").hide()
-    if isNaN(kit_id)
-      return
-    if ( $dual_indexed_checkbox.is(":checked") )
-      $.get "/libraries/select_paired_barcode", $kit_selector.serialize(), (responseText,status,jqXHR) ->
-        $barcode_selector.html(responseText)
-        $barcode_selector.fadeIn()
-    else if ( ! $dual_indexed_checkbox.is(":checked") )
-      $.get "/libraries/select_barcode", $kit_selector.serialize(), (responseText,status,jqXHR) ->
-        $barcode_selector.html(responseText)
-        $barcode_selector.fadeIn()
+    # Get a list of all kits that support dual-indexing
+    $.get "/sequencing_library_prep_kits/dual_indexing_kits", (responseText,status,jqXHR) ->
+      #responseText is JSON, i.e { "sequencing_library_prep_kits": [ 5 ] }
+      pe_kit_ids = responseText.sequencing_library_prep_kits
+      #alert($.type(pe_kit_ids)) #array
+      if $.inArray(kit_id, pe_kit_ids) >= 0
+        $dual_indexed_checkbox.closest("div").show()
+      else
+        $dual_indexed_checkbox.attr("checked",false)
+        $dual_indexed_checkbox.closest("div").hide()
+      if isNaN(kit_id)
+        return
+      if ( $dual_indexed_checkbox.is(":checked") )
+        $.get "/libraries/select_paired_barcode", $kit_selector.serialize(), (responseText,status,jqXHR) ->
+          $barcode_selector.html(responseText)
+          $barcode_selector.fadeIn()
+      else if ( ! $dual_indexed_checkbox.is(":checked") )
+        $.get "/libraries/select_barcode", $kit_selector.serialize(), (responseText,status,jqXHR) ->
+          $barcode_selector.html(responseText)
+          $barcode_selector.fadeIn()
 
   $kit_selector.change (event) -> 
     load_barcode_selection()
 
   $dual_indexed_checkbox.click (event) ->
     load_barcode_selection()
+
+  load_barcode_selection() # For page load incase there is a default value for $kit_selector set.
   #$kit_selector.change()
