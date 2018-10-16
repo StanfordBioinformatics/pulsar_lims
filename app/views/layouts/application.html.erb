@@ -97,7 +97,7 @@
       <!-- Form for running an Elasticsearch search -->
       <%= form_tag("/search/search", method: "get", role: "search", style: "margin-left: 45%;margin-bottom: 1em;") do %>
         <%= hidden_field_tag(:controller_name, controller_name) %>
-        <%= text_field_tag(:query, nil, placeholder: "Search", class: "search", style: "padding: 1em;") %>
+        <%= text_field_tag(:query, nil, placeholder: "Search", class: "search", style: "min-width: 40%; padding: 1em;") %>
         <%= button_tag("", type: "submit", style: "margin-left: -2.3em;", class: "fa fa-search search-btn" ) %>
         &nbsp;<%= content_tag(:span,"",class: "search-desc fa fa-lightbulb-o", style: "position: relative; top: -0.5em;", "data-toggle": "tooltip", "title": "Search for records of a given model or search across all models. To search within a specific model, first navigate to a view related to that model (i.e. the index page for Biosamples) and then enter your search. To search across all models you should first go to the home page of the LIMS. Uses Elasticsearch." ) %>
       <% end %>
