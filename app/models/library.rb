@@ -161,6 +161,7 @@ class Library < ActiveRecord::Base
     if self.concentration_unit.present?
       if self.concentration.blank?
         self.concentration_unit = nil
+        return
       end
       if self.concentration_unit.unit_type != "concentration"
         self.errors.add(:concentration_unit_id, "must be a concentration type of unit.")
