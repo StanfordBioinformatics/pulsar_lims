@@ -443,6 +443,7 @@ table.index {
   }
 
   & tbody {
+    min-width: 100%;
     display: inline-block;
     height: 80vh;
     overflow: auto;
