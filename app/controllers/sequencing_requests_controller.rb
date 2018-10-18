@@ -105,7 +105,6 @@ class SequencingRequestsController < ApplicationController
       else
         action = flash[:action]
         if action.present?
-          #set action for next request
           flash[:action] = action
         end
         format.html { render action || "edit" }
