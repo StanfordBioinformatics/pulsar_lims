@@ -107,8 +107,14 @@
 
   <%= f.input :tissue_preservation_method, collection: Enums::TISSUE_PRESERVATION_METHODS, label_html: {"data-toggle": "tooltip", "title": "The method by which the sample was preserved.  If you need to be able to select an option that is not in this list, please email the admin."} %>
 
-  <%= f.input :date_biosample_taken, html5: true,
-      label_html: {"data-toggle": "tooltip", "title": "For cultured samples, the date the biosample was taken. For tissue samples, the date the biosample was taken."} %>
+  <div class="my-flex" style="align-items: center;">
+    <%= f.input :date_biosample_taken, html5: true, 
+        wrapper_html: {"style": "margin-right: 2em;"},
+        label_html: {"data-toggle": "tooltip", "title": "For cultured samples, the date the biosample was taken. For tissue samples, the date the biosample was taken."} %>
+  
+    <%= f.input :cells_discarded,
+        label_html: {"data-toggle": "tooltip", "title": "True (checked) means that this biosample failed (i.e. a validation step such as immunoblot) and the cells were not kept for further experimentation."} %>
+  </div>
 
   <%= f.input :submitter_comments,
       input_html: {rows: 5},
