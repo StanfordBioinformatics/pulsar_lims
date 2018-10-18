@@ -19,6 +19,11 @@ class Barcode < ActiveRecord::Base
 
   scope :persisted, lambda { where.not(id: nil) }
 
+  def to_label
+     # Shadows the to_label method defined in /app/models/concerns/model_concerns. 
+      return "#{self.name} + #{self.sequence}"
+  end
+
   def self.policy_class
     ApplicationPolicy
   end

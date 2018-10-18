@@ -1,15 +1,15 @@
 require 'elasticsearch/model'
 
 class PairedBarcode < ActiveRecord::Base
-  include Elasticsearch::Model                                                                         
+  include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "PBC"
   DEFINITION = "A representation of a duel-index barcode. There are two references to the Barcode model - one for index1 and another for index2.  Model abbreviation: #{ABBR}"
   # Represents an index1 and index2 barcode pair from the same SequencingLibraryPrepKit (ensured by the
-  # verify_sequencing_kit validation method defined below). 
+  # verify_sequencing_kit validation method defined below).
   default_scope {order("lower(name)")}
-  attr_accessor :add_paired_barcodes #used in the form partial so the user can input multiple pairs to add. 
+  attr_accessor :add_paired_barcodes #used in the form partial so the user can input multiple pairs to add.
   has_many :libraries
   belongs_to :user
   belongs_to :index1, class_name: "Barcode"
@@ -27,7 +27,12 @@ class PairedBarcode < ActiveRecord::Base
 
   def self.policy_class
     ApplicationPolicy
-  end 
+  end
+
+  def to_label
+     # Shadows the to_label method defined in /app/models/concerns/model_concerns.
+      return "#{self.name} + #{self.sequence}"
+  end
 
   def to_s
     display()
@@ -46,7 +51,7 @@ class PairedBarcode < ActiveRecord::Base
     return "#{index1.sequence}-#{index2.sequence}"
   end
 
-   private 
+   private
     def verify_sequencing_kit
       if self.index1.sequencing_library_prep_kit.id != self.index2.sequencing_library_prep_kit.id
         self.errors.add(:index1,": The sequencing library prep kit of the referenced barcode does not match that of index2.")
@@ -55,8 +60,8 @@ class PairedBarcode < ActiveRecord::Base
       elsif self.index1.sequencing_library_prep_kit.id != self.sequencing_library_prep_kit.id
         self.errors.add(:sequencing_library_prep_kit,"does not match the kit specified by the barcodes referenced by index1 and index2.")
         return false
-      end 
-    end 
+      end
+    end
 
     def verify_index_number
       if self.index1.index_number != 1
