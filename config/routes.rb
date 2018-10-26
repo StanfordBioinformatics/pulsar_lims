@@ -106,6 +106,9 @@ Pulsar::Application.routes.draw do
   end
 
   namespace :api do
+    resources "utils" do
+      get "model_attrs", on: :collection
+    end
     resources :barcodes do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
