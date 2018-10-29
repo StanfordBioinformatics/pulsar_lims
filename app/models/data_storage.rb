@@ -34,6 +34,9 @@ class DataStorage < ActiveRecord::Base
 
   def validate_folder_base_path
     path = self.folder_base_path
+    if path.blank?
+        path = ""
+    end
     if not path.start_with?("/")
       path = "/" + path
     end
