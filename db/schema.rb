@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181018224247) do
+ActiveRecord::Schema.define(version: 20181029191653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "addresses", force: :cascade do |t|
     t.string   "city"
@@ -166,40 +167,41 @@ ActiveRecord::Schema.define(version: 20181018224247) do
 
   create_table "biosamples", force: :cascade do |t|
     t.text     "submitter_comments"
-    t.string   "lot_identifier",                  limit: 255
-    t.string   "vendor_product_identifier",       limit: 255
-    t.string   "description",                     limit: 255
+    t.string   "lot_identifier",                     limit: 255
+    t.string   "vendor_product_identifier",          limit: 255
+    t.string   "description",                        limit: 255
     t.integer  "passage_number"
     t.date     "date_biosample_taken"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "vendor_id"
     t.integer  "biosample_type_id"
-    t.string   "name",                            limit: 255
+    t.string   "name",                               limit: 255
     t.integer  "donor_id"
     t.integer  "user_id"
     t.integer  "biosample_term_name_id"
-    t.boolean  "control",                                     default: false
+    t.boolean  "control",                                        default: false
     t.integer  "part_of_id"
     t.integer  "well_id"
     t.integer  "from_prototype_id"
-    t.boolean  "plated",                                      default: false
+    t.boolean  "plated",                                         default: false
     t.integer  "owner_id"
     t.string   "tissue_preservation_method"
+    t.integer  "nih_institutional_certification_id"
     t.string   "nih_institutional_certification"
     t.string   "upstream_identifier"
     t.string   "starting_amount"
     t.string   "starting_amount_units"
     t.string   "tube_label"
-    t.integer  "times_cloned",                                default: 0
+    t.integer  "times_cloned",                                   default: 0
     t.text     "notes"
     t.integer  "crispr_modification_id"
     t.date     "transfection_date"
     t.integer  "transfected_by_id"
     t.integer  "replicate_number"
-    t.boolean  "wild_type",                                   default: false
+    t.boolean  "wild_type",                                      default: false
     t.integer  "chipseq_experiment_id"
-    t.boolean  "cells_discarded",                             default: false
+    t.boolean  "cells_discarded",                                default: false
   end
 
   add_index "biosamples", ["biosample_term_name_id"], name: "index_biosamples_on_biosample_term_name_id", using: :btree
@@ -209,6 +211,7 @@ ActiveRecord::Schema.define(version: 20181018224247) do
   add_index "biosamples", ["donor_id"], name: "index_biosamples_on_donor_id", using: :btree
   add_index "biosamples", ["from_prototype_id"], name: "index_biosamples_on_from_prototype_id", using: :btree
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
+  add_index "biosamples", ["nih_institutional_certification_id"], name: "index_biosamples_on_nih_institutional_certification_id", using: :btree
   add_index "biosamples", ["owner_id"], name: "index_biosamples_on_owner_id", using: :btree
   add_index "biosamples", ["part_of_id"], name: "index_biosamples_on_part_of_id", using: :btree
   add_index "biosamples", ["transfected_by_id"], name: "index_biosamples_on_transfected_by_id", using: :btree
@@ -700,8 +703,8 @@ ActiveRecord::Schema.define(version: 20181018224247) do
     t.integer  "barcode_id"
     t.integer  "paired_barcode_id"
     t.integer  "from_prototype_id"
-    t.integer  "concentration_unit_id"
     t.boolean  "plated",                                      default: false
+    t.integer  "concentration_unit_id"
     t.string   "upstream_identifier"
     t.text     "notes"
     t.boolean  "prototype",                                   default: false
@@ -832,11 +835,13 @@ ActiveRecord::Schema.define(version: 20181018224247) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.string   "dimensions"
+    t.integer  "starting_biosample_id"
     t.integer  "single_cell_sorting_id"
     t.text     "notes"
   end
 
   add_index "plates", ["single_cell_sorting_id"], name: "index_plates_on_single_cell_sorting_id", using: :btree
+  add_index "plates", ["starting_biosample_id"], name: "index_plates_on_starting_biosample_id", using: :btree
   add_index "plates", ["user_id"], name: "index_plates_on_user_id", using: :btree
   add_index "plates", ["vendor_id"], name: "index_plates_on_vendor_id", using: :btree
 
@@ -961,7 +966,7 @@ ActiveRecord::Schema.define(version: 20181018224247) do
   end
 
   add_index "sequencing_runs", ["data_storage_id"], name: "index_sequencing_runs_on_data_storage_id", using: :btree
-  add_index "sequencing_runs", ["name"], name: "index_sequencing_runs_on_name", unique: true, using: :btree
+  add_index "sequencing_runs", ["name"], name: "index_sequencing_runs_on_name", using: :btree
   add_index "sequencing_runs", ["report_id"], name: "index_sequencing_runs_on_report_id", using: :btree
   add_index "sequencing_runs", ["sequencing_request_id"], name: "index_sequencing_runs_on_sequencing_request_id", using: :btree
   add_index "sequencing_runs", ["submitted_by_id"], name: "index_sequencing_runs_on_submitted_by_id", using: :btree
@@ -1122,12 +1127,14 @@ ActiveRecord::Schema.define(version: 20181018224247) do
     t.integer  "plate_id"
     t.integer  "row"
     t.integer  "col"
-    t.boolean  "fail",       default: false
+    t.boolean  "fail",         default: false
     t.text     "comment"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "biosample_id"
   end
 
+  add_index "wells", ["biosample_id"], name: "index_wells_on_biosample_id", using: :btree
   add_index "wells", ["col"], name: "index_wells_on_col", using: :btree
   add_index "wells", ["plate_id"], name: "index_wells_on_plate_id", using: :btree
   add_index "wells", ["row"], name: "index_wells_on_row", using: :btree
@@ -1161,6 +1168,7 @@ ActiveRecord::Schema.define(version: 20181018224247) do
   add_foreign_key "biosamples", "biosamples", column: "part_of_id"
   add_foreign_key "biosamples", "chipseq_experiments"
   add_foreign_key "biosamples", "crispr_modifications"
+  add_foreign_key "biosamples", "documents", column: "nih_institutional_certification_id"
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"
   add_foreign_key "biosamples", "users", column: "owner_id"
@@ -1244,6 +1252,7 @@ ActiveRecord::Schema.define(version: 20181018224247) do
   add_foreign_key "pcrs", "crispr_modifications"
   add_foreign_key "pcrs", "pcr_master_mixes"
   add_foreign_key "pcrs", "users"
+  add_foreign_key "plates", "biosamples", column: "starting_biosample_id"
   add_foreign_key "plates", "single_cell_sortings"
   add_foreign_key "plates", "users"
   add_foreign_key "plates", "vendors"
@@ -1281,6 +1290,7 @@ ActiveRecord::Schema.define(version: 20181018224247) do
   add_foreign_key "uberons", "users"
   add_foreign_key "units", "users"
   add_foreign_key "vendors", "users"
+  add_foreign_key "wells", "biosamples"
   add_foreign_key "wells", "plates"
   add_foreign_key "wells", "users"
 end
