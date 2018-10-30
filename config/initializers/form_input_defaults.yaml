@@ -13,6 +13,9 @@ CrisprModification:
 ChipseqExperiment:
     document_ids: [10]
 
+DonorConstruct:
+    insertion_region: "C-terminal"
+
 Gel:
     percentage: 4-15
 
