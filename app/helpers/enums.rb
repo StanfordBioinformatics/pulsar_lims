@@ -14,6 +14,8 @@ module Enums
 
   GENDERS = ["female", "male", "mixed", "unknown"]
 
+  INSERTION_REGION = ["C-terminal", "internal", "N-terminal", "unknown"]
+
   SEQUENCING_STATUS = ["not started", "started", "trouble-shooting", "failed", "finished"]
 
   STARTING_AMOUNT_UNITS = ["cells", "cells/ml", "g", "items", "mg", "whole animals", "whole embryos", "μg"]

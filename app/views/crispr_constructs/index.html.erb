@@ -22,6 +22,7 @@
       <th>Target</th>
       <th>Ensembl transcript</th>
       <th>RefSeq transcript</th>
+      <th>Insertion region</th>
       <th>Guide sequence</th>
       <th>Description</th>
       <th>Vendor</th>
@@ -48,8 +49,10 @@
         <td><%= link_to rec.cloning_vector.name, rec.cloning_vector %></td>
         <td><%= render partial: "application_partials/link_to_has_many", locals: {links: rec.documents} %></td>
         <td><%= link_to rec.target.name, rec.target %></td>
+      
         <td><%= rec.ensembl_transcript %></td>
         <td><%= rec.refseq_transcript %></td>
+        <td><%= rec.insertion_region %></td>
         <td><%= rec.guide_sequence %></td>
         <td><%= rec.description %></td>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>

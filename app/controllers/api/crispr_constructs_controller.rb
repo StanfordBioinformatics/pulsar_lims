@@ -59,6 +59,7 @@ class Api::CrisprConstructsController < Api::ApplicationController
       :description,
       :ensembl_transcript,
       :guide_sequence,
+      :insertion_region,
       :name,
       :notes,
       :refseq_transcript,
