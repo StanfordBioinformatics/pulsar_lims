@@ -16,6 +16,8 @@
   <%= f.input :refseq_transcript, label_html: {"data-toggle": "tooltip", "title": "RefSeq transcript accession that the donor construct is designed for, if applicable."} %>
   </fieldset>
 
+  <%= f.input :insertion_region, collection: Enums::INSERTION_REGION, label_html: {"data-toggle": "tooltip", "title": "The region of the target into which the donor sequence is being inserted."} %>
+
   <%= f.input :insert_sequence %>
 
   <fieldset>

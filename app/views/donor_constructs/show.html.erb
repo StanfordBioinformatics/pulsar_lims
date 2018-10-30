@@ -14,17 +14,17 @@
       <% end %>
     </td>
   </tr>
-  
+
   <tr>
     <th><strong>Cloning vector:</strong></th>
     <td><%= link_to @donor_construct.cloning_vector.name, @donor_construct.cloning_vector %></td>
   </tr>
-  
+
   <tr>
     <th><strong>Vender:</strong></th>
     <td><%= link_to @donor_construct.vendor.name, @donor_construct.vendor %></td>
   </tr>
-  
+
   <tr>
     <th><strong>Vender product identifier:</strong></th>
     <td><%= @donor_construct.vendor_product_identifier %></td>
@@ -34,7 +34,7 @@
     <th><strong>Protocol documents:</strong></th>
     <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @donor_construct.documents} %></td>
   </tr>
-  
+
   <tr>
     <th><strong>Target:</strong></th>
     <td><%= link_to @donor_construct.target.name, @donor_construct.target %></td>
@@ -49,7 +49,12 @@
     <th><strong>RefSeq transcript:</strong></th>
     <td><%= @donor_construct.refseq_transcript %></td>
   </tr>
-  
+
+  <tr>
+    <th><strong>Insertion region:</string></th>
+    <td><%= @donor_construct.insertion_region %></td>
+  </tr>
+
   <tr>
     <th><strong>Insert sequence:</strong></th>
     <td><%= @donor_construct.insert_sequence %></td>
@@ -109,14 +114,14 @@
     <td><%= @donor_construct.description %></td>
   </tr>
 
-  <tr class="notes-row">                                                                               
-    <th><strong>Notes</strong></th>                                                                    
-    <td><%= simple_format(@donor_construct.notes) %></td>                                                     
-  </tr> 
-  
+  <tr class="notes-row">
+    <th><strong>Notes</strong></th>
+    <td><%= simple_format(@donor_construct.notes) %></td>
+  </tr>
+
 </table>
 
-<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->
 <%= render partial: "application_partials/edit_notes", locals: {rec: @donor_construct} %>
 
 <%= link_to 'Back', donor_constructs_path %>

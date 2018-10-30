@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181030201602) do
+ActiveRecord::Schema.define(version: 20181030224137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -366,7 +366,6 @@ ActiveRecord::Schema.define(version: 20181030201602) do
     t.text     "notes"
     t.integer  "sent_to_id"
     t.date     "date_sent"
-    t.string   "insertion_region"
   end
 
   add_index "crispr_constructs", ["addgene_id"], name: "index_crispr_constructs_on_addgene_id", using: :btree
@@ -553,6 +552,7 @@ ActiveRecord::Schema.define(version: 20181030201602) do
     t.date     "date_sent"
     t.string   "donor_cell_line"
     t.string   "known_snps"
+    t.string   "insertion_region"
   end
 
   add_index "donor_constructs", ["addgene_id"], name: "index_donor_constructs_on_addgene_id", using: :btree

@@ -21,7 +21,8 @@
       <th>Documents</th>
       <th>Target</th>
       <th>Ensembl transcript</th>
-      <th>Refseq transcript</th>
+      <th>RefSeq transcript</th>
+      <th>Insertion region</th>
       <th>Description</th>
       <th>Insert sequence</th>
       <th>Vender</th>
@@ -50,6 +51,7 @@
         <td><%= link_to rec.target.name, rec.target %></td>
         <td><%= rec.ensembl_transcript %></td>
         <td><%= rec.refseq_transcript %></td>
+        <td><%= rec.insertion_region %></td>
         <td><%= rec.description %></td>
         <td><%= rec.insert_sequence %></td>
         <td><%= link_to rec.vendor.name, rec.vendor %></td>

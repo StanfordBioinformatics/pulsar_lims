@@ -58,6 +58,7 @@ class Api::DonorConstructsController < Api::ApplicationController
         :description,
         :donor_cell_line,
         :ensembl_transcript,
+        :insertion_region, 
         :insert_sequence,
         :known_snps,
         :name,
