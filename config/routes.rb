@@ -149,6 +149,11 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
+    resources :crispr_modifications do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :data_storages do
       post :find_by, on: :collection
       post :find_by_or, on: :collection

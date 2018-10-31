@@ -4,6 +4,7 @@ class CrisprModificationSerializer < ActiveModel::Serializer
 
   attributes :id, 
              :category,
+             :description,
              :donor_construct_id,
              :name,
              :notes,
