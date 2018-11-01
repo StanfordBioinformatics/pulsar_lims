@@ -23,7 +23,6 @@
       <th>Barcode</th>
       <th>Paired barcode</th>
       <th>Fragmentation method</th>
-      <th>Crosslinking method</th>
       <th>Concentration</th>
       <th>Size range</th>
       <th>Strand specific?</th>
@@ -69,8 +68,6 @@
             <%= link_to rec.library_fragmentation_method.name, rec.library_fragmentation_method.name %>
           <% end %>
         </td>
-
-        <td><% rec.crosslinking_method %></td>
 
         <td>
           <% if rec.concentration.present? %>
