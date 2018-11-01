@@ -79,6 +79,8 @@
 }
   
 
+// Class added in application.js on mouseenter event for elements with class .modal-for-image.
+// This is done to highlight the fact that the entity is clickable. 
 .modal-content-box-shadow {
   box-shadow: 1px 0px 1px black;
   cursor: pointer;
@@ -192,6 +194,7 @@ End search box styles
     background-color: rgba(0,0,0,0.4); // Black w/ opacity
 }  
 
+// For a container nested inside of .modal
 .modal-content {
     // Code from example at https://www.w3schools.com/howto/howto_css_modals.asp.
     overflow: auto;

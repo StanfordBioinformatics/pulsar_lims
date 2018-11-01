@@ -111,6 +111,10 @@ $(function() {
         // Caption is optional. If a caption is desired to be display alongside the image, then
         // the link or image tag needs to define caption as a data attribute.
         caption = $(this).data("caption");
+        wrapper_id = ".modal"
+        if ($(document.body).find(wrapper_id).length === 1) {
+            $(wrapper_id).remove();
+        }
         $.get("/welcome/modal_for_image", {"image_url": image_url, "caption": caption}, function(data) {
             $(document.body).append(data);
             $(".modal").show();
