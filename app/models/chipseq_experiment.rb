@@ -25,6 +25,22 @@ class ChipseqExperiment < ActiveRecord::Base
     ApplicationPolicy
   end
 
+  def replicate_ids=(ids)
+    """
+    Function : Adds associations to biosamples that are stored in self.replicates.
+    Args     : ids - array of Biosample IDs.
+    """
+    ids.each do |i|
+      if i.blank?
+        next
+      end
+      rec = Biosample.find(i)
+      if not self.replicates.include? rec
+        self.replicates << rec
+      end
+    end
+  end
+
   def document_ids=(ids)
     """
     Function : Adds associations to Documents that are stored in self.documents.
