@@ -4,7 +4,7 @@ class ChipBatchItem < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "CBI"
-  DEFINITION = "Howdy"
+  DEFINITION = "Represents one of the Biosamples processed in this ChipBatch."
   #default_scope {order("lower(name)")} #no name column
   belongs_to :user
   belongs_to :biosample

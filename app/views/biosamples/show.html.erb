@@ -32,6 +32,14 @@
       <th><strong>ChIP-seq:</strong></th>
       <td><%= link_to_record @biosample.chipseq_experiment %></td>
     </tr>
+    <tr>
+      <th><strong>ChIP Batch:</strong></th>
+      <td>
+        <% if @biosample.chip_batch.present? %>
+          <%= link_to_record @biosample.chip_batch %>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
 
   <% if @biosample.starting_biosample_chipseq.present? %>

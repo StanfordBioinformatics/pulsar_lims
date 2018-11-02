@@ -9,6 +9,7 @@ class ChipBatch < ActiveRecord::Base
   belongs_to :user
   belongs_to :analyst, class_name: "User"
   has_many :chip_batch_items, dependent: :destroy
+  has_many :biosamples, through: :chip_batch_items
 
   validates :analyst, presence: true
   validates :crosslinking_method, inclusion: {in: Enums::CROSSLINKING_METHOD, message: "must be an element in the list #{Enums::CROSSLINKING_METHOD}."}, allow_blank: true

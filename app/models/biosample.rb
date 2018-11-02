@@ -12,6 +12,8 @@ class Biosample < ActiveRecord::Base
   ###
   # Support pooled from
   ###
+  has_one :chip_batch_item
+  has_one :chip_batch, through: :chip_batch_item
   has_many :shippings, dependent: :destroy
   has_many :gel_lanes
   has_many :gels, through: :gel_lanes
