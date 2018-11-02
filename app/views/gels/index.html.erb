@@ -15,6 +15,7 @@
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %> 
       <th>Immunoblot</th>
+      <th>PCR</th>
       <th>Percentage</th>
       <th>Run date</th>
       <th>Gel image</th>
@@ -29,7 +30,12 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td>
           <% if rec.immunoblot.present? %>
-            <% link_to_record(rec.immunoblot) %>
+            <%= link_to_record(rec.immunoblot) %>
+          <% end %>
+        </td>
+        <td>
+          <% if rec.pcr.present? %>
+            <%= link_to_record(rec.pcr) %>
           <% end %>
         </td>
         <td><%= "#{rec.percentage}%" %></td>

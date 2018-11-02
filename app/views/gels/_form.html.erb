@@ -2,7 +2,13 @@
 
   <% defaults = INPUT_DEFAULTS[@gel.class.name] %>
  
-  <%= f.association :immunoblot, label_method: :display, label_html: {"data-toggle": "tooltip", title: "If this gel is part of an immunoblot analysis, specify the ummunoblot record here."} %>
+  <% if @gel.immunoblot_id.present? %>
+    <!-- A gel is linked to either a PCR or an Immunoblot, never both. This association is first set
+         on the PCR show page or the Immunoblot show page. -->
+    <%= f.association :immunoblot, label_method: :display, label_html: {"data-toggle": "tooltip", title: "If this gel is part of an immunoblot analysis, specify the ummunoblot record here."} %>
+  <% elsif @gel.pcr_id.present? %>
+    <%= f.association :pcr, label_method: :display %>
+  <% end %>
   <% file_upload_hint="" %>
   <% if @gel.gel_image.present? %>
     <% file_upload_hint="You previously uploaded #{@gel.gel_image}." %>

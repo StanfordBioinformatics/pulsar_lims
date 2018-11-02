@@ -1,5 +1,5 @@
 <div class="xfade my-flex jumbotron" style="max-width: 25%;">
-  <%= select_tag :select_pcr_gel, options_from_collection_for_select(Gel.all, "id", "to_label") %>
+  <%= select_tag :select_immunoblot_gel, options_from_collection_for_select(Gel.available, "id", "to_label") %>
   <%= link_to :Submit, "#", id: :immunoblot_set_gel %>
   <%= link_to fa_icon("close lg"), "#", class: "xfade-out" %>
 </div>

@@ -4,12 +4,17 @@
 
 <table class="attributes">
   <tr>
-    <th><strong>Immunoblot:</strong></th>
-    <td>
-      <% if @gel.immunoblot.present? %>
+    <% if @gel.immunoblot.present? %>
+      <th><strong>Immunoblot:</strong></th>
+      <td>
         <%= link_to_record(@gel.immunoblot) %>
-      <% end %>
-    </td>
+      </td>
+    <% elsif @gel.pcr.present? %>
+      <th><strong>PCR:</strong></th>
+      <td>
+        <%= link_to_record(@gel.pcr) %>
+      </td>
+    <% end %>
   </tr>
   
   <tr>

@@ -15,6 +15,7 @@
     <tr>
       <%= render partial: "application_partials/index_common_table_headers", locals: {model: Pcr} %>
       <th>Description</th>
+      <th>Gel</th>
       <th>Pcr master mix</th>
       <th>Forward primer</th>
       <th>Reverse primer</th>
@@ -33,6 +34,16 @@
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.description %></td>
+        <td>                                                                                           
+          <% if rec.gel.present? %>                                                                    
+            <div style="display: flex">                                                                
+              <%= link_to rec.gel.display(), rec.gel %>                                                
+              <% if rec.gel.gel_image.present? %>                                                      
+                <%= image_tag rec.gel.gel_image, alt: "gel", data: {"caption": rec.gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+              <% end %>                                                                                
+            </div>                                                                                     
+          <% end %>                                                                                    
+        </td> 
         <td><%= link_to rec.pcr_master_mix.name, rec.pcr_master_mix %></td>
         <td><%= rec.forward_primer %></td>
         <td><%= rec.reverse_primer %></td>

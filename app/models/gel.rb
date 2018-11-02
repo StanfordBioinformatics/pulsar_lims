@@ -18,6 +18,7 @@ class Gel < ActiveRecord::Base
   accepts_nested_attributes_for :gel_lanes, allow_destroy: true 
 
   scope :persisted, lambda { where.not(id: nil) }
+  scope :available, lambda { where(immunoblot_id: nil, pcr_id: nil) }
 
   def self.policy_class
     ApplicationPolicy
@@ -36,7 +37,7 @@ class Gel < ActiveRecord::Base
 private
 
   def validate_owner
-    if self.pcr_id and self.immunoblot_id
+    if self.pcr_id.present? and self.immunoblot_id.present?
         self.errors.add(:base, "can't be linked to both a PCR and an Immunoblot.")
     end
   end

@@ -33,7 +33,11 @@ Pulsar::Application.routes.draw do
     get :select_options, on: :collection
   end
 
-  resources :pcrs
+  resources :pcrs do
+    get :add_gel, on: :member
+    get :select_gel, on: :member
+  end
+
   resources :pcr_master_mixes do
     get :select_options, on: :collection
   end

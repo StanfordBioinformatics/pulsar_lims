@@ -1,5 +1,7 @@
 <%= render partial:  "application_partials/header", locals: {rec: @pcr } %>
 
+<span id="record_id" style="display: none;"><%= @pcr.id %></span>
+
 <table class="attributes">
   <tr>
     <th><strong>Name:</strong></th>
@@ -64,11 +66,24 @@
   </tr> 
 </table>
 
-<!-- Add section for building a new gel association -->
-<% if @pcr.gel.blank? %>
-  <h3 class="section">Gel</h3> 
-  <%= link_to "Add Gel", [:add_gel, @pcr], class: "reg-btn", id: "pcr-add-gel", remote: true %>
-<% end %>
+<!-- Add section for building a new gel association -->                                                
+<h3 class="section">Gel</h3>                                                                           
+<% if @pcr.gel.blank? %>                                                                        
+  <div class="xfade-in">                                                                               
+    <div class="my-flex">                                                                              
+      <%= link_to "Add", add_gel_pcr_path(@pcr), id: "pcr-add-gel-btn", class: "reg-btn" %>
+      <p>or</p>                                                                                        
+      <%= link_to "Select existing", select_gel_pcr_path(@pcr), class: "reg-btn", id: "pcr-select-gel", remote: true %>
+    </div>                                                                                          
+  </div>                                                                                               
+<% else %>                                                                                             
+  <div class="my-flex">                                                                                
+    <%= link_to_record @pcr.gel %>                                                              
+    <% if @pcr.gel.gel_image.present? %>                                                        
+      <%= image_tag @pcr.gel.gel_image, alt: "gel", data: {"caption": @pcr.gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+    <% end %>                                                                                       
+  </div>                                                                                               
+<% end %> 
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
 <%= render partial: "application_partials/edit_notes", locals: {rec: @pcr} %>

@@ -1,5 +1,15 @@
 class PcrsController < ApplicationController
-  before_action :set_pcr, only: [:show, :edit, :update, :destroy]
+  before_action :set_pcr, only: [:show, :edit, :update, :destroy, :add_gel, :select_gel]
+  skip_after_action :verify_authorized, only: [:add_gel, :select_gel]
+
+  def add_gel
+    @gel = @pcr.build_gel
+    @s3_direct_post = @gel.s3_direct_post()
+  end
+
+  def select_gel
+    render layout: false
+  end
 
   def index
     super
