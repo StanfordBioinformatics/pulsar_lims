@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181102023601) do
+ActiveRecord::Schema.define(version: 20181102075418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -624,14 +624,18 @@ ActiveRecord::Schema.define(version: 20181102023601) do
     t.date     "run_date"
     t.text     "notes"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.float    "voltage"
     t.string   "percentage"
     t.string   "gel_image"
     t.text     "caption"
+    t.integer  "immunoblot_id"
+    t.integer  "pcr_id"
   end
 
+  add_index "gels", ["immunoblot_id"], name: "index_gels_on_immunoblot_id", using: :btree
+  add_index "gels", ["pcr_id"], name: "index_gels_on_pcr_id", using: :btree
   add_index "gels", ["user_id"], name: "index_gels_on_user_id", using: :btree
 
   create_table "genome_locations", force: :cascade do |t|
@@ -658,11 +662,9 @@ ActiveRecord::Schema.define(version: 20181102023601) do
     t.string   "primary_antibody_dilution"
     t.string   "secondary_antibody_dilution"
     t.string   "name"
-    t.integer  "gel_id"
   end
 
   add_index "immunoblots", ["analyst_id"], name: "index_immunoblots_on_analyst_id", using: :btree
-  add_index "immunoblots", ["gel_id"], name: "index_immunoblots_on_gel_id", using: :btree
   add_index "immunoblots", ["primary_antibody_id"], name: "index_immunoblots_on_primary_antibody_id", using: :btree
   add_index "immunoblots", ["user_id"], name: "index_immunoblots_on_user_id", using: :btree
 
@@ -821,11 +823,9 @@ ActiveRecord::Schema.define(version: 20181102023601) do
     t.datetime "updated_at",             null: false
     t.text     "notes"
     t.string   "name"
-    t.integer  "gel_id"
   end
 
   add_index "pcrs", ["crispr_modification_id"], name: "index_pcrs_on_crispr_modification_id", using: :btree
-  add_index "pcrs", ["gel_id"], name: "index_pcrs_on_gel_id", using: :btree
   add_index "pcrs", ["pcr_master_mix_id"], name: "index_pcrs_on_pcr_master_mix_id", using: :btree
   add_index "pcrs", ["user_id"], name: "index_pcrs_on_user_id", using: :btree
 
@@ -1224,11 +1224,12 @@ ActiveRecord::Schema.define(version: 20181102023601) do
   add_foreign_key "gel_lanes", "gels"
   add_foreign_key "gel_lanes", "units", column: "sample_concentration_units_id"
   add_foreign_key "gel_lanes", "users"
+  add_foreign_key "gels", "immunoblots"
+  add_foreign_key "gels", "pcrs"
   add_foreign_key "gels", "users"
   add_foreign_key "genome_locations", "chromosomes"
   add_foreign_key "genome_locations", "users"
   add_foreign_key "immunoblots", "antibodies", column: "primary_antibody_id"
-  add_foreign_key "immunoblots", "gels"
   add_foreign_key "immunoblots", "users"
   add_foreign_key "immunoblots", "users", column: "analyst_id"
   add_foreign_key "isotypes", "users"
@@ -1252,7 +1253,6 @@ ActiveRecord::Schema.define(version: 20181102023601) do
   add_foreign_key "pcr_master_mixes", "users"
   add_foreign_key "pcr_master_mixes", "vendors"
   add_foreign_key "pcrs", "crispr_modifications"
-  add_foreign_key "pcrs", "gels"
   add_foreign_key "pcrs", "pcr_master_mixes"
   add_foreign_key "pcrs", "users"
   add_foreign_key "plates", "biosamples", column: "starting_biosample_id"
