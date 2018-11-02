@@ -8,7 +8,7 @@ class Pcr < ActiveRecord::Base
   DEFINITION = "A PCR assay.  Model abbreviation: #{ABBR}"
   default_scope {order("lower(name)")}
   belongs_to :user
-  has_one :gel
+  has_one :gel, dependent: :nullify
   belongs_to :pcr_master_mix
   belongs_to :crispr_modification
 
