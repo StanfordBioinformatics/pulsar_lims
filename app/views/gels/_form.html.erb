@@ -1,7 +1,8 @@
 <%= simple_form_for @gel do |f| %>
 
   <% defaults = INPUT_DEFAULTS[@gel.class.name] %>
-  <%= f.association :immunoblot, as: :hidden, label_method: :display, label_html: {"data-toggle": "tooltip", title: "If this gel is part of an immunoblot analysis, specify the ummunoblot record here."} %>
+ 
+  <%= f.association :immunoblot, label_method: :display, label_html: {"data-toggle": "tooltip", title: "If this gel is part of an immunoblot analysis, specify the ummunoblot record here."} %>
   <% file_upload_hint="" %>
   <% if @gel.gel_image.present? %>
     <% file_upload_hint="You previously uploaded #{@gel.gel_image}." %>

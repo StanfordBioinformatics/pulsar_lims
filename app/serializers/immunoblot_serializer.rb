@@ -13,6 +13,7 @@ class ImmunoblotSerializer < ActiveModel::Serializer
              :updated_at
 
   has_one :analyst
+  has_one :gel
   has_one :primary_antibody
   has_one :user
   has_many :secondary_antibodies

@@ -8,7 +8,8 @@ Pulsar::Application.routes.draw do
   end
   resources :shippings
   resources :immunoblots do
-    post :add_gel, on: :member
+    get :add_gel, on: :member
+    get :select_gel, on: :member
   end
   resources :gels do
     get :add_lane, on: :member

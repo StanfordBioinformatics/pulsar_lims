@@ -66,11 +66,6 @@
   </tr>
 
   <tr>
-    <th><strong>Gel:</strong></th>
-    <td><%= link_to @immunoblot.gel.display(), @immunoblot.gel %></td>
-  </tr>
-
-  <tr>
     <th><strong>Submitter comments:</strong></th>
     <td><%= @immunoblot.submitter_comments %></td>
   </tr>
@@ -82,9 +77,22 @@
 </table>
 
 <!-- Add section for building a new gel association -->
+<h3 class="section">Gel</h3>
 <% if @immunoblot.gel.blank? %>
-  <h3 class="section">Gel</h3>
-  <%= link_to "Add", add_gel_immunoblot_path(@immunoblot), id: "immunoblot-add-gel-btn", class: "reg-btn", method: :post %>
+  <div class="xfade-in">
+    <div class="my-flex">
+      <%= link_to "Add", add_gel_immunoblot_path(@immunoblot), id: "immunoblot-add-gel-btn", class: "reg-btn" %>
+      <p>or</p>
+      <%= link_to "Select existing", select_gel_immunoblot_path(@immunoblot), class: "reg-btn", id: "immunoblot-select-gel", remote: true %>
+    </div>
+  </div>
+<% else %>
+  <div class="my-flex">
+    <%= link_to_record @immunoblot.gel %>
+    <% if @immunoblot.gel.gel_image.present? %> 
+      <%= image_tag @immunoblot.gel.gel_image, alt: "gel", data: {"caption": @immunoblot.gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+    <% end %>
+  </div>
 <% end %>
 
 </br></br>

@@ -70,7 +70,6 @@ class GelsController < ApplicationController
 
   def update
     authorize @gel
-    
     respond_to do |format|
       if @gel.update(gel_params)
         format.html { redirect_to @gel, notice: 'Gel was successfully updated.' }
@@ -98,8 +97,9 @@ class GelsController < ApplicationController
       params.require(:gel).permit(
         :caption,
         :gel_image,
-        :immunoblot_id,
+        :immunoblot_id, 
         :notes,
+        :pcr_id,
         :percentage,
         :run_date,
         :voltage,

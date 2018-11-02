@@ -1,10 +1,14 @@
 class ImmunoblotsController < ApplicationController
-  before_action :set_immunoblot, only: [:show, :edit, :update, :destroy, :add_gel]
-  skip_after_action :verify_authorized, only: [:add_gel]
+  before_action :set_immunoblot, only: [:show, :edit, :update, :destroy, :add_gel, :select_gel]
+  skip_after_action :verify_authorized, only: [:add_gel, :select_gel]
 
   def add_gel
     @gel = @immunoblot.build_gel
     @s3_direct_post = @gel.s3_direct_post()
+  end
+
+  def select_gel
+    render layout: false
   end
 
   def index
@@ -68,8 +72,10 @@ class ImmunoblotsController < ApplicationController
       params.require(:immunoblot).permit(
         :analyst_id, 
         :date_performed, 
+        :gel_id,
         :name,
         :notes,
+        :pcr_id,
         :primary_antibody_id,
         :primary_antibody_dilution,
         :secondary_antibody_dilution,

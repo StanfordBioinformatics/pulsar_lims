@@ -291,10 +291,13 @@
 <h3 class="section">Validations</h3>
 <div class="my-flex">
   <strong>Immunoblots:</strong>
-  <% if @biosample.immunoblots.any? %>
-    <%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.immunoblots} %>
-  <% else %>
-    None
+  <% @biosample.immunoblots.each do |i| %>
+    <div><%= link_to_record i %></div>
+    <div>
+      <% if i.gel.gel_image.present? %>
+        <%= image_tag i.gel.gel_image, alt: "gel", data: {"caption": i.gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+      <% end %>
+    </div>
   <% end %>
 </div>
 </br></br>

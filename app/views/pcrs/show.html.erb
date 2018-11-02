@@ -64,6 +64,12 @@
   </tr> 
 </table>
 
+<!-- Add section for building a new gel association -->
+<% if @pcr.gel.blank? %>
+  <h3 class="section">Gel</h3> 
+  <%= link_to "Add Gel", [:add_gel, @pcr], class: "reg-btn", id: "pcr-add-gel", remote: true %>
+<% end %>
+
 <!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
 <%= render partial: "application_partials/edit_notes", locals: {rec: @pcr} %>
 
