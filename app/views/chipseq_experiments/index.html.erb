@@ -15,7 +15,7 @@
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Target</th>
-      <th>Starting biosample</th>
+      <th>Starting biosamples</th>
       <th>Replicates</th>
       <th>Controls</th>
       <th>Wild type control</th>
@@ -31,8 +31,8 @@
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= link_to_record(rec.target) %></td>
         <td>
-          <% if rec.starting_biosample.present? %>
-            <%= link_to_record rec.starting_biosample %>
+          <% if rec.chipseq_starting_biosamples.present? %>
+            <%= render partial: "application_partials/link_to_has_many", locals: {links:  rec.chipseq_starting_biosamples} %>
           <% end %>
         </td>
         <td>

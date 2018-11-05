@@ -15,13 +15,13 @@ $ ->
       $(".chipseq_experiment_target select").html(responseText)
 
   #Get a selection for choosing the wild type control based on the value chosen for the starting_biosample.
-  $("#chipseq_experiment_starting_biosample_id").on "change", () ->
-    $.get "/chipseq_experiments/get_wt_control_selection", {starting_biosample_id: $("#chipseq_experiment_starting_biosample_id").val()}, (responseText,status,jqXHR) ->
+  $("#chipseq_experiment_chipseq_starting_biosample_ids").on "change", () ->
+    $.get "/chipseq_experiments/get_wt_control_selection", {starting_biosample_id: $("#chipseq_experiment_chipseq_starting_biosample_ids").val()[0]}, (responseText,status,jqXHR) ->
       $("#chipseq_experiment_wild_type_control_id").closest("div").replaceWith(responseText)
 
   # Trigger change for above since the user might have opend the record in edit mode. If no change
   # event is triggered here, then the wt control input will be disabled. 
-  $("#chipseq_experiment_starting_biosample_id").change()
+  $("#chipseq_experiment_chipseq_starting_biosample_ids").change()
 
   $("#chipseq-add-ctl").on "click", (event) ->
     if $(event.target).attr("disabled") == "disabled"

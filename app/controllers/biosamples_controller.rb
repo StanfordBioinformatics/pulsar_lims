@@ -150,6 +150,7 @@ class BiosamplesController < ApplicationController
         :biosample_type_id,
         :cells_discarded,
         :chipseq_experiment_id,
+        :chipseq_starting_biosample_id,
         :crispr_modification_id,
         :date_biosample_taken, 
         :description, 

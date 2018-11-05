@@ -9,15 +9,15 @@ class ChipseqExperiment < ActiveRecord::Base
   belongs_to :user
   belongs_to :target
   has_and_belongs_to_many :documents
-  # The starting_biosample is the one that is the ancestor of all the 'control_replicates' and 'replicates'.
-  belongs_to :starting_biosample, class_name: "Biosample"
+  # A chipseq_starting_biosamples is one that is the ancestor of one or more 'control_replicates' and 'replicates'.
+  has_many :chipseq_starting_biosamples, class_name: "Biosample", foreign_key: :chipseq_starting_biosample_id
   belongs_to :wild_type_control, class_name: "Biosample"
   has_many :control_replicates, -> {controls}, class_name: "Biosample", dependent: :nullify
   has_many :replicates, -> {experimental}, class_name: "Biosample", dependent: :nullify
 
   accepts_nested_attributes_for :documents, allow_destroy: true
 
-  validates :starting_biosample, presence: true
+  validates :chipseq_starting_biosample_ids, presence: true
   validates :name, presence: true, uniqueness: true
   validates :target, presence: true
 

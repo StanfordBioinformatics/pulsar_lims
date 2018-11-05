@@ -65,6 +65,7 @@ class Api::ChipseqExperimentsController < Api::ApplicationController
         :starting_biosample_id,
         :upstream_identifier,
         :wild_type_control_id,
+        :chipseq_starting_biosample_ids => [], 
         :document_ids => [], 
         :replicate_ids => [],
         :control_replicate_ids => []

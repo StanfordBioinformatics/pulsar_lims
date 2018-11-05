@@ -42,10 +42,10 @@
     </tr>
   <% end %>
 
-  <% if @biosample.starting_biosample_chipseq.present? %>
+  <% if @biosample.chipseq_starting_biosample.present? %>
     <tr>
       <th><strong>Startign biosample for ChIP-seq</strong></th>
-      <td><%= link_to_record @biosample.starting_biosample_chipseq %></td>
+      <td><%= link_to_record @biosample.chipseq_starting_biosample %></td>
     </tr>
   <% end %>
 

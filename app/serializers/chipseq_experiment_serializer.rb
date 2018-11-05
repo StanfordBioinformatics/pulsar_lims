@@ -7,7 +7,6 @@ class ChipseqExperimentSerializer < ActiveModel::Serializer
              :description,
              :name,
              :notes,
-             :starting_biosample,
              :submitter_comments,
              :target_id,
              :upstream_identifier,
@@ -20,5 +19,6 @@ class ChipseqExperimentSerializer < ActiveModel::Serializer
   has_one :user
   has_many :control_replicates
   has_many :replicates
+  has_many :chipseq_starting_biosamples
   #has_many :documents
 end

@@ -7,10 +7,10 @@
   </tr>
 
   <tr>
-    <th><strong>Starting biosample:</strong></th>
+    <th><strong>Starting biosamples:</strong></th>
     <td>
-      <% if @chipseq_experiment.starting_biosample.present? %>
-        <%= link_to_record @chipseq_experiment.starting_biosample %>
+      <% if @chipseq_experiment.chipseq_starting_biosamples.any? %>
+        <%= render partial: "application_partials/link_to_has_many", locals: {links:  @chipseq_experiment.chipseq_starting_biosamples} %>
       <% end %>
     </td>
   </td>
@@ -69,7 +69,7 @@
   <% if @chipseq_experiment.replicates.blank? %>
     <% ctl_rep_btn_disabled = true %>
   <% end %>
-  <%= link_to "Add control replicate", [:choose_replicates_for_control, @chipseq_experiment], disabled: ctl_rep_btn_disabled, class: "reg-btn", id: "chipseq-add-ctl", remote: true %>
+  <%= link_to "Add control replicate", [:select_controls, @chipseq_experiment], disabled: ctl_rep_btn_disabled, class: "reg-btn", id: "chipseq-add-ctl", remote: true %>
 </div>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             

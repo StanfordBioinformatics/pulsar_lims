@@ -60,6 +60,8 @@ class Api::BiosamplesController < Api::ApplicationController
         :biosample_term_name_id,
         :biosample_type_id,
         :cells_discarded,
+        :chipseq_experiment_id,
+        :chipseq_starting_biosample_id,
         :control,
         :crispr_modification_id,
         :date_biosample_taken,

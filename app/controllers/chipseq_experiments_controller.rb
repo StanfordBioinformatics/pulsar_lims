@@ -1,6 +1,6 @@
 class ChipseqExperimentsController < ApplicationController
-  before_action :set_chipseq_experiment, only: [:show, :edit, :update, :destroy, :add_replicate, :choose_replicates_for_control, :create_control_replicate]
-  skip_after_action :verify_authorized, only: [:add_replicate, :choose_replicates_for_control, :create_control_replicate, :get_wt_control_selection]
+  before_action :set_chipseq_experiment, only: [:show, :edit, :update, :destroy, :add_replicate, :select_controls, :create_control_replicate]
+  skip_after_action :verify_authorized, only: [:add_replicate, :select_controls, :create_control_replicate, :get_wt_control_selection]
 
   def get_wt_control_selection
     starting_biosample = Biosample.find(params["starting_biosample_id"])
@@ -11,34 +11,51 @@ class ChipseqExperimentsController < ApplicationController
 
   def add_replicate
     # AJAX from show view.
-    starting_biosample = @chipseq_experiment.starting_biosample
-    # Don't include biosamples that are already in self.replicates in the selection.
-    @selection = starting_biosample.biosample_parts.where.not(id: @chipseq_experiment.replicates)
+    starting_biosamples = @chipseq_experiment.chipseq_starting_biosamples
+    selection = []
+    starting_biosamples.each do |s|
+      # Don't include biosamples that are already in self.replicates in the selection.
+      selection.concat(s.biosample_parts.where.not(id: @chipseq_experiment.replicates))
+    end
+    @selection = selection
     render layout: false
   end
 
-  def choose_replicates_for_control
-    @selection = @chipseq_experiment.replicates
+  def select_controls
+    starting_biosamples = @chipseq_experiment.chipseq_starting_biosamples
+    controls = Set.new()
+    starting_biosamples.each do |s|
+      controls.merge(s.control_children())
+    end
+    @selection = controls.to_a
     render layout: false
   end
+  
 
-  def create_control_replicate
-    replicate_ids = chipseq_experiment_params[:replicate_ids].select{|x| x.present?}
-    first_rep = Biosample.find(replicate_ids[0])
-    input_cnt = @chipseq_experiment.control_replicates.length + 1
-    name = "#{@chipseq_experiment.target.name} #{first_rep.biosample_term_name.name} input #{input_cnt}"
-    custom_attrs = {
-      part_of_id: nil,
-      from_prototype_id: nil,
-      pooled_from_biosample_ids: replicate_ids,
-      name: name,
-      control: true,
-      chipseq_experiment_id: @chipseq_experiment.id
-    }
-    clone = first_rep.clone_biosample(associated_user_id: current_user.id, custom_attrs: custom_attrs)
-    flash[:notice] = "Control biosample #{clone.to_label()} was successfully created."
-    redirect_to @chipseq_experiment
-  end
+#  def select_controls
+#    # Called remotely. Renders a form that POSTS to create_control_replicate action below. 
+#    @selection = @chipseq_experiment.replicates
+#    render layout: false
+#  end
+#
+#  def create_control_replicate
+#    # Called via POST from select_controls action's template. 
+#    replicate_ids = chipseq_experiment_params[:replicate_ids].select{|x| x.present?}
+#    first_rep = Biosample.find(replicate_ids[0])
+#    input_cnt = @chipseq_experiment.control_replicates.length + 1
+#    name = "#{@chipseq_experiment.target.name} #{first_rep.biosample_term_name.name} input #{input_cnt}"
+#    custom_attrs = {
+#      part_of_id: nil,
+#      from_prototype_id: nil,
+#      pooled_from_biosample_ids: replicate_ids,
+#      name: name,
+#      control: true,
+#      chipseq_experiment_id: @chipseq_experiment.id
+#    }
+#    clone = first_rep.clone_biosample(associated_user_id: current_user.id, custom_attrs: custom_attrs)
+#    flash[:notice] = "Control biosample #{clone.to_label()} was successfully created."
+#    redirect_to @chipseq_experiment
+#  end
 
   def index
     super
@@ -108,9 +125,9 @@ class ChipseqExperimentsController < ApplicationController
         :notes,
         :submitter_comments,
         :target_id,
-        :starting_biosample_id,
         :upstream_identifier,
         :wild_type_control_id,
+        :chipseq_starting_biosample_ids => [],
         :document_ids => [],
         :replicate_ids => [],
         :control_replicate_ids => [],

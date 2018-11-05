@@ -18,8 +18,7 @@ Pulsar::Application.routes.draw do
   end
   resources :gel_lanes
   resources :chipseq_experiments do
-    get :choose_replicates_for_control, on: :member
-    post :create_control_replicate, on: :member
+    get :select_controls, on: :member
     get :get_wt_control_selection, on: :collection
     get :add_replicate, on: :member
   end

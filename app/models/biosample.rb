@@ -37,7 +37,7 @@ class Biosample < ActiveRecord::Base
   has_and_belongs_to_many :treatments
   belongs_to :crispr_modification
   belongs_to :transfected_by, class_name: "User"
-  has_one :starting_biosample_chipseq, class_name: "ChipseqExperiment", foreign_key: "starting_biosample_id", dependent: :restrict_with_exception
+  belongs_to :chipseq_starting_biosample, class_name: "ChipseqExperiment"
   #Note that specifying "dependent: :restrict_with_exception" when triggered will raise ActiveRecord::DeleteRestrictionError
   has_many :starting_biosample_single_cell_sortings, class_name: "SingleCellSorting", foreign_key: :starting_biosample_id, dependent: :restrict_with_exception #the starting biosample used for sorting. Not required.
   has_one :sorting_biosample_single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :sorting_biosample_id, dependent: :nullify #, dependent: :restrict_with_error #the starting biosample used for sorting. Not required.
@@ -89,6 +89,20 @@ class Biosample < ActiveRecord::Base
 
   def children
     return self.biosample_parts + self.pooled_biosamples
+  end
+
+  def control_children
+    # Finds all descendents of the given biosample and returns an array of only the ones
+    # that are controls and not wild_types, if any. 
+    # Returns a Set object.
+    ctls = Set.new()
+    self.children.each do |c|
+      if c.control? and not c.wild_type?
+        ctls << c
+      end
+      ctls.merge(c.control_children())
+    end
+    return ctls
   end
 
   def document_ids=(ids)

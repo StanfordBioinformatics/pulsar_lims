@@ -32,6 +32,7 @@ class BiosampleSerializer < ActiveModel::Serializer
 
   has_one :biosample_term_name
   has_one :biosample_type
+  has_one :chipseq_experiment_id
   has_one :donor
   has_one :sorting_biosample_single_cell_sorting
   has_one :transfected_by
