@@ -3,7 +3,8 @@ class ImmunoblotsController < ApplicationController
   skip_after_action :verify_authorized, only: [:add_gel, :select_gel]
 
   def add_gel
-    @gel = @immunoblot.build_gel
+    defaults = INPUT_DEFAULTS["Gel"]
+    @gel = @immunoblot.build_gel(percentage: defaults["percentage_for_IP"])
     @s3_direct_post = @gel.s3_direct_post()
   end
 

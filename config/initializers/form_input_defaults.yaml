@@ -17,7 +17,9 @@ DonorConstruct:
     insertion_region: "C-terminal"
 
 Gel:
-    percentage: 4-15
+    percentage_for_IP: 4-15
+    percentage_for_PCR: 1
+
 
 GelLane:
     sample_volume: 7

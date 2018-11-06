@@ -22,6 +22,7 @@ class ChipseqExperimentsController < ApplicationController
   end
 
   def select_controls
+    # Called remotely from ChipseqExperiment show view when clicking on the "Add control replicate button".
     starting_biosamples = @chipseq_experiment.chipseq_starting_biosamples
     controls = Set.new()
     starting_biosamples.each do |s|

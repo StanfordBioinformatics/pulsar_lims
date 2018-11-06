@@ -16,6 +16,7 @@
   <%= f.input :gel_image, as: :file, input_html: {class: 'image directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }}, label: "Gel image", hint: file_upload_hint %>
   <%= f.input :caption, label_html: {"data-toggle": "tooltip", "title": "A short description of the gel image to be shown alongside the image when viewed."} %>
 
+  
   <%= f.input :percentage, placeholder: "%", input_html: {value: @gel.percentage || defaults["percentage"]}, 
       label_html: {"data-toggle": "tooltip", "title": "The percentage of agarose or polyacrylamide of which the gel is composed."} %>
   <%# f.input :voltage, placeholder: "volts" %>
