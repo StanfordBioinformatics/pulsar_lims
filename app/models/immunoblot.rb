@@ -15,8 +15,8 @@ class Immunoblot < ActiveRecord::Base
   has_and_belongs_to_many :documents
   has_many :biosamples, through: :gel
 
-  validates :primary_antibody, presence: {message: "must be specified when 'primary antibody dilution' is specified."}, if: "primary_antibody_dilution.present?"
-  validates :secondary_antibody, presence: {message: "must be specified when 'secondary antibody dilution' is specified."}, if: "secondary_antibody_dilution.present?"
+  validates :primary_antibody, presence: true
+  validate :validate_dilutions
 
   accepts_nested_attributes_for :documents, allow_destroy: true
 
@@ -47,4 +47,13 @@ class Immunoblot < ActiveRecord::Base
   end
 
   private
+
+  def validate_dilutions
+    if self.primary_antibody_dilution.present? and not self.primary_antibody.present?
+      self.primary_antibody_dilution = nil
+    end
+    if self.secondary_antibody_dilution.present? and not self.secondary_antibody.present?
+      self.secondary_antibody_dilution = nil
+    end
+  end
 end
