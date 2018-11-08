@@ -15,12 +15,16 @@ class SearchController < ApplicationController
     else
       ctl_name = params[:controller_name]
     end
+    # Set it again for next search
+    flash[:ctl_name] = ctl_name
     # Need to set @model_class before rendering index view since it depends on it being set.
     # Normally, it is set through the before_action callback at the top, however, we need to set it
     # based on the controler_name that is passed in the params.
     begin
       @model_class = ctl_name.classify.constantize
     rescue NameError
+      # The user was on a controller page that isn't associated with a model, i.e. 
+      # the welcome controller. 
       @model_class = nil
     end
     # If there isn't a model class for the controller in question, then we'll get a NameError error.
@@ -28,16 +32,17 @@ class SearchController < ApplicationController
     # message "uninitialized constant Welcome". In such a case, we'll search across all Elastic indices
     # (all models). 
     if @model_class.nil?
+      # Do a global search
       @records = Elasticsearch::Model.search(query, models=[], options={size: limit}).records
+      render layout: false
       return
     elsif @model_class < ActiveRecord::Base
       @records = @model_class.search(query, size: limit).records
     else
+      # Shouldn't get here
+      @records = []
       flash[:notice] = "Search failed; contact administrator."
-      redirect_to(request.referrer || root_path)
-      return
     end
-    flash[:ctl_name] = ctl_name
-    render "#{ctl_name}/index"
+    render "#{ctl_name}/index", layout: false
   end 
 end

@@ -95,7 +95,7 @@
   
     <div class="main">
       <!-- Form for running an Elasticsearch search -->
-      <%= form_tag("/search/search", method: "get", role: "search", style: "margin-left: 45%;margin-bottom: 1em;") do %>
+      <%= form_tag("/search/search", id: "search-form", remote: true, method: "get", role: "search", style: "margin-left: 45%;margin-bottom: 1em;") do %>
         <%= hidden_field_tag(:controller_name, controller_name) %>
         <%= text_field_tag(:query, nil, placeholder: "Search", class: "search", style: "min-width: 40%; padding: 1em;") %>
         <%= button_tag("", type: "submit", style: "margin-left: -2.3em;", class: "fa fa-search search-btn" ) %>
@@ -201,7 +201,9 @@
                 <%= message %>
               </div>
             <% end %>
-            <%= yield %>
+            <div id="rendered-content">
+              <%= yield %>
+            </div>
           </div>
         </div>
         </br>

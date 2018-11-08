@@ -1,3 +1,8 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
+$ -> 
+  $(document).on "ajax:success", "#search-form", (event, data) ->
+    table = $(data)[2] # There is <header> at index 0, and a text node at index 1.
+    $("#rendered-content table.index").html(table)
