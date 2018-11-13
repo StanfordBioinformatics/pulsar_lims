@@ -63,8 +63,14 @@ class ApplicationController < ActionController::Base
     if page.blank?
         page = 1
     end
-    @records = @records.page params[:page]
     @page = true
+    @records = @records.page(page)
+    # pagination is set to be remote, and when a user does a search, that is also remote. 
+    # but just normal clicking to get to an index view is not remote. So, if remote, then don't
+    # include layout (see search.js.coffee for details).
+    if request.xhr?
+        render layout: false
+    end
   end
 
   def find_by

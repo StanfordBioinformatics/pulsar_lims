@@ -13,7 +13,7 @@ Args:
      can manually specify the entry_name (model_name) via the entry_name parameter. -->
 <% begin %>
   <% val = page_entries_info(records) %>
-  <span style="position: absolute; bottom: 0; right: 0;" class="index-view-total"><%= val %></span>
+  <span class="index-view-total"><%= val %></span>
 <% rescue Exception %>
-  <span style="position: absolute; bottom: 0; right: 0;" class="index-view-total"><strong>Total: </strong><%= records.count %></span>
+  <span class="index-view-total"><strong>Total: </strong><%= records.count %></span>
 <% end %>

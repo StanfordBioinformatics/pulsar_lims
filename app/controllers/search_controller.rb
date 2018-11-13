@@ -3,7 +3,6 @@ class SearchController < ApplicationController
 
   def search
     limit = 10000
-    @page = true # For use in pagination in view.
     query = params[:query]
     # Careful not use use 'controller_name' as a variable name as that is the name of a Rails method.
     if flash[:ctl_name].present?
@@ -33,12 +32,20 @@ class SearchController < ApplicationController
     # (all models).
     if @model_class.nil?
       # Do a global search
-      @records = Elasticsearch::Model.search(query, models=[], options={size: limit}).records.page(1)
+      # Can't do paging here since the page method isn't defined on the result of a cross-model search,
+      # contrary to a search in a specific model. For for global search results, make sure that 
+      # @page doesn't get set to true. 
+      @records = Elasticsearch::Model.search(query, models=[], options={size: limit}).records
       @total = @records.count
       render layout: false
       return
     elsif @model_class < ActiveRecord::Base
-      @records = @model_class.search(query, size: limit).records.page(1)
+      @page = true # For use in pagination in view.
+      page_num = params[:page]
+      if page_num.nil?
+        page_num = 1
+      end
+      @records = @model_class.search(query, size: limit).records.page(page_num)
       @total = @records.count
     else
       # Shouldn't get here
