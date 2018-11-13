@@ -1,5 +1,6 @@
-<header>
+<header class="index-view-header">
   <h1 class="index-page-header">Global search results</h1>
+  <%= render partial: "application_partials/total", locals: {records: @records} %>
 </header>
 
 <table class="attributes index">
