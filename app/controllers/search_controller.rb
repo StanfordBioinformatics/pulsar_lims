@@ -34,10 +34,12 @@ class SearchController < ApplicationController
     if @model_class.nil?
       # Do a global search
       @records = Elasticsearch::Model.search(query, models=[], options={size: limit}).records.page(1)
+      @total = @records.count
       render layout: false
       return
     elsif @model_class < ActiveRecord::Base
       @records = @model_class.search(query, size: limit).records.page(1)
+      @total = @records.count
     else
       # Shouldn't get here
       @records = []
