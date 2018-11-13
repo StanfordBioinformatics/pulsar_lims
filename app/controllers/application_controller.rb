@@ -54,10 +54,17 @@ class ApplicationController < ActionController::Base
     end
     @records = @records.unscoped.order(updated_at: :desc)
     @total = @records.count
-    unless params[:all].present?
-      @records = @records.page params[:page]
-      @page = true
+    # Commended out code below because allowing the "all" feature causes memory bloats. 
+    #unless params[:all].present?
+    #  @records = @records.page params[:page]
+    #  @page = true
+    #end
+    page = params[:page]
+    if page.blank?
+        page = 1
     end
+    @records = @records.page params[:page]
+    @page = true
   end
 
   def find_by
@@ -236,5 +243,4 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
-
 end

@@ -56,7 +56,4 @@
   </tbody>
 </table>
 
-<% if defined?(@page) %>                                                                               
-  <%= paginate @records %>                                                                             
-  <%= link_to "All", chipseq_experiments_path(all: true) %>                                                  
-<% end %>
+<%= render partial: "application_partials/index_paging" %>

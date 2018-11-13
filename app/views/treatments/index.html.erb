@@ -54,7 +54,4 @@
 
 <br>
 
-<% if defined?(@page) %>                                                                               
-  <%= paginate @records %>                                                                             
-  <%= link_to "All", treatments_path(all: true) %>                                                        
-<% end %>
+<%= render partial: "application_partials/index_paging" %>
