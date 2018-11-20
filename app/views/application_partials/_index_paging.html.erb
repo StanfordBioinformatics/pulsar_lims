@@ -1,4 +1,16 @@
-<div id="#paging">
-  <%= paginate @records, remote: true %>
-  <%# link_to "All", biosamples_path(all: true) %>
-</div>
+<% if not @records.class < ActiveRecord::Associations::CollectionProxy %>
+  <!-- Paging doesn't work when @records is an instance of the above class. That's because it 
+       appearts to expect an ActiveRecord::Relation instance. The former type of instance can arise
+       when trying to list all the associated records of a particular record, i.e. the show page of
+       a SequencingRequest displays a count of libraries, which is a link to the sequencing_requests 
+       controller's libraries_index action that renders the libraries/index template. Since all index
+       templates render this partial, we need to be able to turn off paging when appropriate so
+       we can avoid the error that reads 
+
+       ActionView::Template::Error (undefined method `total_pages' for #<Library::ActiveRecord_Associations_CollectionProxy:0x00007feae9f51028>):
+  -->
+  <div id="#paging">
+    <%= paginate @records, remote: true %>
+    <%# link_to "All", biosamples_path(all: true) %>
+  </div>
+<% end %>
