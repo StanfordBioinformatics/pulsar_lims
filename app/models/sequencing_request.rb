@@ -84,12 +84,11 @@ class SequencingRequest < ActiveRecord::Base
   end
 
   def get_library_with_barcode(barcode_id)
-    if paired_end
-      lib = libraries.find_by(paired_barcode_id: barcode_id)
-    else
-      lib = libraries.find_by(barcode_id: barcode_id)
+    self.libraries.each do |lib|
+      if (lib.paired_barcode_id == barcode_id) or (lib.barcode_id == barcode_id)
+        return lib
+      end
     end
-    return lib
   end
 
   protected

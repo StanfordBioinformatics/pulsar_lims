@@ -23,7 +23,7 @@ class SequencingResultsController < ApplicationController
 
   def get_library_selector
     #Takes :barcode_id as a param, which can be a Barcode or PairedEndBarcode.
-    barcode_id = params[:barcode_id]
+    barcode_id = params[:barcode_id].to_i
     lib = @sequencing_request.get_library_with_barcode(barcode_id=barcode_id)
     selector = "<option value=\"#{lib.id}\">#{lib.name}</option>"
     #render text: selector
