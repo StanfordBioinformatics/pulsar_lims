@@ -36,6 +36,16 @@
       <th><strong>Read1 uri:</strong></th>
       <td><%= @sequencing_result.read1_uri %></td>
     </tr>
+
+    <tr>
+      <th><strong>Read1 Align %:</strong></th>
+      <td><%= @sequencing_result.read1_aligned_perc %></td>
+    </tr>
+
+    <tr>
+      <th><strong>Read1 count:</strong></th>
+      <td><%= @sequencing_result.read1_count %></td>
+    </tr>
   
     <tr>
       <th><strong>Read2 uri:</strong></th>
@@ -43,13 +53,18 @@
     </tr>
   
     <tr>
-      <th><strong>Read1 count:</strong></th>
-      <td><%= @sequencing_result.read1_count %></td>
+      <th><strong>Read2 count:</strong></th>
+      <td><%= @sequencing_result.read2_count %></td>
+    </tr>
+
+    <tr>
+      <th><strong>Read2 Align %:</strong></th>
+      <td><%= @sequencing_result.read2_aligned_perc %></td>
     </tr>
   
     <tr>
-      <th><strong>Read2 count:</strong></th>
-      <td><%= @sequencing_result.read2_count %></td>
+      <th><strong>Pair Align %:</strong></th>
+      <td><%= @sequencing_result.pair_aligned_perc %></td>
     </tr>
 
   <tr class="notes-row">                                                                               

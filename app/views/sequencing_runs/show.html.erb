@@ -85,10 +85,13 @@
           <th>Barcode</th>
         <% end %>
         <th>Read1 Count</th>
+        <th>Read1 Align %</th>
         <th>Read1 URI</th>
         <% if @sequencing_request.paired_end? %>
           <th>Read2 Count </th>
+          <th>Read2 Align %</th>
           <th>Read2 URI</th>
+          <th>Pair Align %</th>
         <% end %>
         <th>Comment</th>
         <th>Actions</th>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181105215744) do
+ActiveRecord::Schema.define(version: 20181121030741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -937,12 +937,16 @@ ActiveRecord::Schema.define(version: 20181105215744) do
     t.string   "read2_uri"
     t.integer  "read1_count"
     t.integer  "read2_count"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "user_id"
     t.integer  "sequencing_run_id"
     t.text     "notes"
     t.boolean  "merged"
+    t.float    "read2_aligned_perc"
+    t.float    "read1_aligned_perc"
+    t.float    "pair_aligned_perc"
+    t.string   "mapper"
   end
 
   add_index "sequencing_results", ["library_id"], name: "index_sequencing_results_on_library_id", using: :btree

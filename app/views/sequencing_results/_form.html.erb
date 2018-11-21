@@ -38,12 +38,16 @@
 <%= f.input :barcode_id, as: :select,  collection: barcodes.map {|x| [x.display,x.id]}, selected: barcode_selected, include_blank: include_blank, input_html: { id: "sequencing_result_barcode_id" } %>
   
 <%= f.input :read1_count %>
+<%= f.input :read1_aligned_perc %>
   
 <%= f.input :read1_uri %>
   
 <% if @sequencing_request.paired_end? %>
   <%= f.input :read2_count %>
+  <%= f.input :read2_aligned_perc %>
   <%= f.input :read2_uri %>
+  <%= f.input :pair_aligned_perc %>
 <% end %>
+<%= f.input :mapper, label_html: {"data-toggle": "tooltip", "title": "The mapper (i.e. bwa) used to align the reads as a QC check."} %>
 <%= f.input :comment %>
 <%= render partial: "application_partials/notes", locals: {f: f} %>
