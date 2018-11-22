@@ -28,6 +28,13 @@
     <td><%= @data_storage.folder_base_path %></td>
   </tr>
 
+  <% if @data_storage.sequencing_runs.any? %>
+    <tr>
+      <th><strong>Sequencing runs:</strong></th>
+      <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @data_storage.sequencing_runs} %></td>
+    </tr>
+  <% end %>
+
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    
     <td><%= simple_format(@data_storage.notes) %></td>                                                     
