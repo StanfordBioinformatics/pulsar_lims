@@ -9,8 +9,8 @@ $ ->
      $("#sequencing_result_library_id").val("").attr("disabled", true)
      $("#sequencing_result_barcode_id").val("").attr("disabled", true)
    else
-     $("#sequencing_result_library_id").val("").attr("disabled", false)
-     $("#sequencing_result_barcode_id").val("").attr("disabled", false)
+     $("#sequencing_result_library_id").attr("disabled", false)
+     $("#sequencing_result_barcode_id").attr("disabled", false)
    
    
  $(document).on "change", "#sequencing_result_merged",  check_merged_result

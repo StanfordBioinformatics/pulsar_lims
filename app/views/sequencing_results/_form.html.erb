@@ -8,7 +8,7 @@
   <% barcodes = @sequencing_run.get_barcodes_on_request() %>
   <% library_selected = nil %>
   <% barcode_selected = nil %>
-  <% if @sequencing_result.merged == false %>
+  <% if @sequencing_result.merged.blank? %>
     <% library_selected = @sequencing_result.library.id %>
     <% barcode_selected = @sequencing_result.library.get_indexseq %> <!-- Library could be un-barcoded, which makes sense if it is the only library being sequenced. -->
   <% end %>
@@ -30,7 +30,7 @@
 <%= f.input :merged, input_html: {id: "sequencing_result_merged"}, label_html: {"data-toggle": "tooltip", "title": "Select True if all of the FASTQ files were merged into a R1 FASTQ file and an R2 FASTQ file."} %>
 <!-- Show the library selector and barcode selector. Changing the value of one will populate the
      value of the other via AJAX. -->
-<%= f.association :library, collection: libs, selected: library_selected, include_blank: include_blank, input_html: { id: "sequencing_result_library_id" } %>
+<%= f.association :library, collection: libs.map{|x| [x.display, x.id]}, selected: library_selected, include_blank: include_blank, input_html: { id: "sequencing_result_library_id" } %>
 
 <!-- The barcode_id attribute is a fake attribute implemented through an attr_accessor. It is only
      used to aid in selecting the Library - if a barcode is selected, then some jQuery will run to

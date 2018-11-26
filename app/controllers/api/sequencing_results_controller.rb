@@ -57,18 +57,20 @@ class Api::SequencingResultsController < Api::ApplicationController
 
   def sequencing_result_params
     params.require(:sequencing_result).permit(
-        :comment,                                                                                      
-        :is_control,                                                                                   
-        :library_id,                                                                                   
+        :comment,
+        :is_control,
+        :library_id,
         :merged_r1,
         :merged_r1,
-        :notes,                                                                                        
-        :read1_uri,                                                                                    
-        :read1_count,                                                                                  
-        :read2_uri,                                                                                    
-        :read2_count,                                                                                  
+        :notes,
+        :read1_aligned_perc,
+        :read1_uri,
+        :read1_count,
+        :read2_aligned_perc,
+        :read2_uri,
+        :read2_count,
         :sequencing_run_id,
-        :user_id                                                                                       
+        :user_id
     )
   end
 end
