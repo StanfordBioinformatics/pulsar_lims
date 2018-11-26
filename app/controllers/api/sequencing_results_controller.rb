@@ -63,6 +63,7 @@ class Api::SequencingResultsController < Api::ApplicationController
         :merged_r1,
         :merged_r1,
         :notes,
+        :pair_aligned_perc,
         :read1_aligned_perc,
         :read1_uri,
         :read1_count,

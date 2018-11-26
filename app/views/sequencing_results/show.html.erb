@@ -44,7 +44,7 @@
 
     <tr>
       <th><strong>Read1 count:</strong></th>
-      <td><%= @sequencing_result.read1_count %></td>
+      <td><%= number_with_delimiter(@sequencing_result.read1_count, delimeter: ",") %></td>
     </tr>
   
     <tr>
@@ -54,7 +54,7 @@
   
     <tr>
       <th><strong>Read2 count:</strong></th>
-      <td><%= @sequencing_result.read2_count %></td>
+      <td><%= number_with_delimiter(@sequencing_result.read2_count, delimeter: ",") %></td>
     </tr>
 
     <tr>

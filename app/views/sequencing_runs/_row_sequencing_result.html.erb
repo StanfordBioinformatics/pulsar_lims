@@ -26,11 +26,11 @@
       <% end %>
     </td>
 
-    <td><%= res.read1_count %></td>
+    <td><%= number_with_delimiter(res.read1_count, delimeter: ",") %></td>
     <td><%= res.read1_aligned_perc %></td>
     <td><%= res.read1_uri %></td>
     <% if @sequencing_request.paired_end? %>
-      <td><%= res.read2_count %></td>
+      <td><%= number_with_delimiter(res.read2_count, delimeter: ",") %></td>
       <td><%= res.read2_aligned_perc %></td>
       <td><%= res.read2_uri %></td>
       <td><%= res.pair_aligned_perc %></td>

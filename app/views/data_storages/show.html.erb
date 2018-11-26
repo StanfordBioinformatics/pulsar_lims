@@ -20,7 +20,14 @@
   
   <tr>
     <th><strong>Project identifier:</strong></th>
-    <td><%= @data_storage.project_identifier %></td>
+    <td>
+      <% if @data_storage.data_storage_provider.name == "DNAnexus" %>
+        <% url = url_to_dnanexus_project(@data_storage.project_identifier) %>
+        <%= link_to @data_storage.project_identifier, url %>
+      <% else %>
+        <%= @data_storage.project_identifier %>
+      <% end %>
+    </td>
   </tr>
   
   <tr>
