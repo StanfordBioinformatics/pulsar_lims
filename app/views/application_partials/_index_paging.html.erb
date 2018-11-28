@@ -1,4 +1,4 @@
-<% if not @records.class < ActiveRecord::Associations::CollectionProxy %>
+<% if (not @records.class == Array) and not (@records.class < ActiveRecord::Associations::CollectionProxy) %>
   <!-- Paging doesn't work when @records is an instance of the above class. That's because it 
        appearts to expect an ActiveRecord::Relation instance. The former type of instance can arise
        when trying to list all the associated records of a particular record, i.e. the show page of
