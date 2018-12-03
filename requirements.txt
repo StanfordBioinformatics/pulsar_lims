@@ -1,2 +1,2 @@
 boto3
-pulsarpy-dx
+pulsarpy-dx==0.3.0
