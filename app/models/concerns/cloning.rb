@@ -7,52 +7,62 @@ module Cloning
     after_update :propagate_update_if_prototype
   end
 
-  def parents
+  def part_of_chain
     """
-    Looks for sibling records of the same model that are considered to be parents of the current record.
-    The view pages for a record that has any parents may (at the business logic of each model's discretion)
-    display the parent's attributes in its views. For example, given 
-    a record that is a biosample, it may have no treatments declared directly on the record. However,
-    if it has a parent and that parent has an associated treatment, then that parent's treatment will be displayed
+    Finds all ancestors of the given model that are linked together via the part_of_id record attribute.
+    For example, Biosample C can be part_of Biosample B, which in turn can be part_of Biosample A. 
+    Additionally the from_prototype attribute is also checked. Normally, when, say, a Biosample is cloned, the new
+    Biosample will have a part_of_id attribute and a from_prototype attribute both pointing to the parent.
+    Having the from_prototype set means that when the parent's attributes change, the child's attributes
+    will also be updated to reflect that (the attributes that can be tracked in this manner are specified
+    in a model method by the name of attributes_for_cloning). Sometimes, there are situations where
+    a record doesn't have the part_of attribute set, but the from_prototype is set. This scenario 
+    occurs in SingleCellSortings regarding the Library prototype. The Library prototype is a
+    virtual Library that is cloned each time a new Library needs to be linked to a Biosample in a 
+    Well of a Plate. This method currently being documented is called in the Library show view 
+    (again, imagine a Library of a Biosample linked to a Well) to list any protocol Documents 
+    that are linked to itself and to any ancestral Libraries - a handy feature that lets us avoid 
+    having to re-associate the same Documents to each Library manually. 
+
+    The view pages for a record that has any such ancestors may (at the business logic of each model's discretion)
+    display the ancestor's attributes in its views. For example, given 
+    a record that is a Biosample, it may have no Treatments declared directly on the record. However,
+    if it has an ancestor with an associated Treatment, then that ancestor's Treatment will be displayed
     on the view pages for the record. Thus, the main purpose for this method is for views to consult
-    when desired whether a given record has parents, and if so, whether to display the parent attributes
+    when desired whether a given record has ancestors, and if so, whether to display the ancestory attributes
     for one or more associations. 
 
-    Parent relationships are established via use of the foreign keys 'part_of_id' and 'from_prototype_id'
-    that are present in the same model (table) as the current record. This check is recursive - if 
-    a parent exists, it will in turn be checked for a parent, and all found parents will be part of the
-    returned array. If the record's model doesn't define such foreign keys to itself, then the 
-    result will always be an empty array.
-
-    Example: A Biosample can have a parent via the part_of relationship when an aliquot is taken from
-    a parent to create the child. It is important to point out that if a biosample was creating by being
-    pooled from multiple biosamples (indicated by 'pooled_from_biosamples') then the biosamples used 
-    in the pooling are not considered parents in this method and hence won't be a part of the resulting array. 
+    Parent relationships are established via use of the foreign keys 'part_of_id' and 'from_prototype_id'. 
+    This check is recursive - if such an ancestor exists, it will in turn be checked for a one, 
+    and all found ancestorys will be part of the returned array. If the record's model doesn't define 
+    such foreign keys to itself, then the result will always be an empty array.
 
     Returns:
         Array of sibling records of the same class.
     """
-    parents = []
-    # Add parents from any part-of relationships in this single-parent ancestor chain.
+    chain = []
+    # Add chain from any part-of relationships in this single-parent ancestor chain.
     if self.respond_to?(:part_of)
       parent = self.part_of
       while parent.present?
-        parents << parent
+        chain << parent
         parent = parent.part_of
       end
     end
 
-    # Add parents from any prototoype in this single-parent ancestor chain.
+    # Add chain from any prototoype in this single-parent ancestor chain.
     # I can't imagine a scenario where it would be useful to have more than one ancestor that is
     # a prototype, but it's possible to do so should check for it.
     if self.respond_to?(:from_prototype)
       parent = self.from_prototype
       while parent.present?
-        parents << parent
+        if not chain.include?(parent)
+          chain << parent
+        end
         parent = parent.from_prototype
       end
     end
-    return parents
+    return chain
   end
 
   def update_from_sibling(sibling_id)

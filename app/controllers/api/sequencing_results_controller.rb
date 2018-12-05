@@ -66,9 +66,11 @@ class Api::SequencingResultsController < Api::ApplicationController
         :pair_aligned_perc,
         :read1_aligned_perc,
         :read1_uri,
+        :read1_upstream_identifier,
         :read1_count,
         :read2_aligned_perc,
         :read2_uri,
+        :read2_upstream_identifier,
         :read2_count,
         :sequencing_run_id,
         :user_id

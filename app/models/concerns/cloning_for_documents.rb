@@ -6,7 +6,7 @@ module CloningForDocuments
         Document::ActiveRecord_Relation.
     """
     document_ids = self.document_ids
-    self.parents.each do |p|
+    self.part_of_chain.each do |p|
       document_ids.concat(p.document_ids)
     end
     return Document.where(id: document_ids)

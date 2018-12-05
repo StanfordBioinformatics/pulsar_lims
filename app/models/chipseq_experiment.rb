@@ -25,6 +25,25 @@ class ChipseqExperiment < ActiveRecord::Base
     ApplicationPolicy
   end
 
+  def paired_input_control_map
+    # Generates a hash where each key is an ID of an experimental Biosample record and each value is a
+    # list of one or more control Biosample record IDs, where each control is derived from the experimental
+    # Biosample via either the part_of attribute or the pooled_from_biosamples attribute. 
+    # Experimental Biosamples that don't have controls don't appear in the hash. 
+    res = {}
+    self.control_replicates.each do |c|
+      self.replicate_ids.each do |r|
+        if c.parent_ids.include?(r)
+          if not res.include?(r)
+            res[r] = []
+          end
+          res[r] << c.id
+        end
+      end
+    end
+    return res
+  end
+
   def replicate_ids=(ids)
     """
     Function : Adds associations to biosamples that are stored in self.replicates.

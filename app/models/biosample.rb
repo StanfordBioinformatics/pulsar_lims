@@ -52,7 +52,7 @@ class Biosample < ActiveRecord::Base
   validates :replicate_number, numericality: { greater_than: 0 }, allow_nil: true
   validates :upstream_identifier, uniqueness: true, allow_blank: true
   validates :name, uniqueness: true, presence: true
-  #validates :documents, presence: true, unless: Proc.new {|bio| bio.parents.any? }
+  #validates :documents, presence: true, unless: Proc.new {|bio| bio.part_of_chain.any? }
   validates :biosample_type_id, presence: true
   validates :biosample_term_name_id, presence: true
   validates :vendor_id, presence: true
@@ -87,8 +87,36 @@ class Biosample < ActiveRecord::Base
     BiosampleTermName.all
   end
 
+  def parents
+    # Gives an array containing either the part_of biosample or the pooled_from_biosamples,
+    # whichever is present. A child biosample can't be both derived via both attributes. 
+    if self.part_of.present?
+      return [self.part_of]
+    elsif self.pooled_from_biosamples.present?
+      return self.pooled_from_biosamples.to_a
+    else
+      return []
+    end
+  end
+
+  def parent_ids
+    return self.parents.map{|c| c.id}
+  end
+
   def children
-    return self.biosample_parts + self.pooled_biosamples
+    # Gives an array containing both the biosample_parts and the pooled_biosamples.
+    res = []
+    if self.biosample_parts.present?
+      res << self.biosample_parts.to_a
+    end
+    if self.pooled_biosamples.present?
+      res << self.pooled_biosamples.to_a
+    end
+    return []
+  end
+
+  def children_ids
+    return self.children.map{|c| c.id}
   end
 
   def control_children
@@ -208,7 +236,7 @@ class Biosample < ActiveRecord::Base
         Treatment::ActiveRecord_Relation.
     """
     treatment_ids = self.treatment_ids 
-    self.parents.each do |p|
+    self.part_of_chain.each do |p|
       treatment_ids.concat(p.treatment_ids)
     end
     return Treatment.where(id: treatment_ids)
