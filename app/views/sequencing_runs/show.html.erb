@@ -84,10 +84,12 @@
         <% else %>
           <th><strong>Barcode</strong></th>
         <% end %>
+        <th><strong>Read1 Upstream identifier</strong></th>
         <th><strong>Read1 Count</strong></th>
         <th><strong>Read1 Align %</strong></th>
         <th><strong>Read1 URI</strong></th>
         <% if @sequencing_request.paired_end? %>
+          <th><strong>Read2 Upstream identifier</strong></th>
           <th><strong>Read2 Count </strong></th>
           <th><strong>Read2 Align %</strong></th>
           <th><strong>Read2 URI</strong></th>

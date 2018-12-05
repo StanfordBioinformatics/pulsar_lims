@@ -31,6 +31,11 @@
       <th><strong>Comment:</strong></th>
       <td><%= @sequencing_result.comment %></td>
     </tr>
+
+    <tr>
+      <th><strong>Read1 upstream identifier:</strong></th>
+      <td><%= @sequencing_result.read1_upstream_identifier %></td>
+    </tr>
   
     <tr>
       <th><strong>Read1 uri:</strong></th>
@@ -38,7 +43,7 @@
     </tr>
 
     <tr>
-      <th><strong>Read1 Align %:</strong></th>
+      <th><strong>Read1 align %:</strong></th>
       <td><%= @sequencing_result.read1_aligned_perc %></td>
     </tr>
 
@@ -47,6 +52,11 @@
       <td><%= number_with_delimiter(@sequencing_result.read1_count, delimeter: ",") %></td>
     </tr>
   
+    <tr>
+      <th><strong>Read2 upstream identifier:</strong></th>
+      <td><%= @sequencing_result.read2_upstream_identifier %></td>
+    </tr>
+
     <tr>
       <th><strong>Read2 uri:</strong></th>
       <td><%= @sequencing_result.read2_uri %></td>
