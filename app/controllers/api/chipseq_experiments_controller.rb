@@ -1,7 +1,12 @@
 class Api::ChipseqExperimentsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/chipseq_experiments/3
-  before_action :set_chipseq_experiment, only: [:show, :update, :destroy]
+  before_action :set_chipseq_experiment, only: [:show, :update, :destroy, :paired_input_control_map]
+  skip_after_action :verify_authorized, only: [:paired_input_control_map] 
+
+  def paired_input_control_map
+    render json: @chipseq_experiment.paired_input_control_map()
+  end
 
   def find_by
     # find_by defined in ApplicationController#find_by.

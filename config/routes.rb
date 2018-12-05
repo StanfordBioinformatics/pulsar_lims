@@ -169,6 +169,7 @@ Pulsar::Application.routes.draw do
     end
 
     resources :chipseq_experiments do
+      get :paired_input_control_map, on: :member
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
