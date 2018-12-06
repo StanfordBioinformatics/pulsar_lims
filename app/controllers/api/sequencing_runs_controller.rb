@@ -5,7 +5,7 @@ class Api::SequencingRunsController < Api::ApplicationController
   skip_after_action :verify_authorized, only: [:library_sequencing_result]
 
   def library_sequencing_result
-    render json: @sequencing_run.library_sequencing_result(params[:library_id])
+    render json: @sequencing_run.library_sequencing_result(params[:library_id]), root: false
   end
 
   def find_by
