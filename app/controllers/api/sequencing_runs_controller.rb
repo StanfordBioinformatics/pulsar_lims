@@ -1,7 +1,12 @@
 class Api::SequencingRunsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/sequencing_runs/3
-  before_action :set_sequencing_run, only: [:show, :update, :destroy]
+  before_action :set_sequencing_run, only: [:show, :update, :destroy, :library_sequencing_result]
+  skip_after_action :verify_authorized, only: [:library_sequencing_result]
+
+  def library_sequencing_result
+    render json: @sequencing_run.library_sequencing_result(params[:library_id])
+  end
 
   def find_by
     # find_by defined in ApplicationController#find_by.

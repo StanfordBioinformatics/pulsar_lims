@@ -264,6 +264,7 @@ Pulsar::Application.routes.draw do
     end
 
     resources :sequencing_runs do
+      get :library_sequencing_result, on: :member
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end

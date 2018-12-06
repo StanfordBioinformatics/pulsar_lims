@@ -44,6 +44,10 @@ class SequencingRun< ActiveRecord::Base
     return barcodes
   end
 
+  def library_sequencing_result(library_id)
+    return self.sequencing_results.where(library_id: library_id)
+  end
+
   def library_sequencing_result_present(lib)
     return self.sequencing_results.where({library_id: lib.id}).present?
   end
