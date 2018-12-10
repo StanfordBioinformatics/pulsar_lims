@@ -179,11 +179,6 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
-    resources :library_fragmentation_methods do
-      post :find_by, on: :collection
-      post :find_by_or, on: :collection
-    end
-
     resources :units do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
@@ -229,6 +224,11 @@ Pulsar::Application.routes.draw do
     end
 
     resources :libraries do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
+    resources :library_fragmentation_methods do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
