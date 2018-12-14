@@ -42,5 +42,6 @@ class BiosampleSerializer < ActiveModel::Serializer
   has_many :pooled_from_biosamples
   has_many :shippings
   has_many :treatments
+  has_many :wt_for_chipseq_experiments
 
 end

@@ -42,6 +42,13 @@
     </tr>
   <% end %>
 
+  <% if @biosample.wt_for_chipseq_experiments.present? %>
+    <tr>
+      <th><strong>WT control for</strong></th>
+      <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.wt_for_chipseq_experiments} %></td>
+    </tr>
+  <% end %>
+
   <% if @biosample.chipseq_starting_biosample.present? %>
     <tr>
       <th><strong>Starting biosample for ChIP-seq</strong></th>
