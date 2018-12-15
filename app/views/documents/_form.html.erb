@@ -1,6 +1,8 @@
 <%= simple_form_for(@document) do |f| %>
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @document } %>
 
+  <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "You normally don't need to set this as it is set automatically after POSTING the record to the upstream database. This represents the identifier for this record in the upstream database."} %>
+
   <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "An identifier for the target on the ENCODE Portal, such as the value of the 'uuid' or 'name' property of the Portal's record entry."} %>
 
   <%= f.input :is_protocol, label: "Is Protocol?", as: :radio_buttons, item_label_class: "radio-inline", item_wrapper_tag: false, label_html: {"data-toggle" => "tooltip", "title" => "Select if this is a protocol document."} %>

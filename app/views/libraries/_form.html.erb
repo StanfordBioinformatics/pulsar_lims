@@ -5,6 +5,8 @@
 
   <%= f.input :prototype, as: :hidden %>
 
+  <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "You normally don't need to set this as it is set automatically after POSTING the record to the upstream database. This represents the identifier for this record in the upstream database."} %>
+
   <%= f.input :name, label_html: {"data-toggle" => "tooltip", "title" => "Unique library name"} %>
 
   <!-- The biosample isn't required if this is a prototype library. Nonetheless, sometimes it still
