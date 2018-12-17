@@ -113,7 +113,7 @@ class Biosample < ActiveRecord::Base
     if self.pooled_biosamples.present?
       res << self.pooled_biosamples.to_a
     end
-    return []
+    return res
   end
 
   def children_ids
