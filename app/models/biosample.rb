@@ -108,10 +108,10 @@ class Biosample < ActiveRecord::Base
     # Gives an array containing both the biosample_parts and the pooled_biosamples.
     res = []
     if self.biosample_parts.present?
-      res << self.biosample_parts.to_a
+      res.concat self.biosample_parts.to_a
     end
     if self.pooled_biosamples.present?
-      res << self.pooled_biosamples.to_a
+      res.concat self.pooled_biosamples.to_a
     end
     return res
   end
