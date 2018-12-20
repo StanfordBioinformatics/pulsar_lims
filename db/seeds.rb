@@ -498,7 +498,6 @@ BiosampleType.create!([
   {user_id: admin, name: "cell line"},
   {user_id: admin, name: "tissue"},
   {user_id: admin, name: "in vitro differentiated cells"},
-  {user_id: admin, name: "induced pluripotent stem cell line"},
   {user_id: admin, name: "whole organisms"},
   {user_id: admin, name: "stem cell"}
   ])
