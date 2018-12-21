@@ -3,6 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+  #Refresh the documents list in the form when the refresh fa-icon is clicked:
+  $(document).on "click", ".biosample_crispr_modification i.refresh", (event) ->
+     $.get "/crispr_modifications/select_options", (responseText,status,jqXHR) ->
+       $(".biosample_crispr_modification select").html(responseText)
+
   #Refresh the analyst list in the form when the refresh fa-icon is clicked:
   $(document).on "click", ".biosample_transfected_by i.refresh", (event) ->
     $.get "/users/select_options", (responseText,status,jqXHR) ->

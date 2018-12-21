@@ -1,4 +1,4 @@
 <%= simple_form_for @biosample do |f| %>
-  <%= f.association :crispr_modification %>
+  <%= f.association :crispr_modification, label_html: {class: "refresh"} %>
   <%= f.button :submit, class: "btn-primary" %>
 <% end %>

@@ -9,7 +9,6 @@ class BiosamplesController < ApplicationController
   end
 
   def add_crispr_modification
-    #ajax call from show view
   end
 
   def clone
