@@ -26,6 +26,7 @@ class DonorConstruct < ActiveRecord::Base
   validates :insert_sequence, format: { with: /\A[acgtnACGTN]+\z/, message: "can only contain characters in the set ACTGN" }, allow_blank: true
   validates :vendor_id, presence: true
   validates :target_id, presence: true
+  validates :construct_tags, presence: true
 
   accepts_nested_attributes_for :construct_tags, allow_destroy: true
   accepts_nested_attributes_for :documents, allow_destroy: true
@@ -68,4 +69,5 @@ class DonorConstruct < ActiveRecord::Base
       end
     end
   end
+
 end
