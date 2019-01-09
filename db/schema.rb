@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181204003305) do
+ActiveRecord::Schema.define(version: 20190109195025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,41 +166,40 @@ ActiveRecord::Schema.define(version: 20181204003305) do
 
   create_table "biosamples", force: :cascade do |t|
     t.text     "submitter_comments"
-    t.string   "lot_identifier",                     limit: 255
-    t.string   "vendor_product_identifier",          limit: 255
-    t.string   "description",                        limit: 255
+    t.string   "lot_identifier",                  limit: 255
+    t.string   "vendor_product_identifier",       limit: 255
+    t.string   "description",                     limit: 255
     t.integer  "passage_number"
     t.date     "date_biosample_taken"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "vendor_id"
     t.integer  "biosample_type_id"
-    t.string   "name",                               limit: 255
+    t.string   "name",                            limit: 255
     t.integer  "donor_id"
     t.integer  "user_id"
     t.integer  "biosample_term_name_id"
-    t.boolean  "control",                                        default: false
+    t.boolean  "control",                                     default: false
     t.integer  "part_of_id"
     t.integer  "well_id"
     t.integer  "from_prototype_id"
-    t.boolean  "plated",                                         default: false
+    t.boolean  "plated",                                      default: false
     t.integer  "owner_id"
     t.string   "tissue_preservation_method"
-    t.integer  "nih_institutional_certification_id"
     t.string   "nih_institutional_certification"
     t.string   "upstream_identifier"
     t.string   "starting_amount"
     t.string   "starting_amount_units"
     t.string   "tube_label"
-    t.integer  "times_cloned",                                   default: 0
+    t.integer  "times_cloned",                                default: 0
     t.text     "notes"
     t.integer  "crispr_modification_id"
     t.date     "transfection_date"
     t.integer  "transfected_by_id"
     t.integer  "replicate_number"
-    t.boolean  "wild_type",                                      default: false
+    t.boolean  "wild_type",                                   default: false
     t.integer  "chipseq_experiment_id"
-    t.boolean  "cells_discarded",                                default: false
+    t.boolean  "cells_discarded",                             default: false
     t.integer  "chipseq_starting_biosample_id"
   end
 
@@ -212,7 +211,6 @@ ActiveRecord::Schema.define(version: 20181204003305) do
   add_index "biosamples", ["donor_id"], name: "index_biosamples_on_donor_id", using: :btree
   add_index "biosamples", ["from_prototype_id"], name: "index_biosamples_on_from_prototype_id", using: :btree
   add_index "biosamples", ["name"], name: "index_biosamples_on_name", unique: true, using: :btree
-  add_index "biosamples", ["nih_institutional_certification_id"], name: "index_biosamples_on_nih_institutional_certification_id", using: :btree
   add_index "biosamples", ["owner_id"], name: "index_biosamples_on_owner_id", using: :btree
   add_index "biosamples", ["part_of_id"], name: "index_biosamples_on_part_of_id", using: :btree
   add_index "biosamples", ["transfected_by_id"], name: "index_biosamples_on_transfected_by_id", using: :btree
@@ -1177,7 +1175,6 @@ ActiveRecord::Schema.define(version: 20181204003305) do
   add_foreign_key "biosamples", "chipseq_experiments"
   add_foreign_key "biosamples", "chipseq_experiments", column: "chipseq_starting_biosample_id"
   add_foreign_key "biosamples", "crispr_modifications"
-  add_foreign_key "biosamples", "documents", column: "nih_institutional_certification_id"
   add_foreign_key "biosamples", "donors"
   add_foreign_key "biosamples", "users"
   add_foreign_key "biosamples", "users", column: "owner_id"
