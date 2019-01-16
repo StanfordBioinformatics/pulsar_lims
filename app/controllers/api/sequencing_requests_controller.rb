@@ -1,7 +1,8 @@
 class Api::SequencingRequestsController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/sequencing_requests/3
-  before_action :set_sequencing_request, only: [:show, :update, :destroy]
+  before_action :set_sequencing_request, only: [:show, :update, :destroy, :get_library_barcode_sequence_hash]
+  skip_after_action :verify_authorized, only: [:get_library_barcode_sequence_hash]
 
   def find_by
     # find_by defined in ApplicationController#find_by.
@@ -13,6 +14,10 @@ class Api::SequencingRequestsController < Api::ApplicationController
     # find_by_or defined in ApplicationController#find_by_or.
     # Use this method when you want to OR all of your query parameters.
     super
+  end
+
+  def get_library_barcode_sequence_hash
+    render json: @sequencing_request.get_library_barcode_sequence_hash()
   end
 
   def index

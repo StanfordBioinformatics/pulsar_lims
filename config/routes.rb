@@ -259,6 +259,7 @@ Pulsar::Application.routes.draw do
     end
 
     resources :sequencing_requests do
+      get :get_library_barcode_sequence_hash, on: :member
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end

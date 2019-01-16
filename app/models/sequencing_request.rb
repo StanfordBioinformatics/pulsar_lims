@@ -91,6 +91,16 @@ class SequencingRequest < ActiveRecord::Base
     end
   end
 
+  def get_library_barcode_sequence_hash()
+    # Creates a hash where each key is a Library ID whose value is the barcode sequence on the 
+    # library. This is done for each Library on the SequencingRequest.
+    res = {}
+    self.libraries.each do |lib|
+      res[lib.id] = lib.get_indexseq.sequence()
+    end
+    return res
+  end
+
   protected
     def add_libraries_from_plate(plate)
       #I Set this method under the protected block so that this can be called from an instance method within the class definition.
