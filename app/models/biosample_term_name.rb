@@ -27,15 +27,14 @@ class BiosampleTermName < ActiveRecord::Base
   # 7) induced pluripotent stem cell (EFO)
   #
   #Note that the ENCODE DCC requires that all ontology accessions start with the ontology prefix separated by
-  # a ':" followed by the identifier. This is the case for Uberon and CL accessions, but EFO accessions are
-  # instead separated by a '_". This table stores the accessions as they are naturally stored in the corresponding
-  # ontologies. Thus for EFO accessions, the API will need to replace the '_' with a ':' prior to submission to DCC.
+  # a ':" followed by the identifier. This is the case for Uberon and CL accessions natively, but EFO accessions are
+  # instead separated by a '_". 
   belongs_to :user
   belongs_to :biosample_ontology
   has_many   :biosamples
 
   validates :name, length: { minimum: 2, maximum: 40 }, uniqueness: true, presence: true
-  validates :accession, presence: true, format: { with: /\A(CL:|UBERON:|EFO:)[0-9]{2,8}\z/, message: "Must begin with CL:, UBERON:, or EFO:, followed by two to eight numbers." }
+  validates :accession, presence: true, format: { with: /\A(CL:|UBERON:|EFO:|NTR:)[0-9]{2,8}\z/, message: "Must begin with CL:, UBERON:, or EFO:, followed by two to eight numbers." }
   validates :biosample_ontology_id, presence: true
 
   scope :cl, lambda { where(biosample_ontology_id: BiosampleOntology.find_by(name: "CL")) }

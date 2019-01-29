@@ -57,10 +57,11 @@ class Api::BiosampleOntologiesController < Api::ApplicationController
 
   def biosample_ontology_params
     params.require(:biosample_ontology).permit(
-      :user_id,
+      :description,
       :name,
       :notes,
-      :url
+      :url,
+      :user_id,
     )
   end
 end
