@@ -40,7 +40,8 @@ class Well < ActiveRecord::Base
   end
 
   def add_library_to_biosample(biosample)
-    if not biosample.well.plate.id == self.plate.id
+    # This method should only be called for wells belonging to plates on single_cell_sorting experiments. 
+    if not biosample.well.id == self.id
       raise "Invalid biosample #{biosample.name} does not exist on the same Plate as does this Well #{well.name}."
     end
     library_attrs = self.plate.single_cell_sorting.library_prototype.clone()
@@ -80,7 +81,11 @@ class Well < ActiveRecord::Base
   end
 
   def add_biosample
-    # Create Biosample
+    # An after create hook to add a Biosample to the well, but only if the plate that this well 
+    # belongs to is a part of a SingleCellSorting.
+    if not self.plate.single_cell_sorting.present?
+      return
+    end
     custom_attrs = {}
     custom_attrs[:from_prototype_id] = self.plate.single_cell_sorting.sorting_biosample.id
     custom_attrs[:part_of_id] = self.plate.single_cell_sorting.starting_biosample.id
