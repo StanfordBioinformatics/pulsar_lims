@@ -9,6 +9,8 @@ class Plate < ActiveRecord::Base
   attr_accessor :add_barcodes #used only in the show view in the form at the bottom.
   ROW_LETTERS = ("A".."Z").to_a
   DIMENSIONS = ["2x2 (4)","8x12 (96)","16x24 (384)"]
+  # Dimensions commonly used form 10X Genomics in single-cell applications
+  DIMENSIONS.unshift("1x8 (8)") # Chromium Chip E
   
   has_and_belongs_to_many :antibodies
   has_many :wells, dependent: :destroy  #"validate: true" is default for has_many

@@ -6,6 +6,7 @@
 
 <%= f.association :chip_batch, as: :hidden, label: false %>
 <%= f.association :biosample, collection: Biosample.non_plated, label: false %>
+<%= f.association :antibody, label: false %>
 <div style="display: flex;">
   <%= f.input :concentration, label: false, wrapper_html: {style: "flex: 1 1 55%"} %>
   <% if @chip_batch_item.id.blank? %>

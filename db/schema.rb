@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190129075023) do
+ActiveRecord::Schema.define(version: 20190204010420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,8 +246,10 @@ ActiveRecord::Schema.define(version: 20190129075023) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.integer  "concentration_unit_id"
+    t.integer  "antibody_id"
   end
 
+  add_index "chip_batch_items", ["antibody_id"], name: "index_chip_batch_items_on_antibody_id", using: :btree
   add_index "chip_batch_items", ["biosample_id"], name: "index_chip_batch_items_on_biosample_id", using: :btree
   add_index "chip_batch_items", ["chip_batch_id"], name: "index_chip_batch_items_on_chip_batch_id", using: :btree
   add_index "chip_batch_items", ["concentration_unit_id"], name: "index_chip_batch_items_on_concentration_unit_id", using: :btree
@@ -1182,6 +1184,7 @@ ActiveRecord::Schema.define(version: 20190129075023) do
   add_foreign_key "biosamples", "users", column: "transfected_by_id"
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "biosamples", "wells"
+  add_foreign_key "chip_batch_items", "antibodies"
   add_foreign_key "chip_batch_items", "biosamples"
   add_foreign_key "chip_batch_items", "chip_batches"
   add_foreign_key "chip_batch_items", "units", column: "concentration_unit_id"

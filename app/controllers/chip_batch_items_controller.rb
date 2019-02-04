@@ -60,6 +60,7 @@ class ChipBatchItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def chip_batch_item_params
       params.require(:chip_batch_item).permit(
+        :antibody_id,
         :biosample_id, 
         :chip_batch_id,
         :concentration, 

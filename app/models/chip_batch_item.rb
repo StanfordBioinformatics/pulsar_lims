@@ -6,6 +6,7 @@ class ChipBatchItem < ActiveRecord::Base
   ABBR = "CBI"
   DEFINITION = "Represents one of the Biosamples processed in this ChipBatch."
   #default_scope {order("lower(name)")} #no name column
+  belongs_to :antibody
   belongs_to :user
   belongs_to :biosample
   belongs_to :chip_batch

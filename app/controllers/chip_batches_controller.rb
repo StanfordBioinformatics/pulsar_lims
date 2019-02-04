@@ -99,6 +99,7 @@ class ChipBatchesController < ApplicationController
         :date,
         :notes,
         chip_batch_items_attributes: [
+          :antibody_id,
           :id,
           :biosample_id,
           :chip_batch_id,
