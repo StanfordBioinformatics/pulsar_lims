@@ -26,7 +26,6 @@ class Biosample < ActiveRecord::Base
   # Virtual biosamples are used currently in the single_cell_sorting model via the sorting_biosample_id foreign key.
   # This biosample is a prototype used as a reference for creating the biosamples in the wells of the plates on
   # the single_cell_sorting experiment. kk
-  belongs_to :chipseq_experiment # for experimental replicates
   has_many :wt_for_chipseq_experiments, class_name: "ChipseqExperiment", foreign_key: :wild_type_control_id 
   belongs_to :well
   has_many :biosample_parts, class_name: "Biosample", foreign_key: "part_of_id", dependent: :destroy
