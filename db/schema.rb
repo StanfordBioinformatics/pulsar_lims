@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190204010420) do
+ActiveRecord::Schema.define(version: 20190205220044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -712,10 +712,12 @@ ActiveRecord::Schema.define(version: 20190204010420) do
     t.text     "notes"
     t.boolean  "prototype",                                   default: false
     t.integer  "times_cloned",                                default: 0
+    t.integer  "chipseq_experiment_id"
   end
 
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
+  add_index "libraries", ["chipseq_experiment_id"], name: "index_libraries_on_chipseq_experiment_id", using: :btree
   add_index "libraries", ["concentration_unit_id"], name: "index_libraries_on_concentration_unit_id", using: :btree
   add_index "libraries", ["from_prototype_id"], name: "index_libraries_on_from_prototype_id", using: :btree
   add_index "libraries", ["library_fragmentation_method_id"], name: "index_libraries_on_library_fragmentation_method_id", using: :btree
@@ -1242,6 +1244,7 @@ ActiveRecord::Schema.define(version: 20190204010420) do
   add_foreign_key "isotypes", "users"
   add_foreign_key "libraries", "barcodes"
   add_foreign_key "libraries", "biosamples"
+  add_foreign_key "libraries", "chipseq_experiments"
   add_foreign_key "libraries", "libraries", column: "from_prototype_id"
   add_foreign_key "libraries", "library_fragmentation_methods"
   add_foreign_key "libraries", "nucleic_acid_terms"
