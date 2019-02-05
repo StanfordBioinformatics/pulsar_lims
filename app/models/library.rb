@@ -54,8 +54,8 @@ class Library < ActiveRecord::Base
   scope :persisted, lambda { where.not(id: nil) }
   scope :non_plated, lambda { where(plated: false) }
   # See merge doc at https://apidock.com/rails/ActiveRecord/SpawnMethods/merge
-  scope :controls, -> { Library.joins(:biosample).merge(Biosample.controls) }
-  scope :experimental, -> { Library.joins(:biosample).merge(Biosample.experimental) }
+  scope :controls, -> { Library.joins(:biosample).merge(Biosample.unscoped.controls) }
+  scope :experimental, -> { Library.joins(:biosample).merge(Biosample.unscoped.experimental) }
 
   # Only call self.set_name() if this is a library on a well.
   #before_validation :set_name, on: :create #Somehow this gets called when updating too, despite saying "on: :create". So in that method, I make sure that the record isn't persisted before continuing. 
