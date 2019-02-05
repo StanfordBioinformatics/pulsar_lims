@@ -8,7 +8,7 @@
 
   <%= f.input :name %>
   <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "The alias or accession of an existing ChIP-Seq experiment on the ENCODE Portal (leave blank if this is a new experiment that hasn't been registered there yet). For a list of available ChIP-Seq on the ENCODE Portal, see https://www.encodeproject.org/search/?type=Experiment&assay_title=ChIP-seq."} %>
-  <%= f.association :chipseq_starting_biosamples, collection: Biosample.experimental.non_plated %>
+  <%= f.association :chipseq_starting_biosamples, collection: Biosample.has_wt_parent %>
   <% wtc_disabled = false %>
   <% if @chipseq_experiment.wild_type_control.blank? %>
     <% wtc_disabled = true %>

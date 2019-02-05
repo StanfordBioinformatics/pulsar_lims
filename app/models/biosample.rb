@@ -76,6 +76,8 @@ class Biosample < ActiveRecord::Base
   scope :wild_type_controls, -> {wild_types.where(control: true) }
   scope :controls, -> { where(control: true, wild_type: false) }
   scope :experimental, -> { where(wild_type: false, control: false) }
+  # For scope below, self join example inspired from https://www.w3schools.com/sql/sql_join_self.asp
+  scope :has_wt_parent, -> { Biosample.find_by_sql("SELECT A.* FROM biosamples A, biosamples B WHERE A.part_of_id = B.id AND B.wild_type = true AND A.wild_type = false AND A.control = False")}
 
   before_validation :set_name, on: [:create, :update]
   after_validation :check_plated #true if it belongs to a well.
