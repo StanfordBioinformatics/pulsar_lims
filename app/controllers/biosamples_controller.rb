@@ -17,7 +17,7 @@ class BiosamplesController < ApplicationController
   end
 
   def create_clones
-    # Called from the view rendered by the clone action above. 
+    # Called from the view rendered by the clone action above.
     authorize @biosample, :create?
     num_clones = params[:copies].to_i
     (1..num_clones).each do |num|
@@ -28,21 +28,21 @@ class BiosamplesController < ApplicationController
     redirect_to biosamples_url, notice: "Your #{num_clones} clones have been created!"
   end
 
-  def biosample_parts 
+  def biosample_parts
     #Called via ajax
     @records = @biosample.children
     @total = @records.count
     @no_new_btn = true
     @title = "Child biosamples of #{@biosample.name}"
-    render action: "index" 
+    render action: "index"
   end
-    
+
   def prototype_instances
     #Called via ajax
     @records = policy_scope(Biosample.where({from_prototype: @biosample})).page params[:page]
     @no_new_btn = true
     @title = "Prototype instances of Biosample #{@biosample.name}"
-    render action: "index" 
+    render action: "index"
   end
 
   def select_options
@@ -144,42 +144,42 @@ class BiosamplesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def biosample_params
       params.require(:biosample).permit(
-        :control, 
-        :biosample_term_name_id, 
+        :control,
+        :biosample_term_name_id,
         :biosample_type_id,
         :cells_discarded,
         :chipseq_experiment_id,
         :chipseq_starting_biosample_id,
         :crispr_modification_id,
-        :date_biosample_taken, 
-        :description, 
+        :date_biosample_taken,
+        :description,
         :donor_id,
-        :lot_identifier, 
-        :name, 
+        :lot_identifier,
+        :name,
         :notes,
         :nih_institutional_certification,
-        :owner_id, 
-        :part_of_id, 
-        :passage_number, 
+        :owner_id,
+        :part_of_id,
+        :passage_number,
         :replicate_number,
         :starting_amount,
         :starting_amount_units,
-        :submitter_comments, 
+        :submitter_comments,
         :times_cloned,
-        :tissue_preservation_method, 
+        :tissue_preservation_method,
         :transfection_date,
         :transfected_by_id,
         :tube_label,
-        :upstream_identifier, 
+        :upstream_identifier,
         :vendor_id,
-        :vendor_product_identifier, 
+        :vendor_product_identifier,
         :wild_type,
-        
-        documents_attributes: [:id, :_destroy], 
-        :document_ids => [], 
-        pooled_from_biosamples_attributes: [:id, :_destroy], 
-        :pooled_from_biosample_ids => [], 
-        treatments_attributes: [:id, :_destroy], 
+
+        documents_attributes: [:id, :_destroy],
+        :document_ids => [],
+        pooled_from_biosamples_attributes: [:id, :_destroy],
+        :pooled_from_biosample_ids => [],
+        treatments_attributes: [:id, :_destroy],
         :treatment_ids => []
     )
     end
