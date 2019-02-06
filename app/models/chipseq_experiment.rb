@@ -46,14 +46,14 @@ class ChipseqExperiment < ActiveRecord::Base
 
   def replicate_ids=(ids)
     """
-    Function : Adds associations to biosamples that are stored in self.replicates.
-    Args     : ids - array of Biosample IDs.
+    Function : Adds associations to Libraries that are stored in self.replicates.
+    Args     : ids - array of Library IDs.
     """
     ids.each do |i|
       if i.blank?
         next
       end
-      rec = Biosample.find(i)
+      rec = Library.find(i)
       if not self.replicates.include? rec
         self.replicates << rec
       end

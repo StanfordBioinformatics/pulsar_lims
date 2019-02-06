@@ -1,0 +1,9 @@
+<%= simple_fields_for(@chipseq_experiment) do |f| %>
+    <%= f.association :replicates, 
+        label: "Add replicates (Libraries)", 
+        collection: @libraries, 
+        label_html: {
+          "data-toggle": "tooltip", 
+          "title": "Select one or more libraries, all of which belong to the selected Biosample above. Selecting multiple libraries adds them as technical replicates on the experiment."}
+    %>
+<% end %>

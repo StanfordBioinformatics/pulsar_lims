@@ -14,6 +14,7 @@ class Biosample < ActiveRecord::Base
   ###
   has_one :chip_batch_item
   has_one :chip_batch, through: :chip_batch_item
+  has_many :chipseq_experiments, through: :libraries
   has_many :shippings, dependent: :destroy
   has_many :gel_lanes
   has_many :gels, through: :gel_lanes
@@ -121,7 +122,7 @@ class Biosample < ActiveRecord::Base
     return self.children.map{|c| c.id}
   end
 
-  def control_children
+  def control_descendents
     # Finds all descendents of the given biosample and returns an array of only the ones
     # that are controls and not wild_types, if any. 
     # Returns a Set object.
@@ -130,7 +131,7 @@ class Biosample < ActiveRecord::Base
       if c.control? and not c.wild_type?
         ctls << c
       end
-      ctls.merge(c.control_children())
+      ctls.merge(c.control_descendents())
     end
     return ctls
   end

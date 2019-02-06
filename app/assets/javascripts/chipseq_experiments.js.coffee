@@ -19,7 +19,7 @@ $ ->
     $.get "/chipseq_experiments/get_wt_control_selection", {starting_biosample_id: $("#chipseq_experiment_chipseq_starting_biosample_ids").val()[0]}, (responseText,status,jqXHR) ->
       $("#chipseq_experiment_wild_type_control_id").closest("div").replaceWith(responseText)
 
-  # Trigger change for above since the user might have opend the record in edit mode. If no change
+  # Trigger change for above since the user might have opened the record in edit mode. If no change
   # event is triggered here, then the wt control input will be disabled. 
   $("#chipseq_experiment_chipseq_starting_biosample_ids").change()
 
@@ -32,3 +32,9 @@ $ ->
   $("#chipseq-add-rep, #chipseq-add-ctl").on "ajax:success", (event, data) -> 
     $(".bottom-btns").hide()
     $(".bottom-btns").after(data)
+    $("#biosample").on "change", () -> 
+      biosample_id = $(this).val()
+      route = "/chipseq_experiments/select_biosample_libraries"
+      $.get route, {biosample_id: biosample_id}, (responseText,status,jqXHR) ->
+        $("#library_selector").html(responseText)
+        add_tooltip_icon() # Defined in application.js
