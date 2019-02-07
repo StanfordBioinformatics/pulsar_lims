@@ -126,7 +126,7 @@
     <tr>
       <th><strong>Child biosamples:</strong></th>
       <td>
-        <%= link_to "#{@biosample.children.length} total", [:biosample_parts, @biosample] %>
+        <%= link_to "#{@biosample.children.length} total", [:biosample_children, @biosample] %>
       </td>
     </tr>
   <% end %>
