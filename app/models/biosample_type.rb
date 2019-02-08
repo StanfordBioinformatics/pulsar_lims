@@ -34,7 +34,6 @@ class BiosampleType < ActiveRecord::Base
     primary_cell = BiosampleType.find_by!(name: "primary cell") #CL 
     stem_cell = BiosampleType.find_by!(name: "stem cell") #CL 
     cell_line = BiosampleType.find_by!(name: "cell line") #EFO
-    induced_pluripotent_stem_cell = BiosampleType.find_by!(name: "induced pluripotent stem cell line") #EFO
     in_vitro_differentiated_cell = BiosampleType.find_by!(name: "in vitro differentiated cells") #CL or EFO
 
     biosample_term_name_selection = BiosampleTermName.all
@@ -42,7 +41,7 @@ class BiosampleType < ActiveRecord::Base
       biosample_term_name_selection = BiosampleTermName.uberon
     elsif [primary_cell.name, stem_cell.name].include?(biosample_type_name)
       biosample_term_name_selection = BiosampleTermName.cl
-    elsif [cell_line.name,induced_pluripotent_stem_cell.name].include?(biosample_type_name)
+    elsif cell_line.name == biosample_type_name
       biosample_term_name_selection = BiosampleTermName.efo
     elsif biosample_type_name == in_vitro_differentiated_cell.name
       biosample_term_name_selection = BiosampleTermName.cl.merge(BiosampleTermName.efo)
