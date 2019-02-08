@@ -4,6 +4,7 @@ class LibrarySerializer < ActiveModel::Serializer
 
   attributes :id,
              :biosample_id, 
+             :chipseq_experiment_id,
              :concentration,
              :dual_indexed,
              :from_prototype_id, 

@@ -59,6 +59,7 @@ class Api::LibrariesController < Api::ApplicationController
     params.require(:library).permit(
         :barcode_id,
         :biosample_id,
+        :chipseq_experiment_id,
         :concentration,
         :concentration_unit_id,
         :dual_indexed,

@@ -13,6 +13,15 @@
       <td><%= link_to @library.biosample.name, @library.biosample %></td>
     <tr>
   <% end %>
+ 
+  <tr>
+    <th><strong>Replicate on ChIP-seq exp:</strong></th>
+    <td>
+      <% if @library.chipseq_experiment.present? %>
+        <%= link_to_record(@library.chipseq_experiment) %>
+      <% end %>
+    </td>
+  </tr>
 
   <tr>
     <th><strong>Times cloned:</strong></th>

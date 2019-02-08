@@ -18,7 +18,7 @@ Pulsar::Application.routes.draw do
   end
   resources :gel_lanes
   resources :chipseq_experiments do
-    get :select_biosample_libraries, on: :collection
+    get :select_biosample_libraries, on: :member
     get :select_control_biosample, on: :member
     get :get_wt_control_selection, on: :collection
     get :select_experimental_biosample, on: :member
