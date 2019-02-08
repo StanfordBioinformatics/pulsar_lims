@@ -51,4 +51,7 @@ Params:
   </ul>
 </header>
 
+<!-- Add hidden span tag to store the record's ID - Useful at times in JS code to lookup. -->
+<span style="display: none;" id="record_id"><%= rec.id %></span>
+
 <%= render partial: "application_partials/record_meta", locals: { record: rec } %>
