@@ -19,6 +19,7 @@
       <th>Dual-indexed?</th>
       <th>Nucleic acid type</th>
       <th>Biosample</th>
+      <th>ChIP-seq Exp</th>
       <th>Vendor</th>
       <th>Barcode</th>
       <th>Paired barcode</th>
@@ -43,6 +44,12 @@
             <%= link_to rec.biosample.name, rec.biosample %></td>
           <% end %>
         </td>
+
+        <td>                                                                                                 
+          <% if rec.chipseq_experiment.present? %>                                                    
+            <%= link_to_record(rec.chipseq_experiment) %>                                             
+          <% end %>                                                                                        
+        </td> 
 
         <td>
           <% if rec.vendor.present? %>

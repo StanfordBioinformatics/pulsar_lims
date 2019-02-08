@@ -30,11 +30,15 @@ $ ->
       event.stopPropagation()
 
   $("#chipseq-add-rep, #chipseq-add-ctl").on "ajax:success", (event, data) -> 
+    tag = this.id
     $(".bottom-btns").hide()
     $(".bottom-btns").after(data)
     $("#biosample").on "change", () -> 
       biosample_id = $(this).val()
-      route = "/chipseq_experiments/select_biosample_libraries"
-      $.get route, {biosample_id: biosample_id}, (responseText,status,jqXHR) ->
+      params = {biosample_id: biosample_id}
+      if tag == "chipseq-add-ctl"
+        params.control = true
+      route = "/chipseq_experiments/" + $("#record_id").text() + "/select_biosample_libraries"
+      $.get route, params, (responseText,status,jqXHR) ->
         $("#library_selector").html(responseText)
         add_tooltip_icon() # Defined in application.js

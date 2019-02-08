@@ -15,6 +15,10 @@
       label_html: {class: "refresh", "data-toggle" => "tooltip","title" => "The biosample that nucleic acid was isolated from to generate the library. Not required if this is a Library prototype."}
   %>
 
+  <% if @library.chipseq_experiment.present? %>
+    <%= f.association :chipseq_experiment, label_html: {"data-toggle": "tooltip", "title": "The ChIP-seq experiment on which this library serves as a replicate."} %>
+  <% end %>
+
   <fieldset>
     <legend>Prep kit and barcoding</legend>
     <%= f.association :sequencing_library_prep_kit, selected: @library.sequencing_library_prep_kit_id || defaults["sequencing_library_prep_kit_id"], label_html: {"data-toggle" => "tooltip", "title" => "The library prep kit used for creating the library."} %>
