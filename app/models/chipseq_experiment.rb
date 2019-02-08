@@ -60,6 +60,22 @@ class ChipseqExperiment < ActiveRecord::Base
     end
   end
 
+  def control_replicate_ids=(ids)
+    """
+    Function : Adds associations to Libraries that are stored in self.control_replicates.
+    Args     : ids - array of Library IDs.
+    """
+    ids.each do |i|
+      if i.blank?
+        next
+      end
+      rec = Library.find(i)
+      if not self.control_replicates.include? rec
+        self.control_replicates << rec
+      end
+    end
+  end
+
   def document_ids=(ids)
     """
     Function : Adds associations to Documents that are stored in self.documents.

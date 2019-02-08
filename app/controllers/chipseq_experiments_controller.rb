@@ -1,5 +1,5 @@
 class ChipseqExperimentsController < ApplicationController
-  before_action :set_chipseq_experiment, only: [:show, :edit, :update, :destroy, :select_experimental_biosample, :select_control_biosample, :create_control_replicate]
+  before_action :set_chipseq_experiment, only: [:show, :edit, :update, :destroy, :select_experimental_biosample, :select_control_biosample, :create_control_replicate, :select_biosample_libraries]
   skip_after_action :verify_authorized, only: [:select_experimental_biosample, :select_control_biosample, :create_control_replicate, :get_wt_control_selection, :select_biosample_libraries]
 
   def select_biosample_libraries
@@ -7,8 +7,12 @@ class ChipseqExperimentsController < ApplicationController
     # button or the "Add control replicate" button and then selects a biosample.
     # The call is made from chipseq_experiments.js.coffee.
     @biosample = Biosample.find(params[:biosample_id])
-    @chipseq_experiment = ChipseqExperiment.new # For simple_fields_for in the view
-    @libraries = @biosample.libraries
+    @control = false
+    if params[:control].present?
+      @control = true
+    end
+    # Filter out any libraries that are already on the ChipseqExperiment.
+    @libraries = @biosample.libraries.reject { |x| x.chipseq_experiment_id == @chipseq_experiment.id}
     render layout: false
   end
 
