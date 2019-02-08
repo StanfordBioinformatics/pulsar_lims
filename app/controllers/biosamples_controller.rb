@@ -1,7 +1,7 @@
 class BiosamplesController < ApplicationController
 #  include DocumentsConcern #gives me add_documents(), remove_documents()
-  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :biosample_parts, :prototype_instances, :clone, :create_clones, :delete_biosample_document, :add_crispr_modification, :add_shipping]
-  skip_after_action :verify_authorized, only: [:biosample_parts, :prototype_instances, :select_biosample_term_name, :crispr_modification_id, :add_crispr_modification, :add_shipping]
+  before_action :set_biosample, only: [:show, :edit, :update, :destroy, :biosample_children, :prototype_instances, :clone, :create_clones, :delete_biosample_document, :add_crispr_modification, :add_shipping]
+  skip_after_action :verify_authorized, only: [:biosample_children, :prototype_instances, :select_biosample_term_name, :crispr_modification_id, :add_crispr_modification, :add_shipping]
 
   def add_shipping
     #ajax call from show view
