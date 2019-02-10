@@ -28,7 +28,7 @@ class BiosamplesController < ApplicationController
     redirect_to biosamples_url, notice: "Your #{num_clones} clones have been created!"
   end
 
-  def biosample_children
+  def biosample_parts
     #Called via ajax
     @records = @biosample.children
     @total = @records.count
