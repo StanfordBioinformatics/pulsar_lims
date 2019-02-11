@@ -11,13 +11,14 @@ class Library < ActiveRecord::Base
   include CloningForDocuments # A Concern that includes instance methods all_documents() and parent_documents().
   ABBR = "L"
   DEFINITION = "A sequencing library that is prepared for sequencing.  Model abbreviation: #{ABBR}"
-  #default_scope {order("lower(name)")}
+  default_scope {order("lower(name)")}
   default_scope {order(:id)}
   #The is_control bool column has a default of false.
   has_many :sequencing_results, dependent: :destroy
   has_and_belongs_to_many :documents
   has_and_belongs_to_many :sequencing_requests
   has_one :single_cell_sorting, class_name: "SingleCellSorting", foreign_key: :library_prototype_id, dependent: :nullify
+  has_one :chip_batch, class_name: "ChipBatch", foreign_key: :library_prototype_id, dependent: :nullify
   #A virtual (prototype) library can be used as a template for a single_cell_sorting experiment. This would then be used
   # as a template for making library objects associated to the each biosample in each well of each plate present on the singe_cell_sorting. 
   belongs_to :barcode

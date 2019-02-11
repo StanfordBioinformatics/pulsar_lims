@@ -3,7 +3,7 @@
 
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @library } %>
 
-  <%= f.input :prototype, as: :hidden %>
+  <%= f.input :prototype, label_html: {"data-toggle": "tooltip", "title": "Select only if this is a fake Library that serves as a model for building others. For example, a prototype Library is typically cloned to create real Libraries that may differ only by barcode."} %>
 
   <%= f.input :upstream_identifier, label_html: {"data-toggle": "tooltip", "title": "You normally don't need to set this as it is set automatically after POSTING the record to the upstream database. This represents the identifier for this record in the upstream database."} %>
 

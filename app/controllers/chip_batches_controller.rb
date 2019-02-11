@@ -97,6 +97,7 @@ class ChipBatchesController < ApplicationController
         :chip_batch_item_ids,
         :crosslinking_method,
         :date,
+        :library_prototype_id,
         :notes,
         chip_batch_items_attributes: [
           :antibody_id,

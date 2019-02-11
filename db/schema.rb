@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190205220044) do
+ActiveRecord::Schema.define(version: 20190211024039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -259,13 +259,15 @@ ActiveRecord::Schema.define(version: 20190205220044) do
     t.integer  "user_id"
     t.string   "crosslinking_method"
     t.date     "date"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "analyst_id"
     t.text     "notes"
+    t.integer  "library_prototype_id"
   end
 
   add_index "chip_batches", ["analyst_id"], name: "index_chip_batches_on_analyst_id", using: :btree
+  add_index "chip_batches", ["library_prototype_id"], name: "index_chip_batches_on_library_prototype_id", using: :btree
   add_index "chip_batches", ["user_id"], name: "index_chip_batches_on_user_id", using: :btree
 
   create_table "chipseq_experiments", force: :cascade do |t|
@@ -1191,6 +1193,7 @@ ActiveRecord::Schema.define(version: 20190205220044) do
   add_foreign_key "chip_batch_items", "chip_batches"
   add_foreign_key "chip_batch_items", "units", column: "concentration_unit_id"
   add_foreign_key "chip_batch_items", "users"
+  add_foreign_key "chip_batches", "libraries", column: "library_prototype_id"
   add_foreign_key "chip_batches", "users"
   add_foreign_key "chip_batches", "users", column: "analyst_id"
   add_foreign_key "chipseq_experiments", "biosamples", column: "wild_type_control_id"

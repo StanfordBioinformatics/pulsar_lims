@@ -1,4 +1,4 @@
-<%= simple_form_for(@single_cell_sorting, html: {class: "howdy"}) do |f| %>
+<%= simple_form_for(@single_cell_sorting) do |f| %>
   <%= f.simple_fields_for :sorting_biosample, @biosample do |ff| %>
     <%= render partial: "biosamples/form", locals: {f: ff} %>
   <% end %>

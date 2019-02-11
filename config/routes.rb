@@ -381,6 +381,7 @@ Pulsar::Application.routes.draw do
   end
 
   resources :libraries do
+    get :select_options, on: :collection
     get :select_paired_barcode, on: :collection
     get :select_barcode, on: :collection
   end

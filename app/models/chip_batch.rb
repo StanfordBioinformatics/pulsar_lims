@@ -8,6 +8,7 @@ class ChipBatch < ActiveRecord::Base
   #default_scope {order("lower(name)")} #no name column
   belongs_to :user
   belongs_to :analyst, class_name: "User"
+  belongs_to :library_prototype, class_name: "Library", dependent: :destroy 
   has_many :chip_batch_items, dependent: :destroy
   has_many :biosamples, through: :chip_batch_items
 

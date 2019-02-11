@@ -3,6 +3,17 @@ class LibrariesController < ApplicationController
   before_action :set_library, only: [:show, :edit, :update, :destroy]
   skip_after_action :verify_authorized, only: [:select_barcode,:select_paired_barcode]
 
+  def select_options
+    #Called via ajax.
+    #Typically called when the user selects the refresh icon in any form that has a crispr_modifications selection.
+    if params[:prototype].present? and params[:prototype] == "true"
+      @records = Library.where(prototype: true)
+    else
+      @records = Library.all
+    end
+    render "application_partials/select_options", layout: false
+  end
+
   def select_barcode
     #barcodes on a sequencing_library_prep_kit
     #used in the Library _form with ajax
@@ -38,7 +49,7 @@ class LibrariesController < ApplicationController
   end
 
   def edit
-    authorize @library  
+    authorize @library
   end
 
   def create
