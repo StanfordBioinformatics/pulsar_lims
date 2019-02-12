@@ -22,8 +22,8 @@ $ ->
     $.post "/chip_batches/" + $("#record_id").text() + "/create_or_update_chip_batch_item", $form.serialize(), (data) ->
       $jqdata = $(data)
       $form.replaceWith($jqdata)
-      $jqdata.fadeOut () -> 
-        $(this).fadeIn()
+      $jqdata.fadeOut "slow", () -> 
+        $(this).fadeIn("slow")
 
   $(document).on "change", ".chip-batch-item-form div > *", () ->
     $form =  $(this).closest("form")
