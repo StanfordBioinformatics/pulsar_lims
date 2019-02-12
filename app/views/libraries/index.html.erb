@@ -19,6 +19,7 @@
       <th>Dual-indexed?</th>
       <th>Nucleic acid type</th>
       <th>Biosample</th>
+      <th>Antibody</th>
       <th>ChIP-seq Exp</th>
       <th>Vendor</th>
       <th>Barcode</th>
@@ -42,6 +43,12 @@
         <td>
           <% unless rec.prototype? %>
             <%= link_to rec.biosample.name, rec.biosample %></td>
+          <% end %>
+        </td>
+
+        <td>
+          <% if rec.antibody.present? %>
+            <%= link_to_record rec.antibody %>
           <% end %>
         </td>
 

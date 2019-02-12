@@ -11,6 +11,11 @@
 
 $ ->
 
+  #Refresh the antibodies list in the form when the refresh fa-icon is clicked:                   
+  $(document).on "click", ".library_antibody i.refresh", (event) ->                      
+    $.get "/antibodies/select_options", (responseText,status,jqXHR) ->                            
+      $(".library_antibody select").html(responseText)  
+
   #Refresh the biosamples list in the form when the refresh fa-icon is clicked:                   
   $(document).on "click", ".library_biosample i.refresh", (event) ->                      
     $.get "/biosamples/select_options", (responseText,status,jqXHR) ->                            

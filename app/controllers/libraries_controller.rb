@@ -105,7 +105,7 @@ class LibrariesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_params
       params.require(:library).permit(
-        :antibody,
+        :antibody_id,
         :barcode_id,
         :biosample_id,
         :chipseq_experiment_id,

@@ -15,6 +15,8 @@
       label_html: {class: "refresh", "data-toggle" => "tooltip","title" => "The biosample that nucleic acid was isolated from to generate the library. Not required if this is a Library prototype."}
   %>
 
+  <%= f.association :antibody, label_html: {class: "refresh", "data-toggle": "tooltip", "title": "Antibody used to pull down DNA that went into this library, if applicable."} %>
+
   <% if @library.chipseq_experiment.present? %>
     <%= f.association :chipseq_experiment, label_html: {"data-toggle": "tooltip", "title": "The ChIP-seq experiment on which this library serves as a replicate."} %>
   <% end %>
