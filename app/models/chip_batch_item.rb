@@ -11,18 +11,30 @@ class ChipBatchItem < ActiveRecord::Base
   belongs_to :biosample
   belongs_to :chip_batch
   belongs_to :concentration_unit, class_name: "Unit"
+  belongs_to :library
 
   validates :chip_batch_id, presence: true
   validates :biosample_id, presence: true
   validates :concentration, numericality: {greater_than: 0}, allow_blank: true
   validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"
   validate :validate_concentration_units
+  validate :validate_library
+
+  accepts_nested_attributes_for :library, allow_destroy: true
 
   def self.policy_class
     ApplicationPolicy
   end
 
   private
+
+  def validate_library
+    if self.library.present?
+      if not self.biosample.library_ids.include?(self.library_id)
+        self.errors.add(:library_id, "selected must also be linked to the the given Biosample.")
+      end
+    end
+  end
 
   def validate_concentration_units
     if self.concentration_unit.present?

@@ -57,11 +57,11 @@ class Api::ChipBatchItemsController < Api::ApplicationController
 
   def chip_batch_item_params
     params.require(:chip_batch_item).permit(
-        :antibody_id,
         :biosample_id,
         :chip_batch_id,
         :concentration,
         :concentration_unit_id,
+        :library_id,
         :notes
     )
   end

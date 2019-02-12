@@ -18,6 +18,7 @@ class Barcode < ActiveRecord::Base
   validates :sequencing_library_prep_kit, presence: true
 
   scope :persisted, lambda { where.not(id: nil) }
+  scope :kit, lambda {|kit_id| where(sequencing_library_prep_kit_id: kit_id)}
 
   def to_label
      # Shadows the to_label method defined in /app/models/concerns/model_concerns. 

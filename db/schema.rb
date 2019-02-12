@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190211024039) do
+ActiveRecord::Schema.define(version: 20190211234323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,13 +246,13 @@ ActiveRecord::Schema.define(version: 20190211024039) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.integer  "concentration_unit_id"
-    t.integer  "antibody_id"
+    t.integer  "library_id"
   end
 
-  add_index "chip_batch_items", ["antibody_id"], name: "index_chip_batch_items_on_antibody_id", using: :btree
   add_index "chip_batch_items", ["biosample_id"], name: "index_chip_batch_items_on_biosample_id", using: :btree
   add_index "chip_batch_items", ["chip_batch_id"], name: "index_chip_batch_items_on_chip_batch_id", using: :btree
   add_index "chip_batch_items", ["concentration_unit_id"], name: "index_chip_batch_items_on_concentration_unit_id", using: :btree
+  add_index "chip_batch_items", ["library_id"], name: "index_chip_batch_items_on_library_id", using: :btree
   add_index "chip_batch_items", ["user_id"], name: "index_chip_batch_items_on_user_id", using: :btree
 
   create_table "chip_batches", force: :cascade do |t|
@@ -715,8 +715,10 @@ ActiveRecord::Schema.define(version: 20190211024039) do
     t.boolean  "prototype",                                   default: false
     t.integer  "times_cloned",                                default: 0
     t.integer  "chipseq_experiment_id"
+    t.integer  "antibody_id"
   end
 
+  add_index "libraries", ["antibody_id"], name: "index_libraries_on_antibody_id", using: :btree
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
   add_index "libraries", ["chipseq_experiment_id"], name: "index_libraries_on_chipseq_experiment_id", using: :btree
@@ -1188,9 +1190,9 @@ ActiveRecord::Schema.define(version: 20190211024039) do
   add_foreign_key "biosamples", "users", column: "transfected_by_id"
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "biosamples", "wells"
-  add_foreign_key "chip_batch_items", "antibodies"
   add_foreign_key "chip_batch_items", "biosamples"
   add_foreign_key "chip_batch_items", "chip_batches"
+  add_foreign_key "chip_batch_items", "libraries"
   add_foreign_key "chip_batch_items", "units", column: "concentration_unit_id"
   add_foreign_key "chip_batch_items", "users"
   add_foreign_key "chip_batches", "libraries", column: "library_prototype_id"
@@ -1245,6 +1247,7 @@ ActiveRecord::Schema.define(version: 20190211024039) do
   add_foreign_key "immunoblots", "users"
   add_foreign_key "immunoblots", "users", column: "analyst_id"
   add_foreign_key "isotypes", "users"
+  add_foreign_key "libraries", "antibodies"
   add_foreign_key "libraries", "barcodes"
   add_foreign_key "libraries", "biosamples"
   add_foreign_key "libraries", "chipseq_experiments"

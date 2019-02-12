@@ -24,6 +24,7 @@ class LibrarySerializer < ActiveModel::Serializer
   # Dont serialize the following associations:
   #    1. from_prototype_id
   #    2. biosample_id
+  has_one :antibody
   has_one :barcode
   has_one :concentration_unit
   has_one :library_fragmentation_method

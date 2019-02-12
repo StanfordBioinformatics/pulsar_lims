@@ -33,7 +33,7 @@ $ ->
   $dual_indexed_checkbox.closest("div").hide()
 
   $barcode_selector = $("#barcode_selector")
-
+  # Function to hide barcode selector if the SequencingLibraryPrepKit isn't yet selected:
   hide_barcode_selector = ->
     if ( ! $kit_selector.val() )
       $barcode_selector.hide()

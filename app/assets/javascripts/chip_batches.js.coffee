@@ -2,10 +2,19 @@
 
 $ ->
 
+  $(document).on "change", "#chip_batch_item_select_biosample", () ->
+    route = "/biosamples/" + $(this).val() + "/select_biosample_libraries"
+    $.get route, (responseText,status,jqXHR) ->
+      $("#chip_batch_item_select_biosample_library").html("<option value></option>" + responseText)
+      $("#chip_batch_item_select_biosample_library").attr("disabled", false)
+    
+
+  # User clicks "Add row" button in show view.
   $(".add-chip-batch-item-btn").on "ajax:success", (event,data) ->
     $rows = $(".chip-batch-item-rows")
     $rows.append(data)
 
+  # User clicks the "Create" button in a ChipBatchRow.
   $(document).on "click", ".chip-batch-create-row-btn", (event) ->
     event.preventDefault()
     event.stopPropagation()

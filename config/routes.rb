@@ -405,6 +405,7 @@ Pulsar::Application.routes.draw do
   end
 
   resources :biosamples do
+    get :select_biosample_libraries, on: :member 
     get :add_shipping, on: :member
     get :add_crispr_modification, on: :member
     get :clone, on: :member

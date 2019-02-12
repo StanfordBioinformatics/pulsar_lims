@@ -11,6 +11,7 @@ class ChipBatchesController < ApplicationController
 
   def create_or_update_chip_batch_item
     item_params = chip_batch_params[:chip_batch_items_attributes]["0"] # Subset the dict with only key being 0.
+    logger.debug(params)
     if item_params[:id].present?
       # Then do an update
       @chip_batch_item = ChipBatchItem.find(item_params[:id])
@@ -20,6 +21,12 @@ class ChipBatchesController < ApplicationController
       payload = item_params
       payload.update({user_id: current_user.id})
       @chip_batch_item = ChipBatchItem.create(payload)
+      if @chip_batch_item.valid?
+        if @chip_batch.library_prototype.present? and @chip_batch_item.library.blank?
+          library = @chip_batch.library_prototype.clone_library(associated_biosample_id: @chip_batch_item.biosample_id, associated_user_id: current_user.id)
+          @chip_batch_item.update!(library_id: library.id)
+        end
+      end
     end
     render partial: "chip_batches/add_chip_batch_item", layout: false
   end
@@ -106,7 +113,14 @@ class ChipBatchesController < ApplicationController
           :chip_batch_id,
           :concentration,
           :concentration_unit_id,
-          :notes
+          :library_id,
+          :notes,
+          library_attributes: [                                                                          
+            :id,                                                                                         
+            :antibody_id,                                                                                
+            :barcode_id,                                                                                 
+            :paired_barcode_id                                                                           
+          ] 
         ]
       )
     end

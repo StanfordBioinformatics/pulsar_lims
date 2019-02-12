@@ -5,8 +5,27 @@
 <% end %>
 
 <%= f.association :chip_batch, as: :hidden, label: false %>
-<%= f.association :biosample, collection: Biosample.non_plated, label: false %>
-<%= f.association :antibody, label: false %>
+<%= f.association :biosample, collection: Biosample.non_plated, label: false, input_html: {id: "chip_batch_item_select_biosample"} %>
+
+<div>
+  <%= f.association :library, label: false, disabled: true, input_html: {id: "chip_batch_item_select_biosample_library"} %>
+</div>
+
+<% if @chip_batch_item.library.present? %>
+  <% slpk_id = @chip_batch_item.library.sequencing_library_prep_kit_id %>
+  <%= f.simple_fields_for :library, @chip_batch_item.library do |ff| %>
+    <% if @chip_batch_item.library.dual_indexed? %>
+      <%= ff.association :paired_barcode, label: false, collection: Barcode.kit(slpk_id) %>
+    <% else %>
+      <%= ff.association :barcode, label: false, collection: Barcode.kit(slpk_id) %>
+    <% end %>
+    <%= ff.association :antibody, label: false %>
+  <% end %>
+<% else %>
+  <span></span><!-- barcode input -->
+  <span></span><!-- antibody input -->
+<% end %>
+
 <div style="display: flex;">
   <%= f.input :concentration, label: false, wrapper_html: {style: "flex: 1 1 55%"} %>
   <% if @chip_batch_item.id.blank? %>

@@ -44,7 +44,7 @@
 
 <div style="overflow: auto; max-width: 95%;">
   <%= render partial: "chip_batch_items/headers" %>
-  <div class="chip-batch-item-rows" %>
+  <div class="chip-batch-item-rows" style="padding-bottom: 2em;" %>
     <% @chip_batch.chip_batch_items.each do |item| %>
       <% @chip_batch_item = item %>
       <%= render partial: "chip_batches/add_chip_batch_item" %>

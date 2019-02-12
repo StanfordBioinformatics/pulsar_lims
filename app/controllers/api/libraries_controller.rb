@@ -57,6 +57,7 @@ class Api::LibrariesController < Api::ApplicationController
 
   def library_params
     params.require(:library).permit(
+        :antibody,
         :barcode_id,
         :biosample_id,
         :chipseq_experiment_id,
