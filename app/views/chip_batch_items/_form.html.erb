@@ -5,15 +5,19 @@
 <% end %>
 
 <%= f.association :chip_batch, as: :hidden, label: false %>
-<%= f.association :biosample, collection: Biosample.non_plated, label: false, input_html: {id: "chip_batch_item_select_biosample"} %>
 
-<div>
-  <% disabled = true %>
-  <% if @chip_batch_item.library.present? %>
-    <% disabled = false %>
-  <% end %>
-  <%= f.association :library, label: false, disabled: disabled, input_html: {id: "chip_batch_item_select_biosample_library"} %>
-</div>
+<% if @chip_batch_item.biosample.present? and @chip_batch_item.library.present? %>
+    <!-- Then don't allow user to change biosample selection as that can result in various side effects. -->
+    <div><%= link_to_record @chip_batch_item.biosample %></div>
+    <%= f.association :library, label: false, collection: @chip_batch_item.biosample.libraries, input_html: {class: "chip_batch_item_select_biosample_library"} %>
+<% else %>
+    <%= f.association :biosample, collection: Biosample.non_plated, label: false, input_html: {class: "chip_batch_item_select_biosample"} %>
+    <% collection = [] %>
+    <% if @chip_batch_item.biosample.present? %>
+      <% collection = @chip_batch_item.biosample.libraries %>
+    <% end %>
+    <%= f.association :library, label: false, disabled: !@chip_batch_item.biosample.present?, collection: collection,  input_html: {class: "chip_batch_item_select_biosample_library"} %>
+<% end %>
 
 <% if @chip_batch_item.library.present? %>
   <% slpk_id = @chip_batch_item.library.sequencing_library_prep_kit_id %>

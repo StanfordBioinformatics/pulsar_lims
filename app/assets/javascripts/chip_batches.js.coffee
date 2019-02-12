@@ -2,11 +2,13 @@
 
 $ ->
 
-  $(document).on "change", "#chip_batch_item_select_biosample", () ->
+  $(document).on "change", ".chip_batch_item_select_biosample", (event) ->
+    event.stopPropagation()
+    $row = $(this).closest("form")
     route = "/biosamples/" + $(this).val() + "/select_biosample_libraries"
     $.get route, (responseText,status,jqXHR) ->
-      $("#chip_batch_item_select_biosample_library").html("<option value></option>" + responseText)
-      $("#chip_batch_item_select_biosample_library").attr("disabled", false)
+      $row.find(".chip_batch_item_select_biosample_library").html("<option value></option>" + responseText)
+      $row.find(".chip_batch_item_select_biosample_library").attr("disabled", false)
     
 
   # User clicks "Add row" button in show view.
