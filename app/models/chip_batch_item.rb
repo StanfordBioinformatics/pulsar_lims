@@ -11,7 +11,7 @@ class ChipBatchItem < ActiveRecord::Base
   belongs_to :biosample
   belongs_to :chip_batch
   belongs_to :concentration_unit, class_name: "Unit"
-  belongs_to :library
+  belongs_to :library, dependent: :destroy
 
   validates :chip_batch_id, presence: true
   validates :biosample_id, presence: true

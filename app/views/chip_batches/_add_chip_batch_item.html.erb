@@ -1,4 +1,4 @@
-<%= simple_form_for @chip_batch, html: {remote: true, method: :post, class: "chip-batch-item-form"} do |f| %>
+<%= simple_form_for @chip_batch, html: {remote: true, method: :post, class: "chip-batch-item-form rm-on-record-del"} do |f| %>
   <%= f.simple_fields_for :chip_batch_items, @chip_batch_item do |ff| %>
     <%= render partial: "chip_batch_items/form", locals: {f: ff} %>
   <% end %>
@@ -7,6 +7,6 @@
       <%= f.button :submit, "Create", class: "btn-primary chip-batch-create-row-btn", style: "padding: 0.3em; margin-right: 1em;" %>
     <% end %>
     <!-- Also add button to delete chip_batch_item form (whether chip_batch_item is persisted or not -->
-    <%= link_to fa_icon("trash lg"), remove_chip_batch_item_chip_batch_path(chip_batch_item_id: @chip_batch_item.id), method: :delete, class: "chip-batch-remove-item", remote: true %>
+    <%= link_to fa_icon("trash lg"), remove_chip_batch_item_chip_batch_path(chip_batch_item_id: @chip_batch_item.id), method: :delete, class: "chip-batch-remove-item" %>
   </div>
 <% end %>

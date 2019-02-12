@@ -8,7 +8,11 @@
 <%= f.association :biosample, collection: Biosample.non_plated, label: false, input_html: {id: "chip_batch_item_select_biosample"} %>
 
 <div>
-  <%= f.association :library, label: false, disabled: true, input_html: {id: "chip_batch_item_select_biosample_library"} %>
+  <% disabled = true %>
+  <% if @chip_batch_item.library.present? %>
+    <% disabled = false %>
+  <% end %>
+  <%= f.association :library, label: false, disabled: disabled, input_html: {id: "chip_batch_item_select_biosample_library"} %>
 </div>
 
 <% if @chip_batch_item.library.present? %>
