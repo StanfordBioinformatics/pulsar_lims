@@ -16,7 +16,7 @@ $ ->
     $rows = $(".chip-batch-item-rows")
     $rows.append(data)
 
-  # User clicks the "Create" button in a ChipBatchRow.
+  # User clicks the "Create" button in a BatchRow.
   $(document).on "click", ".chip-batch-create-row-btn", (event) ->
     event.preventDefault()
     event.stopPropagation()

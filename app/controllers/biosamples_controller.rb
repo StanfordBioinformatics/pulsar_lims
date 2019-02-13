@@ -4,7 +4,7 @@ class BiosamplesController < ApplicationController
   skip_after_action :verify_authorized, only: [:biosample_children, :prototype_instances, :select_biosample_term_name, :crispr_modification_id, :add_crispr_modification, :add_shipping, :select_biosample_libraries]
 
   def select_biosample_libraries
-    # ajax called from chip_batches.js.coffee.
+    # ajax called from batches.js.coffee.
     render layout: false
   end
 

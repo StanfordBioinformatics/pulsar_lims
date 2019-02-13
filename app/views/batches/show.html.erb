@@ -1,0 +1,58 @@
+<%= render partial:  "application_partials/header", locals: {rec: @batch } %>
+
+<span id="record_id" style="display: none;"><%= @batch.id %></span>
+
+<table class="attributes">
+  <tbody>
+    <tr>
+      <th><strong>Library prototype</strong></th>
+      <td>
+        <% if @batch.library_prototype.present? %>
+          <%= link_to_record @batch.library_prototype %>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <th><strong>Analyst:</strong></th>
+      <td><%= @batch.analyst %></td>
+    </tr>
+
+    <tr>
+      <th><strong>Date:</strong></th>
+      <td><%= @batch.date %></td>
+    </tr>
+
+    <tr>
+      <th><strong>Crosslinking Method:</strong></th>
+      <td>
+        <% if @batch.crosslinking_method.present? %>
+          <%= @batch.crosslinking_method %>
+        <% end %>
+      </td>
+    </tr>
+
+  <tr class="notes-row">
+    <th><strong>Notes</strong></th>
+    <td><%= simple_format(@batch.notes) %></td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->
+<%= render partial: "application_partials/edit_notes", locals: {rec: @batch} %>
+
+<div style="overflow: auto;">
+  <%= render partial: "chip_batch_items/headers" %>
+  <div class="chip-batch-item-rows" style="padding-bottom: 2em;" %>
+    <% @batch.chip_batch_items.each do |item| %>
+      <% @chip_batch_item = item %>
+      <%= render partial: "batches/add_chip_batch_item" %>
+    <% end %>
+  </div>
+</div>
+</br>
+<%= link_to "Add row", add_chip_batch_item_batch_path(@batch), class: "add-chip-batch-item-btn reg-btn", remote: true %>
+
+</br></br>
+<%= link_to 'Back', batches_path %>

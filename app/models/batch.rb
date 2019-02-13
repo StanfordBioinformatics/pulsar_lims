@@ -1,5 +1,5 @@
 require 'elasticsearch/model'
-class ChipBatch < ActiveRecord::Base
+class Batch < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   include ModelConcerns

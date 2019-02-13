@@ -4,12 +4,12 @@ class ChipBatchItem < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "CBI"
-  DEFINITION = "Represents one of the Biosamples processed in this ChipBatch."
+  DEFINITION = "Represents one of the Biosamples processed in this Batch."
   #default_scope {order("lower(name)")} #no name column
   belongs_to :antibody
   belongs_to :user
   belongs_to :biosample
-  belongs_to :chip_batch
+  belongs_to :batch
   belongs_to :concentration_unit, class_name: "Unit"
   belongs_to :library, dependent: :destroy
 

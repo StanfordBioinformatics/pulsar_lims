@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190211234323) do
+ActiveRecord::Schema.define(version: 20190213034628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,21 @@ ActiveRecord::Schema.define(version: 20190211234323) do
 
   add_index "barcodes", ["sequencing_library_prep_kit_id"], name: "index_barcodes_on_sequencing_library_prep_kit_id", using: :btree
   add_index "barcodes", ["user_id"], name: "index_barcodes_on_user_id", using: :btree
+
+  create_table "batches", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "crosslinking_method"
+    t.date     "date"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "analyst_id"
+    t.text     "notes"
+    t.integer  "library_prototype_id"
+  end
+
+  add_index "batches", ["analyst_id"], name: "index_batches_on_analyst_id", using: :btree
+  add_index "batches", ["library_prototype_id"], name: "index_batches_on_library_prototype_id", using: :btree
+  add_index "batches", ["user_id"], name: "index_batches_on_user_id", using: :btree
 
   create_table "biosample_ontologies", force: :cascade do |t|
     t.integer  "user_id"
@@ -254,21 +269,6 @@ ActiveRecord::Schema.define(version: 20190211234323) do
   add_index "chip_batch_items", ["concentration_unit_id"], name: "index_chip_batch_items_on_concentration_unit_id", using: :btree
   add_index "chip_batch_items", ["library_id"], name: "index_chip_batch_items_on_library_id", using: :btree
   add_index "chip_batch_items", ["user_id"], name: "index_chip_batch_items_on_user_id", using: :btree
-
-  create_table "chip_batches", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "crosslinking_method"
-    t.date     "date"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.integer  "analyst_id"
-    t.text     "notes"
-    t.integer  "library_prototype_id"
-  end
-
-  add_index "chip_batches", ["analyst_id"], name: "index_chip_batches_on_analyst_id", using: :btree
-  add_index "chip_batches", ["library_prototype_id"], name: "index_chip_batches_on_library_prototype_id", using: :btree
-  add_index "chip_batches", ["user_id"], name: "index_chip_batches_on_user_id", using: :btree
 
   create_table "chipseq_experiments", force: :cascade do |t|
     t.integer  "user_id"
@@ -1173,6 +1173,9 @@ ActiveRecord::Schema.define(version: 20190211234323) do
   add_foreign_key "attachments", "users"
   add_foreign_key "barcodes", "sequencing_library_prep_kits"
   add_foreign_key "barcodes", "users"
+  add_foreign_key "batches", "libraries", column: "library_prototype_id"
+  add_foreign_key "batches", "users"
+  add_foreign_key "batches", "users", column: "analyst_id"
   add_foreign_key "biosample_ontologies", "users"
   add_foreign_key "biosample_term_names", "biosample_ontologies"
   add_foreign_key "biosample_term_names", "users"
@@ -1190,14 +1193,11 @@ ActiveRecord::Schema.define(version: 20190211234323) do
   add_foreign_key "biosamples", "users", column: "transfected_by_id"
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "biosamples", "wells"
+  add_foreign_key "chip_batch_items", "batches", column: "chip_batch_id"
   add_foreign_key "chip_batch_items", "biosamples"
-  add_foreign_key "chip_batch_items", "chip_batches"
   add_foreign_key "chip_batch_items", "libraries"
   add_foreign_key "chip_batch_items", "units", column: "concentration_unit_id"
   add_foreign_key "chip_batch_items", "users"
-  add_foreign_key "chip_batches", "libraries", column: "library_prototype_id"
-  add_foreign_key "chip_batches", "users"
-  add_foreign_key "chip_batches", "users", column: "analyst_id"
   add_foreign_key "chipseq_experiments", "biosamples", column: "wild_type_control_id"
   add_foreign_key "chipseq_experiments", "targets"
   add_foreign_key "chipseq_experiments", "users"

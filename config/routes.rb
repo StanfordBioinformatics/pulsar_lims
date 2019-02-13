@@ -1,7 +1,7 @@
 Pulsar::Application.routes.draw do
 
   resources :chip_batch_items
-  resources :chip_batches do
+  resources :batches do
     get :add_chip_batch_item, on: :member
     post :create_or_update_chip_batch_item, on: :member
     delete :remove_chip_batch_item, on: :member
@@ -144,7 +144,7 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
-    resources :chip_batches do
+    resources :batches do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end

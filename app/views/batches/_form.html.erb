@@ -1,6 +1,6 @@
-<%= simple_form_for(@chip_batch) do |f| %>
-  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @chip_batch } %>
-  <% defaults = INPUT_DEFAULTS[@chip_batch.class.name] %>
+<%= simple_form_for(@batch) do |f| %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @batch } %>
+  <% defaults = INPUT_DEFAULTS[@batch.class.name] %>
 
   <%= f.association :library_prototype, collection: Library.where(prototype: true), label_html: {class: "refresh", "data-toggle": "tooltip", title: "The selected library prototype will be used to create a Library record for each Biosample on it the batch. The prototype serves as the model for what each Library to build should look like. You'll still need to add individual barcodes though for each Library that is actually created for each Biosample."} %>
 
@@ -8,7 +8,7 @@
 
   <%= f.input :date, label: "Batch date" %>
 
-  <%= f.input :crosslinking_method, selected: @chip_batch.crosslinking_method || defaults["crosslinking_method"], collection: Enums::CROSSLINKING_METHOD, label_html: {"data-toggle": "tooltip", title: "Crosslinking protocol used in the ChIP experiment."} %>
+  <%= f.input :crosslinking_method, selected: @batch.crosslinking_method || defaults["crosslinking_method"], collection: Enums::CROSSLINKING_METHOD, label_html: {"data-toggle": "tooltip", title: "Crosslinking protocol used in the ChIP experiment."} %>
 
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 

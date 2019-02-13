@@ -1,16 +1,16 @@
-class ChipBatchesController < ApplicationController
-  before_action :set_chip_batch, only: [:show, :edit, :update, :destroy, :add_chip_batch_item, :create_or_update_chip_batch_item]
+class BatchesController < ApplicationController
+  before_action :set_batch, only: [:show, :edit, :update, :destroy, :add_chip_batch_item, :create_or_update_chip_batch_item]
   skip_after_action :verify_authorized, only: [:add_chip_batch_item, :create_or_update_chip_batch_item, :remove_chip_batch_item]
 
   def add_chip_batch_item
-    # Called in /views/chip_batches/show.html.erb via AJAX to add a new row for entering a
+    # Called in /views/batches/show.html.erb via AJAX to add a new row for entering a
     # ChipBatchItem.
-    @chip_batch_item = @chip_batch.chip_batch_items.build()
-    render partial: "chip_batches/add_chip_batch_item", layout: false
+    @chip_batch_item = @batch.chip_batch_items.build()
+    render partial: "batches/add_chip_batch_item", layout: false
   end
 
   def create_or_update_chip_batch_item
-    item_params = chip_batch_params[:chip_batch_items_attributes]["0"] # Subset the dict with only key being 0.
+    item_params = batch_params[:chip_batch_items_attributes]["0"] # Subset the dict with only key being 0.
     logger.debug(params)
     if item_params[:id].present?
       # Then do an update
@@ -22,13 +22,13 @@ class ChipBatchesController < ApplicationController
       payload.update({user_id: current_user.id})
       @chip_batch_item = ChipBatchItem.create(payload)
       if @chip_batch_item.valid?
-        if @chip_batch.library_prototype.present? and @chip_batch_item.library.blank?
-          library = @chip_batch.library_prototype.clone_library(associated_biosample_id: @chip_batch_item.biosample_id, associated_user_id: current_user.id)
+        if @batch.library_prototype.present? and @chip_batch_item.library.blank?
+          library = @batch.library_prototype.clone_library(associated_biosample_id: @chip_batch_item.biosample_id, associated_user_id: current_user.id)
           @chip_batch_item.update!(library_id: library.id)
         end
       end
     end
-    render partial: "chip_batches/add_chip_batch_item", layout: false
+    render partial: "batches/add_chip_batch_item", layout: false
   end
 
   def remove_chip_batch_item
@@ -46,60 +46,60 @@ class ChipBatchesController < ApplicationController
   end
 
   def show
-    authorize @chip_batch
+    authorize @batch
   end
 
   def new
-    authorize ChipBatch
-    @chip_batch = ChipBatch.new 
+    authorize Batch
+    @batch = Batch.new 
   end
 
   def edit
-    authorize @chip_batch
+    authorize @batch
   end
 
   def create
-    authorize ChipBatch
-    @chip_batch = ChipBatch.new(chip_batch_params)
-    @chip_batch.user = current_user
+    authorize Batch
+    @batch = Batch.new(batch_params)
+    @batch.user = current_user
 
     respond_to do |format|
-      if @chip_batch.save
-        format.html { redirect_to @chip_batch, notice: 'Chip batch was successfully created.' }
-        format.json { render json: @chip_batch, status: :created }
+      if @batch.save
+        format.html { redirect_to @batch, notice: 'Batch was successfully created.' }
+        format.json { render json: @batch, status: :created }
       else
         format.html { render action: 'new' }
-        format.json { render json: @chip_batch.errors, status: :unprocessable_entity }
+        format.json { render json: @batch.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
-    authorize @chip_batch
+    authorize @batch
     respond_to do |format|
-      if @chip_batch.update(chip_batch_params)
-        format.html { redirect_to @chip_batch, notice: 'Chip batch was successfully updated.' }
+      if @batch.update(batch_params)
+        format.html { redirect_to @batch, notice: 'Batch was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @chip_batch.errors, status: :unprocessable_entity }
+        format.json { render json: @batch.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    ddestroy(@chip_batch, redirect_path_success: chip_batches_path)
+    ddestroy(@batch, redirect_path_success: batches_path)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_chip_batch
-      @chip_batch = ChipBatch.find(params[:id])
+    def set_batch
+      @batch = Batch.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def chip_batch_params
-      params.require(:chip_batch).permit(
+    def batch_params
+      params.require(:batch).permit(
         :analyst_id,
         :chip_batch_item_ids,
         :crosslinking_method,
@@ -110,7 +110,7 @@ class ChipBatchesController < ApplicationController
           :antibody_id,
           :id,
           :biosample_id,
-          :chip_batch_id,
+          :batch_id,
           :concentration,
           :concentration_unit_id,
           :library_id,
