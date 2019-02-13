@@ -1,4 +1,4 @@
-.chip-batch-item-form, .chip-batch-item-headers {
+.batch-item-form, .batch-item-headers {
   display: grid;
   grid-gap: 0.5em;
   margin: 0;
@@ -8,14 +8,14 @@
   align-items: center;
 }
 
-.chip-batch-item-headers {
+.batch-item-headers {
   border: none;
   & > * {
     font-weight: bold;
   }
 }
 
-.chip-batch-item-form {
+.batch-item-form {
   & > div > * {
     padding: 0;
     padding-left: 0.5em;

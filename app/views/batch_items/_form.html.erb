@@ -1,7 +1,7 @@
 <!-- Add hidden element to serve as a status check for jQuery to know whether this record exists or not. -->
 <% defaults = INPUT_DEFAULTS[@batch_item.class.name] %>
 <% if @batch_item.id.present? %>
-  <span style="display: none" id="chip-batch-item-persisted"></span>
+  <span style="display: none" id="batch-item-persisted"></span>
 <% end %>
 
 <%= f.association :batch, as: :hidden, label: false %>

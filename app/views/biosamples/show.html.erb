@@ -35,8 +35,8 @@
     <tr>
       <th><strong>Batch:</strong></th>
       <td>
-        <% if @biosample.chip_batch.present? %>
-          <%= link_to_record @biosample.chip_batch %>
+        <% if @biosample.batch.present? %>
+          <%= link_to_record @biosample.batch %>
         <% end %>
       </td>
     </tr>

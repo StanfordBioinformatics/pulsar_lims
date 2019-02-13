@@ -1,0 +1,12 @@
+<%= simple_form_for @batch, html: {remote: true, method: :post, class: "batch-item-form rm-on-record-del"} do |f| %>
+  <%= f.simple_fields_for :batch_items, @batch_item do |ff| %>
+    <%= render partial: "batch_items/form", locals: {f: ff} %>
+  <% end %>
+  <div style="display: flex; align-items: flex-start;">
+    <% if not @batch_item.persisted? %>
+      <%= f.button :submit, "Create", class: "btn-primary batch-create-row-btn", style: "padding: 0.3em; margin-right: 1em;" %>
+    <% end %>
+    <!-- Also add button to delete batch_item form (whether batch_item is persisted or not -->
+    <%= link_to fa_icon("trash lg"), remove_batch_item_batch_path(batch_item_id: @batch_item.id), method: :delete, class: "batch-remove-item" %>
+  </div>
+<% end %>
