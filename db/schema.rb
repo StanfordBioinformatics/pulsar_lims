@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190213042834) do
+ActiveRecord::Schema.define(version: 20190213081108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,7 +129,6 @@ ActiveRecord::Schema.define(version: 20190213042834) do
 
   create_table "batch_items", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "chip_batch_id"
     t.integer  "biosample_id"
     t.string   "concentration"
     t.text     "notes"
@@ -137,10 +136,11 @@ ActiveRecord::Schema.define(version: 20190213042834) do
     t.datetime "updated_at",            null: false
     t.integer  "concentration_unit_id"
     t.integer  "library_id"
+    t.integer  "batch_id"
   end
 
+  add_index "batch_items", ["batch_id"], name: "index_batch_items_on_batch_id", using: :btree
   add_index "batch_items", ["biosample_id"], name: "index_batch_items_on_biosample_id", using: :btree
-  add_index "batch_items", ["chip_batch_id"], name: "index_batch_items_on_chip_batch_id", using: :btree
   add_index "batch_items", ["concentration_unit_id"], name: "index_batch_items_on_concentration_unit_id", using: :btree
   add_index "batch_items", ["library_id"], name: "index_batch_items_on_library_id", using: :btree
   add_index "batch_items", ["user_id"], name: "index_batch_items_on_user_id", using: :btree
@@ -1173,7 +1173,7 @@ ActiveRecord::Schema.define(version: 20190213042834) do
   add_foreign_key "attachments", "users"
   add_foreign_key "barcodes", "sequencing_library_prep_kits"
   add_foreign_key "barcodes", "users"
-  add_foreign_key "batch_items", "batches", column: "chip_batch_id"
+  add_foreign_key "batch_items", "batches"
   add_foreign_key "batch_items", "biosamples"
   add_foreign_key "batch_items", "libraries"
   add_foreign_key "batch_items", "units", column: "concentration_unit_id"
