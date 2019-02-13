@@ -1,10 +1,10 @@
 Pulsar::Application.routes.draw do
 
-  resources :chip_batch_items
+  resources :batch_items
   resources :batches do
-    get :add_chip_batch_item, on: :member
-    post :create_or_update_chip_batch_item, on: :member
-    delete :remove_chip_batch_item, on: :member
+    get :add_batch_item, on: :member
+    post :create_or_update_batch_item, on: :member
+    delete :remove_batch_item, on: :member
   end
   resources :shippings
   resources :immunoblots do
@@ -149,7 +149,7 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
-    resources :chip_batch_items do
+    resources :batch_items do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end

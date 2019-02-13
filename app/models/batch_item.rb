@@ -1,5 +1,5 @@
 require 'elasticsearch/model'
-class ChipBatchItem < ActiveRecord::Base
+class BatchItem < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
@@ -13,7 +13,7 @@ class ChipBatchItem < ActiveRecord::Base
   belongs_to :concentration_unit, class_name: "Unit"
   belongs_to :library, dependent: :destroy
 
-  validates :chip_batch_id, presence: true
+  validates :batch_id, presence: true
   validates :biosample_id, presence: true
   validates :concentration, numericality: {greater_than: 0}, allow_blank: true
   validates :concentration_unit, presence: {message: "must be specified when the quantity is specified."}, if: "concentration.present?"

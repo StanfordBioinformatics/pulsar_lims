@@ -1,8 +1,8 @@
 <header class="index-view-header">
   <h1 class="index-page-header">
-    <%= @title || "ChIP Batch Items" %>
+    <%= @title || "Batch Items" %>
   </h1>
-  <p class="model-definition"><%= ChipBatchItem::DEFINITION %></p>
+  <p class="model-definition"><%= BatchItem::DEFINITION %></p>
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
@@ -14,7 +14,7 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
-      <th>Chip batch</th>
+      <th>Batch</th>
       <th>Biosample</th>
       <th>Concentration</th>
       <th>Notes</th>
@@ -26,7 +26,7 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
-        <td><%= link_to_record rec.chip_batch %></td>
+        <td><%= link_to_record rec.batch %></td>
         <td><%= link_to_record rec.biosample %></td>
         <td>
           <% if rec.concentration.present? %>
@@ -35,7 +35,7 @@
         </td>
         <td><%= rec.notes %></td>
         <td>
-          <%= link_to fa_icon("pencil"), edit_chip_batch_item_path(rec) %>
+          <%= link_to fa_icon("pencil"), edit_batch_item_path(rec) %>
           <%= link_to fa_icon("trash"), rec, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>

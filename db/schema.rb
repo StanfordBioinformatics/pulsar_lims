@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190213034628) do
+ActiveRecord::Schema.define(version: 20190213042834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,24 @@ ActiveRecord::Schema.define(version: 20190213034628) do
 
   add_index "barcodes", ["sequencing_library_prep_kit_id"], name: "index_barcodes_on_sequencing_library_prep_kit_id", using: :btree
   add_index "barcodes", ["user_id"], name: "index_barcodes_on_user_id", using: :btree
+
+  create_table "batch_items", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "chip_batch_id"
+    t.integer  "biosample_id"
+    t.string   "concentration"
+    t.text     "notes"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "concentration_unit_id"
+    t.integer  "library_id"
+  end
+
+  add_index "batch_items", ["biosample_id"], name: "index_batch_items_on_biosample_id", using: :btree
+  add_index "batch_items", ["chip_batch_id"], name: "index_batch_items_on_chip_batch_id", using: :btree
+  add_index "batch_items", ["concentration_unit_id"], name: "index_batch_items_on_concentration_unit_id", using: :btree
+  add_index "batch_items", ["library_id"], name: "index_batch_items_on_library_id", using: :btree
+  add_index "batch_items", ["user_id"], name: "index_batch_items_on_user_id", using: :btree
 
   create_table "batches", force: :cascade do |t|
     t.integer  "user_id"
@@ -251,24 +269,6 @@ ActiveRecord::Schema.define(version: 20190213034628) do
 
   add_index "biosamples_treatments", ["biosample_id", "treatment_id"], name: "index_biosamples_treatments_on_biosample_id_and_treatment_id", using: :btree
   add_index "biosamples_treatments", ["treatment_id", "biosample_id"], name: "index_biosamples_treatments_on_treatment_id_and_biosample_id", using: :btree
-
-  create_table "chip_batch_items", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "chip_batch_id"
-    t.integer  "biosample_id"
-    t.string   "concentration"
-    t.text     "notes"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "concentration_unit_id"
-    t.integer  "library_id"
-  end
-
-  add_index "chip_batch_items", ["biosample_id"], name: "index_chip_batch_items_on_biosample_id", using: :btree
-  add_index "chip_batch_items", ["chip_batch_id"], name: "index_chip_batch_items_on_chip_batch_id", using: :btree
-  add_index "chip_batch_items", ["concentration_unit_id"], name: "index_chip_batch_items_on_concentration_unit_id", using: :btree
-  add_index "chip_batch_items", ["library_id"], name: "index_chip_batch_items_on_library_id", using: :btree
-  add_index "chip_batch_items", ["user_id"], name: "index_chip_batch_items_on_user_id", using: :btree
 
   create_table "chipseq_experiments", force: :cascade do |t|
     t.integer  "user_id"
@@ -1173,6 +1173,11 @@ ActiveRecord::Schema.define(version: 20190213034628) do
   add_foreign_key "attachments", "users"
   add_foreign_key "barcodes", "sequencing_library_prep_kits"
   add_foreign_key "barcodes", "users"
+  add_foreign_key "batch_items", "batches", column: "chip_batch_id"
+  add_foreign_key "batch_items", "biosamples"
+  add_foreign_key "batch_items", "libraries"
+  add_foreign_key "batch_items", "units", column: "concentration_unit_id"
+  add_foreign_key "batch_items", "users"
   add_foreign_key "batches", "libraries", column: "library_prototype_id"
   add_foreign_key "batches", "users"
   add_foreign_key "batches", "users", column: "analyst_id"
@@ -1193,11 +1198,6 @@ ActiveRecord::Schema.define(version: 20190213034628) do
   add_foreign_key "biosamples", "users", column: "transfected_by_id"
   add_foreign_key "biosamples", "vendors"
   add_foreign_key "biosamples", "wells"
-  add_foreign_key "chip_batch_items", "batches", column: "chip_batch_id"
-  add_foreign_key "chip_batch_items", "biosamples"
-  add_foreign_key "chip_batch_items", "libraries"
-  add_foreign_key "chip_batch_items", "units", column: "concentration_unit_id"
-  add_foreign_key "chip_batch_items", "users"
   add_foreign_key "chipseq_experiments", "biosamples", column: "wild_type_control_id"
   add_foreign_key "chipseq_experiments", "targets"
   add_foreign_key "chipseq_experiments", "users"

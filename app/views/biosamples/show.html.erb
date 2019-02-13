@@ -33,7 +33,7 @@
       <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.chipseq_experiments} %></td>
     </tr>
     <tr>
-      <th><strong>ChIP Batch:</strong></th>
+      <th><strong>Batch:</strong></th>
       <td>
         <% if @biosample.chip_batch.present? %>
           <%= link_to_record @biosample.chip_batch %>

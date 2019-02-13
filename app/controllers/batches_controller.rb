@@ -1,42 +1,42 @@
 class BatchesController < ApplicationController
-  before_action :set_batch, only: [:show, :edit, :update, :destroy, :add_chip_batch_item, :create_or_update_chip_batch_item]
-  skip_after_action :verify_authorized, only: [:add_chip_batch_item, :create_or_update_chip_batch_item, :remove_chip_batch_item]
+  before_action :set_batch, only: [:show, :edit, :update, :destroy, :add_batch_item, :create_or_update_batch_item]
+  skip_after_action :verify_authorized, only: [:add_batch_item, :create_or_update_batch_item, :remove_batch_item]
 
-  def add_chip_batch_item
+  def add_batch_item
     # Called in /views/batches/show.html.erb via AJAX to add a new row for entering a
-    # ChipBatchItem.
-    @chip_batch_item = @batch.chip_batch_items.build()
-    render partial: "batches/add_chip_batch_item", layout: false
+    # BatchItem.
+    @batch_item = @batch.batch_items.build()
+    render partial: "batches/add_batch_item", layout: false
   end
 
-  def create_or_update_chip_batch_item
-    item_params = batch_params[:chip_batch_items_attributes]["0"] # Subset the dict with only key being 0.
+  def create_or_update_batch_item
+    item_params = batch_params[:batch_items_attributes]["0"] # Subset the dict with only key being 0.
     logger.debug(params)
     if item_params[:id].present?
       # Then do an update
-      @chip_batch_item = ChipBatchItem.find(item_params[:id])
-      @chip_batch_item.update(item_params)
+      @batch_item = BatchItem.find(item_params[:id])
+      @batch_item.update(item_params)
     else
       # Create it
       payload = item_params
       payload.update({user_id: current_user.id})
-      @chip_batch_item = ChipBatchItem.create(payload)
-      if @chip_batch_item.valid?
-        if @batch.library_prototype.present? and @chip_batch_item.library.blank?
-          library = @batch.library_prototype.clone_library(associated_biosample_id: @chip_batch_item.biosample_id, associated_user_id: current_user.id)
-          @chip_batch_item.update!(library_id: library.id)
+      @batch_item = BatchItem.create(payload)
+      if @batch_item.valid?
+        if @batch.library_prototype.present? and @batch_item.library.blank?
+          library = @batch.library_prototype.clone_library(associated_biosample_id: @batch_item.biosample_id, associated_user_id: current_user.id)
+          @batch_item.update!(library_id: library.id)
         end
       end
     end
-    render partial: "batches/add_chip_batch_item", layout: false
+    render partial: "batches/add_batch_item", layout: false
   end
 
-  def remove_chip_batch_item
-    item_id = params[:chip_batch_item_id]
-    # May be that the user never saved the chip_batch_item (row) and just wants to remove it.
+  def remove_batch_item
+    item_id = params[:batch_item_id]
+    # May be that the user never saved the batch_item (row) and just wants to remove it.
     if item_id.present?
-      @chip_batch_item = ChipBatchItem.find(item_id)
-      @chip_batch_item.destroy!
+      @batch_item = BatchItem.find(item_id)
+      @batch_item.destroy!
     end
     render json: {}, status: :no_content
   end
@@ -101,12 +101,12 @@ class BatchesController < ApplicationController
     def batch_params
       params.require(:batch).permit(
         :analyst_id,
-        :chip_batch_item_ids,
+        :batch_item_ids,
         :crosslinking_method,
         :date,
         :library_prototype_id,
         :notes,
-        chip_batch_items_attributes: [
+        batch_items_attributes: [
           :antibody_id,
           :id,
           :biosample_id,

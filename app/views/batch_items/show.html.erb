@@ -1,0 +1,34 @@
+<%= render partial:  "application_partials/header", locals: {rec: @batch_item } %>
+
+<table class="attributes">
+  <tbody>
+    <tr>
+      <th><strong>Batch:</strong></th>
+      <td><%= link_to_record @batch_item.batch %></td>
+    </tr>
+    
+    <tr>
+      <th><strong>Biosample:</strong></th>
+      <td><%= link_to_record @batch_item.biosample %></td>
+    </tr>
+    
+    <tr>                                                                                                 
+      <th><strong>Concentration:</strong></th>                                                    
+      <td>
+        <% if @batch_item.concentration.present? %>
+          <%= "#{@batch_item.concentration} #{@batch_item.concentration_unit.name}" %>
+        <% end %>
+      </td>
+    </tr> 
+    
+    <tr class="notes-row">
+      <th><strong>Notes:</strong></th>
+      <td><%= simple_format(@batch_item.notes) %></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<%= render partial: "application_partials/edit_notes", locals: {rec: @batch_item} %>  
+
+<%= link_to 'Back', batch_items_path %>
