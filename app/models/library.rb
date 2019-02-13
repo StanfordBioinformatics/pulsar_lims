@@ -11,8 +11,8 @@ class Library < ActiveRecord::Base
   include CloningForDocuments # A Concern that includes instance methods all_documents() and parent_documents().
   ABBR = "L"
   DEFINITION = "A sequencing library that is prepared for sequencing.  Model abbreviation: #{ABBR}"
-  default_scope {order("lower(name)")}
-  default_scope {order(:id)}
+  #default_scope {order("lower(name)")}
+  #default_scope {order(:id)}
   #The is_control bool column has a default of false.
   has_many :sequencing_results, dependent: :destroy
   has_and_belongs_to_many :documents
