@@ -1,7 +1,7 @@
-ChipBatch:
+Batch:
     crosslinking_method: formaldehyde
 
-ChipBatchItem:
+BatchItem:
     concentration_unit: 10 #ng/µl
 
 CrisprModification:
