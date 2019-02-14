@@ -1,6 +1,6 @@
 <div id="cs_select_experimental_library" class="xfade bg-info jumbotron">
   <p><%= heading %></p>
-  <%= simple_form_for(@chipseq_experiment, html: {style: "position: relative;"}) do |f| %>
+  <%= simple_form_for(record, html: {style: "position: relative;"}) do |f| %>
     <!-- relative positioning above since xfade-out uses absolute positioning. -->
     <div class="form-group">
       <%= link_to fa_icon("close lg"), "#", class: "xfade-out" %>

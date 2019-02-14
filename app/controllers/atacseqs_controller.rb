@@ -1,5 +1,12 @@
 class AtacseqsController < ApplicationController
-  before_action :set_atacseq, only: [:show, :edit, :update, :destroy]
+  before_action :set_atacseq, only: [:show, :edit, :update, :destroy, :select_experimental_biosample]
+  skip_after_action :verify_authorized, only: [:select_experimental_biosample]
+
+  def select_experimental_biosample
+    # AJAX from show view when user clicks on the "Add experiment replicate" button.
+    @selection = Biosample.all
+    render partial: "chipseq_experiments/select_experimental_or_ctl_biosample", locals: {record: @atacseq, heading: "Add experimental replicates"}
+  end
 
   def index
     super
@@ -21,6 +28,7 @@ class AtacseqsController < ApplicationController
   def create
     authorize Atacseq
     @atacseq = Atacseq.new(atacseq_params)
+    @atacseq.user = current_user
 
     respond_to do |format|
       if @atacseq.save
@@ -57,10 +65,12 @@ class AtacseqsController < ApplicationController
 
     def atacseq_params
       params.require(:atacseq).permit(
-        :description, 
-        :name, 
+        :description,
+        :name,
         :notes,
-        :submitter_comments
+        :submitter_comments,
+        :document_ids => [],
+        documents_attributes: [:id, :_destroy]
       )
     end
 end

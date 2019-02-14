@@ -23,20 +23,20 @@ $ ->
   # event is triggered here, then the wt control input will be disabled. 
   $("#chipseq_experiment_chipseq_starting_biosample_ids").change()
 
-  $("#chipseq-add-ctl").on "click", (event) ->
+  $("#experiment-add-ctl").on "click", (event) ->
     if $(event.target).attr("disabled") == "disabled"
       # Then user hasn't selected any experimental replicates yet from which the controls are made.
       event.preventDefault()
       event.stopPropagation()
 
-  $("#chipseq-add-rep, #chipseq-add-ctl").on "ajax:success", (event, data) -> 
+  $("#experiment-add-rep, #experiment-add-ctl").on "ajax:success", (event, data) -> 
     tag = this.id
     $(".bottom-btns").hide()
     $(".bottom-btns").after(data)
     $("#biosample").on "change", () -> 
       biosample_id = $(this).val()
       params = {biosample_id: biosample_id}
-      if tag == "chipseq-add-ctl"
+      if tag == "experiment-add-ctl"
         params.control = true
       route = "/chipseq_experiments/" + $("#record_id").text() + "/select_biosample_libraries"
       $.get route, params, (responseText,status,jqXHR) ->

@@ -64,12 +64,12 @@
 
 
 <div class="bottom-btns xfade-in">
-  <%= link_to "Add experiment replicate", [:select_experimental_biosample, @chipseq_experiment], class: "reg-btn", id: "chipseq-add-rep", remote: true %>
+  <%= link_to "Add experiment replicate", [:select_experimental_biosample, @chipseq_experiment], class: "reg-btn", id: "experiment-add-rep", remote: true %>
   <% ctl_rep_btn_disabled = false %>
   <% if @chipseq_experiment.replicates.blank? %>
     <% ctl_rep_btn_disabled = true %>
   <% end %>
-  <%= link_to "Add control replicate", [:select_control_biosample, @chipseq_experiment], disabled: ctl_rep_btn_disabled, class: "reg-btn", id: "chipseq-add-ctl", remote: true %>
+  <%= link_to "Add control replicate", [:select_control_biosample, @chipseq_experiment], disabled: ctl_rep_btn_disabled, class: "reg-btn", id: "experiment-add-ctl", remote: true %>
 </div>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             

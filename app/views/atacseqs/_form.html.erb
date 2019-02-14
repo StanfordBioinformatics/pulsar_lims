@@ -1,9 +1,29 @@
+<% defaults = INPUT_DEFAULTS[@atacseq.class.name] %>
+
 <%= simple_form_for(@atacseq) do |f| %>
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @atacseq } %>
 
   <%= f.input :name %>
   <%= f.input :description %>
   <%= f.input :submitter_comments %>
+
+  <fieldset>
+    <legend>Documents</legend>
+    <% if @atacseq.persisted? %>
+      <strong>Linked documents:</strong>
+      <%= render partial: "application_partials/simple_fields_for", locals: {f: f, record: @atacseq, attribute: :documents} %>
+    <% end %>
+    <% if @atacseq.id.blank? %>
+      <% documents_default = defaults["document_ids"] %>
+    <% else %>
+      <% documents_default = nil %>
+    <% end %>
+    <%= f.association :documents, label: "Add documents",
+        selected: documents_default,
+        include_blank: true,
+        input_html: {class: "atacseq_documents_selector"},
+        label_html: {class: "refresh", "data-toggle": "tooltip","title": "Documents that provide additional information (not data file)."} %>
+  </fieldset>
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   <div class="form-actions">

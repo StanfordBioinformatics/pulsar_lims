@@ -32,7 +32,7 @@ class ChipseqExperimentsController < ApplicationController
       selection.concat(s.biosample_parts.where.not(id: @chipseq_experiment.replicates))
     end
     @selection = selection
-    render partial: "select_experimental_or_ctl_biosample", locals: {heading: "Add experimental replicates"}
+    render partial: "select_experimental_or_ctl_biosample", locals: {record: @chipseq_experiment, heading: "Add experimental replicates"}
   end
 
   def select_control_biosample

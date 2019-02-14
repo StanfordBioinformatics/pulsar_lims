@@ -9,6 +9,7 @@ class Document < ActiveRecord::Base
   default_scope {order("lower(name)")}
   #The is_protocol bool column has a default of false.
   has_many :analyses, foreign_key: :protocol_id, dependent: :nullify
+  has_and_belongs_to_many :atacseqs
   has_and_belongs_to_many :biosamples
   has_and_belongs_to_many :chipseq_experiments
   has_and_belongs_to_many :crispr_modifications

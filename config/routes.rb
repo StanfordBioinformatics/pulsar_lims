@@ -1,6 +1,8 @@
 Pulsar::Application.routes.draw do
 
-  resources :atacseqs
+  resources :atacseqs do
+    get :select_experimental_biosample, on: :member
+  end
   resources :batch_items
   resources :batches do
     get :add_batch_item, on: :member

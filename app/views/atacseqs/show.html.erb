@@ -1,10 +1,15 @@
-<%= render partial:  "application_partials/header", locals: {rec: @construct_tag } %>
+<%= render partial:  "application_partials/header", locals: {rec: @atacseq } %>
 
 <table class="attributes">
   <tbody>
     <tr>
       <th><strong>Name:</strong></th>
       <td><%= @atacseq.name %></td>
+    </tr>
+
+    <tr>
+      <th><strong>Documents:</strong></th>
+      <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @atacseq.documents}  %></td>
     </tr>
       
     <tr>
@@ -24,7 +29,15 @@
   </tbody>
 </table>
 
+<div class="bottom-btns xfade-in">                                                                     
+  <%= link_to "Add experiment replicate", [:select_experimental_biosample, @atacseq], class: "reg-btn", id: "experiment-add-rep", remote: true %> 
+  <% ctl_rep_btn_disabled = false %>                                                                   
+  <% if @atacseq.replicates.blank? %>                                                       
+    <% ctl_rep_btn_disabled = true %>                                                                  
+  <% end %>                                                                                            
+</div>  
+
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
-<%= render partial: "application_partials/edit_notes", locals: {rec: @construct_tag} %>
+<%= render partial: "application_partials/edit_notes", locals: {rec: @atacseq} %>
 
 <%= link_to 'Back', atacseqs_path %>

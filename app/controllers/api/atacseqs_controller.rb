@@ -61,7 +61,8 @@ class Api::AtacseqsController < Api::ApplicationController
       :description,
       :name,
       :notes,
-      :submitter_comments
+      :submitter_comments,
+      :document_ids => []
     )
   end
 end

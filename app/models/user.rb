@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   include ModelConcerns
   ABBR = "U"
   default_scope {order(:last_name, :first_name)}
+  has_many :atacseqs, dependent: :nullify
   has_many :addresses, dependent: :nullify
   has_many :gels, dependent: :nullify
   has_many :analyses, dependent: :nullify

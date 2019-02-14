@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190214044125) do
+ActiveRecord::Schema.define(version: 20190214055727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,14 @@ ActiveRecord::Schema.define(version: 20190214044125) do
   end
 
   add_index "atacseqs", ["user_id"], name: "index_atacseqs_on_user_id", using: :btree
+
+  create_table "atacseqs_documents", id: false, force: :cascade do |t|
+    t.integer "atacseq_id",  null: false
+    t.integer "document_id", null: false
+  end
+
+  add_index "atacseqs_documents", ["atacseq_id", "document_id"], name: "index_atacseqs_documents_on_atacseq_id_and_document_id", using: :btree
+  add_index "atacseqs_documents", ["document_id", "atacseq_id"], name: "index_atacseqs_documents_on_document_id_and_atacseq_id", using: :btree
 
   create_table "attachments", force: :cascade do |t|
     t.string   "file"
