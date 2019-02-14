@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190213081108) do
+ActiveRecord::Schema.define(version: 20190214044125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,18 @@ ActiveRecord::Schema.define(version: 20190213081108) do
   end
 
   add_index "antibody_purifications", ["user_id"], name: "index_antibody_purifications_on_user_id", using: :btree
+
+  create_table "atacseqs", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.text     "submitter_comments"
+    t.text     "notes"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "atacseqs", ["user_id"], name: "index_atacseqs_on_user_id", using: :btree
 
   create_table "attachments", force: :cascade do |t|
     t.string   "file"
@@ -716,9 +728,11 @@ ActiveRecord::Schema.define(version: 20190213081108) do
     t.integer  "times_cloned",                                default: 0
     t.integer  "chipseq_experiment_id"
     t.integer  "antibody_id"
+    t.integer  "atacseq_id"
   end
 
   add_index "libraries", ["antibody_id"], name: "index_libraries_on_antibody_id", using: :btree
+  add_index "libraries", ["atacseq_id"], name: "index_libraries_on_atacseq_id", using: :btree
   add_index "libraries", ["barcode_id"], name: "index_libraries_on_barcode_id", using: :btree
   add_index "libraries", ["biosample_id"], name: "index_libraries_on_biosample_id", using: :btree
   add_index "libraries", ["chipseq_experiment_id"], name: "index_libraries_on_chipseq_experiment_id", using: :btree
@@ -1170,6 +1184,7 @@ ActiveRecord::Schema.define(version: 20190213081108) do
   add_foreign_key "antibodies", "users"
   add_foreign_key "antibodies", "vendors"
   add_foreign_key "antibody_purifications", "users"
+  add_foreign_key "atacseqs", "users"
   add_foreign_key "attachments", "users"
   add_foreign_key "barcodes", "sequencing_library_prep_kits"
   add_foreign_key "barcodes", "users"
@@ -1248,6 +1263,7 @@ ActiveRecord::Schema.define(version: 20190213081108) do
   add_foreign_key "immunoblots", "users", column: "analyst_id"
   add_foreign_key "isotypes", "users"
   add_foreign_key "libraries", "antibodies"
+  add_foreign_key "libraries", "atacseqs"
   add_foreign_key "libraries", "barcodes"
   add_foreign_key "libraries", "biosamples"
   add_foreign_key "libraries", "chipseq_experiments"

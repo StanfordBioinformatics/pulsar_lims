@@ -81,7 +81,7 @@ class ChipseqExperimentsController < ApplicationController
   end
 
   def new
-    authorize ChipseqExperiment.new
+    authorize ChipseqExperiment
     @chipseq_experiment = ChipseqExperiment.new
   end
 

@@ -1,5 +1,6 @@
 Pulsar::Application.routes.draw do
 
+  resources :atacseqs
   resources :batch_items
   resources :batches do
     get :add_batch_item, on: :member
@@ -114,6 +115,12 @@ Pulsar::Application.routes.draw do
     resources "utils" do
       get "model_attrs", on: :collection
     end
+
+    resources :atacseqs do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :barcodes do
       post :find_by, on: :collection
       post :find_by_or, on: :collection

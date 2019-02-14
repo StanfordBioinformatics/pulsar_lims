@@ -4,7 +4,7 @@ class ChipseqExperiment < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
   include ModelConcerns
   ABBR = "CS"
-  DEFINITION = "A ChIP-Seq experiment"
+  DEFINITION = "A ChIP-seq experiment"
   default_scope {order("lower(name)")}
   belongs_to :user
   belongs_to :target

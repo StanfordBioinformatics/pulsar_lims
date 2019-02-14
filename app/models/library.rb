@@ -23,6 +23,7 @@ class Library < ActiveRecord::Base
   #A virtual (prototype) library can be used as a template for a single_cell_sorting experiment. This would then be used
   # as a template for making library objects associated to the each biosample in each well of each plate present on the singe_cell_sorting. 
   belongs_to :antibody
+  belongs_to :atacseq
   belongs_to :barcode
   belongs_to :biosample
   belongs_to :chipseq_experiment

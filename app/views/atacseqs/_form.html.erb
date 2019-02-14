@@ -1,0 +1,12 @@
+<%= simple_form_for(@atacseq) do |f| %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @atacseq } %>
+
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :submitter_comments %>
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div>
+<% end %>

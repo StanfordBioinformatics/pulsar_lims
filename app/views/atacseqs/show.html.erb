@@ -1,0 +1,30 @@
+<%= render partial:  "application_partials/header", locals: {rec: @construct_tag } %>
+
+<table class="attributes">
+  <tbody>
+    <tr>
+      <th><strong>Name:</strong></th>
+      <td><%= @atacseq.name %></td>
+    </tr>
+      
+    <tr>
+      <th><strong>Description:</strong></th>
+      <td><%= @atacseq.description %></td>
+    </tr>
+    
+    <tr>
+      <th><strong>Submitter comments:</strong></th>
+      <td><%= @atacseq.submitter_comments %></td>
+    </tr>
+    
+    <tr>
+      <th><strong>Notes:</strong></th>
+      <td><%= @atacseq.notes %></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<%= render partial: "application_partials/edit_notes", locals: {rec: @construct_tag} %>
+
+<%= link_to 'Back', atacseqs_path %>

@@ -28,6 +28,7 @@ class Biosample < ActiveRecord::Base
   # the single_cell_sorting experiment. kk
   has_many :wt_for_chipseq_experiments, class_name: "ChipseqExperiment", foreign_key: :wild_type_control_id 
   has_many :chipseq_experiments, -> {unscope(:order)}, through: :libraries
+  has_many :atacseqs, -> {unscope(:order)}, through: :libraries
   belongs_to :well
   has_many :biosample_parts, class_name: "Biosample", foreign_key: "part_of_id", dependent: :destroy
   belongs_to :part_of, class_name: "Biosample"
