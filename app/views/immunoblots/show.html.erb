@@ -76,24 +76,25 @@
   </tr>
 </table>
 
-<!-- Add section for building a new gel association -->
-<h3 class="section">Gel</h3>
-<% if @immunoblot.gel.blank? %>
-  <div class="xfade-in">
-    <div class="my-flex">
-      <%= link_to "Add", add_gel_immunoblot_path(@immunoblot), id: "immunoblot-add-gel-btn", class: "reg-btn" %>
-      <p>or</p>
-      <%= link_to "Select existing", select_gel_immunoblot_path(@immunoblot), class: "reg-btn", id: "immunoblot-select-gel", remote: true %>
-    </div>
-  </div>
-<% else %>
+<!-- Add section for associated Gels and adding additional Gels. -->
+
+<h3 class="section">Gels</h3>
+<% @immunoblot.gels.each do |gel| %>
   <div class="my-flex">
-    <%= link_to_record @immunoblot.gel %>
-    <% if @immunoblot.gel.gel_image.present? %> 
-      <%= image_tag @immunoblot.gel.gel_image, alt: "gel", data: {"caption": @immunoblot.gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+    <%= link_to_record gel %>
+    <% if gel.gel_image.present? %> 
+      <%= image_tag gel.gel_image, alt: "gel", data: {"caption": gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
     <% end %>
   </div>
 <% end %>
 
+<hr />
+<div class="xfade-in">
+  <div class="my-flex">
+    <%= link_to "Add", add_gel_immunoblot_path(@immunoblot), id: "immunoblot-add-gel-btn", class: "reg-btn" %>
+    <span>or</span>
+    <%= link_to "Select existing", select_gel_immunoblot_path(@immunoblot), class: "reg-btn", id: "immunoblot-select-gel", remote: true %>
+  </div>
+</div>
 </br></br>
 <%= link_to 'Back', immunoblots_path %>

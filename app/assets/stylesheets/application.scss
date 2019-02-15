@@ -70,10 +70,9 @@
 
 .my-flex {
   display: flex;
+  align-items: center;
   margin-bottom: 0.3em;
   & > * {
-    margin-top: 0;
-    padding-top: 0;
     margin-right: 0.5em;
   }
 }

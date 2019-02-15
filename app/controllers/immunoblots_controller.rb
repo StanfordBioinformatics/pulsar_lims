@@ -4,7 +4,7 @@ class ImmunoblotsController < ApplicationController
 
   def add_gel
     defaults = INPUT_DEFAULTS["Gel"]
-    @gel = @immunoblot.build_gel(percentage: defaults["percentage_for_IP"])
+    @gel = @immunoblot.gels.build(percentage: defaults["percentage_for_IP"])
     @s3_direct_post = @gel.s3_direct_post()
   end
 
@@ -73,7 +73,6 @@ class ImmunoblotsController < ApplicationController
       params.require(:immunoblot).permit(
         :analyst_id, 
         :date_performed, 
-        :gel_id,
         :name,
         :notes,
         :pcr_id,
@@ -82,6 +81,7 @@ class ImmunoblotsController < ApplicationController
         :secondary_antibody_dilution,
         :submitter_comments,
         document_ids: [],
+        gel_ids: [],
         secondary_antibody_ids: [],
         documents_attributes: [:id, :_destroy],
       )

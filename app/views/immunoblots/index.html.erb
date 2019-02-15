@@ -46,13 +46,15 @@
           <% end %>
         </td>
         <td>
-          <% if rec.gel.present? %>
-            <div style="display: flex">
-              <%= link_to rec.gel.display(), rec.gel %>
-              <% if rec.gel.gel_image.present? %>
-                <%= image_tag rec.gel.gel_image, alt: "gel", data: {"caption": rec.gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
-              <% end %>
-            </div>
+          <% if rec.gels.any? %>
+            <%= rec.gels.each do |gel| %>
+              <div style="display: flex">
+                <%= link_to gel.display(), gel %>
+                <% if gel.gel_image.present? %>
+                  <%= image_tag gel.gel_image, alt: "gel", data: {"caption": gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+                <% end %>
+              </div>
+            <% end %>
           <% end %>
         </td>
         <td><%= rec.submitter_comments %></td>
