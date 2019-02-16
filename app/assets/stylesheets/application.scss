@@ -141,7 +141,9 @@ i.refresh {
   font-size: 1.3em;
   color: black;
   //aquamarine
+  padding: 0.5em;
   background-color: rgb(127,255,212);
+  min-width: 200px;
   max-width: 400px;
   text-align: left;
 }

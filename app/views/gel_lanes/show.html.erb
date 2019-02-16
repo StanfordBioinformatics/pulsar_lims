@@ -30,6 +30,11 @@
     <th><strong>Actual product size:</strong></th>
     <td><%= "#{@gel_lane.actual_product_size} kDa" %></td>
   </tr>
+
+  <tr>
+    <th><strong>Low target band intensity:</strong></th>
+    <td><%= @gel_lane.low_target_band_intensity? %></td>
+  </tr>
   
   <tr>
     <th><strong>Pass:</strong></th>

@@ -110,6 +110,7 @@ class GelsController < ApplicationController
           :biosample_id,
           :expected_product_size,                                                                      
           :lane_number,                                                                                
+          :low_target_band_intensity,
           :sample_concentration,                                                                       
           :sample_concentration_units_id,                                                              
           :sample_volume,                                                                              
