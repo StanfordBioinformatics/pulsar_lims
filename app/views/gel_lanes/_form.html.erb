@@ -17,7 +17,8 @@
 </div>
 <%= f.input :expected_product_size, label: false, placeholder: "kDa" %>
 <%= f.input :actual_product_size, label: false, placeholder: "kDa" %>
-<%= f.input :low_target_band_intensity, default: false, label_html: {"data-toggle": "tooltip", "title": "True means that target band intensity is reduced by greater than 50% from what is expected."} %>
+<%= f.input :low_target_band_intensity, label: false, label_html: {"data-toggle": "tooltip", "title": "True means that target band intensity is reduced by greater than 50% from what is expected."} %>
+<%= f.input :needs_mass_spec, label: false %>
 <%= f.input :pass, as: :select, default: true, label: false %>
 <%= f.input :submitter_comments, label: false %>
 <%= f.input :notes, label: false %>

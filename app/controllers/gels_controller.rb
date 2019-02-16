@@ -111,6 +111,7 @@ class GelsController < ApplicationController
           :expected_product_size,                                                                      
           :lane_number,                                                                                
           :low_target_band_intensity,
+          :needs_mass_spec,
           :sample_concentration,                                                                       
           :sample_concentration_units_id,                                                              
           :sample_volume,                                                                              
