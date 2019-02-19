@@ -1,5 +1,17 @@
 class BatchItemsController < ApplicationController
-  before_action :set_batch_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_batch_item, only: [:show, :edit, :update, :destroy, :create_library_from_prototype]
+  skip_after_action :verify_authorized, only: [:create_library_from_prototype]
+
+  def create_library_from_prototype
+    # Ajax post from batches.js.coffee when user clicks on "Create library" button in a batch_item row
+    # of a batch record on the show view.
+    batch = @batch_item.batch
+    if batch.library_prototype.present? and @batch_item.library.blank?
+      library = batch.library_prototype.clone_library(associated_biosample_id: @batch_item.biosample_id, associated_user_id: current_user.id)
+      @batch_item.update!(library_id: library.id)
+    end
+    render json: {}, status: :no_content
+  end
 
   def index
     super
@@ -60,18 +72,18 @@ class BatchItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def batch_item_params
       params.require(:batch_item).permit(
-        :biosample_id, 
+        :biosample_id,
         :batch_id,
-        :concentration, 
+        :concentration,
         :concentration_unit_id,
         :library_id,
         :notes,
-        library_attributes: [                                                                        
+        library_attributes: [
           :id,
-          :antibody_id,                                                                              
-          :barcode_id,                                                                               
-          :paired_barcode_id                                                                         
-        ] 
+          :antibody_id,
+          :barcode_id,
+          :paired_barcode_id
+        ]
       )
     end
 end

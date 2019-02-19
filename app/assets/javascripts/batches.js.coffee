@@ -11,21 +11,27 @@ $ ->
       $row.find(".batch_item_select_biosample_library").attr("disabled", false)
     
 
-  # User clicks "Add row" button in show view.
+  # User clicks "Add row" button in show view to add new batch_item.
   $(".add-batch-item-btn").on "ajax:success", (event,data) ->
     $rows = $(".batch-item-rows")
     $rows.append(data)
 
-  # User clicks the "Create" button in a BatchRow.
-  $(document).on "click", ".batch-create-row-btn", (event) ->
-    event.preventDefault()
-    event.stopPropagation()
-    $form =  $(this).closest("form")
-    $.post "/batches/" + $("#record_id").text() + "/create_or_update_batch_item", $form.serialize(), (data) ->
-      $jqdata = $(data)
-      $form.replaceWith($jqdata)
-      $jqdata.fadeOut "slow", () -> 
-        $(this).fadeIn("slow")
+
+  # User clicks on the Create button in a batch_item row.
+  $(document).on "ajax:success", ".batch-item-form", (event, data) ->
+     $jqdata = $(data)
+     $form = $(this)
+     $form.replaceWith($jqdata)
+     $jqdata.fadeOut "slow", () -> 
+       $(this).fadeIn("slow")
+
+  # User clicks on button to create library from Batch's prototype library
+  $(document).on "click", "#batch-item-create-library-btn", (event) ->
+    batch_item_id = $(this).data("batch-item-id")
+    $.post "/batch_items/" + batch_item_id + "/create_library_from_prototype", () -> 
+      $.get "/batches/" + $("#record_id").text() + "/refresh_batch_item_row", {batch_item_id: batch_item_id}, (data) ->
+        $("#batch-item-create-library-btn").closest("form").replaceWith(data)
+      
 
   $(document).on "change", ".batch-item-form div > *", () ->
     $form =  $(this).closest("form")

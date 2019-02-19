@@ -42,6 +42,7 @@
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->
 <%= render partial: "application_partials/edit_notes", locals: {rec: @batch} %>
 
+<!-- Display existing rows (batch_item records), even ones that haven't been persisted yet -->
 <div style="overflow: auto;">
   <%= render partial: "batch_items/headers" %>
   <div class="batch-item-rows" style="padding-bottom: 2em;" %>
@@ -52,6 +53,7 @@
   </div>
 </div>
 </br>
+<!-- Button to create new row -->
 <%= link_to "Add row", add_batch_item_batch_path(@batch), class: "add-batch-item-btn reg-btn", remote: true %>
 
 </br></br>

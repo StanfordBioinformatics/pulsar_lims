@@ -1,6 +1,6 @@
 class BatchesController < ApplicationController
-  before_action :set_batch, only: [:show, :edit, :update, :destroy, :add_batch_item, :create_or_update_batch_item]
-  skip_after_action :verify_authorized, only: [:add_batch_item, :create_or_update_batch_item, :remove_batch_item]
+  before_action :set_batch, only: [:show, :edit, :update, :destroy, :add_batch_item, :create_or_update_batch_item, :refresh_batch_item_row]
+  skip_after_action :verify_authorized, only: [:add_batch_item, :create_or_update_batch_item, :remove_batch_item, :refresh_batch_item_row]
 
   def add_batch_item
     # Called in /views/batches/show.html.erb via AJAX to add a new row for entering a
@@ -21,13 +21,12 @@ class BatchesController < ApplicationController
       payload = item_params
       payload.update({user_id: current_user.id})
       @batch_item = BatchItem.create(payload)
-      if @batch_item.valid?
-        if @batch.library_prototype.present? and @batch_item.library.blank?
-          library = @batch.library_prototype.clone_library(associated_biosample_id: @batch_item.biosample_id, associated_user_id: current_user.id)
-          @batch_item.update!(library_id: library.id)
-        end
-      end
     end
+    render partial: "batches/add_batch_item", layout: false
+  end
+
+  def refresh_batch_item_row
+    @batch_item = BatchItem.find(params[:batch_item_id])
     render partial: "batches/add_batch_item", layout: false
   end
 
