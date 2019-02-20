@@ -11,7 +11,6 @@ $ ->
     event.stopPropagation()
     $form =  $(this).closest("form")
     $.post "/gels/" + $("#record_id").text() + "/create_or_update_gel_lane", $form.serialize(), (data, textStatus, jqXHR) ->
-      alert(textStatus)
       $jqdata = $(data)
       $form.html($jqdata.html()) 
       if $jqdata.find(".has-error")
