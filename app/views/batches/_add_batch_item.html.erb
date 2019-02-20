@@ -19,6 +19,6 @@
       <% end %>
     <% end %>
     <!-- Also add button to delete batch_item form (whether batch_item is persisted or not -->
-    <%= link_to fa_icon("trash lg"), remove_batch_item_batch_path(batch_item_id: @batch_item.id), method: :delete, class: "batch-remove-item" %>
+    <%= link_to fa_icon("trash lg"), remove_batch_item_batch_path(batch_item_id: @batch_item.id), method: :delete %>
   </div>
 <% end %>

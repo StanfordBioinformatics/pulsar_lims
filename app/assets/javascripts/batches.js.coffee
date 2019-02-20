@@ -22,7 +22,7 @@ $ ->
     $jqdata = $(data)
     $form = $(this)
     $form.html($jqdata.html())
-    if $jqdata.find(".has-error") 
+    if $jqdata.find(".has-error").length >= 1
       # Then there was a server-side validation error.
       $form.addClass("error-row-color")
     else
@@ -43,10 +43,6 @@ $ ->
       return
     $.post "/batches/" + $("#record_id").text() + "/create_or_update_batch_item", $form.serialize(), (data) ->
       $form.replaceWith(data)
-
-  $(document).on "ajax:success", ".batch-remove-item", (event, data) ->
-    $form = $(this).closest("form")
-    $form.fadeOut()
 
   #Refresh the library_prototype list in the form when the refresh fa-icon is clicked:
   $(document).on "click", ".batch_library_prototype i.refresh", (event) ->

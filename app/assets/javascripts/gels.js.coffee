@@ -13,10 +13,11 @@ $ ->
     $.post "/gels/" + $("#record_id").text() + "/create_or_update_gel_lane", $form.serialize(), (data, textStatus, jqXHR) ->
       $jqdata = $(data)
       $form.html($jqdata.html()) 
-      if $jqdata.find(".has-error")
+      if $jqdata.find(".has-error").length >= 1
         # Then there was a server-side validation error. 
         $form.addClass("error-row-color")
       else
+        $form.removeClass("error-row-color")
         $form.addClass("created-row-color")
         setTimeout (-> $form.removeClass("created-row-color")), 1000
 
@@ -26,8 +27,3 @@ $ ->
       return
     $.post "/gels/" + $("#record_id").text() + "/create_or_update_gel_lane", $form.serialize(), (data) ->
       $form.replaceWith(data)
-
-  $(document).on "ajax:success", ".gel-remove-gel-lane", (event, data) ->
-    $form = $(this).closest("form")
-    $form.fadeOut()
-
