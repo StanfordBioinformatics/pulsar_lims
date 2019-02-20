@@ -19,11 +19,11 @@ $ ->
 
   # User clicks on the Create button in a batch_item row.
   $(document).on "ajax:success", ".batch-item-form", (event, data) ->
-     $jqdata = $(data)
-     $form = $(this)
-     $form.replaceWith($jqdata)
-     $jqdata.fadeOut "slow", () -> 
-       $(this).fadeIn("slow")
+    $jqdata = $(data)
+    $form = $(this)
+    $form.html($jqdata.html())
+    $form.addClass("created-row-color")
+    setTimeout (-> $form.removeClass("created-row-color")), 1000
 
   # User clicks on button to create library from Batch's prototype library
   $(document).on "click", "#batch-item-create-library-btn", (event) ->

@@ -3,8 +3,11 @@ Pulsar::Application.routes.draw do
   resources :atacseqs do
     get :select_experimental_biosample, on: :member
   end
-  resources :batch_items
+  resources :batch_items do 
+    post :create_library_from_prototype, on: :member
+  end
   resources :batches do
+    get :refresh_batch_item_row, on: :member 
     get :add_batch_item, on: :member
     post :create_or_update_batch_item, on: :member
     delete :remove_batch_item, on: :member

@@ -1,4 +1,5 @@
-<%= simple_form_for(@batch, url: [:create_or_update_batch_item, @batch], html: {remote: true, method: :post, class: "batch-item-form rm-on-record-del"}) do |f| %>
+<%= simple_form_for(@batch, url: [:create_or_update_batch_item, @batch], html: {remote: true, method: :post, class: "batch-item-form rm-on-record-del", style: "transition-property: all; transition-duration: 0.4s; float: left;"}) do |f| %>
+  <!-- Note: Added float: left above so that the border of the form extends all the way out to the right when scrolling. -->
   <%= f.simple_fields_for :batch_items, @batch_item do |ff| %>
     <%= render partial: "batch_items/form", locals: {f: ff} %>
   <% end %>
