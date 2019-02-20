@@ -1,5 +1,5 @@
-<!-- Add hidden element to serve as a status check for jQuery to know whether this record exists or not. -->
 <% defaults = INPUT_DEFAULTS[@gel_lane.class.name] %>
+<!-- Add hidden element to serve as a status check for jQuery to know whether this record exists or not. -->
 <% if @gel_lane.id.present? %>
   <span style="display: none" id="gel-lane-persisted"></span>
 <% end %>

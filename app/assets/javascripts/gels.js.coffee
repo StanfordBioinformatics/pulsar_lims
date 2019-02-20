@@ -10,8 +10,16 @@ $ ->
     event.preventDefault()
     event.stopPropagation()
     $form =  $(this).closest("form")
-    $.post "/gels/" + $("#record_id").text() + "/create_or_update_gel_lane", $form.serialize(), (data) ->
-      $form.replaceWith(data) 
+    $.post "/gels/" + $("#record_id").text() + "/create_or_update_gel_lane", $form.serialize(), (data, textStatus, jqXHR) ->
+      alert(textStatus)
+      $jqdata = $(data)
+      $form.html($jqdata.html()) 
+      if $jqdata.find(".has-error")
+        # Then there was a server-side validation error. 
+        $form.addClass("error-row-color")
+      else
+        $form.addClass("created-row-color")
+        setTimeout (-> $form.removeClass("created-row-color")), 1000
 
   $(document).on "change", ".gel-lane-form div > *", () ->
     $form =  $(this).closest("form")

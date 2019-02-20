@@ -17,6 +17,8 @@
 }
 
 .gel-lane-form {
+  transition: background-color, 1.0s;
+  float: left;
   & > div > * {
     padding: 0;
     padding-left: 0.5em;

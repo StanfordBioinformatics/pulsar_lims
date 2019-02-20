@@ -16,6 +16,8 @@
 }
 
 .batch-item-form {
+  transition: background-color, 0.4s;
+  float: left;
   & > div > * {
     padding: 0;
     padding-left: 0.5em;

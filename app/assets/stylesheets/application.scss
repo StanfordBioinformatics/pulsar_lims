@@ -51,8 +51,16 @@
   }
 }
 
+// Used when a user is trying to save a new row (i.e. a BatchItem or a GelLane) and 
+// the row was successfully created.
 .created-row-color {
     background-color: #dff0d8;
+}
+
+// Used when a user is trying to create a new row (i.e. a BatchItem or a GelLane) and 
+// there was a validaiton error.
+.error-row-color {
+    background-color: #f2dede;
 }
 
 // When the fa icon with class "xfade-out" is clicked, then 

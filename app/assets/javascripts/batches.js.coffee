@@ -22,8 +22,12 @@ $ ->
     $jqdata = $(data)
     $form = $(this)
     $form.html($jqdata.html())
-    $form.addClass("created-row-color")
-    setTimeout (-> $form.removeClass("created-row-color")), 1000
+    if $jqdata.find(".has-error") 
+      # Then there was a server-side validation error.
+      $form.addClass("error-row-color")
+    else
+      $form.addClass("created-row-color")
+      setTimeout (-> $form.removeClass("created-row-color")), 1000
 
   # User clicks on button to create library from Batch's prototype library
   $(document).on "click", "#batch-item-create-library-btn", (event) ->
