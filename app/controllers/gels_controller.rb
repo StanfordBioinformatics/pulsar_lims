@@ -21,11 +21,6 @@ class GelsController < ApplicationController
       payload = gel_lane_params
       payload.update({user_id: current_user.id})
       @gel_lane = GelLane.create(payload)
-      if @gel_lane.valid? 
-          status = 400
-      else
-        status = 201
-      end
     end
     render partial: "gels/add_lane", layout: false
   end
