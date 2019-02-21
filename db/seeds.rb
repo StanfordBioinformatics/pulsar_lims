@@ -18,6 +18,7 @@ admin = User.find_by!(email: "admin@enc.com").id
 
 Vendor.delete_all
 Vendor.create!([
+  {user_id: admin, name: "10x Genomics", upstream_identifier: "", url: "https://www.10xgenomics.com/"},
   {user_id: admin, name: "Abcam", upstream_identifier: "abcam", url: "http://www.abcam.com"},
   {user_id: admin, name: "Active Motif", upstream_identifier: "active-motif", url: "http://www.activemotif.com"},
   {user_id: admin, name: "Agilent", upstream_identifier: "agilent", url: "http://www.home.agilent.com"},
@@ -75,7 +76,7 @@ Unit.create!([
   {user_id: admin, name: "mL", unit_type: "volume"},
   {user_id: admin, name: "µL", unit_type: "volume"}
 ])
-  
+ 
 
 DocumentType.delete_all
 DocumentType.create!([
@@ -106,7 +107,7 @@ CloningVector.delete_all
 CloningVector.create!([
   {user_id: admin, name: "pMD18-T Simple", vendor_id: Vendor.find_by(name: "Genomics Online").id, product_url: "https://www.genomics-online.com/vector-backbone/37/pmd18-t-simple/"}
 ])
-  
+ 
 
 BiosampleOntology.delete_all
 BiosampleOntology.create!([
@@ -146,17 +147,17 @@ illumina_adapter_letter = Rails.root.join("lib","seeds","illumina-adapter-sequen
 nebnext_oligos_E7600 = Rails.root.join("lib","seeds","nebnext_oligos_E7600.pdf")
 Document.delete_all
 Document.create!([
-  {user_id: admin, name: File.basename(illumina_truseq_dna_pcr_free), content_type: "application/pdf", 
-    data: File.open(illumina_truseq_dna_pcr_free,"rb").read(), is_protocol: false, 
+  {user_id: admin, name: File.basename(illumina_truseq_dna_pcr_free), content_type: "application/pdf",
+    data: File.open(illumina_truseq_dna_pcr_free,"rb").read(), is_protocol: false,
     description: "Illumina reference guide.",
     document_type_id: DocumentType.find_by(name: "general protocol").id},
 
-  {user_id: admin, name: File.basename(illumina_adapter_letter), content_type: "application/pdf", 
-    data: File.open(illumina_adapter_letter,"rb").read(), is_protocol: false, 
+  {user_id: admin, name: File.basename(illumina_adapter_letter), content_type: "application/pdf",
+    data: File.open(illumina_adapter_letter,"rb").read(), is_protocol: false,
     description: "Illumina barcodes for various library prep kits.",
     document_type_id: DocumentType.find_by(name: "general protocol").id},
-  {user_id: admin, name: File.basename(nebnext_oligos_E7600), content_type: "application/pdf", 
-    data: File.open(nebnext_oligos_E7600,"rb").read(), is_protocol: false, 
+  {user_id: admin, name: File.basename(nebnext_oligos_E7600), content_type: "application/pdf",
+    data: File.open(nebnext_oligos_E7600,"rb").read(), is_protocol: false,
     description: "The NEBNext Multiplex Oligos for Illumina (Dual Index Primers Set 1) contains the adaptor and index primers that are ideally suited for multiplex sample preparation for next-generation sequencing on the Illumina platform.",
     document_type_id: DocumentType.find_by(name: "general protocol").id}
 ])
@@ -167,7 +168,8 @@ SequencingLibraryPrepKit.create!([
   {user_id: admin, name: "Illumina TruSeq LT Kits", documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes TruSeq DNA PCR-Free LT, TruSeq Nano DNA LT, TruSeq DNA v1/v2/LT (obsolete), TruSeq RNA v1/v2/LT, TruSeq Stranded mRNA LT, TruSeq Stranded Total RNA LT, TruSeq RNA Access, and TruSeq ChIP"},
   {user_id: admin, name: "Illumina Nextera Kits", supports_paired_end: true, documents: [Document.find_by(name: "illumina-adapter-sequences_1000000002694-01.pdf")] ,vendor_id: Vendor.find_by(name: "Illumina").id, description: "Includes Nextera DNA, Nextera XT, Nextera Enrichment (obsolete), and Nextera Rapid Capture. Does not include Nextera XT Index Kit v2."},
   {user_id: admin, name: "NEBNext Multiplex Oligos for Illumina (Dual Index Primers Set 1)", supports_paired_end: true, documents: [Document.find_by(name: "nebnext_oligos_E7600.pdf")] ,vendor_id: Vendor.find_by(name: "New England BioLabs").id, vendor_product_identifier: "E7600S", description: "Contains the adaptor and index primers that are ideally suited for multiplex sample preparation for next-generation sequencing on the Illumina platform. Designed for use with specific NEBNext Kits, see https://www.neb.com/~/media/Catalog/All-Products/E7CFA11A57424D299FAA2AF513787BBE/Datacards%20or%20Manuals/manualE7600.pdf."},
-  {user_id: admin, name: "Custom nextera Greenleaf lab", supports_paired_end: true, vendor_id: Vendor.find_by(name: "Greenleaf Lab").id, description: "Contains custom barcodes based off of Nextera, designed in the Greenleaf lab."}
+  {user_id: admin, name: "Custom nextera Greenleaf lab", supports_paired_end: true, vendor_id: Vendor.find_by(name: "Greenleaf Lab").id, description: "Contains custom barcodes based off of Nextera, designed in the Greenleaf lab."},
+  {user_id: admin, name: "Chromium Single Cell ATAC Library & Gel Bead Kit", supports_paired_end: false, vendor_id: Vendor.find_by(name: "10x Genomics").id, description: "Contains sample indices for PN-120262: Chromium i7 Multiplex Kit"}
 ])
 
 truseq_ht_kits_id = SequencingLibraryPrepKit.find_by!(name: "Illumina TruSeq HT Kits").id
@@ -175,28 +177,126 @@ truseq_lt_kits_id = SequencingLibraryPrepKit.find_by!(name: "Illumina TruSeq LT 
 nextera_kits_id = SequencingLibraryPrepKit.find_by!(name: "Illumina Nextera Kits").id
 nebnext_duel_set1_id = SequencingLibraryPrepKit.find_by!(name: "NEBNext Multiplex Oligos for Illumina (Dual Index Primers Set 1)").id
 greenleaf_kit_id = SequencingLibraryPrepKit.find_by!(name: "Custom nextera Greenleaf lab").id
+tenx_genomics_kit_id = SequencingLibraryPrepKit.find_by!(name: "Chromium Single Cell ATAC Library & Gel Bead Kit").id
 
 Barcode.delete_all
 Barcode.create!([
-{user_id: admin, name: "D701", sequence: "ATTACTCG", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D702", sequence: "TCCGGAGA", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D703", sequence: "CGCTCATT", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D704", sequence: "GAGATTCC", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D705", sequence: "ATTCAGAA", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D706", sequence: "GAATTCGT", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D707", sequence: "CTGAAGCT", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D708", sequence: "TAATGCGC", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D709", sequence: "CGGCTATG", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D710", sequence: "TCCGCGAA", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D711", sequence: "TCTCGCGC", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "SI-GA-A1", sequence: "GGTTTACT,CTAAACGG,TCGGCGTC,AACCGTAA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-A2", sequence: "TTTCATGA,ACGTCCCT,CGCATGTG,GAAGGAAC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-A3", sequence: "CAGTACTG,AGTAGTCT,GCAGTAGA,TTCCCGAC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-A4", sequence: "TATGATTC,CCCACAGT,ATGCTGAA,GGATGCCG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-A5", sequence: "CTAGGTGA,TCGTTCAG,AGCCAATT,GATACGCC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-A6", sequence: "CGCTATGT,GCTGTCCA,TTGAGATC,AAACCGAG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-A7", sequence: "ACAGAGGT,TATAGTTG,CGGTCCCA,GTCCTAAC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-A8", sequence: "GCATCTCC,TGTAAGGT,CTGCGATG,AACGTCAA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-A9", sequence: "TCTTAAAG,CGAGGCTC,GTCCTTCT,AAGACGGA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-A10", sequence: "GAAACCCT,TTTCTGTC,CCGTGTGA,AGCGAAAG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-A11", sequence: "GTCCGGTC,AAGATCAT,CCTGAAGG,TGATCTCA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-A12", sequence: "AGTGGAAC,GTCTCCTT,TCACATCA,CAGATGGG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-B1", sequence: "GTAATCTT,TCCGGAAG,AGTTCGGC,CAGCATCA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-B2", sequence: "TACTCTTC,CCTGTGCG,GGACACGT,ATGAGAAA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-B3", sequence: "GTGTATTA,TGTGCGGG,ACCATAAC,CAACGCCT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-B4", sequence: "ACTTCATA,GAGATGAC,TGCCGTGG,CTAGACCT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-B5", sequence: "AATAATGG,CCAGGGCA,TGCCTCAT,GTGTCATC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-B6", sequence: "CGTTAATC,GCCACGCT,TTACTCAG,AAGGGTGA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-B7", sequence: "AAACCTCA,GCCTTGGT,CTGGACTC,TGTAGAAG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-B8", sequence: "AAAGTGCT,GCTACCTG,TGCTGTAA,CTGCAAGC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-B9", sequence: "CTGTAACT,TCTAGCGA,AGAGTGTG,GACCCTAC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-B10", sequence: "ACCGTATG,GATTAGAT,CTGACTGA,TGACGCCC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-B11", sequence: "GTTCCTCA,AGGTACGC,TAAGTATG,CCCAGGAT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-B12", sequence: "TACCACCA,CTAAGTTT,GGGTCAAG,ACTGTGGC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-C1", sequence: "CCACTTAT,AACTGGCG,TTGGCATA,GGTAACGC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-C2", sequence: "CCTAGACC,ATCTCTGT,TAGCTCTA,GGAGAGAG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-C3", sequence: "TCAGCCGT,CAGAGGCC,GGTCAATA,ATCTTTAG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-C4", sequence: "ACAATTCA,TGCGCAGC,CATCACTT,GTGTGGAG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-C5", sequence: "CGACTTGA,TACAGACT,ATTGCGTG,GCGTACAC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-C6", sequence: "ATTACTTC,TGCGAACT,GCATTCGG,CAGCGGAA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-C7", sequence: "GTCTCTCG,AATCTCTC,CGGAGGGA,TCAGAAAT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-C8", sequence: "GTTGAGAA,AGATCTGG,TCGATACT,CACCGCTC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-C9", sequence: "GCGCAGAA,ATCTTACC,TATGGTGT,CGAACCTG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-C10", sequence: "TCTCAGTG,GAGACTAT,CGCTTAGC,ATAGGCCA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-C11", sequence: "GAGGATCT,AGACCATA,TCCTGCGC,CTTATGAG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-C12", sequence: "TCTCGTTT,GGCTAGCG,ATGACCGC,CAAGTAAA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-D1", sequence: "CACTCGGA,GCTGAATT,TGAAGTAC,ATGCTCCG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-D2", sequence: "TAACAAGG,GGTTCCTC,ATCATGCA,CCGGGTAT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-D3", sequence: "ACATTACT,TTTGGGTA,CAGCCCAC,GGCAATGG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-D4", sequence: "CCCTAACA,ATTCCGAT,TGGATTGC,GAAGGCTG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-D5", sequence: "CTCGTCAC,GATCAGCA,ACAACAGG,TGGTGTTT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-D6", sequence: "CATGCGAT,TGATATTC,GTGATCGA,ACCCGACG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-D7", sequence: "ATTTGCTA,TAGACACC,CCACAGGG,GGCGTTAT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-D8", sequence: "GCAACAAA,TAGTTGTC,CGCCATCG,ATTGGCGT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-D9", sequence: "AGGAGATG,GATGTGGT,CTACATCC,TCCTCCAA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-D10", sequence: "CAATACCC,TGTCTATG,ACCACGAA,GTGGGTGT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-D11", sequence: "CTTTGCGG,TGCACAAA,AAGCAGTC,GCAGTTCT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-D12", sequence: "GCACAATG,CTTGGTAC,TGCACCGT,AAGTTGCA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-E1", sequence: "TGGTAAAC,GAAAGGGT,ACTGCTCG,CTCCTCTA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-E2", sequence: "GTGGTACC,TACTATAG,ACAAGGTA,CGTCCCGT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-E3", sequence: "AGGTATTG,CTCCTAGT,TCAAGGCC,GATGCCAA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-E4", sequence: "TTCGCCCT,GGATGGGC,AATCAATG,CCGATTAA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-E5", sequence: "CATTAGCG,TTCGCTGA,ACAAGAAT,GGGCTCTC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-E6", sequence: "CTGCGGCT,GACTCAAA,AGAAACTC,TCTGTTGG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-E7", sequence: "CACGCCTT,GTATATAG,TCTCGGGC,AGGATACA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-E8", sequence: "ATAGTTAC,TGCTGAGT,CCTACGTA,GAGCACCG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-E9", sequence: "TTGTTTCC,GGAGGAGG,CCTAACAA,AACCCGTT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-E10", sequence: "AAATGTGC,GGGCAAAT,TCTATCCG,CTCGCGTA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-E11", sequence: "AAGCGCTG,CGTTTGAT,GTAGCACA,TCCAATGC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-E12", sequence: "ACCGGCTC,GAGTTAGT,CGTCCTAG,TTAAAGCA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-F1", sequence: "GTTGCAGC,TGGAATTA,CAATGGAG,ACCCTCCT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-F2", sequence: "TTTACATG,CGCGATAC,ACGCGGGT,GAATTCCA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-F3", sequence: "TTCAGGTG,ACGGACAT,GATCTTGA,CGATCACC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-F4", sequence: "CCCAATAG,GTGTCGCT,AGAGTCGC,TATCGATA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-F5", sequence: "GACTACGT,CTAGCGAG,TCTATATC,AGGCGTCA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-F6", sequence: "CGGAGCAC,GACCTATT,ACTTAGGA,TTAGCTCG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-F7", sequence: "CGTGCAGA,AACAAGAT,TCGCTTCG,GTATGCTC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-F8", sequence: "CATGAACA,TCACTCGC,AGCTGGAT,GTGACTTG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-F9", sequence: "CAAGCTCC,GTTCACTG,TCGTGAAA,AGCATGGT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-F10", sequence: "GCTTGGCT,AAACAAAC,CGGGCTTA,TTCATCGG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-F11", sequence: "GCGAGAGT,TACGTTCA,AGTCCCAC,CTATAGTG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-F12", sequence: "TGATGCAT,GCTACTGA,CACCTGCC,ATGGAATG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-G1", sequence: "ATGAATCT,GATCTCAG,CCAGGAGC,TGCTCGTA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-G2", sequence: "TGATTCTA,ACTAGGAG,CAGCCACT,GTCGATGC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-G3", sequence: "CCTCATTC,AGCATCCG,GTGGCAAT,TAATGGGA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-G4", sequence: "GCGATGTG,AGATACAA,TTTCCACT,CACGGTGC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-G5", sequence: "GAGCAAGA,TCTGTGAT,CGCAGTTC,ATATCCCG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-G6", sequence: "CTGACGCG,GGTCGTAC,TCCTTCTT,AAAGAAGA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-G7", sequence: "GGTATGCA,CTCGAAAT,ACACCTTC,TAGTGCGG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-G8", sequence: "TATGAGCT,CCGATAGC,ATACCCAA,GGCTGTTG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-G9", sequence: "TAGGACGT,ATCCCACA,GGAATGTC,CCTTGTAG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-G10", sequence: "TCGCCAGC,AATGTTAG,CGATAGCT,GTCAGCTA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-G11", sequence: "TTATCGTT,AGCAGAGC,CATCTCCA,GCGGATAG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-G12", sequence: "ATTCTAAG,CCCGATTA,TGGAGGCT,GAATCCGC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-H1", sequence: "GTATGTCA,TGTCAGAC,CACGTCGG,ACGACATT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-H2", sequence: "TAATGACC,ATGCCTTA,GCCGAGAT,CGTATCGG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-H3", sequence: "CCAAGATG,AGGCCCGA,TACGTGAC,GTTTATCT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-H4", sequence: "GCCATTCC,CAAGAATT,TTGCCGGA,AGTTGCAG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-H5", sequence: "CCACTACA,GATTCTGG,TGCGGCTT,ATGAAGAC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-H6", sequence: "TAGGATAA,CCTTTGTC,GTACGCGG,AGCACACT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-H7", sequence: "AGCTATCA,CATATAAC,TCAGGGTG,GTGCCCGT", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-H8", sequence: "TTGTTGAT,GCTCAACC,CAAAGTGG,AGCGCCTA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-H9", sequence: "ACACTGTT,CAGGATGG,GGCTGAAC,TTTACCCA", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-H10", sequence: "GTAATTGC,AGTCGCTT,CACGAGAA,TCGTCACG", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-H11", sequence: "GGCGAGTA,ACTTCTAT,CAAATACG,TTGCGCGC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+{user_id: admin, name: "SI-GA-H12", sequence: "GACAGCAT,TTTGTACA,AGGCCGTG,CCATATGC", index_number: 1, sequencing_library_prep_kit_id: tenx_genomics_kit_id},
+
+{user_id: admin, name: "D701", sequence: "ATTACTCG", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D702", sequence: "TCCGGAGA", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D703", sequence: "CGCTCATT", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D704", sequence: "GAGATTCC", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D705", sequence: "ATTCAGAA", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D706", sequence: "GAATTCGT", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D707", sequence: "CTGAAGCT", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D708", sequence: "TAATGCGC", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D709", sequence: "CGGCTATG", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D710", sequence: "TCCGCGAA", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D711", sequence: "TCTCGCGC", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
 {user_id: admin, name: "D712", sequence: "AGCGATAG", index_number: 1, sequencing_library_prep_kit_id: truseq_ht_kits_id},
-{user_id: admin, name: "D501", sequence: "TATAGCCT", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D502", sequence: "ATAGAGGC", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D503", sequence: "CCTATCCT", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D504", sequence: "GGCTCTGA", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D505", sequence: "AGGCGAAG", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D506", sequence: "TAATCTTA", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
-{user_id: admin, name: "D507", sequence: "CAGGACGT", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id}, 
+{user_id: admin, name: "D501", sequence: "TATAGCCT", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D502", sequence: "ATAGAGGC", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D503", sequence: "CCTATCCT", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D504", sequence: "GGCTCTGA", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D505", sequence: "AGGCGAAG", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D506", sequence: "TAATCTTA", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id},
+{user_id: admin, name: "D507", sequence: "CAGGACGT", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id},
 {user_id: admin, name: "D508", sequence: "GTACTGAC", index_number: 2, sequencing_library_prep_kit_id: truseq_ht_kits_id},
 
 {user_id: admin, name: "AD001", sequence: "ATCACG", index_number: 1, sequencing_library_prep_kit_id: truseq_lt_kits_id},
@@ -705,12 +805,12 @@ Target.create!([
 
 TreatmentTermName.delete_all
 TreatmentTermName.create!([
-  {user_id: admin, name: "17β-hydroxy-5α-androstan-3-one", accession: "CHEBI:16330", 
+  {user_id: admin, name: "17β-hydroxy-5α-androstan-3-one", accession: "CHEBI:16330",
    description: "A 17β-hydroxy steroid that is testosterone in which the 4,5 double bond has been reduced to a single bond with α-configuration at position 5."},
   {user_id: admin, name: "tumor necrosis factor", accession: "UniProtKB:P01375",
    description: "Cytokine that binds to TNFRSF1A/TNFR1 and TNFRSF1B/TNFBR. It is mainly secreted by macrophages and can induce cell death of certain tumor cell lines. It is potent pyrogen causing fever by direct action or by stimulation of interleukin-1 secretion and is implicated in the induction of cachexia, Under certain conditions it can stimulate cell proliferation and induce cell differentiation. Impairs regulatory T-cells (Treg) function in individuals with rheumatoid arthritis via FOXP3 dephosphorylation. Upregulates the expression of protein phosphatase 1 (PP1), which dephosphorylates the key 'Ser-418' residue of FOXP3, thereby inactivating FOXP3 and rendering Treg cells functionally defective (PubMed:23396208). Key mediator of cell death in the anticancer action of BCG-stimulated neutrophils in combination with DIABLO/SMAC mimetic in the RT4v6 bladder cancer cell line (PubMed:22517918)."}
 ])
-  
+ 
 
 Antibody.delete_all
 Antibody.create!([
@@ -735,4 +835,4 @@ Library.create!([
 #
   {user_id: admin, name: "lib2", sequencing_library_prep_kit_id: truseq_ht_kits_id, nucleic_acid_term_id: NucleicAcidTerm.find_by!(name: "DNA").id, biosample_id: Biosample.find_by!(name: "ENCBS389LEA").id, size_range: "450-650", documents: [Document.second],strand_specific: false}
 ])
-  
+ 
