@@ -47,7 +47,7 @@
         </td>
         <td>
           <% if rec.gels.any? %>
-            <%= rec.gels.each do |gel| %>
+            <% rec.gels.each do |gel| %>
               <div style="display: flex">
                 <%= link_to gel.display(), gel %>
                 <% if gel.gel_image.present? %>
