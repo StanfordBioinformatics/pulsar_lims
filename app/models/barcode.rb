@@ -14,7 +14,7 @@ class Barcode < ActiveRecord::Base
   validates_uniqueness_of :name, scope: :sequencing_library_prep_kit_id
   validates :name, presence: true
   validates_uniqueness_of :sequence, scope: :sequencing_library_prep_kit_id
-  validates :sequence, presence: true, format: { with: /\A[acgtnACGTN]+\z/, message: "can only contain characters in the set ACTGN" }
+  validates :sequence, presence: true, format: { with: /\A[acgtnACGTN,]+\z/, message: "can only contain characters in the set ACTGN. Multi-oligo barcodes (i.e. 10x Genomics sample indices in single cell sequencing libraries) are allowed and must be separated by a comma." }
   validates :sequencing_library_prep_kit, presence: true
 
   scope :persisted, lambda { where.not(id: nil) }
