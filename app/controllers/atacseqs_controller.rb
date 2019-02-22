@@ -8,7 +8,7 @@ class AtacseqsController < ApplicationController
   end
 
   def bulk
-    title = "Batch ATAC-Seq Experiments"
+    title = "Bulk ATAC-Seq Experiments"
     redirect_to action: index, scope: :bulk, title: title
   end
 
