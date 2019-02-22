@@ -2,6 +2,8 @@ module Enums
   #Defines several constants to serve as enums. These are references in models during validation
   # of property values.
 
+  BATCH_TYPES = ["bulk ATAC-seq", "scATAC-seq", "ChIP-seq"]
+
   CONCENTRATION_INSTRUMENTS = ["Bioanalyzer", "Qubit"]
 
   CRISPR_MOD_CATEGORIES = ["deletion", "interference", "insertion", "mutagenesis", "replacement"]

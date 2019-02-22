@@ -59,6 +59,7 @@ class Api::BatchsController < Api::ApplicationController
     params.require(:batch).permit(
         :analyst_id,
         :batch_item_ids,
+        :batch_type,
         :crosslinking_method,
         :date,
         :library_prototype_id,

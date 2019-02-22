@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190216024513) do
+ActiveRecord::Schema.define(version: 20190222004330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,6 +174,7 @@ ActiveRecord::Schema.define(version: 20190216024513) do
     t.integer  "analyst_id"
     t.text     "notes"
     t.integer  "library_prototype_id"
+    t.string   "batch_type"
   end
 
   add_index "batches", ["analyst_id"], name: "index_batches_on_analyst_id", using: :btree
