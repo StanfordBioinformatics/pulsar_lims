@@ -2,7 +2,7 @@
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @batch } %>
   <% defaults = INPUT_DEFAULTS[@batch.class.name] %>
 
-  <%= f.input :batch_type, collection: Enums::BATCH_TYPES %>
+  <%= f.input :batch_type, collection: Batch::BATCH_TYPES %>
 
   <%= f.association :library_prototype, collection: Library.where(prototype: true), label_html: {class: "refresh", "data-toggle": "tooltip", title: "The selected library prototype will be used to create a Library record for each Biosample on it the batch. The prototype serves as the model for what each Library to build should look like. You'll still need to add individual barcodes though for each Library that is actually created for each Biosample."} %>
 

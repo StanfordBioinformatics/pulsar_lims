@@ -48,11 +48,22 @@ class ApplicationController < ActionController::Base
   end
 
   def index(scope: nil, where: {})
-    @records = policy_scope(@model_class).where(where)
-    if scope.present?
-      @records = @records.send(scope)
+    if scope.nil?
+      # Then check if scope was passed as a query parameter (see ex. of this being done in 
+      # the batches controller via the bulk_atacseq_index instance method and a couple of others.
+      if params.include?("scope")
+        scope = params["scope"] #Note: can't use symbol for subsetting here. 
+      end
     end
-    @records = @records.unscoped.order(updated_at: :desc)
+    @scope = scope
+    if params.include?("title")
+      @title = params["title"]
+    end
+    @records = policy_scope(@model_class).where(where)
+    if @scope.present?
+      @records = @records.send(@scope)
+    end
+    @records = @records.order(updated_at: :desc)
     @total = @records.count
     # Commended out code below because allowing the "all" feature causes memory bloats. 
     #unless params[:all].present?

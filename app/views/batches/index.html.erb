@@ -5,7 +5,7 @@
   <p class="model-definition"><%= Batch::DEFINITION %></p>
 
   <ul class="actions">
-    <%= render partial: "application_partials/auth_new_record" %>
+    <%= render partial: "application_partials/auth_new_record", locals: {scope: @scope} %>
   </ul>
   <%= render partial: "application_partials/total", locals: {records: @records} %>
 </header>

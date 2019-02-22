@@ -1,6 +1,21 @@
 class BatchesController < ApplicationController
   before_action :set_batch, only: [:show, :edit, :update, :destroy, :add_batch_item, :create_or_update_batch_item, :refresh_batch_item_row]
-  skip_after_action :verify_authorized, only: [:add_batch_item, :create_or_update_batch_item, :remove_batch_item, :refresh_batch_item_row]
+  skip_after_action :verify_authorized, only: [:add_batch_item, :create_or_update_batch_item, :remove_batch_item, :refresh_batch_item_row, :bulk_atacseq_index, :sc_atacseq_index, :chipseq_index]
+
+  def bulk_atacseq_index
+    title = "Batches for bulk ATAC-seq" 
+    redirect_to action: index, scope: :bulk_atacseq, title: title
+  end
+
+  def sc_atacseq_index
+    title = "Batches for scATAC-seq" 
+    redirect_to action: index, scope: :sc_atacseq, title: title
+  end
+
+  def chipseq_index
+    title = "Batches for ChIP-seq"
+    redirect_to action: index, scope: :chipseq, title: title
+  end
 
   def add_batch_item
     # Called in /views/batches/show.html.erb via AJAX to add a new row for entering a
@@ -50,7 +65,18 @@ class BatchesController < ApplicationController
 
   def new
     authorize Batch
-    @batch = Batch.new 
+    scope = params[:scope]
+    defaults = {}
+    if scope.present?
+      if scope == "sc_atacseq"
+        defaults = {batch_type: Batch::SC_ATACSEQ}
+      elsif scope == "bulk_atacseq"
+        defaults = {batch_type: Batch::BULK_ATACSEQ}
+      elsif scope == "chipseq"
+        defaults = {batch_type: Batch::CHIPSEQ}
+      end
+    end
+    @batch = Batch.new(defaults)
   end
 
   def edit

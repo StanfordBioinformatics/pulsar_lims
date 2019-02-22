@@ -6,6 +6,7 @@
 
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
+    <%= link_to "Batches", chipseq_index_batches_path, class: "reg-btn" %> 
   </ul>
   <%= render partial: "application_partials/total", locals: {records: @records} %>
 </header>
