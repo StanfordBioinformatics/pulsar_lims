@@ -41,7 +41,7 @@
 <%= link_to "Add Image", add_gel_image_gel_path(@gel), class: "reg-btn" %>
 <h3 class="section">Gel images</h3>
 <% @gel.gel_images.each do |i| %>
-  <div style="display: flex; justify-content: flex-start; align-items: center;" %>
+  <div style="display: flex; align-items: center;" %>
     <div>
       <%= link_to_record i %>
     </div>
