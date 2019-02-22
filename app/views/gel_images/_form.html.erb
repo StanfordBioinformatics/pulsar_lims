@@ -1,0 +1,16 @@
+<%= simple_form_for(@gel_image) do |f| %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @gel_image } %>
+
+  <%= f.association :gel %>
+  <%= f.input :film_exposure_time, label_html: {"data-toggle": "tooltip", "title": "Time in seconds of film exposure to light."} %>
+  <% file_upload_hint="" %>                                                                            
+  <% if @gel_image.image.present? %>                                                                     
+    <% file_upload_hint="You previously uploaded #{@gel_image.image}." %>                                
+  <% end %> 
+  <%= f.input :image, as: :file, input_html: {class: 'image directUpload', data: { 'form-data' => (@s3_direct_post.fields), 'url' => @s3_direct_post.url, 'host' => URI.parse(@s3_direct_post.url).host }}, label: "Gel image", hint: file_upload_hint %>
+  <%= f.input :caption, label_html: {"data-toggle": "tooltip", "title": "A short description of the gel image to be shown alongside the image when viewed."} %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div></br>
+<% end %>

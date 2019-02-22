@@ -1,0 +1,2 @@
+module GelImagesHelper
+end

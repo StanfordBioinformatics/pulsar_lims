@@ -1,7 +1,7 @@
 class GelsController < ApplicationController
   before_action :set_gel, only: [:show, :edit, :update, :destroy, :add_lane, :create_or_update_gel_lane, :remove_gel_lane]
-  skip_after_action :verify_authorized, only: [:add_lane, :create_or_update_gel_lane, :remove_gel_lane]
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
+  skip_after_action :verify_authorized, only: [:add_lane, :create_or_update_gel_lane, :remove_gel_lane]
 
   def add_lane
     # Called in /views/gels/show.html.erb via AJAX to add a new row for entering a 
@@ -103,6 +103,7 @@ class GelsController < ApplicationController
         :percentage,
         :run_date,
         :voltage,
+        gel_image_ids: [],
         gel_lanes_attributes:  [
           :id,
           :actual_product_size,                                                                        

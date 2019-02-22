@@ -1,5 +1,6 @@
 Pulsar::Application.routes.draw do
 
+  resources :gel_images
   resources :atacseqs do
     get :single_cell, on: :collection
     get :bulk, on: :collection

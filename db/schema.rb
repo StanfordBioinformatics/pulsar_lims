@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190222041855) do
+ActiveRecord::Schema.define(version: 20190222194102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -622,6 +622,19 @@ ActiveRecord::Schema.define(version: 20190222041855) do
   add_index "file_references", ["data_file_type_id"], name: "index_file_references_on_data_file_type_id", using: :btree
   add_index "file_references", ["data_storage_id"], name: "index_file_references_on_data_storage_id", using: :btree
   add_index "file_references", ["user_id"], name: "index_file_references_on_user_id", using: :btree
+
+  create_table "gel_images", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "gel_id"
+    t.integer  "film_exposure_time"
+    t.string   "image"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.text     "caption"
+  end
+
+  add_index "gel_images", ["gel_id"], name: "index_gel_images_on_gel_id", using: :btree
+  add_index "gel_images", ["user_id"], name: "index_gel_images_on_user_id", using: :btree
 
   create_table "gel_lanes", force: :cascade do |t|
     t.integer  "lane_number"
@@ -1261,6 +1274,8 @@ ActiveRecord::Schema.define(version: 20190222041855) do
   add_foreign_key "file_references", "data_file_types"
   add_foreign_key "file_references", "data_storages"
   add_foreign_key "file_references", "users"
+  add_foreign_key "gel_images", "gels"
+  add_foreign_key "gel_images", "users"
   add_foreign_key "gel_lanes", "biosamples"
   add_foreign_key "gel_lanes", "gels"
   add_foreign_key "gel_lanes", "units", column: "sample_concentration_units_id"

@@ -12,6 +12,7 @@ class Gel < ActiveRecord::Base
   belongs_to :user
   has_many :gel_lanes, dependent: :destroy
   has_many :biosamples, through: :gel_lanes
+  has_many :gel_images, dependent: :destroy
   validates :voltage, numericality: {greater_than: 0}, allow_blank: true
   validate :validate_owner, on: [:create, :update]
 

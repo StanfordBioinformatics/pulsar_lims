@@ -1,0 +1,30 @@
+<%= render partial:  "application_partials/header", locals: {rec: @gel_image} %>
+
+<table class="attributes">
+  <tbody>
+    <tr>
+      <th><strong>Gel:</strong></th>
+      <td><%= link_to_record @gel_image.gel %></td>
+    </tr>
+
+    <tr>
+      <th><strong>Film exposure time:</strong></th>
+      <td>
+        <% if @gel_image.film_exposure_time.present? %>
+          <%= @gel_image.film_exposure_time.to_s + "s" %>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <th><strong>Caption:</strong></th>
+      <td><%= @gel_image.caption %></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="section">Image</h3>                                                                     
+<%= image_tag @gel_image.image, alt: "gel", class: "modal-for-image", style: "width: 100px;" %>          
+</br></br>
+
+<%= link_to 'Back', gel_images_path %>

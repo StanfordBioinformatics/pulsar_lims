@@ -19,7 +19,6 @@
       <th>Primary antibody</th>
       <th>Secondary antibody</th>
       <th>Gel</th>
-      <th>Submitter comments</th>
       <th>Notes</th>
       <th>Actions</th>
     </tr>
@@ -57,7 +56,6 @@
             <% end %>
           <% end %>
         </td>
-        <td><%= rec.submitter_comments %></td>
         <td><%= rec.notes %></td>
         <td>
           <%= link_to fa_icon("pencil"), edit_immunoblot_path(rec) %>
