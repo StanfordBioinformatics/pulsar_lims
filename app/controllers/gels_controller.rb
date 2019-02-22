@@ -1,7 +1,13 @@
 class GelsController < ApplicationController
-  before_action :set_gel, only: [:show, :edit, :update, :destroy, :add_lane, :create_or_update_gel_lane, :remove_gel_lane]
-  before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
-  skip_after_action :verify_authorized, only: [:add_lane, :create_or_update_gel_lane, :remove_gel_lane]
+  before_action :set_gel, only: [:show, :edit, :update, :destroy, :add_lane, :create_or_update_gel_lane, :remove_gel_lane, :add_gel_image]
+  before_action :set_s3_direct_post, only: [:new, :edit, :create, :update, :add_gel_image]
+  skip_after_action :verify_authorized, only: [:add_lane, :create_or_update_gel_lane, :remove_gel_lane, :add_gel_image]
+
+  def add_gel_image
+    @gel_image = @gel.gel_images.build
+    render partial: "gel_images/form"
+    return
+  end
 
   def add_lane
     # Called in /views/gels/show.html.erb via AJAX to add a new row for entering a 

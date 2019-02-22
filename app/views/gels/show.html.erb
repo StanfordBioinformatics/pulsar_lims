@@ -38,6 +38,8 @@
   </tr>
 </table>
 
+<%= link_to "Add Image", [:add_gel_image, @gel], class: "reg-btn" %>
+
 <h3 class="section">Gel image</h3>
 <%= image_tag @gel.gel_image, alt: "gel", class: "modal-for-image", style: "width: 100px;" %>
 </br></br>

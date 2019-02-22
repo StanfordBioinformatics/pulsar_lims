@@ -24,6 +24,7 @@ Pulsar::Application.routes.draw do
     get :select_gel, on: :member
   end
   resources :gels do
+    get :add_gel_image, on: :member
     get :add_lane, on: :member
     post :create_or_update_gel_lane, on: :member
     delete :remove_gel_lane, on: :member
