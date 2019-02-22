@@ -1,12 +1,17 @@
 Pulsar::Application.routes.draw do
 
   resources :atacseqs do
+    get :single_cell, on: :collection
+    get :bulk, on: :collection
     get :select_experimental_biosample, on: :member
   end
   resources :batch_items do 
     post :create_library_from_prototype, on: :member
   end
   resources :batches do
+    get :bulk_atacseq_index, on: :collection
+    get :sc_atacseq_index, on: :collection
+    get :chipseq_index, on: :collection
     get :refresh_batch_item_row, on: :member 
     get :add_batch_item, on: :member
     post :create_or_update_batch_item, on: :member
