@@ -100,7 +100,6 @@ class GelsController < ApplicationController
     def gel_params
       params.require(:gel).permit(
         :caption,
-        :gel_image,
         :immunoblot_id, 
         :notes,
         :pcr_id,

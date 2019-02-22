@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190222194102) do
+ActiveRecord::Schema.define(version: 20190222230405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -668,7 +668,6 @@ ActiveRecord::Schema.define(version: 20190222194102) do
     t.datetime "updated_at",    null: false
     t.float    "voltage"
     t.string   "percentage"
-    t.string   "gel_image"
     t.text     "caption"
     t.integer  "immunoblot_id"
     t.integer  "pcr_id"

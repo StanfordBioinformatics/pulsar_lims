@@ -38,8 +38,8 @@
   </tr>
 </table>
 
-<%= link_to "Add Image", add_gel_image_gel_path(@gel), class: "reg-btn" %>
 <h3 class="section">Gel images</h3>
+<%= link_to "Add Image", add_gel_image_gel_path(@gel), class: "reg-btn" %>
 <% @gel.gel_images.each do |i| %>
   <div style="display: flex; align-items: center;" %>
     <div>
@@ -49,9 +49,6 @@
   </div>
 <% end %>
 
-<h3 class="section">Gel image old</h3>
-<%= image_tag @gel.gel_image, alt: "gel", class: "modal-for-image", style: "width: 100px;" %>
-</br></br>
 <h4 class="section">Gel lanes</h4>
 
 <div style="overflow: auto; max-width: 95%;">

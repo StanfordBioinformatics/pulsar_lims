@@ -41,10 +41,13 @@
         <td><%= "#{rec.percentage}%" %></td>
         <td><%= rec.run_date %></td>
         <td>
-          <% if rec.gel_image.present? %>
-            <div style="display: flex">                                                                
-              <%= image_tag rec.gel_image, alt: "gel", data: {"caption": rec.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
-            </div> 
+          <% if rec.gel_images.any? %>
+            <% rec.gel_images.each do |gi| %>
+              <div style="display: flex; align-items: center;" %>
+                <div><%= link_to_record gi %></div>
+                <%= image_tag gi.image, alt: "Gel image", data: {"caption": gi.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+              </div> 
+            <% end %>
           <% end %>                                                                                
         </td>
         <td><%= rec.notes %></td>
