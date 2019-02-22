@@ -5,8 +5,12 @@
   <p class="model-definition"><%= Atacseq::DEFINITION %></p>
 
   <ul class="actions">
-    <%= render partial: "application_partials/auth_new_record" %>
-    <%= link_to "Batches", bulk_atacseq_index_batches_path, class: "reg-btn" %>
+    <%= render partial: "application_partials/auth_new_record", locals: {scope: @scope} %>
+    <% if @scope == "single_cell" %>
+      <%= link_to "Batches", sc_atacseq_index_batches_path, class: "reg-btn" %>
+    <% elsif @scope == "bulk" %>
+      <%= link_to "Batches", bulk_atacseq_index_batches_path, class: "reg-btn" %>
+    <% end %>
   </ul>
   <%= render partial: "application_partials/total", locals: {records: @records} %>
 </header>

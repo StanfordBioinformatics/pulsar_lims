@@ -12,6 +12,9 @@ class Atacseq < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true 
 
+  scope :single_cell, lambda { where(single_cell: true) }
+  scope :bulk, lambda { where(single_cell: false) }
+
   accepts_nested_attributes_for :documents, allow_destroy: true
 
   def self.policy_class

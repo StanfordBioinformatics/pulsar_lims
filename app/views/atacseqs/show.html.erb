@@ -8,6 +8,11 @@
     </tr>
 
     <tr>
+      <th><strong>Single cell:</strong></th>
+      <td><%= @atacseq.single_cell? %></td>
+    </tr>
+
+    <tr>
       <th><strong>Documents:</strong></th>
       <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @atacseq.documents}  %></td>
     </tr>

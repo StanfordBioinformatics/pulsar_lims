@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190222004330) do
+ActiveRecord::Schema.define(version: 20190222041855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,8 +110,9 @@ ActiveRecord::Schema.define(version: 20190222004330) do
     t.text     "description"
     t.text     "submitter_comments"
     t.text     "notes"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.boolean  "single_cell",        default: false
   end
 
   add_index "atacseqs", ["user_id"], name: "index_atacseqs_on_user_id", using: :btree

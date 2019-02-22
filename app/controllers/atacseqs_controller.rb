@@ -1,6 +1,16 @@
 class AtacseqsController < ApplicationController
   before_action :set_atacseq, only: [:show, :edit, :update, :destroy, :select_experimental_biosample]
-  skip_after_action :verify_authorized, only: [:select_experimental_biosample]
+  skip_after_action :verify_authorized, only: [:select_experimental_biosample, :single_cell, :bulk]
+
+  def single_cell
+    title = "Single Cell ATAC-Seq Experiments"
+    redirect_to action: index, scope: :single_cell, title: title
+  end
+
+  def bulk
+    title = "Batch ATAC-Seq Experiments"
+    redirect_to action: index, scope: :bulk, title: title
+  end
 
   def select_experimental_biosample
     # AJAX from show view when user clicks on the "Add experiment replicate" button.
@@ -18,7 +28,14 @@ class AtacseqsController < ApplicationController
 
   def new
     authorize Atacseq
-    @atacseq = Atacseq.new
+    scope = params[:scope]
+    defaults = {}
+    if scope.present?
+      if scope == "single_cell"
+        defaults = {single_cell: true}
+      end 
+    end
+    @atacseq = Atacseq.new(defaults)
   end
 
   def edit
@@ -68,6 +85,7 @@ class AtacseqsController < ApplicationController
         :description,
         :name,
         :notes,
+        :single_cell,
         :submitter_comments,
         :document_ids => [],
         documents_attributes: [:id, :_destroy]
