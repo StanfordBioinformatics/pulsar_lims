@@ -5,6 +5,11 @@
 <table class="attributes">
   <tbody>
     <tr>
+      <th><strong>Batch type</strong></th>
+      <td><%= @batch.batch_type %></td>
+    </tr>
+
+    <tr>
       <th><strong>Library prototype</strong></th>
       <td>
         <% if @batch.library_prototype.present? %>
