@@ -38,9 +38,18 @@
   </tr>
 </table>
 
-<%= link_to "Add Image", [:add_gel_image, @gel], class: "reg-btn" %>
+<%= link_to "Add Image", add_gel_image_gel_path(@gel), class: "reg-btn" %>
+<h3 class="section">Gel images</h3>
+<% @gel.gel_images.each do |i| %>
+  <div style="display: flex; justify-content: flex-start; align-items: center;" %>
+    <div>
+      <%= link_to_record i %>
+    </div>
+    <%= image_tag i.image, alt: "Gel image", class: "modal-for-image", style: "width: 100px; margin-left: 1em;" %>
+  </div>
+<% end %>
 
-<h3 class="section">Gel image</h3>
+<h3 class="section">Gel image old</h3>
 <%= image_tag @gel.gel_image, alt: "gel", class: "modal-for-image", style: "width: 100px;" %>
 </br></br>
 <h4 class="section">Gel lanes</h4>
