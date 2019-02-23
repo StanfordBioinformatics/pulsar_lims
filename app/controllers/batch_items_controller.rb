@@ -72,6 +72,7 @@ class BatchItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def batch_item_params
       params.require(:batch_item).permit(
+        :antibody_id,
         :biosample_id,
         :batch_id,
         :concentration,

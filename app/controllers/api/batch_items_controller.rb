@@ -57,6 +57,7 @@ class Api::BatchItemsController < Api::ApplicationController
 
   def batch_item_params
     params.require(:batch_item).permit(
+        :antibody_id,
         :biosample_id,
         :batch_id,
         :concentration,
