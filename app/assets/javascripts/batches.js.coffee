@@ -26,6 +26,7 @@ $ ->
       # Then there was a server-side validation error.
       $form.addClass("error-row-color")
     else
+      $form.removeClass("error-row-color") 
       $form.addClass("created-row-color")
       setTimeout (-> $form.removeClass("created-row-color")), 1000
 

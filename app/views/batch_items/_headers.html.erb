@@ -1,10 +1,12 @@
 <!-- These <ul> tag is styled as a grid in batches.css -->
 <ul class="batch-item-headers list-unstyled"> 
   <li>Biosample</li>
+  <% if @batch.batch_type == Batch::CHIPSEQ %>
+    <li>Antibody</li>
+  <% end %>
   <li>Library</li>
-  <li>Library.barcode</li>
-  <li>Library.antibody</li>
-  <li>Concentration</li>
+  <li>Library barcode</li>
+  <li>Library concentration</li>
   <li>Notes</li>
   <li>Actions</li>
 </ul>

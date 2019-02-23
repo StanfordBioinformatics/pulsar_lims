@@ -7,7 +7,7 @@ class BatchItemsController < ApplicationController
     # of a batch record on the show view.
     batch = @batch_item.batch
     if batch.library_prototype.present? and @batch_item.library.blank?
-      library = batch.library_prototype.clone_library(associated_biosample_id: @batch_item.biosample_id, associated_user_id: current_user.id)
+      library = batch.library_prototype.clone_library(associated_biosample_id: @batch_item.biosample_id, associated_user_id: current_user.id, custom_attrs: {antibody: @batch_item.antibody})
       @batch_item.update!(library_id: library.id)
     end
     render json: {}, status: :no_content

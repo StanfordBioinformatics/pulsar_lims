@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190222230405) do
+ActiveRecord::Schema.define(version: 20190223001301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,8 +158,10 @@ ActiveRecord::Schema.define(version: 20190222230405) do
     t.integer  "concentration_unit_id"
     t.integer  "library_id"
     t.integer  "batch_id"
+    t.integer  "antibody_id"
   end
 
+  add_index "batch_items", ["antibody_id"], name: "index_batch_items_on_antibody_id", using: :btree
   add_index "batch_items", ["batch_id"], name: "index_batch_items_on_batch_id", using: :btree
   add_index "batch_items", ["biosample_id"], name: "index_batch_items_on_biosample_id", using: :btree
   add_index "batch_items", ["concentration_unit_id"], name: "index_batch_items_on_concentration_unit_id", using: :btree
@@ -1212,6 +1214,7 @@ ActiveRecord::Schema.define(version: 20190222230405) do
   add_foreign_key "attachments", "users"
   add_foreign_key "barcodes", "sequencing_library_prep_kits"
   add_foreign_key "barcodes", "users"
+  add_foreign_key "batch_items", "antibodies"
   add_foreign_key "batch_items", "batches"
   add_foreign_key "batch_items", "biosamples"
   add_foreign_key "batch_items", "libraries"
