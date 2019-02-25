@@ -4,7 +4,6 @@ class GelSerializer < ActiveModel::Serializer
 
   attributes :id, 
              :caption,
-             :gel_image,
              :notes,
              :pcr_id,
              :percentage,
@@ -14,4 +13,6 @@ class GelSerializer < ActiveModel::Serializer
   has_one :pcr
   has_one :immunoblot
   has_one :user
+
+  has_many :gel_images
 end
