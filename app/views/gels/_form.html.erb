@@ -14,7 +14,7 @@
   <%= f.input :percentage, placeholder: "%", input_html: {value: @gel.percentage || defaults["percentage"]}, 
       label_html: {"data-toggle": "tooltip", "title": "The percentage of agarose or polyacrylamide of which the gel is composed."} %>
   <%# f.input :voltage, placeholder: "volts" %>
-  <%= f.input :run_date %>
+  <%= f.input :run_date, include_blank: true %>
   <%= f.input :notes %>
 
   <div class="form-actions">
