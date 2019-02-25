@@ -238,6 +238,26 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
+    resources :gels do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
+    resources :gel_images do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
+    resources :gel_lanes do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
+    resources :immunoblots do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :nucleic_acid_terms do
       post :find_by, on: :collection
       post :find_by_or, on: :collection

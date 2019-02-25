@@ -14,6 +14,7 @@ class Immunoblot < ActiveRecord::Base
   has_and_belongs_to_many :documents
   has_many :biosamples, through: :gels
 
+  validates :name, uniqueness: {message: "must be unique"}, allow_blank: true
   validates :primary_antibody, presence: true
   validate :validate_dilutions
 
@@ -51,7 +52,7 @@ class Immunoblot < ActiveRecord::Base
     if self.primary_antibody_dilution.present? and not self.primary_antibody.present?
       self.primary_antibody_dilution = nil
     end
-    if self.secondary_antibody_dilution.present? and not self.secondary_antibody.present?
+    if self.secondary_antibody_dilution.present? and not self.secondary_antibody_ids.any?
       self.secondary_antibody_dilution = nil
     end
   end
