@@ -10,7 +10,6 @@ class Immunoblot < ActiveRecord::Base
   has_many :gels, dependent: :nullify    
   belongs_to :primary_antibody, class_name: "Antibody"
   has_and_belongs_to_many :secondary_antibodies, class_name: "Antibody", join_table: :immunoblots_secondary_antibodies, foreign_key: :immunoblot_id, association_foreign_key: :secondary_antibody_id
-  belongs_to :secondary_antibody, class_name: "Antibody"
   belongs_to :user
   has_and_belongs_to_many :documents
   has_many :biosamples, through: :gels
