@@ -47,10 +47,12 @@
         <td>
           <% if rec.gels.any? %>
             <% rec.gels.each do |gel| %>
-              <div style="display: flex">
+              <div style="display: flex; align-items: center;">
                 <%= link_to gel.display(), gel %>
-                <% if gel.gel_image.present? %>
-                  <%= image_tag gel.gel_image, alt: "gel", data: {"caption": gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+                <% if gel.gel_images.any? %>
+                  <% gel.gel_images.each do |gi| %>
+                    <%= image_tag gi.image, alt: "Gel image", data: {"caption": gi.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+                  <% end %>
                 <% end %>
               </div>
             <% end %>
