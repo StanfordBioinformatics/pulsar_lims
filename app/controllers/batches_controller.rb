@@ -137,14 +137,14 @@ class BatchesController < ApplicationController
           :id,
           :biosample_id,
           :batch_id,
-          :concentration,
-          :concentration_unit_id,
           :library_id,
           :notes,
           library_attributes: [                                                                          
             :id,                                                                                         
             :antibody_id,                                                                                
             :barcode_id,                                                                                 
+            :concentration,
+            :concentration_unit_id,
             :paired_barcode_id                                                                           
           ] 
         ]
