@@ -43,7 +43,7 @@ class ChipseqExperimentsController < ApplicationController
       controls.merge(s.control_descendents())
     end
     @selection = controls.to_a
-    render partial: "select_experimental_or_ctl_biosample", locals: {heading: "Add control replicates"}
+    render partial: "select_experimental_or_ctl_biosample", locals: {record: @chipseq_experiment, heading: "Add control replicates"}
   end
 
 
