@@ -14,14 +14,16 @@
     <tr>
   <% end %>
 
-  <tr>
-    <th><strong>Batch:</strong></th>
-    <td>
-      <% if @library.biosample.batch.present? %>
-        <%= link_to_record @library.biosample.batch %>
-      <% end %>
-    </td>
-  </tr>
+  <% if not @library.prototype? %>
+    <tr>
+      <th><strong>Batch:</strong></th>
+      <td>
+        <% if @library.biosample.batch.present? %>
+          <%= link_to_record @library.biosample.batch %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
 
   <tr>
     <th><strong>Antibody:</strong></th>
