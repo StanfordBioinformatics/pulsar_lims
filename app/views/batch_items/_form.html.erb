@@ -32,7 +32,7 @@
     <% end %>
     <div style="display: flex;">
       <%= ff.input :concentration, label: false, wrapper_html: {style: "flex: 1 1 55%"} %>
-      <% conc_unit_default = @batch_item.library.concentration_unit_id || INPUT_DEFAULTS["Library"]["concentration_unit"] || "" %>
+      <% conc_unit_default = @batch_item.library.concentration_unit_id || INPUT_DEFAULTS["Library"]["concentration_unit_id"] || "" %>
       <%= ff.association :concentration_unit, label: false, include_blank: true, collection: Unit.where(unit_type: "concentration"), selected: conc_unit_default, wrapper_html: {style: "flex: 1 1 45%"} %>
     </div>
   <% end %>
