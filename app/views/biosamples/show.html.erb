@@ -27,34 +27,14 @@
     <td><%= @biosample.control? %></td>
   </tr>
 
-  <% if @biosample.chipseq_experiments.any? %>
-    <tr>
-      <th><strong>ChIP-seq:</strong></th>
-      <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.chipseq_experiments} %></td>
-    </tr>
-    <tr>
-      <th><strong>Batch:</strong></th>
-      <td>
-        <% if @biosample.batch.present? %>
-          <%= link_to_record @biosample.batch %>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-
-  <% if @biosample.wt_for_chipseq_experiments.present? %>
-    <tr>
-      <th><strong>WT control for</strong></th>
-      <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.wt_for_chipseq_experiments} %></td>
-    </tr>
-  <% end %>
-
-  <% if @biosample.chipseq_starting_biosample.present? %>
-    <tr>
-      <th><strong>Starting biosample for ChIP-seq</strong></th>
-      <td><%= link_to_record @biosample.chipseq_starting_biosample %></td>
-    </tr>
-  <% end %>
+  <tr>
+    <th><strong>Batch:</strong></th>
+    <td>
+      <% if @biosample.batch.present? %>
+        <%= link_to_record @biosample.batch %>
+      <% end %>
+    </td>
+  </tr>
 
   <tr>
     <th><strong>Times cloned:</strong></th>
@@ -304,17 +284,43 @@
 <%= render partial: "application_partials/edit_notes", locals: {rec: @biosample} %>
 
 <h3 class="section">Validations</h3>
-<div class="my-flex">
-  <strong>Immunoblots:</strong>
-  <% @biosample.immunoblots.each do |i| %>
+<strong>Immunoblots</strong>
+<% @biosample.immunoblots.each do |i| %>
+  <div class="my-flex">
     <div><%= link_to_record i %></div>
-    <div>
-      <% if i.gel.gel_image.present? %>
-        <%= image_tag i.gel.gel_image, alt: "gel", data: {"caption": i.gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+    <% if i.gels.any? %>
+      <% i.gels.each do |gel| %>
+        <div><%= link_to_record gel %></div>
+        <% if gel.gel_images.any? %>
+          <% gel.gel_images.each do |gi| %>
+            <%= image_tag gi.image, alt: "gel", data: {"caption": gi.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+          <% end %>
+        <% end %>
       <% end %>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>
+</br>
+
+<h3 class="section">Experiments</h3>
+<!-- ChIP-seq experiments -->
+<% if @biosample.chipseq_starting_biosample.present? %>
+  <strong>Starting biosample for ChIP-seq</strong>
+  <%= link_to_record @biosample.chipseq_starting_biosample %>
+<% elsif @biosample.wt_for_chipseq_experiments.present? %>
+  <strong>WT control for</strong>
+  <%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.wt_for_chipseq_experiments} %>
+<% end %>
+
+<% if @biosample.chipseq_experiments.any? %>
+  <strong>ChIP-seq:</strong>
+  <%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.chipseq_experiments} %>
+<% end %>
+<!-- ATAC-seq experiments -->
+<% if @biosample.atacseqs.any? %>
+  <strong>ATAC-seq:</strong>
+  <%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.atacseqs} %>
+<% end %>
 </br></br>
 
 <%= link_to "Back", biosamples_path %>

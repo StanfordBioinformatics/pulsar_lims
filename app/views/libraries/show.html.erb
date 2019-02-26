@@ -15,6 +15,15 @@
   <% end %>
 
   <tr>
+    <th><strong>Batch:</strong></th>
+    <td>
+      <% if @library.biosample.batch.present? %>
+        <%= link_to_record @library.biosample.batch %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
     <th><strong>Antibody:</strong></th>
     <td>
       <% if @library.antibody.present? %>
@@ -22,7 +31,7 @@
       <% end %>
     </td>
   </tr>
- 
+
   <tr>
     <th><strong>Replicate on ChIP-seq exp:</strong></th>
     <td>

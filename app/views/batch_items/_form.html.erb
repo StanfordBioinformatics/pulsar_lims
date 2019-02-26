@@ -30,18 +30,15 @@
     <% else %>
       <%= ff.association :barcode, label: false, collection: Barcode.kit(slpk_id) %>
     <% end %>
+    <div style="display: flex;">
+      <%= ff.input :concentration, label: false, wrapper_html: {style: "flex: 1 1 55%"} %>
+      <% conc_unit_default = @batch_item.library.concentration_unit_id || INPUT_DEFAULTS["Library"]["concentration_unit"] || "" %>
+      <%= ff.association :concentration_unit, label: false, include_blank: true, collection: Unit.where(unit_type: "concentration"), selected: conc_unit_default, wrapper_html: {style: "flex: 1 1 45%"} %>
+    </div>
   <% end %>
 <% else %>
   <span></span><!-- barcode input -->
-<% end %>
-
-<% if @batch_item.library.present? %>
-  <div style="display: flex;">
-    <%= f.input :concentration, label: false, wrapper_html: {style: "flex: 1 1 55%"} %>
-    <% conc_unit_default = @batch_item.concentration_unit_id || defaults["concentration_unit"] || "" %>
-    <%= f.association :concentration_unit, label: false, include_blank: true, collection: Unit.where(unit_type: "concentration"), selected: conc_unit_default, wrapper_html: {style: "flex: 1 1 45%"} %>
-  </div>
-<% else %>
   <span></span><!-- concentration input and concentration_unit input -->
 <% end %>
+
 <%= f.input :notes, label: false %>
