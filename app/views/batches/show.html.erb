@@ -50,7 +50,7 @@
 <!-- Display existing rows (batch_item records), even ones that haven't been persisted yet -->
 <div class="batch-item-rows" style="overflow: auto; padding-bottom: 2em;" %>
   <%= render partial: "batch_items/headers" %>
-  <% @batch.batch_items.each do |item| %>
+  <% @batch.batch_items.order(:id).each do |item| %>
     <% @batch_item = item %>
     <%= render partial: "batches/add_batch_item" %>
   <% end %>
