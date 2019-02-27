@@ -8,7 +8,7 @@ class Biosample < ActiveRecord::Base
   include CloningForDocuments # A Concern that includes instance methods all_documents() and parent_documents().
   ABBR = "B"
   DEFINITION = "The source material (cell line, tissue sample) that one either begins an experiment with; also, any derivites of this source material that have been modified by the experimenter. Note: faint red rows indicate biosamples that failed (the cells_discarded attribute is set to True). Model abbreviation: #{ABBR}"
-  default_scope {order("lower(name)")}
+  #default_scope {order("lower(name)")}
   ###
   # Support pooled from
   ###

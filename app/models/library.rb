@@ -66,6 +66,11 @@ class Library < ActiveRecord::Base
   after_validation :check_plated
   validate :validate_barcode, unless: Proc.new {|lib| lib.single_cell_sorting.present? } #verifies self.barcode/self.paired_barcode
 
+  def to_label
+    # Shadows the to_label method defined in /app/models/concerns/model_concerns.
+    self.get_record_id + " " + self.name
+  end
+
   def display
     self.get_record_id()
   end
