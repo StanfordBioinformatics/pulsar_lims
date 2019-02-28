@@ -40,15 +40,19 @@
 
 <h3 class="section">Gel images</h3>
 <%= link_to "Add Image", add_gel_image_gel_path(@gel), class: "reg-btn" %>
-</br>
-<% @gel.gel_images.each do |i| %>
-  <div style="display: flex; align-items: center;" %>
-    <div>
-      <%= link_to_record i %>
+</br></br>
+<div style="display: flex">
+  <% @gel.gel_images.each do |i| %>
+    <div style="display: flex; align-items: center; margin-right: 1em;" %>
+      <div>
+        <%= link_to_record i %>
+      </div>
+      <div>
+        <%= image_tag i.image, alt: "Gel image", class: "modal-for-image", style: "width: 100px; margin-left: 1em;" %>
+      </div>
     </div>
-    <%= image_tag i.image, alt: "Gel image", class: "modal-for-image", style: "width: 100px; margin-left: 1em;" %>
-  </div>
-<% end %>
+  <% end %>
+</div>
 
 <h4 class="section">Gel lanes</h4>
 
