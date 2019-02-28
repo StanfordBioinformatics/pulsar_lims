@@ -12,7 +12,8 @@ class GelLaneSerializer < ActiveModel::Serializer
              :pass,
              :submitter_comments,
              :created_at,
-             :updated_at
+             :updated_at,
+             :upstream_identifier
 
 
   has_one :gel
