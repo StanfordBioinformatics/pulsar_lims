@@ -14,5 +14,7 @@ class GelSerializer < ActiveModel::Serializer
   has_one :immunoblot
   has_one :user
 
+  has_many :biosamples
+  has_many :gel_lanes
   has_many :gel_images
 end
