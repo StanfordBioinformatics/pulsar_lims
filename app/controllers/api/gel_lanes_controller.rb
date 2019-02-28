@@ -67,6 +67,7 @@ class Api::GelLanesController < Api::ApplicationController
       :sample_concentration,                                                                       
       :sample_concentration_units_id,                                                              
       :sample_volume,                                                                              
+      :upstream_identifier,
       :notes,                                                                                      
       :pass,                                                                                       
       :submitter_comments 
