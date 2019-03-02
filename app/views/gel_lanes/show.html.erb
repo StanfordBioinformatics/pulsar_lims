@@ -18,7 +18,11 @@
 
   <tr>
     <th><strong>Sample concentration:</strong></th>
-    <td><%= "#{@gel_lane.sample_concentration} #{@gel_lane.sample_concentration_units.name}" %></td>
+    <td>
+      <% if @gel_lane.sample_concentration.present? %>
+        <%= "#{@gel_lane.sample_concentration} #{@gel_lane.sample_concentration_units.name}" %>
+      <% end %>
+    </td>
   </tr>
   
   <tr>
