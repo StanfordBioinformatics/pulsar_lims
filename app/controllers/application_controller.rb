@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
       @records = @records.send(@scope)
     end
     # Order records by updated_at. NOTE!! If the model uses default_scope, then that will override this. 
-    @records = @records.order(updated_at: :desc)
+    @records = @records.unscoped.order(updated_at: :desc)
     @total = @records.count
     # Commended out code below because allowing the "all" feature causes memory bloats. 
     #unless params[:all].present?

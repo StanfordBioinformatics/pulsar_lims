@@ -64,6 +64,11 @@ class Api::DocumentsController < Api::ApplicationController
   def document_params
     params.require(:document).permit(
       :user_id,
+      :content_type,
+      :data,
+      :description,
+      :document_type_id,
+      :is_protocol,
       :name,
       :notes,
       :upstream_identifier
