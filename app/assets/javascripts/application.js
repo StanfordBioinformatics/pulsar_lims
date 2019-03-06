@@ -62,6 +62,27 @@ $(document).on("click", ".xfade-out", function(event) {
   })
 })
 
+function img_landscape_to_potrait(jq_img) {
+  // Sometimes images are taken in landscape mode (i.e. gel images). 
+  // The lab would like to see them in portrait mode instead.
+  // This function is designed to work on a landscape image (width > height)
+  // and to convert it to portrait mode. 
+  $elem = jq_img
+  elem_width = $elem.width();
+  elem_height = $elem.height();
+  if (elem_width > elem_height) {
+    $elem.css("transform", "rotate(-90deg) translate(" + -1 * elem_width + "px, 0)");
+    $elem.css("transform-origin", "left top");
+    $elem.closest("div").height(elem_width);
+  } 
+}
+//Rotate images 90deg if the width is greater than the height
+$(function() {
+  $(document).find("img").each(function(i, elem) {
+    img_landscape_to_potrait($(elem));
+  })
+})
+
 //Set select inputs to show 6 rows:
 //$(function() {
 //  $("select",document).attr("size","8");
@@ -116,8 +137,10 @@ $(function() {
             $(wrapper_id).remove();
         }
         $.get("/welcome/modal_for_image", {"image_url": image_url, "caption": caption}, function(data) {
-            $(document.body).append(data);
+            $data = $(data);
+            $(document.body).append($data);
             $(".modal").show();
+            img_landscape_to_potrait($(".modal img"));
         })
     })
 })

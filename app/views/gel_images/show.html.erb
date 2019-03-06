@@ -23,8 +23,10 @@
   </tbody>
 </table>
 
-<h3 class="section">Image</h3>                                                                     
-<%= image_tag @gel_image.image, alt: "gel", class: "modal-for-image", style: "width: 100px;" %>          
+<h3 class="section">Image</h3>
+<div>
+  <%= image_tag @gel_image.image, alt: "gel", class: "modal-for-image", id: "boba", style: "width: 100px;" %>
+</div>
 </br></br>
 
 <%= link_to 'Back', gel_images_path %>

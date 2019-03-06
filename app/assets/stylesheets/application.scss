@@ -1,8 +1,8 @@
 /* Import all of Bootstrap's Css Components */
 
 :root {
-  box-sizing: border-box; 
-} 
+  box-sizing: border-box;
+}
 
 @import "reset";
 @import "bootstrap-sprockets";
@@ -51,20 +51,20 @@
   }
 }
 
-// Used when a user is trying to save a new row (i.e. a BatchItem or a GelLane) and 
+// Used when a user is trying to save a new row (i.e. a BatchItem or a GelLane) and
 // the row was successfully created.
 .created-row-color {
     background-color: #dff0d8;
 }
 
-// Used when a user is trying to create a new row (i.e. a BatchItem or a GelLane) and 
+// Used when a user is trying to create a new row (i.e. a BatchItem or a GelLane) and
 // there was a validaiton error.
 .error-row-color {
     background-color: #f2dede;
 }
 
-// When the fa icon with class "xfade-out" is clicked, then 
-// remove the closest container element with class "xfade". The removal will 
+// When the fa icon with class "xfade-out" is clicked, then
+// remove the closest container element with class "xfade". The removal will
 // happed by fading out the element in application.js. Then, any element on the page with class
 // "xfade-in" will fade in.
 // See an example of these classes being used in /app/views/chipseq_experiments/add_replicate.html.erb.
@@ -78,7 +78,7 @@
 .xfade {
   position: relative;
 }
-  
+
 
 .my-flex {
   display: flex;
@@ -88,10 +88,10 @@
     margin-right: 0.5em;
   }
 }
-  
+
 
 // Class added in application.js on mouseenter event for elements with class .modal-for-image.
-// This is done to highlight the fact that the entity is clickable. 
+// This is done to highlight the fact that the entity is clickable.
 .modal-content-box-shadow {
   box-shadow: 1px 0px 1px black;
   cursor: pointer;
@@ -102,8 +102,8 @@
 }
 
 .index-view-total {
-  position: absolute; 
-  bottom: 0; 
+  position: absolute;
+  bottom: 0;
   right: 0;
   margin-right: 3em;
 }
@@ -114,10 +114,10 @@
 }
 
 .hbtm--remove {
-  // hbtm stands for has_and_belongs_to_many. This class is used in the application partial 
-  // _parental_and_self_fklinks.html.erb. The hbtm--remove modifier class is targeted here to 
-  // set some left margin on the checkbox for removing an association. 
-  //  
+  // hbtm stands for has_and_belongs_to_many. This class is used in the application partial
+  // _parental_and_self_fklinks.html.erb. The hbtm--remove modifier class is targeted here to
+  // set some left margin on the checkbox for removing an association.
+  //
   margin-left: 1em !important;
 }
 
@@ -169,7 +169,7 @@ i.refresh {
 }
 
 
-/* 
+/*
 Styles for the search
 */
 .search, .search-btn {
@@ -188,7 +188,7 @@ Styles for the search
   height: 30px;
   //Give height just enough so that the search icon doesn't touch the borders of the input.
 }
-/* 
+/*
 End search box styles
 */
 
@@ -205,7 +205,7 @@ End search box styles
     height: 100%;
     background-color: rgb(0,0,0); // Fallback color
     background-color: rgba(0,0,0,0.4); // Black w/ opacity
-}  
+}
 
 // For a container nested inside of .modal
 .modal-content {
@@ -299,13 +299,13 @@ fieldset div.form-group {
 
 
 select:focus, input:focus, textarea:focus {
-  background-color: #FFFFCC; 
+  background-color: #FFFFCC;
 }
 
 
 input.search:focus + .search-btn {
     //Set background color of main search icon (search form on all pages) to same color as input's new background color (above style) when in focus.
-    // Otherwise, it'll stay white on yellow background. 
+    // Otherwise, it'll stay white on yellow background.
     background-color: #FFFFCC;
 }
 
@@ -324,7 +324,7 @@ input.search:focus + .search-btn {
   }
  .active a {
     background-color: #8C1515;
-  } 
+  }
   a:hover {
     background-color: rgba(0,0,0,0.2);
   }
@@ -354,7 +354,7 @@ html {
   }
 }
 
-body { 
+body {
   background-color: #ddd;
   padding: 0;
 }
@@ -367,7 +367,7 @@ body {
 }
 
 .main {
-  border-radius: 0.2em; 
+  border-radius: 0.2em;
   margin-top: 100px;
   padding-top: 2em;
   //margin-top: calc(3 * $navbar-height); //doesn't work with variables.
@@ -405,11 +405,11 @@ body {
     padding-right: 1em;
     margin-top: 0.6em;
     margin-bottom: 0;
-    padding-bottom: 0; 
+    padding-bottom: 0;
     &:last-child {
       padding-bottom: 1.0em;
     }
-    a { 
+    a {
       font-size: 0.8em;
     }
   }
@@ -425,7 +425,7 @@ ul.actions {
   @extend .list-inline;
   margin-bottom: 2em;
 }
-    
+
 #meta_attributes {
   border: 1px solid grey;
   @extend .table;
@@ -447,7 +447,7 @@ ul.actions {
   // Define variable for setting equal td and th widths in the index view table so that the columns can all be
   // aligned properly. This is needed since I modified the tbody element to be "display: inline-block"
   // so that I could set a height and enable scrolling in the div (rather than the viewport). The
-  // ultimate purpose of all of this is to set the table headers to be in place when scrolling. 
+  // ultimate purpose of all of this is to set the table headers to be in place when scrolling.
   --index-table-cell-width: 128px;
 }
 
@@ -496,7 +496,7 @@ table.index {
 
 //.attributes tbody th {
   //The <th> tags in the show views (not the index views) can take up way too much space, with the header value all the way on the left and the <td> value all the way on the right.
-  // This fixes that for the show views. Not sure why 'max-width' property doesn't have any effect here; only the 'width' property appears to. 
+  // This fixes that for the show views. Not sure why 'max-width' property doesn't have any effect here; only the 'width' property appears to.
 //  width: 15%;
 //}
 
@@ -549,7 +549,7 @@ a.clone {
     padding-right: 0.5em;
   }
 }
-  
+
 
 a.delete {
   @extend .btn-danger;
