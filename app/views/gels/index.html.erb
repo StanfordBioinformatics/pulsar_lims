@@ -45,7 +45,9 @@
             <% rec.gel_images.each do |gi| %>
               <div style="display: flex; align-items: center;" %>
                 <div><%= link_to_record gi %></div>
-                <%= image_tag gi.image, alt: "Gel image", data: {"caption": gi.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+                <div>
+i                 <%= image_tag gi.image, alt: "Gel image", data: {"caption": gi.caption}, class: "portrait modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+                </div>
               </div> 
             <% end %>
           <% end %>                                                                                

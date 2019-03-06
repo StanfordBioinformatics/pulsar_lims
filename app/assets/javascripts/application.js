@@ -72,13 +72,14 @@ function img_landscape_to_potrait(jq_img) {
   elem_height = $elem.height();
   if (elem_width > elem_height) {
     $elem.css("transform", "rotate(-90deg) translate(" + -1 * elem_width + "px, 0)");
+    // the transform function takes a (width, height).
     $elem.css("transform-origin", "left top");
     $elem.closest("div").height(elem_width);
   } 
 }
 //Rotate images 90deg if the width is greater than the height
 $(function() {
-  $(document).find("img").each(function(i, elem) {
+  $(document).find("img.portrait").each(function(i, elem) {
     img_landscape_to_potrait($(elem));
   })
 })
@@ -140,7 +141,7 @@ $(function() {
             $data = $(data);
             $(document.body).append($data);
             $(".modal").show();
-            img_landscape_to_potrait($(".modal img"));
+            img_landscape_to_potrait($(".modal img.portrait"));
         })
     })
 })
