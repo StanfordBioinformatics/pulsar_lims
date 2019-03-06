@@ -14,7 +14,7 @@
 <% else %>
     <% disabled = true %>
     <% library_collection = [] %>
-    <%= f.association :biosample, collection: Biosample.non_plated, label: false, input_html: {class: "batch_item_select_biosample"} %>
+    <%= f.association :biosample, collection: Biosample.non_plated.order(:name), label: false, input_html: {class: "batch_item_select_biosample"} %>
 <% end %>
 
 <% if @batch_item.batch.batch_type == Batch::CHIPSEQ %>
