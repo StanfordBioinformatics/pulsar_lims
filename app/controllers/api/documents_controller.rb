@@ -33,6 +33,10 @@ class Api::DocumentsController < Api::ApplicationController
 
   def create
     @document = Document.new(document_params)
+    # The data attribute (document body) should be base64 encoded and then converted into a string 
+    # (i.e. UTF-8 encoded), which the Pulsarpy client already does when calling this endpoint.
+    data = Base64.decode64(@document.data)
+    @document.data = data
     @document.user = @current_user
     authorize @document
     if @document.save

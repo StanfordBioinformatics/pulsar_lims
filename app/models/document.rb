@@ -55,7 +55,6 @@ class Document < ActiveRecord::Base
     self.name = format_filename(document_field.original_filename)
     self.content_type = document_field.content_type.chomp
     self.data = document_field.read
-    #Rails.logger.debug(self.data.to_s)
   end
 
   def format_filename(filename)
