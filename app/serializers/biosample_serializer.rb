@@ -29,6 +29,7 @@ class BiosampleSerializer < ActiveModel::Serializer
              :created_at,
              :updated_at
 
+  has_one :batch_item
   has_one :biosample_term_name
   has_one :biosample_type
   has_one :donor
