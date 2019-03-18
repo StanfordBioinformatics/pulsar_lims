@@ -1,6 +1,8 @@
 Pulsar::Application.routes.draw do
 
-  resources :primers
+  resources :primers do 
+    get :select_options, on: :collection
+  end
   resources :gel_images
   resources :atacseqs do
     get :single_cell, on: :collection

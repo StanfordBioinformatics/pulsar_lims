@@ -78,7 +78,7 @@ class PcrsController < ApplicationController
           :description,
           :document_id,
           :extension_time,
-          :forward_primer,
+          :forward_primer_id,
           :genomic_dna_concentration,
           :genomic_dna_concentration_units_id,
           :genomic_dna_prep_date,
@@ -86,7 +86,7 @@ class PcrsController < ApplicationController
           :notes,
           :num_cycles,
           :pcr_master_mix_id,
-          :reverse_primer,
+          :reverse_primer_id,
           :second_pcr_num_cycles,
           :success)
     end

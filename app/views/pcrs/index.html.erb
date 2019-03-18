@@ -6,6 +6,8 @@
   
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
+    <%= link_to "Primers", primers_path, class: "reg-btn" %>
+    <%= link_to "Master mixes", pcr_master_mixes_path, class: "reg-btn" %>
   </ul> 
   <%= render partial: "application_partials/total", locals: {records: @records} %>
 </header>
@@ -44,8 +46,8 @@
           <% end %>                                                                                    
         </td> 
         <td><%= link_to rec.pcr_master_mix.name, rec.pcr_master_mix %></td>
-        <td><%= rec.forward_primer %></td>
-        <td><%= rec.reverse_primer %></td>
+        <td><%= link_to_record rec.forward_primer %></td>
+        <td><%= link_to_record rec.reverse_primer %></td>
         <td><%= rec.amplicon_size %></td>
         <td><%= rec.annealing_temperature %></td>
         <td><%= rec.extension_time %></td>

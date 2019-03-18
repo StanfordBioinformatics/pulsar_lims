@@ -1,6 +1,13 @@
 class PrimersController < ApplicationController
   before_action :set_primer, only: [:show, :edit, :update, :destroy]
 
+  def select_options                                                                                   
+    #Called via ajax.                                                                                  
+    #Typically called when the user selects the refresh icon in any form that has a primer selection.
+    @records = Primer.all
+    render "application_partials/select_options", layout: false                                        
+  end  
+
   def index
     super
   end

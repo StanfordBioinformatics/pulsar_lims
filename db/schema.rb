@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190318195305) do
+ActiveRecord::Schema.define(version: 20190318205032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -859,8 +859,6 @@ ActiveRecord::Schema.define(version: 20190318195305) do
     t.integer  "user_id"
     t.text     "description"
     t.integer  "pcr_master_mix_id"
-    t.string   "forward_primer"
-    t.string   "reverse_primer"
     t.integer  "amplicon_size"
     t.float    "annealing_temperature"
     t.integer  "extension_time"
@@ -877,13 +875,17 @@ ActiveRecord::Schema.define(version: 20190318195305) do
     t.integer  "genomic_dna_concentration_units_id"
     t.integer  "document_id"
     t.integer  "second_pcr_num_cycles"
+    t.integer  "forward_primer_id"
+    t.integer  "reverse_primer_id"
   end
 
   add_index "pcrs", ["analyst_id"], name: "index_pcrs_on_analyst_id", using: :btree
   add_index "pcrs", ["biosample_id"], name: "index_pcrs_on_biosample_id", using: :btree
   add_index "pcrs", ["document_id"], name: "index_pcrs_on_document_id", using: :btree
+  add_index "pcrs", ["forward_primer_id"], name: "index_pcrs_on_forward_primer_id", using: :btree
   add_index "pcrs", ["genomic_dna_concentration_units_id"], name: "index_pcrs_on_genomic_dna_concentration_units_id", using: :btree
   add_index "pcrs", ["pcr_master_mix_id"], name: "index_pcrs_on_pcr_master_mix_id", using: :btree
+  add_index "pcrs", ["reverse_primer_id"], name: "index_pcrs_on_reverse_primer_id", using: :btree
   add_index "pcrs", ["user_id"], name: "index_pcrs_on_user_id", using: :btree
 
   create_table "plates", force: :cascade do |t|
@@ -1345,6 +1347,8 @@ ActiveRecord::Schema.define(version: 20190318195305) do
   add_foreign_key "pcrs", "biosamples"
   add_foreign_key "pcrs", "documents"
   add_foreign_key "pcrs", "pcr_master_mixes"
+  add_foreign_key "pcrs", "primers", column: "forward_primer_id"
+  add_foreign_key "pcrs", "primers", column: "reverse_primer_id"
   add_foreign_key "pcrs", "units", column: "genomic_dna_concentration_units_id"
   add_foreign_key "pcrs", "users"
   add_foreign_key "pcrs", "users", column: "analyst_id"
