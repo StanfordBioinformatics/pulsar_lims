@@ -50,6 +50,15 @@
     <td><%= @primer.date_ordered %></td>
   </tr>
 
+  <tr>
+    <th><strong>Ordered from:</strong></th>
+    <td>
+      <% if @primer.ordered_from.present? %>
+        <%= link_to_record @primer.ordered_from %>
+      <% end %>
+    </td>
+  </tr>
+
   <tr class="notes-row">                                                                               
     <th><strong>Notes</strong></th>                                                                    
     <td><%= simple_format(@primer.notes) %></td>                                                 

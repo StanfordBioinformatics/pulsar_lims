@@ -9,6 +9,7 @@
   <%= f.input :sequence %>
   <%= f.input :melting_temperature, label: "Tm", placeholder: "Celsius" %>
   <%= f.input :date_ordered %>
+  <%= f.association :ordered_from %>
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   <div class="form-actions">

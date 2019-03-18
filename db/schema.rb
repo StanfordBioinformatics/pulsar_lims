@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190318205032) do
+ActiveRecord::Schema.define(version: 20190318232621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -927,11 +927,18 @@ ActiveRecord::Schema.define(version: 20190318205032) do
     t.datetime "updated_at",          null: false
     t.integer  "target_id"
     t.integer  "designed_by_id"
+    t.integer  "ordered_from_id"
   end
 
   add_index "primers", ["designed_by_id"], name: "index_primers_on_designed_by_id", using: :btree
+  add_index "primers", ["ordered_from_id"], name: "index_primers_on_ordered_from_id", using: :btree
   add_index "primers", ["target_id"], name: "index_primers_on_target_id", using: :btree
   add_index "primers", ["user_id"], name: "index_primers_on_user_id", using: :btree
+
+  create_table "primers_mate_primers", id: false, force: :cascade do |t|
+    t.integer "primer_id"
+    t.integer "mate_primer_id"
+  end
 
   create_table "reference_genomes", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -1359,6 +1366,7 @@ ActiveRecord::Schema.define(version: 20190318205032) do
   add_foreign_key "primers", "targets"
   add_foreign_key "primers", "users"
   add_foreign_key "primers", "users", column: "designed_by_id"
+  add_foreign_key "primers", "vendors", column: "ordered_from_id"
   add_foreign_key "reference_genomes", "users"
   add_foreign_key "sequencing_centers", "users"
   add_foreign_key "sequencing_library_prep_kits", "users"

@@ -74,7 +74,9 @@ class PrimersController < ApplicationController
         :melting_temperature,
         :name, 
         :notes,
+        :ordered_from_id,
         :sequence,
-        :target_id)
+        :target_id,
+        :mate_primer_ids => [])
     end
 end
