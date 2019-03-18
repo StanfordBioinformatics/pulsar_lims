@@ -48,13 +48,6 @@
     <td><%= @pcr.num_cycles %></td>
   </tr>
   
-  <% if @pcr.crispr_modification.present? %>
-    <tr>
-      <th><strong>Crispr modification:</strong></th>
-      <td><%= link_to @pcr.crispr_modification.name, @pcr.crispr_modification %></td>
-    </tr>
-  <% end %>
-  
   <tr>
     <th><strong>Success:</strong></th>
     <td><%= @pcr.success %></td>

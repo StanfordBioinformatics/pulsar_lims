@@ -17,11 +17,6 @@ class CrisprModification < ActiveRecord::Base
   belongs_to :genomic_integration_site, class_name: "GenomeLocation"
   has_many :biosamples
 
-  # Each pcr_validation should be submitted to the ENCODE profile
-  # https://www.encodeproject.org/profiles/genetic_modification_characterization.json.
-  # This should be done after creation of the corresponding genetic_modification so that the
-  # genetic_modification_characterization.characterizes property points to it.
-  has_many :pcr_validations, class_name: "Pcr", dependent: :nullify
   has_and_belongs_to_many :crispr_constructs
   has_and_belongs_to_many :documents
   validates :crispr_constructs, presence: true

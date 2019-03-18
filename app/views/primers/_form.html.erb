@@ -1,0 +1,18 @@
+<%= simple_form_for(@primer) do |f| %>
+  <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @primer} %>    
+
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.association :designed_by, label_html: {"data-toggle": "tooltip", "title": "The user that designed/found the primer sequence."} %>
+  <%= f.association :target, label_html: {"data-toggle": "tooltip", "title": "Gene that this primer applies to."} %>
+  <%= f.input :direction, collection: Primer::DIRECTION %>
+  <%= f.input :sequence %>
+  <%= f.input :melting_temperature, label: "Tm", placeholder: "Celsius" %>
+  <%= f.input :date_ordered %>
+  <%= render partial: "application_partials/notes", locals: {f: f} %>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div>
+<% end %>
+</br>

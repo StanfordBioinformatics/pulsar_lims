@@ -38,6 +38,9 @@ Library:
     sequencing_library_prep_kit_id: 6 # Custom ChIP-seq library kit (Snyder lab)
     size_range: 250-450
 
+Pcr:
+    genomic_dna_concentration_units_id: # 10 ng/µl
+
 SequencingRequest:
     concentration_instrument: Qubit
     sequencing_center: 1 #Stanford Genome Sequencing Service Center

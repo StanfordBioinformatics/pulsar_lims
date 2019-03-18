@@ -23,7 +23,6 @@
       <th>Annealing temperature</th>
       <th>Extension time</th>
       <th>Num cycles</th>
-      <th>Crispr modification</th>
       <th>Success</th>
       <th></th>
     </tr>
@@ -51,11 +50,6 @@
         <td><%= rec.annealing_temperature %></td>
         <td><%= rec.extension_time %></td>
         <td><%= rec.num_cycles %></td>
-        <% if rec.crispr_modification.present? %>
-          <td><%= link_to rec.crispr_modification.name, rec.crispr_modification  %></td>
-        <% else %>
-          <td></td>
-        <% end %>
         <td><%= rec.success %></td>
         <td>
           <%= link_to fa_icon("pencil"), edit_pcr_path(rec) %>

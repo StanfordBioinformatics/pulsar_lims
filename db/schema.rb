@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190228221448) do
+ActiveRecord::Schema.define(version: 20190318195305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -865,15 +865,24 @@ ActiveRecord::Schema.define(version: 20190228221448) do
     t.float    "annealing_temperature"
     t.integer  "extension_time"
     t.integer  "num_cycles"
-    t.integer  "crispr_modification_id"
     t.boolean  "success"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.text     "notes"
     t.string   "name"
+    t.integer  "analyst_id"
+    t.integer  "biosample_id"
+    t.date     "genomic_dna_prep_date"
+    t.float    "genomic_dna_concentration"
+    t.integer  "genomic_dna_concentration_units_id"
+    t.integer  "document_id"
+    t.integer  "second_pcr_num_cycles"
   end
 
-  add_index "pcrs", ["crispr_modification_id"], name: "index_pcrs_on_crispr_modification_id", using: :btree
+  add_index "pcrs", ["analyst_id"], name: "index_pcrs_on_analyst_id", using: :btree
+  add_index "pcrs", ["biosample_id"], name: "index_pcrs_on_biosample_id", using: :btree
+  add_index "pcrs", ["document_id"], name: "index_pcrs_on_document_id", using: :btree
+  add_index "pcrs", ["genomic_dna_concentration_units_id"], name: "index_pcrs_on_genomic_dna_concentration_units_id", using: :btree
   add_index "pcrs", ["pcr_master_mix_id"], name: "index_pcrs_on_pcr_master_mix_id", using: :btree
   add_index "pcrs", ["user_id"], name: "index_pcrs_on_user_id", using: :btree
 
@@ -902,6 +911,25 @@ ActiveRecord::Schema.define(version: 20190228221448) do
 
   add_index "plates_sequencing_requests", ["plate_id", "sequencing_request_id"], name: "plate_sequencing_request", using: :btree
   add_index "plates_sequencing_requests", ["sequencing_request_id", "plate_id"], name: "sequencing_request_plate", using: :btree
+
+  create_table "primers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.text     "notes"
+    t.string   "direction"
+    t.string   "sequence"
+    t.string   "melting_temperature"
+    t.date     "date_ordered"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "target_id"
+    t.integer  "designed_by_id"
+  end
+
+  add_index "primers", ["designed_by_id"], name: "index_primers_on_designed_by_id", using: :btree
+  add_index "primers", ["target_id"], name: "index_primers_on_target_id", using: :btree
+  add_index "primers", ["user_id"], name: "index_primers_on_user_id", using: :btree
 
   create_table "reference_genomes", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -1314,13 +1342,19 @@ ActiveRecord::Schema.define(version: 20190228221448) do
   add_foreign_key "paired_barcodes", "users"
   add_foreign_key "pcr_master_mixes", "users"
   add_foreign_key "pcr_master_mixes", "vendors"
-  add_foreign_key "pcrs", "crispr_modifications"
+  add_foreign_key "pcrs", "biosamples"
+  add_foreign_key "pcrs", "documents"
   add_foreign_key "pcrs", "pcr_master_mixes"
+  add_foreign_key "pcrs", "units", column: "genomic_dna_concentration_units_id"
   add_foreign_key "pcrs", "users"
+  add_foreign_key "pcrs", "users", column: "analyst_id"
   add_foreign_key "plates", "biosamples", column: "starting_biosample_id"
   add_foreign_key "plates", "single_cell_sortings"
   add_foreign_key "plates", "users"
   add_foreign_key "plates", "vendors"
+  add_foreign_key "primers", "targets"
+  add_foreign_key "primers", "users"
+  add_foreign_key "primers", "users", column: "designed_by_id"
   add_foreign_key "reference_genomes", "users"
   add_foreign_key "sequencing_centers", "users"
   add_foreign_key "sequencing_library_prep_kits", "users"

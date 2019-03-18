@@ -1,13 +1,31 @@
+  <% defaults = INPUT_DEFAULTS[@pcr.class.name] %>
+
   <%= render partial:  "application_partials/show_form_error_messages", locals: {:model_obj => @pcr} %>
 
   <%= f.input :name %>
   <%= f.input :description %>
+  <%= f.association :analyst, label_html: {"data-toggle": "tooltip", "title": "User that ran the PCR."} %>
+  <%= f.association :biosample %>
+  <%= f.input :genomic_dna_prep_date %>
+  
+  <div style="display: flex;">
+    <%= f.input :genomic_dna_concentration %>
+    <%= f.association :genomic_dna_concentration_units, 
+        selected: @pcr.genomic_dna_concentration_units_id || defaults["genomic_dna_concentration_units_id"], 
+        collection: Unit.where(unit_type: "concentration"),
+        label: "Concentration. units",
+        wrapper_html: {style: "margin-left: 1.5em;"}
+    %>
+  </div>
+
+  <%= f.association :document, label: "Protocol", label_html: {"data-toggle": "tooltip", "title": "Protocol document describing PCR procedure in detail."} %>
+
   <%= f.association :pcr_master_mix, label_html: {class: "refresh"} %>
   <%= f.input :forward_primer %>
   <%= f.input :reverse_primer %>
   <%= f.input :amplicon_size, label: "Amplicon size (bp)" %>
   <%= f.input :annealing_temperature, label: "Annealing temp.", label_html: {class: "celsius"} %>
-  <%= f.input :extension_time %>
+  <%= f.input :extension_time, placeholder: "seconds", label_html: {"data-toggle": "tooltip", "title": "Extension time measured in seconds."} %>
   <%= f.input :num_cycles, label_html: {"data-toggle": "tooltip", "title": "The number of PCR cycles."} %>
-  <%= f.association :crispr_modification, label_html: {class: "refresh"} %>
   <%= f.input :success, label_html: {"data-toggle": "tooltip", "title": "True if the PCR worked (gave a product), False otherwise."}  %>
+  <%= f.input :second_pcr_num_cycles, label_html: {"data-toggle": "tooltip", "title": "Number of additional PCR cycles required on a band cut out from the original PCR gel."} %>

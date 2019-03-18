@@ -1,0 +1,64 @@
+<%= render partial:  "application_partials/header", locals: {rec: @primer} %>  
+
+<table class="attributes">
+  <tbody>
+  <tr>
+    <th><strong>Name:</strong></th>
+    <td><%= @primer.name %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Description:</strong></th>
+    <td><%= @primer.description %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Designed by:</strong></th>
+    <td><%= @primer.designed_by %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Target:</strong></th>
+    <td>
+      <% if @primer.target.present? %>
+        <%= link_to_record @primer.target %>
+      <% end %>
+    </td>
+  </tr>
+  
+  <tr>
+    <th><strong>Direction:</strong></th>
+    <td><%= @primer.direction %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Sequence:</strong></th>
+    <td><%= @primer.sequence %></td>
+  </tr>
+  
+  <tr>
+    <th><strong>Tm:</strong></th>
+    <td>
+      <% if @primer.melting_temperature.present? %>
+        <%= @primer.melting_temperature %> &#8451;
+      <% end %>
+    </td>
+  </tr>
+  
+  <tr>
+    <th><strong>Date ordered:</strong></th>
+    <td><%= @primer.date_ordered %></td>
+  </tr>
+
+  <tr class="notes-row">                                                                               
+    <th><strong>Notes</strong></th>                                                                    
+    <td><%= simple_format(@primer.notes) %></td>                                                 
+  </tr>
+  </tbody>
+</table>
+</br>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
+<%= render partial: "application_partials/edit_notes", locals: {rec: @primer} %>
+
+<%= link_to 'Back', primers_path %>
