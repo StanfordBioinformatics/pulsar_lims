@@ -16,6 +16,7 @@
   <thead>
     <tr>
       <%= render partial: "application_partials/index_common_table_headers", locals: {model: Pcr} %>
+      <th>Biosample</th>
       <th>Description</th>
       <th>Gel</th>
       <th>Pcr master mix</th>
@@ -34,6 +35,7 @@
     <% @records.each do |rec| %>
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= link_to_record rec.biosample %></td>
         <td><%= rec.description %></td>
         <td>
           <% if rec.gel.present? %>

@@ -284,7 +284,7 @@
 <%= render partial: "application_partials/edit_notes", locals: {rec: @biosample} %>
 
 <h3 class="section">Validations</h3>
-<strong>Immunoblots</strong>
+<p><strong>Immunoblots</strong></p>
 <% @biosample.immunoblots.each do |i| %>
   <div class="my-flex">
     <div><%= link_to_record i %></div>
@@ -295,6 +295,20 @@
           <% gel.gel_images.each do |gi| %>
             <%= image_tag gi.image, alt: "gel", data: {"caption": gi.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
           <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+<p><strong>PCRs</strong></p>
+<% @biosample.pcrs.each do |p| %>
+  <div class="my-flex">
+    <div><%= link_to_record p %></div>
+    <% if p.gel.present? %>
+      <div><%= link_to_record p.gel %></div>
+      <% if p.gel.gel_images.any? %>
+        <% p.gel.gel_images.each do |gi| %> 
+          <%= image_tag gi.image, alt: "gel", data: {"caption": gi.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
         <% end %>
       <% end %>
     <% end %>
