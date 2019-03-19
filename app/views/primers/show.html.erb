@@ -35,6 +35,15 @@
     <th><strong>Sequence:</strong></th>
     <td><%= @primer.sequence %></td>
   </tr>
+
+  <tr>
+    <th><strong>Mate primers:</strong></th>
+    <td>
+      <% if @primer.mate_primers.any? %>
+        <%= render partial: "application_partials/link_to_has_many", locals: {links: @primer.mate_primers} %>
+      <% end %>
+    </td>
+  </tr>
   
   <tr>
     <th><strong>Tm:</strong></th>
