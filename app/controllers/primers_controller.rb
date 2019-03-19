@@ -4,7 +4,11 @@ class PrimersController < ApplicationController
   def select_options                                                                                   
     #Called via ajax.                                                                                  
     #Typically called when the user selects the refresh icon in any form that has a primer selection.
-    @records = Primer.all
+    if params[:direction] == Primer::FORWARD_D
+      @records = Primer.forward
+    else
+      @records = Primer.reverse
+    end
     render "application_partials/select_options", layout: false                                        
   end  
 

@@ -3,12 +3,12 @@
 $ ->
   #Refresh the pcr_master_mixes list in the form when the refresh fa-icon is clicked:
   $(document).on "click", ".pcr_forward_primer i.refresh", (event) ->
-    $.get "/primers/select_options", (responseText,status,jqXHR) ->
+    $.get "/primers/select_options", {direction: "forward"}, (responseText,status,jqXHR) ->
       $(".pcr_forward_primer select").html(responseText)
 
   #Refresh the pcr_master_mixes list in the form when the refresh fa-icon is clicked:
   $(document).on "click", ".pcr_reverse_primer i.refresh", (event) ->
-    $.get "/primers/select_options", (responseText,status,jqXHR) ->
+    $.get "/primers/select_options", {direction: "reverse"}, (responseText,status,jqXHR) ->
       $(".pcr_reverse_primer select").html(responseText)
 
   #Refresh the pcr_master_mixes list in the form when the refresh fa-icon is clicked:
