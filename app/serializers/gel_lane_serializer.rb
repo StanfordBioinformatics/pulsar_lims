@@ -3,7 +3,6 @@ class GelLaneSerializer < ActiveModel::Serializer
   self.root = false
 
   attributes :id, 
-             :actual_product_size,
              :expected_product_size, 
              :lane_number, 
              :sample_concentration,

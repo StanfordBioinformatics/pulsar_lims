@@ -1,7 +1,17 @@
-<%= simple_form_for @gel, html: {remote: true, method: :post, style: "padding-top: 0.5em;", class: "gel-lane-form rm-on-record-del"} do |f| %>
+<%# There are two gel_lane forms - one specific to Gels linked to a Pcr, and another specific to
+     Gels linked to an Immunoblot. Figure out which to use:
+%>
+<% if @gel.immunoblot.present? %>
+  <% form_type_class = "gel-lane-form-immunoblot" %>
+  <% form_partial = "form_immunoblot_type" %>
+<% else %>
+  <% form_type_class = "gel-lane-form-pcr" %>
+  <% form_partial = "form_pcr_type" %>
+<% end %>
+<%= simple_form_for @gel, html: {remote: true, method: :post, style: "padding-top: 0.5em;", class: "gel-lane-form #{form_type_class}"} do |f| %>
   <!-- Form uses grid layout; see gels.scss. -->
   <%= f.simple_fields_for :gel_lanes, @gel_lane do |ff| %>
-    <%= render partial: "gel_lanes/form", locals: {f: ff} %>
+    <%= render partial: "gel_lanes/#{form_partial}", locals: {f: ff} %>
   <% end %>
   <div style="display: flex; align-items: flex-start;">
     <% if not @gel_lane.persisted? %>

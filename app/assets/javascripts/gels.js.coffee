@@ -11,9 +11,8 @@ $ ->
     event.stopPropagation()
     $form =  $(this).closest("form")
     $.post "/gels/" + $("#record_id").text() + "/create_or_update_gel_lane", $form.serialize(), (data, textStatus, jqXHR) ->
-      $jqdata = $(data)
-      $form.html($jqdata.html()) 
-      if $jqdata.find(".has-error").length >= 1
+      $form.html($(data).html())
+      if $form.find(".has-error").length >= 1
         # Then there was a server-side validation error. 
         $form.addClass("error-row-color")
       else

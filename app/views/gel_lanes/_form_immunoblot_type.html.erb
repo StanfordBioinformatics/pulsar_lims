@@ -1,0 +1,24 @@
+<% defaults = INPUT_DEFAULTS[@gel_lane.class.name] %>
+<!-- Add hidden element to serve as a status check for jQuery to know whether this record exists or not. -->
+<% if @gel_lane.id.present? %>
+  <span style="display: none" id="gel-lane-persisted"></span>
+<% end %>
+<%= f.input :id, as: :hidden %>
+<%= f.association :gel, as: :hidden %>
+
+<%= f.input :lane_number, label: false %>
+<%= f.input :upstream_identifier, label: false %>
+<%= f.association :biosample, collection: Biosample.non_plated.order("LOWER(name)"),  label: false %>
+<%= f.input :sample_volume, label: false, placeholder: "µL", input_html: {value: @gel_lane.sample_volume || defaults["sample_volume"]}, 
+    label_html: {"data-toggle": "tooltip", title: "The volume in µL of sample loaded into this lane of the gel."} %>
+  
+<div style="display: flex;">
+  <%= f.input :sample_concentration, label: false, wrapper_html: {style: "flex: 1 1 55%"} %>
+  <%= f.association :sample_concentration_units, label: false, collection: Unit.where(unit_type: "concentration"), wrapper_html: {style: "flex: 1 1 45%"} %>
+</div>
+<%= f.input :expected_product_size, label: false, placeholder: "kDa" %>
+<%= f.input :low_target_band_intensity, label: false, label_html: {"data-toggle": "tooltip", "title": "True means that target band intensity is reduced by greater than 50% from what is expected."} %>
+<%= f.input :needs_mass_spec, label: false %>
+<%= f.input :pass, as: :select, default: true, label: false %>
+<%= f.input :submitter_comments, label: false %>
+<%= f.input :notes, label: false %>

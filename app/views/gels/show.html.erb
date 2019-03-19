@@ -57,7 +57,11 @@
 <h4 class="section">Gel lanes</h4>
 
 <div style="overflow: auto; max-width: 95%;">
-  <%= render partial: "gel_lanes/headers" %>
+  <% if @gel.immunoblot.present? %>
+    <%= render partial: "gel_lanes/headers_immunoblot_type" %>
+  <% else %>
+    <%= render partial: "gel_lanes/headers_pcr_type" %>
+  <% end %>
   <div class="gel-lanes" %>
     <% @gel.gel_lanes.order(:lane_number).each do |lane| %>
       <% @gel_lane = lane %>
@@ -67,10 +71,11 @@
 </div>
 </br>
 
+<%= link_to "Add lane", add_lane_gel_path(@gel), class: "add-gel-lane-btn reg-btn", remote: true %>
+
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             
 <%= render partial: "application_partials/edit_notes", locals: {rec: @gel} %> 
 
-<%= link_to "Add lane", add_lane_gel_path(@gel), class: "add-gel-lane-btn reg-btn", remote: true %>
 
 </br></br>
 <%= link_to 'Back', gels_path %>

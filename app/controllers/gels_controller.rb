@@ -109,12 +109,12 @@ class GelsController < ApplicationController
         gel_image_ids: [],
         gel_lanes_attributes:  [
           :id,
-          :actual_product_size,                                                                        
           :gel_id,                                                                             
           :biosample_id,
           :expected_product_size,                                                                      
           :lane_number,                                                                                
           :low_target_band_intensity,
+          :needs_additional_pcr,
           :needs_mass_spec,
           :sample_concentration,                                                                       
           :sample_concentration_units_id,                                                              

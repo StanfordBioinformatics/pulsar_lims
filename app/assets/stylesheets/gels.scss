@@ -1,11 +1,20 @@
 //#
 
-.gel-lane-form, .gel-lane-headers {
+.gel-lane-form-immunoblot, .gel-lane-headers-immunoblot {
   display: grid;
   grid-gap: 0.5em;
   margin: 0;
   padding: 0;
-  grid-template-columns: 3em 7em 12em 8em 10em repeat(5, 8em) repeat(2, 15em) 4em;
+  grid-template-columns: 3em 7em 12em 8em 10em repeat(4, 8em) repeat(2, 15em) 4em;
+  align-items: center;
+}
+
+.gel-lane-form-pcr, .gel-lane-headers-pcr {
+  display: grid;
+  grid-gap: 0.5em;
+  margin: 0;
+  padding: 0;
+  grid-template-columns: 3em 7em 12em 8em 10em repeat(3, 8em) repeat(2, 15em) 4em;
   align-items: center;
 }
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190318230302) do
+ActiveRecord::Schema.define(version: 20190319202528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -649,13 +649,13 @@ ActiveRecord::Schema.define(version: 20190318230302) do
     t.integer  "sample_concentration_units_id"
     t.integer  "gel_id"
     t.float    "expected_product_size"
-    t.float    "actual_product_size"
     t.float    "sample_volume"
     t.float    "sample_concentration"
     t.integer  "biosample_id"
     t.boolean  "low_target_band_intensity"
     t.boolean  "needs_mass_spec"
     t.string   "upstream_identifier"
+    t.boolean  "needs_additional_pcr"
   end
 
   add_index "gel_lanes", ["biosample_id"], name: "index_gel_lanes_on_biosample_id", using: :btree
