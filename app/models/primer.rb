@@ -19,6 +19,11 @@ class Primer < ActiveRecord::Base
   validates :direction, presence: true, inclusion: {in: DIRECTION, message: "must be a value from the set #{DIRECTION}."}
   validates :sequence, presence: true, format: { with: /\A[acgtnACGTN,]+\z/, message: "can only contain characters in the set ACTGN (case in-sensitive)."}
 
+  validates :mate_primers, with: :validate_mate_primers
+
+  scope :forward, lambda {where(direction: FORWARD_D)}
+  scope :reverse, lambda {where(direction: REVERSE_D)}
+
   def self.policy_class
     ApplicationPolicy
   end
@@ -30,6 +35,17 @@ class Primer < ActiveRecord::Base
        display += self.name  + " "
      end
      return display += self.sequence
+  end
+
+  private
+
+  def validate_mate_primers
+    self.mate_primers.each do |m|
+      if m.direction == self.direction
+        self.errors[:mate_primers] << "must be in the opposite direction of the current primer."
+        return false
+      end
+    end
   end
 
 end

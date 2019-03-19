@@ -2,6 +2,7 @@ Pulsar::Application.routes.draw do
 
   resources :primers do 
     get :select_options, on: :collection
+    get :mate_primer_selection, on: :collection
   end
   resources :gel_images
   resources :atacseqs do
