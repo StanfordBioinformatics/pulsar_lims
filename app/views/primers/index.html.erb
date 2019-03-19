@@ -20,7 +20,6 @@
       <th>Target</th>
       <th>Direction</th>
       <th>Sequence</th>
-      <th>Mate primers</th>
       <th>Melting temperature</th>
       <th>Date ordered</th>
       <th>Actions</th>
@@ -40,11 +39,6 @@
         </td>
         <td><%= rec.direction %></td>
         <td><%= rec.sequence %></td>
-        <td>
-          <% if rec.mate_primers.any? %>                                                               
-            <% render partial: "application_partials/link_to_has_many", locals: {links: rec.mate_primers} %>  
-          <% end %>
-        </td>
         <td><%= rec.melting_temperature %></td>
         <td><%= rec.date_ordered %></td>
         <td>

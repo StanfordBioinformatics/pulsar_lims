@@ -14,8 +14,8 @@ class Pcr < ActiveRecord::Base
   belongs_to :forward_primer, class_name: "Primer"
   belongs_to :reverse_primer, class_name: "Primer"
   belongs_to :genomic_dna_concentration_units, class_name: "Unit"
-  has_one :gel, dependent: :nullify
   belongs_to :pcr_master_mix
+  has_one :gel, dependent: :destroy
 
   validates :biosample, presence: true
   validates :forward_primer, presence: true
@@ -23,7 +23,24 @@ class Pcr < ActiveRecord::Base
   validates :name, uniqueness: true, allow_blank: true
   validates :pcr_master_mix, presence: true
 
+  validates :forward_primer, with: :validate_forward_primer                                            
+  validates :reverse_primer, with: :validate_reverse_primer  
+
   def self.policy_class
     ApplicationPolicy
+  end
+
+  private
+ 
+  def validate_forward_primer
+    if self.forward_primer.direction != Primer::FORWARD_D
+      self.errors[:forward_primer] << "must be a forward primer."
+    end
+  end
+
+  def validate_reverse_primer
+    if self.reverse_primer.direction != Primer::REVERSE_D
+      self.errors[:reverse_primer] << "must be a reverse primer."
+    end
   end
 end

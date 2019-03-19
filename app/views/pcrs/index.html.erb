@@ -1,14 +1,14 @@
 <header class="index-view-header">
-  <h1 class="index-page-header">                                                                       
-    <%= @title || "PCRs" %>                                                                      
+  <h1 class="index-page-header">
+    <%= @title || "PCRs" %>
   </h1>
   <p class="model-definition"><%= Pcr::DEFINITION %></p>
-  
+
   <ul class="actions">
     <%= render partial: "application_partials/auth_new_record" %>
     <%= link_to "Primers", primers_path, class: "reg-btn" %>
     <%= link_to "Master mixes", pcr_master_mixes_path, class: "reg-btn" %>
-  </ul> 
+  </ul>
   <%= render partial: "application_partials/total", locals: {records: @records} %>
 </header>
 
@@ -35,16 +35,18 @@
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.description %></td>
-        <td>                                                                                           
-          <% if rec.gel.present? %>                                                                    
-            <div style="display: flex">                                                                
-              <%= link_to rec.gel.display(), rec.gel %>                                                
-              <% if rec.gel.gel_image.present? %>                                                      
-                <%= image_tag rec.gel.gel_image, alt: "gel", data: {"caption": rec.gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
-              <% end %>                                                                                
-            </div>                                                                                     
-          <% end %>                                                                                    
-        </td> 
+        <td>
+          <% if rec.gel.present? %>
+            <div style="display: flex, align-items: center;">
+              <%= link_to rec.gel.display(), rec.gel %>
+              <% if rec.gel.gel_images.any? %>
+                <% rec.gel.gel_images.each do |gi| %>
+                  <%= image_tag gi.image, alt: "gel", data: {"caption": rec.gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </td>
         <td><%= link_to rec.pcr_master_mix.name, rec.pcr_master_mix %></td>
         <td><%= link_to_record rec.forward_primer %></td>
         <td><%= link_to_record rec.reverse_primer %></td>

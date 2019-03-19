@@ -7,7 +7,6 @@
   <%= f.association :target, label_html: {"data-toggle": "tooltip", "title": "Gene that this primer applies to."} %>
   <%= f.input :direction, collection: Primer::DIRECTION %>
   <%= f.input :sequence %>
-  <%= f.association :mate_primers %>
   <%= f.input :melting_temperature, label: "Tm", placeholder: "Celsius" %>
   <%= f.input :date_ordered %>
   <%= f.association :ordered_from %>

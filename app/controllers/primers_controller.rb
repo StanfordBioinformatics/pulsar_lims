@@ -1,19 +1,5 @@
 class PrimersController < ApplicationController
   before_action :set_primer, only: [:show, :edit, :update, :destroy]
-  skip_after_action :verify_authorized, only: [:mate_primer_selection]
-
-  def mate_primer_selection
-    # Called via ajax in primers.js.coffee when the user is filling out the form for a Primer.
-    # When the user selections a value for the Primer.direction propery, the mate_primers selection
-    # should only consist of primers for the opposite direction.
-    if params[:direction] == Primer::FORWARD_D
-      @selection = Primer.reverse
-    else
-      @selection = Primer.forward
-    end
-    @primer = Primer.new
-    render layout: false
-  end
 
   def select_options                                                                                   
     #Called via ajax.                                                                                  
@@ -90,7 +76,6 @@ class PrimersController < ApplicationController
         :notes,
         :ordered_from_id,
         :sequence,
-        :target_id,
-        :mate_primer_ids => [])
+        :target_id)
     end
 end

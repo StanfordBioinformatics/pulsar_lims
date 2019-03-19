@@ -21,8 +21,8 @@
   <%= f.association :document, label: "Protocol", label_html: {"data-toggle": "tooltip", "title": "Protocol document describing PCR procedure in detail."} %>
 
   <%= f.association :pcr_master_mix, label_html: {class: "refresh"} %>
-  <%= f.association :forward_primer, label_html: {class: "refresh"} %>
-  <%= f.association :reverse_primer, label_html: {class: "refresh"} %>
+  <%= f.association :forward_primer, collection: Primer.forward, label_html: {class: "refresh"} %>
+  <%= f.association :reverse_primer, collection: Primer.reverse, label_html: {class: "refresh"} %>
   <%= f.input :amplicon_size, label: "Amplicon size (bp)" %>
   <%= f.input :annealing_temperature, label: "Annealing temp.", label_html: {class: "celsius"} %>
   <%= f.input :extension_time, placeholder: "seconds", label_html: {"data-toggle": "tooltip", "title": "Extension time measured in seconds."} %>

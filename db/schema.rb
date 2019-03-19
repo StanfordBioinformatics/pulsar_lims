@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190318232621) do
+ActiveRecord::Schema.define(version: 20190318230302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -934,11 +934,6 @@ ActiveRecord::Schema.define(version: 20190318232621) do
   add_index "primers", ["ordered_from_id"], name: "index_primers_on_ordered_from_id", using: :btree
   add_index "primers", ["target_id"], name: "index_primers_on_target_id", using: :btree
   add_index "primers", ["user_id"], name: "index_primers_on_user_id", using: :btree
-
-  create_table "primers_mate_primers", id: false, force: :cascade do |t|
-    t.integer "primer_id"
-    t.integer "mate_primer_id"
-  end
 
   create_table "reference_genomes", force: :cascade do |t|
     t.string   "name",       limit: 255

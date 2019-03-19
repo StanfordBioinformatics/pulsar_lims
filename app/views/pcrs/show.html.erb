@@ -72,8 +72,10 @@
 <% else %>                                                                                             
   <div class="my-flex">                                                                                
     <%= link_to_record @pcr.gel %>                                                              
-    <% if @pcr.gel.gel_image.present? %>                                                        
-      <%= image_tag @pcr.gel.gel_image, alt: "gel", data: {"caption": @pcr.gel.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+    <% if @pcr.gel.gel_images.any? %>                                                        
+      <% @pcr.gel.gel_images.each do |gi| %>
+        <%= image_tag gi.image, alt: "gel", data: {"caption": gi.caption}, class: "modal-for-image", style: "margin-left: 0.3em; max-width: 50px; max-height: 50px; object-fit: contain;" %>
+      <% end %>
     <% end %>                                                                                       
   </div>                                                                                               
 <% end %> 
@@ -81,4 +83,5 @@
 <!-- Hidden form that is used when the user tries to edit the 'notes'. --> 
 <%= render partial: "application_partials/edit_notes", locals: {rec: @pcr} %>
 
+</br>
 <%= link_to 'Back', pcrs_path %>

@@ -14,12 +14,9 @@ class Primer < ActiveRecord::Base
   belongs_to :ordered_from, class_name: "Vendor"
   belongs_to :designed_by, class_name: "User"
   belongs_to :target
-  has_and_belongs_to_many :mate_primers, class_name: "Primer", join_table: "primers_mate_primers", foreign_key: "primer_id", association_foreign_key: "mate_primer_id"
 
   validates :direction, presence: true, inclusion: {in: DIRECTION, message: "must be a value from the set #{DIRECTION}."}
   validates :sequence, presence: true, format: { with: /\A[acgtnACGTN,]+\z/, message: "can only contain characters in the set ACTGN (case in-sensitive)."}
-
-  validates :mate_primers, with: :validate_mate_primers
 
   scope :forward, lambda {where(direction: FORWARD_D)}
   scope :reverse, lambda {where(direction: REVERSE_D)}
@@ -36,16 +33,4 @@ class Primer < ActiveRecord::Base
      end
      return display += self.sequence
   end
-
-  private
-
-  def validate_mate_primers
-    self.mate_primers.each do |m|
-      if m.direction == self.direction
-        self.errors[:mate_primers] << "must be in the opposite direction of the current primer."
-        return false
-      end
-    end
-  end
-
 end

@@ -5,7 +5,6 @@ class PcrsController < ApplicationController
   def add_gel
     defaults = INPUT_DEFAULTS["Gel"] 
     @gel = @pcr.build_gel(percentage: defaults["percentage_for_PCR"])
-    @s3_direct_post = @gel.s3_direct_post()
   end
 
   def select_gel
