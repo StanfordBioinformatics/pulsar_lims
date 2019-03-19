@@ -5,7 +5,6 @@ class ImmunoblotsController < ApplicationController
   def add_gel
     defaults = INPUT_DEFAULTS["Gel"]
     @gel = @immunoblot.gels.build(percentage: defaults["percentage_for_IP"])
-    @s3_direct_post = @gel.s3_direct_post()
   end
 
   def select_gel
