@@ -2,6 +2,11 @@
 
 $ ->
   #Refresh the pcr_master_mixes list in the form when the refresh fa-icon is clicked:
+  $(document).on "click", ".pcr_biosample i.refresh", (event) ->
+    $.get "/biosamples/select_options", {direction: "forward"}, (responseText,status,jqXHR) ->
+      $(".pcr_biosample select").html(responseText)
+
+  #Refresh the pcr_master_mixes list in the form when the refresh fa-icon is clicked:
   $(document).on "click", ".pcr_forward_primer i.refresh", (event) ->
     $.get "/primers/select_options", {direction: "forward"}, (responseText,status,jqXHR) ->
       $(".pcr_forward_primer select").html(responseText)

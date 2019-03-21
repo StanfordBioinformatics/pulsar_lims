@@ -5,7 +5,7 @@
   <%= f.input :name %>
   <%= f.input :description %>
   <%= f.association :analyst, label_html: {"data-toggle": "tooltip", "title": "User that ran the PCR."} %>
-  <%= f.association :biosample %>
+  <%= f.association :biosample, label_html: {class: "refresh"} %>
   <%= f.input :genomic_dna_prep_date %>
   
   <div style="display: flex;">
