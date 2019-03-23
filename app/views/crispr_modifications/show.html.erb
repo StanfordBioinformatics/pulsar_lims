@@ -96,13 +96,6 @@
     </table>
   <% end %>
 </div>
-
-<div>
-  <strong>PCR Validations:</strong>
-  <%= render partial: "application_partials/link_to_has_many", locals: {links: @crispr.pcr_validations} %>
-</div>
-
-<%= link_to "New PCR Validation", new_pcr_validation_crispr_modification_path(@crispr), class: "reg-btn" %>
 </br></br>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->

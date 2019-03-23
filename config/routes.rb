@@ -91,7 +91,6 @@ Pulsar::Application.routes.draw do
     get :prototype_instances, on: :member
     get :select_options, on: :collection
     #crisprs only belong to biosamples.
-    get :new_pcr_validation, on: :member
     get :select_crispr_construct, on: :collection
     #select_crispr_construct on collection instead of member b/c the user selects this when creating or editing the crispr object, and
     # since the crispr won't have an id yet when being created, we can't use :member.

@@ -1,6 +1,6 @@
 class CrisprModificationsController < ApplicationController
-  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy, :new_pcr_validation, :prototype_instances]
-  skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct, :new_pcr_validation, :prototype_instances]
+  before_action :set_crispr_modification, only: [:show, :edit, :update, :destroy, :prototype_instances]
+  skip_after_action :verify_authorized, only: [:select_chromosome_on_reference_genome, :select_crispr_construct, :prototype_instances]
 
   def select_options
     #Called via ajax.
@@ -16,10 +16,6 @@ class CrisprModificationsController < ApplicationController
     @no_new_btn = true
     @title = "Prototype instances of CRISPR Modification #{@crispr.name}"
     render action: "index"
-  end
-
-  def new_pcr_validation
-    @pcr = @crispr.pcr_validations.build
   end
 
   def select_crispr_construct
