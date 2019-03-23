@@ -59,6 +59,7 @@ class Api::BiosamplesController < Api::ApplicationController
         :user_id,
         :biosample_term_name_id,
         :biosample_type_id,
+        :cells_died_after_transfection,
         :cells_discarded,
         :chipseq_experiment_id,
         :chipseq_starting_biosample_id,

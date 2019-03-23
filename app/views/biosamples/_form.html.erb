@@ -110,7 +110,7 @@
     <%= f.input :date_biosample_taken, html5: true, 
         wrapper_html: {"style": "margin-right: 2em;"},
         label_html: {"data-toggle": "tooltip", "title": "For cultured samples, the date the biosample was taken. For tissue samples, the date the biosample was taken."} %>
-  
+
     <%= f.input :cells_discarded,
         label_html: {"data-toggle": "tooltip", "title": "True (checked) means that this biosample failed (i.e. a validation step such as immunoblot) and the cells were not kept for further experimentation."} %>
   </div>
@@ -128,6 +128,8 @@
       <%= f.association :crispr_modification %>
     <% end %>
     <legend>Transfection</legend>
+    <%= f.input :cells_died_after_transfection, 
+        label_html: {"data-toggle": "tooltip", title: "True (checked) means that this biosample failed to grow after transfection."} %>
     <%= f.input :transfection_date, include_blank: true %>
     <%= f.association :transfected_by,
         label: "Analyst",

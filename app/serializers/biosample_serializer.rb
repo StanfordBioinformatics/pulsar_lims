@@ -3,6 +3,7 @@ class BiosampleSerializer < ActiveModel::Serializer
   self.root = false
 
   attributes :id,
+             :cells_died_after_transfection,
              :cells_discarded,
              :control,
              :crispr_modification_id,

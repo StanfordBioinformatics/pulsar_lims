@@ -35,7 +35,7 @@
   </thead>
   <tbody>
     <% @records.each do |rec| %>
-      <% if rec.cells_discarded? %>
+      <% if rec.cells_discarded? or rec.cells_died_after_transfection? %>
         <% cls_list = "discarded" %>
       <% else %>
         <% cls_list = "" %>
