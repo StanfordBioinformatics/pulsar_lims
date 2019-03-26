@@ -35,7 +35,7 @@ gem 'aws-sdk', '~> 2'
 
 gem 'active_model_serializers', '~> 0.9.3' 
 
-gem 'devise', '~> 3.4.1'
+gem "devise", ">= 4.6.0"
 gem 'pundit', '~> 0.3.0'
 
 gem 'carrierwave', '~> 0.10.0'
