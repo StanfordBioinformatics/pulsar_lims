@@ -51,6 +51,14 @@
   }
 }
 
+// How to color rows in the admin users index page.
+.admin {
+  background-color: #ACFDF7;
+}
+.archived {
+  background-color: #D6D4D4;
+}
+
 // Used when a user is trying to save a new row (i.e. a BatchItem or a GelLane) and
 // the row was successfully created.
 .created-row-color {

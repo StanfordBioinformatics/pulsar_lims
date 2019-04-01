@@ -1,23 +1,24 @@
 <header>
-	<h1>Users</h1>
-	
-	<ul class="actions">
-		<li>
-			<%= link_to "New User", new_admin_user_path, class: "new" %>
-		</li>
-	</ul>
+  <h1>Users</h1>
+  
+  <ul class="actions">
+    <li>
+      <%= link_to "New User", new_admin_user_path, class: "new" %>
+    </li>
+  </ul>
 </header>
 
 <table class="attributes">
   <thead>
     <tr>
       <th>User</th>
-			<th>Role</th>
-			<th>Created</th>
+      <th>Archived?</th>
+      <th>Role</th>
+      <th>Created</th>
       <th>Last Sign-in</th>
     </tr>
   </thead>
   <tbody>
-     <%= render partial: "user_table_row", collection: @all_users, as: :user %>
+     <%= render partial: "user_table_row", locals: {users: @all_users} %>
   </tbody>
 </table></br>

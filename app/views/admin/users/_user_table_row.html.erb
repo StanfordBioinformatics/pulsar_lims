@@ -1,6 +1,27 @@
-<tr>
-	<td><%= link_to user, [:admin, user] %></td>
-	<td><%= user.role_name %></td>
-	<td><%= user.created_at %></td>
-	<td><%= user.last_sign_in_at %></td>
-</tr>
+<div style="max-width: 80%; display: flex; justify-content: flex-end;" class="table-legend">
+  <div style="border: 1px solid grey; padding: 0.5em;">
+    <h5>Row color legend </h5>
+    <ul style="font-size: 0.8em; display: inline-block; list-style-type: none;">
+      <li class="admin">Admin</li>
+      <li class="archived">Archived</li>
+    </ul>
+  <div>
+</div>
+
+<% users.each do |u| %>
+  <% if u.role == User::ADMIN_ROLE && u.archived_at.blank? %>
+    <% col_cls = "admin" %>
+  <% elsif u.archived_at.present? %>
+    <!-- Greyish color -->
+    <% col_cls = "archived" %>
+  <% else %>
+    <% col_cls = "" %>
+  <% end %>
+  <tr class="<%= col_cls %>" %>
+    <td><%= link_to u, [:admin, u] %></td>
+    <td><%= u.archived_at? %></td>
+    <td><%= u.role_name %></td>
+    <td><%= u.created_at %></td>
+    <td><%= u.last_sign_in_at %></td>
+  </tr>
+<% end %>
