@@ -35,11 +35,7 @@
 </table>
 
 <div class="bottom-btns xfade-in">                                                                     
-  <%= link_to "Add experiment replicate", [:select_experimental_biosample, @atacseq], class: "reg-btn", id: "experiment-add-rep", remote: true %> 
-  <% ctl_rep_btn_disabled = false %>                                                                   
-  <% if @atacseq.replicates.blank? %>                                                       
-    <% ctl_rep_btn_disabled = true %>                                                                  
-  <% end %>                                                                                            
+  <%= link_to "Add experiment replicate", [:select_experimental_biosample, @atacseq], class: "reg-btn", id: "atacseq-experiment-add-rep", remote: true %> 
 </div>  
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->                             

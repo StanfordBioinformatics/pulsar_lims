@@ -1,6 +1,6 @@
 class AtacseqsController < ApplicationController
-  before_action :set_atacseq, only: [:show, :edit, :update, :destroy, :select_experimental_biosample]
-  skip_after_action :verify_authorized, only: [:select_experimental_biosample, :single_cell, :bulk]
+  before_action :set_atacseq, only: [:show, :edit, :update, :destroy, :select_experimental_biosample, :select_biosample_libraries]
+  skip_after_action :verify_authorized, only: [:select_experimental_biosample, :single_cell, :bulk, :select_biosample_libraries]
 
   def single_cell
     title = "Single Cell ATAC-Seq Experiments"
@@ -15,8 +15,18 @@ class AtacseqsController < ApplicationController
   def select_experimental_biosample
     # AJAX from show view when user clicks on the "Add experiment replicate" button.
     @selection = Biosample.all
-    render partial: "chipseq_experiments/select_experimental_or_ctl_biosample", locals: {record: @atacseq, heading: "Add experimental replicates"}
+    render partial: "select_experimental_or_ctl_biosample", locals: {heading: "Add experimental replicates"}
   end
+
+  def select_biosample_libraries                                                                       
+    # AJAX call from partial in /views/application_partials/select_experimental_biosample when user 
+    # selects a biosample.                       
+    @biosample = Biosample.find(params[:biosample_id])                                                 
+    # Filter out any Libraries from this Biosample that are already present on the experiment via 
+    # the replicates attribute.
+    @libraries = @biosample.libraries.reject { |x| x.atacseq_id == @atacseq.id}
+    render layout: false                                                                               
+  end   
 
   def index
     super

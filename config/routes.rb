@@ -6,6 +6,7 @@ Pulsar::Application.routes.draw do
   end
   resources :gel_images
   resources :atacseqs do
+    get :select_biosample_libraries, on: :member
     get :single_cell, on: :collection
     get :bulk, on: :collection
     get :select_experimental_biosample, on: :member

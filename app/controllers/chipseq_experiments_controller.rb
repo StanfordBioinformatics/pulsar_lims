@@ -2,9 +2,32 @@ class ChipseqExperimentsController < ApplicationController
   before_action :set_chipseq_experiment, only: [:show, :edit, :update, :destroy, :select_experimental_biosample, :select_control_biosample, :create_control_replicate, :select_biosample_libraries]
   skip_after_action :verify_authorized, only: [:select_experimental_biosample, :select_control_biosample, :create_control_replicate, :get_wt_control_selection, :select_biosample_libraries]
 
+  def select_experimental_biosample
+    # AJAX from show view when user clicks on the "Add experiment replicate" button.
+    starting_biosamples = @chipseq_experiment.chipseq_starting_biosamples
+    selection = []
+    starting_biosamples.each do |s|
+      # Don't include biosamples that are already in self.replicates in the selection.
+      selection.concat(s.biosample_parts.where.not(id: @chipseq_experiment.replicates))
+    end
+    @selection = selection
+    render partial: "select_experimental_or_ctl_biosample", locals: {heading: "Add experimental replicates"}
+  end
+
+  def select_control_biosample
+    # AJAX from show view when user clicks on the "Add control replicate" button.
+    starting_biosamples = @chipseq_experiment.chipseq_starting_biosamples
+    controls = Set.new()
+    starting_biosamples.each do |s|
+      controls.merge(s.control_descendents())
+    end
+    @selection = controls.to_a
+    render partial: "select_experimental_or_ctl_biosample", locals: {heading: "Add control replicates"}
+  end
+
   def select_biosample_libraries
-    # AJAX call from ChipseqExperiment show view when user clicks on the "Add experiment replicate"
-    # button or the "Add control replicate" button and then selects a biosample.
+    # AJAX call from partial in /views/application_partials/select_experimental_biosample when user
+    # selects a biosample.
     # The call is made from chipseq_experiments.js.coffee.
     @biosample = Biosample.find(params[:biosample_id])
     @control = false
@@ -22,30 +45,6 @@ class ChipseqExperimentsController < ApplicationController
     @chipseq_experiment = ChipseqExperiment.new
     render layout: false
   end
-
-  def select_experimental_biosample
-    # AJAX from show view when user clicks on the "Add experiment replicate" button.
-    starting_biosamples = @chipseq_experiment.chipseq_starting_biosamples
-    selection = []
-    starting_biosamples.each do |s|
-      # Don't include biosamples that are already in self.replicates in the selection.
-      selection.concat(s.biosample_parts.where.not(id: @chipseq_experiment.replicates))
-    end
-    @selection = selection
-    render partial: "select_experimental_or_ctl_biosample", locals: {record: @chipseq_experiment, heading: "Add experimental replicates"}
-  end
-
-  def select_control_biosample
-    # AJAX from show view when user clicks on the "Add control replicate" button.
-    starting_biosamples = @chipseq_experiment.chipseq_starting_biosamples
-    controls = Set.new()
-    starting_biosamples.each do |s|
-      controls.merge(s.control_descendents())
-    end
-    @selection = controls.to_a
-    render partial: "select_experimental_or_ctl_biosample", locals: {record: @chipseq_experiment, heading: "Add control replicates"}
-  end
-
 
 #  def select_controls
 #    # Called remotely. Renders a form that POSTS to create_control_replicate action below.
