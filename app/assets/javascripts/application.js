@@ -286,7 +286,8 @@ $(function() {
             return;
           }
           $rm.fadeOut(function(){
-            $rm.remove()
+            $rm.fadeOut();
+            $rm.remove();
           })
           if ($(event.target).closest("a").hasClass("sequencing_result")) {
             //Then make sure the btn to add new seq res is activated:
