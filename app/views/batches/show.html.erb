@@ -28,14 +28,16 @@
       <td><%= @batch.date %></td>
     </tr>
 
-    <tr>
-      <th><strong>Crosslinking Method:</strong></th>
-      <td>
-        <% if @batch.crosslinking_method.present? %>
-          <%= @batch.crosslinking_method %>
-        <% end %>
-      </td>
-    </tr>
+    <% if @batch.batch_type == Batch::CHIPSEQ %>
+      <tr>
+        <th><strong>Crosslinking Method:</strong></th>
+        <td>
+          <% if @batch.crosslinking_method.present? %>
+            <%= @batch.crosslinking_method %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
 
   <tr class="notes-row">
     <th><strong>Notes</strong></th>

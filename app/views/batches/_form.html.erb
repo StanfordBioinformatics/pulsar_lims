@@ -10,7 +10,9 @@
 
   <%= f.input :date, label: "Batch date" %>
 
-  <%= f.input :crosslinking_method, selected: @batch.crosslinking_method || defaults["crosslinking_method"], collection: Enums::CROSSLINKING_METHOD, label_html: {"data-toggle": "tooltip", title: "Crosslinking protocol used in the ChIP experiment."} %>
+  <% if @batch.batch_type == Batch::CHIPSEQ %>
+    <%= f.input :crosslinking_method, selected: @batch.crosslinking_method || defaults["crosslinking_method"], collection: Enums::CROSSLINKING_METHOD, label_html: {"data-toggle": "tooltip", title: "Crosslinking protocol used in the ChIP experiment."} %>
+  <% end %>
 
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 
