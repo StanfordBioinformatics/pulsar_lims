@@ -59,12 +59,12 @@ class ApplicationController < ActionController::Base
     if params.include?("title")
       @title = params["title"]
     end
-    @records = policy_scope(@model_class).where(where)
+    @records = policy_scope(@model_class).unscoped.where(where)
     if @scope.present?
       @records = @records.send(@scope)
     end
     # Order records by updated_at. NOTE!! If the model uses default_scope, then that will override this. 
-    @records = @records.unscoped.order(updated_at: :desc)
+    @records = @records.order(updated_at: :desc)
     @total = @records.count
     # Commended out code below because allowing the "all" feature causes memory bloats. 
     #unless params[:all].present?
