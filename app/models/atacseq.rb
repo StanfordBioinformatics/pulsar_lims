@@ -8,7 +8,7 @@ class Atacseq < ActiveRecord::Base
   default_scope {order("lower(name)")}
   belongs_to :user
   has_and_belongs_to_many :documents
-  has_many :replicates, -> {experimental}, class_name: "Library", dependent: :nullify
+  has_many :replicates, class_name: "Library", dependent: :nullify
 
   validates :name, presence: true, uniqueness: true 
 
@@ -20,4 +20,20 @@ class Atacseq < ActiveRecord::Base
   def self.policy_class
     ApplicationPolicy
   end
+
+  def replicate_ids=(ids)                                                                              
+    """                                                                                                
+    Function : Adds associations to Libraries that are stored in self.replicates.                      
+    Args     : ids - array of Library IDs.                                                             
+    """                                                                                                
+    ids.each do |i|                                                                                    
+      if i.blank?                                                                                      
+        next                                                                                           
+      end                                                                                              
+      rec = Library.find(i)                                                                            
+      if not self.replicates.include? rec                                                              
+        self.replicates << rec                                                                         
+      end                                                                                              
+    end                                                                                                
+  end 
 end

@@ -20,6 +20,7 @@
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Description</th>
+      <th>Replicates</th>
       <th>Submitter comments</th>
       <th>Notes</th>
       <th>Actions</th>
@@ -31,6 +32,9 @@
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= rec.description %></td>
+        <td>
+          <%= render partial: "application_partials/link_to_has_many", locals: {links: rec.replicates} %>
+        </td>
         <td><%= rec.submitter_comments %></td>
         <td><%= rec.notes %></td>
         <td>

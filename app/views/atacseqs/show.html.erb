@@ -21,6 +21,11 @@
       <th><strong>Description:</strong></th>
       <td><%= @atacseq.description %></td>
     </tr>
+
+    <tr>                                                                                                 
+      <th><strong>Replicates:</strong></th>                                                              
+      <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @atacseq.replicates} %>
+    </tr>
     
     <tr>
       <th><strong>Submitter comments:</strong></th>

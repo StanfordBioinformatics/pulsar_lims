@@ -98,6 +98,7 @@ class AtacseqsController < ApplicationController
         :single_cell,
         :submitter_comments,
         :document_ids => [],
+        :replicate_ids => [],
         documents_attributes: [:id, :_destroy]
       )
     end
