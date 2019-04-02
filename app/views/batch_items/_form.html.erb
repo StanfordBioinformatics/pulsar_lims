@@ -20,7 +20,7 @@
 <% if @batch_item.batch.batch_type == Batch::CHIPSEQ %>
   <%= f.association :antibody, label: false %>
 <% end %>
-<%= f.association :library, label: false, disabled: disabled, collection: library_collection,  input_html: {class: "batch_item_select_biosample_library"} %>
+<%= f.association :library, label: false, disabled: disabled, collection: library_collection, input_html: {id: :batch_item_library, class: "batch_item_select_biosample_library"} %>
 
 <% if @batch_item.library.present? %>
   <% slpk_id = @batch_item.library.sequencing_library_prep_kit_id %>

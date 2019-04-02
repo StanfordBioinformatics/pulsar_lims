@@ -42,7 +42,9 @@ $ ->
     $form =  $(this).closest("form")
     if !($form.has("#batch-item-persisted").length > 0)
       return
-    $.post "/batches/" + $("#record_id").text() + "/create_or_update_batch_item", $form.serialize(), (data) ->
+    payload = $form.serialize()
+      
+    $.post "/batches/" + $("#record_id").text() + "/create_or_update_batch_item", payload, (data) ->
       $form.replaceWith(data)
 
   #Refresh the library_prototype list in the form when the refresh fa-icon is clicked:

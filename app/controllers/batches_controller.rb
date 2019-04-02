@@ -26,7 +26,16 @@ class BatchesController < ApplicationController
 
   def create_or_update_batch_item
     item_params = batch_params[:batch_items_attributes]["0"] # Subset the dict with only key being 0.
-    logger.debug(params)
+    if item_params.include?(:library_id)
+      if item_params.include?(:library_attributes)
+        library_attr_id = item_params[:library_attributes][:id]
+        if library_attr_id != item_params[:library_id]
+          # Then user changed the library selector in a batch_item row and the nested form for related library fields
+          # on the related library object still reference the old library. In this case, delete library_attributes.
+          item_params.delete("library_attributes")
+        end
+      end
+    end
     if item_params[:id].present?
       # Then do an update
       @batch_item = BatchItem.find(item_params[:id])
