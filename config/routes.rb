@@ -143,6 +143,7 @@ Pulsar::Application.routes.draw do
     end
 
     resources :biosamples do
+      get :parent_ids, on: :member
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end

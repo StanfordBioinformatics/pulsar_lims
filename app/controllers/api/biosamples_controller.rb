@@ -1,7 +1,12 @@
 class Api::BiosamplesController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/biosamples/3
-  before_action :set_biosample, only: [:show, :update, :destroy]
+  before_action :set_biosample, only: [:show, :update, :destroy, :parent_ids]
+
+  def parent_ids
+    authorize @biosample, :show?
+    render json: @biosample.parent_ids
+  end
 
   def find_by
     #find_by defined in ApplicationController#find_by.
