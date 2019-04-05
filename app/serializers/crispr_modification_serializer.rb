@@ -18,6 +18,5 @@ class CrisprModificationSerializer < ActiveModel::Serializer
   has_many :biosamples
   has_many :crispr_constructs
   has_many :documents
-  has_many :pcr_validations
   has_many :crispr_constructs
 end
