@@ -8,7 +8,12 @@
 
 <%= f.input :lane_number, label: false %>
 <%= f.input :upstream_identifier, label: false %>
-<%= f.association :biosample, collection: Biosample.non_plated.order("LOWER(name)"),  label: false %>
+<div style="display: flex">
+  <% if @gel_lane.biosample.present? %>
+    <%= link_to @gel_lane.biosample.get_record_id, @gel_lane.biosample, style: "font-size: 0.8em; flex: 1;" %>
+  <% end %>
+  <%= f.association :biosample, collection: Biosample.non_plated.order("LOWER(name)"),  label: false, wrapper_html: {style: "flex: 4;"} %>
+</div>
 <%= f.input :sample_volume, label: false, placeholder: "µL", input_html: {value: @gel_lane.sample_volume || defaults["sample_volume"]}, 
     label_html: {"data-toggle": "tooltip", title: "The volume in µL of sample loaded into this lane of the gel."} %>
   
