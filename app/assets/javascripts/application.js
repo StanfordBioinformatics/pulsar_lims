@@ -286,7 +286,6 @@ $(function() {
             return;
           }
           $rm.fadeOut(function(){
-            $rm.fadeOut();
             $rm.remove();
           })
           if ($(event.target).closest("a").hasClass("sequencing_result")) {

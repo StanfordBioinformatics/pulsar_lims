@@ -39,6 +39,7 @@ class BiosampleSerializer < ActiveModel::Serializer
   has_one :vendor
   has_many :chipseq_experiments
   has_many :documents
+  has_many :immunoblots
   has_many :libraries
   has_many :biosample_parts
   has_many :pooled_biosamples

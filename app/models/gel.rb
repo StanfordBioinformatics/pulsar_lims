@@ -21,6 +21,7 @@ class Gel < ActiveRecord::Base
 
   scope :persisted, lambda { where.not(id: nil) }
   scope :available, lambda { where(immunoblot_id: nil, pcr_id: nil) }
+  scope :immunoblot_gels, lambda { where.not(immunoblot_id: nil) }
 
   def self.policy_class
     ApplicationPolicy

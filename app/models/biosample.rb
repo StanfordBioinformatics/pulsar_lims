@@ -17,7 +17,7 @@ class Biosample < ActiveRecord::Base
   has_many :shippings, dependent: :destroy
   has_many :gel_lanes
   has_many :gels, through: :gel_lanes
-  has_many :immunoblots, through: :gels
+  has_many :immunoblots,  -> { Biosample.joins(:gels).merge(Gel.unscoped.immunoblot_gels) }, through: :gels
   has_many :pcrs
   has_and_belongs_to_many :pooled_from_biosamples, class_name: "Biosample", join_table: "biosamples_pooled_from_biosamples", foreign_key: "biosample_id", association_foreign_key: "pooled_from_biosample_id"
   has_and_belongs_to_many :pooled_biosamples, class_name: "Biosample", join_table: "biosamples_pooled_from_biosamples", foreign_key: "pooled_from_biosample_id", association_foreign_key: "biosample_id"
