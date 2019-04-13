@@ -3,7 +3,7 @@
 <% if @gel_lane.id.present? %>
   <span style="display: none" id="gel-lane-persisted"></span>
 <% end %>
-<%= f.input :id, as: :hidden %>
+<%= f.input :id, label: false, disabled: true %>
 <%= f.association :gel, as: :hidden %>
 
 <%= f.input :lane_number, label: false %>

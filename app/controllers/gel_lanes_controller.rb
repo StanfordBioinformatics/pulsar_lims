@@ -1,5 +1,5 @@
 class GelLanesController < ApplicationController
-  before_action :set_gel_lane, only: [:edit, :destroy]
+  before_action :set_gel_lane, only: [:edit, :destroy, :show]
 
   def new
     authorize GelLane
@@ -8,6 +8,15 @@ class GelLanesController < ApplicationController
 
   def edit
     authorize @gel_lane
+  end
+
+  def show
+    authorize @gel_lane
+    redirect_to @gel_lane.gel
+  end
+
+  def index
+    super
   end
 
   def create

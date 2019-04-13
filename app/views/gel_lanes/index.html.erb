@@ -1,0 +1,59 @@
+<header class="index-view-header">
+  <h1 class="index-page-header">                                                                       
+    <%= @title || "gel lanes" %>                                                                      
+  </h1>
+  <p class="model-definition"><%= GelLane::DEFINITION %></p>
+  
+  <ul class="actions">
+    <%= render partial: "application_partials/auth_new_record" %>
+  </ul> 
+  <%= render partial: "application_partials/total", locals: {records: @records} %>
+</header>
+
+<table class="attributes index">
+  <thead>
+    <tr>
+      <%= render partial: "application_partials/index_common_table_headers" %>
+      <th>Lane number</th>
+      <th>Pass?</th>
+      <th>Gel?</th>
+      <th>Biosample</th>
+      <th>Sample volume</th>
+      <th>Sample concentration</th>
+      <th>Expected product size</th>
+      <th>Low target band intensity</th>
+      <th>Needs mass spec?</th>
+      <th>Needs additional PCR?</th>
+      <th>Submitter comments</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @records.each do |rec| %>
+      <tr>
+        <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
+        <td><%= rec.lane_number %></td>
+        <td><%= rec.pass? %></td>
+        <td><%= link_to_record rec.gel %></td>
+        <td><%= link_to_record rec.biosample %></td>
+        <td><%= rec.sample_volume %></td>
+        <td>
+          <% if rec.sample_concentration %>
+            <%= "#{rec.sample_concentration} #{rec.sample_concentration_units.name}" %>
+          <% end %>
+        </td>
+        <td><%= rec.expected_product_size %></td>
+        <td><%= rec.low_target_band_intensity? %></td>
+        <td><%= rec.needs_mass_spec? %></td>
+        <td><%= rec.needs_additional_pcr? %></td>
+        <td><%= rec.submitter_comments %></td>
+        <td>
+          <%= link_to fa_icon("trash"), rec %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render partial: "application_partials/index_paging" %>

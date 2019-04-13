@@ -1,0 +1,80 @@
+<%= render partial:  "application_partials/header", locals: {rec: @gel_lane } %>
+
+<table class="attributes">
+  <tr>
+    <th><strong>Lane number:</strong></th>
+    <td><%= @gel_lane.lane_number %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Pass:</strong></th>
+    <td><%= @gel_lane.pass? %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Gel:</strong></th>
+    <td><%= link_to_record @gel_lane.gel %></td>
+  </tr>
+
+  <tr>
+    <th><strong>Biosample:</strong></th>
+    <td>
+      <%= link_to_record @gel_lane.biosample %>
+    </td>
+  </tr>
+
+  <tr>
+    <th><strong>Sample volume:</strong></th>
+    <td><%= "#{@gel_lane.sample_volume} µL" %></td>
+  </tr>
+
+  <% if @gel_lane.sample_concentration.present? %>
+    <tr>
+      <th><strong>Sample Concentration:</strong></th>
+      <td><%= "#{@gel_lane.sample_concentration} #{@gel_lane.sample_concentration_units.name}" %></td>
+    </tr>
+  <% end %>
+
+  <% if @gel_lane.expected_product_size.present? %>
+    <tr>
+      <th><strong>Expected product size</strong></th>
+      <td><%= @gel_lane.expected_product_size %></td>
+    </tr>
+  <% end %>
+
+  <% if @gel_lane.low_target_band_intensity.present? %>
+    <tr>
+      <th><strong>Low target band intensity:</strong></th>
+      <td><%= @gel_lane.low_target_band_intensity? %></td>
+    </tr>
+  <% end %>
+
+  <% if @gel_lane.needs_mass_spec.present? %>
+    <tr>
+      <th><strong>Needs mass spec:</strong></th>
+      <td><%= @gel_lane.needs_mass_spec? %></td>
+    </tr>
+  <% end %>
+
+  <% if @gel_lane.needs_additional_pcr? %>
+    <tr>
+      <th><strong>Needs additional PCR:</strong></th>
+      <td><%= @gel_lane.needs_additional_pcr? %></td>
+    </tr>
+  <% end %>
+
+  <tr>
+    <th><strong>Submitter Comments:</strong></th>
+    <td><%= @gel_lane.submitter_comments %>
+  </tr>
+
+  <tr class="notes-row">
+    <th><strong>Notes:</strong></th>
+    <td><%= simple_format(@gel_lane.notes) %></td>
+  </tr>
+</table>
+
+<!-- Hidden form that is used when the user tries to edit the 'notes'. -->
+<%= render partial: "application_partials/edit_notes", locals: {rec: @gel_lane} %>
+
+<%= link_to 'Back', gel_lanes_path %>
