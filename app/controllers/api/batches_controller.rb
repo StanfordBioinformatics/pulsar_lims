@@ -1,4 +1,4 @@
-class Api::BatchsController < Api::ApplicationController
+class Api::BatchesController < Api::ApplicationController
   #example with curl:
   # curl -H "Authorization: Token token=${token}" http://localhost:3000/api/batches/3
   before_action :set_batch, only: [:show, :update, :destroy]

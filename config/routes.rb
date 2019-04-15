@@ -142,6 +142,16 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
 
+    resources :batches do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
+    resources :batch_items do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :biosamples do
       get :parent_ids, on: :member
       post :find_by, on: :collection
@@ -164,16 +174,6 @@ Pulsar::Application.routes.draw do
     end
 
     resources :biosample_term_names do
-      post :find_by, on: :collection
-      post :find_by_or, on: :collection
-    end
-
-    resources :batches do
-      post :find_by, on: :collection
-      post :find_by_or, on: :collection
-    end
-
-    resources :batch_items do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
     end
