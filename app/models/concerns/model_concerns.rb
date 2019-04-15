@@ -18,13 +18,6 @@ module ModelConcerns
   end
 
   def display
-    if self.respond_to?(:name)
-      # The 'name' attribute isn't all all objects, and isn't required for all Models that have it,
-      # although it is for most.
-      if self.name.present?
-        return self.name
-      end
-    end
-    return self.get_record_id()
+    return self.to_label()
   end
 end
