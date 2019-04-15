@@ -28,10 +28,10 @@
   </tr>
 
   <tr>
-    <th><strong>Batch:</strong></th>
+    <th><strong>Batches:</strong></th>
     <td>
-      <% if @biosample.batch.present? %>
-        <%= link_to_record @biosample.batch %>
+      <% if @biosample.batches.any? %>
+        <%= render partial: "application_partials/link_to_has_many", locals: {links: @biosample.batches} %>
       <% end %>
     </td>
   </tr>
