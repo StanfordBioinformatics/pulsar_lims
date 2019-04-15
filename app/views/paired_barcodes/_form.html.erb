@@ -7,7 +7,7 @@
   <%= f.input :add_paired_barcodes, 
       as: :text, 
       placeholder: "TAAGGCGA-TAGATCGC\nCGTACTAG-CTCTCTAT\n...",
-      hint: "Copy and paste paired barcodes. If any have errors, you'll need fix them and paste back back in.",
+      hint: "Copy and paste paired barcodes. If any have errors, you'll need to fix them and paste back back in.",
       label_html: {"data-toggle" => "tooltip", "title" => "Enter 1 or more paired barcodes in uppercase in the form index1-index2. Both indices must be from the selected sequencing library prep kit. There should be one pair per row, and any pair that already exists in the table will be skipped."} %>
 
   <%= render partial: "application_partials/notes", locals: {f: f} %>
