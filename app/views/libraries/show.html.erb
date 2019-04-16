@@ -18,8 +18,8 @@
     <tr>
       <th><strong>Batch:</strong></th>
       <td>
-        <% if @library.biosample.batch.present? %>
-          <%= link_to_record @library.biosample.batch %>
+        <% if @library.biosample.batches.any? %>
+          <%= render partial: "application_partials/link_to_has_many", locals: {links: @library.biosample.batches} %>
         <% end %>
       </td>
     </tr>
