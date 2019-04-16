@@ -63,6 +63,7 @@ class Api::AtacseqsController < Api::ApplicationController
       :notes,
       :single_cell,
       :submitter_comments,
+      :upstream_identifier,
       :replicate_ids => [],
       :document_ids => []
     )

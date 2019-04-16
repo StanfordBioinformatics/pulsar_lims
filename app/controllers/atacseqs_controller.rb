@@ -97,6 +97,7 @@ class AtacseqsController < ApplicationController
         :notes,
         :single_cell,
         :submitter_comments,
+        :upstream_identifier,
         :document_ids => [],
         :replicate_ids => [],
         documents_attributes: [:id, :_destroy]
