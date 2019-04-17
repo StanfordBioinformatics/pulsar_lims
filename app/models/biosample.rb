@@ -13,7 +13,7 @@ class Biosample < ActiveRecord::Base
   # Support pooled from
   ###
   has_many :batch_items
-  has_many :batches, through: :batch_items
+  has_many :batches, through: :batch_items, uniq: true
   has_many :shippings, dependent: :destroy
   has_many :gel_lanes
   has_many :gels, through: :gel_lanes
@@ -28,8 +28,8 @@ class Biosample < ActiveRecord::Base
   # This biosample is a prototype used as a reference for creating the biosamples in the wells of the plates on
   # the single_cell_sorting experiment. kk
   has_many :wt_for_chipseq_experiments, class_name: "ChipseqExperiment", foreign_key: :wild_type_control_id 
-  has_many :chipseq_experiments, -> {unscope(:order)}, through: :libraries
-  has_many :atacseqs, -> {unscope(:order)}, through: :libraries
+  has_many :chipseq_experiments, -> {unscope(:order)}, through: :libraries, uniq: true
+  has_many :atacseqs, -> {unscope(:order)}, through: :libraries, uniq: true
   belongs_to :well
   has_many :biosample_parts, class_name: "Biosample", foreign_key: "part_of_id", dependent: :destroy
   belongs_to :part_of, class_name: "Biosample"
