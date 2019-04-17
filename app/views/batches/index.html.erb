@@ -15,6 +15,7 @@
     <tr>
       <%= render partial: "application_partials/index_common_table_headers" %>
       <th>Analyst</th>
+      <th>Num. Items</th>
       <th>Crosslinking method</th>
       <th>Date</th>
       <th>Actions</th>
@@ -26,6 +27,7 @@
       <tr>
         <%= render partial: "application_partials/index_common_table_cells", locals: {record: rec} %>
         <td><%= link_to_record rec.analyst %></td>
+        <td><%= rec.batch_items.count %></td>
         <td>
           <% if rec.crosslinking_method.present? %>
             <%= rec.crosslinking_method %>
