@@ -5,7 +5,7 @@
     <div class="form-group">
       <%= link_to fa_icon("close lg"), "#", class: "xfade-out" %>
       <%= label_tag :biosample, "Biosample" %>
-      <%= select_tag :biosample, options_from_collection_for_select(@selection, :id, :name), {include_blank: true} %>
+      <%= select_tag :biosample, options_from_collection_for_select(@selection, :id, :to_label), {include_blank: true} %>
       <div id="library_selector"></div>
     </div>
     <%= f.button :submit, "Update", class: "reg-btn" %>
