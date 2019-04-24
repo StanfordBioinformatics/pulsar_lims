@@ -15,7 +15,6 @@ class SequencingRun< ActiveRecord::Base
 
   validates :status, presence: true, inclusion: {in: Enums::SEQUENCING_STATUS, message: "must be an element in the list #{Enums::SEQUENCING_STATUS}."}
   validates :data_storage_id, presence: {message: "must be set when the status is set to 'finished'.", if:  "status == 'finished'"}
-  validates :name, length: { minimum: 2, maximum: 40 }
   validates :name, presence: true
   validates_uniqueness_of :name, scope: :sequencing_request_id
 
