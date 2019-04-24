@@ -17,7 +17,7 @@
       <% if not res.merged? %>
         <% barcode = res.library.get_indexseq %>
           <% if barcode %>
-            <%= link_to barcode.display, [barcode.sequencing_library_prep_kit, barcode] %>
+            <%= link_to_record barcode %>
           <% else %>
             N/A
           <% end %>
