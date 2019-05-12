@@ -34,7 +34,7 @@ class ChipseqExperiment < ActiveRecord::Base
     self.control_replicates.each do |ctl_lib|
       ctl_bio = ctl_lib.biosample
       self.replicate_ids.each do |exp_lib_id|
-        exp_bio_id = Library(exp_lib_id).biosample.id
+        exp_bio_id = Library.find(exp_lib_id).biosample.id
         if ctl_bio.parent_ids.include?(exp_bio_id)
           if not res.include?(exp_bio_id)
             res[exp_bio_id] = []
