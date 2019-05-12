@@ -31,13 +31,15 @@ class ChipseqExperiment < ActiveRecord::Base
     # Biosample via either the part_of attribute or the pooled_from_biosamples attribute. 
     # Experimental Biosamples that don't have controls don't appear in the hash. 
     res = {}
-    self.control_replicates.each do |c|
-      self.replicate_ids.each do |r|
-        if c.parent_ids.include?(r)
-          if not res.include?(r)
-            res[r] = []
+    self.control_replicates.each do |ctl_lib|
+      ctl_bio = ctl_lib.biosample
+      self.replicate_ids.each do |exp_lib_id|
+        exp_bio_id = Library(exp_lib_id).biosample.id
+        if ctl_bio.parent_ids.include?(exp_bio_id)
+          if not res.include?(exp_bio_id)
+            res[exp_bio_id] = []
           end
-          res[r] << c.id
+          res[exp_bio_id] << ctl_bio.id
         end
       end
     end
