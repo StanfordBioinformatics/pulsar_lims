@@ -60,11 +60,11 @@ class Api::GelsController < Api::ApplicationController
       :caption,                                                                                      
       :immunoblot_id,                                                                                
       :notes,                                                                                        
-      :pcr_id,                                                                                       
       :percentage,                                                                                   
       :run_date,                                                                                     
       :voltage,                                                                                      
       gel_image_ids: [],
+      pcr_ids: []
     )
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190602044912) do
+ActiveRecord::Schema.define(version: 20190602054111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -675,11 +675,9 @@ ActiveRecord::Schema.define(version: 20190602044912) do
     t.string   "percentage"
     t.text     "caption"
     t.integer  "immunoblot_id"
-    t.integer  "pcr_id"
   end
 
   add_index "gels", ["immunoblot_id"], name: "index_gels_on_immunoblot_id", using: :btree
-  add_index "gels", ["pcr_id"], name: "index_gels_on_pcr_id", using: :btree
   add_index "gels", ["user_id"], name: "index_gels_on_user_id", using: :btree
 
   create_table "genome_locations", force: :cascade do |t|
@@ -1320,7 +1318,6 @@ ActiveRecord::Schema.define(version: 20190602044912) do
   add_foreign_key "gel_lanes", "units", column: "sample_concentration_units_id"
   add_foreign_key "gel_lanes", "users"
   add_foreign_key "gels", "immunoblots"
-  add_foreign_key "gels", "pcrs"
   add_foreign_key "gels", "users"
   add_foreign_key "genome_locations", "chromosomes"
   add_foreign_key "genome_locations", "users"

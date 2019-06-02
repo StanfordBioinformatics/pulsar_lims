@@ -78,6 +78,7 @@ class PcrsController < ApplicationController
           :document_id,
           :extension_time,
           :forward_primer_id,
+          :gel_id,
           :genomic_dna_concentration,
           :genomic_dna_concentration_units_id,
           :genomic_dna_prep_date,

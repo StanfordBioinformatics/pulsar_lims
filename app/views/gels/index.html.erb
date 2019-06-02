@@ -34,9 +34,7 @@
           <% end %>
         </td>
         <td>
-          <% if rec.pcr.present? %>
-            <%= link_to_record(rec.pcr) %>
-          <% end %>
+          <%= render partial: "application_partials/link_to_has_many", locals: {links: rec.pcrs} %>
         </td>
         <td><%= "#{rec.percentage}%" %></td>
         <td><%= rec.run_date %></td>

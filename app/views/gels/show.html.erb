@@ -9,11 +9,8 @@
       <td>
         <%= link_to_record(@gel.immunoblot) %>
       </td>
-    <% elsif @gel.pcr.present? %>
-      <th><strong>PCR:</strong></th>
-      <td>
-        <%= link_to_record(@gel.pcr) %>
-      </td>
+    <% elsif @gel.pcrs.any? %>
+      <td><%= render partial: "application_partials/link_to_has_many", locals: {links: @gel.pcrs} %></td>
     <% end %>
   </tr>
   

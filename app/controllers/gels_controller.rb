@@ -102,10 +102,10 @@ class GelsController < ApplicationController
         :caption,
         :immunoblot_id, 
         :notes,
-        :pcr_id,
         :percentage,
         :run_date,
         :voltage,
+        pcr_ids: [],
         gel_image_ids: [],
         gel_lanes_attributes:  [
           :id,
