@@ -15,7 +15,7 @@ class Pcr < ActiveRecord::Base
   belongs_to :reverse_primer, class_name: "Primer"
   belongs_to :genomic_dna_concentration_units, class_name: "Unit"
   belongs_to :pcr_master_mix
-  has_one :gel, dependent: :destroy
+  belongs_to :gel
 
   validates :biosample, presence: true
   validates :forward_primer, presence: true

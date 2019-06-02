@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190416222322) do
+ActiveRecord::Schema.define(version: 20190602044912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -879,12 +879,14 @@ ActiveRecord::Schema.define(version: 20190416222322) do
     t.integer  "second_pcr_num_cycles"
     t.integer  "forward_primer_id"
     t.integer  "reverse_primer_id"
+    t.integer  "gel_id"
   end
 
   add_index "pcrs", ["analyst_id"], name: "index_pcrs_on_analyst_id", using: :btree
   add_index "pcrs", ["biosample_id"], name: "index_pcrs_on_biosample_id", using: :btree
   add_index "pcrs", ["document_id"], name: "index_pcrs_on_document_id", using: :btree
   add_index "pcrs", ["forward_primer_id"], name: "index_pcrs_on_forward_primer_id", using: :btree
+  add_index "pcrs", ["gel_id"], name: "index_pcrs_on_gel_id", using: :btree
   add_index "pcrs", ["genomic_dna_concentration_units_id"], name: "index_pcrs_on_genomic_dna_concentration_units_id", using: :btree
   add_index "pcrs", ["pcr_master_mix_id"], name: "index_pcrs_on_pcr_master_mix_id", using: :btree
   add_index "pcrs", ["reverse_primer_id"], name: "index_pcrs_on_reverse_primer_id", using: :btree
@@ -1350,6 +1352,7 @@ ActiveRecord::Schema.define(version: 20190416222322) do
   add_foreign_key "pcr_master_mixes", "vendors"
   add_foreign_key "pcrs", "biosamples"
   add_foreign_key "pcrs", "documents"
+  add_foreign_key "pcrs", "gels"
   add_foreign_key "pcrs", "pcr_master_mixes"
   add_foreign_key "pcrs", "primers", column: "forward_primer_id"
   add_foreign_key "pcrs", "primers", column: "reverse_primer_id"
