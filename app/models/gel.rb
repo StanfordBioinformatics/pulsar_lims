@@ -16,10 +16,9 @@ class Gel < ActiveRecord::Base
   validates :voltage, numericality: {greater_than: 0}, allow_blank: true
   validate :validate_pcr_immunoblot # Both shouldn't be present
 
-  accepts_nested_attributes_for :gel_lanes, allow_destroy: true 
+  accepts_nested_attributes_for :gel_lanes, allow_destroy: true
 
   scope :persisted, lambda { where.not(id: nil) }
-  scope :available, lambda { where(immunoblot_id: nil, pcr_id: nil) }
   scope :immunoblot_gels, lambda { where.not(immunoblot_id: nil) }
 
   def self.policy_class
@@ -28,6 +27,22 @@ class Gel < ActiveRecord::Base
 
   def display
     "#{Gel::ABBR}-#{self.id}"
+  end
+
+  def pcr_ids=(ids)
+    """
+    Function : Adds associations to Pcrs that are stored in self.pcrs.
+    Args     : ids - array of Pcr IDs.
+    """
+    ids.each do |i|
+      if i.blank?
+        next
+      end
+      doc = Pcr.find(i)
+      if not self.pcrs.include? doc
+        self.pcrs << doc
+      end
+    end
   end
 
 private

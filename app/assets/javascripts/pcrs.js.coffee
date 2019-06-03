@@ -46,7 +46,7 @@ $ ->
      if not gel_id
          return
      $.ajax({
-       data: {gel: {pcr_id: $("#record_id").text()}},
+       data: {gel: {pcr_ids: [$("#record_id").text()]}},
        dataType: "json",
        url: "/gels/" + gel_id,
        type: "PUT",

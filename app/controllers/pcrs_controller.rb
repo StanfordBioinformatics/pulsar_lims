@@ -46,6 +46,7 @@ class PcrsController < ApplicationController
 
   def update
     authorize @pcr
+    p params
     respond_to do |format|
       if @pcr.update(pcr_params)
         format.html { redirect_to @pcr, notice: 'Pcr was successfully updated.' }
