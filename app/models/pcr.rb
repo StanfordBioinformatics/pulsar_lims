@@ -33,14 +33,18 @@ class Pcr < ActiveRecord::Base
   private
  
   def validate_forward_primer
-    if self.forward_primer.direction != Primer::FORWARD_D
-      self.errors[:forward_primer] << "must be a forward primer."
+    if self.forward_primer.present?
+      if self.forward_primer.direction != Primer::FORWARD_D
+        self.errors[:forward_primer] << "must be a forward primer."
+      end
     end
   end
 
   def validate_reverse_primer
-    if self.reverse_primer.direction != Primer::REVERSE_D
-      self.errors[:reverse_primer] << "must be a reverse primer."
+    if self.reverse_primer.present?
+      if self.reverse_primer.direction != Primer::REVERSE_D
+        self.errors[:reverse_primer] << "must be a reverse primer."
+      end
     end
   end
 end
