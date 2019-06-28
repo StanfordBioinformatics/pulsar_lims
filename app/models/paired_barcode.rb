@@ -20,8 +20,9 @@ class PairedBarcode < ActiveRecord::Base
   validates :sequencing_library_prep_kit, presence: true
   validates :index1_id, presence: true
   validates :index2_id, presence: true
+  validate :verify_name
 
-  before_save :verify_sequencing_kit, :verify_index_number, :verify_name
+  before_save :verify_sequencing_kit, :verify_index_number
 
   scope :persisted, lambda { where.not(id: nil) }
   scope :kit, lambda {|kit_id| where(sequencing_library_prep_kit_id: kit_id)} 
