@@ -78,7 +78,9 @@ class PairedBarcode < ActiveRecord::Base
 
     def verify_name
       if self.name.blank?
-        self.name = self.make_name
+        if self.index1.present? and self.index2.present?
+          self.name = PairedBarcode.make_name(self.index1.name, self.index2.name)
+        end
       end
     end
 end
