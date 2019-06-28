@@ -21,7 +21,7 @@ class PairedBarcode < ActiveRecord::Base
   validates :index1_id, presence: true
   validates :index2_id, presence: true
 
-  before_save :verify_sequencing_kit, :verify_index_number
+  before_save :verify_sequencing_kit, :verify_index_number, :verify_name
 
   scope :persisted, lambda { where.not(id: nil) }
   scope :kit, lambda {|kit_id| where(sequencing_library_prep_kit_id: kit_id)} 
@@ -72,6 +72,12 @@ class PairedBarcode < ActiveRecord::Base
       if self.index2.index_number != 2
         self.errors.add(:index2, ": The referenced barcode does not have the index_number attribute set to 2.")
         return false
+      end
+    end
+
+    def verify_name
+      if self.name.blank?
+        self.name = self.make_name
       end
     end
 end
