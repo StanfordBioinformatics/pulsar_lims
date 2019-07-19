@@ -25,6 +25,9 @@
 
 <h3 class="section">Image</h3>
 <div>
+  <p>
+    <%= @gel_image.image.split("/")[-1] %>
+  </p>
   <%= image_tag @gel_image.image, alt: "gel", class: "modal-for-image", style: "width: 100px;" %>
 </div>
 </br></br>
