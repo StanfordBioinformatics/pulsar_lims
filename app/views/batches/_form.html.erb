@@ -8,7 +8,7 @@
 
   <%= f.association :analyst %>
 
-  <%= f.input :date, label: "Batch date" %>
+  <%= f.input :date, label: "Batch date", include_blank: true %>
 
   <% if @batch.batch_type == Batch::CHIPSEQ %>
     <%= f.input :crosslinking_method, selected: @batch.crosslinking_method || defaults["crosslinking_method"], collection: Enums::CROSSLINKING_METHOD, label_html: {"data-toggle": "tooltip", title: "Crosslinking protocol used in the ChIP experiment."} %>
