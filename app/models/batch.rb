@@ -13,7 +13,7 @@ class Batch < ActiveRecord::Base
   #default_scope {order("lower(name)")} #no name column
   belongs_to :user
   belongs_to :analyst, class_name: "User"
-  belongs_to :library_prototype, class_name: "Library", dependent: :destroy 
+  belongs_to :library_prototype, class_name: "Library"
   has_many :batch_items, dependent: :destroy
   has_many :biosamples, through: :batch_items
 
