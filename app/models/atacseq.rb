@@ -10,7 +10,7 @@ class Atacseq < ActiveRecord::Base
   has_and_belongs_to_many :documents
   has_many :replicates, class_name: "Library", dependent: :nullify
 
-  validates :name, presence: true, uniqueness: true 
+  validates :name, presence: true, uniqueness: true
 
   scope :single_cell, lambda { where(single_cell: true) }
   scope :bulk, lambda { where(single_cell: false) }
@@ -21,19 +21,19 @@ class Atacseq < ActiveRecord::Base
     ApplicationPolicy
   end
 
-  def replicate_ids=(ids)                                                                              
-    """                                                                                                
-    Function : Adds associations to Libraries that are stored in self.replicates.                      
-    Args     : ids - array of Library IDs.                                                             
-    """                                                                                                
-    ids.each do |i|                                                                                    
-      if i.blank?                                                                                      
-        next                                                                                           
-      end                                                                                              
-      rec = Library.find(i)                                                                            
-      if not self.replicates.include? rec                                                              
-        self.replicates << rec                                                                         
-      end                                                                                              
-    end                                                                                                
-  end 
+  def replicate_ids=(ids)
+    """
+    Function : Adds associations to Libraries that are stored in self.replicates.
+    Args     : ids - array of Library IDs.
+    """
+    ids.each do |i|
+      if i.blank?
+        next
+      end
+      rec = Library.find(i)
+      if not self.replicates.include? rec
+        self.replicates << rec
+      end
+    end
+  end
 end

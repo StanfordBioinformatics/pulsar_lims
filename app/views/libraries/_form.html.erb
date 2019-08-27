@@ -77,4 +77,8 @@
       input_html: {value: @library.size_range || defaults["size_range"]},
       label_html: {"data-toggle" => "tooltip", "title" => "The measured size range of the purified nucleic acid, in bp."} %>
 
+  <% if @library.atacseq_id.present? %>
+    <%= f.association :atacseq %>
+  <% end %>
+
   <%= render partial: "application_partials/notes", locals: {f: f} %>

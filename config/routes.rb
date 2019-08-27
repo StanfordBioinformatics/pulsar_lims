@@ -4,7 +4,9 @@ Pulsar::Application.routes.draw do
     get :select_options, on: :collection
     get :mate_primer_selection, on: :collection
   end
+
   resources :gel_images
+
   resources :atacseqs do
     get :select_biosample_libraries, on: :member
     get :single_cell, on: :collection

@@ -157,6 +157,13 @@
     <th><strong>Notes</strong></th>
     <td><%= simple_format(@library.notes) %></td>
   </tr>
+
+  <% if @library.atacseq_id.present? %>
+    <tr>
+      <th><strong>ATAC-seq</strong></th>
+      <td><%= link_to @library.atacseq.id, @library.atacseq %></td>
+    </tr>
+  <% end %>
 </table>
 
 <!-- Hidden form that is used when the user tries to edit the 'notes'. -->

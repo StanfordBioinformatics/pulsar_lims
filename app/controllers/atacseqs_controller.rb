@@ -82,7 +82,7 @@ class AtacseqsController < ApplicationController
   end
 
   def destroy
-    ddestroy(@atacseq, redirect_path_success: atacseq_path)
+    ddestroy(@atacseq, redirect_path_success: atacseqs_path)
   end
 
   private
