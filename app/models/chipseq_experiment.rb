@@ -10,7 +10,7 @@ class ChipseqExperiment < ActiveRecord::Base
   belongs_to :target
   has_and_belongs_to_many :documents
   # A chipseq_starting_biosamples is one that is the ancestor of one or more 'control_replicates' and 'replicates'.
-  has_many :chipseq_starting_biosamples, class_name: "Biosample", foreign_key: :chipseq_starting_biosample_id
+  has_many :chipseq_starting_biosamples, class_name: "Biosample", foreign_key: :chipseq_starting_biosample_id, dependency: :nullify
   belongs_to :wild_type_control, class_name: "Biosample"
   has_many :control_replicates, -> {controls}, class_name: "Library", dependent: :nullify
   has_many :replicates, -> {experimental}, class_name: "Library", dependent: :nullify
