@@ -22,3 +22,5 @@ def import_into_elasticsearch
     end
   end
 end
+
+import_into_elasticsearch()
