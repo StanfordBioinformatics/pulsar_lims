@@ -265,6 +265,11 @@ Pulsar::Application.routes.draw do
       post :find_by_or, on: :collection
     end
     
+    resources :pcrs do
+      post :find_by, on: :collection
+      post :find_by_or, on: :collection
+    end
+
     resources :nucleic_acid_terms do
       post :find_by, on: :collection
       post :find_by_or, on: :collection
