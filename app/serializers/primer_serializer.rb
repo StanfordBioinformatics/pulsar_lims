@@ -4,6 +4,6 @@ class PrimerSerializer < ActiveModel::Serializer
   # https://api.rubyonrails.org/classes/ActiveModel/Serializers/JSON.html
   self.root = false
   
-  attributes :id, :name, :description, :notes, :direction, :sequence, :melting_temperature, :date_ordered
+  attributes :id, :name, :description, :notes, :direction, :sequence, :melting_temperature, :date_ordered, :target_id
   has_one :user
 end
