@@ -17,7 +17,7 @@ class ChipseqExperiment < ActiveRecord::Base
 
   accepts_nested_attributes_for :documents, allow_destroy: true
 
-  validates :chipseq_starting_biosample_ids, presence: true
+  #validates :chipseq_starting_biosample_ids, presence: true
   validates :name, presence: true, uniqueness: true
   validates :target, presence: true
 
