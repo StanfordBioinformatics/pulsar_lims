@@ -9,6 +9,7 @@ class ChipseqExperimentSerializer < ActiveModel::Serializer
              :notes,
              :submitter_comments,
              :target_id,
+             :chipseq_starting_biosample_ids,
              :upstream_identifier,
              :upstream_identifier,
              :wild_type_control_id,
