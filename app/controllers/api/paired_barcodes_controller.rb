@@ -59,7 +59,8 @@ class Api::PairedBarcodesController < Api::ApplicationController
     params.require(:paired_barcode).permit(
         :add_paired_barcodes,                                                                          
         :index1_id,                                                                                    
-        :index2_id,                                                                                    
+        :index2_id,
+        :name,        
         :notes,                                                                                        
         :sequencing_library_prep_kit_id
     )
