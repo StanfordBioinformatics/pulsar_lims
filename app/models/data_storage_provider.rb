@@ -15,8 +15,9 @@ class DataStorageProvider < ActiveRecord::Base
   AZURE_STORAGE_ACCOUNT = "Azure Storage Account" #Equivalent to what AWS and Azure call bucket. 
   DNANEXUS = "DNAnexus"
   GOOGLE_STORAGE_BUCKET = "Google Storage Bucket"
+  SCG = "Stanford Center for Genomics"
   
-  PROVIDERS = [AWS_S3_BUCKET,AZURE_STORAGE_ACCOUNT,DNANEXUS,GOOGLE_STORAGE_BUCKET]
+  PROVIDERS = [AWS_S3_BUCKET,AZURE_STORAGE_ACCOUNT,DNANEXUS,GOOGLE_STORAGE_BUCKET, SCG]
 
   validate :check_name_in_providers
 
