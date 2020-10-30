@@ -36,4 +36,20 @@ class Atacseq < ActiveRecord::Base
       end
     end
   end
+  
+  def document_ids=(ids)
+    """
+    Function : Adds associations to Documents that are stored in self.documents.
+    Args     : ids - array of Document IDs.
+    """
+    ids.each do |i|
+      if i.blank?
+        next
+      end
+      doc = Document.find(i)
+      if not self.documents.include? doc
+        self.documents << doc
+      end
+    end
+  end
 end
