@@ -88,6 +88,6 @@ class PcrsController < ApplicationController
           :pcr_master_mix_id,
           :reverse_primer_id,
           :second_pcr_num_cycles,
-          :success)
+          :sanger_sequencing_success)
     end
 end
