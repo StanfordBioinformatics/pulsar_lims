@@ -27,5 +27,5 @@
   <%= f.input :annealing_temperature, label: "Annealing temp.", label_html: {class: "celsius"} %>
   <%= f.input :extension_time, placeholder: "seconds", label_html: {"data-toggle": "tooltip", "title": "Extension time measured in seconds."} %>
   <%= f.input :num_cycles, label_html: {"data-toggle": "tooltip", "title": "The number of PCR cycles."} %>
-  <%# f.input :success, label_html: {"data-toggle": "tooltip", "title": "True if the PCR worked (gave a product), False otherwise."}  %>
+  <%= f.input :success, label_html: {"data-toggle": "tooltip", "title": "True if the PCR worked (gave a product), False otherwise."}  %>
   <%= f.input :second_pcr_num_cycles, label_html: {"data-toggle": "tooltip", "title": "Number of additional PCR cycles required on a band cut out from the original PCR gel."} %>
