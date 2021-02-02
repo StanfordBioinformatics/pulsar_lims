@@ -1,7 +1,11 @@
 module ModelConcerns
 
   def get_record_id
-    return "#{self.class::ABBR}-#{self.id}"
+    if self.class == Atacseq && self.single_cell
+      return "scAS-#{self.id}"
+    else
+      return "#{self.class::ABBR}-#{self.id}"
+    end
   end
 
   def to_label 
