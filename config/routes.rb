@@ -10,6 +10,8 @@ Pulsar::Application.routes.draw do
   resources :atacseqs do
     get :select_biosample_libraries, on: :member
     get :single_cell, on: :collection
+    get :snrna, on: :collection
+    get :multiome, on: :collection
     get :bulk, on: :collection
     get :select_experimental_biosample, on: :member
   end
@@ -19,6 +21,8 @@ Pulsar::Application.routes.draw do
   resources :batches do
     get :bulk_atacseq_index, on: :collection
     get :sc_atacseq_index, on: :collection
+    get :sn_rnaseq_index, on: :collection
+    get :multiome_atacseq_index, on: :collection
     get :chipseq_index, on: :collection
     get :refresh_batch_item_row, on: :member 
     get :add_batch_item, on: :member

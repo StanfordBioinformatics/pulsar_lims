@@ -12,6 +12,8 @@ class Atacseq < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
+  scope :multiome, lambda { where(multiome: true) }
+  scope :snrna, lambda { where(snrna: true) }
   scope :single_cell, lambda { where(single_cell: true) }
   scope :bulk, lambda { where(single_cell: false) }
 

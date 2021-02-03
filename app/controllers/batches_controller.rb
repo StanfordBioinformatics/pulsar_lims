@@ -11,6 +11,11 @@ class BatchesController < ApplicationController
     title = "Batches for scATAC-seq" 
     redirect_to action: index, scope: :sc_atacseq, title: title
   end
+  
+  def sn_rnaseq_index
+    title = "Batches for snRNA-seq" 
+    redirect_to action: index, scope: :sn_rnaseq, title: title
+  end
 
   def chipseq_index
     title = "Batches for ChIP-seq"
@@ -77,7 +82,9 @@ class BatchesController < ApplicationController
     scope = params[:scope]
     defaults = {}
     if scope.present?
-      if scope == "sc_atacseq"
+      if scope == "sn_rnaseq"
+        defaults = {batch_type: Batch::SN_RNASEQ}
+      elsif scope == "sc_atacseq"
         defaults = {batch_type: Batch::SC_ATACSEQ}
       elsif scope == "bulk_atacseq"
         defaults = {batch_type: Batch::BULK_ATACSEQ}

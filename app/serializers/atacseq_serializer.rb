@@ -7,6 +7,8 @@ class AtacseqSerializer < ActiveModel::Serializer
              :name, 
              :notes,
              :single_cell,
+             :snrna,
+             :multiome,
              :submitter_comments,
              :upstream_identifier,
              :updated_at,

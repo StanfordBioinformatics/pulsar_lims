@@ -3,6 +3,8 @@ module ModelConcerns
   def get_record_id
     if self.class == Atacseq && self.single_cell
       return "scAS-#{self.id}"
+    elsif self.class == Atacseq && self.snrna
+      return "snRNA-#{self.id}"
     else
       return "#{self.class::ABBR}-#{self.id}"
     end

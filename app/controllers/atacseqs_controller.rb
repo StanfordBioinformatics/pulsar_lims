@@ -1,7 +1,17 @@
 class AtacseqsController < ApplicationController
   before_action :set_atacseq, only: [:show, :edit, :update, :destroy, :select_experimental_biosample, :select_biosample_libraries]
-  skip_after_action :verify_authorized, only: [:select_experimental_biosample, :single_cell, :bulk, :select_biosample_libraries]
+  skip_after_action :verify_authorized, only: [:select_experimental_biosample, :multiome, :small_nuclear, :single_cell, :bulk, :select_biosample_libraries]
 
+  def multiome
+    title = "Multiome-Seq Experiments"
+    redirect_to action: index, scope: :multiome, title: title
+  end
+  
+  def small_nuclear
+    title = "Small nuclear RNA-Seq Experiments"
+    redirect_to action: index, scope: :snrna, title: title
+  end
+  
   def single_cell
     title = "Single Cell ATAC-Seq Experiments"
     redirect_to action: index, scope: :single_cell, title: title
@@ -43,6 +53,8 @@ class AtacseqsController < ApplicationController
     if scope.present?
       if scope == "single_cell"
         defaults = {single_cell: true}
+      elsif scope == "snrna"
+        defaults = {snrna: true}
       end 
     end
     @atacseq = Atacseq.new(defaults)
@@ -96,6 +108,8 @@ class AtacseqsController < ApplicationController
         :name,
         :notes,
         :single_cell,
+        :snrna,
+        :multiome,
         :submitter_comments,
         :upstream_identifier,
         :document_ids => [],

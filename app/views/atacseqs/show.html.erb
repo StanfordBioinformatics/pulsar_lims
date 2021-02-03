@@ -11,6 +11,16 @@
       <th><strong>Single cell:</strong></th>
       <td><%= @atacseq.single_cell? %></td>
     </tr>
+    
+    <tr>
+      <th><strong>Small nuclear:</strong></th>
+      <td><%= @atacseq.snrna? %></td>
+    </tr>
+    
+    <tr>
+      <th><strong>Multiome:</strong></th>
+      <td><%= @atacseq.multiome? %></td>
+    </tr>
 
     <tr>
       <th><strong>Documents:</strong></th>

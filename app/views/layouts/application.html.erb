@@ -142,6 +142,8 @@
                 <span class="navbar-brand"><h5>Experiments<h5></span>
               </div>
               <ul style="" class="nav navbar-nav">
+                <%= link_to "Multiome", multiome_atacseqs_path, class: (controller_name() == "atacseqs" and params[:scope] == "multiome") ? "list-group-item active" : "list-group-item" %>
+                <%= link_to "snRNA-seq", snrna_atacseqs_path, class: (controller_name() == "atacseqs" and params[:scope] == "snrna") ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "scATAC-seq", single_cell_atacseqs_path, class: (controller_name() == "atacseqs" and params[:scope] == "single_cell") ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "Bulk ATAC-seq", bulk_atacseqs_path, class: (controller_name() == "atacseqs" and params[:scope] == "bulk") ? "list-group-item active" : "list-group-item" %>
                 <%= link_to "ChIP-seq", chipseq_experiments_path, class: controller_name() == "chipseq_experiments" ? "list-group-item active" : "list-group-item" %>
