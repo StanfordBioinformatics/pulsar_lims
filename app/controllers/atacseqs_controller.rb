@@ -1,6 +1,6 @@
 class AtacseqsController < ApplicationController
   before_action :set_atacseq, only: [:show, :edit, :update, :destroy, :select_experimental_biosample, :select_biosample_libraries]
-  skip_after_action :verify_authorized, only: [:select_experimental_biosample, :multiome, :small_nuclear, :single_cell, :bulk, :select_biosample_libraries]
+  skip_after_action :verify_authorized, only: [:select_experimental_biosample, :multiome, :snrna, :single_cell, :bulk, :select_biosample_libraries]
 
   def multiome
     title = "Multiome-Seq Experiments"
