@@ -9,7 +9,7 @@
     <% if @scope == "single_cell" %>
       <%= link_to "Batches", sc_atacseq_index_batches_path, class: "reg-btn" %>
     <% elsif @scope == "snrna" %>
-      <%= link_to "Batches", snrna_atacseq_index_batches_path, class: "reg-btn" %>
+      <%= link_to "Batches", sn_rnaseq_index_batches_path, class: "reg-btn" %>
     <% elsif @scope == "bulk" %>
       <%= link_to "Batches", bulk_atacseq_index_batches_path, class: "reg-btn" %>
     <% end %>
