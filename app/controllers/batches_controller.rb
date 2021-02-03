@@ -1,6 +1,6 @@
 class BatchesController < ApplicationController
   before_action :set_batch, only: [:show, :edit, :update, :destroy, :add_batch_item, :create_or_update_batch_item, :refresh_batch_item_row]
-  skip_after_action :verify_authorized, only: [:add_batch_item, :create_or_update_batch_item, :remove_batch_item, :refresh_batch_item_row, :bulk_atacseq_index, :sc_atacseq_index, :chipseq_index]
+  skip_after_action :verify_authorized, only: [:add_batch_item, :create_or_update_batch_item, :remove_batch_item, :refresh_batch_item_row, :bulk_atacseq_index, :sn_rnaseq_index, :sc_atacseq_index, :chipseq_index]
 
   def bulk_atacseq_index
     title = "Batches for bulk ATAC-seq" 
