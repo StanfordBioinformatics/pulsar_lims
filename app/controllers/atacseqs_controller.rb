@@ -7,7 +7,8 @@ class AtacseqsController < ApplicationController
     redirect_to action: index, scope: :multiome, title: title
   end
   
-  def small_nuclear
+  # small nuclear RNA-seq
+  def snrna
     title = "Small nuclear RNA-Seq Experiments"
     redirect_to action: index, scope: :snrna, title: title
   end
