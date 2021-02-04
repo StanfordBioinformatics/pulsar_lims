@@ -54,8 +54,10 @@ class AtacseqsController < ApplicationController
     if scope.present?
       if scope == "single_cell"
         defaults = {single_cell: true}
+        @new_title = "New Single-cell Atacseq"
       elsif scope == "snrna"
         defaults = {snrna: true}
+        @new_title = "New Single-nuclear RNAseq"
       end 
     end
     @atacseq = Atacseq.new(defaults)
