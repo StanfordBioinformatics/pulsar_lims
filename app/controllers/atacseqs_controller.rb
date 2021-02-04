@@ -9,7 +9,7 @@ class AtacseqsController < ApplicationController
   
   # small nuclear RNA-seq
   def snrna
-    title = "Small Nuclear RNA-Seq Experiments"
+    title = "Single Nuclear RNA-Seq Experiments"
     redirect_to action: index, scope: :snrna, title: title
   end
   
