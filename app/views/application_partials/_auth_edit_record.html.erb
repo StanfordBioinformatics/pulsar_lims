@@ -9,8 +9,16 @@
 <% record_class_hr = record.model_name.human.titleize %>
 <% if policy(record).update? %>
   <% if nested.present? %>
-    <li><%= link_to "Edit", [:edit,nested,record, scope].flatten, class: "edit" %></li>
+    <% if scope.present ? %>
+      <li><%= link_to "Edit", [:edit,nested,record, scope].flatten, class: "edit" %></li>
+    <% else %>
+      <li><%= link_to "Edit", [:edit,nested,record].flatten, class: "edit" %></li>
+    <% end %>
   <% else %>
-    <li><%= link_to "Edit", [:edit,record, scope], class: "edit" %></li>
+    <% if scope.present ? %>
+      <li><%= link_to "Edit", [:edit,record, scope], class: "edit" %></li>
+    <% else %>
+      <li><%= link_to "Edit", [:edit,record], class: "edit" %></li>
+    <% end %>
   <% end %>
 <% end %>
