@@ -45,6 +45,7 @@ class AtacseqsController < ApplicationController
 
   def show
     authorize @atacseq
+    @scope = params[:scope]
   end
 
   def new
