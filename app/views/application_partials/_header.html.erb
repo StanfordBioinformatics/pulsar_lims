@@ -29,13 +29,16 @@ Params:
   <% no_destroy_btn = false %>
 <% end %>
 
+<% if local_assigns[:scope].nil? %>
+  <% scope = nil %>
+<% end %>
 
 <%= render partial:  "application_partials/show_form_error_messages", locals: { :model_obj => rec } %>
 <header>
   <h1><%= rec.display %></h1>
 
   <ul class="actions">
-    <%= render partial: "application_partials/auth_edit_record", locals: {record: rec, nested: nested} %>
+    <%= render partial: "application_partials/auth_edit_record", locals: {record: rec, nested: nested, scope: scope} %>
     <% unless no_destroy_btn %>
       <%= render partial: "application_partials/auth_destroy_record", locals: {record: rec, nested: nested} %>
     <% end %>
