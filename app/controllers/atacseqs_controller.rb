@@ -45,7 +45,14 @@ class AtacseqsController < ApplicationController
 
   def show
     authorize @atacseq
-    @scope = params[:scope]
+
+    if @atacseq.single_cell
+      @scope = "single_cell"
+    elsif @atacseq.snrna
+      @scope = "snrna"
+    else
+      @scope = "multiome"
+    end
   end
 
   def new
