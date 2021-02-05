@@ -66,9 +66,15 @@ class AtacseqsController < ApplicationController
 
   def edit
     authorize @atacseq
-    puts "Current record id is #{@atacseq.id}"
+    #puts "Current record id is #{@atacseq.id}"
 
-    #@new_edit_title = ""
+    if @atacseq.single_cell
+      @edit_title = "Edit Single-cell ATacseq Experiment"
+    elsif @atacseq.snrna
+      @edit_title = "Edit Single-nuclear RNAseq Experiment"
+    else
+      @edit_title = "Edit Bulk ATacse Experiment"
+    end
   end
 
   def create
