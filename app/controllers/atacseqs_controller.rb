@@ -70,7 +70,7 @@ class AtacseqsController < ApplicationController
         @new_title = "New Bulk Atacseq Experiment"
       elsif scope == "multiome"
         defaults = {multiome: true}
-        @new_title = "New Multiome Experiment"
+        @new_title = "New Multiome (snRNA or scAtac) Experiment"
       end 
     end
     @atacseq = Atacseq.new(defaults)
