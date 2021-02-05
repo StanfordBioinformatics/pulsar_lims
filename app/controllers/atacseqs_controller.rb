@@ -66,6 +66,9 @@ class AtacseqsController < ApplicationController
 
   def edit
     authorize @atacseq
+    puts "Current record id is #{@atacseq.id}"
+
+    #@new_edit_title = ""
   end
 
   def create
