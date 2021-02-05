@@ -14,8 +14,8 @@ class Atacseq < ActiveRecord::Base
 
   scope :multiome, lambda { where(multiome: true) }
   scope :snrna, lambda { where(snrna: true) }
-  scope :single_cell, lambda { where(single_cell: true) }
-  scope :bulk, lambda { where(single_cell: false) }
+  scope :single_cell, lambda { where(single_cell: true, snrna: false) }
+  scope :bulk, lambda { where(single_cell: false, snrna: false) }
 
   accepts_nested_attributes_for :documents, allow_destroy: true
 
