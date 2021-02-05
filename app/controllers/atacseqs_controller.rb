@@ -51,7 +51,7 @@ class AtacseqsController < ApplicationController
     elsif @atacseq.snrna
       @scope = "snrna"
     else
-      @scope = "multiome"
+      @scope = "bulk"
     end
   end
 
@@ -62,10 +62,15 @@ class AtacseqsController < ApplicationController
     if scope.present?
       if scope == "single_cell"
         defaults = {single_cell: true}
-        @new_title = "New Single-cell Atacseq"
+        @new_title = "New Single-cell Atacseq Experiment"
       elsif scope == "snrna"
         defaults = {snrna: true}
-        @new_title = "New Single-nuclear RNAseq"
+        @new_title = "New Single-nuclear RNAseq Experiment"
+      elsif scope == "bulk"
+        @new_title = "New Bulk Atacseq Experiment"
+      elsif scope == "multiome"
+        defaults = {multiome: true}
+        @new_title = "New Multiome Experiment"
       end 
     end
     @atacseq = Atacseq.new(defaults)
@@ -76,11 +81,11 @@ class AtacseqsController < ApplicationController
     #puts "Current record id is #{@atacseq.id}"
 
     if @atacseq.single_cell
-      @edit_title = "Edit Single-cell ATacseq Experiment"
+      @edit_title = "Edit Single-cell Atacseq Experiment"
     elsif @atacseq.snrna
       @edit_title = "Edit Single-nuclear RNAseq Experiment"
     else
-      @edit_title = "Edit Bulk ATacse Experiment"
+      @edit_title = "Edit Bulk Atacseq Experiment"
     end
   end
 
