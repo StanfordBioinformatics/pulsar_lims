@@ -43,7 +43,7 @@ Params:
       <%= render partial: "application_partials/auth_destroy_record", locals: {record: rec, nested: nested} %>
     <% end %>
     <% unless no_new_btn %>
-      <%= render partial: "application_partials/auth_new_record", locals: {nested: nested} %>
+      <%= render partial: "application_partials/auth_new_record", locals: {nested: nested, scope: scope} %>
     <% end %>
     <% if clone.present? %>
       <li>                                                                                             
