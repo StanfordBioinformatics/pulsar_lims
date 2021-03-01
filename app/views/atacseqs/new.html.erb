@@ -2,6 +2,6 @@
   <%= @new_title || "New Atacseq" %>
 </h1>
 
-<%= render 'form' %>
+<%= render 'form', locals: {scope: @scope} %>
 
 <%= link_to 'Back', atacseqs_path %>

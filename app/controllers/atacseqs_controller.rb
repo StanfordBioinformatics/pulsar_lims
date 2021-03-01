@@ -57,18 +57,18 @@ class AtacseqsController < ApplicationController
 
   def new
     authorize Atacseq
-    scope = params[:scope]
+    @scope = params[:scope]
     defaults = {}
-    if scope.present?
-      if scope == "single_cell"
+    if @scope.present?
+      if @scope == "single_cell"
         defaults = {single_cell: true}
         @new_title = "New Single-cell Atacseq Experiment"
-      elsif scope == "snrna"
+      elsif @scope == "snrna"
         defaults = {snrna: true}
         @new_title = "New Single-nuclear RNAseq Experiment"
-      elsif scope == "bulk"
+      elsif @scope == "bulk"
         @new_title = "New Bulk Atacseq Experiment"
-      elsif scope == "multiome"
+      elsif @scope == "multiome"
         defaults = {multiome: true}
         @new_title = "New Multiome (snRNA or scAtac) Experiment"
       end 

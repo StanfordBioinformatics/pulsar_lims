@@ -33,6 +33,18 @@
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   <div class="form-actions">
-    <%= f.button :submit, class: "btn-primary" %>
+    <% create_label = "Create" %>
+
+    <% if scope == "single_cell" %>
+      <% create_label = "Create Single-cell Atacseq" %>
+    <% elsif scope == "snrna" %>
+      <% create_label = "Create Single-nuclear RNAseq" %>
+    <% elsif scope == "bulk" %>
+      <% create_label = "Create Bulk Atacseq" %>
+    <% elsif scope == "multiome" %>
+      <% create_label = "Create Multiome-seq" %>
+    <% end %>
+
+    <%= f.button :submit, create_label, class: "btn-primary" %>
   </div>
 <% end %>
