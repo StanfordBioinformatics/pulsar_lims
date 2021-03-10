@@ -20,7 +20,7 @@ class LibrarySerializer < ActiveModel::Serializer
              :vendor_product_identifier,
              :upstream_identifier,
              :created_at,
-             :updated_ait
+             :updated_at
 
   # Dont serialize the following associations:
   #    1. from_prototype_id
