@@ -5,6 +5,7 @@ class LibrarySerializer < ActiveModel::Serializer
   attributes :id,
              :biosample_id, 
              :chipseq_experiment_id,
+             :atacseq_id,
              :concentration,
              :dual_indexed,
              :from_prototype_id, 
@@ -19,7 +20,7 @@ class LibrarySerializer < ActiveModel::Serializer
              :vendor_product_identifier,
              :upstream_identifier,
              :created_at,
-             :updated_at
+             :updated_ait
 
   # Dont serialize the following associations:
   #    1. from_prototype_id
