@@ -2,7 +2,7 @@
   <%= @edit_title || "Editing Atacseq" %>
 </h1>
 
-<%= render 'form' %>
+<%= render partial: 'form', locals: {scope: @scope} %>
 
 <%= link_to 'Show', @atacseq %> |
 <%= link_to 'Back', atacseqs_path %>

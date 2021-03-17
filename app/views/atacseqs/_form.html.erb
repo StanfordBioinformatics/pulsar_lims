@@ -33,8 +33,7 @@
   <%= render partial: "application_partials/notes", locals: {f: f} %>
 
   <div class="form-actions">
-    <% create_label = "Create" %>
-
+    <% create_label = "Update" %>
     <% if scope == "single_cell" %>
       <% create_label = "Create Single-cell Atacseq" %>
     <% elsif scope == "snrna" %>
@@ -44,7 +43,6 @@
     <% elsif scope == "multiome" %>
       <% create_label = "Create Multiome-seq" %>
     <% end %>
-
     <%= f.button :submit, create_label, class: "btn-primary" %>
   </div>
 <% end %>
