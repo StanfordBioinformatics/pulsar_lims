@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.7.3"
+ruby "2.6.3"
 #ruby "2.3.7"
 
 #Kaminari for pagination.
@@ -55,7 +55,8 @@ gem 'pg', '~> 0.19.0'
 gem 'sass-rails'
 
 #Use Bootstrap (nathankw added)
-gem 'sprockets-rails', '>= 2.1.4'
+#gem 'sprockets-rails', '>= 2.1.4'
+gem 'sprockets-rails', '~> 3.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails', '~> 4.3'
 gem 'simple_form', '~> 3.1.0'
