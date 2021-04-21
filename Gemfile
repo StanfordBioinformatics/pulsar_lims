@@ -4,7 +4,7 @@ ruby "2.6.3"
 
 #Kaminari for pagination.
 gem 'kaminari'
-gem 'bigdecimal', '>= 1.3.5'
+
 #Elasticsearch
 # Put Elasticsearch gems after pagination gems (Kaminari) per the documentation link noted below. 
 # Gem instructions from https://github.com/elastic/elasticsearch-rails.
