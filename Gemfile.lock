@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/elastic/elasticsearch-rails.git
+  remote: https://github.com/elastic/elasticsearch-rails.git
   revision: a4ec07b2d097545ca41c13686c9cbfc9eab9e639
   branch: master
   specs:
