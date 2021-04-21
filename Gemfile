@@ -32,7 +32,7 @@ gem "puma", group: :production
 # Alternatively you can achieve the same result by including the rails_12factor gem in your Gemfile:
 #   gem 'rails_12factor', group: :production
 gem 'rails_12factor', group: :production
-gem 'aws-sdk', '~> 2'
+gem 'aws-sdk', '~> 3'
 
 gem 'active_model_serializers', '~> 0.9.3' 
 
