@@ -1117,6 +1117,7 @@ GEM
     aws-sigv4 (1.2.3)
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
+    bigdecimal (3.0.0)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -1353,6 +1354,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.9.3)
   aws-sdk (~> 3)
+  bigdecimal (>= 1.3.5)
   bootstrap-sass (~> 3.3.6)
   capybara (~> 2.4)
   carrierwave (~> 0.10.0)
