@@ -13,8 +13,8 @@ gem 'kaminari'
 #    2.x	→	2.x
 #    5.x	→	5.x
 #    master	→	master
-gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '6.x'
-gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '6.x'
+gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '5.x'
+gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '5.x'
 #gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: 'master'
 #gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: 'master'
 
