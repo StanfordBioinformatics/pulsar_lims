@@ -1,13 +1,13 @@
 GIT
   remote: git://github.com/elastic/elasticsearch-rails.git
-  revision: a4ec07b2d097545ca41c13686c9cbfc9eab9e639
-  branch: master
+  revision: 606f3482e298fab0afc5a083468f23ec7464b0d3
+  branch: 6.x
   specs:
-    elasticsearch-model (7.1.0)
+    elasticsearch-model (6.1.0)
       activesupport (> 3)
-      elasticsearch (~> 7)
+      elasticsearch (~> 6)
       hashie
-    elasticsearch-rails (7.1.0)
+    elasticsearch-rails (6.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -1157,12 +1157,12 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.4.4)
-    elasticsearch (7.12.0)
-      elasticsearch-api (= 7.12.0)
-      elasticsearch-transport (= 7.12.0)
-    elasticsearch-api (7.12.0)
+    elasticsearch (6.8.3)
+      elasticsearch-api (= 6.8.3)
+      elasticsearch-transport (= 6.8.3)
+    elasticsearch-api (6.8.3)
       multi_json
-    elasticsearch-transport (7.12.0)
+    elasticsearch-transport (6.8.3)
       faraday (~> 1)
       multi_json
     erubis (2.7.0)
