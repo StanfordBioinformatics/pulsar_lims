@@ -27,7 +27,7 @@ class Api::ChipseqExperimentsController < Api::ApplicationController
 
   def show
     authorize @chipseq_experiment
-    render json: @chipseq_experiment, include: "replicates"
+    render json: @chipseq_experiment
   end
 
   def create
