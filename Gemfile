@@ -13,15 +13,17 @@ gem 'kaminari'
 #    2.x	→	2.x
 #    5.x	→	5.x
 #    master	→	master
-gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '5.x'
-gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '5.x'
-#gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: 'master'
-#gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: 'master'
+gem 'elasticsearch-model', git: 'https://github.com/elastic/elasticsearch-rails.git', branch: '5.x'
+gem 'elasticsearch-rails', git: 'https://github.com/elastic/elasticsearch-rails.git', branch: '5.x'
+#gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '5.x'
+#gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '5.x'
+##gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: 'master'
+##gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: 'master'
 
 #Vue.js
 gem 'vuejs-rails'
 
-gem 'country_select'
+gem 'country_select', '>=5.0', '<7.0'
 
 #Add production webserver gem for Puma
 gem "puma", group: :production
@@ -43,7 +45,7 @@ gem 'pundit', '~> 0.3.0'
 gem 'carrierwave', '~> 0.10.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'json'
+gem 'json', '= 2.1.0'
 gem 'rails', '~> 4.2.1'
 
 #gem 'sqlite3'
